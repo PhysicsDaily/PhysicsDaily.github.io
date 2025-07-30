@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics Daily - Notes</title>
+    <title>Physics Daily - A Vibrant Journey</title>
     <style>
         /* --- Google Font & Basic Reset --- */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
@@ -17,38 +17,48 @@
         body {
             font-family: 'Poppins', sans-serif;
             color: #ffffff;
-            /* Animated Gradient Background */
-            background: linear-gradient(-45deg, #0b132b, #1c2541, #3a506b, #5bc0be);
-            background-size: 400% 400%;
-            animation: gradientBG 20s ease infinite;
+            background-color: #0d1117; /* Dark base color */
             line-height: 1.6;
+            overflow-x: hidden; /* Hide horizontal scrollbar */
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* --- Particle.js Canvas for Animated BG --- */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Place it behind all other content */
         }
 
         /* --- Header --- */
         .header {
             text-align: center;
-            padding: 60px 20px 40px;
-            background-color: rgba(0, 0, 0, 0.2);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 80px 20px 60px;
+            position: relative;
+            z-index: 1;
         }
 
         .header h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 700;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            letter-spacing: 3px;
+            /* Text Glow and Float Animation */
+            animation: glow-float 8s ease-in-out infinite;
+            text-shadow: 0 0 10px #00aeff, 0 0 20px #00aeff, 0 0 30px #00aeff, 0 0 40px #0077ff;
+        }
+        
+        @keyframes glow-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
         .header p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 300;
-            color: #cccccc;
+            color: #b0c4de;
+            margin-top: 10px;
         }
 
         /* --- Main Content & Topic Grid --- */
@@ -56,117 +66,143 @@
             padding: 40px 20px;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
         
         .section-title {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 600;
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #5bc0be;
+            margin-bottom: 40px;
             text-align: center;
+            color: #61dafb; /* Vibrant teal color */
+            border-bottom: 2px solid rgba(97, 218, 251, 0.3);
+            padding-bottom: 15px;
         }
 
         .topic-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
         }
 
         /* --- Topic Card Styling --- */
         .topic-card {
-            background: rgba(28, 37, 65, 0.6);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 25px;
+            background: rgba(17, 34, 51, 0.75);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(97, 218, 251, 0.2);
+            border-radius: 12px;
+            padding: 30px;
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease;
             text-decoration: none;
             color: #ffffff;
+            will-change: transform; /* Performance optimization */
         }
 
         .topic-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-            border-color: #5bc0be;
+            transform: perspective(1000px) rotateY(5deg) rotateX(5deg) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 174, 255, 0.3);
+            border-color: #61dafb;
         }
 
         .topic-card .chapter-number {
             font-size: 1rem;
             font-weight: 300;
-            color: #cccccc;
-            margin-bottom: 8px;
+            color: #b0c4de;
+            margin-bottom: 10px;
         }
 
         .topic-card h3 {
-            font-size: 1.25rem;
+            font-size: 1.4rem;
             font-weight: 600;
+            color: #ffffff;
         }
 
         /* --- Footer --- */
         .footer {
             text-align: center;
-            padding: 20px;
+            padding: 25px;
             margin-top: 40px;
-            background-color: rgba(0, 0, 0, 0.3);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(13, 17, 23, 0.8);
+            border-top: 1px solid rgba(97, 218, 251, 0.2);
             font-size: 0.9rem;
-            color: #aaaaaa;
+            color: #8899a6;
+            position: relative;
+            z-index: 1;
         }
-
     </style>
 </head>
 <body>
 
+    <!-- Canvas for the particle animation -->
+    <div id="particles-js"></div>
+
     <header class="header">
         <h1>Physics Daily</h1>
-        <p>Your daily dose of physics, based on "Concepts of Physics" by H.C. Verma</p>
+        <p>A Vibrant Exploration of H.C. Verma's "Concepts of Physics"</p>
     </header>
 
     <main class="main-content">
-
-        <h2 class="section-title">Volume 1: Mechanics, Waves, and Optics</h2>
+        <h2 class="section-title">Volume 1</h2>
         <div class="topic-grid">
-            <!-- Replace "#" with the actual link to your note page, e.g., "chapter1.html" -->
             <a href="#" class="topic-card">
-                <div class="chapter-number">Chapter 1-14</div>
+                <div class="chapter-number">Chapters 1-14</div>
                 <h3>Mechanics</h3>
             </a>
             <a href="#" class="topic-card">
-                <div class="chapter-number">Chapter 15-17</div>
-                <h3>Waves</h3>
+                <div class="chapter-number">Chapters 15-17</div>
+                <h3>Waves & Sound</h3>
             </a>
             <a href="#" class="topic-card">
-                <div class="chapter-number">Chapter 18-22</div>
+                <div class="chapter-number">Chapters 18-22</div>
                 <h3>Optics</h3>
             </a>
         </div>
         
-        <h2 class="section-title">Volume 2: Thermodynamics, Electromagnetism, and Modern Physics</h2>
+        <h2 class="section-title">Volume 2</h2>
         <div class="topic-grid">
              <a href="#" class="topic-card">
-                <div class="chapter-number">Chapter 23-28</div>
+                <div class="chapter-number">Chapters 23-28</div>
                 <h3>Heat & Thermodynamics</h3>
             </a>
             <a href="#" class="topic-card">
-                <div class="chapter-number">Chapter 29-40</div>
+                <div class="chapter-number">Chapters 29-40</div>
                 <h3>Electricity & Magnetism</h3>
             </a>
              <a href="#" class="topic-card">
-                <div class="chapter-number">Chapter 41-47</div>
+                <div class="chapter-number">Chapters 41-47</div>
                 <h3>Modern Physics</h3>
             </a>
         </div>
-        
-        <!-- You can add more detailed topic cards here if you wish -->
-
     </main>
 
     <footer class="footer">
         <p>&copy; 2025 physicsdaily.github.io. All Rights Reserved.</p>
     </footer>
+
+    <!-- Particle.js Library -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#61dafb" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
+                "size": { "value": 3, "random": true, "anim": { "enable": false } },
+                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.2, "width": 1 },
+                "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } }, "push": { "particles_nb": 4 } }
+            },
+            "retina_detect": true
+        });
+    </script>
 
 </body>
 </html>
