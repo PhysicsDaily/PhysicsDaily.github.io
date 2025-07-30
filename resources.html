@@ -89,12 +89,12 @@
             padding: 0 1.5rem;
         }
 
-        /* Dark Mode Toggle */
+        /* Dark Mode Toggle - Now positioned within contribute section only */
         .theme-toggle {
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
-            z-index: 1000;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 50px;
@@ -409,6 +409,15 @@
             font-weight: 500;
         }
 
+        /* Contribute section styling */
+        .contribute-section {
+            position: relative;
+            background: var(--bg-tertiary);
+            padding: 3rem 2rem;
+            border-radius: var(--border-radius);
+            margin: 4rem 0;
+        }
+
         /* Footer */
         .footer {
             text-align: center;
@@ -449,8 +458,8 @@
             }
 
             .theme-toggle {
-                top: 1rem;
-                right: 1rem;
+                top: 0.5rem;
+                right: 0.5rem;
             }
 
             .nav-content {
@@ -473,6 +482,10 @@
             .main-content {
                 padding: 2rem 0;
             }
+
+            .contribute-section {
+                padding: 2rem 1rem;
+            }
         }
 
         /* Animation for scroll reveal */
@@ -494,12 +507,6 @@
     </style>
 </head>
 <body>
-    <!-- Theme Toggle -->
-    <div class="theme-toggle">
-        <button id="light-mode" class="active" title="Light Mode">☀️</button>
-        <button id="dark-mode" title="Dark Mode">🌙</button>
-    </div>
-
     <!-- Navigation -->
     <nav class="nav">
         <div class="container">
@@ -620,6 +627,7 @@
                         <li><strong>Knight</strong> <span>- Physics for Scientists and Engineers: A Strategic Approach with Modern Physics</span></li>
                     </ul>
                 </div>
+
                 <!-- Physics for JEE Section -->
                 <div class="resource-list">
                     <h3>Physics for JEE</h3>
@@ -628,13 +636,15 @@
                         <li><strong>HC Verma</strong> <span>- Concepts of Physics Volume 2</span></li>
                     </ul>
                 </div>
-            </section> <div class="resource-list">
+
+                <div class="resource-list">
                     <h3>Advanced Physics</h3>
                     <ul>
                         <li><strong>Halliday, Resnick, and Krane</strong> <span>- Physics (Primary source for advanced study and competitions)</span></li>
                         <li><strong>Morin</strong> <span>- Introduction to Classical Mechanics: With Problems and Solutions</span></li>
                     </ul>
                 </div>
+            </section>
 
             <!-- Review Resources -->
             <section class="section fade-in">
@@ -716,15 +726,23 @@
                 </div>
             </section>
 
-            <!-- Call to Action -->
+            <!-- Contribution Section with Dark Mode toggle -->
             <section class="section fade-in">
-                <div class="highlight-box">
-                    <h3>🚀 Ready to Start Learning?</h3>
-                    <p>Choose your level and dive into our structured physics curriculum. Remember: consistency and choosing the right resources are key to mastering physics!</p>
-                    <br>
-                    <a href="index.html" style="background: rgba(255,255,255,0.2); padding: 0.75rem 1.5rem; border-radius: 8px; color: white; text-decoration: none; font-weight: 600; display: inline-block;">
-                        📚 Start Learning Physics
-                    </a>
+                <div class="contribute-section">
+                    <!-- Theme Toggle - Now only in contribute section -->
+                    <div class="theme-toggle">
+                        <button id="light-mode" class="active" title="Light Mode">☀️</button>
+                        <button id="dark-mode" title="Dark Mode">🌙</button>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <h3>🚀 Ready to Start Learning?</h3>
+                        <p>Choose your level and dive into our structured physics curriculum. Remember: consistency and choosing the right resources are key to mastering physics!</p>
+                        <br>
+                        <a href="index.html" style="background: rgba(255,255,255,0.2); padding: 0.75rem 1.5rem; border-radius: 8px; color: white; text-decoration: none; font-weight: 600; display: inline-block;">
+                            📚 Start Learning Physics
+                        </a>
+                    </div>
                 </div>
             </section>
         </div>
