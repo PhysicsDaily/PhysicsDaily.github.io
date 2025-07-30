@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Daily - Interactive Physics Notes from Krane's Physics</title>
+    <meta name="description" content="Comprehensive physics notes and study resources based on Krane's Physics textbook. Interactive learning for mechanics, thermodynamics, electromagnetism, and modern physics.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #f1f5f9;
+            --accent-color: #06b6d4;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-light: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-border: rgba(226, 232, 240, 0.8);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-tertiary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-quaternary: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header Styles */
+        .header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: -0.02em;
+        }
+
+        .header .subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .header .description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+
+        .header .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--card-bg);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--text-light);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-bottom: 4rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .topic-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .topic-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transition: var(--transition);
+        }
+
+        .topic-card.mechanics:before {
+            background: var(--gradient-primary);
+        }
+
+        .topic-card.waves:before {
+            background: var(--gradient-secondary);
+        }
+
+        .topic-card.electromagnetism:before {
+            background: var(--gradient-tertiary);
+        }
+
+        .topic-card.modern:before {
+            background: var(--gradient-quaternary);
+        }
+
+        .topic-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .topic-card:hover:before {
+            height: 6px;
+        }
+
+        .chapter-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--accent-color);
+            background: rgba(6, 182, 212, 0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .topic-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .topic-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .topic-chapters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .chapter-tag {
+            font-size: 0.75rem;
+            background: var(--secondary-color);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .progress-indicator {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .progress-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--secondary-color);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent-color);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            margin: 4rem 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 4rem;
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--text-light);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .header {
+                padding: 2rem 0;
+            }
+
+            .topic-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .topic-card {
+                padding: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: fit-content;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation for scroll reveal */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <header class="header">
+        <div class="container">
+            <h1>Physics Daily</h1>
+            <p class="subtitle">Interactive Physics Notes from Krane's "Physics"</p>
+            <p class="description">
+                Master physics concepts with comprehensive notes, examples, and interactive content 
+                organized by chapter from Kenneth Krane's acclaimed physics textbook.
+            </p>
+            <div class="cta-buttons">
+                <a href="#mechanics" class="btn">
+                    📚 Start Learning
+                </a>
+                <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io" class="btn btn-secondary">
+                    ⭐ Star on GitHub
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Statistics Section -->
+            <section class="stats-section fade-in">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">52</span>
+                        <span class="stat-label">Chapters</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">4</span>
+                        <span class="stat-label">Major Parts</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">∞</span>
+                        <span class="stat-label">Learning Opportunities</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Free Access</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part I: Mechanics -->
+            <section id="mechanics" class="section fade-in">
+                <div class="section-header">
+                    <h2 class="section-title">Part I: Mechanics</h2>
+                    <p class="section-subtitle">
+                        Foundation of physics covering motion, forces, energy, and rotational dynamics
+                    </p>
+                </div>
+                <div class="topic-grid">
+                    <a href="mechanics/foundations.html" class="topic-card mechanics">
+                        <div class="chapter-number">Chapters 1-5</div>
+                        <h3>Foundations of Mechanics</h3>
+                        <p class="topic-description">
+                            Basic concepts of motion, vectors, kinematics, Newton's laws, and force analysis
+                        </p>
+                        <div class="topic-chapters">
+                            <span class="chapter-tag">Ch 1: Introduction</span>
+                            <span class="chapter-tag">Ch 2: Motion in One Dimension</span>
+                            <span class="chapter-tag">Ch 3: Motion in Two Dimensions</span>
+                            <span class="chapter-tag">Ch 4: Newton's Laws</span>
+                            <span class="chapter-tag">Ch 5: Applications of Newton's Laws</span>
+                        </div>
+                        <div class="progress-indicator">
+                            <div class="progress-label">Progress</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 25%"></div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="mechanics/momentum.html" class="topic-card mechanics">
+                        <div class="chapter-number">Chapters 6-10</div>
+                        <h3>Work, Energy & Momentum</h3>
+                        <p class="topic-description">
+                            Energy conservation, momentum, collisions, and rotational motion fundamentals
+                        </p>
+                        <div class="topic-chapters">
+                            <span class="chapter-tag">Ch 6: Work and Energy</span>
+                            <span class="chapter-tag">Ch 7: Energy Conservation</span>
+                            <span class="chapter-tag">Ch 8: Linear Momentum</span>
+                            <span class="chapter-tag">Ch 9: Rotational Mechanics</span>
+                            <span class="chapter-tag">Ch 10: Angular Momentum</span>
+                        </div>
+                        <div class="progress-indicator">
+                            <div class="progress-label">Progress</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 15%"></div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="mechanics/advanced.html" class="topic-card mechanics">
+                        <div class="chapter-number">Chapters 11-14</div>
+                        <h3>Advanced Mechanics</h3>
+                        <p class="topic-description">
+                            Gravitation, oscillations, and more complex mechanical systems
+                        </p>
+                        <div class="topic-chapters">
+                            <span class="chapter-tag">Ch 11: Statics</span>
+                            <span class="chapter-tag">Ch 12: Gravitation</span>
+                            <span class="chapter-tag">Ch 13: Solids and Fluids</span>
+                            <span class="chapter-tag">Ch 14: Oscillations</span>
+                        </div>
+                        <div class="progress-indicator">
+                            <div class="progress-label">Progress</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 10%"></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Part II: Waves, Fluids & Thermodynamics -->
+            <section class="section fade-in">
+                <div class="section-header">
+                    <h2 class="section-title">Part II: Waves, Fluids & Thermodynamics</h2>
+                    <p class="section-subtitle">
+                        Wave mechanics, fluid dynamics, heat, and statistical physics
+                    </p>
+                </div>
+                <div class="topic-grid">
+                    <a href="waves/mechanics.html" class="topic-card waves">
+                        <div class="chapter-number">Chapters 15-19</div>
+                        <h3>Wave Mechanics & Fluids</h3>
+                        <p class="topic-description">
+                            Wave propagation, interference, sound, and fluid dynamics
+                        </p>
+                        <div class="topic-chapters">
+                            <span class="chapter-tag">Ch 15: Wave Motion</span>
+                            <span class="chapter-tag">Ch 16: Sound</span>
+                            <span class="chapter-tag">Ch 17: Superposition</span>
+                            <span class="chapter-tag">Ch 18: Temperature</span>
+                            <span class="chapter-tag">Ch 19: Molecular Properties</span>
+                        </div>
+                        <div class="progress-indicator">
+                            <div class="progress-label">Progress</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 5%"></div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="thermo/dynamics.html" class="topic-card waves">
+                        <div class="chapter-number">Chapters 20-24</div>
+                        <h3>Thermodynamics</h3>
+                        <p class="topic-description">
+                            Laws of thermodynamics, heat engines, and statistical mechanics
+                        </p>
+                        <div class="topic-chapters">
+                            <span class="chapter-tag">Ch 20: First Law</span>
+                            <span class="chapter-tag">Ch 21: Kinetic Theory</span>
+                            <span class="chapter-tag">Ch 22: Second Law</span>
+                            <span class="chapter-tag">Ch 23: Heat Engines</span>
+                            <span class="chapter-tag">Ch 24: Statistical Mechanics</span>
+                        </div>
+                        <div class="progress-indicator">
+                            <div class="progress-label">Progress</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Part III: Electricity & Magnetism -->
+            <section class="section fade-in">
+                <div class="section-header">
+                    <h2 class="section-title">Part III: Electricity & Magnetism</h2>
+                    <p class="section-subtitle">
+                        Electric and magnetic fields, circuits, and electromagnetic phenomena
+                    </p>
+                </div>
+                <div class="topic-grid">
+                    <a href="electromagnetism/electrostatics.html" class="topic-card electromagnetism">
+                        <div class="chapter-number">Chapters 25-30</div>
+                        <h3>Electrostatics</h3>
+                        <p class="topic-description">
+                            Electric fields, potential, capacitance, and dielectric materials
+                        </p>
+                        <div class="topic-chapters">
+                            <span class="chapter-tag">Ch 25: Electric Charge</span>
+                            <span class="chapter-tag">Ch 26: Electric Field</span>
+                            <span class="chapter-tag">Ch 27: Gauss's Law</span>
+                            <span class="chapter-tag">Ch 28: Electric Potential</span>
+                            <span class="chapter-tag">Ch 29: Capacitance</span>
+                            <span class="chapter-tag">Ch 30: Dielectrics</span>
+                        </div>
+                        <div class="progress-indicator">
+                            <div class="progress-label">Progress</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="electromagnetism/circuits.html" class="topic-card electromagnetism">
+                        <div class="chapter-number">Chapters 31-36</div>
+                        <h3>Circuits & Magnetism</h3>
+                        <p class="topic-description">
+                            Current, resistance, magnetic fields, and electromagnetic induction
+                        </p>
+                        <div class="topic-chapters">
+                            <span class="chapter-tag">Ch 31: Current</span>
+                            <span class="chapter-tag">Ch 32: DC Circuits</span>
+                            <span class="chapter-tag">Ch 33: Magnetic Field</span>
+                            <span class="chapter-tag">Ch 34: Sources of B</span>
+                            <span class="chapter-tag">Ch 35: Faraday's Law</span>
+                            <span class="chapter-tag">Ch 36: Inductance</span>
+                        </div>
+                        <div class="progress-indicator">
+                            <div class="progress-label">Progress</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="electromagnetism/maxwell.html" class="topic-card electromagnetism">
+                        <div class="chapter-number">Chapters 37-38</div>
+                        <h3>AC Circuits & Maxwell's Equations</h3>
+                        <p class="topic-description">
+                            Alternating current circuits and the unification of electricity and magnetism
+                        </p>
+                        <div class="topic-chapters">
+                            <span class="chapter-tag">Ch 37: AC Circuits</span>
+                            <span class="chapter-tag">Ch 38: Maxwell's Equations</span>
+                        </div>
+                        <div class="progress-indicator">
+                            <div class="progress-label">Progress</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Part IV: Optics & Modern Physics -->
+            <section class="section fade-in">
+                <div class="section-header">
+                    <h2 class="section-title">Part IV: Optics & Modern Physics</h2>
+                    <p class="section-subtitle">
+                        Light, optics, relativity, quantum mechanics, and nuclear physics
+                    </p>
+                </div>
+                <div class="topic-grid">
+                    <a href="optics/geometric.html" class="topic-card modern">
+                        <div class="chapter-number">Chapters 39-44</div>
+                        <h3>Optics</h3>
+                        <p class="topic-description">
+                            Geometric optics, wave optics, interference, and diffraction
+                        </p>
+                        <div class="topic-chapters">
+                            <span class="chapter-tag">Ch 39: Geometric Optics</span>
+                            <span class="chapter-tag">Ch 40: Optical Instruments</span>
+                            <span class="chapter-tag">Ch 41: Interference</span>
+                            <span class="chapter-tag">Ch 42: Diffraction</span>
+                            <span class="chapter-tag">Ch 43: Polarization</span>
+                            <span class="chapter-tag">Ch 44: Special Relativity</span>
+                        </div>
+                        <div class="progress-indicator">
+                            <div class="progress-label">Progress</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="modern/quantum.html" class="topic-card modern">
+                        <div class="chapter-number">Chapters 45-49</div>
+                        <h3>Quantum Mechanics</h3>
+                        <p class="topic-description">
+                            Quantum theory, atomic structure, and molecular physics
+                        </p>
+                        <div class="topic-chapters">
+                            <span class="chapter-tag">Ch 45: Quantum Physics</span>
+                            <span class="chapter-tag">Ch 46: Quantum Mechanics</span>
+                            <span class="chapter-tag">Ch 47: Atomic Structure</span>
+                            <span class="chapter-tag">Ch 48: Many-Electron Atoms</span>
+                            <span class="chapter-tag">Ch 49: Molecules</span>
+                        </div>
+                        <div class="progress-indicator">
+                            <div class="progress-label">Progress</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="modern/nuclear.html" class="topic-card modern">
+                        <div class="chapter-number">Chapters 50-52</div>
+                        <h3>Nuclear & Particle Physics</h3>
+                        <p class="topic-description">
+                            Nuclear structure, radioactivity, and elementary particles
+                        </p>
+                        <div class="topic-chapters">
+                            <span class="chapter-tag">Ch 50: Nuclear Structure</span>
+                            <span class="chapter-tag">Ch 51: Nuclear Decay</span>
+                            <span class="chapter-tag">Ch 52: Particle Physics</span>
+                        </div>
+                        <div class="progress-indicator">
+                            <div class="progress-label">Progress</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="about.html">About</a>
+                <a href="contribute.html">Contribute</a>
+                <a href="resources.html">Resources</a>
+                <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io">GitHub</a>
+            </div>
+            <p>&copy; 2025 Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Particles.js configuration
+        particlesJS("particles-js", {
+            particles: {
+                number: {
+                    value: 100,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: "#ffffff"
+                },
+                shape: {
+                    type: "circle",
+                    stroke: {
+                        width: 0,
+                        color: "#000000"
+                    }
+                },
+                opacity: {
+                    value: 0.3,
+                    random: false,
+                    anim: {
+                        enable: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#ffffff",
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false,
+                    attract: {
+                        enable: false
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "repulse"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    repulse: {
+                        distance: 100,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Dynamic progress bar animations
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 300);
+            });
+        }
+
+        // Trigger progress animation when cards come into view
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBar = entry.target.querySelector('.progress-fill');
+                    if (progressBar) {
+                        const targetWidth = progressBar.style.width;
+                        progressBar.style.width = '0%';
+                        setTimeout(() => {
+                            progressBar.style.width = targetWidth;
+                        }, 500);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.topic-card').forEach(card => {
+            cardObserver.observe(card);
+        });
+    </script>
+</body>
+</html>
