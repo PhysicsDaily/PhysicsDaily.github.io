@@ -12,22 +12,57 @@
         :root {
             --primary-color: #2563eb;
             --primary-dark: #1d4ed8;
-            --secondary-color: #f1f5f9;
+            --primary-light: #3b82f6;
+            --secondary-color: #64748b;
             --accent-color: #06b6d4;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            
+            /* Light theme colors */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
             --text-primary: #1e293b;
             --text-secondary: #64748b;
-            --text-light: #ffffff;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --card-border: rgba(226, 232, 240, 0.8);
+            --text-muted: #94a3b8;
+            --border-color: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --card-bg: #ffffff;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --header-bg: #ffffff;
+            
+            /* Gradients for light theme */
             --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             --gradient-tertiary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             --gradient-quaternary: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             --border-radius: 12px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            /* Dark theme colors */
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --border-hover: #475569;
+            --card-bg: #1e293b;
+            --card-shadow: rgba(0, 0, 0, 0.3);
+            --header-bg: #0f172a;
+            
+            /* Darker gradients for dark theme */
+            --gradient-primary: linear-gradient(135deg, #4338ca 0%, #6366f1 100%);
+            --gradient-secondary: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+            --gradient-tertiary: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+            --gradient-quaternary: linear-gradient(135deg, #059669 0%, #10b981 100%);
         }
 
         * {
@@ -40,18 +75,9 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: var(--text-primary);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--bg-primary);
             min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
+            transition: var(--transition);
         }
 
         .container {
@@ -60,33 +86,76 @@
             padding: 0 1.5rem;
         }
 
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            padding: 0.5rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .theme-toggle button {
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .theme-toggle button:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .theme-toggle button.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
         /* Header Styles */
         .header {
-            text-align: center;
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
             padding: 4rem 0 3rem;
-            position: relative;
-            z-index: 10;
+            text-align: center;
+            transition: var(--transition);
         }
 
         .header h1 {
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
-            color: var(--text-light);
+            color: var(--text-primary);
             margin-bottom: 1rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             letter-spacing: -0.02em;
         }
 
         .header .subtitle {
             font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--text-secondary);
             margin-bottom: 2rem;
-            font-weight: 400;
+            font-weight: 500;
         }
 
         .header .description {
             font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto 2rem;
             line-height: 1.7;
@@ -105,39 +174,39 @@
             align-items: center;
             gap: 0.5rem;
             padding: 0.75rem 1.5rem;
-            background: var(--card-bg);
-            color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
             text-decoration: none;
             border-radius: var(--border-radius);
             font-weight: 500;
             transition: var(--transition);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--card-border);
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-sm);
+            border: none;
+            cursor: pointer;
         }
 
         .btn:hover {
+            background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-            background: rgba(255, 255, 255, 1);
+            box-shadow: var(--shadow-md);
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-light);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-            color: var(--text-light);
+            background: var(--bg-tertiary);
+            border-color: var(--border-hover);
         }
 
         /* Main Content */
         .main-content {
-            padding-bottom: 4rem;
-            position: relative;
-            z-index: 10;
+            padding: 4rem 0;
+            background: var(--bg-secondary);
+            transition: var(--transition);
         }
 
         .section {
@@ -152,14 +221,13 @@
         .section-title {
             font-size: clamp(1.8rem, 4vw, 2.5rem);
             font-weight: 600;
-            color: var(--text-light);
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .section-subtitle {
             font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto;
         }
@@ -178,9 +246,8 @@
             text-decoration: none;
             color: var(--text-primary);
             transition: var(--transition);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--card-border);
-            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
             position: relative;
             overflow: hidden;
         }
@@ -215,7 +282,7 @@
         .topic-card:hover {
             transform: translateY(-4px);
             box-shadow: var(--shadow-lg);
-            background: rgba(255, 255, 255, 1);
+            border-color: var(--border-hover);
         }
 
         .topic-card:hover:before {
@@ -257,8 +324,8 @@
 
         .chapter-tag {
             font-size: 0.75rem;
-            background: var(--secondary-color);
-            color: var(--text-secondary);
+            background: var(--bg-tertiary);
+            color: var(--text-muted);
             padding: 0.25rem 0.5rem;
             border-radius: 6px;
             font-weight: 500;
@@ -267,7 +334,7 @@
         .progress-indicator {
             margin-top: 1rem;
             padding-top: 1rem;
-            border-top: 1px solid var(--card-border);
+            border-top: 1px solid var(--border-color);
         }
 
         .progress-label {
@@ -278,7 +345,7 @@
 
         .progress-bar {
             height: 6px;
-            background: var(--secondary-color);
+            background: var(--bg-tertiary);
             border-radius: 3px;
             overflow: hidden;
         }
@@ -293,11 +360,11 @@
         /* Stats Section */
         .stats-section {
             margin: 4rem 0;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: var(--card-bg);
             border-radius: var(--border-radius);
             padding: 3rem 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
         }
 
         .stats-grid {
@@ -313,29 +380,50 @@
         .stat-number {
             font-size: 2.5rem;
             font-weight: 700;
-            color: var(--text-light);
+            color: var(--primary-color);
             display: block;
             margin-bottom: 0.5rem;
         }
 
         .stat-label {
             font-size: 1rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--text-secondary);
             font-weight: 500;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 6rem 0;
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .hero-section h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
         }
 
         /* Footer */
         .footer {
             text-align: center;
-            padding: 2rem 0;
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem 0;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
             margin-top: 4rem;
         }
 
         .footer p {
-            color: rgba(255, 255, 255, 0.7);
+            color: var(--text-secondary);
             font-size: 0.95rem;
         }
 
@@ -348,14 +436,14 @@
         }
 
         .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
             transition: var(--transition);
         }
 
         .footer-links a:hover {
-            color: var(--text-light);
+            color: var(--primary-color);
         }
 
         /* Responsive Design */
@@ -366,6 +454,11 @@
 
             .header {
                 padding: 2rem 0;
+            }
+
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
             }
 
             .topic-grid {
@@ -390,6 +483,10 @@
             .btn {
                 width: fit-content;
             }
+
+            .hero-section {
+                padding: 4rem 0;
+            }
         }
 
         @media (max-width: 480px) {
@@ -409,10 +506,19 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Dark mode transition */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
     </style>
 </head>
 <body>
-    <div id="particles-js"></div>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <button id="light-mode" class="active" title="Light Mode">☀️</button>
+        <button id="dark-mode" title="Dark Mode">🌙</button>
+    </div>
 
     <header class="header">
         <div class="container">
@@ -432,6 +538,14 @@
             </div>
         </div>
     </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h2>Learn Physics the Right Way</h2>
+            <p>Comprehensive coverage of all 52 chapters from Krane's Physics textbook with modern, interactive learning tools.</p>
+        </div>
+    </section>
 
     <main class="main-content">
         <div class="container">
@@ -743,86 +857,33 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Particles.js configuration
-        particlesJS("particles-js", {
-            particles: {
-                number: {
-                    value: 100,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: "#ffffff"
-                },
-                shape: {
-                    type: "circle",
-                    stroke: {
-                        width: 0,
-                        color: "#000000"
-                    }
-                },
-                opacity: {
-                    value: 0.3,
-                    random: false,
-                    anim: {
-                        enable: false
-                    }
-                },
-                size: {
-                    value: 3,
-                    random: true,
-                    anim: {
-                        enable: false
-                    }
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: "#ffffff",
-                    opacity: 0.2,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: "none",
-                    random: false,
-                    straight: false,
-                    out_mode: "out",
-                    bounce: false,
-                    attract: {
-                        enable: false
-                    }
-                }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: {
-                    onhover: {
-                        enable: true,
-                        mode: "repulse"
-                    },
-                    onclick: {
-                        enable: true,
-                        mode: "push"
-                    },
-                    resize: true
-                },
-                modes: {
-                    repulse: {
-                        distance: 100,
-                        duration: 0.4
-                    },
-                    push: {
-                        particles_nb: 4
-                    }
-                }
-            },
-            retina_detect: true
+        // Dark mode functionality
+        const lightModeBtn = document.getElementById('light-mode');
+        const darkModeBtn = document.getElementById('dark-mode');
+        const body = document.body;
+
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        
+        if (currentTheme === 'dark') {
+            body.setAttribute('data-theme', 'dark');
+            lightModeBtn.classList.remove('active');
+            darkModeBtn.classList.add('active');
+        }
+
+        lightModeBtn.addEventListener('click', () => {
+            body.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            lightModeBtn.classList.add('active');
+            darkModeBtn.classList.remove('active');
+        });
+
+        darkModeBtn.addEventListener('click', () => {
+            body.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            lightModeBtn.classList.remove('active');
+            darkModeBtn.classList.add('active');
         });
 
         // Smooth scrolling for anchor links
@@ -858,18 +919,6 @@
         });
 
         // Dynamic progress bar animations
-        function animateProgressBars() {
-            const progressBars = document.querySelectorAll('.progress-fill');
-            progressBars.forEach(bar => {
-                const width = bar.style.width;
-                bar.style.width = '0%';
-                setTimeout(() => {
-                    bar.style.width = width;
-                }, 300);
-            });
-        }
-
-        // Trigger progress animation when cards come into view
         const cardObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
