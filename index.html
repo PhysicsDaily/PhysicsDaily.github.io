@@ -3,24 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics Daily</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Physics Daily - Notes</title>
+    <style>
+        /* --- Google Font & Basic Reset --- */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+            /* Animated Gradient Background */
+            background: linear-gradient(-45deg, #0b132b, #1c2541, #3a506b, #5bc0be);
+            background-size: 400% 400%;
+            animation: gradientBG 20s ease infinite;
+            line-height: 1.6;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- Header --- */
+        .header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: #cccccc;
+        }
+
+        /* --- Main Content & Topic Grid --- */
+        .main-content {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #5bc0be;
+            text-align: center;
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        /* --- Topic Card Styling --- */
+        .topic-card {
+            background: rgba(28, 37, 65, 0.6);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            border-color: #5bc0be;
+        }
+
+        .topic-card .chapter-number {
+            font-size: 1rem;
+            font-weight: 300;
+            color: #cccccc;
+            margin-bottom: 8px;
+        }
+
+        .topic-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaaaaa;
+        }
+
+    </style>
 </head>
 <body>
-    <header>
+
+    <header class="header">
         <h1>Physics Daily</h1>
-        <p>Your daily dose of physics, based on "Fundamentals of Physics" by Halliday, Resnick, and Walker.</p>
+        <p>Your daily dose of physics, based on "Concepts of Physics" by H.C. Verma</p>
     </header>
 
-    <main>
-        <div class="container" id="table-of-contents">
-            </div>
+    <main class="main-content">
+
+        <h2 class="section-title">Volume 1: Mechanics, Waves, and Optics</h2>
+        <div class="topic-grid">
+            <!-- Replace "#" with the actual link to your note page, e.g., "chapter1.html" -->
+            <a href="#" class="topic-card">
+                <div class="chapter-number">Chapter 1-14</div>
+                <h3>Mechanics</h3>
+            </a>
+            <a href="#" class="topic-card">
+                <div class="chapter-number">Chapter 15-17</div>
+                <h3>Waves</h3>
+            </a>
+            <a href="#" class="topic-card">
+                <div class="chapter-number">Chapter 18-22</div>
+                <h3>Optics</h3>
+            </a>
+        </div>
+        
+        <h2 class="section-title">Volume 2: Thermodynamics, Electromagnetism, and Modern Physics</h2>
+        <div class="topic-grid">
+             <a href="#" class="topic-card">
+                <div class="chapter-number">Chapter 23-28</div>
+                <h3>Heat & Thermodynamics</h3>
+            </a>
+            <a href="#" class="topic-card">
+                <div class="chapter-number">Chapter 29-40</div>
+                <h3>Electricity & Magnetism</h3>
+            </a>
+             <a href="#" class="topic-card">
+                <div class="chapter-number">Chapter 41-47</div>
+                <h3>Modern Physics</h3>
+            </a>
+        </div>
+        
+        <!-- You can add more detailed topic cards here if you wish -->
+
     </main>
 
-    <footer>
-        <p>&copy; 2025 Physics Daily</p>
+    <footer class="footer">
+        <p>&copy; 2025 physicsdaily.github.io. All Rights Reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
 </body>
 </html>
