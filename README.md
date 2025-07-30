@@ -1,56 +1,47 @@
 # Physics Daily
 
-🔬 **Your comprehensive physics notes and study resources**
+🔬 **Master Physics with Halliday, Resnick & Krane's "Fundamentals of Physics"**
 
-Welcome to Physics Daily, a comprehensive website dedicated to providing clear, organized physics notes covering topics from classical mechanics to quantum physics. Whether you're a high school student, undergraduate, or just curious about the fascinating world of physics, you'll find detailed study materials to help you understand the fundamental principles that govern our universe.
+Welcome to Physics Daily, a comprehensive website dedicated to providing clear, organized physics notes following the structure of Halliday, Resnick, and Krane's "Fundamentals of Physics" textbook. Whether you're a high school student, undergraduate, or just curious about the fascinating world of physics, you'll find detailed study materials to help you understand the fundamental principles that govern our universe.
 
 ## 🌐 Live Website
 
 Visit the live website at: [https://physicsdaily.github.io](https://physicsdaily.github.io)
 
-## 📚 Topics Covered
+## 📚 Topics Covered (Following HRK Structure)
 
-### 🔧 Classical Mechanics
-- Newton's laws of motion
-- Kinematics and dynamics
-- Energy and momentum
-- Rotational motion
-- Oscillations and waves
+### 🔧 Part I: Mechanics
+- Motion in one and two dimensions
+- Force and motion (Newton's laws)
+- Energy, momentum, and collisions
+- Rotation and rolling motion
+- Equilibrium and gravitation
+- Fluids and oscillations
 
-### ⚡ Electricity & Magnetism
-- Electric fields and potentials
-- Magnetic fields and forces
-- Electromagnetic induction
-- Maxwell's equations
-- AC/DC circuits
+### 🌡️ Part II: Thermodynamics
+- Wave motion and temperature
+- Heat and kinetic theory of gases
+- Entropy and the second law of thermodynamics
 
-### 🌡️ Thermodynamics
-- Laws of thermodynamics
-- Heat engines and refrigerators
-- Entropy and statistical mechanics
-- Phase transitions
-- Kinetic theory of gases
+### ⚡ Part III: Electromagnetism
+- Electric charge and electric fields
+- Electric potential and capacitance
+- Current and resistance
+- Magnetic fields and electromagnetic induction
+- Electromagnetic oscillations and AC circuits
+- Electromagnetic waves
 
-### 🌊 Waves & Optics
-- Wave mechanics and properties
+### 🌊 Part IV: Optics
+- Geometric optics (mirrors and lenses)
 - Interference and diffraction
-- Polarization
-- Geometric and wave optics
-- Lasers and modern optics
+- Wave nature of light
 
-### ⚛️ Modern Physics
+### ⚛️ Part V: Modern Physics
 - Special relativity
-- Quantum mechanics fundamentals
-- Atomic structure
-- Nuclear physics
-- Particle physics basics
-
-### 🔬 Laboratory Physics
-- Experimental techniques
-- Data analysis methods
-- Error analysis
-- Scientific instrumentation
-- Practical applications
+- Quantum physics fundamentals
+- Atomic structure and X-rays
+- Nuclear physics and radioactivity
+- Particle physics and cosmology
 
 ## 🚧 Development Status
 

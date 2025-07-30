@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics Daily - A Vibrant Journey</title>
+    <title>Physics Daily - Fundamentals of Physics by HRK</title>
     <style>
-        /* --- Google Font & Basic Reset --- */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        /* --- Font & Basic Reset --- */
+        /* Using system fonts for better performance and reliability */
 
         * {
             margin: 0;
@@ -15,21 +15,45 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: -webkit-system-font, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
             color: #ffffff;
             background-color: #0d1117; /* Dark base color */
             line-height: 1.6;
             overflow-x: hidden; /* Hide horizontal scrollbar */
         }
 
-        /* --- Particle.js Canvas for Animated BG --- */
-        #particles-js {
+        /* --- Animated Background --- */
+        #animated-bg {
             position: fixed;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
-            z-index: -1; /* Place it behind all other content */
+            z-index: -1;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #21262d 100%);
+        }
+
+        /* Physics-themed floating elements */
+        .physics-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 15s infinite linear;
+            font-size: 2rem;
+            color: #61dafb;
+        }
+
+        .physics-element:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .physics-element:nth-child(2) { top: 20%; left: 80%; animation-delay: 2s; }
+        .physics-element:nth-child(3) { top: 50%; left: 15%; animation-delay: 4s; }
+        .physics-element:nth-child(4) { top: 70%; left: 70%; animation-delay: 6s; }
+        .physics-element:nth-child(5) { top: 80%; left: 30%; animation-delay: 8s; }
+        .physics-element:nth-child(6) { top: 30%; left: 60%; animation-delay: 10s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); opacity: 0.1; }
+            50% { opacity: 0.3; }
+            100% { transform: translateY(-20px) rotate(360deg); opacity: 0.1; }
         }
 
         /* --- Header --- */
@@ -47,11 +71,22 @@
             /* Text Glow and Float Animation */
             animation: glow-float 8s ease-in-out infinite;
             text-shadow: 0 0 10px #00aeff, 0 0 20px #00aeff, 0 0 30px #00aeff, 0 0 40px #0077ff;
+            background: linear-gradient(45deg, #61dafb, #00aeff, #0077ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: glow-float 8s ease-in-out infinite, gradient-shift 4s ease-in-out infinite;
         }
         
         @keyframes glow-float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .header p {
@@ -136,44 +171,144 @@
 </head>
 <body>
 
-    <!-- Canvas for the particle animation -->
-    <div id="particles-js"></div>
+    <!-- Animated physics-themed background -->
+    <div id="animated-bg">
+        <div class="physics-element">⚛️</div>
+        <div class="physics-element">🔬</div>
+        <div class="physics-element">⚡</div>
+        <div class="physics-element">🌊</div>
+        <div class="physics-element">🔭</div>
+        <div class="physics-element">🧲</div>
+    </div>
 
     <header class="header">
         <h1>Physics Daily</h1>
-        <p>A Vibrant Exploration of H.C. Verma's "Concepts of Physics"</p>
+        <p>Master Physics with Halliday, Resnick & Krane's "Fundamentals of Physics"</p>
     </header>
 
     <main class="main-content">
-        <h2 class="section-title">Volume 1</h2>
+        <h2 class="section-title">Part I: Mechanics</h2>
         <div class="topic-grid">
             <a href="#" class="topic-card">
-                <div class="chapter-number">Chapters 1-14</div>
-                <h3>Mechanics</h3>
+                <div class="chapter-number">Chapters 1-4</div>
+                <h3>Motion in One & Two Dimensions</h3>
+                <div style="opacity: 0.6; margin-top: 10px; font-size: 0.9rem;">v = dx/dt, a = dv/dt</div>
             </a>
             <a href="#" class="topic-card">
-                <div class="chapter-number">Chapters 15-17</div>
-                <h3>Waves & Sound</h3>
+                <div class="chapter-number">Chapters 5-6</div>
+                <h3>Force & Motion</h3>
+                <div style="opacity: 0.6; margin-top: 10px; font-size: 0.9rem;">F = ma, ΣF = 0</div>
             </a>
             <a href="#" class="topic-card">
-                <div class="chapter-number">Chapters 18-22</div>
-                <h3>Optics</h3>
+                <div class="chapter-number">Chapters 7-9</div>
+                <h3>Energy, Momentum & Collisions</h3>
+                <div style="opacity: 0.6; margin-top: 10px; font-size: 0.9rem;">E = ½mv², p = mv</div>
+            </a>
+            <a href="#" class="topic-card">
+                <div class="chapter-number">Chapters 10-11</div>
+                <h3>Rotation & Rolling</h3>
+                <div style="opacity: 0.6; margin-top: 10px; font-size: 0.9rem;">τ = Iα, L = Iω</div>
+            </a>
+            <a href="#" class="topic-card">
+                <div class="chapter-number">Chapters 12-13</div>
+                <h3>Equilibrium & Gravitation</h3>
+                <div style="opacity: 0.6; margin-top: 10px; font-size: 0.9rem;">F = Gm₁m₂/r²</div>
+            </a>
+            <a href="#" class="topic-card">
+                <div class="chapter-number">Chapters 14-16</div>
+                <h3>Fluids & Oscillations</h3>
+                <div style="opacity: 0.6; margin-top: 10px; font-size: 0.9rem;">F = -kx, T = 2π√(m/k)</div>
             </a>
         </div>
         
-        <h2 class="section-title">Volume 2</h2>
+        <h2 class="section-title">Part II: Thermodynamics</h2>
         <div class="topic-grid">
-             <a href="#" class="topic-card">
-                <div class="chapter-number">Chapters 23-28</div>
-                <h3>Heat & Thermodynamics</h3>
+            <a href="#" class="topic-card">
+                <div class="chapter-number">Chapters 17-18</div>
+                <h3>Waves & Temperature</h3>
+                <div style="opacity: 0.6; margin-top: 10px; font-size: 0.9rem;">v = fλ, PV = nRT</div>
             </a>
             <a href="#" class="topic-card">
-                <div class="chapter-number">Chapters 29-40</div>
-                <h3>Electricity & Magnetism</h3>
+                <div class="chapter-number">Chapters 19-20</div>
+                <h3>Heat & Kinetic Theory</h3>
+                <div style="opacity: 0.6; margin-top: 10px; font-size: 0.9rem;">Q = mcΔT, ½mv² = ³⁄₂kT</div>
             </a>
-             <a href="#" class="topic-card">
-                <div class="chapter-number">Chapters 41-47</div>
-                <h3>Modern Physics</h3>
+            <a href="#" class="topic-card">
+                <div class="chapter-number">Chapter 21</div>
+                <h3>Entropy & Second Law</h3>
+                <div style="opacity: 0.6; margin-top: 10px; font-size: 0.9rem;">ΔS ≥ 0, η = 1 - T₂/T₁</div>
+            </a>
+        </div>
+
+        <h2 class="section-title">Part III: Electromagnetism</h2>
+        <div class="topic-grid">
+            <a href="#" class="topic-card">
+                <div class="chapter-number">Chapters 22-24</div>
+                <h3>Electric Charge & Fields</h3>
+                <div style="opacity: 0.6; margin-top: 10px; font-size: 0.9rem;">F = kq₁q₂/r², E = F/q</div>
+            </a>
+            <a href="#" class="topic-card">
+                <div class="chapter-number">Chapters 25-27</div>
+                <h3>Electric Potential & Capacitance</h3>
+                <div style="opacity: 0.6; margin-top: 10px; font-size: 0.9rem;">V = kq/r, C = Q/V</div>
+            </a>
+            <a href="#" class="topic-card">
+                <div class="chapter-number">Chapters 28-29</div>
+                <h3>Current & Resistance</h3>
+                <div style="opacity: 0.6; margin-top: 10px; font-size: 0.9rem;">I = Q/t, V = IR</div>
+            </a>
+            <a href="#" class="topic-card">
+                <div class="chapter-number">Chapters 30-32</div>
+                <h3>Magnetic Fields & Induction</h3>
+                <div style="opacity: 0.6; margin-top: 10px; font-size: 0.9rem;">F = qv×B, ε = -dΦ/dt</div>
+            </a>
+            <a href="#" class="topic-card">
+                <div class="chapter-number">Chapters 33-34</div>
+                <h3>Electromagnetic Oscillations</h3>
+                <div style="opacity: 0.6; margin-top: 10px; font-size: 0.9rem;">ω = 1/√(LC), Z = √(R² + X²)</div>
+            </a>
+            <a href="#" class="topic-card">
+                <div class="chapter-number">Chapters 35-36</div>
+                <h3>Electromagnetic Waves</h3>
+                <div style="opacity: 0.6; margin-top: 10px; font-size: 0.9rem;">c = 1/√(μ₀ε₀), I ∝ E²</div>
+            </a>
+        </div>
+
+        <h2 class="section-title">Part IV: Optics</h2>
+        <div class="topic-grid">
+            <a href="#" class="topic-card">
+                <div class="chapter-number">Chapters 37-38</div>
+                <h3>Geometric Optics</h3>
+                <div style="opacity: 0.6; margin-top: 10px; font-size: 0.9rem;">1/f = 1/s + 1/s', n₁sinθ₁ = n₂sinθ₂</div>
+            </a>
+            <a href="#" class="topic-card">
+                <div class="chapter-number">Chapters 39-40</div>
+                <h3>Interference & Diffraction</h3>
+                <div style="opacity: 0.6; margin-top: 10px; font-size: 0.9rem;">δ = 2πd sinθ/λ, dsinθ = mλ</div>
+            </a>
+        </div>
+
+        <h2 class="section-title">Part V: Modern Physics</h2>
+        <div class="topic-grid">
+            <a href="#" class="topic-card">
+                <div class="chapter-number">Chapters 41-42</div>
+                <h3>Relativity</h3>
+                <div style="opacity: 0.6; margin-top: 10px; font-size: 0.9rem;">E = mc², γ = 1/√(1-v²/c²)</div>
+            </a>
+            <a href="#" class="topic-card">
+                <div class="chapter-number">Chapters 43-44</div>
+                <h3>Quantum Physics</h3>
+                <div style="opacity: 0.6; margin-top: 10px; font-size: 0.9rem;">E = hf, λ = h/p</div>
+            </a>
+            <a href="#" class="topic-card">
+                <div class="chapter-number">Chapters 45-46</div>
+                <h3>Atomic & Nuclear Physics</h3>
+                <div style="opacity: 0.6; margin-top: 10px; font-size: 0.9rem;">E = -13.6/n² eV, N = N₀e^(-λt)</div>
+            </a>
+            <a href="#" class="topic-card">
+                <div class="chapter-number">Chapters 47-48</div>
+                <h3>Particle Physics & Cosmology</h3>
+                <div style="opacity: 0.6; margin-top: 10px; font-size: 0.9rem;">H = v/d, Λ = 8πGρ/3c²</div>
             </a>
         </div>
     </main>
@@ -181,28 +316,6 @@
     <footer class="footer">
         <p>&copy; 2025 physicsdaily.github.io. All Rights Reserved.</p>
     </footer>
-
-    <!-- Particle.js Library -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#61dafb" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.5, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
-                "size": { "value": 3, "random": true, "anim": { "enable": false } },
-                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.2, "width": 1 },
-                "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
-                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } }, "push": { "particles_nb": 4 } }
-            },
-            "retina_detect": true
-        });
-    </script>
 
 </body>
 </html>
