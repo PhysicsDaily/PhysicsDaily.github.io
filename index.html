@@ -3,233 +3,680 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics Daily - A Vibrant Journey</title>
+    <meta name="description" content="Physics Daily - Comprehensive physics notes organized according to Kenneth S. Krane's Physics textbook. Study materials covering classical mechanics, electricity & magnetism, thermodynamics, optics, and modern physics.">
+    <meta name="keywords" content="physics, notes, study materials, Krane physics, classical mechanics, quantum physics, electricity, magnetism, thermodynamics">
+    <meta name="author" content="Physics Daily">
+    <title>Physics Daily - Comprehensive Physics Notes | Krane's Physics Textbook</title>
     <style>
-        /* --- Google Font & Basic Reset --- */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        /* Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
+        /* CSS Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-color: #2563eb;
+            --primary-light: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #7c3aed;
+            --accent-color: #06b6d4;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-light: #64748b;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-card: #ffffff;
+            --border-light: #e2e8f0;
+            --border-medium: #cbd5e1;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --gradient-accent: linear-gradient(135deg, var(--accent-color), var(--primary-light));
+        }
+
         body {
-            font-family: 'Poppins', sans-serif;
-            color: #ffffff;
-            background-color: #0d1117; /* Dark base color */
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            overflow-x: hidden; /* Hide horizontal scrollbar */
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            scroll-behavior: smooth;
         }
 
-        /* --- Particle.js Canvas for Animated BG --- */
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1; /* Place it behind all other content */
-        }
-
-        /* --- Header --- */
+        /* Header */
         .header {
-            text-align: center;
-            padding: 80px 20px 60px;
-            position: relative;
-            z-index: 1;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-md);
         }
 
-        .header h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            /* Text Glow and Float Animation */
-            animation: glow-float 8s ease-in-out infinite;
-            text-shadow: 0 0 10px #00aeff, 0 0 20px #00aeff, 0 0 30px #00aeff, 0 0 40px #0077ff;
-        }
-        
-        @keyframes glow-float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            font-weight: 300;
-            color: #b0c4de;
-            margin-top: 10px;
-        }
-
-        /* --- Main Content & Topic Grid --- */
-        .main-content {
-            padding: 40px 20px;
+        .header-content {
             max-width: 1200px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 40px;
-            text-align: center;
-            color: #61dafb; /* Vibrant teal color */
-            border-bottom: 2px solid rgba(97, 218, 251, 0.3);
-            padding-bottom: 15px;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .topic-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-
-        /* --- Topic Card Styling --- */
-        .topic-card {
-            background: rgba(17, 34, 51, 0.75);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(97, 218, 251, 0.2);
-            border-radius: 12px;
-            padding: 30px;
-            text-align: center;
-            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease;
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 700;
             text-decoration: none;
-            color: #ffffff;
-            will-change: transform; /* Performance optimization */
+            color: white;
         }
 
-        .topic-card:hover {
-            transform: perspective(1000px) rotateY(5deg) rotateX(5deg) scale(1.05);
-            box-shadow: 0 15px 30px rgba(0, 174, 255, 0.3);
-            border-color: #61dafb;
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
         }
 
-        .topic-card .chapter-number {
-            font-size: 1rem;
-            font-weight: 300;
-            color: #b0c4de;
-            margin-bottom: 10px;
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
         }
 
-        .topic-card h3 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: #ffffff;
+        .nav-menu a:hover {
+            opacity: 0.8;
         }
 
-        /* --- Footer --- */
-        .footer {
-            text-align: center;
-            padding: 25px;
-            margin-top: 40px;
-            background-color: rgba(13, 17, 23, 0.8);
-            border-top: 1px solid rgba(97, 218, 251, 0.2);
+        .search-box {
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
             font-size: 0.9rem;
-            color: #8899a6;
+            width: 200px;
+        }
+
+        .search-box::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--bg-secondary);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .hero-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .feature {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* Chapter Grid */
+        .chapter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .chapter-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
             position: relative;
-            z-index: 1;
+            overflow: hidden;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        .chapter-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-primary);
+        }
+
+        .chapter-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .chapter-description {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        /* Quick Access Section */
+        .quick-access {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        .quick-access h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .quick-link {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .quick-link:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            background: var(--gradient-accent);
+            color: white;
+        }
+
+        .quick-link-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quick-link h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-primary);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                gap: 1rem;
+            }
+
+            .search-box {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .chapter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-content {
+                padding: 2rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .chapter-card {
+                padding: 1rem;
+            }
+
+            .quick-access {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-
-    <div id="particles-js"></div>
-
+    <!-- Header -->
     <header class="header">
-        <h1>Physics Daily</h1>
-        <p>An Interactive Exploration of Krane's "Physics"</p>
+        <div class="header-content">
+            <a href="#" class="logo">Physics Daily</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#chapters">Chapters</a></li>
+                    <li><a href="#formulas">Formulas</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <input type="search" class="search-box" placeholder="Search topics...">
+        </div>
     </header>
 
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Physics Daily</h1>
+            <p>Comprehensive physics notes organized according to Kenneth S. Krane's "Physics" textbook. Master fundamental concepts from classical mechanics to quantum physics with structured, accessible study materials.</p>
+            
+            <div class="hero-features">
+                <div class="feature">
+                    <div class="feature-icon">📚</div>
+                    <h3>Textbook Aligned</h3>
+                    <p>Follows Krane's Physics structure</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔬</div>
+                    <h3>Comprehensive</h3>
+                    <p>27 chapters covering all physics topics</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📱</div>
+                    <h3>Responsive</h3>
+                    <p>Optimized for all devices</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Fast Loading</h3>
+                    <p>Optimized for GitHub Pages</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
     <main class="main-content">
-        <h2 class="section-title">Mechanics</h2>
-        <div class="topic-grid">
-            <a href="#" class="topic-card">
-                <div class="chapter-number">Chapters 1-5</div>
-                <h3>Foundations of Mechanics</h3>
-            </a>
-            <a href="#" class="topic-card">
-                <div class="chapter-number">Chapters 6-10</div>
-                <h3>Momentum & Rotational Motion</h3>
-            </a>
-            <a href="#" class="topic-card">
-                <div class="chapter-number">Chapters 11-14</div>
-                <h3>Energy & Gravitation</h3>
-            </a>
-        </div>
-        
-        <h2 class="section-title">Waves, Fluids & Thermodynamics</h2>
-        <div class="topic-grid">
-             <a href="#" class="topic-card">
-                <div class="chapter-number">Chapters 15-19</div>
-                <h3>Fluids & Waves</h3>
-            </a>
-            <a href="#" class="topic-card">
-                <div class="chapter-number">Chapters 20-24</div>
-                <h3>Relativity & Thermodynamics</h3>
-            </a>
-        </div>
+        <section id="chapters">
+            <h2 class="section-title">Physics Chapters</h2>
+            <p class="section-subtitle">Explore comprehensive notes organized by Krane's Physics textbook chapters</p>
+            
+            <div class="chapter-grid">
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 1</div>
+                    <h3 class="chapter-title">Introduction and Mathematical Concepts</h3>
+                    <p class="chapter-description">Units, dimensions, vectors, coordinate systems, and mathematical foundations for physics</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 2</div>
+                    <h3 class="chapter-title">Motion in One Dimension</h3>
+                    <p class="chapter-description">Displacement, velocity, acceleration, and kinematic equations for linear motion</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 3</div>
+                    <h3 class="chapter-title">Motion in Two and Three Dimensions</h3>
+                    <p class="chapter-description">Vector kinematics, projectile motion, circular motion, and relative motion</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 4</div>
+                    <h3 class="chapter-title">Newton's Laws of Motion</h3>
+                    <p class="chapter-description">Force, mass, inertia, and the fundamental laws governing motion</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 5</div>
+                    <h3 class="chapter-title">Applications of Newton's Laws</h3>
+                    <p class="chapter-description">Friction, drag forces, uniform circular motion, and problem-solving techniques</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 6</div>
+                    <h3 class="chapter-title">Work and Energy</h3>
+                    <p class="chapter-description">Work-energy theorem, kinetic energy, potential energy, and power</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 7</div>
+                    <h3 class="chapter-title">Conservation of Energy</h3>
+                    <p class="chapter-description">Energy conservation principles, conservative and non-conservative forces</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 8</div>
+                    <h3 class="chapter-title">Linear Momentum</h3>
+                    <p class="chapter-description">Momentum conservation, impulse, collisions, and center of mass</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 9</div>
+                    <h3 class="chapter-title">Rotational Motion</h3>
+                    <p class="chapter-description">Angular kinematics, rotational dynamics, moment of inertia, and torque</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 10</div>
+                    <h3 class="chapter-title">Angular Momentum</h3>
+                    <p class="chapter-description">Angular momentum conservation, gyroscopic motion, and precession</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 11</div>
+                    <h3 class="chapter-title">Oscillations</h3>
+                    <p class="chapter-description">Simple harmonic motion, damped oscillations, and forced vibrations</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 12</div>
+                    <h3 class="chapter-title">Waves</h3>
+                    <p class="chapter-description">Wave properties, wave equation, interference, and standing waves</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 13</div>
+                    <h3 class="chapter-title">Temperature and Heat</h3>
+                    <p class="chapter-description">Temperature scales, thermal expansion, heat capacity, and phase transitions</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 14</div>
+                    <h3 class="chapter-title">Thermodynamics</h3>
+                    <p class="chapter-description">Laws of thermodynamics, heat engines, refrigerators, and entropy</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 15</div>
+                    <h3 class="chapter-title">Electric Charge and Electric Field</h3>
+                    <p class="chapter-description">Coulomb's law, electric field, field lines, and Gauss's law</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 16</div>
+                    <h3 class="chapter-title">Electric Potential</h3>
+                    <p class="chapter-description">Electric potential energy, voltage, equipotential surfaces, and capacitance</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 17</div>
+                    <h3 class="chapter-title">Electric Current and Resistance</h3>
+                    <p class="chapter-description">Current, resistance, Ohm's law, power, and electrical circuits</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 18</div>
+                    <h3 class="chapter-title">Magnetic Field</h3>
+                    <p class="chapter-description">Magnetic forces, magnetic field sources, and Ampère's law</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 19</div>
+                    <h3 class="chapter-title">Electromagnetic Induction</h3>
+                    <p class="chapter-description">Faraday's law, Lenz's law, motional EMF, and inductance</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 20</div>
+                    <h3 class="chapter-title">AC Circuits</h3>
+                    <p class="chapter-description">Alternating current, impedance, resonance, and power in AC circuits</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 21</div>
+                    <h3 class="chapter-title">Electromagnetic Waves</h3>
+                    <p class="chapter-description">Maxwell's equations, wave propagation, and electromagnetic spectrum</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 22</div>
+                    <h3 class="chapter-title">Geometric Optics</h3>
+                    <p class="chapter-description">Reflection, refraction, mirrors, lenses, and optical instruments</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 23</div>
+                    <h3 class="chapter-title">Wave Optics</h3>
+                    <p class="chapter-description">Interference, diffraction, polarization, and wave nature of light</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 24</div>
+                    <h3 class="chapter-title">Special Relativity</h3>
+                    <p class="chapter-description">Time dilation, length contraction, relativistic momentum and energy</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 25</div>
+                    <h3 class="chapter-title">Quantum Physics</h3>
+                    <p class="chapter-description">Blackbody radiation, photoelectric effect, and particle-wave duality</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 26</div>
+                    <h3 class="chapter-title">Atomic Physics</h3>
+                    <p class="chapter-description">Atomic structure, Bohr model, electron configurations, and X-rays</p>
+                </a>
+                
+                <a href="#" class="chapter-card">
+                    <div class="chapter-number">Chapter 27</div>
+                    <h3 class="chapter-title">Nuclear Physics</h3>
+                    <p class="chapter-description">Nuclear structure, radioactivity, nuclear reactions, and applications</p>
+                </a>
+            </div>
+        </section>
 
-        <h2 class="section-title">Electricity & Magnetism</h2>
-        <div class="topic-grid">
-             <a href="#" class="topic-card">
-                <div class="chapter-number">Chapters 25-30</div>
-                <h3>Electrostatics</h3>
-            </a>
-             <a href="#" class="topic-card">
-                <div class="chapter-number">Chapters 31-36</div>
-                <h3>Circuits & Magnetism</h3>
-            </a>
-             <a href="#" class="topic-card">
-                <div class="chapter-number">Chapters 37-38</div>
-                <h3>AC Circuits & Maxwell's Equations</h3>
-            </a>
-        </div>
-
-        <h2 class="section-title">Optics & Modern Physics</h2>
-        <div class="topic-grid">
-             <a href="#" class="topic-card">
-                <div class="chapter-number">Chapters 39-44</div>
-                <h3>Optics</h3>
-            </a>
-             <a href="#" class="topic-card">
-                <div class="chapter-number">Chapters 45-49</div>
-                <h3>Quantum Mechanics</h3>
-            </a>
-             <a href="#" class="topic-card">
-                <div class="chapter-number">Chapters 50-52</div>
-                <h3>Nuclear & Particle Physics</h3>
-            </a>
-        </div>
+        <!-- Quick Access Section -->
+        <section class="quick-access" id="formulas">
+            <h2>Quick Access</h2>
+            <div class="quick-links">
+                <a href="#" class="quick-link">
+                    <div class="quick-link-icon">📐</div>
+                    <h3>Formula Sheets</h3>
+                    <p>Quick reference formulas for all chapters</p>
+                </a>
+                <a href="#" class="quick-link">
+                    <div class="quick-link-icon">🔄</div>
+                    <h3>Recent Updates</h3>
+                    <p>Latest notes and improvements</p>
+                </a>
+                <a href="#" class="quick-link">
+                    <div class="quick-link-icon">🎯</div>
+                    <h3>Practice Problems</h3>
+                    <p>Solved examples and exercises</p>
+                </a>
+                <a href="#" class="quick-link">
+                    <div class="quick-link-icon">📊</div>
+                    <h3>Study Progress</h3>
+                    <p>Track your learning journey</p>
+                </a>
+            </div>
+        </section>
     </main>
 
+    <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2025 physicsdaily.github.io. All Rights Reserved.</p>
+        <div class="footer-content">
+            <div class="footer-section" id="about">
+                <h3>About Physics Daily</h3>
+                <p>Physics Daily is a comprehensive educational resource providing structured physics notes based on Kenneth S. Krane's acclaimed "Physics" textbook. Our mission is to make physics accessible and understandable for students at all levels.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#chapters">All Chapters</a></li>
+                    <li><a href="#formulas">Formula Sheets</a></li>
+                    <li><a href="#">Study Guides</a></li>
+                    <li><a href="#">Practice Tests</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Physics Levels</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Introductory Physics</a></li>
+                    <li><a href="#">Intermediate Physics</a></li>
+                    <li><a href="#">Advanced Physics</a></li>
+                    <li><a href="#">Graduate Level</a></li>
+                </ul>
+            </div>
+            <div class="footer-section" id="contact">
+                <h3>Contact & Support</h3>
+                <ul class="footer-links">
+                    <li><a href="mailto:contact@physicsdaily.github.io">Email Us</a></li>
+                    <li><a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io">GitHub Repository</a></li>
+                    <li><a href="#">Report Issues</a></li>
+                    <li><a href="#">Contribute Content</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Physics Daily. Educational content available for free use. Made with ❤️ for physics enthusiasts everywhere.</p>
+        </div>
     </footer>
-
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#61dafb" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.5, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
-                "size": { "value": 3, "random": true, "anim": { "enable": false } },
-                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.2, "width": 1 },
-                "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
-                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } }, "push": { "particles_nb": 4 } }
-            },
-            "retina_detect": true
-        });
-    </script>
-
 </body>
 </html>
-```
