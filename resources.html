@@ -92,20 +92,22 @@
         /* Dark Mode Toggle */
         .theme-toggle {
             position: fixed;
-            top: 2rem;
-            right: 2rem;
-            z-index: 1000;
+            top: 1rem;
+            right: 1rem;
+            z-index: 999;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 50px;
             padding: 0.5rem;
             box-shadow: var(--shadow-md);
             transition: var(--transition);
+            opacity: 0.9;
         }
 
         .theme-toggle:hover {
             transform: scale(1.05);
             box-shadow: var(--shadow-lg);
+            opacity: 1;
         }
 
         .theme-toggle button {
@@ -628,13 +630,16 @@
                         <li><strong>HC Verma</strong> <span>- Concepts of Physics Volume 2</span></li>
                     </ul>
                 </div>
-            </section> <div class="resource-list">
+
+                <!-- Advanced Physics Section -->
+                <div class="resource-list">
                     <h3>Advanced Physics</h3>
                     <ul>
                         <li><strong>Halliday, Resnick, and Krane</strong> <span>- Physics (Primary source for advanced study and competitions)</span></li>
                         <li><strong>Morin</strong> <span>- Introduction to Classical Mechanics: With Problems and Solutions</span></li>
                     </ul>
                 </div>
+            </section>
 
             <!-- Review Resources -->
             <section class="section fade-in">
