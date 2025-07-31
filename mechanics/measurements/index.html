@@ -10,6 +10,43 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../shared/mechanics-style.css">
     <style>
+        /* Theme Toggle - Fixed positioning */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            padding: 4px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .theme-toggle button {
+            background: none;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle button.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .theme-toggle button:hover {
+            background: var(--bg-secondary);
+        }
+
+        .theme-toggle button.active:hover {
+            background: var(--primary-dark);
+        }
+
         .quiz-container {
             background: var(--card-bg);
             border-radius: 12px;
@@ -57,10 +94,37 @@
             margin: 8px;
             font-weight: 500;
             transition: all 0.2s ease;
+            display: inline-block;
+            text-decoration: none;
         }
         .btn:hover {
             background: var(--primary-dark);
             transform: translateY(-1px);
+        }
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+        .btn-close:hover {
+            background: #c82333;
+        }
+        .quiz-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
         }
         .section {
             margin: 32px 0;
@@ -102,6 +166,8 @@
             margin-left: 8px;
             color: var(--text-secondary);
             cursor: pointer;
+            display: inline-block;
+            width: calc(100% - 32px);
         }
         .quiz-question input[type="radio"] {
             margin-right: 8px;
@@ -112,10 +178,54 @@
             background: var(--card-bg);
             border-radius: 8px;
             border: 1px solid var(--border);
+            position: relative;
+        }
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .results-header h3 {
+            margin: 0;
+            color: var(--text-primary);
+        }
+        
+        /* Ensure content doesn't overlap with fixed theme toggle */
+        body {
+            padding-top: 20px;
+        }
+        
+        .nav {
+            margin-top: 60px;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+                scale: 0.9;
+            }
+            
+            .quiz-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                margin: 4px 0;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Theme Toggle - Fixed Position -->
+    <div class="theme-toggle">
+        <button id="light-mode" class="active" title="Light Mode">☀️</button>
+        <button id="dark-mode" title="Dark Mode">🌙</button>
+    </div>
+
     <!-- Navigation -->
     <nav class="nav">
         <div class="container">
@@ -130,12 +240,6 @@
             </div>
         </div>
     </nav>
-
-    <!-- Theme Toggle -->
-    <div class="theme-toggle">
-        <button id="light-mode" class="active" title="Light Mode">☀️</button>
-        <button id="dark-mode" title="Dark Mode">🌙</button>
-    </div>
 
     <!-- Breadcrumb -->
     <div class="breadcrumb">
@@ -452,11 +556,16 @@
                     <input type="radio" name="q10" value="d" id="q10d"> <label for="q10d">d) 1650763.73 wavelengths of krypton-86 radiation</label>
                 </div>
 
-                <button class="btn" onclick="calculateScore()">Submit Quiz</button>
-                <button class="btn" onclick="resetQuiz()">Reset Quiz</button>
+                <div class="quiz-buttons">
+                    <button class="btn" onclick="calculateScore()">📊 Submit Quiz</button>
+                    <button class="btn btn-secondary" onclick="resetQuiz()">🔄 Reset Quiz</button>
+                </div>
                 
                 <div id="results" style="display: none;">
-                    <h3>Quiz Results</h3>
+                    <div class="results-header">
+                        <h3>Quiz Results</h3>
+                        <button class="btn btn-close" onclick="closeResults()">✕ Close</button>
+                    </div>
                     <div id="feedback"></div>
                 </div>
             </div>
@@ -533,6 +642,9 @@
 
             document.getElementById('feedback').innerHTML = feedback;
             document.getElementById('results').style.display = 'block';
+            
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function getAnswerText(question, answer) {
@@ -563,20 +675,35 @@
             document.getElementById('results').style.display = 'none';
         }
 
+        function closeResults() {
+            document.getElementById('results').style.display = 'none';
+        }
+
         // Theme toggle functionality
         const lightModeBtn = document.getElementById('light-mode');
         const darkModeBtn = document.getElementById('dark-mode');
+
+        // Check for saved theme preference or default to light mode
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        if (savedTheme === 'dark') {
+            darkModeBtn.classList.add('active');
+            lightModeBtn.classList.remove('active');
+        }
 
         lightModeBtn.addEventListener('click', () => {
             document.documentElement.setAttribute('data-theme', 'light');
             lightModeBtn.classList.add('active');
             darkModeBtn.classList.remove('active');
+            localStorage.setItem('theme', 'light');
         });
 
         darkModeBtn.addEventListener('click', () => {
             document.documentElement.setAttribute('data-theme', 'dark');
             darkModeBtn.classList.add('active');
             lightModeBtn.classList.remove('active');
+            localStorage.setItem('theme', 'dark');
         });
     </script>
 </body>
