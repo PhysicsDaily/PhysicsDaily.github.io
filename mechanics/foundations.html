@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mechanics: Foundations & Kinematics - Physics Daily</title>
+    <meta name="description" content="Master the foundations of classical mechanics including measurement, motion, forces, Newton's laws, momentum, and particle systems. Comprehensive physics notes and study materials.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #3b82f6;
+            --secondary-color: #64748b;
+            --accent-color: #06b6d4;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            
+            /* Light theme colors */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border-color: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --card-bg: #ffffff;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --header-bg: #ffffff;
+            
+            /* Gradients for light theme */
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-tertiary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-quaternary: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --gradient-modern: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            /* Dark theme colors */
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --border-hover: #475569;
+            --card-bg: #1e293b;
+            --card-shadow: rgba(0, 0, 0, 0.3);
+            --header-bg: #0f172a;
+            
+            /* Darker gradients for dark theme */
+            --gradient-primary: linear-gradient(135deg, #4338ca 0%, #6366f1 100%);
+            --gradient-secondary: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+            --gradient-tertiary: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+            --gradient-quaternary: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            --gradient-modern: linear-gradient(135deg, #e11d48 0%, #be185d 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            min-height: 100vh;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+    </style>
+    <link rel="stylesheet" href="shared/mechanics-style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../index.html" class="nav-logo">Physics Daily</a>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../resources.html">Resources</a></li>
+                    <li><a href="#" class="active">Mechanics</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="../index.html">Home</a>
+                <span class="breadcrumb-separator">›</span>
+                <a href="../index.html#foundations">Classical Mechanics</a>
+                <span class="breadcrumb-separator">›</span>
+                <span>Foundations & Kinematics</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" style="background: var(--bg-secondary); padding: 3rem 0 2rem; text-align: center; border-bottom: 1px solid var(--border-color);">
+        <div class="container">
+            <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--text-primary); margin-bottom: 1rem;">Mechanics: Foundations & Kinematics</h1>
+            <p style="font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto;">Master the fundamental principles of classical mechanics from basic measurement to complex particle systems</p>
+        </div>
+    </header>
+
+    <main style="padding: 4rem 0; background: var(--bg-secondary);">
+        <div class="container">
+            <!-- Progress Tracker -->
+            <section class="progress-tracker fade-in-up">
+                <h3>📊 Overall Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 15%;"></div>
+                </div>
+                <div class="progress-text">2 of 7 chapters started</div>
+            </section>
+
+            <!-- Learning Objectives -->
+            <section class="learning-objectives fade-in-up">
+                <h3>🎯 Learning Objectives</h3>
+                <ul>
+                    <li>Understand fundamental concepts of measurement, units, and dimensional analysis</li>
+                    <li>Master kinematics in one, two, and three dimensions</li>
+                    <li>Apply Newton's laws of motion to solve complex problems</li>
+                    <li>Analyze momentum conservation and particle collisions</li>
+                    <li>Understand center of mass and systems of particles</li>
+                    <li>Develop problem-solving skills for real-world applications</li>
+                </ul>
+            </section>
+
+            <!-- Chapter Overview -->
+            <section class="section fade-in-up">
+                <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; color: var(--text-primary); margin-bottom: 2rem; position: relative; padding-left: 1rem;">
+                    📚 Chapter Overview
+                </h2>
+                <div class="chapter-grid">
+                    <a href="chapter1/index.html" class="chapter-card">
+                        <div class="chapter-number">Chapter 1</div>
+                        <h3>Measurement</h3>
+                        <p class="chapter-description">
+                            Learn about units, standards, significant figures, dimensional analysis, and uncertainty in measurements.
+                        </p>
+                        <div class="chapter-meta">
+                            <span class="difficulty-badge difficulty-beginner">Beginner</span>
+                            <span class="study-time">⏱️ 3-4 hours</span>
+                        </div>
+                    </a>
+
+                    <a href="chapter2/index.html" class="chapter-card">
+                        <div class="chapter-number">Chapter 2</div>
+                        <h3>Motion in One Dimension</h3>
+                        <p class="chapter-description">
+                            Master position, displacement, velocity, acceleration, and kinematic equations for 1D motion.
+                        </p>
+                        <div class="chapter-meta">
+                            <span class="difficulty-badge difficulty-beginner">Beginner</span>
+                            <span class="study-time">⏱️ 4-5 hours</span>
+                        </div>
+                    </a>
+
+                    <a href="chapter3/index.html" class="chapter-card">
+                        <div class="chapter-number">Chapter 3</div>
+                        <h3>Force and Newton's Laws</h3>
+                        <p class="chapter-description">
+                            Understand forces, Newton's three laws of motion, and their applications in problem solving.
+                        </p>
+                        <div class="chapter-meta">
+                            <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                            <span class="study-time">⏱️ 5-6 hours</span>
+                        </div>
+                    </a>
+
+                    <a href="chapter4/index.html" class="chapter-card">
+                        <div class="chapter-number">Chapter 4</div>
+                        <h3>Motion in 2D & 3D</h3>
+                        <p class="chapter-description">
+                            Extend kinematics to two and three dimensions, including projectile motion and circular motion.
+                        </p>
+                        <div class="chapter-meta">
+                            <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                            <span class="study-time">⏱️ 6-7 hours</span>
+                        </div>
+                    </a>
+
+                    <a href="chapter5/index.html" class="chapter-card">
+                        <div class="chapter-number">Chapter 5</div>
+                        <h3>Applications of Newton's Laws</h3>
+                        <p class="chapter-description">
+                            Apply Newton's laws to solve problems involving friction, tension, and inclined planes.
+                        </p>
+                        <div class="chapter-meta">
+                            <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                            <span class="study-time">⏱️ 5-6 hours</span>
+                        </div>
+                    </a>
+
+                    <a href="chapter6/index.html" class="chapter-card">
+                        <div class="chapter-number">Chapter 6</div>
+                        <h3>Momentum</h3>
+                        <p class="chapter-description">
+                            Explore linear momentum, impulse, conservation of momentum, and collision analysis.
+                        </p>
+                        <div class="chapter-meta">
+                            <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                            <span class="study-time">⏱️ 4-5 hours</span>
+                        </div>
+                    </a>
+
+                    <a href="chapter7/index.html" class="chapter-card">
+                        <div class="chapter-number">Chapter 7</div>
+                        <h3>Systems of Particles</h3>
+                        <p class="chapter-description">
+                            Understand center of mass, motion of systems, and the behavior of particle collections.
+                        </p>
+                        <div class="chapter-meta">
+                            <span class="difficulty-badge difficulty-advanced">Advanced</span>
+                            <span class="study-time">⏱️ 5-6 hours</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Quick Access Menu -->
+            <section class="section fade-in-up">
+                <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; color: var(--text-primary); margin-bottom: 2rem; position: relative; padding-left: 1rem;">
+                    🔗 Quick Access to Topics
+                </h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <div class="topic-list">
+                        <h3>Measurement & Units</h3>
+                        <ul>
+                            <li><a href="chapter1/measurement-units.html">
+                                <div class="topic-title">Units and Standards</div>
+                                <div class="topic-subtitle">SI units, prefixes, conversions</div>
+                            </a></li>
+                            <li><a href="chapter1/significant-figures.html">
+                                <div class="topic-title">Significant Figures</div>
+                                <div class="topic-subtitle">Rules and calculations</div>
+                            </a></li>
+                            <li><a href="chapter1/dimensional-analysis.html">
+                                <div class="topic-title">Dimensional Analysis</div>
+                                <div class="topic-subtitle">Checking equations and solving problems</div>
+                            </a></li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-list">
+                        <h3>Kinematics</h3>
+                        <ul>
+                            <li><a href="chapter2/position-displacement.html">
+                                <div class="topic-title">Position & Displacement</div>
+                                <div class="topic-subtitle">Reference frames and vectors</div>
+                            </a></li>
+                            <li><a href="chapter2/velocity-acceleration.html">
+                                <div class="topic-title">Velocity & Acceleration</div>
+                                <div class="topic-subtitle">Average and instantaneous values</div>
+                            </a></li>
+                            <li><a href="chapter2/kinematic-equations.html">
+                                <div class="topic-title">Kinematic Equations</div>
+                                <div class="topic-subtitle">Motion with constant acceleration</div>
+                            </a></li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-list">
+                        <h3>Forces & Newton's Laws</h3>
+                        <ul>
+                            <li><a href="chapter3/newtons-laws.html">
+                                <div class="topic-title">Newton's Three Laws</div>
+                                <div class="topic-subtitle">Fundamental principles of motion</div>
+                            </a></li>
+                            <li><a href="chapter3/force-diagrams.html">
+                                <div class="topic-title">Free Body Diagrams</div>
+                                <div class="topic-subtitle">Identifying and drawing forces</div>
+                            </a></li>
+                            <li><a href="chapter3/applications.html">
+                                <div class="topic-title">Problem Solving</div>
+                                <div class="topic-subtitle">Systematic approach to dynamics</div>
+                            </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Notes Section Placeholder -->
+            <section class="notes-section fade-in-up">
+                <h3>📝 Comprehensive Notes Coming Soon</h3>
+                <p>
+                    Detailed notes, worked examples, and interactive content for each topic are being prepared. 
+                    Each section will include theory explanations, step-by-step problem solutions, and practice exercises 
+                    to help you master the fundamental concepts of classical mechanics.
+                </p>
+            </section>
+
+            <!-- Contributions Section -->
+            <section style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%); color: white; padding: 3rem 2rem; border-radius: var(--border-radius); margin: 3rem 0; text-align: center;">
+                <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">🤝 Help Us Improve</h3>
+                <p style="opacity: 0.9; line-height: 1.7; margin-bottom: 1.5rem;">
+                    This is an open-source educational resource. If you find errors, have suggestions, 
+                    or want to contribute content, we'd love your help!
+                </p>
+                <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io" style="background: rgba(255,255,255,0.2); padding: 0.75rem 1.5rem; border-radius: 8px; color: white; text-decoration: none; font-weight: 600; display: inline-block;" target="_blank">
+                    🌟 Contribute on GitHub
+                </a>
+            </section>
+
+            <!-- Dark Mode Toggle - positioned below contributions section as requested -->
+            <div style="position: fixed; bottom: 2rem; right: 2rem; z-index: 1000; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 50px; padding: 0.5rem; box-shadow: var(--shadow-md); transition: var(--transition);" class="theme-toggle">
+                <button id="light-mode" class="active" title="Light Mode" style="background: none; border: none; padding: 0.5rem; border-radius: 50%; cursor: pointer; color: var(--text-secondary); transition: var(--transition); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">☀️</button>
+                <button id="dark-mode" title="Dark Mode" style="background: none; border: none; padding: 0.5rem; border-radius: 50%; cursor: pointer; color: var(--text-secondary); transition: var(--transition); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🌙</button>
+            </div>
+        </div>
+    </main>
+
+    <footer style="text-align: center; padding: 3rem 0; background: var(--card-bg); border-top: 1px solid var(--border-color); margin-top: 4rem;">
+        <div class="container">
+            <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                <a href="../index.html" style="color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: var(--transition);">Home</a>
+                <a href="../resources.html" style="color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: var(--transition);">Resources</a>
+                <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io" style="color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: var(--transition);">GitHub</a>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">&copy; 2025 Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dark mode functionality
+        const lightModeBtn = document.getElementById('light-mode');
+        const darkModeBtn = document.getElementById('dark-mode');
+        const body = document.body;
+
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        
+        if (currentTheme === 'dark') {
+            body.setAttribute('data-theme', 'dark');
+            lightModeBtn.classList.remove('active');
+            darkModeBtn.classList.add('active');
+        }
+
+        lightModeBtn.addEventListener('click', () => {
+            body.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            lightModeBtn.classList.add('active');
+            darkModeBtn.classList.remove('active');
+        });
+
+        darkModeBtn.addEventListener('click', () => {
+            body.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            lightModeBtn.classList.remove('active');
+            darkModeBtn.classList.add('active');
+        });
+
+        // Add active state styles for theme toggle
+        const style = document.createElement('style');
+        style.textContent = `
+            .theme-toggle button.active {
+                background: var(--primary-color) !important;
+                color: white !important;
+            }
+            .theme-toggle button:hover {
+                background: var(--bg-tertiary) !important;
+                color: var(--text-primary) !important;
+            }
+            .theme-toggle:hover {
+                transform: scale(1.05);
+                box-shadow: var(--shadow-lg);
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

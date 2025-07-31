@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newton's Three Laws - Physics Daily</title>
+    <meta name="description" content="Learn Newton's fundamental laws of motion: inertia, F=ma, and action-reaction pairs. Foundation of classical mechanics.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #3b82f6;
+            --secondary-color: #64748b;
+            --accent-color: #06b6d4;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            
+            /* Light theme colors */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border-color: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --card-bg: #ffffff;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --header-bg: #ffffff;
+            
+            /* Gradients for light theme */
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-tertiary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-quaternary: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --gradient-modern: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            /* Dark theme colors */
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --border-hover: #475569;
+            --card-bg: #1e293b;
+            --card-shadow: rgba(0, 0, 0, 0.3);
+            --header-bg: #0f172a;
+            
+            /* Darker gradients for dark theme */
+            --gradient-primary: linear-gradient(135deg, #4338ca 0%, #6366f1 100%);
+            --gradient-secondary: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+            --gradient-tertiary: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+            --gradient-quaternary: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            --gradient-modern: linear-gradient(135deg, #e11d48 0%, #be185d 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            min-height: 100vh;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+    </style>
+    <link rel="stylesheet" href="../shared/mechanics-style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../../index.html" class="nav-logo">Physics Daily</a>
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../resources.html">Resources</a></li>
+                    <li><a href="../foundations.html" class="active">Mechanics</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="../../index.html">Home</a>
+                <span class="breadcrumb-separator">›</span>
+                <a href="../foundations.html">Foundations & Kinematics</a>
+                <span class="breadcrumb-separator">›</span>
+                <a href="index.html">Chapter 3: Force and Newton's Laws</a>
+                <span class="breadcrumb-separator">›</span>
+                <span>Newton's Three Laws</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header style="background: var(--bg-secondary); padding: 3rem 0 2rem; text-align: center; border-bottom: 1px solid var(--border-color);">
+        <div class="container">
+            <div class="chapter-number" style="font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--text-secondary);">Chapter 3, Topic 3.1</div>
+            <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--text-primary); margin-bottom: 1rem;">Newton's Three Laws</h1>
+            <p style="font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto;">The fundamental principles that govern motion and forces in classical mechanics</p>
+        </div>
+    </header>
+
+    <main style="padding: 4rem 0; background: var(--bg-secondary);">
+        <div class="container">
+            <div class="chapter-layout">
+                <div class="chapter-main">
+                    <!-- Learning Objectives -->
+                    <section class="learning-objectives fade-in-up">
+                        <h3>🎯 Learning Objectives</h3>
+                        <ul>
+                            <li>State and explain Newton's three laws of motion</li>
+                            <li>Apply the first law to identify equilibrium conditions</li>
+                            <li>Use F = ma to solve dynamics problems</li>
+                            <li>Identify action-reaction pairs in physical systems</li>
+                            <li>Distinguish between mass and weight</li>
+                        </ul>
+                    </section>
+
+                    <!-- Notes Section Placeholder -->
+                    <section class="notes-section fade-in-up">
+                        <h3>📝 Comprehensive Notes Coming Soon</h3>
+                        <p>
+                            Detailed explanations of Newton's three laws, examples, applications, and problem-solving strategies 
+                            will be added here. Content will include historical context, mathematical formulations, 
+                            and real-world applications of each law.
+                        </p>
+                    </section>
+                </div>
+
+                <div class="chapter-sidebar">
+                    <!-- Quick Access -->
+                    <div class="quick-access">
+                        <h3>🔗 Topic Navigation</h3>
+                        <ul>
+                            <li><a href="index.html">← Back to Chapter 3</a></li>
+                            <li><a href="newtons-laws.html" style="color: var(--primary-color); font-weight: 600;">Newton's Three Laws</a></li>
+                            <li><a href="force-diagrams.html">Free Body Diagrams</a></li>
+                            <li><a href="applications.html">Problem Solving</a></li>
+                            <li><a href="../chapter4/index.html">Next: Chapter 4 →</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Dark Mode Toggle -->
+    <div style="position: fixed; bottom: 2rem; right: 2rem; z-index: 1000; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 50px; padding: 0.5rem; box-shadow: var(--shadow-md); transition: var(--transition);" class="theme-toggle">
+        <button id="light-mode" class="active" title="Light Mode" style="background: none; border: none; padding: 0.5rem; border-radius: 50%; cursor: pointer; color: var(--text-secondary); transition: var(--transition); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">☀️</button>
+        <button id="dark-mode" title="Dark Mode" style="background: none; border: none; padding: 0.5rem; border-radius: 50%; cursor: pointer; color: var(--text-secondary); transition: var(--transition); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🌙</button>
+    </div>
+
+    <footer style="text-align: center; padding: 3rem 0; background: var(--card-bg); border-top: 1px solid var(--border-color); margin-top: 4rem;">
+        <div class="container">
+            <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                <a href="../../index.html" style="color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: var(--transition);">Home</a>
+                <a href="../../resources.html" style="color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: var(--transition);">Resources</a>
+                <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io" style="color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: var(--transition);">GitHub</a>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">&copy; 2025 Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dark mode functionality
+        const lightModeBtn = document.getElementById('light-mode');
+        const darkModeBtn = document.getElementById('dark-mode');
+        const body = document.body;
+
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        
+        if (currentTheme === 'dark') {
+            body.setAttribute('data-theme', 'dark');
+            lightModeBtn.classList.remove('active');
+            darkModeBtn.classList.add('active');
+        }
+
+        lightModeBtn.addEventListener('click', () => {
+            body.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            lightModeBtn.classList.add('active');
+            darkModeBtn.classList.remove('active');
+        });
+
+        darkModeBtn.addEventListener('click', () => {
+            body.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            lightModeBtn.classList.remove('active');
+            darkModeBtn.classList.add('active');
+        });
+
+        // Add active state styles for theme toggle
+        const style = document.createElement('style');
+        style.textContent = `
+            .theme-toggle button.active {
+                background: var(--primary-color) !important;
+                color: white !important;
+            }
+            .theme-toggle button:hover {
+                background: var(--bg-tertiary) !important;
+                color: var(--text-primary) !important;
+            }
+            .theme-toggle:hover {
+                transform: scale(1.05);
+                box-shadow: var(--shadow-lg);
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

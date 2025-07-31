@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Units and Standards - Physics Daily</title>
+    <meta name="description" content="Learn about the International System of Units (SI), unit prefixes, conversions, and the importance of measurement standards in physics.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #3b82f6;
+            --secondary-color: #64748b;
+            --accent-color: #06b6d4;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            
+            /* Light theme colors */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border-color: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --card-bg: #ffffff;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --header-bg: #ffffff;
+            
+            /* Gradients for light theme */
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-tertiary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-quaternary: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --gradient-modern: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            /* Dark theme colors */
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --border-hover: #475569;
+            --card-bg: #1e293b;
+            --card-shadow: rgba(0, 0, 0, 0.3);
+            --header-bg: #0f172a;
+            
+            /* Darker gradients for dark theme */
+            --gradient-primary: linear-gradient(135deg, #4338ca 0%, #6366f1 100%);
+            --gradient-secondary: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+            --gradient-tertiary: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+            --gradient-quaternary: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            --gradient-modern: linear-gradient(135deg, #e11d48 0%, #be185d 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            min-height: 100vh;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+    </style>
+    <link rel="stylesheet" href="../shared/mechanics-style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../../index.html" class="nav-logo">Physics Daily</a>
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../resources.html">Resources</a></li>
+                    <li><a href="../foundations.html" class="active">Mechanics</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="../../index.html">Home</a>
+                <span class="breadcrumb-separator">›</span>
+                <a href="../foundations.html">Foundations & Kinematics</a>
+                <span class="breadcrumb-separator">›</span>
+                <a href="index.html">Chapter 1: Measurement</a>
+                <span class="breadcrumb-separator">›</span>
+                <span>Units and Standards</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header style="background: var(--bg-secondary); padding: 3rem 0 2rem; text-align: center; border-bottom: 1px solid var(--border-color);">
+        <div class="container">
+            <div class="chapter-number" style="font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--text-secondary);">Chapter 1, Topic 1.1</div>
+            <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--text-primary); margin-bottom: 1rem;">Units and Standards</h1>
+            <p style="font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto;">Understanding the International System of Units, prefixes, and measurement standards</p>
+        </div>
+    </header>
+
+    <main style="padding: 4rem 0; background: var(--bg-secondary);">
+        <div class="container">
+            <div class="chapter-layout">
+                <div class="chapter-main">
+                    <!-- Learning Objectives -->
+                    <section class="learning-objectives fade-in-up">
+                        <h3>🎯 Learning Objectives</h3>
+                        <ul>
+                            <li>Identify the seven SI base units and their symbols</li>
+                            <li>Use metric prefixes correctly in calculations</li>
+                            <li>Convert between different units using conversion factors</li>
+                            <li>Understand the importance of measurement standards</li>
+                            <li>Apply unit conversions to solve practical problems</li>
+                        </ul>
+                    </section>
+
+                    <!-- Content Section -->
+                    <section class="fade-in-up" style="background: var(--card-bg); border-radius: var(--border-radius); padding: 2.5rem; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); margin: 3rem 0;">
+                        <h2 style="color: var(--text-primary); font-size: 1.5rem; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem;">
+                            📏 The International System of Units (SI)
+                        </h2>
+                        
+                        <div style="margin-bottom: 2rem;">
+                            <h3 style="color: var(--text-primary); font-size: 1.2rem; margin-bottom: 1rem;">SI Base Units</h3>
+                            <div style="overflow-x: auto;">
+                                <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+                                    <thead>
+                                        <tr style="background: var(--bg-tertiary);">
+                                            <th style="padding: 1rem; text-align: left; border: 1px solid var(--border-color); color: var(--text-primary);">Quantity</th>
+                                            <th style="padding: 1rem; text-align: left; border: 1px solid var(--border-color); color: var(--text-primary);">Unit</th>
+                                            <th style="padding: 1rem; text-align: left; border: 1px solid var(--border-color); color: var(--text-primary);">Symbol</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding: 0.75rem; border: 1px solid var(--border-color); color: var(--text-secondary);">Length</td>
+                                            <td style="padding: 0.75rem; border: 1px solid var(--border-color); color: var(--text-primary); font-weight: 500;">meter</td>
+                                            <td style="padding: 0.75rem; border: 1px solid var(--border-color); font-family: 'JetBrains Mono', monospace; color: var(--text-primary);">m</td>
+                                        </tr>
+                                        <tr style="background: var(--bg-secondary);">
+                                            <td style="padding: 0.75rem; border: 1px solid var(--border-color); color: var(--text-secondary);">Mass</td>
+                                            <td style="padding: 0.75rem; border: 1px solid var(--border-color); color: var(--text-primary); font-weight: 500;">kilogram</td>
+                                            <td style="padding: 0.75rem; border: 1px solid var(--border-color); font-family: 'JetBrains Mono', monospace; color: var(--text-primary);">kg</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 0.75rem; border: 1px solid var(--border-color); color: var(--text-secondary);">Time</td>
+                                            <td style="padding: 0.75rem; border: 1px solid var(--border-color); color: var(--text-primary); font-weight: 500;">second</td>
+                                            <td style="padding: 0.75rem; border: 1px solid var(--border-color); font-family: 'JetBrains Mono', monospace; color: var(--text-primary);">s</td>
+                                        </tr>
+                                        <tr style="background: var(--bg-secondary);">
+                                            <td style="padding: 0.75rem; border: 1px solid var(--border-color); color: var(--text-secondary);">Electric Current</td>
+                                            <td style="padding: 0.75rem; border: 1px solid var(--border-color); color: var(--text-primary); font-weight: 500;">ampere</td>
+                                            <td style="padding: 0.75rem; border: 1px solid var(--border-color); font-family: 'JetBrains Mono', monospace; color: var(--text-primary);">A</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 0.75rem; border: 1px solid var(--border-color); color: var(--text-secondary);">Temperature</td>
+                                            <td style="padding: 0.75rem; border: 1px solid var(--border-color); color: var(--text-primary); font-weight: 500;">kelvin</td>
+                                            <td style="padding: 0.75rem; border: 1px solid var(--border-color); font-family: 'JetBrains Mono', monospace; color: var(--text-primary);">K</td>
+                                        </tr>
+                                        <tr style="background: var(--bg-secondary);">
+                                            <td style="padding: 0.75rem; border: 1px solid var(--border-color); color: var(--text-secondary);">Amount of Substance</td>
+                                            <td style="padding: 0.75rem; border: 1px solid var(--border-color); color: var(--text-primary); font-weight: 500;">mole</td>
+                                            <td style="padding: 0.75rem; border: 1px solid var(--border-color); font-family: 'JetBrains Mono', monospace; color: var(--text-primary);">mol</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 0.75rem; border: 1px solid var(--border-color); color: var(--text-secondary);">Luminous Intensity</td>
+                                            <td style="padding: 0.75rem; border: 1px solid var(--border-color); color: var(--text-primary); font-weight: 500;">candela</td>
+                                            <td style="padding: 0.75rem; border: 1px solid var(--border-color); font-family: 'JetBrains Mono', monospace; color: var(--text-primary);">cd</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 2rem;">
+                            <h3 style="color: var(--text-primary); font-size: 1.2rem; margin-bottom: 1rem;">Common SI Prefixes</h3>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                                <div style="background: var(--bg-tertiary); padding: 1rem; border-radius: 8px;">
+                                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Large Numbers</h4>
+                                    <ul style="list-style: none; padding: 0; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--text-secondary);">
+                                        <li>kilo (k) = 10³</li>
+                                        <li>mega (M) = 10⁶</li>
+                                        <li>giga (G) = 10⁹</li>
+                                        <li>tera (T) = 10¹²</li>
+                                    </ul>
+                                </div>
+                                <div style="background: var(--bg-tertiary); padding: 1rem; border-radius: 8px;">
+                                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Small Numbers</h4>
+                                    <ul style="list-style: none; padding: 0; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--text-secondary);">
+                                        <li>milli (m) = 10⁻³</li>
+                                        <li>micro (μ) = 10⁻⁶</li>
+                                        <li>nano (n) = 10⁻⁹</li>
+                                        <li>pico (p) = 10⁻¹²</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border: 1px solid rgba(102, 126, 234, 0.2); border-radius: 8px; padding: 1.5rem; margin: 2rem 0;">
+                            <h4 style="color: var(--text-primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                                💡 Example: Unit Conversion
+                            </h4>
+                            <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                                Convert 2.5 kilometers to meters:
+                            </p>
+                            <div style="font-family: 'JetBrains Mono', monospace; background: var(--card-bg); padding: 1rem; border-radius: 6px; color: var(--text-primary);">
+                                2.5 km × (1000 m / 1 km) = 2500 m
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Notes Section Placeholder -->
+                    <section class="notes-section fade-in-up">
+                        <h3>📝 Complete Notes Coming Soon</h3>
+                        <p>
+                            Additional content including measurement standards, historical context, 
+                            practical examples, and practice problems will be added here.
+                        </p>
+                    </section>
+                </div>
+
+                <div class="chapter-sidebar">
+                    <!-- Quick Access -->
+                    <div class="quick-access">
+                        <h3>🔗 Topic Navigation</h3>
+                        <ul>
+                            <li><a href="index.html">← Back to Chapter 1</a></li>
+                            <li><a href="measurement-units.html" style="color: var(--primary-color); font-weight: 600;">Units and Standards</a></li>
+                            <li><a href="significant-figures.html">Significant Figures</a></li>
+                            <li><a href="dimensional-analysis.html">Dimensional Analysis</a></li>
+                            <li><a href="../chapter2/index.html">Next: Chapter 2 →</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Key Points -->
+                    <div style="background: var(--card-bg); border-radius: var(--border-radius); padding: 1.5rem; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); margin-top: 1.5rem;">
+                        <h3 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                            ⭐ Key Points
+                        </h3>
+                        <ul style="list-style: none; padding: 0; margin: 0; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+                            <li style="margin-bottom: 0.5rem;">• SI uses 7 base units</li>
+                            <li style="margin-bottom: 0.5rem;">• Prefixes represent powers of 10</li>
+                            <li style="margin-bottom: 0.5rem;">• Standards ensure consistency</li>
+                            <li style="margin-bottom: 0.5rem;">• Conversion factors preserve equality</li>
+                            <li>• Units must be consistent in calculations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Dark Mode Toggle -->
+    <div style="position: fixed; bottom: 2rem; right: 2rem; z-index: 1000; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 50px; padding: 0.5rem; box-shadow: var(--shadow-md); transition: var(--transition);" class="theme-toggle">
+        <button id="light-mode" class="active" title="Light Mode" style="background: none; border: none; padding: 0.5rem; border-radius: 50%; cursor: pointer; color: var(--text-secondary); transition: var(--transition); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">☀️</button>
+        <button id="dark-mode" title="Dark Mode" style="background: none; border: none; padding: 0.5rem; border-radius: 50%; cursor: pointer; color: var(--text-secondary); transition: var(--transition); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🌙</button>
+    </div>
+
+    <footer style="text-align: center; padding: 3rem 0; background: var(--card-bg); border-top: 1px solid var(--border-color); margin-top: 4rem;">
+        <div class="container">
+            <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                <a href="../../index.html" style="color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: var(--transition);">Home</a>
+                <a href="../../resources.html" style="color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: var(--transition);">Resources</a>
+                <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io" style="color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: var(--transition);">GitHub</a>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">&copy; 2025 Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dark mode functionality
+        const lightModeBtn = document.getElementById('light-mode');
+        const darkModeBtn = document.getElementById('dark-mode');
+        const body = document.body;
+
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        
+        if (currentTheme === 'dark') {
+            body.setAttribute('data-theme', 'dark');
+            lightModeBtn.classList.remove('active');
+            darkModeBtn.classList.add('active');
+        }
+
+        lightModeBtn.addEventListener('click', () => {
+            body.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            lightModeBtn.classList.add('active');
+            darkModeBtn.classList.remove('active');
+        });
+
+        darkModeBtn.addEventListener('click', () => {
+            body.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            lightModeBtn.classList.remove('active');
+            darkModeBtn.classList.add('active');
+        });
+
+        // Add active state styles for theme toggle
+        const style = document.createElement('style');
+        style.textContent = `
+            .theme-toggle button.active {
+                background: var(--primary-color) !important;
+                color: white !important;
+            }
+            .theme-toggle button:hover {
+                background: var(--bg-tertiary) !important;
+                color: var(--text-primary) !important;
+            }
+            .theme-toggle:hover {
+                transform: scale(1.05);
+                box-shadow: var(--shadow-lg);
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

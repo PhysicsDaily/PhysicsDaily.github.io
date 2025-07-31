@@ -1,0 +1,458 @@
+/* 
+ * Mechanics Section Shared Styles
+ * Extends the main design system for the Mechanics section
+ */
+
+/* Inherit all main CSS variables and base styles from parent page */
+
+/* Mechanics-specific color palette */
+:root {
+    --mechanics-primary: var(--gradient-primary);
+    --mechanics-accent: #667eea;
+    --mechanics-secondary: #764ba2;
+}
+
+/* Breadcrumb Navigation */
+.breadcrumb {
+    background: var(--bg-secondary);
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+}
+
+.breadcrumb-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.breadcrumb-nav a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.breadcrumb-nav a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+.breadcrumb-separator {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+/* Chapter Progress Tracking */
+.progress-tracker {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.progress-tracker h3 {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.progress-bar {
+    background: var(--bg-tertiary);
+    border-radius: 10px;
+    height: 8px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+    background: var(--mechanics-primary);
+    height: 100%;
+    border-radius: 10px;
+    transition: var(--transition);
+}
+
+.progress-text {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    text-align: right;
+}
+
+/* Chapter Grid Layout */
+.chapter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.chapter-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.chapter-card:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--mechanics-primary);
+    transition: var(--transition);
+}
+
+.chapter-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--border-hover);
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.chapter-card:hover:before {
+    height: 6px;
+}
+
+.chapter-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--mechanics-accent);
+    background: rgba(102, 126, 234, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.chapter-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+}
+
+.chapter-description {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.chapter-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.difficulty-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.difficulty-beginner {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+}
+
+.difficulty-intermediate {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--warning-color);
+}
+
+.difficulty-advanced {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+}
+
+.study-time {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Topic Lists */
+.topic-list {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    margin: 2rem 0;
+    box-shadow: var(--shadow-sm);
+}
+
+.topic-list h3 {
+    background: var(--bg-tertiary);
+    padding: 1rem 1.5rem;
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.topic-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.topic-list li {
+    padding: 0;
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.topic-list li:last-child {
+    border-bottom: none;
+}
+
+.topic-list li a {
+    display: block;
+    padding: 1rem 1.5rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.topic-list li:hover {
+    background: var(--bg-tertiary);
+}
+
+.topic-list li a:hover {
+    color: var(--primary-color);
+}
+
+.topic-title {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.topic-subtitle {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Learning Objectives */
+.learning-objectives {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.learning-objectives h3 {
+    color: var(--mechanics-accent);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.learning-objectives ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.learning-objectives li {
+    padding: 0.5rem 0;
+    color: var(--text-primary);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.learning-objectives li:before {
+    content: '✓';
+    color: var(--success-color);
+    font-weight: bold;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+/* Notes Section Placeholder */
+.notes-section {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 3rem 2rem;
+    text-align: center;
+    border: 2px dashed var(--border-color);
+    margin: 3rem 0;
+    transition: var(--transition);
+}
+
+.notes-section:hover {
+    border-color: var(--mechanics-accent);
+    background: var(--bg-secondary);
+}
+
+.notes-section h3 {
+    color: var(--text-secondary);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.notes-section p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Quick Access Menu */
+.quick-access {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 2rem;
+}
+
+.quick-access h3 {
+    color: var(--text-primary);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quick-access ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.quick-access li {
+    margin-bottom: 0.5rem;
+}
+
+.quick-access a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    display: block;
+    padding: 0.25rem 0;
+}
+
+.quick-access a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* Sidebar Layout for Chapter Pages */
+.chapter-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 2rem;
+    align-items: start;
+}
+
+.chapter-main {
+    min-width: 0; /* Prevent grid overflow */
+}
+
+.chapter-sidebar {
+    min-width: 0; /* Prevent grid overflow */
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 1024px) {
+    .chapter-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .quick-access {
+        position: static;
+        order: -1; /* Show sidebar first on mobile */
+    }
+}
+
+@media (max-width: 768px) {
+    .chapter-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .chapter-card {
+        padding: 1.5rem;
+    }
+    
+    .breadcrumb-nav {
+        flex-wrap: wrap;
+        gap: 0.25rem;
+    }
+    
+    .chapter-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .learning-objectives {
+        padding: 1.5rem;
+    }
+    
+    .notes-section {
+        padding: 2rem 1rem;
+    }
+    
+    .topic-list h3,
+    .topic-list li a {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* Animation Enhancements */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Ensure smooth transitions for all interactive elements */
+.chapter-card,
+.topic-list li,
+.quick-access a,
+.breadcrumb-nav a {
+    transition: var(--transition);
+}
