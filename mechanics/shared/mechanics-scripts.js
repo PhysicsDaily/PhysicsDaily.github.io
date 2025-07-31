@@ -1,4 +1,5 @@
-// Dark mode functionality
+// mechanics/shared/mechanics-scripts.js
+
 document.addEventListener('DOMContentLoaded', function() {
     const lightModeBtn = document.getElementById('light-mode');
     const darkModeBtn = document.getElementById('dark-mode');
@@ -9,28 +10,51 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (currentTheme === 'dark') {
         body.setAttribute('data-theme', 'dark');
-        lightModeBtn.classList.remove('active');
-        darkModeBtn.classList.add('active');
+        if(lightModeBtn) lightModeBtn.classList.remove('active');
+        if(darkModeBtn) darkModeBtn.classList.add('active');
     }
 
-    lightModeBtn.addEventListener('click', () => {
-        body.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'light');
-        lightModeBtn.classList.add('active');
-        darkModeBtn.classList.remove('active');
-    });
+    if(lightModeBtn) {
+        lightModeBtn.addEventListener('click', () => {
+            body.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            lightModeBtn.classList.add('active');
+            if(darkModeBtn) darkModeBtn.classList.remove('active');
+        });
+    }
 
-    darkModeBtn.addEventListener('click', () => {
-        body.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-        lightModeBtn.classList.remove('active');
-        darkModeBtn.classList.add('active');
-    });
+    if(darkModeBtn) {
+        darkModeBtn.addEventListener('click', () => {
+            body.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            if(lightModeBtn) lightModeBtn.classList.remove('active');
+            darkModeBtn.classList.add('active');
+        });
+    }
+
+    // Function to get progress from localStorage
+    function getChapterProgress() {
+        const progress = {
+            '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0
+        };
+        for (let chapter in progress) {
+            const savedProgress = localStorage.getItem(`chapter-${chapter}-progress`);
+            if (savedProgress !== null) {
+                progress[chapter] = parseInt(savedProgress, 10);
+            }
+        }
+        return progress;
+    }
 
     // Progress tracking
     function updateProgress() {
-        const completed = getCompletedChapters();
-        document.getElementById('completed-chapters').textContent = completed;
+        const chapterProgress = getChapterProgress();
+        const completed = Object.values(chapterProgress).filter(p => p === 100).length;
+        
+        const completedChaptersElement = document.getElementById('completed-chapters');
+        if (completedChaptersElement) {
+            completedChaptersElement.textContent = completed;
+        }
         
         // Update progress bars
         Object.keys(chapterProgress).forEach(chapter => {
@@ -41,22 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Mock progress data - replace with actual tracking
-    const chapterProgress = {
-        '1': 0,
-        '2': 0,
-        '3': 0,
-        '4': 0,
-        '5': 0,
-        '6': 0,
-        '7': 0
-    };
-
-    function getCompletedChapters() {
-        return Object.values(chapterProgress).filter(progress => progress === 100).length;
-    }
-
-    // Initialize progress
+    // Initialize progress on page load
     updateProgress();
 
     // Smooth scrolling for anchor links
