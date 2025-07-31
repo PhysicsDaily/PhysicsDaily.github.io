@@ -4,341 +4,469 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapter 1: Measurement - Physics Daily</title>
+    <meta name="description" content="Master scientific measurement, significant figures, and dimensional analysis in physics.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../shared/mechanics-style.css">
     <style>
         .quiz-container {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
         }
         .question {
-            margin: 15px 0;
-            padding: 10px;
-            border-left: 4px solid #007bff;
-            background: white;
+            margin: 20px 0;
+            padding: 16px;
+            border-left: 4px solid var(--primary);
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
         }
         .progress-bar {
             width: 100%;
-            height: 20px;
-            background: #e9ecef;
-            border-radius: 10px;
+            height: 24px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
             overflow: hidden;
-            margin: 10px 0;
+            margin: 16px 0;
+            border: 1px solid var(--border);
         }
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #28a745, #20c997);
+            background: linear-gradient(90deg, var(--success), var(--info));
             width: 0%;
             transition: width 0.5s ease;
         }
         .score-display {
-            font-weight: bold;
+            font-weight: 600;
             text-align: center;
-            margin: 10px 0;
+            margin: 16px 0;
+            color: var(--text-primary);
         }
         .btn {
-            background: #007bff;
+            background: var(--primary);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 12px 24px;
+            border-radius: 8px;
             cursor: pointer;
-            margin: 5px;
+            margin: 8px;
+            font-weight: 500;
+            transition: all 0.2s ease;
         }
         .btn:hover {
-            background: #0056b3;
+            background: var(--primary-dark);
+            transform: translateY(-1px);
         }
         .section {
-            margin: 30px 0;
-            padding: 20px;
-            border-radius: 8px;
-            background: #ffffff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 32px 0;
+            padding: 24px;
+            border-radius: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
         }
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
         }
         th, td {
-            border: 1px solid #dee2e6;
+            border: 1px solid var(--border);
             padding: 12px;
             text-align: left;
         }
         th {
-            background: #f8f9fa;
-            font-weight: bold;
+            background: var(--bg-secondary);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        td {
+            color: var(--text-secondary);
+        }
+        .quiz-question {
+            margin: 16px 0;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        .quiz-question label {
+            margin-left: 8px;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+        .quiz-question input[type="radio"] {
+            margin-right: 8px;
+        }
+        #results {
+            margin-top: 24px;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border);
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Physics Daily</h1>
-        <nav>
-            <a href="../../index.html">Home</a>
-            <a href="../foundations.html">Foundations</a>
-            <a href="#" class="active">📏 Measurements</a>
-        </nav>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../../index.html" class="nav-logo">Physics Daily</a>
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../resources.html">Resources</a></li>
+                    <li><a href="../../about.html">About</a></li>
+                    <li><a href="../../contribute.html">Contribute</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <button id="light-mode" class="active" title="Light Mode">☀️</button>
+        <button id="dark-mode" title="Dark Mode">🌙</button>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span class="separator">›</span>
+                <a href="../foundations.html">Classical Mechanics</a>
+                <span class="separator">›</span>
+                <span class="current">📏 Measurement</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1>Chapter 1: Measurement</h1>
+            <p class="subtitle">Foundation of Scientific Physics</p>
+            <p class="description">
+                Master the fundamental concepts of measurement, units, and dimensional analysis that form the bedrock of all physics.
+            </p>
+        </div>
     </header>
 
-    <main>
-        <div class="section">
-            <h1>Chapter 1: Measurement</h1>
-            <p><strong>Physics is an experimental science.</strong> To communicate and verify experimental results, it's crucial to have agreed-upon standards for measuring physical quantities. This chapter introduces the fundamental concepts of measurement in physics and develops the mathematical framework for precise scientific communication.</p>
-        </div>
-
-        <div class="section">
-            <h2>1.1 Physical Quantities, Standards, and Units</h2>
-            <p>The laws of physics are expressed in terms of <strong>physical quantities</strong> such as mass, length, time, force, energy, and momentum. Each quantity has a precise operational definition that specifies how it can be measured.</p>
-            
-            <h3>Characteristics of Good Physical Standards:</h3>
-            <ul>
-                <li><strong>Accessibility:</strong> Can be reproduced in laboratories worldwide</li>
-                <li><strong>Invariability:</strong> Unchanging over time and location</li>
-                <li><strong>Precision:</strong> Allows measurement to desired accuracy</li>
-                <li><strong>Reproducibility:</strong> Independent measurements yield same results</li>
-            </ul>
-
-            <p>Without standardized units, comparing experimental results from different laboratories would be impossible. These standards form the foundation of scientific communication and technological advancement.</p>
-        </div>
-
-        <div class="section">
-            <h2>1.2 The International System of Units (SI)</h2>
-            <p>The internationally accepted system is the <strong>International System of Units (SI)</strong>, established by the General Conference on Weights and Measures. It's based on seven fundamental base units:</p>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Quantity</th>
-                        <th>Unit Name</th>
-                        <th>Symbol</th>
-                        <th>Definition</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Time</td>
-                        <td>second</td>
-                        <td>s</td>
-                        <td>Duration of 9,192,631,770 periods of cesium-133 radiation</td>
-                    </tr>
-                    <tr>
-                        <td>Length</td>
-                        <td>meter</td>
-                        <td>m</td>
-                        <td>Distance traveled by light in 1/299,792,458 seconds</td>
-                    </tr>
-                    <tr>
-                        <td>Mass</td>
-                        <td>kilogram</td>
-                        <td>kg</td>
-                        <td>Defined by Planck constant h = 6.62607015 × 10⁻³⁴ J⋅s</td>
-                    </tr>
-                    <tr>
-                        <td>Electric current</td>
-                        <td>ampere</td>
-                        <td>A</td>
-                        <td>Defined by elementary charge e = 1.602176634 × 10⁻¹⁹ C</td>
-                    </tr>
-                    <tr>
-                        <td>Temperature</td>
-                        <td>kelvin</td>
-                        <td>K</td>
-                        <td>Defined by Boltzmann constant k = 1.380649 × 10⁻²³ J/K</td>
-                    </tr>
-                    <tr>
-                        <td>Amount of substance</td>
-                        <td>mole</td>
-                        <td>mol</td>
-                        <td>Exactly 6.02214076 × 10²³ elementary entities</td>
-                    </tr>
-                    <tr>
-                        <td>Luminous intensity</td>
-                        <td>candela</td>
-                        <td>cd</td>
-                        <td>Luminous intensity of 540 THz radiation with efficacy 683 lm/W</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <p><strong>Alternative Systems:</strong> Gaussian (CGS), British Imperial (FPS), and natural units used in specialized fields.</p>
-        </div>
-
-        <div class="section">
-            <h2>1.3 Fundamental and Derived Units</h2>
-            <p><strong>Fundamental quantities</strong> are independently defined, while <strong>derived quantities</strong> are expressed in terms of fundamental quantities.</p>
-
-            <h3>Examples of Derived Units:</h3>
-            <ul>
-                <li><strong>Area:</strong> m² (length × length)</li>
-                <li><strong>Volume:</strong> m³ (length × length × length)</li>
-                <li><strong>Speed:</strong> m/s (length/time)</li>
-                <li><strong>Acceleration:</strong> m/s² (length/time²)</li>
-                <li><strong>Force:</strong> kg⋅m/s² = N (mass × acceleration)</li>
-                <li><strong>Energy:</strong> kg⋅m²/s² = J (force × distance)</li>
-                <li><strong>Power:</strong> kg⋅m²/s³ = W (energy/time)</li>
-                <li><strong>Pressure:</strong> kg/(m⋅s²) = Pa (force/area)</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2>1.4 Dimensional Analysis</h2>
-            <p>Every physical quantity has <strong>dimensions</strong> - the fundamental nature of the quantity expressed in terms of basic physical concepts.</p>
-
-            <h3>Fundamental Dimensions in Mechanics:</h3>
-            <ul>
-                <li><strong>Mass [M]</strong></li>
-                <li><strong>Length [L]</strong></li>
-                <li><strong>Time [T]</strong></li>
-            </ul>
-
-            <h3>Dimensional Equations:</h3>
-            <ul>
-                <li>Area: [L²]</li>
-                <li>Velocity: [LT⁻¹]</li>
-                <li>Acceleration: [LT⁻²]</li>
-                <li>Force: [MLT⁻²]</li>
-                <li>Energy: [ML²T⁻²]</li>
-                <li>Power: [ML²T⁻³]</li>
-                <li>Momentum: [MLT⁻¹]</li>
-                <li>Angular momentum: [ML²T⁻¹]</li>
-            </ul>
-
-            <h3>Applications of Dimensional Analysis:</h3>
-            <ol>
-                <li><strong>Checking equation validity</strong></li>
-                <li><strong>Deriving relationships between quantities</strong></li>
-                <li><strong>Converting units systematically</strong></li>
-                <li><strong>Identifying errors in calculations</strong></li>
-            </ol>
-        </div>
-
-        <div class="section">
-            <h2>1.5 Principle of Homogeneity</h2>
-            <p>The <strong>principle of homogeneity</strong> states that any valid physical equation must be dimensionally consistent - both sides must have identical dimensions.</p>
-
-            <h3>Example Analysis:</h3>
-            <p>Consider the kinematic equation: <strong>x = x₀ + v₀t + ½at²</strong></p>
-            <ul>
-                <li>Left side: [x] = [L]</li>
-                <li>Right side: [x₀] + [v₀t] + [at²] = [L] + [LT⁻¹][T] + [LT⁻²][T²] = [L] + [L] + [L] = [L]</li>
-                <li>✅ Dimensionally consistent!</li>
-            </ul>
-
-            <p><strong>Important:</strong> Dimensional consistency is necessary but not sufficient for correctness. An equation can be dimensionally correct but physically wrong due to missing constants or incorrect functional relationships.</p>
-        </div>
-
-        <div class="section">
-            <h2>🤔 Conceptual Questions</h2>
-            <div class="question">
-                <strong>1.</strong> What are the key characteristics that make a physical standard suitable for scientific measurement? Why are these characteristics essential?
-            </div>
-            <div class="question">
-                <strong>2.</strong> Why is international standardization of units crucial for scientific progress? What would happen without it?
-            </div>
-            <div class="question">
-                <strong>3.</strong> Explain the difference between fundamental and derived units. Give three examples of each and show how derived units relate to fundamental ones.
-            </div>
-            <div class="question">
-                <strong>4.</strong> Can an equation be dimensionally correct but still be physically wrong? Provide an example and explanation.
-            </div>
-            <div class="question">
-                <strong>5.</strong> What are the limitations of dimensional analysis? When might it fail to provide useful information?
-            </div>
-            <div class="question">
-                <strong>6.</strong> How do modern SI unit definitions based on fundamental constants improve upon earlier definitions?
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>🧮 Numerical Problems</h2>
-            <div class="question">
-                <strong>1.</strong> The speed of light is 299,792,458 m/s. Convert this to:
+    <main class="main-content">
+        <div class="container">
+            <div class="section">
+                <h2>1.1 Physical Quantities, Standards, and Units</h2>
+                <p><strong>Physics is an experimental science.</strong> To communicate and verify experimental results, it's crucial to have agreed-upon standards for measuring physical quantities. This chapter introduces the fundamental concepts of measurement in physics and develops the mathematical framework for precise scientific communication.</p>
+                
+                <p>The laws of physics are expressed in terms of <strong>physical quantities</strong> such as mass, length, time, force, energy, and momentum. Each quantity has a precise operational definition that specifies how it can be measured.</p>
+                
+                <h3>Characteristics of Good Physical Standards:</h3>
                 <ul>
-                    <li>a) kilometers per hour (km/h)</li>
-                    <li>b) miles per hour (mph) [1 mile = 1.609 km]</li>
+                    <li><strong>Accessibility:</strong> Can be reproduced in laboratories worldwide</li>
+                    <li><strong>Invariability:</strong> Unchanging over time and location</li>
+                    <li><strong>Precision:</strong> Allows measurement to desired accuracy</li>
+                    <li><strong>Reproducibility:</strong> Independent measurements yield same results</li>
+                </ul>
+
+                <p>Without standardized units, comparing experimental results from different laboratories would be impossible. These standards form the foundation of scientific communication and technological advancement.</p>
+            </div>
+
+            <div class="section">
+                <h2>1.2 The International System of Units (SI)</h2>
+                <p>The internationally accepted system is the <strong>International System of Units (SI)</strong>, established by the General Conference on Weights and Measures. It's based on seven fundamental units:</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Quantity</th>
+                            <th>Unit Name</th>
+                            <th>Symbol</th>
+                            <th>Definition</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Time</td>
+                            <td>second</td>
+                            <td>s</td>
+                            <td>Duration of 9,192,631,770 periods of cesium-133 radiation</td>
+                        </tr>
+                        <tr>
+                            <td>Length</td>
+                            <td>meter</td>
+                            <td>m</td>
+                            <td>Distance traveled by light in 1/299,792,458 seconds</td>
+                        </tr>
+                        <tr>
+                            <td>Mass</td>
+                            <td>kilogram</td>
+                            <td>kg</td>
+                            <td>Defined by Planck constant h = 6.62607015 × 10⁻³⁴ J⋅s</td>
+                        </tr>
+                        <tr>
+                            <td>Electric current</td>
+                            <td>ampere</td>
+                            <td>A</td>
+                            <td>Defined by elementary charge e = 1.602176634 × 10⁻¹⁹ C</td>
+                        </tr>
+                        <tr>
+                            <td>Temperature</td>
+                            <td>kelvin</td>
+                            <td>K</td>
+                            <td>Defined by Boltzmann constant k = 1.380649 × 10⁻²³ J/K</td>
+                        </tr>
+                        <tr>
+                            <td>Amount of substance</td>
+                            <td>mole</td>
+                            <td>mol</td>
+                            <td>Exactly 6.02214076 × 10²³ elementary entities</td>
+                        </tr>
+                        <tr>
+                            <td>Luminous intensity</td>
+                            <td>candela</td>
+                            <td>cd</td>
+                            <td>Luminous intensity of 540 THz radiation with efficacy 683 lm/W</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>Alternative Systems:</strong> Gaussian (CGS), British Imperial (FPS), and natural units used in specialized fields.</p>
+            </div>
+
+            <div class="section">
+                <h2>1.3 Fundamental and Derived Units</h2>
+                <p><strong>Fundamental quantities</strong> are independently defined, while <strong>derived quantities</strong> are expressed in terms of fundamental quantities.</p>
+
+                <h3>Examples of Derived Units:</h3>
+                <ul>
+                    <li><strong>Area:</strong> m² (length × length)</li>
+                    <li><strong>Volume:</strong> m³ (length × length × length)</li>
+                    <li><strong>Speed:</strong> m/s (length/time)</li>
+                    <li><strong>Acceleration:</strong> m/s² (length/time²)</li>
+                    <li><strong>Force:</strong> kg⋅m/s² = N (mass × acceleration)</li>
+                    <li><strong>Energy:</strong> kg⋅m²/s² = J (force × distance)</li>
+                    <li><strong>Power:</strong> kg⋅m²/s³ = W (energy/time)</li>
+                    <li><strong>Pressure:</strong> kg/(m⋅s²) = Pa (force/area)</li>
                 </ul>
             </div>
-            <div class="question">
-                <strong>2.</strong> For a simple pendulum, T = 2π√(L/g). Verify dimensional consistency where:
+
+            <div class="section">
+                <h2>1.4 Dimensional Analysis</h2>
+                <p>Every physical quantity has <strong>dimensions</strong> - the fundamental nature of the quantity expressed in terms of basic physical concepts.</p>
+
+                <h3>Fundamental Dimensions in Mechanics:</h3>
                 <ul>
-                    <li>T = period (time)</li>
-                    <li>L = length of pendulum</li>
-                    <li>g = gravitational acceleration</li>
+                    <li><strong>Mass [M]</strong></li>
+                    <li><strong>Length [L]</strong></li>
+                    <li><strong>Time [T]</strong></li>
                 </ul>
-            </div>
-            <div class="question">
-                <strong>3.</strong> In Einstein's mass-energy equation E = mc²:
+
+                <h3>Dimensional Equations:</h3>
                 <ul>
-                    <li>a) If [E] = ML²T⁻² and [m] = M, find [c]</li>
-                    <li>b) Verify this matches the known dimensions of the speed of light</li>
+                    <li>Area: [L²]</li>
+                    <li>Velocity: [LT⁻¹]</li>
+                    <li>Acceleration: [LT⁻²]</li>
+                    <li>Force: [MLT⁻²]</li>
+                    <li>Energy: [ML²T⁻²]</li>
+                    <li>Power: [ML²T⁻³]</li>
+                    <li>Momentum: [MLT⁻¹]</li>
+                    <li>Angular momentum: [ML²T⁻¹]</li>
                 </ul>
+
+                <h3>Applications of Dimensional Analysis:</h3>
+                <ol>
+                    <li><strong>Checking equation validity</strong></li>
+                    <li><strong>Deriving relationships between quantities</strong></li>
+                    <li><strong>Converting units systematically</strong></li>
+                    <li><strong>Identifying errors in calculations</strong></li>
+                </ol>
             </div>
-            <div class="question">
-                <strong>4.</strong> A rectangular water tank measures 5.0 m × 3.0 m × 2.0 m. Given water density = 1000 kg/m³:
+
+            <div class="section">
+                <h2>1.5 Principle of Homogeneity</h2>
+                <p>The <strong>principle of homogeneity</strong> states that any valid physical equation must be dimensionally consistent - both sides must have identical dimensions.</p>
+
+                <h3>Example Analysis:</h3>
+                <p>Consider the kinematic equation: <strong>x = x₀ + v₀t + ½at²</strong></p>
                 <ul>
-                    <li>a) Calculate the volume of water when full</li>
-                    <li>b) Find the total mass of water</li>
-                    <li>c) What's the weight of water? (g = 9.8 m/s²)</li>
+                    <li>Left side: [x] = [L]</li>
+                    <li>Right side: [x₀] + [v₀t] + [at²] = [L] + [LT⁻¹][T] + [LT⁻²][T²] = [L] + [L] + [L] = [L]</li>
+                    <li>✅ Dimensionally consistent!</li>
                 </ul>
-            </div>
-            <div class="question">
-                <strong>5.</strong> The period of oscillation for a mass-spring system is T = 2π√(m/k). If you want to double the period, by what factor must you change the mass?
-            </div>
-        </div>
 
-        <div class="quiz-container">
-            <h2>📊 Interactive Assessment Quiz</h2>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressBar"></div>
-            </div>
-            <div class="score-display" id="scoreDisplay">Progress: 0% | Score: 0/4</div>
-
-            <div class="question">
-                <strong>1.</strong> Which of the following is a fundamental SI unit?<br>
-                <input type="radio" name="q1" value="a" id="q1a"> <label for="q1a">a) Newton (N)</label><br>
-                <input type="radio" name="q1" value="b" id="q1b"> <label for="q1b">b) Joule (J)</label><br>
-                <input type="radio" name="q1" value="c" id="q1c"> <label for="q1c">c) Watt (W)</label><br>
-                <input type="radio" name="q1" value="d" id="q1d"> <label for="q1d">d) Kilogram (kg)</label>
+                <p><strong>Important:</strong> Dimensional consistency is necessary but not sufficient for correctness. An equation can be dimensionally correct but physically wrong due to missing constants or incorrect relationships.</p>
             </div>
 
-            <div class="question">
-                <strong>2.</strong> The principle of homogeneity states that:<br>
-                <input type="radio" name="q2" value="a" id="q2a"> <label for="q2a">a) All physical quantities must have the same units</label><br>
-                <input type="radio" name="q2" value="b" id="q2b"> <label for="q2b">b) An equation must be dimensionally consistent</label><br>
-                <input type="radio" name="q2" value="c" id="q2c"> <label for="q2c">c) The universe is uniform and homogeneous</label><br>
-                <input type="radio" name="q2" value="d" id="q2d"> <label for="q2d">d) Derived units are homogeneous with fundamental units</label>
+            <div class="section">
+                <h2>🤔 Conceptual Questions</h2>
+                <div class="question">
+                    <strong>1.</strong> What are the key characteristics that make a physical standard suitable for scientific measurement? Why are these characteristics essential?
+                </div>
+                <div class="question">
+                    <strong>2.</strong> Why is international standardization of units crucial for scientific progress? What would happen without it?
+                </div>
+                <div class="question">
+                    <strong>3.</strong> Explain the difference between fundamental and derived units. Give three examples of each and show how derived units relate to fundamental ones.
+                </div>
+                <div class="question">
+                    <strong>4.</strong> Can an equation be dimensionally correct but still be physically wrong? Provide an example and explanation.
+                </div>
+                <div class="question">
+                    <strong>5.</strong> What are the limitations of dimensional analysis? When might it fail to provide useful information?
+                </div>
+                <div class="question">
+                    <strong>6.</strong> How do modern SI unit definitions based on fundamental constants improve upon earlier definitions?
+                </div>
             </div>
 
-            <div class="question">
-                <strong>3.</strong> The dimensional formula for torque is:<br>
-                <input type="radio" name="q3" value="a" id="q3a"> <label for="q3a">a) [MLT⁻²]</label><br>
-                <input type="radio" name="q3" value="b" id="q3b"> <label for="q3b">b) [ML²T⁻²]</label><br>
-                <input type="radio" name="q3" value="c" id="q3c"> <label for="q3c">c) [ML⁻¹T⁻²]</label><br>
-                <input type="radio" name="q3" value="d" id="q3d"> <label for="q3d">d) [M⁻¹L³T⁻²]</label>
+            <div class="section">
+                <h2>🧮 Numerical Problems</h2>
+                <div class="question">
+                    <strong>1.</strong> The speed of light is 299,792,458 m/s. Convert this to:
+                    <ul>
+                        <li>a) kilometers per hour (km/h)</li>
+                        <li>b) miles per hour (mph) [1 mile = 1.609 km]</li>
+                    </ul>
+                </div>
+                <div class="question">
+                    <strong>2.</strong> For a simple pendulum, T = 2π√(L/g). Verify dimensional consistency where:
+                    <ul>
+                        <li>T = period (time)</li>
+                        <li>L = length of pendulum</li>
+                        <li>g = gravitational acceleration</li>
+                    </ul>
+                </div>
+                <div class="question">
+                    <strong>3.</strong> In Einstein's mass-energy equation E = mc²:
+                    <ul>
+                        <li>a) If [E] = ML²T⁻² and [m] = M, find [c]</li>
+                        <li>b) Verify this matches the known dimensions of the speed of light</li>
+                    </ul>
+                </div>
+                <div class="question">
+                    <strong>4.</strong> A rectangular water tank measures 5.0 m × 3.0 m × 2.0 m. Given water density = 1000 kg/m³:
+                    <ul>
+                        <li>a) Calculate the volume of water when full</li>
+                        <li>b) Find the total mass of water</li>
+                        <li>c) What's the weight of water? (g = 9.8 m/s²)</li>
+                    </ul>
+                </div>
+                <div class="question">
+                    <strong>5.</strong> The period of oscillation for a mass-spring system is T = 2π√(m/k). If you want to double the period, by what factor must you change the mass?
+                </div>
             </div>
 
-            <div class="question">
-                <strong>4.</strong> A light-year is a unit of:<br>
-                <input type="radio" name="q4" value="a" id="q4a"> <label for="q4a">a) Time</label><br>
-                <input type="radio" name="q4" value="b" id="q4b"> <label for="q4b">b) Mass</label><br>
-                <input type="radio" name="q4" value="c" id="q4c"> <label for="q4c">c) Distance</label><br>
-                <input type="radio" name="q4" value="d" id="q4d"> <label for="q4d">d) Energy</label>
-            </div>
+            <div class="quiz-container">
+                <h2>📊 Interactive Assessment Quiz</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+                <div class="score-display" id="scoreDisplay">Progress: 0% | Score: 0/10</div>
 
-            <button class="btn" onclick="calculateScore()">Submit Quiz</button>
-            <button class="btn" onclick="resetQuiz()">Reset Quiz</button>
-            
-            <div id="results" style="margin-top: 20px; display: none;">
-                <h3>Quiz Results</h3>
-                <div id="feedback"></div>
+                <div class="quiz-question">
+                    <strong>1.</strong> Which of the following is a fundamental SI unit?<br>
+                    <input type="radio" name="q1" value="a" id="q1a"> <label for="q1a">a) Newton (N)</label><br>
+                    <input type="radio" name="q1" value="b" id="q1b"> <label for="q1b">b) Joule (J)</label><br>
+                    <input type="radio" name="q1" value="c" id="q1c"> <label for="q1c">c) Watt (W)</label><br>
+                    <input type="radio" name="q1" value="d" id="q1d"> <label for="q1d">d) Kilogram (kg)</label>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>2.</strong> The principle of homogeneity states that:<br>
+                    <input type="radio" name="q2" value="a" id="q2a"> <label for="q2a">a) All physical quantities must have the same units</label><br>
+                    <input type="radio" name="q2" value="b" id="q2b"> <label for="q2b">b) An equation must be dimensionally consistent</label><br>
+                    <input type="radio" name="q2" value="c" id="q2c"> <label for="q2c">c) The universe is uniform and homogeneous</label><br>
+                    <input type="radio" name="q2" value="d" id="q2d"> <label for="q2d">d) Derived units are homogeneous with fundamental units</label>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>3.</strong> The dimensional formula for torque is:<br>
+                    <input type="radio" name="q3" value="a" id="q3a"> <label for="q3a">a) [MLT⁻²]</label><br>
+                    <input type="radio" name="q3" value="b" id="q3b"> <label for="q3b">b) [ML²T⁻²]</label><br>
+                    <input type="radio" name="q3" value="c" id="q3c"> <label for="q3c">c) [ML⁻¹T⁻²]</label><br>
+                    <input type="radio" name="q3" value="d" id="q3d"> <label for="q3d">d) [M⁻¹L³T⁻²]</label>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>4.</strong> A light-year is a unit of:<br>
+                    <input type="radio" name="q4" value="a" id="q4a"> <label for="q4a">a) Time</label><br>
+                    <input type="radio" name="q4" value="b" id="q4b"> <label for="q4b">b) Mass</label><br>
+                    <input type="radio" name="q4" value="c" id="q4c"> <label for="q4c">c) Distance</label><br>
+                    <input type="radio" name="q4" value="d" id="q4d"> <label for="q4d">d) Energy</label>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>5.</strong> Which quantity has dimensions [ML⁻¹T⁻²]?<br>
+                    <input type="radio" name="q5" value="a" id="q5a"> <label for="q5a">a) Force</label><br>
+                    <input type="radio" name="q5" value="b" id="q5b"> <label for="q5b">b) Pressure</label><br>
+                    <input type="radio" name="q5" value="c" id="q5c"> <label for="q5c">c) Energy</label><br>
+                    <input type="radio" name="q5" value="d" id="q5d"> <label for="q5d">d) Power</label>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>6.</strong> The SI unit redefinition in 2019 was based on:<br>
+                    <input type="radio" name="q6" value="a" id="q6a"> <label for="q6a">a) Physical artifacts</label><br>
+                    <input type="radio" name="q6" value="b" id="q6b"> <label for="q6b">b) Fundamental constants of nature</label><br>
+                    <input type="radio" name="q6" value="c" id="q6c"> <label for="q6c">c) Average measurements from multiple labs</label><br>
+                    <input type="radio" name="q6" value="d" id="q6d"> <label for="q6d">d) International committee decisions</label>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>7.</strong> Dimensional analysis can be used for all EXCEPT:<br>
+                    <input type="radio" name="q7" value="a" id="q7a"> <label for="q7a">a) Checking equation validity</label><br>
+                    <input type="radio" name="q7" value="b" id="q7b"> <label for="q7b">b) Converting units</label><br>
+                    <input type="radio" name="q7" value="c" id="q7c"> <label for="q7c">c) Determining exact numerical constants</label><br>
+                    <input type="radio" name="q7" value="d" id="q7d"> <label for="q7d">d) Deriving relationships between quantities</label>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>8.</strong> The dimensional formula for angular momentum is:<br>
+                    <input type="radio" name="q8" value="a" id="q8a"> <label for="q8a">a) [MLT⁻¹]</label><br>
+                    <input type="radio" name="q8" value="b" id="q8b"> <label for="q8b">b) [ML²T⁻¹]</label><br>
+                    <input type="radio" name="q8" value="c" id="q8c"> <label for="q8c">c) [ML²T⁻²]</label><br>
+                    <input type="radio" name="q8" value="d" id="q8d"> <label for="q8d">d) [MLT⁻²]</label>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>9.</strong> Which statement about significant figures is correct?<br>
+                    <input type="radio" name="q9" value="a" id="q9a"> <label for="q9a">a) They represent absolute precision</label><br>
+                    <input type="radio" name="q9" value="b" id="q9b"> <label for="q9b">b) They indicate the reliability of measurements</label><br>
+                    <input type="radio" name="q9" value="c" id="q9c"> <label for="q9c">c) They are always equal to decimal places</label><br>
+                    <input type="radio" name="q9" value="d" id="q9d"> <label for="q9d">d) They are only important in theoretical physics</label>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>10.</strong> The meter is defined as:<br>
+                    <input type="radio" name="q10" value="a" id="q10a"> <label for="q10a">a) 1/40,000,000 of Earth's circumference</label><br>
+                    <input type="radio" name="q10" value="b" id="q10b"> <label for="q10b">b) Length of a platinum-iridium bar</label><br>
+                    <input type="radio" name="q10" value="c" id="q10c"> <label for="q10c">c) Distance light travels in 1/299,792,458 seconds</label><br>
+                    <input type="radio" name="q10" value="d" id="q10d"> <label for="q10d">d) 1650763.73 wavelengths of krypton-86 radiation</label>
+                </div>
+
+                <button class="btn" onclick="calculateScore()">Submit Quiz</button>
+                <button class="btn" onclick="resetQuiz()">Reset Quiz</button>
+                
+                <div id="results" style="display: none;">
+                    <h3>Quiz Results</h3>
+                    <div id="feedback"></div>
+                </div>
             </div>
         </div>
     </main>
 
-    <footer>
-        <p>&copy; 2024 Physics Daily. Advancing physics education through interactive learning.</p>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Physics Daily. Advancing physics education through interactive learning.</p>
+        </div>
     </footer>
 
     <script>
@@ -346,7 +474,13 @@
             q1: 'd', // Kilogram is fundamental
             q2: 'b', // Dimensional consistency
             q3: 'b', // [ML²T⁻²] for torque
-            q4: 'c'  // Distance
+            q4: 'c', // Distance
+            q5: 'b', // Pressure has [ML⁻¹T⁻²]
+            q6: 'b', // Fundamental constants
+            q7: 'c', // Cannot determine exact constants
+            q8: 'b', // [ML²T⁻¹] for angular momentum
+            q9: 'b', // Indicate reliability
+            q10: 'c' // Distance light travels in 1/299,792,458 seconds
         };
 
         function calculateScore() {
@@ -358,9 +492,9 @@
                 const selected = document.querySelector(`input[name="${question}"]:checked`);
                 if (selected && selected.value === correctAnswers[question]) {
                     score++;
-                    feedback += `<p style="color: green;">✅ Question ${question.slice(1)}: Correct!</p>`;
+                    feedback += `<p style="color: var(--success);">✅ Question ${question.slice(1)}: Correct!</p>`;
                 } else {
-                    feedback += `<p style="color: red;">❌ Question ${question.slice(1)}: Incorrect. Correct answer: ${getAnswerText(question, correctAnswers[question])}</p>`;
+                    feedback += `<p style="color: var(--danger);">❌ Question ${question.slice(1)}: Incorrect. Correct answer: ${getAnswerText(question, correctAnswers[question])}</p>`;
                 }
             }
 
@@ -372,24 +506,27 @@
             // Determine performance level
             let level = '';
             let color = '';
-            if (percentage >= 75) {
+            if (percentage >= 90) {
                 level = 'Excellent! Chapter Mastered 🎯';
-                color = '#28a745';
-            } else if (percentage >= 50) {
-                level = 'Good! Chapter Completed ✅';
-                color = '#20c997';
-            } else if (percentage >= 25) {
-                level = 'Basic Understanding 📚';
-                color = '#ffc107';
+                color = 'var(--success)';
+            } else if (percentage >= 75) {
+                level = 'Very Good! Strong Understanding ✅';
+                color = 'var(--info)';
+            } else if (percentage >= 60) {
+                level = 'Good! Chapter Completed 📚';
+                color = 'var(--warning)';
+            } else if (percentage >= 40) {
+                level = 'Basic Understanding 📖';
+                color = 'var(--warning)';
             } else {
-                level = 'Needs Review 📖';
-                color = '#dc3545';
+                level = 'Needs Review 🔄';
+                color = 'var(--danger)';
             }
 
             document.getElementById('scoreDisplay').innerHTML = 
                 `<span style="color: ${color};">${level}</span><br>Progress: ${percentage}% | Score: ${score}/${total}`;
             
-            feedback += `<div style="margin-top: 15px; padding: 15px; background: ${color}; color: white; border-radius: 5px;">
+            feedback += `<div style="margin-top: 15px; padding: 15px; background: ${color}; color: white; border-radius: 8px;">
                 <strong>Final Score: ${score}/${total} (${percentage}%)</strong><br>
                 <strong>Status: ${level}</strong>
             </div>`;
@@ -403,7 +540,13 @@
                 q1: {a: 'Newton', b: 'Joule', c: 'Watt', d: 'Kilogram'},
                 q2: {a: 'Same units', b: 'Dimensional consistency', c: 'Universe homogeneous', d: 'Units homogeneous'},
                 q3: {a: '[MLT⁻²]', b: '[ML²T⁻²]', c: '[ML⁻¹T⁻²]', d: '[M⁻¹L³T⁻²]'},
-                q4: {a: 'Time', b: 'Mass', c: 'Distance', d: 'Energy'}
+                q4: {a: 'Time', b: 'Mass', c: 'Distance', d: 'Energy'},
+                q5: {a: 'Force', b: 'Pressure', c: 'Energy', d: 'Power'},
+                q6: {a: 'Physical artifacts', b: 'Fundamental constants', c: 'Average measurements', d: 'Committee decisions'},
+                q7: {a: 'Checking validity', b: 'Converting units', c: 'Determining constants', d: 'Deriving relationships'},
+                q8: {a: '[MLT⁻¹]', b: '[ML²T⁻¹]', c: '[ML²T⁻²]', d: '[MLT⁻²]'},
+                q9: {a: 'Absolute precision', b: 'Indicate reliability', c: 'Equal decimal places', d: 'Only theoretical'},
+                q10: {a: 'Earth circumference', b: 'Platinum bar', c: 'Light distance', d: 'Krypton wavelengths'}
             };
             return answers[question][answer];
         }
@@ -414,11 +557,27 @@
             
             // Reset progress bar
             document.getElementById('progressBar').style.width = '0%';
-            document.getElementById('scoreDisplay').textContent = 'Progress: 0% | Score: 0/4';
+            document.getElementById('scoreDisplay').textContent = 'Progress: 0% | Score: 0/10';
             
             // Hide results
             document.getElementById('results').style.display = 'none';
         }
+
+        // Theme toggle functionality
+        const lightModeBtn = document.getElementById('light-mode');
+        const darkModeBtn = document.getElementById('dark-mode');
+
+        lightModeBtn.addEventListener('click', () => {
+            document.documentElement.setAttribute('data-theme', 'light');
+            lightModeBtn.classList.add('active');
+            darkModeBtn.classList.remove('active');
+        });
+
+        darkModeBtn.addEventListener('click', () => {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            darkModeBtn.classList.add('active');
+            lightModeBtn.classList.remove('active');
+        });
     </script>
 </body>
 </html>
