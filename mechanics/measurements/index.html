@@ -227,6 +227,19 @@
                 align-items: flex-start;
             }
         }
+
+        details {
+            border: 1px solid #aaa;
+            border-radius: 4px;
+            padding: .5em .5em 0;
+            margin-top: 1em;
+        }
+
+        summary {
+            font-weight: bold;
+            margin: -.5em -.5em 0;
+            padding: .5em;
+        }
     </style>
 </head>
 <body>
@@ -415,26 +428,69 @@
 
                 <p><strong>Important:</strong> Dimensional consistency is necessary but not sufficient for correctness. An equation can be dimensionally correct but physically wrong due to missing constants or incorrect relationships.</p>
             </div>
+            
+            <div class="section">
+                <h2>1.6 Precision and Significant Figures</h2>
+                <p>When we make measurements, it's important to indicate the precision of the measurement. <strong>Significant figures</strong> are the digits in a number that are known with certainty, plus the first uncertain digit. Paying attention to significant figures helps us avoid making errors in calculations and ensures that we are not claiming more precision than we actually have.</p>
+                
+                <h3>Rules for Significant Figures:</h3>
+                <ul>
+                    <li><strong>Rule 1:</strong> Non-zero digits are always significant.</li>
+                    <li><strong>Rule 2:</strong> Zeros between two significant digits are significant.</li>
+                    <li><strong>Rule 3:</strong> Leading zeros are not significant.</li>
+                    <li><strong>Rule 4:</strong> Trailing zeros are significant only if the number contains a decimal point.</li>
+                </ul>
+
+                <h3>Calculations with Significant Figures:</h3>
+                <ul>
+                    <li><strong>Multiplication and Division:</strong> The result should have the same number of significant figures as the factor with the least number of significant figures.</li>
+                    <li><strong>Addition and Subtraction:</strong> The result should have the same number of decimal places as the number with the fewest decimal places.</li>
+                </ul>
+            </div>
 
             <div class="section">
                 <h2>🤔 Conceptual Questions</h2>
                 <div class="question">
                     <strong>1.</strong> What are the key characteristics that make a physical standard suitable for scientific measurement? Why are these characteristics essential?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>A good physical standard should be accessible, invariable, precise, and reproducible. These characteristics are essential for ensuring that measurements are consistent and can be compared across different laboratories and experiments.</p>
+                    </details>
                 </div>
                 <div class="question">
                     <strong>2.</strong> Why is international standardization of units crucial for scientific progress? What would happen without it?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>International standardization of units is crucial for clear communication and collaboration in science. Without it, scientists would have difficulty comparing results, which would hinder scientific progress.</p>
+                    </details>
                 </div>
                 <div class="question">
                     <strong>3.</strong> Explain the difference between fundamental and derived units. Give three examples of each and show how derived units relate to fundamental ones.
+                    <details>
+                        <summary>Answer</summary>
+                        <p>Fundamental units are the base units of a system of measurement, while derived units are combinations of fundamental units. Examples of fundamental units include the meter (m), kilogram (kg), and second (s). Derived units include area (m²), volume (m³), and speed (m/s).</p>
+                    </details>
                 </div>
                 <div class="question">
                     <strong>4.</strong> Can an equation be dimensionally correct but still be physically wrong? Provide an example and explanation.
+                    <details>
+                        <summary>Answer</summary>
+                        <p>Yes, an equation can be dimensionally correct but physically wrong. For example, the equation for kinetic energy, K = mv², is dimensionally correct, but the correct formula is K = ½mv². Dimensional analysis can check for consistency but not for the correctness of dimensionless constants.</p>
+                    </details>
                 </div>
                 <div class="question">
                     <strong>5.</strong> What are the limitations of dimensional analysis? When might it fail to provide useful information?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>Dimensional analysis cannot determine dimensionless constants or the exact form of a physical law. It is also less useful for complex systems with many variables.</p>
+                    </details>
                 </div>
                 <div class="question">
                     <strong>6.</strong> How do modern SI unit definitions based on fundamental constants improve upon earlier definitions?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>Modern SI unit definitions are based on fundamental constants of nature, which are more stable and universal than physical artifacts. This makes the standards more precise and reproducible.</p>
+                    </details>
                 </div>
             </div>
 
@@ -446,6 +502,11 @@
                         <li>a) kilometers per hour (km/h)</li>
                         <li>b) miles per hour (mph) [1 mile = 1.609 km]</li>
                     </ul>
+                    <details>
+                        <summary>Answer</summary>
+                        <p>a) 1,079,252,848.8 km/h</p>
+                        <p>b) 670,616,629.4 mph</p>
+                    </details>
                 </div>
                 <div class="question">
                     <strong>2.</strong> For a simple pendulum, T = 2π√(L/g). Verify dimensional consistency where:
@@ -454,6 +515,10 @@
                         <li>L = length of pendulum</li>
                         <li>g = gravitational acceleration</li>
                     </ul>
+                    <details>
+                        <summary>Answer</summary>
+                        <p>The left side has dimension [T]. The right side has dimension √([L]/[LT⁻²]) = √[T²] = [T]. The equation is dimensionally consistent.</p>
+                    </details>
                 </div>
                 <div class="question">
                     <strong>3.</strong> In Einstein's mass-energy equation E = mc²:
@@ -461,6 +526,11 @@
                         <li>a) If [E] = ML²T⁻² and [m] = M, find [c]</li>
                         <li>b) Verify this matches the known dimensions of the speed of light</li>
                     </ul>
+                    <details>
+                        <summary>Answer</summary>
+                        <p>a) [c²] = [E]/[m] = [ML²T⁻²]/[M] = [L²T⁻²], so [c] = [LT⁻¹].</p>
+                        <p>b) The dimensions of the speed of light are indeed [LT⁻¹].</p>
+                    </details>
                 </div>
                 <div class="question">
                     <strong>4.</strong> A rectangular water tank measures 5.0 m × 3.0 m × 2.0 m. Given water density = 1000 kg/m³:
@@ -469,9 +539,19 @@
                         <li>b) Find the total mass of water</li>
                         <li>c) What's the weight of water? (g = 9.8 m/s²)</li>
                     </ul>
+                    <details>
+                        <summary>Answer</summary>
+                        <p>a) Volume = 30 m³</p>
+                        <p>b) Mass = 30,000 kg</p>
+                        <p>c) Weight = 294,000 N</p>
+                    </details>
                 </div>
                 <div class="question">
                     <strong>5.</strong> The period of oscillation for a mass-spring system is T = 2π√(m/k). If you want to double the period, by what factor must you change the mass?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>To double the period, you must quadruple the mass.</p>
+                    </details>
                 </div>
             </div>
 
@@ -480,7 +560,7 @@
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressBar"></div>
                 </div>
-                <div class="score-display" id="scoreDisplay">Progress: 0% | Score: 0/10</div>
+                <div class="score-display" id="scoreDisplay">Progress: 0% | Score: 0/30</div>
 
                 <div class="quiz-question">
                     <strong>1.</strong> Which of the following is a fundamental SI unit?<br><br>
@@ -681,10 +761,411 @@
                         <label for="q10d">d) 1,650,763.73 wavelengths of krypton-86 radiation</label>
                     </div>
                 </div>
+                
+                <div class="quiz-question">
+                    <strong>11.</strong> Which of the following is a derived SI unit?<br><br>
+                    <div class="option">
+                        <input type="radio" name="q11" value="a" id="q11a">
+                        <label for="q11a">a) Ampere (A)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q11" value="b" id="q11b">
+                        <label for="q11b">b) Candela (cd)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q11" value="c" id="q11c">
+                        <label for="q11c">c) Mole (mol)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q11" value="d" id="q11d">
+                        <label for="q11d">d) Newton (N)</label>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <strong>12.</strong> A measurement is recorded as 1.020 cm. How many significant figures are in this measurement?<br><br>
+                    <div class="option">
+                        <input type="radio" name="q12" value="a" id="q12a">
+                        <label for="q12a">a) 1</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q12" value="b" id="q12b">
+                        <label for="q12b">b) 2</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q12" value="c" id="q12c">
+                        <label for="q12c">c) 3</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q12" value="d" id="q12d">
+                        <label for="q12d">d) 4</label>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <strong>13.</strong> The dimensions for pressure are:<br><br>
+                    <div class="option">
+                        <input type="radio" name="q13" value="a" id="q13a">
+                        <label for="q13a">a) [MLT⁻¹]</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q13" value="b" id="q13b">
+                        <label for="q13b">b) [ML²T⁻²]</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q13" value="c" id="q13c">
+                        <label for="q13c">c) [ML⁻¹T⁻²]</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q13" value="d" id="q13d">
+                        <label for="q13d">d) [MLT⁻³]</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>14.</strong> The sum of 2.345 m and 1.2 m is:<br><br>
+                    <div class="option">
+                        <input type="radio" name="q14" value="a" id="q14a">
+                        <label for="q14a">a) 3.5 m</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q14" value="b" id="q14b">
+                        <label for="q14b">b) 3.54 m</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q14" value="c" id="q14c">
+                        <label for="q14c">c) 3.545 m</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q14" value="d" id="q14d">
+                        <label for="q14d">d) 3.55 m</label>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <strong>15.</strong> The product of 2.5 m and 3.14 m is:<br><br>
+                    <div class="option">
+                        <input type="radio" name="q15" value="a" id="q15a">
+                        <label for="q15a">a) 7.8 m²</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q15" value="b" id="q15b">
+                        <label for="q15b">b) 7.85 m²</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q15" value="c" id="q15c">
+                        <label for="q15c">c) 7.9 m²</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q15" value="d" id="q15d">
+                        <label for="q15d">d) 8.0 m²</label>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <strong>16.</strong> The number 0.00340 has how many significant figures?<br><br>
+                    <div class="option">
+                        <input type="radio" name="q16" value="a" id="q16a">
+                        <label for="q16a">a) 2</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q16" value="b" id="q16b">
+                        <label for="q16b">b) 3</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q16" value="c" id="q16c">
+                        <label for="q16c">c) 4</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q16" value="d" id="q16d">
+                        <label for="q16d">d) 5</label>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <strong>17.</strong> Which of the following is a scalar quantity?<br><br>
+                    <div class="option">
+                        <input type="radio" name="q17" value="a" id="q17a">
+                        <label for="q17a">a) Force</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q17" value="b" id="q17b">
+                        <label for="q17b">b) Velocity</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q17" value="c" id="q17c">
+                        <label for="q17c">c) Acceleration</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q17" value="d" id="q17d">
+                        <label for="q17d">d) Mass</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>18.</strong> The dimensional formula for impulse is the same as that for:<br><br>
+                    <div class="option">
+                        <input type="radio" name="q18" value="a" id="q18a">
+                        <label for="q18a">a) Momentum</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q18" value="b" id="q18b">
+                        <label for="q18b">b) Force</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q18" value="c" id="q18c">
+                        <label for="q18c">c) Energy</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q18" value="d" id="q18d">
+                        <label for="q18d">d) Power</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>19.</strong> The SI unit for luminous intensity is:<br><br>
+                    <div class="option">
+                        <input type="radio" name="q19" value="a" id="q19a">
+                        <label for="q19a">a) Lumen</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q19" value="b" id="q19b">
+                        <label for="q19b">b) Lux</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q19" value="c" id="q19c">
+                        <label for="q19c">c) Candela</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q19" value="d" id="q19d">
+                        <label for="q19d">d) Watt</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>20.</strong> A good physical standard must be:<br><br>
+                    <div class="option">
+                        <input type="radio" name="q20" value="a" id="q20a">
+                        <label for="q20a">a) Accessible</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q20" value="b" id="q20b">
+                        <label for="q20b">b) Invariable</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q20" value="c" id="q20c">
+                        <label for="q20c">c) Reproducible</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q20" value="d" id="q20d">
+                        <label for="q20d">d) All of the above</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>21.</strong> Which of the following is not a fundamental dimension in mechanics?<br><br>
+                    <div class="option">
+                        <input type="radio" name="q21" value="a" id="q21a">
+                        <label for="q21a">a) Mass</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q21" value="b" id="q21b">
+                        <label for="q21b">b) Length</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q21" value="c" id="q21c">
+                        <label for="q21c">c) Time</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q21" value="d" id="q21d">
+                        <label for="q21d">d) Force</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>22.</strong> The number of significant figures in 3.1400 is:<br><br>
+                    <div class="option">
+                        <input type="radio" name="q22" value="a" id="q22a">
+                        <label for="q22a">a) 3</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q22" value="b" id="q22b">
+                        <label for="q22b">b) 4</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q22" value="c" id="q22c">
+                        <label for="q22c">c) 5</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q22" value="d" id="q22d">
+                        <label for="q22d">d) 6</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>23.</strong> Which of the following is a vector quantity?<br><br>
+                    <div class="option">
+                        <input type="radio" name="q23" value="a" id="q23a">
+                        <label for="q23a">a) Speed</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q23" value="b" id="q23b">
+                        <label for="q23b">b) Distance</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q23" value="c" id="q23c">
+                        <label for="q23c">c) Displacement</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q23" value="d" id="q23d">
+                        <label for="q23d">d) Temperature</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>24.</strong> A car's speedometer measures:<br><br>
+                    <div class="option">
+                        <input type="radio" name="q24" value="a" id="q24a">
+                        <label for="q24a">a) Velocity</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q24" value="b" id="q24b">
+                        <label for="q24b">b) Speed</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q24" value="c" id="q24c">
+                        <label for="q24c">c) Acceleration</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q24" value="d" id="q24d">
+                        <label for="q24d">d) Displacement</label>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <strong>25.</strong> The SI unit of electric current is the:<br><br>
+                    <div class="option">
+                        <input type="radio" name="q25" value="a" id="q25a">
+                        <label for="q25a">a) Volt</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q25" value="b" id="q25b">
+                        <label for="q25b">b) Ampere</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q25" value="c" id="q25c">
+                        <label for="q25c">c) Ohm</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q25" value="d" id="q25d">
+                        <label for="q25d">d) Watt</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>26.</strong> The number 100 has how many significant figures?<br><br>
+                    <div class="option">
+                        <input type="radio" name="q26" value="a" id="q26a">
+                        <label for="q26a">a) 1</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q26" value="b" id="q26b">
+                        <label for="q26b">b) 2</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q26" value="c" id="q26c">
+                        <label for="q26c">c) 3</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q26" value="d" id="q26d">
+                        <label for="q26d">d) Ambiguous</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>27.</strong> The area of a circle with a radius of 2.5 m is:<br><br>
+                    <div class="option">
+                        <input type="radio" name="q27" value="a" id="q27a">
+                        <label for="q27a">a) 19 m²</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q27" value="b" id="q27b">
+                        <label for="q27b">b) 19.6 m²</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q27" value="c" id="q27c">
+                        <label for="q27c">c) 19.63 m²</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q27" value="d" id="q27d">
+                        <label for="q27d">d) 20 m²</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>28.</strong> Which of the following is a characteristic of a good physical standard?<br><br>
+                    <div class="option">
+                        <input type="radio" name="q28" value="a" id="q28a">
+                        <label for="q28a">a) It must be easily changed.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q28" value="b" id="q28b">
+                        <label for="q28b">b) It must be available only in one location.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q28" value="c" id="q28c">
+                        <label for="q28c">c) It must be invariable.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q28" value="d" id="q28d">
+                        <label for="q28d">d) It must be made of a rare material.</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>29.</strong> The dimensional formula for frequency is:<br><br>
+                    <div class="option">
+                        <input type="radio" name="q29" value="a" id="q29a">
+                        <label for="q29a">a) [T]</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q29" value="b" id="q29b">
+                        <label for="q29b">b) [T⁻¹]</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q29" value="c" id="q29c">
+                        <label for="q29c">c) [L]</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q29" value="d" id="q29d">
+                        <label for="q29d">d) [LT⁻¹]</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <strong>30.</strong> The base unit for the amount of substance is the:<br><br>
+                    <div class="option">
+                        <input type="radio" name="q30" value="a" id="q30a">
+                        <label for="q30a">a) Gram</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q30" value="b" id="q30b">
+                        <label for="q30b">b) Mole</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q30" value="c" id="q30c">
+                        <label for="q30c">c) Kilogram</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q30" value="d" id="q30d">
+                        <label for="q30d">d) Liter</label>
+                    </div>
+                </div>
+
 
                 <div class="quiz-buttons">
-                    <button class="btn" onclick="calculateScore()" style="background-color: #007BFF; color: #FFFFFF; border: none;">📊 Submit Quiz</button>
-                    <button class="btn btn-secondary" onclick="resetQuiz()" style="background-color: #007BFF; color: #FFFFFF; border: none;">🔄 Reset Quiz</button>
+                    <button class="btn" onclick="calculateScore()">📊 Submit Quiz</button>
+                    <button class="btn btn-secondary" onclick="resetQuiz()">🔄 Reset Quiz</button>
                 </div>
                 
                 <div id="results" style="display: none;">
@@ -706,16 +1187,9 @@
 
     <script>
         const correctAnswers = {
-            q1: 'd', // Kilogram is fundamental
-            q2: 'b', // Dimensional consistency
-            q3: 'b', // [ML²T⁻²] for torque
-            q4: 'c', // Distance
-            q5: 'b', // Pressure has [ML⁻¹T⁻²]
-            q6: 'b', // Fundamental constants
-            q7: 'c', // Cannot determine exact constants
-            q8: 'b', // [ML²T⁻¹] for angular momentum
-            q9: 'b', // Indicate reliability
-            q10: 'c' // Distance light travels in 1/299,792,458 seconds
+            q1: 'd', q2: 'b', q3: 'b', q4: 'c', q5: 'b', q6: 'b', q7: 'c', q8: 'b', q9: 'b', q10: 'c',
+            q11: 'd', q12: 'd', q13: 'c', q14: 'a', q15: 'c', q16: 'b', q17: 'd', q18: 'a', q19: 'c', q20: 'd',
+            q21: 'd', q22: 'c', q23: 'c', q24: 'b', q25: 'b', q26: 'd', q27: 'a', q28: 'c', q29: 'b', q30: 'b'
         };
 
         function calculateScore() {
@@ -779,16 +1253,36 @@
 
         function getAnswerText(question, answer) {
             const answers = {
-                q1: {a: 'Newton', b: 'Joule', c: 'Watt', d: 'Kilogram'},
-                q2: {a: 'Same units', b: 'Dimensional consistency', c: 'Universe homogeneous', d: 'Units homogeneous'},
-                q3: {a: '[MLT⁻²]', b: '[ML²T⁻²]', c: '[ML⁻¹T⁻²]', d: '[M⁻¹L³T⁻²]'},
-                q4: {a: 'Time', b: 'Mass', c: 'Distance', d: 'Energy'},
-                q5: {a: 'Force', b: 'Pressure', c: 'Energy', d: 'Power'},
-                q6: {a: 'Physical artifacts', b: 'Fundamental constants', c: 'Average measurements', d: 'Committee decisions'},
-                q7: {a: 'Checking validity', b: 'Converting units', c: 'Determining constants', d: 'Deriving relationships'},
-                q8: {a: '[MLT⁻¹]', b: '[ML²T⁻¹]', c: '[ML²T⁻²]', d: '[MLT⁻²]'},
-                q9: {a: 'Absolute precision', b: 'Indicate reliability', c: 'Equal decimal places', d: 'Only theoretical'},
-                q10: {a: 'Earth circumference', b: 'Platinum bar', c: 'Light distance', d: 'Krypton wavelengths'}
+                 q1: {a: 'Newton (N)', b: 'Joule (J)', c: 'Watt (W)', d: 'Kilogram (kg)'},
+                 q2: {a: 'All physical quantities must have the same units', b: 'An equation must be dimensionally consistent', c: 'The universe is uniform and homogeneous', d: 'Derived units are homogeneous with fundamental units'},
+                 q3: {a: '[MLT⁻²]', b: '[ML²T⁻²]', c: '[ML⁻¹T⁻²]', d: '[M⁻¹L³T⁻²]'},
+                 q4: {a: 'Time', b: 'Mass', c: 'Distance', d: 'Energy'},
+                 q5: {a: 'Force', b: 'Pressure', c: 'Energy', d: 'Power'},
+                 q6: {a: 'Physical artifacts', b: 'Fundamental constants of nature', c: 'Average measurements from multiple labs', d: 'International committee decisions'},
+                 q7: {a: 'Checking equation validity', b: 'Converting units', c: 'Determining exact numerical constants', d: 'Deriving relationships between quantities'},
+                 q8: {a: '[MLT⁻¹]', b: '[ML²T⁻¹]', c: '[ML²T⁻²]', d: '[MLT⁻²]'},
+                 q9: {a: 'They represent absolute precision', b: 'They indicate the reliability of a measurement', c: 'They are always equal to the number of decimal places', d: 'They are only important in theoretical physics'},
+                 q10: {a: '1/40,000,000 of the Earth\'s circumference', b: 'The length of a specific platinum-iridium bar', c: 'The distance light travels in vacuum in 1/299,792,458 of a second', d: '1,650,763.73 wavelengths of krypton-86 radiation'},
+                 q11: {a: 'Ampere (A)', b: 'Candela (cd)', c: 'Mole (mol)', d: 'Newton (N)'},
+                 q12: {a: '1', b: '2', c: '3', d: '4'},
+                 q13: {a: '[MLT⁻¹]', b: '[ML²T⁻²]', c: '[ML⁻¹T⁻²]', d: '[MLT⁻³]'},
+                 q14: {a: '3.5 m', b: '3.54 m', c: '3.545 m', d: '3.55 m'},
+                 q15: {a: '7.8 m²', b: '7.85 m²', c: '7.9 m²', d: '8.0 m²'},
+                 q16: {a: '2', b: '3', c: '4', d: '5'},
+                 q17: {a: 'Force', b: 'Velocity', c: 'Acceleration', d: 'Mass'},
+                 q18: {a: 'Momentum', b: 'Force', c: 'Energy', d: 'Power'},
+                 q19: {a: 'Lumen', b: 'Lux', c: 'Candela', d: 'Watt'},
+                 q20: {a: 'Accessible', b: 'Invariable', c: 'Reproducible', d: 'All of the above'},
+                 q21: {a: 'Mass', b: 'Length', c: 'Time', d: 'Force'},
+                 q22: {a: '3', b: '4', c: '5', d: '6'},
+                 q23: {a: 'Speed', b: 'Distance', c: 'Displacement', d: 'Temperature'},
+                 q24: {a: 'Velocity', b: 'Speed', c: 'Acceleration', d: 'Displacement'},
+                 q25: {a: 'Volt', b: 'Ampere', c: 'Ohm', d: 'Watt'},
+                 q26: {a: '1', b: '2', c: '3', d: 'Ambiguous'},
+                 q27: {a: '19 m²', b: '19.6 m²', c: '19.63 m²', d: '20 m²'},
+                 q28: {a: 'It must be easily changed.', b: 'It must be available only in one location.', c: 'It must be invariable.', d: 'It must be made of a rare material.'},
+                 q29: {a: '[T]', b: '[T⁻¹]', c: '[L]', d: '[LT⁻¹]'},
+                 q30: {a: 'Gram', b: 'Mole', c: 'Kilogram', d: 'Liter'}
             };
             return `<strong>${answer.toUpperCase()}</strong>: ${answers[question][answer]}`;
         }
@@ -796,7 +1290,7 @@
         function resetQuiz() {
             document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
             document.getElementById('progressBar').style.width = '0%';
-            document.getElementById('scoreDisplay').textContent = 'Progress: 0% | Score: 0/10';
+            document.getElementById('scoreDisplay').textContent = 'Progress: 0% | Score: 0/30';
             document.getElementById('results').style.display = 'none';
         }
 
