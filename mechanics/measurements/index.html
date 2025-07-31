@@ -10,10 +10,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../shared/mechanics-style.css">
     <style>
-        /* Theme Toggle - Fixed positioning */
+        /* Theme Toggle - Better positioning */
         .theme-toggle {
             position: fixed;
-            top: 20px;
+            top: 80px;
             right: 20px;
             z-index: 1000;
             display: flex;
@@ -162,23 +162,34 @@
             border-radius: 8px;
             border: 1px solid var(--border);
         }
+        
+        /* Fixed radio button alignment */
+        .quiz-question .option {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        
+        .quiz-question input[type="radio"] {
+            margin: 0 12px 0 0;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+        
         .quiz-question label {
-            margin-left: 8px;
             color: var(--text-secondary);
             cursor: pointer;
-            display: inline-block;
-            width: calc(100% - 32px);
+            flex: 1;
+            line-height: 1.4;
         }
-        .quiz-question input[type="radio"] {
-            margin-right: 8px;
-        }
+        
         #results {
             margin-top: 24px;
             padding: 20px;
             background: var(--card-bg);
             border-radius: 8px;
             border: 1px solid var(--border);
-            position: relative;
         }
         .results-header {
             display: flex;
@@ -193,17 +204,13 @@
         
         /* Ensure content doesn't overlap with fixed theme toggle */
         body {
-            padding-top: 20px;
-        }
-        
-        .nav {
-            margin-top: 60px;
+            padding-top: 0;
         }
         
         /* Mobile responsiveness */
         @media (max-width: 768px) {
             .theme-toggle {
-                top: 10px;
+                top: 70px;
                 right: 10px;
                 scale: 0.9;
             }
@@ -216,16 +223,16 @@
                 width: 100%;
                 margin: 4px 0;
             }
+            
+            .results-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Theme Toggle - Fixed Position -->
-    <div class="theme-toggle">
-        <button id="light-mode" class="active" title="Light Mode">☀️</button>
-        <button id="dark-mode" title="Dark Mode">🌙</button>
-    </div>
-
     <!-- Navigation -->
     <nav class="nav">
         <div class="container">
@@ -240,6 +247,12 @@
             </div>
         </div>
     </nav>
+
+    <!-- Theme Toggle - Positioned below navigation -->
+    <div class="theme-toggle">
+        <button id="light-mode" class="active" title="Light Mode">☀️</button>
+        <button id="dark-mode" title="Dark Mode">🌙</button>
+    </div>
 
     <!-- Breadcrumb -->
     <div class="breadcrumb">
@@ -477,83 +490,203 @@
                 <div class="score-display" id="scoreDisplay">Progress: 0% | Score: 0/10</div>
 
                 <div class="quiz-question">
-                    <strong>1.</strong> Which of the following is a fundamental SI unit?<br>
-                    <input type="radio" name="q1" value="a" id="q1a"> <label for="q1a">a) Newton (N)</label><br>
-                    <input type="radio" name="q1" value="b" id="q1b"> <label for="q1b">b) Joule (J)</label><br>
-                    <input type="radio" name="q1" value="c" id="q1c"> <label for="q1c">c) Watt (W)</label><br>
-                    <input type="radio" name="q1" value="d" id="q1d"> <label for="q1d">d) Kilogram (kg)</label>
+                    <strong>1.</strong> Which of the following is a fundamental SI unit?<br><br>
+                    <div class="option">
+                        <input type="radio" name="q1" value="a" id="q1a">
+                        <label for="q1a">a) Newton (N)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" value="b" id="q1b">
+                        <label for="q1b">b) Joule (J)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" value="c" id="q1c">
+                        <label for="q1c">c) Watt (W)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" value="d" id="q1d">
+                        <label for="q1d">d) Kilogram (kg)</label>
+                    </div>
                 </div>
 
                 <div class="quiz-question">
-                    <strong>2.</strong> The principle of homogeneity states that:<br>
-                    <input type="radio" name="q2" value="a" id="q2a"> <label for="q2a">a) All physical quantities must have the same units</label><br>
-                    <input type="radio" name="q2" value="b" id="q2b"> <label for="q2b">b) An equation must be dimensionally consistent</label><br>
-                    <input type="radio" name="q2" value="c" id="q2c"> <label for="q2c">c) The universe is uniform and homogeneous</label><br>
-                    <input type="radio" name="q2" value="d" id="q2d"> <label for="q2d">d) Derived units are homogeneous with fundamental units</label>
+                    <strong>2.</strong> The principle of homogeneity states that:<br><br>
+                    <div class="option">
+                        <input type="radio" name="q2" value="a" id="q2a">
+                        <label for="q2a">a) All physical quantities must have the same units</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" value="b" id="q2b">
+                        <label for="q2b">b) An equation must be dimensionally consistent</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" value="c" id="q2c">
+                        <label for="q2c">c) The universe is uniform and homogeneous</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" value="d" id="q2d">
+                        <label for="q2d">d) Derived units are homogeneous with fundamental units</label>
+                    </div>
                 </div>
 
                 <div class="quiz-question">
-                    <strong>3.</strong> The dimensional formula for torque is:<br>
-                    <input type="radio" name="q3" value="a" id="q3a"> <label for="q3a">a) [MLT⁻²]</label><br>
-                    <input type="radio" name="q3" value="b" id="q3b"> <label for="q3b">b) [ML²T⁻²]</label><br>
-                    <input type="radio" name="q3" value="c" id="q3c"> <label for="q3c">c) [ML⁻¹T⁻²]</label><br>
-                    <input type="radio" name="q3" value="d" id="q3d"> <label for="q3d">d) [M⁻¹L³T⁻²]</label>
+                    <strong>3.</strong> The dimensional formula for torque is:<br><br>
+                    <div class="option">
+                        <input type="radio" name="q3" value="a" id="q3a">
+                        <label for="q3a">a) [MLT⁻²]</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" value="b" id="q3b">
+                        <label for="q3b">b) [ML²T⁻²]</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" value="c" id="q3c">
+                        <label for="q3c">c) [ML⁻¹T⁻²]</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" value="d" id="q3d">
+                        <label for="q3d">d) [M⁻¹L³T⁻²]</label>
+                    </div>
                 </div>
 
                 <div class="quiz-question">
-                    <strong>4.</strong> A light-year is a unit of:<br>
-                    <input type="radio" name="q4" value="a" id="q4a"> <label for="q4a">a) Time</label><br>
-                    <input type="radio" name="q4" value="b" id="q4b"> <label for="q4b">b) Mass</label><br>
-                    <input type="radio" name="q4" value="c" id="q4c"> <label for="q4c">c) Distance</label><br>
-                    <input type="radio" name="q4" value="d" id="q4d"> <label for="q4d">d) Energy</label>
+                    <strong>4.</strong> A light-year is a unit of:<br><br>
+                    <div class="option">
+                        <input type="radio" name="q4" value="a" id="q4a">
+                        <label for="q4a">a) Time</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" value="b" id="q4b">
+                        <label for="q4b">b) Mass</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" value="c" id="q4c">
+                        <label for="q4c">c) Distance</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" value="d" id="q4d">
+                        <label for="q4d">d) Energy</label>
+                    </div>
                 </div>
 
                 <div class="quiz-question">
-                    <strong>5.</strong> Which quantity has dimensions [ML⁻¹T⁻²]?<br>
-                    <input type="radio" name="q5" value="a" id="q5a"> <label for="q5a">a) Force</label><br>
-                    <input type="radio" name="q5" value="b" id="q5b"> <label for="q5b">b) Pressure</label><br>
-                    <input type="radio" name="q5" value="c" id="q5c"> <label for="q5c">c) Energy</label><br>
-                    <input type="radio" name="q5" value="d" id="q5d"> <label for="q5d">d) Power</label>
+                    <strong>5.</strong> Which quantity has dimensions [ML⁻¹T⁻²]?<br><br>
+                    <div class="option">
+                        <input type="radio" name="q5" value="a" id="q5a">
+                        <label for="q5a">a) Force</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" value="b" id="q5b">
+                        <label for="q5b">b) Pressure</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" value="c" id="q5c">
+                        <label for="q5c">c) Energy</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" value="d" id="q5d">
+                        <label for="q5d">d) Power</label>
+                    </div>
                 </div>
 
                 <div class="quiz-question">
-                    <strong>6.</strong> The SI unit redefinition in 2019 was based on:<br>
-                    <input type="radio" name="q6" value="a" id="q6a"> <label for="q6a">a) Physical artifacts</label><br>
-                    <input type="radio" name="q6" value="b" id="q6b"> <label for="q6b">b) Fundamental constants of nature</label><br>
-                    <input type="radio" name="q6" value="c" id="q6c"> <label for="q6c">c) Average measurements from multiple labs</label><br>
-                    <input type="radio" name="q6" value="d" id="q6d"> <label for="q6d">d) International committee decisions</label>
+                    <strong>6.</strong> The SI unit redefinition in 2019 was based on:<br><br>
+                    <div class="option">
+                        <input type="radio" name="q6" value="a" id="q6a">
+                        <label for="q6a">a) Physical artifacts</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q6" value="b" id="q6b">
+                        <label for="q6b">b) Fundamental constants of nature</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q6" value="c" id="q6c">
+                        <label for="q6c">c) Average measurements from multiple labs</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q6" value="d" id="q6d">
+                        <label for="q6d">d) International committee decisions</label>
+                    </div>
                 </div>
 
                 <div class="quiz-question">
-                    <strong>7.</strong> Dimensional analysis can be used for all EXCEPT:<br>
-                    <input type="radio" name="q7" value="a" id="q7a"> <label for="q7a">a) Checking equation validity</label><br>
-                    <input type="radio" name="q7" value="b" id="q7b"> <label for="q7b">b) Converting units</label><br>
-                    <input type="radio" name="q7" value="c" id="q7c"> <label for="q7c">c) Determining exact numerical constants</label><br>
-                    <input type="radio" name="q7" value="d" id="q7d"> <label for="q7d">d) Deriving relationships between quantities</label>
+                    <strong>7.</strong> Dimensional analysis can be used for all EXCEPT:<br><br>
+                    <div class="option">
+                        <input type="radio" name="q7" value="a" id="q7a">
+                        <label for="q7a">a) Checking equation validity</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q7" value="b" id="q7b">
+                        <label for="q7b">b) Converting units</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q7" value="c" id="q7c">
+                        <label for="q7c">c) Determining exact numerical constants</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q7" value="d" id="q7d">
+                        <label for="q7d">d) Deriving relationships between quantities</label>
+                    </div>
                 </div>
 
                 <div class="quiz-question">
-                    <strong>8.</strong> The dimensional formula for angular momentum is:<br>
-                    <input type="radio" name="q8" value="a" id="q8a"> <label for="q8a">a) [MLT⁻¹]</label><br>
-                    <input type="radio" name="q8" value="b" id="q8b"> <label for="q8b">b) [ML²T⁻¹]</label><br>
-                    <input type="radio" name="q8" value="c" id="q8c"> <label for="q8c">c) [ML²T⁻²]</label><br>
-                    <input type="radio" name="q8" value="d" id="q8d"> <label for="q8d">d) [MLT⁻²]</label>
+                    <strong>8.</strong> The dimensional formula for angular momentum is:<br><br>
+                    <div class="option">
+                        <input type="radio" name="q8" value="a" id="q8a">
+                        <label for="q8a">a) [MLT⁻¹]</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q8" value="b" id="q8b">
+                        <label for="q8b">b) [ML²T⁻¹]</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q8" value="c" id="q8c">
+                        <label for="q8c">c) [ML²T⁻²]</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q8" value="d" id="q8d">
+                        <label for="q8d">d) [MLT⁻²]</label>
+                    </div>
                 </div>
 
                 <div class="quiz-question">
-                    <strong>9.</strong> Which statement about significant figures is correct?<br>
-                    <input type="radio" name="q9" value="a" id="q9a"> <label for="q9a">a) They represent absolute precision</label><br>
-                    <input type="radio" name="q9" value="b" id="q9b"> <label for="q9b">b) They indicate the reliability of measurements</label><br>
-                    <input type="radio" name="q9" value="c" id="q9c"> <label for="q9c">c) They are always equal to decimal places</label><br>
-                    <input type="radio" name="q9" value="d" id="q9d"> <label for="q9d">d) They are only important in theoretical physics</label>
+                    <strong>9.</strong> Which statement about significant figures is correct?<br><br>
+                    <div class="option">
+                        <input type="radio" name="q9" value="a" id="q9a">
+                        <label for="q9a">a) They represent absolute precision</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q9" value="b" id="q9b">
+                        <label for="q9b">b) They indicate the reliability of measurements</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q9" value="c" id="q9c">
+                        <label for="q9c">c) They are always equal to decimal places</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q9" value="d" id="q9d">
+                        <label for="q9d">d) They are only important in theoretical physics</label>
+                    </div>
                 </div>
 
                 <div class="quiz-question">
-                    <strong>10.</strong> The meter is defined as:<br>
-                    <input type="radio" name="q10" value="a" id="q10a"> <label for="q10a">a) 1/40,000,000 of Earth's circumference</label><br>
-                    <input type="radio" name="q10" value="b" id="q10b"> <label for="q10b">b) Length of a platinum-iridium bar</label><br>
-                    <input type="radio" name="q10" value="c" id="q10c"> <label for="q10c">c) Distance light travels in 1/299,792,458 seconds</label><br>
-                    <input type="radio" name="q10" value="d" id="q10d"> <label for="q10d">d) 1650763.73 wavelengths of krypton-86 radiation</label>
+                    <strong>10.</strong> The meter is defined as:<br><br>
+                    <div class="option">
+                        <input type="radio" name="q10" value="a" id="q10a">
+                        <label for="q10a">a) 1/40,000,000 of Earth's circumference</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q10" value="b" id="q10b">
+                        <label for="q10b">b) Length of a platinum-iridium bar</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q10" value="c" id="q10c">
+                        <label for="q10c">c) Distance light travels in 1/299,792,458 seconds</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q10" value="d" id="q10d">
+                        <label for="q10d">d) 1650763.73 wavelengths of krypton-86 radiation</label>
+                    </div>
                 </div>
 
                 <div class="quiz-buttons">
