@@ -134,18 +134,431 @@
                 </div>
             </section>
 
-            <!-- Content Placeholder -->
+            <!-- Chapter Content -->
             <section class="content-section">
-                <div class="content-placeholder">
-                    <h2>📝 Chapter Content</h2>
-                    <p>This section is ready for your physics notes. You can add:</p>
-                    <ul>
-                        <li><strong>Theory explanations</strong> with clear concepts</li>
-                        <li><strong>Worked examples</strong> with step-by-step solutions</li>
-                        <li><strong>Practice problems</strong> with varying difficulty</li>
-                        <li><strong>Key formulas</strong> and reference materials</li>
-                        <li><strong>Real-world applications</strong> and examples</li>
-                    </ul>
+                <div class="chapter-content">
+                    
+                    <!-- Introduction -->
+                    <div class="section-header">
+                        <h2>📐 Introduction to Scientific Measurement</h2>
+                        <p class="lead">Physics is fundamentally an experimental science. The ability to make precise, accurate, and reproducible measurements is essential for scientific discovery and technological advancement.</p>
+                    </div>
+
+                    <!-- 1.1 Physical Quantities, Standards, and Units -->
+                    <div class="content-card">
+                        <h3>1.1 Physical Quantities, Standards, and Units</h3>
+                        <p>Physical quantities are measurable properties of objects or phenomena. They form the foundation of all physical laws and theories. To communicate scientific results effectively, we need agreed-upon standards that are:</p>
+                        <ul>
+                            <li><strong>Accessible:</strong> Available to scientists worldwide</li>
+                            <li><strong>Invariable:</strong> Unchanging over time</li>
+                            <li><strong>Reproducible:</strong> Can be recreated anywhere</li>
+                            <li><strong>Precise:</strong> Defined with high accuracy</li>
+                        </ul>
+                        
+                        <div class="highlight-box">
+                            <h4>🎯 Key Insight</h4>
+                            <p>Without standardized measurements, a physicist in Tokyo cannot meaningfully compare results with a colleague in London. Standards enable global scientific collaboration.</p>
+                        </div>
+                    </div>
+
+                    <!-- 1.2 The International System of Units (SI) -->
+                    <div class="content-card">
+                        <h3>1.2 The International System of Units (SI)</h3>
+                        <p>The SI system, established in 1960, is built upon seven fundamental base units. These base units are defined using fundamental constants of nature, ensuring their permanence and universal accessibility.</p>
+                        
+                        <div class="table-container">
+                            <table class="modern-table">
+                                <thead>
+                                    <tr>
+                                        <th>Physical Quantity</th>
+                                        <th>SI Unit</th>
+                                        <th>Symbol</th>
+                                        <th>Definition Base</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Length</td>
+                                        <td>meter</td>
+                                        <td>m</td>
+                                        <td>Speed of light in vacuum</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mass</td>
+                                        <td>kilogram</td>
+                                        <td>kg</td>
+                                        <td>Planck's constant</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Time</td>
+                                        <td>second</td>
+                                        <td>s</td>
+                                        <td>Cesium atomic transition</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Electric current</td>
+                                        <td>ampere</td>
+                                        <td>A</td>
+                                        <td>Elementary charge</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Temperature</td>
+                                        <td>kelvin</td>
+                                        <td>K</td>
+                                        <td>Boltzmann constant</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Amount of substance</td>
+                                        <td>mole</td>
+                                        <td>mol</td>
+                                        <td>Avogadro's number</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Luminous intensity</td>
+                                        <td>candela</td>
+                                        <td>cd</td>
+                                        <td>Luminous efficacy</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 1.3 Fundamental and Derived Units -->
+                    <div class="content-card">
+                        <h3>1.3 Fundamental and Derived Units</h3>
+                        <p>While base units are defined independently, <strong>derived units</strong> are expressed as combinations of base units. This hierarchical structure ensures consistency throughout physics.</p>
+                        
+                        <div class="example-box">
+                            <h4>📋 Common Derived Units</h4>
+                            <div class="formula-grid">
+                                <div class="formula-item">
+                                    <span class="quantity">Area:</span>
+                                    <span class="unit">m²</span>
+                                </div>
+                                <div class="formula-item">
+                                    <span class="quantity">Volume:</span>
+                                    <span class="unit">m³</span>
+                                </div>
+                                <div class="formula-item">
+                                    <span class="quantity">Speed:</span>
+                                    <span class="unit">m/s</span>
+                                </div>
+                                <div class="formula-item">
+                                    <span class="quantity">Acceleration:</span>
+                                    <span class="unit">m/s²</span>
+                                </div>
+                                <div class="formula-item">
+                                    <span class="quantity">Force:</span>
+                                    <span class="unit">kg⋅m/s² (Newton)</span>
+                                </div>
+                                <div class="formula-item">
+                                    <span class="quantity">Energy:</span>
+                                    <span class="unit">kg⋅m²/s² (Joule)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 1.4 Dimensional Analysis -->
+                    <div class="content-card">
+                        <h3>1.4 Dimensional Analysis</h3>
+                        <p>Every physical quantity has dimensions associated with it. For mechanical quantities, we use three fundamental dimensions: Mass [M], Length [L], and Time [T]. Dimensional analysis is a powerful tool for:</p>
+                        <ul>
+                            <li>Checking the validity of equations</li>
+                            <li>Deriving relationships between quantities</li>
+                            <li>Converting between unit systems</li>
+                            <li>Estimating unknown quantities</li>
+                        </ul>
+
+                        <div class="example-box">
+                            <h4>🔬 Example: Dimensional Analysis of Kinetic Energy</h4>
+                            <p><strong>Kinetic Energy:</strong> KE = ½mv²</p>
+                            <p><strong>Dimensional check:</strong></p>
+                            <p>[KE] = [M][L²T⁻²] = ML²T⁻²</p>
+                            <p><strong>Verification:</strong> This matches the dimensions of energy (Force × Distance = MLT⁻² × L = ML²T⁻²) ✅</p>
+                        </div>
+                    </div>
+
+                    <!-- 1.5 Principle of Homogeneity -->
+                    <div class="content-card">
+                        <h3>1.5 Principle of Homogeneity</h3>
+                        <p>The principle of dimensional homogeneity states that any valid physical equation must be dimensionally consistent. Both sides of an equation must have identical dimensions.</p>
+                        
+                        <div class="highlight-box">
+                            <h4>⚖️ Mathematical Expression</h4>
+                            <p>For any valid equation A = B + C - D...</p>
+                            <p>The dimensions must satisfy: [A] = [B] = [C] = [D]</p>
+                        </div>
+
+                        <div class="example-box">
+                            <h4>🧮 Example: Position Equation</h4>
+                            <p><strong>Equation:</strong> x = x₀ + v₀t + ½at²</p>
+                            <p><strong>Dimensional analysis:</strong></p>
+                            <p>[x] = [L]</p>
+                            <p>[x₀] = [L]</p>
+                            <p>[v₀t] = [LT⁻¹][T] = [L]</p>
+                            <p>[½at²] = [LT⁻²][T²] = [L]</p>
+                            <p><strong>Result:</strong> All terms have dimension [L] → Equation is valid ✅</p>
+                        </div>
+                    </div>
+
+                    <!-- 1.6 Significant Figures and Precision -->
+                    <div class="content-card">
+                        <h3>1.6 Significant Figures and Precision</h3>
+                        <p>Significant figures represent the precision of a measurement. They indicate which digits in a number are meaningful and reliable.</p>
+                        
+                        <div class="rules-box">
+                            <h4>📏 Rules for Significant Figures</h4>
+                            <ol>
+                                <li><strong>Non-zero digits</strong> are always significant</li>
+                                <li><strong>Leading zeros</strong> are never significant</li>
+                                <li><strong>Captive zeros</strong> (between non-zero digits) are always significant</li>
+                                <li><strong>Trailing zeros</strong> are significant only if there's a decimal point</li>
+                                <li><strong>Exact numbers</strong> have infinite significant figures</li>
+                            </ol>
+                        </div>
+
+                        <div class="example-box">
+                            <h4>🔢 Examples</h4>
+                            <ul>
+                                <li>123.45 → 5 significant figures</li>
+                                <li>0.00456 → 3 significant figures</li>
+                                <li>1050 → 3 or 4 significant figures (ambiguous)</li>
+                                <li>1.050 × 10³ → 4 significant figures (clear)</li>
+                                <li>2π → infinite significant figures (exact)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 1.7 Order of Magnitude Estimation -->
+                    <div class="content-card">
+                        <h3>1.7 Order of Magnitude Estimation</h3>
+                        <p>Order of magnitude calculations help physicists make quick estimates and sanity checks. These "Fermi problems" develop physical intuition and problem-solving skills.</p>
+                        
+                        <div class="example-box">
+                            <h4>🌍 Example: How many ping pong balls fit in Earth?</h4>
+                            <div class="calculation-steps">
+                                <p><strong>Step 1:</strong> Earth radius ≈ 6 × 10⁶ m</p>
+                                <p><strong>Step 2:</strong> Earth volume ≈ (4/3)π(6 × 10⁶)³ ≈ 10²¹ m³</p>
+                                <p><strong>Step 3:</strong> Ping pong ball radius ≈ 2 cm = 0.02 m</p>
+                                <p><strong>Step 4:</strong> Ball volume ≈ (4/3)π(0.02)³ ≈ 3 × 10⁻⁵ m³</p>
+                                <p><strong>Step 5:</strong> Number of balls ≈ 10²¹ / (3 × 10⁻⁵) ≈ 3 × 10²⁵</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Conceptual Questions Section -->
+            <section class="questions-section">
+                <h2>🤔 Conceptual Questions</h2>
+                <p class="section-description">Test your understanding of measurement fundamentals with these thought-provoking questions.</p>
+                
+                <div class="question-card">
+                    <h4>Question 1: Standards and Reproducibility</h4>
+                    <p>What are the essential characteristics that make a physical standard useful for scientific measurement? Why was the meter originally defined as 1/10,000,000 of the distance from the equator to the North Pole, and why was this definition eventually abandoned?</p>
+                    <div class="answer-hint">
+                        <details>
+                            <summary>💡 Hint</summary>
+                            <p>Consider what makes measurements reliable across different laboratories and time periods.</p>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <h4>Question 2: Dimensional Consistency</h4>
+                    <p>A student claims that the equation v = at + d (where v is velocity, a is acceleration, t is time, and d is distance) could be valid under certain conditions. Use dimensional analysis to evaluate this claim and explain why this equation cannot be physically meaningful.</p>
+                    <div class="answer-hint">
+                        <details>
+                            <summary>💡 Hint</summary>
+                            <p>Check if the dimensions on both sides of the equation match.</p>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <h4>Question 3: Measurement Precision</h4>
+                    <p>Two students measure the length of a table. Student A reports 1.237 m, while Student B reports 1.24 m. Assuming both measurements are correct within their precision, which measurement is more precise? Which is more accurate if the true length is 1.235 m? Explain the difference between precision and accuracy.</p>
+                    <div class="answer-hint">
+                        <details>
+                            <summary>💡 Hint</summary>
+                            <p>Precision relates to the number of significant figures, while accuracy relates to how close the measurement is to the true value.</p>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <h4>Question 4: SI System Evolution</h4>
+                    <p>In 2019, the kilogram was redefined based on Planck's constant rather than a physical prototype. What advantages does this new definition provide? How does this change reflect the evolution of physics from classical to quantum foundations?</p>
+                    <div class="answer-hint">
+                        <details>
+                            <summary>💡 Hint</summary>
+                            <p>Consider the stability, accessibility, and fundamental nature of the new definition.</p>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <h4>Question 5: Estimation and Scale</h4>
+                    <p>Explain why order-of-magnitude estimation is a valuable skill in physics. Give an example of how dimensional analysis could help you estimate the time it takes for light to travel from the Sun to Earth without looking up the exact distance.</p>
+                    <div class="answer-hint">
+                        <details>
+                            <summary>💡 Hint</summary>
+                            <p>Think about what you know about the solar system scale and the speed of light.</p>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Numerical Problems Section -->
+            <section class="numerical-section">
+                <h2>🔢 Numerical Problems</h2>
+                <p class="section-description">Apply measurement concepts to solve quantitative problems.</p>
+
+                <div class="problem-card">
+                    <h4>Problem 1: Unit Conversions</h4>
+                    <p>The speed of light is approximately 299,792,458 m/s.</p>
+                    <p><strong>a)</strong> Convert this to kilometers per hour.</p>
+                    <p><strong>b)</strong> Convert this to miles per hour (1 mile = 1.609 km).</p>
+                    <p><strong>c)</strong> How long does it take light to travel from the Sun to Earth if the distance is 1.496 × 10⁸ km?</p>
+                    
+                    <div class="solution-box">
+                        <details>
+                            <summary>📊 Solution</summary>
+                            <div class="solution-content">
+                                <p><strong>a)</strong> c = 299,792,458 m/s × (1 km/1000 m) × (3600 s/1 h) = 1.079 × 10⁹ km/h</p>
+                                <p><strong>b)</strong> c = 1.079 × 10⁹ km/h × (1 mile/1.609 km) = 6.706 × 10⁸ mph</p>
+                                <p><strong>c)</strong> t = d/c = (1.496 × 10⁸ km)/(2.998 × 10⁵ km/s) = 499 s = 8.32 min</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="problem-card">
+                    <h4>Problem 2: Dimensional Analysis</h4>
+                    <p>The period T of a simple pendulum depends on its length L, the acceleration due to gravity g, and possibly its mass m. Use dimensional analysis to find the relationship T = f(L, g, m).</p>
+                    
+                    <div class="solution-box">
+                        <details>
+                            <summary>📊 Solution</summary>
+                            <div class="solution-content">
+                                <p><strong>Given dimensions:</strong></p>
+                                <p>[T] = T, [L] = L, [g] = LT⁻², [m] = M</p>
+                                <p><strong>Assume:</strong> T = k L^a g^b m^c</p>
+                                <p><strong>Dimensional equation:</strong> T = L^a (LT⁻²)^b M^c = L^(a+b) T^(-2b) M^c</p>
+                                <p><strong>Comparing powers:</strong></p>
+                                <p>For T: 1 = -2b → b = -1/2</p>
+                                <p>For L: 0 = a + b → a = 1/2</p>
+                                <p>For M: 0 = c → c = 0</p>
+                                <p><strong>Result:</strong> T = k√(L/g) (mass doesn't affect the period!)</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="problem-card">
+                    <h4>Problem 3: Significant Figures</h4>
+                    <p>Calculate the following, expressing your answer with the correct number of significant figures:</p>
+                    <p><strong>a)</strong> (2.4 × 10³) × (1.50 × 10⁻⁴) ÷ (3.0 × 10⁻²)</p>
+                    <p><strong>b)</strong> 15.67 + 0.943 - 12.2</p>
+                    <p><strong>c)</strong> (4.5)² × π × (2.00 × 10⁻³)</p>
+                    
+                    <div class="solution-box">
+                        <details>
+                            <summary>📊 Solution</summary>
+                            <div class="solution-content">
+                                <p><strong>a)</strong> = (2.4 × 1.50 × 10³⁻⁴) ÷ (3.0 × 10⁻²) = 3.6 × 10⁻¹ ÷ 3.0 × 10⁻² = 1.2 × 10¹ = 12</p>
+                                <p>(Limited by 2.4 and 3.0, both having 2 sig figs)</p>
+                                <p><strong>b)</strong> = 15.67 + 0.943 - 12.2 = 4.413 → 4.4</p>
+                                <p>(Limited by 12.2, which has 1 decimal place)</p>
+                                <p><strong>c)</strong> = 20.25 × π × 2.00 × 10⁻³ = 1.27 × 10⁻¹</p>
+                                <p>(Limited by 4.5 and 2.00, giving 3 sig figs)</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="problem-card">
+                    <h4>Problem 4: Advanced Dimensional Analysis</h4>
+                    <p>The drag force F on a sphere moving through a fluid depends on the sphere's radius r, its velocity v, the fluid density ρ, and the fluid viscosity η. The dimensions of viscosity are [η] = ML⁻¹T⁻¹. Find the functional form F = f(r, v, ρ, η).</p>
+                    
+                    <div class="solution-box">
+                        <details>
+                            <summary>📊 Solution</summary>
+                            <div class="solution-content">
+                                <p><strong>Assume:</strong> F = k r^a v^b ρ^c η^d</p>
+                                <p><strong>Dimensions:</strong> [F] = MLT⁻², [r] = L, [v] = LT⁻¹, [ρ] = ML⁻³, [η] = ML⁻¹T⁻¹</p>
+                                <p><strong>Dimensional equation:</strong> MLT⁻² = L^a (LT⁻¹)^b (ML⁻³)^c (ML⁻¹T⁻¹)^d</p>
+                                <p><strong>Simplified:</strong> MLT⁻² = L^(a+b-3c-d) M^(c+d) T^(-b-d)</p>
+                                <p><strong>Equations:</strong></p>
+                                <p>M: 1 = c + d</p>
+                                <p>L: 1 = a + b - 3c - d</p>
+                                <p>T: -2 = -b - d</p>
+                                <p><strong>Solving:</strong> d = 2 - b, c = b - 1, a = 2 - b</p>
+                                <p><strong>Result:</strong> F = k r^(2-b) v^b ρ^(b-1) η^(2-b)</p>
+                                <p>This gives Stokes' law (b=1) and Newton's drag (b=2) as special cases!</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="problem-card">
+                    <h4>Problem 5: Order of Magnitude</h4>
+                    <p>Estimate the number of atoms in your body. State all assumptions clearly and show your reasoning. Compare your result with typical literature values.</p>
+                    
+                    <div class="solution-box">
+                        <details>
+                            <summary>📊 Solution</summary>
+                            <div class="solution-content">
+                                <p><strong>Assumptions:</strong></p>
+                                <p>• Human body mass ≈ 70 kg</p>
+                                <p>• Body is mostly water (H₂O), average atomic mass ≈ 10 u</p>
+                                <p>• 1 u = 1.66 × 10⁻²⁷ kg</p>
+                                <p><strong>Calculation:</strong></p>
+                                <p>Average atom mass = 10 × 1.66 × 10⁻²⁷ kg = 1.66 × 10⁻²⁶ kg</p>
+                                <p>Number of atoms = 70 kg / (1.66 × 10⁻²⁶ kg) ≈ 4 × 10²⁷ atoms</p>
+                                <p><strong>Literature value:</strong> ~7 × 10²⁷ atoms (good agreement!)</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interactive Quiz Section -->
+            <section class="quiz-section">
+                <div class="quiz-header">
+                    <h2>🧩 Interactive Quiz</h2>
+                    <p class="section-description">Test your knowledge and track your progress with this interactive quiz. Your score determines your mastery level!</p>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="score-display">
+                            <span id="currentScore">0</span> / <span id="totalQuestions">10</span> correct
+                            <span class="mastery-level" id="masteryLevel">Not Started</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-container" id="quizContainer">
+                    <!-- Quiz questions will be dynamically loaded here -->
+                </div>
+
+                <div class="quiz-controls">
+                    <button class="btn btn-secondary" id="resetQuiz">🔄 Reset Quiz</button>
+                    <button class="btn btn-primary" id="submitQuiz" style="display: none;">📊 Submit Quiz</button>
+                </div>
+
+                <div class="quiz-results" id="quizResults" style="display: none;">
+                    <div class="results-card">
+                        <h3>🎯 Quiz Results</h3>
+                        <div class="final-score" id="finalScore"></div>
+                        <div class="mastery-badge" id="masteryBadge"></div>
+                        <div class="performance-breakdown" id="performanceBreakdown"></div>
+                        <div class="recommendations" id="recommendations"></div>
+                        <button class="btn btn-primary" id="retakeQuiz">🔄 Retake Quiz</button>
+                    </div>
                 </div>
             </section>
 
