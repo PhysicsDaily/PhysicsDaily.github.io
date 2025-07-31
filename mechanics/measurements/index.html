@@ -18,7 +18,7 @@
             z-index: 1000;
             display: flex;
             background: var(--card-bg);
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-color, #e2e8f0);
             border-radius: 25px;
             padding: 4px;
             box-shadow: var(--shadow-md);
@@ -35,7 +35,7 @@
         }
 
         .theme-toggle button.active {
-            background: var(--primary);
+            background: var(--primary-color, #2563eb);
             color: white;
         }
 
@@ -52,13 +52,13 @@
             border-radius: 12px;
             padding: 24px;
             margin: 24px 0;
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-color, #e2e8f0);
             box-shadow: var(--shadow-md);
         }
         .question {
             margin: 20px 0;
             padding: 16px;
-            border-left: 4px solid var(--primary);
+            border-left: 4px solid var(--primary-color, #2563eb);
             background: var(--card-bg);
             border-radius: 8px;
             box-shadow: var(--shadow-sm);
@@ -70,11 +70,11 @@
             border-radius: 12px;
             overflow: hidden;
             margin: 16px 0;
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-color, #e2e8f0);
         }
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--success), var(--info));
+            background: linear-gradient(90deg, var(--success-color, #10b981), var(--accent-color, #06b6d4));
             width: 0%;
             transition: width 0.5s ease;
         }
@@ -85,7 +85,7 @@
             color: var(--text-primary);
         }
         .btn {
-            background: var(--primary);
+            background: var(--primary-color, #2563eb);
             color: white;
             border: none;
             padding: 12px 24px;
@@ -104,13 +104,13 @@
         .btn-secondary {
             background: var(--bg-secondary);
             color: var(--text-primary);
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-color, #e2e8f0);
         }
         .btn-secondary:hover {
-            background: var(--border);
+            background: var(--border-hover, #cbd5e1);
         }
         .btn-close {
-            background: var(--danger);
+            background: var(--danger-color, #ef4444);
             color: white;
             padding: 8px 16px;
             font-size: 14px;
@@ -131,7 +131,7 @@
             padding: 24px;
             border-radius: 12px;
             background: var(--card-bg);
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-color, #e2e8f0);
             box-shadow: var(--shadow-md);
         }
         table {
@@ -143,7 +143,7 @@
             overflow: hidden;
         }
         th, td {
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-color, #e2e8f0);
             padding: 12px;
             text-align: left;
         }
@@ -160,10 +160,9 @@
             padding: 16px;
             background: var(--bg-secondary);
             border-radius: 8px;
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-color, #e2e8f0);
         }
         
-        /* Fixed radio button alignment */
         .quiz-question .option {
             display: flex;
             align-items: center;
@@ -189,7 +188,7 @@
             padding: 20px;
             background: var(--card-bg);
             border-radius: 8px;
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-color, #e2e8f0);
         }
         .results-header {
             display: flex;
@@ -202,12 +201,10 @@
             color: var(--text-primary);
         }
         
-        /* Ensure content doesn't overlap with fixed theme toggle */
         body {
             padding-top: 0;
         }
         
-        /* Mobile responsiveness */
         @media (max-width: 768px) {
             .theme-toggle {
                 top: 70px;
@@ -233,7 +230,6 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="nav">
         <div class="container">
             <div class="nav-content">
@@ -248,13 +244,11 @@
         </div>
     </nav>
 
-    <!-- Theme Toggle - Positioned below navigation -->
     <div class="theme-toggle">
         <button id="light-mode" class="active" title="Light Mode">☀️</button>
         <button id="dark-mode" title="Dark Mode">🌙</button>
     </div>
 
-    <!-- Breadcrumb -->
     <div class="breadcrumb">
         <div class="container">
             <nav aria-label="Breadcrumb">
@@ -267,7 +261,6 @@
         </div>
     </div>
 
-    <!-- Header -->
     <header class="header">
         <div class="container">
             <h1>Chapter 1: Measurement</h1>
@@ -657,11 +650,11 @@
                     </div>
                     <div class="option">
                         <input type="radio" name="q9" value="b" id="q9b">
-                        <label for="q9b">b) They indicate the reliability of measurements</label>
+                        <label for="q9b">b) They indicate the reliability of a measurement</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q9" value="c" id="q9c">
-                        <label for="q9c">c) They are always equal to decimal places</label>
+                        <label for="q9c">c) They are always equal to the number of decimal places</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q9" value="d" id="q9d">
@@ -673,26 +666,26 @@
                     <strong>10.</strong> The meter is defined as:<br><br>
                     <div class="option">
                         <input type="radio" name="q10" value="a" id="q10a">
-                        <label for="q10a">a) 1/40,000,000 of Earth's circumference</label>
+                        <label for="q10a">a) 1/40,000,000 of the Earth's circumference</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q10" value="b" id="q10b">
-                        <label for="q10b">b) Length of a platinum-iridium bar</label>
+                        <label for="q10b">b) The length of a specific platinum-iridium bar</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q10" value="c" id="q10c">
-                        <label for="q10c">c) Distance light travels in 1/299,792,458 seconds</label>
+                        <label for="q10c">c) The distance light travels in vacuum in 1/299,792,458 of a second</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q10" value="d" id="q10d">
-                        <label for="q10d">d) 1650763.73 wavelengths of krypton-86 radiation</label>
+                        <label for="q10d">d) 1,650,763.73 wavelengths of krypton-86 radiation</label>
                     </div>
                 </div>
 
                 <div class="quiz-buttons">
-    <button class="btn" onclick="calculateScore()" style="background-color: #007BFF; color: #FFFFFF; border: none;">📊 Submit Quiz</button>
-    <button class="btn btn-secondary" onclick="resetQuiz()" style="background-color: #007BFF; color: #FFFFFF; border: none;">🔄 Reset Quiz</button>
-</div>
+                    <button class="btn" onclick="calculateScore()" style="background-color: #007BFF; color: #FFFFFF; border: none;">📊 Submit Quiz</button>
+                    <button class="btn btn-secondary" onclick="resetQuiz()" style="background-color: #007BFF; color: #FFFFFF; border: none;">🔄 Reset Quiz</button>
+                </div>
                 
                 <div id="results" style="display: none;">
                     <div class="results-header">
@@ -734,13 +727,17 @@
                 const selected = document.querySelector(`input[name="${question}"]:checked`);
                 if (selected && selected.value === correctAnswers[question]) {
                     score++;
-                    feedback += `<p style="color: var(--success);">✅ Question ${question.slice(1)}: Correct!</p>`;
+                    feedback += `<p style="color: var(--success-color, #10b981);">✅ Question ${question.slice(1)}: Correct!</p>`;
                 } else {
-                    feedback += `<p style="color: var(--danger);">❌ Question ${question.slice(1)}: Incorrect. Correct answer: ${getAnswerText(question, correctAnswers[question])}</p>`;
+                    const correctAnswerValue = getAnswerText(question, correctAnswers[question]);
+                    feedback += `<p style="color: var(--danger-color, #ef4444);">❌ Question ${question.slice(1)}: Incorrect. Correct answer: ${correctAnswerValue}</p>`;
                 }
             }
 
             const percentage = Math.round((score / total) * 100);
+            
+            // Save progress to localStorage
+            localStorage.setItem('chapter-1-progress', percentage);
             
             // Update progress bar
             document.getElementById('progressBar').style.width = percentage + '%';
@@ -750,19 +747,19 @@
             let color = '';
             if (percentage >= 90) {
                 level = 'Excellent! Chapter Mastered 🎯';
-                color = 'var(--success)';
+                color = 'var(--success-color, #10b981)';
             } else if (percentage >= 75) {
                 level = 'Very Good! Strong Understanding ✅';
-                color = 'var(--info)';
+                color = 'var(--accent-color, #06b6d4)';
             } else if (percentage >= 60) {
                 level = 'Good! Chapter Completed 📚';
-                color = 'var(--warning)';
+                color = 'var(--warning-color, #f59e0b)';
             } else if (percentage >= 40) {
                 level = 'Basic Understanding 📖';
-                color = 'var(--warning)';
+                color = 'var(--warning-color, #f59e0b)';
             } else {
                 level = 'Needs Review 🔄';
-                color = 'var(--danger)';
+                color = 'var(--danger-color, #ef4444)';
             }
 
             document.getElementById('scoreDisplay').innerHTML = 
@@ -793,18 +790,13 @@
                 q9: {a: 'Absolute precision', b: 'Indicate reliability', c: 'Equal decimal places', d: 'Only theoretical'},
                 q10: {a: 'Earth circumference', b: 'Platinum bar', c: 'Light distance', d: 'Krypton wavelengths'}
             };
-            return answers[question][answer];
+            return `<strong>${answer.toUpperCase()}</strong>: ${answers[question][answer]}`;
         }
 
         function resetQuiz() {
-            // Clear all radio buttons
             document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
-            
-            // Reset progress bar
             document.getElementById('progressBar').style.width = '0%';
             document.getElementById('scoreDisplay').textContent = 'Progress: 0% | Score: 0/10';
-            
-            // Hide results
             document.getElementById('results').style.display = 'none';
         }
 
@@ -815,10 +807,10 @@
         // Theme toggle functionality
         const lightModeBtn = document.getElementById('light-mode');
         const darkModeBtn = document.getElementById('dark-mode');
+        const docElement = document.documentElement;
 
-        // Check for saved theme preference or default to light mode
         const savedTheme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', savedTheme);
+        docElement.setAttribute('data-theme', savedTheme);
 
         if (savedTheme === 'dark') {
             darkModeBtn.classList.add('active');
@@ -826,14 +818,14 @@
         }
 
         lightModeBtn.addEventListener('click', () => {
-            document.documentElement.setAttribute('data-theme', 'light');
+            docElement.setAttribute('data-theme', 'light');
             lightModeBtn.classList.add('active');
             darkModeBtn.classList.remove('active');
             localStorage.setItem('theme', 'light');
         });
 
         darkModeBtn.addEventListener('click', () => {
-            document.documentElement.setAttribute('data-theme', 'dark');
+            docElement.setAttribute('data-theme', 'dark');
             darkModeBtn.classList.add('active');
             lightModeBtn.classList.remove('active');
             localStorage.setItem('theme', 'dark');
