@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: One-Dimensional Kinematics - Physics Daily</title>
+    <meta name="description" content="Master the fundamentals of motion in one dimension, from basic concepts to advanced applications in kinematics.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #64748b;
+            --accent-color: #06b6d4;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        [data-theme="dark"] {
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --card-bg: #334155;
+            --border-color: #475569;
+            --border-hover: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .breadcrumb {
+            background: var(--bg-secondary);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary-color);
+        }
+
+        .separator {
+            margin: 0 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .current {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 25px;
+            padding: 4px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .theme-toggle button {
+            background: none;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle button.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .theme-toggle button:hover {
+            background: var(--bg-secondary);
+        }
+
+        .theme-toggle button.active:hover {
+            background: var(--primary-dark);
+        }
+
+        .section {
+            margin: 32px 0;
+            padding: 24px;
+            border-radius: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .section h3 {
+            color: var(--text-primary);
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .section h4 {
+            color: var(--text-primary);
+            margin: 1rem 0 0.5rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .section p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            text-align: justify;
+        }
+
+        .section ul, .section ol {
+            margin: 1rem 0 1rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
+            border-left: 4px solid var(--accent-color);
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+        }
+
+        [data-theme="dark"] .highlight-box {
+            background: linear-gradient(135deg, #164e63, #0c4a6e);
+        }
+
+        .beginner-note {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 4px solid var(--warning-color);
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+        }
+
+        [data-theme="dark"] .beginner-note {
+            background: linear-gradient(135deg, #451a03, #78350f);
+        }
+
+        .advanced-note {
+            background: linear-gradient(135deg, #f3e8ff, #ede9fe);
+            border-left: 4px solid #8b5cf6;
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+        }
+
+        [data-theme="dark"] .advanced-note {
+            background: linear-gradient(135deg, #2d1b69, #3730a3);
+        }
+
+        .formula-box {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 16px 0;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-left: 4px solid var(--success-color);
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+        }
+
+        [data-theme="dark"] .example-box {
+            background: linear-gradient(135deg, #14532d, #166534);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        td {
+            color: var(--text-secondary);
+        }
+
+        .quiz-container {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+        }
+
+        .question {
+            margin: 20px 0;
+            padding: 16px;
+            border-left: 4px solid var(--primary-color);
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 24px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 16px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success-color), var(--accent-color));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .score-display {
+            font-weight: 600;
+            text-align: center;
+            margin: 16px 0;
+            color: var(--text-primary);
+        }
+
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 8px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border-hover);
+        }
+
+        .btn-close {
+            background: var(--danger-color);
+            color: white;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        .btn-close:hover {
+            background: #c82333;
+        }
+
+        .quiz-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .quiz-question {
+            margin: 16px 0;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .quiz-question .option {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+        }
+
+        .quiz-question .option:hover {
+            background: var(--border-color);
+        }
+
+        .quiz-question .option.correct {
+            background: #dcfce7;
+            border: 1px solid var(--success-color);
+        }
+
+        .quiz-question .option.incorrect {
+            background: #fef2f2;
+            border: 1px solid var(--danger-color);
+        }
+
+        [data-theme="dark"] .quiz-question .option.correct {
+            background: #14532d;
+        }
+
+        [data-theme="dark"] .quiz-question .option.incorrect {
+            background: #451a1a;
+        }
+
+        .quiz-question input[type="radio"] {
+            margin: 0 12px 0 0;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+
+        .quiz-question label {
+            color: var(--text-secondary);
+            cursor: pointer;
+            flex: 1;
+            line-height: 1.4;
+        }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .question-counter {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .mcq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .mcq-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .mcq-item:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .mcq-item.answered {
+            border-color: var(--success-color);
+        }
+
+        .mcq-item.incorrect {
+            border-color: var(--danger-color);
+        }
+
+        #results {
+            margin-top: 24px;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .results-header h3 {
+            margin: 0;
+            color: var(--text-primary);
+        }
+
+        .explanation {
+            background: var(--bg-secondary);
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        details {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: .5em .5em 0;
+            margin-top: 1em;
+            background: var(--bg-secondary);
+        }
+
+        summary {
+            font-weight: bold;
+            margin: -.5em -.5em 0;
+            padding: .5em;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .theme-toggle {
+                top: 70px;
+                right: 10px;
+                scale: 0.9;
+            }
+
+            .quiz-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                margin: 4px 0;
+            }
+
+            .results-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mcq-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quiz-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XN081SR2KP');
+</script>
+</head>
+<body>
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../../index.html" class="nav-logo">Physics Daily</a>
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../resources.html">Resources</a></li>
+                    <li><a href="../../about.html">About</a></li>
+                    <li><a href="../../contribute.html">Contribute</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="theme-toggle">
+        <button id="light-mode" class="active" title="Light Mode">☀️</button>
+        <button id="dark-mode" title="Dark Mode">🌙</button>
+    </div>
+
+    <div class="breadcrumb">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span class="separator">›</span>
+                <a href="../foundations.html">Classical Mechanics</a>
+                <span class="separator">›</span>
+                <span class="current">🚀 One-Dimensional Kinematics</span>
+            </nav>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <h1>Chapter 2: One-Dimensional Kinematics</h1>
+            <p class="subtitle">The Language of Motion</p>
+            <p class="description">
+                Explore the fundamental concepts of motion in one dimension - from basic position and velocity to advanced applications in physics and engineering.
+            </p>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="section">
+                <h2>🌟 Introduction: Understanding Motion</h2>
+                
+                <div class="beginner-note">
+                    <h4>🔰 For Beginners:</h4>
+                    <p>Think about your daily life - walking to school, riding a bike, or watching a ball fall. All of these involve motion! Kinematics is the branch of physics that describes motion mathematically, helping us predict where objects will be and when they'll get there.</p>
+                </div>
+
+                <p><strong>Kinematics is the mathematical description of motion.</strong> It answers fundamental questions: Where is an object? How fast is it moving? Is it speeding up or slowing down? These seemingly simple questions form the foundation for understanding everything from planetary orbits to quantum mechanics.</p>
+
+                <p>The beauty of kinematics lies in its universality. The same equations that describe a falling apple also govern the motion of satellites, the oscillation of atoms, and the expansion of the universe. By mastering one-dimensional motion, you're building the conceptual framework needed for all of physics.</p>
+
+                <div class="highlight-box">
+                    <h4>Real-World Applications</h4>
+                    <p>Kinematics isn't just academic - it's everywhere! Engineers use kinematic equations to design safe cars and efficient rockets. Sports analysts apply these concepts to optimize athlete performance. Even your smartphone's accelerometer uses kinematic principles to detect orientation and motion.</p>
+                </div>
+
+                <div class="advanced-note">
+                    <h4>🎓 Historical Context:</h4>
+                    <p>Galileo Galilei (1564-1642) was the first to mathematically describe motion, laying the groundwork for Newton's laws. His studies of falling objects and projectile motion established the foundation of modern kinematics and challenged Aristotelian physics that had dominated for centuries.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>2.1 Physical Quantities: Scalars and Vectors</h2>
+                
+                <div class="beginner-note">
+                    <h4>🔰 Simple Analogy:</h4>
+                    <p>Imagine giving directions to a friend. Saying "walk 5 blocks" isn't enough - they need to know which direction! Speed tells you how fast, but velocity tells you how fast AND which way. That's the difference between scalars and vectors.</p>
+                </div>
+
+                <h3>Defining Physical Quantities</h3>
+                <p>In physics, we classify all measurable properties into two fundamental categories based on the information they contain:</p>
+
+                <h4>Scalar Quantities</h4>
+                <p><strong>Scalars</strong> are completely described by magnitude alone - just a number with units. They tell us "how much" but not "which direction."</p>
+
+                <div class="example-box">
+                    <h4>📝 Scalar Examples in Motion:</h4>
+                    <ul>
+                        <li><strong>Distance:</strong> "I walked 5 kilometers" (total path length)</li>
+                        <li><strong>Speed:</strong> "The car travels at 60 mph" (rate of motion)</li>
+                        <li><strong>Time:</strong> "The journey took 3 hours" (duration)</li>
+                        <li><strong>Mass:</strong> "The object weighs 2 kg" (amount of matter)</li>
+                    </ul>
+                </div>
+
+                <h4>Vector Quantities</h4>
+                <p><strong>Vectors</strong> require both magnitude and direction for complete description. They tell us "how much" AND "which way."</p>
+
+                <div class="example-box">
+                    <h4>📝 Vector Examples in Motion:</h4>
+                    <ul>
+                        <li><strong>Displacement:</strong> "I moved 3 km north" (change in position)</li>
+                        <li><strong>Velocity:</strong> "The car travels at 60 mph eastward" (rate and direction of motion)</li>
+                        <li><strong>Acceleration:</strong> "The object accelerates at 5 m/s² downward" (rate of velocity change)</li>
+                        <li><strong>Force:</strong> "Apply 10 N upward" (push or pull with direction)</li>
+                    </ul>
+                </div>
+
+                <h3>Mathematical Representation of Vectors</h3>
+                <p>In one dimension, vectors are represented using positive and negative signs to indicate direction:</p>
+
+                <div class="formula-box">
+                    <h4>1D Vector Convention:</h4>
+                    <p>Choose a coordinate system: Positive direction → (+)</p>
+                    <p>Opposite direction → (−)</p>
+                    <p>Example: +5 m/s (rightward), −3 m/s (leftward)</p>
+                </div>
+
+                <div class="advanced-note">
+                    <h4>🎓 Vector Notation:</h4>
+                    <p>Vectors are denoted with arrows (⃗v) or bold letters (v). The magnitude is written as |v| or simply v. In higher dimensions, vectors become more complex, but the one-dimensional case builds essential intuition.</p>
+                </div>
+
+                <h3>Why the Distinction Matters</h3>
+                <div class="highlight-box">
+                    <p><strong>Critical Insight:</strong> Scalar and vector quantities behave differently in calculations. You can't simply add speeds to get velocity, or masses to get acceleration. Understanding this distinction prevents common physics errors and builds deeper conceptual understanding.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>2.2 Position, Displacement, and Distance</h2>
+                
+                <div class="beginner-note">
+                    <h4>🔰 Everyday Example:</h4>
+                    <p>You start at home, walk to the grocery store, then to the bank, and finally back home. Your total distance traveled might be 2 miles, but your displacement is zero because you ended where you started!</p>
+                </div>
+
+                <h3>Position: Where Are You?</h3>
+                <p><strong>Position</strong> specifies the location of an object relative to a chosen origin (reference point). In one dimension, position is a coordinate on a line.</p>
+
+                <div class="formula-box">
+                    <h4>Position Vector:</h4>
+                    <p>x(t) = position at time t</p>
+                    <p>Origin: x = 0 (reference point)</p>
+                    <p>Positive direction: conventionally chosen</p>
+                </div>
+
+                <h3>Displacement: How Did You Move?</h3>
+                <p><strong>Displacement (Δx)</strong> is the change in position - the straight-line distance from initial to final position, including direction.</p>
+
+                <div class="formula-box">
+                    <h4>Displacement Formula:</h4>
+                    <p>Δx = x_f - x_i</p>
+                    <p>where x_f = final position, x_i = initial position</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>📝 Displacement Examples:</h4>
+                    <p><strong>Example 1:</strong> Move from x = 2 m to x = 8 m</p>
+                    <p>Δx = 8 m - 2 m = +6 m (positive direction)</p>
+                    
+                    <p><strong>Example 2:</strong> Move from x = 5 m to x = 1 m</p>
+                    <p>Δx = 1 m - 5 m = -4 m (negative direction)</p>
+                    
+                    <p><strong>Example 3:</strong> Move from x = 3 m to x = 7 m, then back to x = 3 m</p>
+                    <p>Net displacement: Δx = 3 m - 3 m = 0 m</p>
+                </div>
+
+                <h3>Distance: How Far Did You Travel?</h3>
+                <p><strong>Distance</strong> is the total length of the path traveled, regardless of direction. It's always positive and never decreases.</p>
+
+                <div class="highlight-box">
+                    <h4>Key Differences: Displacement vs. Distance</h4>
+                    <ul>
+                        <li><strong>Displacement:</strong> Vector (has direction), can be positive, negative, or zero</li>
+                        <li><strong>Distance:</strong> Scalar (no direction), always positive or zero</li>
+                        <li><strong>Displacement:</strong> Straight-line path from start to finish</li>
+                        <li><strong>Distance:</strong> Total path length actually traveled</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>📝 Comprehensive Example: Road Trip</h4>
+                    <p>A car starts at position x = 0 km on a highway:</p>
+                    <ul>
+                        <li>Drives 50 km east to position x = +50 km</li>
+                        <li>Continues 30 km east to position x = +80 km</li>
+                        <li>Turns around and drives 60 km west to position x = +20 km</li>
+                    </ul>
+                    
+                    <p><strong>Final displacement:</strong> Δx = 20 km - 0 km = +20 km east</p>
+                    <p><strong>Total distance:</strong> 50 km + 30 km + 60 km = 140 km</p>
+                    <p><strong>Interpretation:</strong> The car ends 20 km east of its starting point, but traveled 140 km total.</p>
+                </div>
+
+                <div class="advanced-note">
+                    <h4>🎓 Mathematical Insight:</h4>
+                    <p>For any motion, |displacement| ≤ distance. Equality holds only for straight-line motion in one direction. This relationship becomes crucial in optimization problems and provides insight into the efficiency of different paths.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>2.3 Velocity: Rate of Change of Position</h2>
+                
+                <div class="beginner-note">
+                    <h4>🔰 Intuitive Understanding:</h4>
+                    <p>Velocity is like the "rate of change" of your location. If you're walking quickly, your position changes rapidly. If you're standing still, your position doesn't change at all - zero velocity!</p>
+                </div>
+
+                <h3>Average Velocity: The Big Picture</h3>
+                <p><strong>Average velocity</strong> describes the overall rate of change of position over a time interval. It depends only on the initial and final positions, not on the details of the motion.</p>
+
+                <div class="formula-box">
+                    <h4>Average Velocity:</h4>
+                    <p>v̄ = Δx/Δt = (x_f - x_i)/(t_f - t_i)</p>
+                    <p>Units: meters per second (m/s)</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>📝 Average Velocity Example:</h4>
+                    <p>A runner starts at position x = 0 m at t = 0 s and reaches position x = 100 m at t = 20 s.</p>
+                    <p>v̄ = (100 m - 0 m)/(20 s - 0 s) = 100 m/20 s = 5 m/s</p>
+                    <p><strong>Interpretation:</strong> On average, the runner moved 5 meters east every second.</p>
+                </div>
+
+                <h3>Instantaneous Velocity: The Precise Moment</h3>
+                <p><strong>Instantaneous velocity</strong> is the velocity at a specific instant in time. It's the limit of average velocity as the time interval approaches zero.</p>
+
+                <div class="formula-box">
+                    <h4>Instantaneous Velocity:</h4>
+                    <p>v(t) = lim(Δt→0) Δx/Δt = dx/dt</p>
+                    <p>This is the derivative of position with respect to time</p>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>Graphical Interpretation</h4>
+                    <ul>
+                        <li><strong>Average velocity:</strong> Slope of secant line connecting two points on position vs. time graph</li>
+                        <li><strong>Instantaneous velocity:</strong> Slope of tangent line at a specific point on position vs. time graph</li>
+                    </ul>
+                </div>
+
+                <h3>Speed vs. Velocity: A Crucial Distinction</h3>
+                <div class="highlight-box">
+                    <ul>
+                        <li><strong>Speed:</strong> Scalar quantity, magnitude of velocity vector, always positive</li>
+                        <li><strong>Velocity:</strong> Vector quantity, includes both speed and direction</li>
+                        <li><strong>Average speed:</strong> Total distance / total time</li>
+                        <li><strong>Average velocity:</strong> Total displacement / total time</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>📝 Speed vs. Velocity Example:</h4>
+                    <p>A car travels around a circular track with a circumference of 1000 m in 100 s, returning to its starting point.</p>
+                    
+                    <p><strong>Average speed:</strong> 1000 m / 100 s = 10 m/s</p>
+                    <p><strong>Average velocity:</strong> 0 m / 100 s = 0 m/s</p>
+                    
+                    <p><strong>Explanation:</strong> The car moved quickly (high speed) but ended where it started (zero displacement, hence zero average velocity).</p>
+                </div>
+
+                <div class="advanced-note">
+                    <h4>🎓 Calculus Connection:</h4>
+                    <p>Velocity as the derivative of position introduces the fundamental concept of rates of change in physics. This mathematical relationship appears throughout physics: acceleration is the derivative of velocity, force relates to the derivative of momentum, and power is the derivative of energy.</p>
+                </div>
+
+                <h3>Interpreting Position-Time Graphs</h3>
+                <div class="highlight-box">
+                    <h4>Graph Reading Skills:</h4>
+                    <ul>
+                        <li><strong>Horizontal line:</strong> Zero velocity (object at rest)</li>
+                        <li><strong>Straight line with positive slope:</strong> Constant positive velocity</li>
+                        <li><strong>Straight line with negative slope:</strong> Constant negative velocity</li>
+                        <li><strong>Curved line:</strong> Changing velocity (acceleration present)</li>
+                        <li><strong>Steeper slope:</strong> Higher speed</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>2.4 Acceleration: Rate of Change of Velocity</h2>
+                
+                <div class="beginner-note">
+                    <h4>🔰 Feeling Acceleration:</h4>
+                    <p>You experience acceleration every day! When a car starts moving, you feel pushed back into your seat. When it brakes, you feel thrown forward. When an elevator starts going up, you feel heavier. These sensations are your body detecting changes in velocity - acceleration!</p>
+                </div>
+
+                <h3>Understanding Acceleration</h3>
+                <p><strong>Acceleration</strong> describes how quickly velocity changes. Like velocity, it's a vector quantity with both magnitude and direction. Acceleration can involve changes in speed, direction, or both.</p>
+
+                <h3>Average Acceleration</h3>
+                <p><strong>Average acceleration</strong> is the change in velocity divided by the time interval over which the change occurs.</p>
+
+                <div class="formula-box">
+                    <h4>Average Acceleration:</h4>
+                    <p>ā = Δv/Δt = (v_f - v_i)/(t_f - t_i)</p>
+                    <p>Units: meters per second squared (m/s²)</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>📝 Average Acceleration Examples:</h4>
+                    <p><strong>Example 1 - Speeding up:</strong></p>
+                    <p>A car accelerates from 20 m/s to 35 m/s in 5 seconds.</p>
+                    <p>ā = (35 m/s - 20 m/s)/(5 s) = 15 m/s / 5 s = 3 m/s²</p>
+                    
+                    <p><strong>Example 2 - Slowing down:</strong></p>
+                    <p>A bike slows from 15 m/s to 5 m/s in 4 seconds.</p>
+                    <p>ā = (5 m/s - 15 m/s)/(4 s) = -10 m/s / 4 s = -2.5 m/s²</p>
+                    
+                    <p><strong>Example 3 - Changing direction:</strong></p>
+                    <p>A ball moving at +10 m/s bounces and moves at -8 m/s in 0.1 s.</p>
+                    <p>ā = (-8 m/s - 10 m/s)/(0.1 s) = -18 m/s / 0.1 s = -180 m/s²</p>
+                </div>
+
+                <h3>Instantaneous Acceleration</h3>
+                <p><strong>Instantaneous acceleration</strong> is the acceleration at a specific instant in time.</p>
+
+                <div class="formula-box">
+                    <h4>Instantaneous Acceleration:</h4>
+                    <p>a(t) = lim(Δt→0) Δv/Δt = dv/dt = d²x/dt²</p>
+                    <p>Second derivative of position with respect to time</p>
+                </div>
+
+                <h3>Types of Acceleration</h3>
+                <div class="highlight-box">
+                    <h4>Acceleration Categories:</h4>
+                    <ul>
+                        <li><strong>Positive acceleration:</strong> Velocity increasing in positive direction OR decreasing in negative direction</li>
+                        <li><strong>Negative acceleration (deceleration):</strong> Velocity decreasing in positive direction OR increasing in negative direction</li>
+                        <li><strong>Zero acceleration:</strong> Constant velocity (including zero velocity)</li>
+                    </ul>
+                </div>
+
+                <div class="advanced-note">
+                    <h4>🎓 Common Misconceptions:</h4>
+                    <p><strong>Misconception:</strong> "Negative acceleration always means slowing down."</p>
+                    <p><strong>Reality:</strong> Negative acceleration means acceleration in the negative direction. If you're moving in the negative direction and have negative acceleration, you're actually speeding up!</p>
+                </div>
+
+                <h3>Interpreting Velocity-Time Graphs</h3>
+                <div class="highlight-box">
+                    <h4>Graph Analysis:</h4>
+                    <ul>
+                        <li><strong>Horizontal line:</strong> Zero acceleration (constant velocity)</li>
+                        <li><strong>Straight line with positive slope:</strong> Constant positive acceleration</li>
+                        <li><strong>Straight line with negative slope:</strong> Constant negative acceleration</li>
+                        <li><strong>Curved line:</strong> Changing acceleration</li>
+                        <li><strong>Area under curve:</strong> Displacement</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>📝 Real-World Acceleration Values:</h4>
+                    <ul>
+                        <li><strong>Human walking:</strong> ~0.5 m/s²</li>
+                        <li><strong>Car accelerating:</strong> ~3-5 m/s²</li>
+                        <li><strong>Emergency braking:</strong> ~8-10 m/s²</li>
+                        <li><strong>Free fall (gravity):</strong> ~9.8 m/s²</li>
+                        <li><strong>Fighter jet:</strong> ~50-100 m/s²</li>
+                        <li><strong>Car crash:</strong> ~1000 m/s² (very brief)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>2.5 Motion with Constant Acceleration</h2>
+                
+                <div class="beginner-note">
+                    <h4>🔰 Why Constant Acceleration?</h4>
+                    <p>Many real-world situations involve approximately constant acceleration: a car accelerating on a highway, a ball falling under gravity, or a train braking to a stop. These equations help us predict motion in these common scenarios!</p>
+                </div>
+
+                <h3>The Kinematic Equations</h3>
+                <p>When acceleration is constant, we can derive a set of powerful equations that relate position, velocity, acceleration, and time. These are the <strong>kinematic equations</strong>, fundamental tools for solving motion problems.</p>
+
+                <div class="formula-box">
+                    <h4>The Five Kinematic Equations:</h4>
+                    <p><strong>Equation 1:</strong> v = v₀ + at</p>
+                    <p><strong>Equation 2:</strong> x = x₀ + v₀t + ½at²</p>
+                    <p><strong>Equation 3:</strong> v² = v₀² + 2a(x - x₀)</p>
+                    <p><strong>Equation 4:</strong> x = x₀ + ½(v₀ + v)t</p>
+                    <p><strong>Equation 5:</strong> x = x₀ + vt - ½at²</p>
+                </div>
+
+                <h3>Understanding Each Equation</h3>
+                <div class="highlight-box">
+                    <h4>When to Use Each Equation:</h4>
+                    <ul>
+                        <li><strong>Equation 1:</strong> When you need to find velocity, have initial velocity, acceleration, and time</li>
+                        <li><strong>Equation 2:</strong> When you need position and have all quantities except final velocity</li>
+                        <li><strong>Equation 3:</strong> When time is unknown and you don't need to find it</li>
+                        <li><strong>Equation 4:</strong> When you know both initial and final velocities</li>
+                        <li><strong>Equation 5:</strong> Alternative form when final velocity is known</li>
+                    </ul>
+                </div>
+
+                <h3>Problem-Solving Strategy</h3>
+                <div class="highlight-box">
+                    <h4>Systematic Approach:</h4>
+                    <ol>
+                        <li><strong>Define coordinate system:</strong> Choose positive direction</li>
+                        <li><strong>List known quantities:</strong> x₀, v₀, a, t, x, v</li>
+                        <li><strong>Identify unknown:</strong> What are you solving for?</li>
+                        <li><strong>Choose equation:</strong> Select equation containing known and unknown quantities</li>
+                        <li><strong>Solve algebraically:</strong> Isolate the unknown variable</li>
+                        <li><strong>Check answer:</strong> Does it make physical sense?</li>
+                    </ol>
+                </div>
+
+                <div class="example-box">
+                    <h4>📝 Comprehensive Example: Accelerating Car</h4>
+                    <p><strong>Problem:</strong> A car starts from rest and accelerates at 3 m/s² for 8 seconds. Find: (a) final velocity, (b) distance traveled, (c) velocity after traveling 50 m.</p>
+                    
+                    <p><strong>Given:</strong> v₀ = 0 m/s, a = 3 m/s², t = 8 s, x₀ = 0 m</p>
+                    
+                    <p><strong>Part (a):</strong> Find final velocity</p>
+                    <p>Using v = v₀ + at</p>
+                    <p>v = 0 + (3)(8) = 24 m/s</p>
+                    
+                    <p><strong>Part (b):</strong> Find distance traveled</p>
+                    <p>Using x = x₀ + v₀t + ½at²</p>
+                    <p>x = 0 + 0(8) + ½(3)(8)² = ½(3)(64) = 96 m</p>
+                    
+                    <p><strong>Part (c):</strong> Velocity after 50 m</p>
+                    <p>Using v² = v₀² + 2a(x - x₀)</p>
+                    <p>v² = 0² + 2(3)(50 - 0) = 300</p>
+                    <p>v = √300 ≈ 17.3 m/s</p>
+                </div>
+
+                <div class="advanced-note">
+                    <h4>🎓 Derivation Insight:</h4>
+                    <p>These equations can be derived from the definitions of velocity and acceleration using calculus. The process involves integration and reveals the deep mathematical structure underlying motion. Understanding these derivations provides insight into how physical laws emerge from mathematical relationships.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>2.6 Free Fall Motion</h2>
+                
+                <div class="beginner-note">
+                    <h4>🔰 Universal Experience:</h4>
+                    <p>Drop any object (try it safely!), and it falls with the same acceleration - about 9.8 m/s². This was Galileo's revolutionary discovery: heavy and light objects fall at the same rate when air resistance is negligible!</p>
+                </div>
+
+                <h3>Understanding Free Fall</h3>
+                <p><strong>Free fall</strong> is motion under the influence of gravity alone, with air resistance neglected. Near Earth's surface, all objects in free fall experience the same downward acceleration, regardless of their mass.</p>
+
+                <div class="formula-box">
+                    <h4>Free Fall Acceleration:</h4>
+                    <p>g = 9.8 m/s² (or 9.81 m/s² for more precision)</p>
+                    <p>Direction: Always toward Earth's center (downward)</p>
+                    <p>In equations: a = -g (if upward is positive)</p>
+                </div>
+
+                <h3>Applying Kinematic Equations to Free Fall</h3>
+                <p>Free fall is simply constant acceleration motion with a = -g. We use the same kinematic equations, substituting the acceleration due to gravity.</p>
+
+                <div class="formula-box">
+                    <h4>Free Fall Equations (upward positive):</h4>
+                    <p>v = v₀ - gt</p>
+                    <p>y = y₀ + v₀t - ½gt²</p>
+                    <p>v² = v₀² - 2g(y - y₀)</p>
+                    <p>y = y₀ + ½(v₀ + v)t</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>📝 Free Fall Examples:</h4>
+                    
+                    <p><strong>Example 1 - Dropped Object:</strong></p>
+                    <p>A ball is dropped from a 45 m tall building. How long does it take to hit the ground?</p>
+                    <p><strong>Given:</strong> y₀ = 45 m, v₀ = 0 m/s, y = 0 m, g = 9.8 m/s²</p>
+                    <p>Using y = y₀ + v₀t - ½gt²</p>
+                    <p>0 = 45 + 0 - ½(9.8)t²</p>
+                    <p>t² = 90/9.8 ≈ 9.18</p>
+                    <p>t ≈ 3.03 seconds</p>
+                    
+                    <p><strong>Example 2 - Thrown Upward:</strong></p>
+                    <p>A ball is thrown upward at 20 m/s. Find maximum height and time to return.</p>
+                    <p><strong>At maximum height:</strong> v = 0</p>
+                    <p>Using v² = v₀² - 2g(y - y₀)</p>
+                    <p>0 = (20)² - 2(9.8)(y - 0)</p>
+                    <p>y = 400/19.6 ≈ 20.4 m</p>
+                    
+                    <p><strong>Time to return:</strong> Use symmetry or solve y = 0</p>
+                    <p>Total time = 2(v₀/g) = 2(20/9.8) ≈ 4.08 seconds</p>
+                </div>
+
+                <h3>Important Free Fall Insights</h3>
+                <div class="highlight-box">
+                    <h4>Key Concepts:</h4>
+                    <ul>
+                        <li><strong>Independence of mass:</strong> All objects fall at the same rate (ignoring air resistance)</li>
+                        <li><strong>Symmetry:</strong> Time up equals time down for projectiles</li>
+                        <li><strong>Maximum height:</strong> Velocity is zero at the highest point</li>
+                        <li><strong>Impact velocity:</strong> Same magnitude as initial velocity for same height</li>
+                    </ul>
+                </div>
+
+                <div class="advanced-note">
+                    <h4>🎓 Historical Significance:</h4>
+                    <p>Galileo's study of free fall overturned 2000 years of Aristotelian physics, which claimed heavier objects fall faster. This work laid the foundation for Newton's universal gravitation and ultimately led to our understanding of gravity as curved spacetime in Einstein's general relativity.</p>
+                </div>
+
+                <h3>Air Resistance Effects</h3>
+                <div class="highlight-box">
+                    <h4>When Air Resistance Matters:</h4>
+                    <ul>
+                        <li><strong>Light objects:</strong> Feathers, paper, leaves</li>
+                        <li><strong>High speeds:</strong> Skydiving, meteorites</li>
+                        <li><strong>Large surface area:</strong> Parachutes, wings</li>
+                        <li><strong>Terminal velocity:</strong> When air resistance equals gravitational force</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🤔 Conceptual Questions</h2>
+                
+                <div class="question">
+                    <strong>1.</strong> Can an object have zero velocity but non-zero acceleration? Provide a specific example and explain the physics involved.
+                    <details>
+                        <summary>Answer</summary>
+                        <p>Yes! At the highest point of a ball thrown vertically upward, the velocity is momentarily zero, but acceleration is still -9.8 m/s² downward due to gravity. The velocity is zero because the upward motion has stopped, but acceleration continues to act, causing the ball to begin falling. This demonstrates that acceleration is the rate of change of velocity, not velocity itself.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>2.</strong> Explain why the area under a velocity-time graph gives displacement. What does the area under an acceleration-time graph represent?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>The area under a velocity-time graph gives displacement because displacement is the integral of velocity over time: Δx = ∫v dt. Graphically, this integral represents the area between the curve and the time axis. Similarly, the area under an acceleration-time graph gives the change in velocity: Δv = ∫a dt. This relationship comes from the fundamental theorem of calculus connecting derivatives and integrals.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>3.</strong> Two cars start from rest and travel the same distance. Car A accelerates for half the time then coasts at constant velocity. Car B accelerates uniformly throughout. Which car has the higher final velocity and why?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>Car B (uniform acceleration) has the higher final velocity. For the same distance, Car A must have a higher average velocity during its acceleration phase to compensate for the coasting phase. However, this requires Car A to reach a higher peak velocity early, then maintain it. Car B's steady acceleration results in a higher final velocity. This can be proven by comparing the kinematic equations for both scenarios.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>4.</strong> Is it possible for an object to have a northward velocity and a southward acceleration simultaneously? What would this motion look like?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>Yes, this is possible and common. The object would be moving northward but slowing down due to southward acceleration. Examples include: a car braking while traveling north, a ball thrown northward that's slowing due to air resistance, or a rocket traveling north with engines firing southward. The object continues northward until its velocity reaches zero, then begins moving southward if acceleration continues.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>5.</strong> Why do all objects fall at the same rate in vacuum, regardless of their mass? How does this relate to Newton's second law?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>In Newton's second law, F = ma, the gravitational force is proportional to mass (F = mg), so a = mg/m = g. The mass cancels out, leaving acceleration independent of mass. This occurs because gravitational mass (which determines force) equals inertial mass (which resists acceleration). This equivalence, known as the equivalence principle, was crucial to Einstein's development of general relativity.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>6.</strong> Explain the difference between average velocity and average speed. Under what conditions are they equal?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>Average velocity = displacement/time (vector), while average speed = distance/time (scalar). They are equal only when motion is in a single direction without changing direction. If an object changes direction, the distance traveled exceeds the displacement magnitude, making average speed greater than average velocity magnitude. For round trips, average velocity is zero while average speed is positive.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>7.</strong> How would the kinematic equations change on a planet with different gravitational acceleration? Would the mathematical relationships remain valid?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>The kinematic equations themselves remain unchanged because they're derived from the mathematical definitions of velocity and acceleration. Only the value substituted for 'a' changes. On Mars (g ≈ 3.7 m/s²), objects fall more slowly, but the equations v = v₀ + at still apply with a = -3.7 m/s². The mathematical relationships are universal; only the physical parameters change.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>8.</strong> Can you have constant speed with changing velocity? Provide an example and explain why this occurs.
+                    <details>
+                        <summary>Answer</summary>
+                        <p>Yes! Circular motion at constant speed involves changing velocity because velocity is a vector (has direction). A car moving around a circular track at 60 mph has constant speed but continuously changing velocity due to direction changes. This requires centripetal acceleration toward the center of the circle. Speed (scalar) remains constant while velocity (vector) changes continuously.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>9.</strong> If you drop a ball from a moving car, does it fall straight down relative to the ground? Explain using kinematic principles.
+                    <details>
+                        <summary>Answer</summary>
+                        <p>No, relative to the ground, the ball follows a parabolic path. The ball inherits the car's horizontal velocity when dropped and simultaneously experiences vertical acceleration due to gravity. From the car's reference frame, it falls straight down. From the ground's reference frame, it has both horizontal and vertical motion components. This demonstrates the principle of superposition in kinematics.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>10.</strong> Explain why kinematic equations assume constant acceleration. What happens to these equations when acceleration varies with time?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>Kinematic equations assume constant acceleration because they're derived by integrating constant values. When acceleration varies with time, a(t), we must use calculus: v(t) = v₀ + ∫a(t)dt and x(t) = x₀ + ∫v(t)dt. The simple algebraic kinematic equations become invalid. Instead, we need differential equations or numerical methods to solve variable acceleration problems. This limitation makes these equations applicable primarily to idealized scenarios.</p>
+                    </details>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📝 Numerical Problems</h2>
+                
+                <div class="question">
+                    <strong>Problem 1 - Multi-Stage Motion:</strong>
+                    <p>A cyclist starts from rest and accelerates at 2 m/s² for 5 seconds, then maintains constant velocity for 10 seconds, and finally decelerates at -1.5 m/s² until coming to rest. Find: (a) maximum velocity reached, (b) total distance traveled, (c) total time of motion.</p>
+                    
+                    <details>
+                        <summary>Solution</summary>
+                        <p><strong>Stage 1 - Acceleration (0 to 5 s):</strong></p>
+                        <p>v₁ = v₀ + at = 0 + (2)(5) = 10 m/s</p>
+                        <p>x₁ = v₀t + ½at² = 0 + ½(2)(5)² = 25 m</p>
+                        
+                        <p><strong>Stage 2 - Constant velocity (5 to 15 s):</strong></p>
+                        <p>v₂ = 10 m/s (constant)</p>
+                        <p>x₂ = vt = (10)(10) = 100 m</p>
+                        
+                        <p><strong>Stage 3 - Deceleration:</strong></p>
+                        <p>Time to stop: t₃ = (v_f - v_i)/a = (0 - 10)/(-1.5) = 6.67 s</p>
+                        <p>x₃ = v₀t + ½at² = (10)(6.67) + ½(-1.5)(6.67)² = 66.7 - 33.3 = 33.4 m</p>
+                        
+                        <p><strong>Answers:</strong></p>
+                        <p>(a) Maximum velocity = 10 m/s</p>
+                        <p>(b) Total distance = 25 + 100 + 33.4 = 158.4 m</p>
+                        <p>(c) Total time = 5 + 10 + 6.67 = 21.67 s</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>Problem 2 - Relative Motion:</strong>
+                    <p>Two trains start simultaneously from stations 120 km apart and travel toward each other. Train A travels at 80 km/h, and Train B travels at 60 km/h. Find: (a) when they meet, (b) where they meet relative to Train A's starting point, (c) the distance each train travels.</p>
+                    
+                    <details>
+                        <summary>Solution</summary>
+                        <p><strong>Setting up the problem:</strong></p>
+                        <p>Let Train A start at x = 0, Train B start at x = 120 km</p>
+                        <p>Train A: x_A(t) = 80t</p>
+                        <p>Train B: x_B(t) = 120 - 60t</p>
+                        
+                        <p><strong>When they meet: x_A = x_B</strong></p>
+                        <p>80t = 120 - 60t</p>
+                        <p>140t = 120</p>
+                        <p>t = 120/140 = 0.857 hours = 51.4 minutes</p>
+                        
+                        <p><strong>Where they meet:</strong></p>
+                        <p>x = 80(0.857) = 68.6 km from Train A's start</p>
+                        
+                        <p><strong>Distance traveled:</strong></p>
+                        <p>Train A: 68.6 km</p>
+                        <p>Train B: 60(0.857) = 51.4 km</p>
+                        <p>Check: 68.6 + 51.4 = 120 km ✓</p>
+                    </details>
+                </div>
+            </div>
+
+            <div class="quiz-container">
+                <h2>Test Your Knowledge: 100 MCQs</h2>
+                <p>Challenge yourself with this comprehensive quiz covering all aspects of one-dimensional kinematics.</p>
+                <div id="quiz"></div>
+                <div class="quiz-nav">
+                    <button id="prevBtn" class="btn btn-secondary">Previous</button>
+                    <span id="questionCounter" class="question-counter"></span>
+                    <button id="nextBtn" class="btn">Next</button>
+                </div>
+                <div class="quiz-buttons">
+                    <button id="submitBtn" class="btn">Submit Quiz</button>
+                </div>
+                <div id="results" style="display: none;"></div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Physics Daily. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme toggler
+            const lightModeBtn = document.getElementById('light-mode');
+            const darkModeBtn = document.getElementById('dark-mode');
+            
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            if (savedTheme === 'dark') {
+                darkModeBtn.classList.add('active');
+                lightModeBtn.classList.remove('active');
+            }
+
+            lightModeBtn.addEventListener('click', () => {
+                document.documentElement.setAttribute('data-theme', 'light');
+                lightModeBtn.classList.add('active');
+                darkModeBtn.classList.remove('active');
+                localStorage.setItem('theme', 'light');
+            });
+
+            darkModeBtn.addEventListener('click', () => {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                darkModeBtn.classList.add('active');
+                lightModeBtn.classList.remove('active');
+                localStorage.setItem('theme', 'dark');
+            });
+            
+            // Quiz functionality
+            const quizContainer = document.getElementById('quiz');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            const questionCounter = document.getElementById('questionCounter');
+            const resultsContainer = document.getElementById('results');
+
+            const quizData = [
+                {
+                    question: "1. A body is said to be in motion if it changes its position with respect to:",
+                    options: ["its own axis", "the observer", "time only", "its mass"],
+                    answer: "the observer"
+                },
+                {
+                    question: "2. Which of the following is a vector quantity?",
+                    options: ["Speed", "Distance", "Time", "Displacement"],
+                    answer: "Displacement"
+                },
+                {
+                    question: "3. The numerical ratio of displacement to distance for a moving object is:",
+                    options: ["always less than 1", "always equal to 1", "always more than 1", "equal to or less than 1"],
+                    answer: "equal to or less than 1"
+                },
+                {
+                    question: "4. A body moves in a full circle of radius R. What is the displacement after completing the circle?",
+                    options: ["2πR", "R", "Zero", "πR"],
+                    answer: "Zero"
+                },
+                {
+                    question: "5. If a body is moving with a constant velocity, then its acceleration is:",
+                    options: ["Non-zero and constant", "Infinite", "Variable", "Zero"],
+                    answer: "Zero"
+                },
+                {
+                    question: "6. The slope of a velocity-time graph represents:",
+                    options: ["Displacement", "Distance", "Acceleration", "Speed"],
+                    answer: "Acceleration"
+                },
+                {
+                    question: "7. A body is thrown vertically upwards. At its highest point, which of the following is true?",
+                    options: ["Its velocity is zero and its acceleration is also zero.", "Its velocity is zero and its acceleration is non-zero.", "Its velocity is non-zero and its acceleration is zero.", "Both velocity and acceleration are non-zero."],
+                    answer: "Its velocity is zero and its acceleration is non-zero."
+                },
+                {
+                    question: "8. The area under an acceleration-time graph represents the:",
+                    options: ["Displacement", "Change in velocity", "Average velocity", "Final velocity"],
+                    answer: "Change in velocity"
+                },
+                {
+                    question: "9. Which of the following situations is impossible?",
+                    options: ["An object has zero velocity but non-zero acceleration.", "An object has constant speed but varying velocity.", "An object has constant velocity but varying speed.", "An object has negative velocity and positive acceleration."],
+                    answer: "An object has constant velocity but varying speed."
+                },
+                {
+                    question: "10. If the velocity and acceleration of a particle have opposite signs, the speed of the particle:",
+                    options: ["Increases", "Decreases", "Remains constant", "Is zero"],
+                    answer: "Decreases"
+                },
+                {
+                    question: "11. The motion of a body under the influence of gravity alone is independent of its:",
+                    options: ["Mass", "Height of fall", "Initial velocity", "Shape"],
+                    answer: "Mass"
+                },
+                {
+                    question: "12. For a body starting from rest and moving with uniform acceleration, the ratio of distances covered in the 1st, 2nd, and 3rd seconds is:",
+                    options: ["1:2:3", "1:4:9", "1:3:5", "1:1:1"],
+                    answer: "1:3:5"
+                },
+                {
+                    question: "13. The SI unit of acceleration is:",
+                    options: ["m/s", "cm/s²", "m/s²", "km/h²"],
+                    answer: "m/s²"
+                },
+                {
+                    question: "14. When can the average velocity of a moving object be zero over a time interval?",
+                    options: ["When the average speed is zero.", "When the total distance covered is zero.", "When the final position is the same as the initial position.", "Only if the object remains at rest."],
+                    answer: "When the final position is the same as the initial position."
+                },
+                {
+                    question: "15. If an object travels at a constant speed in a circular path, its velocity is:",
+                    options: ["Constant", "Continuously changing", "Zero", "Infinite"],
+                    answer: "Continuously changing"
+                },
+                {
+                    question: "16. Which of the following must be true for the magnitude of average velocity to be equal to the average speed?",
+                    options: ["The object must be at rest.", "The object must move in a circle.", "The object must move on a straight path without changing direction.", "The object must have zero acceleration."],
+                    answer: "The object must move on a straight path without changing direction."
+                },
+                {
+                    question: "17. A particle's position is given by x = 5. What is its velocity?",
+                    options: ["5 m/s", "Cannot be determined", "Zero", "1 m/s"],
+                    answer: "Zero"
+                },
+                {
+                    question: "18. Retardation is defined as:",
+                    options: ["Negative velocity", "Negative acceleration", "Rate of change of position", "Positive acceleration"],
+                    answer: "Negative acceleration"
+                },
+                {
+                    question: "19. For a uniformly accelerated motion, the average velocity is given by:",
+                    options: ["v", "u", "(u+v)/2", "(v-u)/2"],
+                    answer: "(u+v)/2"
+                },
+                {
+                    question: "20. If a feather and a stone are dropped simultaneously in a vacuum from the same height, which one reaches the ground first?",
+                    options: ["The feather", "The stone", "They reach at the same time", "Depends on their shape"],
+                    answer: "They reach at the same time"
+                },
+                {
+                    question: "21. A man walks 3 meters east and then 4 meters north. The magnitude of his displacement is:",
+                    options: ["7 m", "1 m", "5 m", "12 m"],
+                    answer: "5 m"
+                },
+                {
+                    question: "22. A car travels at 20 km/hr for the first half of a certain time and at 30 km/hr for the second half of the time. Its average speed is:",
+                    options: ["25 km/hr", "24 km/hr", "28 km/hr", "22 km/hr"],
+                    answer: "25 km/hr"
+                },
+                {
+                    question: "23. A car accelerates from rest to a speed of 30 m/s in 6 seconds. Its uniform acceleration is:",
+                    options: ["180 m/s²", "0.2 m/s²", "5 m/s²", "36 m/s²"],
+                    answer: "5 m/s²"
+                },
+                {
+                    question: "24. An object is dropped from a height of 45 m. How long will it take to reach the ground? (Use g = 10 m/s²)",
+                    options: ["3 s", "4.5 s", "9 s", "1.5 s"],
+                    answer: "3 s"
+                },
+                {
+                    question: "25. A ball is thrown upwards with a velocity of 20 m/s. What is the maximum height it reaches? (Use g = 10 m/s²)",
+                    options: ["10 m", "40 m", "2 m", "20 m"],
+                    answer: "20 m"
+                },
+                {
+                    question: "26. The position of a particle is given by x = 3t² + 2t + 5. What is the velocity at t = 2 s?",
+                    options: ["14 m/s", "21 m/s", "12 m/s", "10 m/s"],
+                    answer: "14 m/s"
+                },
+                {
+                    question: "27. A train 100 m long is moving at 20 m/s. A bird flying in the opposite direction at 5 m/s crosses the train in:",
+                    options: ["5 s", "3 s", "4 s", "2 s"],
+                    answer: "4 s"
+                },
+                {
+                    question: "28. A car travels the first half of a distance at 40 km/hr and the second half at 60 km/hr. The average speed of the car is:",
+                    options: ["50 km/hr", "48 km/hr", "52 km/hr", "55 km/hr"],
+                    answer: "48 km/hr"
+                },
+                {
+                    question: "29. A body starting from rest has an acceleration of 4 m/s². The distance traveled by it in the 5th second is:",
+                    options: ["18 m", "20 m", "36 m", "50 m"],
+                    answer: "18 m"
+                },
+                {
+                    question: "30. An object moving with a speed of 6.25 m/s is decelerated at a rate given by dv/dt = -2.5√v. The time taken by the object to come to rest is:",
+                    options: ["1 s", "2 s", "4 s", "8 s"],
+                    answer: "2 s"
+                },
+                {
+                    question: "31. The speed of a car changes from 36 km/h to 72 km/h in 5 seconds. The acceleration is:",
+                    options: ["1 m/s²", "2 m/s²", "3.6 m/s²", "7.2 m/s²"],
+                    answer: "2 m/s²"
+                },
+                {
+                    question: "32. A body starts from rest and travels for t seconds with uniform acceleration of 2 m/s². If the displacement made by it is 16 m, the time of travel t is:",
+                    options: ["4 s", "3 s", "6 s", "8 s"],
+                    answer: "4 s"
+                },
+                {
+                    question: "33. A particle has an initial velocity of 3 m/s east and a constant acceleration of 1 m/s² west. The distance covered by it in the 4th second of its motion is:",
+                    options: ["0 m", "0.5 m", "2 m", "4 m"],
+                    answer: "0.5 m"
+                },
+                {
+                    question: "34. A car is moving with a velocity of 10 m/s. It is brought to rest by applying brakes which produce a uniform retardation of 2 m/s². The car will come to rest after traveling:",
+                    options: ["10 m", "20 m", "25 m", "50 m"],
+                    answer: "25 m"
+                },
+                {
+                    question: "35. The displacement of a particle is given by x = (t-2)². The distance covered by the particle in the first 4 seconds is:",
+                    options: ["4 m", "8 m", "0 m", "16 m"],
+                    answer: "8 m"
+                },
+                {
+                    question: "36. Two cars are moving in the same direction with the same speed of 30 km/h. They are separated by 5 km. The speed of a car moving in the opposite direction if it meets these two cars at an interval of 4 minutes is:",
+                    options: ["40 km/h", "45 km/h", "30 km/h", "15 km/h"],
+                    answer: "45 km/h"
+                },
+                {
+                    question: "37. A ball is thrown vertically down with a velocity of 20 m/s from the top of a tower. It hits the ground after some time with a velocity of 80 m/s. The height of the tower is (g = 10 m/s²):",
+                    options: ["340 m", "320 m", "300 m", "360 m"],
+                    answer: "300 m"
+                },
+                {
+                    question: "38. A body is dropped from a height of 16m. The time taken by it to reach the ground is (g = 9.8 m/s²):",
+                    options: ["1.8 s", "2.5 s", "3.2 s", "4.1 s"],
+                    answer: "1.8 s"
+                },
+                {
+                    question: "39. A particle moves along a straight line such that its displacement at any time t is given by s = t³ - 3t² + 2. The velocity of the particle when its acceleration is zero is:",
+                    options: ["-3 m/s", "-9 m/s", "2 m/s", "1 m/s"],
+                    answer: "-3 m/s"
+                },
+                {
+                    question: "40. A body covers 20 m in the 2nd second and 40 m in the 4th second of its motion. If the motion is uniformly accelerated, how much distance will it cover in the 6th second?",
+                    options: ["50 m", "55 m", "60 m", "65 m"],
+                    answer: "60 m"
+                },
+                {
+                    question: "41. A particle moves with a constant acceleration. If its displacement is S, initial velocity is u, and final velocity is v, then which statement is incorrect?",
+                    options: ["S = (u+v)t/2", "v = u + at", "The velocity at midpoint of the distance is √((u²+v²)/2)", "The velocity at midpoint of the time interval is (u-v)/2"],
+                    answer: "The velocity at midpoint of the time interval is (u-v)/2"
+                },
+                {
+                    question: "42. If a body loses half of its velocity on penetrating 3 cm in a wooden block, then how much will it penetrate more before coming to rest?",
+                    options: ["1 cm", "2 cm", "3 cm", "4 cm"],
+                    answer: "1 cm"
+                },
+                {
+                    question: "43. A stone is released from an elevator going up with an acceleration 'a'. The acceleration of the stone after the release is:",
+                    options: ["a upward", "(g-a) upward", "(g-a) downward", "g downward"],
+                    answer: "g downward"
+                },
+                {
+                    question: "44. A ball is dropped from a height. A second ball is thrown downwards from the same height with some speed after 1 second. They reach the ground simultaneously in 2 seconds. The initial speed of the second ball is:",
+                    options: ["9.8 m/s", "14.7 m/s", "19.6 m/s", "24.5 m/s"],
+                    answer: "14.7 m/s"
+                },
+                {
+                    question: "45. The displacement x of a particle varies with time t as x = αe⁻ᵃᵗ + βeᵇᵗ. The velocity of the particle will:",
+                    options: ["decrease with time", "be independent of α and β", "drop to zero when α = β", "increase with time"],
+                    answer: "increase with time"
+                },
+                {
+                    question: "46. A particle starts from rest and moves with constant acceleration. The ratio of the distance covered in the nth second to that covered in n seconds is:",
+                    options: ["(2n-1)/n²", "2/n - 1/n²", "(2n+1)/n²", "1/n"],
+                    answer: "2/n - 1/n²"
+                },
+                {
+                    question: "47. A stone is dropped into a well and the sound of the splash is heard after 3 seconds. If the depth of the well is 20 m, what is the velocity of sound?",
+                    options: ["30 m/s", "20 m/s", "40 m/s", "10 m/s"],
+                    answer: "20 m/s"
+                },
+                {
+                    question: "48. An object is moving in a straight line. The velocity is given by v = 2t + 5. The displacement of the object in the first 5 seconds is:",
+                    options: ["25 m", "50 m", "75 m", "100 m"],
+                    answer: "50 m"
+                },
+                {
+                    question: "49. A train is moving with uniform acceleration. The engine of the train passes a signal post with velocity u, and the last carriage passes it with velocity v. The middle point of the train passes the signal post with a velocity of:",
+                    options: ["(u+v)/2", "√(uv)", "√((u²+v²)/2)", "(v-u)/2"],
+                    answer: "√((u²+v²)/2)"
+                },
+                {
+                    question: "50. A ball is thrown vertically upwards. The time of ascent is t₁. The time of descent is t₂. If air resistance is considered, then:",
+                    options: ["t₁ = t₂", "t₁ < t₂", "t₁ > t₂", "Depends on the mass of the ball"],
+                    answer: "t₁ < t₂"
+                },
+                {
+                    question: "51. The velocity of a particle is given by v = (180 - 16x)¹/². Its acceleration will be:",
+                    options: ["Zero", "8 m/s²", "-8 m/s²", "4 m/s²"],
+                    answer: "-8 m/s²"
+                },
+                {
+                    question: "52. A particle starts with an initial velocity of 10.0 m/s along the x-direction and accelerates uniformly at 2.0 m/s². The time taken to reach a velocity of 50.0 m/s is:",
+                    options: ["20 s", "25 s", "30 s", "35 s"],
+                    answer: "20 s"
+                },
+                {
+                    question: "53. A stone is dropped from a building. Two seconds later, another stone is dropped. When the first stone has reached a speed of 30 m/s, the separation between the stones is (g = 10 m/s²):",
+                    options: ["80 m", "60 m", "40 m", "20 m"],
+                    answer: "40 m"
+                },
+                {
+                    question: "54. The motion of a body is given by dv(t)/dt = 6.0 - 3v(t). If the body was at rest at t=0, which statement is wrong?",
+                    options: ["The terminal speed is 2.0 m/s.", "The speed varies as v(t) = 2(1 - e⁻³ᵗ) m/s.", "The speed is 1.0 m/s when the acceleration is half its initial value.", "The magnitude of the initial acceleration is 6.0 m/s²."],
+                    answer: "The speed is 1.0 m/s when the acceleration is half its initial value."
+                },
+                {
+                    question: "55. A man in a balloon rising with an acceleration of 4.9 m/s² releases a ball 2 seconds after the balloon is let go. The greatest height reached by the ball above the ground is (g = 9.8 m/s²):",
+                    options: ["14.7 m", "19.6 m", "9.8 m", "24.5 m"],
+                    answer: "14.7 m"
+                },
+                {
+                    question: "56. A car moving at 150 km/h stops in 27m after braking. If the same car moves at one-third of that speed, the stopping distance will be:",
+                    options: ["3 m", "9 m", "1 m", "6 m"],
+                    answer: "3 m"
+                },
+                {
+                    question: "57. The position of a particle is given by x(t) = at + bt² - ct³. Its velocity when acceleration becomes zero is:",
+                    options: ["a + b²/4c", "a + b²/c", "a + b²/2c", "a + b²/3c"],
+                    answer: "a + b²/3c"
+                },
+                {
+                    question: "58. A thief is running at 9 m/s. A policeman in a jeep chases at 10 m/s. If the jeep is 100m behind, how long will it take for the policeman to catch the thief?",
+                    options: ["1 s", "19 s", "90 s", "100 s"],
+                    answer: "100 s"
+                },
+                {
+                    question: "59. Water drops fall from a tap 5 m high at regular intervals. When the first drop hits the ground, the third is just leaving. The height of the second drop from the ground at that instant is:",
+                    options: ["2.50 m", "3.75 m", "4.00 m", "1.25 m"],
+                    answer: "3.75 m"
+                },
+                {
+                    question: "60. A body is released from a height. Another is released one second later from the same height. The separation between them two seconds after the release of the second body is (g=9.8 m/s²):",
+                    options: ["4.9 m", "9.8 m", "19.6 m", "24.5 m"],
+                    answer: "24.5 m"
+                },
+                {
+                    question: "61. From the top of a tower, a stone is thrown up and it reaches the ground in time t₁. A second stone thrown down with the same speed reaches the ground in time t₂. A third stone released from rest reaches the ground in time t₃. The correct relation is:",
+                    options: ["t₃ = (t₁ + t₂)/2", "t₃ = √(t₁t₂)", "1/t₃ = 1/t₁ - 1/t₂", "t₃² = t₁² - t₂²"],
+                    answer: "t₃ = √(t₁t₂)"
+                },
+                {
+                    question: "62. Car A starts 10 m behind car B. Car A begins from rest with an acceleration of 4 m/s², while car B moves with a constant velocity of 1 m/s. The time when car A overtakes car B is:",
+                    options: ["2.5 s", "7.5 s", "5 s", "1.25 s"],
+                    answer: "2.5 s"
+                },
+                {
+                    question: "63. A particle's velocity is decreased at a rate |a| = α√v, where α is a positive constant. If its initial velocity is v₀, it comes to rest at time:",
+                    options: ["t = 2√v₀ / α", "t = √v₀ / α", "t = 2v₀ / α", "infinity"],
+                    answer: "t = 2√v₀ / α"
+                },
+                {
+                    question: "64. The acceleration of a particle moving rectilinearly is a = 4 - 2x. If it is at rest at x=0, at what other position 'x' will the particle momentarily come to rest?",
+                    options: ["2 m", "3 m", "4 m", "5 m"],
+                    answer: "4 m"
+                },
+                {
+                    question: "65. A car starts from rest, accelerates at 5 m/s², then moves uniformly, and finally decelerates at the same rate to come to a stop. The total motion time is 25 s, and the average velocity is 72 km/hr. For how long did the car move uniformly?",
+                    options: ["10 s", "12 s", "15 s", "20 s"],
+                    answer: "15 s"
+                },
+                {
+                    question: "66. A body is projected from the top of a tower vertically upward with 5 m/s. The body lands on the ground in 4 sec. The total height of the tower is:",
+                    options: ["45 m", "60 m", "30 m", "50 m"],
+                    answer: "60 m"
+                },
+                {
+                    question: "67. A particle is dropped under gravity from a height h and travels a distance 9h/25 in the last second. The height h is (g=9.8 m/s²):",
+                    options: ["100 m", "122.5 m", "145 m", "167.5 m"],
+                    answer: "122.5 m"
+                },
+                {
+                    question: "68. A stone is thrown vertically upward with speed u from the top of a tower. It reaches the ground with a velocity 3u. The height of the tower is:",
+                    options: ["3u²/g", "4u²/g", "6u²/g", "9u²/g"],
+                    answer: "4u²/g"
+                },
+                {
+                    question: "69. A particle moves in a straight line with acceleration a = -1/(3v²). If the initial velocity is 5 m/s, the time at which its velocity becomes zero is:",
+                    options: ["5 s", "25 s", "125 s", "50 s"],
+                    answer: "125 s"
+                },
+                {
+                    question: "70. A body is moving from rest under constant acceleration. Let S₁ be the displacement in the first (p-1) sec and S₂ be the displacement in the first p sec. The displacement in the (p² - p + 1)th sec will be:",
+                    options: ["S₁ + S₂", "S₁S₂", "S₁ - S₂", "S₁/S₂"],
+                    answer: "S₁ + S₂"
+                },
+                {
+                    question: "71. A particle starting from rest accelerates at a constant rate 'f' through a distance S, then continues at a constant speed for time 't', and then decelerates at the rate f/2 to come to rest. If the total distance traversed is 15S, then:",
+                    options: ["S = (1/2)ft²", "S = (1/4)ft²", "S = (1/72)ft²", "S = (1/6)ft²"],
+                    answer: "S = (1/72)ft²"
+                },
+                {
+                    question: "72. A particle starting from rest experiences an acceleration given by a = t³. The velocity of the particle after 4 seconds is:",
+                    options: ["32 m/s", "64 m/s", "128 m/s", "16 m/s"],
+                    answer: "64 m/s"
+                },
+                {
+                    question: "73. A block is thrown with a velocity of 2 m/s on a belt which is moving with a velocity of 4 m/s in the opposite direction. If the block stops slipping on the belt after 4 s, the magnitude of its displacement with respect to the ground is:",
+                    options: ["0 m", "4 m", "8 m", "12 m"],
+                    answer: "4 m"
+                },
+                {
+                    question: "74. The acceleration of a particle is given by a = -2x. If the velocity at x = 0 is 20 m/s, the position x where its velocity becomes zero is:",
+                    options: ["10√2 m", "5√2 m", "20√2 m", "20 m"],
+                    answer: "10√2 m"
+                },
+                {
+                    question: "75. An open lift moves upwards with velocity 10 m/s and has an upward acceleration of 2 m/s². A ball is projected upwards with velocity 20 m/s relative to the ground. The time when the ball again meets the lift is:",
+                    options: ["5/3 s", "5/2 s", "10/3 s", "2 s"],
+                    answer: "5/3 s"
+                },
+                {
+                    question: "76. The velocity of a particle is v = v₀ + gt + Ft². If its position is x = 0 at t = 0, then its displacement after unit time (t=1) is:",
+                    options: ["v₀ + g/2 + F", "v₀ + g + F", "v₀ + 2g + 3F", "v₀ + g/2 + F/3"],
+                    answer: "v₀ + g/2 + F/3"
+                },
+                {
+                    question: "77. A ball is dropped from a height of 9.8 m. It rebounds to a height of 5.0 m. If the ball is in contact with the floor for 0.2 s, the average acceleration during contact is (g=10 m/s²):",
+                    options: ["60 m/s²", "240 m/s²", "120 m/s²", "100 m/s²"],
+                    answer: "120 m/s²"
+                },
+                {
+                    question: "78. For a train moving at 20 m/s, the driver must apply brakes 500 m before the station to stop at the station. If the brakes were applied at half this distance, the train would cross the station with speed:",
+                    options: ["10 m/s", "10√2 m/s", "20 m/s", "20√2 m/s"],
+                    answer: "10√2 m/s"
+                },
+                {
+                    question: "79. A body is projected vertically up at t=0 with a velocity of 98 m/s. Another body is projected from the same point with the same velocity after 4 seconds. Both bodies will meet at t = :",
+                    options: ["6 s", "8 s", "10 s", "12 s"],
+                    answer: "12 s"
+                },
+                {
+                    question: "80. In a car race, car A takes a time 't' less than car B at the finish and passes with a speed 'v' more than car B. Both start from rest and travel with constant accelerations a₁ and a₂. Then 'v' is equal to:",
+                    options: ["(2a₁a₂ / (a₁+a₂))t", "√(2a₁a₂)t", "√(a₁a₂)t", "((a₁+a₂)/2)t"],
+                    answer: "√(a₁a₂)t"
+                },
+                {
+                    question: "81. The relation between time 't' and distance 'x' is given by t = mx² + nx, where m and n are constants. The retardation of the motion is (where 'v' is the velocity):",
+                    options: ["2nv³", "2mnv³", "2mv³", "2n²v²"],
+                    answer: "2mv³"
+                },
+                {
+                    question: "82. A particle moves with constant speed v along a regular hexagon ABCDEF. The magnitude of the average velocity for its motion from A to C is:",
+                    options: ["v", "v√3 / 2", "v/2", "v√3"],
+                    answer: "v√3 / 2"
+                },
+                {
+                    question: "83. A particle is thrown upwards from the ground. It experiences a constant resistance force which produces a retardation of 2 m/s². The ratio of time of ascent to the time of descent is (g=10 m/s²):",
+                    options: ["1:1", "√2:√3", "√3:√2", "2:√6"],
+                    answer: "√2:√3"
+                },
+                {
+                    question: "84. The distance 'x' covered by a particle varies with time 't' as x² = at² + 2bt + c. If the particle's acceleration varies as x⁻ⁿ, the integer value of n is:",
+                    options: ["1", "2", "3", "4"],
+                    answer: "3"
+                },
+                {
+                    question: "85. A man jumps off a 202 m high building onto cushions 2 m thick. If the cushions are crushed to a thickness of 0.5 m, what is the man's constant acceleration as he slows down?",
+                    options: ["-1333 m/s²", "-4000/3 m/s²", "-2680 m/s²", "-2020 m/s²"],
+                    answer: "-4000/3 m/s²"
+                },
+                {
+                    question: "86. Two cars A and B run on a highway at 30 m/s. On braking, A retards at 3 m/s² while B retards at 4 m/s². Car A is ahead of B. The response time for the driver of B is 1 sec. The minimum initial distance between them to avoid an accident is:",
+                    options: ["7.5 m", "6.0 m", "8.5 m", "10.0 m"],
+                    answer: "8.5 m"
+                },
+                {
+                    question: "87. A Diwali rocket is launched vertically. It has a constant upward acceleration of 20 m/s² for 2 s, after which it moves freely under gravity (g=10 m/s²). The total time of flight until it reaches the ground is:",
+                    options: ["(2 + 2√6) s", "(4 + 4√2) s", "(4 + 2√6) s", "(4 + 4√3) s"],
+                    answer: "(4 + 2√6) s"
+                },
+                {
+                    question: "88. A steel ball is released from the roof of a building. An observer in front of a 1.2 m high window observes that the ball takes 0.125 s to fall from the top to the bottom of the window. The ball makes a completely elastic collision with the sidewalk and reappears at the bottom of the window 2 s after passing it on the way down. How tall is the building? (g=10 m/s²)",
+                    options: ["50.0 m", "41.5 m", "20.5 m", "15.5 m"],
+                    answer: "20.5 m"
+                },
+                {
+                    question: "89. Two particles A and B start from the same point and move in the positive x-direction. Particle A accelerates at 2 m/s² for 1s and then moves at a constant speed. Particle B accelerates at 1 m/s² for 2s and then moves at a constant speed. The maximum separation between them during the first 2 seconds is:",
+                    options: ["0.25 m", "0.50 m", "0.75 m", "1.25 m"],
+                    answer: "1.25 m"
+                },
+                {
+                    question: "90. Two motorboats that can move with velocities 4.0 m/s and 6.0 m/s relative to water are going upstream in a river. When the faster boat overtakes the slower one, a buoy is dropped from the slower boat. After some time, both boats turn back simultaneously. Their engines are switched off when they reach the buoy again. If the maximum separation between the boats after the buoy is dropped is 200 m and water flow velocity is 1.5 m/s, find the distance between the places where the faster boat passes the buoy.",
+                    options: ["75 m", "300 m", "150 m", "350 m"],
+                    answer: "300 m"
+                },
+                {
+                    question: "91. A particle's acceleration 'a' in m/s² is given by a = 3t² + 2t + 2, where t is time. If the particle starts out with a velocity u = 2 m/s at t = 0, then the velocity at the end of 2 seconds is:",
+                    options: ["12 m/s", "18 m/s", "27 m/s", "36 m/s"],
+                    answer: "18 m/s"
+                },
+                {
+                    question: "92. A particle moves along the x-axis with a velocity given by v(x) = k/x, where k is a constant. The acceleration of the particle is:",
+                    options: ["-k²/x³", "0", "k²/x³", "-k/x²"],
+                    answer: "-k²/x³"
+                },
+                {
+                    question: "93. A particle is dropped from a height H. The time it takes to fall the first H/2 is t₁. The time it takes to fall the remaining H/2 is t₂. Then:",
+                    options: ["t₁ = t₂", "t₁ > t₂", "t₁ < t₂", "Cannot be determined"],
+                    answer: "t₁ < t₂"
+                },
+                {
+                    question: "94. A car accelerates from rest at a constant rate α for some time, after which it decelerates at a constant rate β to come to rest. If the total time elapsed is T, the maximum velocity acquired by the car is:",
+                    options: ["(α² - β² / αβ)T", "(α² + β² / αβ)T", "(αβ / α+β)T", "(α+β / αβ)T"],
+                    answer: "(αβ / α+β)T"
+                },
+                {
+                    question: "95. A train is traveling at v m/s along a level straight track. Very near and parallel to the track is a wall. On the wall a naughty boy has drawn a straight line that slopes upward at a 37° angle with the horizontal. A passenger in the train observes the line out of a window (0.90 m high, 1.8 m wide). The line first appears at one corner and finally disappears at the diagonally opposite corner. If it takes 0.4 sec between appearance and disappearance of the line, what is the value of v? (tan37° = 3/4)",
+                    options: ["6.0 m/s", "7.5 m/s", "8.0 m/s", "6.75 m/s"],
+                    answer: "7.5 m/s"
+                },
+                {
+                    question: "96. An object is dropped from rest. If it travels 45 m in the last second of its fall, the height from which it was dropped is (g = 10 m/s²):",
+                    options: ["80 m", "125 m", "180 m", "45 m"],
+                    answer: "125 m"
+                },
+                {
+                    question: "97. A stone is projected vertically up from the ground. It reaches a maximum height H. When it is at a height of 3H/4, the ratio of its kinetic and potential energies is:",
+                    options: ["1:1", "1:3", "3:1", "1:4"],
+                    answer: "1:3"
+                },
+                {
+                    question: "98. A body starting from rest moves along a straight line with a constant acceleration. The variation of speed (v) with distance (s) is represented by the equation:",
+                    options: ["v ∝ s²", "v ∝ s", "v ∝ √s", "v ∝ 1/s"],
+                    answer: "v ∝ √s"
+                },
+                {
+                    question: "99. Two particles are observed at different locations moving towards each other with velocities u₁ and u₂. They are subjected to constant accelerations a₁ and a₂ in directions opposite to their initial velocities. They will meet twice. If the time interval between these two meetings is Δt, their initial separation is:",
+                    options: ["(u₁+u₂)² / 2(a₁+a₂) + (a₁+a₂) / 4 (Δt)²", "(u₁+u₂)² / (a₁+a₂) - (a₁+a₂) / 8 (Δt)²", "(u₁+u₂)² / 2(a₁+a₂) - (a₁+a₂) / 8 (Δt)²", "(u₁²+u₂²) / 2(a₁+a₂) - (a₁+a₂) / 8 (Δt)²"],
+                    answer: "(u₁+u₂)² / 2(a₁+a₂) - (a₁+a₂) / 8 (Δt)²"
+                },
+                {
+                    question: "100. A rubber ball is shot vertically upwards from a spring gun from a tall building. It is observed that the speed of the ball just before it hits the ground is significantly less than its initial speed of projection. This is primarily because:",
+                    options: ["Acceleration due to gravity is less at greater heights.", "The mass of the ball decreases as it rises.", "The effect of air resistance opposes the motion in both ascent and descent.", "The building is located at the equator."],
+                    answer: "The effect of air resistance opposes the motion in both ascent and descent."
+                }
+            ];
+
+            let currentQuestionIndex = 0;
+            let userAnswers = {};
+
+            function loadQuiz() {
+                quizContainer.innerHTML = '';
+                const currentQuizData = quizData[currentQuestionIndex];
+
+                const questionEl = document.createElement('div');
+                questionEl.classList.add('quiz-question');
+
+                let optionsHtml = '';
+                currentQuizData.options.forEach(option => {
+                    const isChecked = userAnswers[currentQuestionIndex] === option ? 'checked' : '';
+                    optionsHtml += `
+                        <div class="option">
+                            <input type="radio" name="question${currentQuestionIndex}" value="${option}" id="q${currentQuestionIndex}_${option.replace(/\s+/g, '-')}" ${isChecked}>
+                            <label for="q${currentQuestionIndex}_${option.replace(/\s+/g, '-')}">${option}</label>
+                        </div>
+                    `;
+                });
+
+                questionEl.innerHTML = `
+                    <h4>${currentQuizData.question}</h4>
+                    ${optionsHtml}
+                `;
+
+                quizContainer.appendChild(questionEl);
+                updateCounter();
+                updateButtons();
+
+                const options = questionEl.querySelectorAll('input[type="radio"]');
+                options.forEach(option => {
+                    option.addEventListener('change', () => {
+                        userAnswers[currentQuestionIndex] = option.value;
+                    });
+                });
+            }
+
+            function updateCounter() {
+                questionCounter.textContent = `Question ${currentQuestionIndex + 1} of ${quizData.length}`;
+            }
+
+            function updateButtons() {
+                prevBtn.disabled = currentQuestionIndex === 0;
+                nextBtn.disabled = currentQuestionIndex === quizData.length - 1;
+            }
+
+            function showResults() {
+                let score = 0;
+                resultsContainer.innerHTML = '<h3>Quiz Results</h3>';
+
+                quizData.forEach((quizItem, index) => {
+                    const userAnswer = userAnswers[index];
+                    const isCorrect = userAnswer === quizItem.answer;
+                    if (isCorrect) {
+                        score++;
+                    }
+
+                    const resultItem = document.createElement('div');
+                    resultItem.classList.add('quiz-question');
+                    resultItem.innerHTML = `
+                        <h4>${quizItem.question}</h4>
+                        <p>Your answer: <strong>${userAnswer || 'Not answered'}</strong></p>
+                        <p>Correct answer: <strong>${quizItem.answer}</strong></p>
+                        <p style="color: ${isCorrect ? 'var(--success-color)' : 'var(--danger-color)'}; font-weight: bold;">
+                            ${isCorrect ? 'Correct' : 'Incorrect'}
+                        </p>
+                    `;
+                    resultsContainer.appendChild(resultItem);
+                });
+
+                const scorePercentage = (score / quizData.length) * 100;
+                resultsContainer.insertAdjacentHTML('afterbegin', `<p>Your final score is: <strong>${score}/${quizData.length} (${scorePercentage.toFixed(1)}%)</strong></p>`);
+                resultsContainer.style.display = 'block';
+                quizContainer.style.display = 'none';
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+                submitBtn.style.display = 'none';
+                questionCounter.style.display = 'none';
+            }
+
+            prevBtn.addEventListener('click', () => {
+                if (currentQuestionIndex > 0) {
+                    currentQuestionIndex--;
+                    loadQuiz();
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentQuestionIndex < quizData.length - 1) {
+                    currentQuestionIndex++;
+                    loadQuiz();
+                }
+            });
+            
+            submitBtn.addEventListener('click', () => {
+                const answeredQuestions = Object.keys(userAnswers).length;
+                if (answeredQuestions < quizData.length) {
+                    if (!confirm(`You have only answered ${answeredQuestions} out of ${quizData.length} questions. Are you sure you want to submit?`)) {
+                        return;
+                    }
+                }
+                showResults();
+            });
+            
+            loadQuiz();
+        });
+    </script>
+</body>
+</html>
