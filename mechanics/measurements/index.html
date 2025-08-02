@@ -16,6 +16,9 @@
       gtag('js', new Date());
       gtag('config', 'G-XN081SR2KP');
     </script>
+    <!-- MathJax for equation rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         .practice-section {
             padding: 2rem 0;
@@ -58,6 +61,16 @@
         }
         .btn-practice {
             width: 100%;
+        }
+        .math-block {
+            display: block;
+            text-align: center;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+        .equation-number {
+            float: right;
+            padding-right: 10px;
         }
     </style>
 </head>
@@ -135,7 +148,12 @@
                 <p>Each physical quantity must have an <strong>operational definition</strong> - a precise description of how to measure it.</p>
                 <div class="example-box">
                     <h4>📝 Example: Defining Velocity</h4>
-                    <p><strong>Operational definition:</strong> "Change in position divided by time interval: $v = \Delta x/\Delta t$"</p>
+                    <p><strong>Operational definition:</strong> "Change in position divided by time interval:</p>
+                    <div class="math-block">
+                        \begin{equation}
+                        \vec{v} = \frac{\Delta \vec{x}}{\Delta t}
+                        \end{equation}
+                    </div>
                 </div>
                 <h3>Characteristics of Good Physical Standards</h3>
                 <div class="highlight-box">
@@ -158,16 +176,17 @@
                             <th>Quantity</th>
                             <th>Unit Name</th>
                             <th>Symbol</th>
+                            <th>Definition (2019 Revision)</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>Time</td><td>second</td><td>s</td></tr>
-                        <tr><td>Length</td><td>meter</td><td>m</td></tr>
-                        <tr><td>Mass</td><td>kilogram</td><td>kg</td></tr>
-                        <tr><td>Electric current</td><td>ampere</td><td>A</td></tr>
-                        <tr><td>Temperature</td><td>kelvin</td><td>K</td></tr>
-                        <tr><td>Amount of substance</td><td>mole</td><td>mol</td></tr>
-                        <tr><td>Luminous intensity</td><td>candela</td><td>cd</td></tr>
+                        <tr><td>Time</td><td>second</td><td>s</td><td>Duration of 9,192,631,770 periods of radiation corresponding to the transition between two hyperfine levels of Cs-133</td></tr>
+                        <tr><td>Length</td><td>meter</td><td>m</td><td>Distance light travels in vacuum in 1/299,792,458 second</td></tr>
+                        <tr><td>Mass</td><td>kilogram</td><td>kg</td><td>Defined using Planck's constant (h = 6.62607015×10<sup>−34</sup> J⋅s)</td></tr>
+                        <tr><td>Electric current</td><td>ampere</td><td>A</td><td>Flow of 1/1.602176634×10<sup>−19</sup> elementary charges per second</td></tr>
+                        <tr><td>Temperature</td><td>kelvin</td><td>K</td><td>Defined using Boltzmann constant (k = 1.380649×10<sup>−23</sup> J/K)</td></tr>
+                        <tr><td>Amount of substance</td><td>mole</td><td>mol</td><td>Contains exactly 6.02214076×10<sup>23</sup> elementary entities</td></tr>
+                        <tr><td>Luminous intensity</td><td>candela</td><td>cd</td><td>Luminous intensity in a given direction of a source emitting monochromatic radiation of frequency 540×10<sup>12</sup> Hz with radiant intensity of 1/683 watt per steradian</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -183,27 +202,43 @@
                             <th>SI Unit</th>
                             <th>Symbol</th>
                             <th>In Base Units</th>
+                            <th>Equation</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>Force</td><td>newton</td><td>N</td><td>$kg \cdot m \cdot s^{-2}$</td></tr>
-                        <tr><td>Energy</td><td>joule</td><td>J</td><td>$kg \cdot m^2 \cdot s^{-2}$</td></tr>
-                        <tr><td>Power</td><td>watt</td><td>W</td><td>$kg \cdot m^2 \cdot s^{-3}$</td></tr>
-                        <tr><td>Pressure</td><td>pascal</td><td>Pa</td><td>$kg \cdot m^{-1} \cdot s^{-2}$</td></tr>
+                        <tr><td>Force</td><td>newton</td><td>N</td><td>\(kg \cdot m \cdot s^{-2}\)</td><td>\(F = ma\)</td></tr>
+                        <tr><td>Energy</td><td>joule</td><td>J</td><td>\(kg \cdot m^2 \cdot s^{-2}\)</td><td>\(E = Fd\)</td></tr>
+                        <tr><td>Power</td><td>watt</td><td>W</td><td>\(kg \cdot m^2 \cdot s^{-3}\)</td><td>\(P = E/t\)</td></tr>
+                        <tr><td>Pressure</td><td>pascal</td><td>Pa</td><td>\(kg \cdot m^{-1} \cdot s^{-2}\)</td><td>\(P = F/A\)</td></tr>
+                        <tr><td>Frequency</td><td>hertz</td><td>Hz</td><td>\(s^{-1}\)</td><td>\(f = 1/T\)</td></tr>
+                        <tr><td>Momentum</td><td>-</td><td>kg·m/s</td><td>\(kg \cdot m \cdot s^{-1}\)</td><td>\(p = mv\)</td></tr>
                     </tbody>
                 </table>
             </div>
 
             <div class="section">
                 <h2>1.4 Dimensional Analysis</h2>
-                <p>Every physical quantity has <strong>dimensions</strong> expressed in terms of Mass [M], Length [L], and Time [T].</p>
+                <p>Every physical quantity has <strong>dimensions</strong> expressed in terms of the fundamental dimensions: Mass [M], Length [L], and Time [T].</p>
                 <h3>Dimensional Equations</h3>
-                <ul>
-                    <li>Area: $[L^2]$</li>
-                    <li>Velocity: $[LT^{-1}]$</li>
-                    <li>Force: $[MLT^{-2}]$</li>
-                    <li>Energy: $[ML^2T^{-2}]$</li>
-                </ul>
+                <div class="math-block">
+                    \begin{align}
+                    \text{Area} &= [L^2] \\
+                    \text{Volume} &= [L^3] \\
+                    \text{Velocity} &= [LT^{-1}] \\
+                    \text{Acceleration} &= [LT^{-2}] \\
+                    \text{Force} &= [MLT^{-2}] \\
+                    \text{Energy} &= [ML^2T^{-2}] \\
+                    \text{Power} &= [ML^2T^{-3}] \\
+                    \text{Pressure} &= [ML^{-1}T^{-2}]
+                    \end{align}
+                </div>
+                
+                <h3>Uses of Dimensional Analysis</h3>
+                <ol>
+                    <li><strong>Checking Equations:</strong> Verify that an equation is dimensionally consistent</li>
+                    <li><strong>Converting Units:</strong> Ensure correct unit conversions</li>
+                    <li><strong>Deriving Relationships:</strong> When exact formulas are unknown, dimensional analysis can suggest possible forms</li>
+                </ol>
             </div>
 
             <div class="section">
@@ -211,14 +246,30 @@
                 <p>The <strong>principle of homogeneity</strong> states that any valid physical equation must be dimensionally consistent—every term must have the same dimensions.</p>
                 <div class="example-box">
                     <h4>📝 Example Analysis: Kinematic Equation</h4>
-                    <p>Consider: $x = x_0 + v_0t + \frac{1}{2}at^2$</p>
+                    <p>Consider the equation for position under constant acceleration:</p>
+                    <div class="math-block">
+                        \begin{equation}
+                        x = x_0 + v_0t + \frac{1}{2}at^2
+                        \end{equation}
+                    </div>
+                    <p>Let's analyze the dimensions of each term:</p>
                     <ul>
-                        <li>$[x] = [L]$</li>
-                        <li>$[x_0] = [L]$</li>
-                        <li>$[v_0t] = [LT^{-1}][T] = [L]$</li>
-                        <li>$[\frac{1}{2}at^2] = [LT^{-2}][T^2] = [L]$</li>
+                        <li>\([x] = [L]\)</li>
+                        <li>\([x_0] = [L]\)</li>
+                        <li>\([v_0t] = [LT^{-1}][T] = [L]\)</li>
+                        <li>\([\frac{1}{2}at^2] = [LT^{-2}][T^2] = [L]\)</li>
                     </ul>
-                    <p>✅ All terms have the dimension of length [L], so the equation is consistent.</p>
+                    <p>✅ All terms have the dimension of length [L], so the equation is dimensionally consistent.</p>
+                </div>
+                
+                <div class="advanced-note">
+                    <h4>🎓 The Buckingham Pi Theorem</h4>
+                    <p>For a physical process described by n parameters with k independent dimensions, the process can be described by (n-k) dimensionless parameters. This powerful theorem underlies dimensional analysis and scaling laws in physics and engineering.</p>
+                    <div class="math-block">
+                        \begin{equation}
+                        \Pi_i = f(\Pi_1, \Pi_2, \ldots, \Pi_{n-k})
+                        \end{equation}
+                    </div>
                 </div>
             </div>
 
@@ -228,11 +279,54 @@
                 <h3>Rules for Significant Figures</h3>
                 <div class="highlight-box">
                     <ul>
-                        <li>Non-zero digits are always significant. (e.g., 123 has 3 sig figs)</li>
-                        <li>Zeros between two significant digits are significant. (e.g., 101 has 3 sig figs)</li>
-                        <li>Leading zeros are not significant. (e.g., 0.05 has 1 sig fig)</li>
-                        <li>Trailing zeros are significant only with a decimal point. (e.g., 100 has 1 sig fig, 100.0 has 4)</li>
+                        <li><strong>Non-zero digits:</strong> Always significant. (e.g., 123 has 3 sig figs)</li>
+                        <li><strong>Zeros between non-zeros:</strong> Always significant. (e.g., 101 has 3 sig figs)</li>
+                        <li><strong>Leading zeros:</strong> Never significant; they only fix the decimal point. (e.g., 0.05 has 1 sig fig)</li>
+                        <li><strong>Trailing zeros:</strong> 
+                            <ul>
+                                <li>With decimal point shown: Significant (e.g., 100.0 has 4 sig figs)</li>
+                                <li>Without decimal point: Ambiguous, scientific notation recommended (e.g., 100 could have 1, 2, or 3 sig figs; write as 1.00×10<sup>2</sup> for 3 sig figs)</li>
+                            </ul>
+                        </li>
                     </ul>
+                </div>
+                
+                <h3>Calculations with Significant Figures</h3>
+                <div class="highlight-box">
+                    <ol>
+                        <li><strong>Addition and Subtraction:</strong> The result has the same number of decimal places as the quantity with the fewest decimal places.</li>
+                        <li><strong>Multiplication and Division:</strong> The result has the same number of significant figures as the quantity with the fewest significant figures.</li>
+                        <li><strong>Logarithms:</strong> The number of decimal places in the log equals the number of significant figures in the original number.</li>
+                        <li><strong>Anti-logarithms:</strong> The number of significant figures in the result equals the number of decimal places in the log.</li>
+                    </ol>
+                </div>
+                
+                <div class="example-box">
+                    <h4>📝 Example: Addition</h4>
+                    <p>12.52 + 1.7 = 14.2</p>
+                    <p>Note: Limited by 1.7, which has only one decimal place.</p>
+                    
+                    <h4>📝 Example: Multiplication</h4>
+                    <p>4.51 × 2.3 = 10</p>
+                    <p>Note: Limited by 2.3, which has only two significant figures.</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>1.7 Order of Magnitude Estimation</h2>
+                <p>An <strong>order of magnitude</strong> estimate expresses a quantity to the nearest power of ten, providing a quick approximation.</p>
+                
+                <div class="math-block">
+                    \begin{equation}
+                    \text{Order of Magnitude} = 10^n \text{ where } n \text{ is an integer}
+                    \end{equation}
+                </div>
+                
+                <div class="example-box">
+                    <h4>📝 Example: Estimating the Number of Heartbeats in a Lifetime</h4>
+                    <p>Estimate: 1 beat per second × 60 seconds × 60 minutes × 24 hours × 365 days × 80 years</p>
+                    <p>≈ 1 × 60 × 60 × 24 × 365 × 80 ≈ 2.5 × 10<sup>9</sup> heartbeats</p>
+                    <p>Order of magnitude: 10<sup>9</sup> (one billion) heartbeats</p>
                 </div>
             </div>
         </div>
@@ -269,7 +363,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Physics Daily. Advancing physics education through interactive learning.</p>
+            <p>&copy; 2025 Physics Daily. Advancing physics education through interactive learning.</p>
         </div>
     </footer>
 
