@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Measurement - Physics Daily</title>
+    <meta name="description" content="Master scientific measurement, significant figures, and dimensional analysis in physics.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../shared/mechanics-style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XN081SR2KP');
+    </script>
+    <style>
+        .practice-section {
+            padding: 2rem 0;
+            background-color: var(--bg-secondary);
+        }
+        .practice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .practice-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+        .practice-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+        .practice-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .practice-card h3 {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        .practice-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+        .btn-practice {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../../index.html" class="nav-logo">Physics Daily</a>
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../resources.html">Resources</a></li>
+                    <li><a href="../../about.html">About</a></li>
+                    <li><a href="../../contribute.html">Contribute</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="theme-toggle">
+        <button id="light-mode" title="Light Mode">☀️</button>
+        <button id="dark-mode" title="Dark Mode">🌙</button>
+    </div>
+
+    <div class="breadcrumb">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span class="separator">›</span>
+                <a href="../foundations.html">Classical Mechanics</a>
+                <span class="separator">›</span>
+                <span class="current">📏 Measurement</span>
+            </nav>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <h1>Chapter 1: Measurement</h1>
+            <p class="subtitle">Foundation of Scientific Physics</p>
+            <p class="description">
+                Master the fundamental concepts of measurement, units, and dimensional analysis that form the bedrock of all physics - from basic concepts to advanced applications.
+            </p>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="section">
+                <h2>🌟 Introduction: Why Measurement Matters in Physics</h2>
+                <div class="beginner-note">
+                    <h4>🔰 For Beginners:</h4>
+                    <p>Imagine trying to cook without measuring ingredients, or building a house without measuring lumber. Physics is similar - we need precise measurements to understand how the universe works!</p>
+                </div>
+                <p><strong>Physics is fundamentally an experimental science.</strong> Every law, theory, and principle we know about the universe comes from careful observation and measurement. When Galileo dropped objects from the Tower of Pisa, when Newton observed apples falling, when Einstein predicted the bending of light - all of these discoveries required precise measurement to verify theoretical predictions.</p>
+                <p>Consider this: the GPS in your phone works because engineers understand Einstein's theory of relativity with incredible precision. Without accurate measurement of time (to nanoseconds!) and distance (to centimeters!), your GPS would be off by miles.</p>
+                <div class="highlight-box">
+                    <h4>The Power of Precise Measurement</h4>
+                    <p>The 2017 detection of gravitational waves by LIGO required measuring distance changes smaller than 1/10,000th the width of a proton - that's like measuring the distance to the nearest star to within the width of a human hair!</p>
+                </div>
+                <div class="advanced-note">
+                    <h4>🎓 Advanced Insight:</h4>
+                    <p>Modern physics pushes measurement to quantum limits. The Heisenberg uncertainty principle fundamentally limits how precisely we can simultaneously measure certain pairs of properties. This isn't just a technical limitation - it's a fundamental feature of reality that has practical implications in quantum computing and cryptography.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>1.1 Physical Quantities, Standards, and Units</h2>
+                <h3>What Are Physical Quantities?</h3>
+                <p>A <strong>physical quantity</strong> is any measurable property of matter or energy. These fall into two categories:</p>
+                <ul>
+                    <li><strong>Scalar Quantities:</strong> Have magnitude only (mass, time, temperature, energy)</li>
+                    <li><strong>Vector Quantities:</strong> Have both magnitude and direction (displacement, velocity, acceleration, force)</li>
+                </ul>
+                <h3>Operational Definitions</h3>
+                <p>Each physical quantity must have an <strong>operational definition</strong> - a precise description of how to measure it.</p>
+                <div class="example-box">
+                    <h4>📝 Example: Defining Velocity</h4>
+                    <p><strong>Operational definition:</strong> "Change in position divided by time interval: $v = \Delta x/\Delta t$"</p>
+                </div>
+                <h3>Characteristics of Good Physical Standards</h3>
+                <div class="highlight-box">
+                    <ol>
+                        <li><strong>Accessibility:</strong> Can be reproduced in laboratories worldwide</li>
+                        <li><strong>Invariability:</strong> Unchanging over time and location</li>
+                        <li><strong>Precision:</strong> Allows measurement to desired accuracy</li>
+                        <li><strong>Reproducibility:</strong> Independent measurements yield consistent results</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>1.2 The International System of Units (SI)</h2>
+                <p>The <strong>International System of Units (SI)</strong> is the modern form of the metric system, established by international treaty. It's built on seven fundamental base units that define all other measurements.</p>
+                <h3>The Seven SI Base Units</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Quantity</th>
+                            <th>Unit Name</th>
+                            <th>Symbol</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Time</td><td>second</td><td>s</td></tr>
+                        <tr><td>Length</td><td>meter</td><td>m</td></tr>
+                        <tr><td>Mass</td><td>kilogram</td><td>kg</td></tr>
+                        <tr><td>Electric current</td><td>ampere</td><td>A</td></tr>
+                        <tr><td>Temperature</td><td>kelvin</td><td>K</td></tr>
+                        <tr><td>Amount of substance</td><td>mole</td><td>mol</td></tr>
+                        <tr><td>Luminous intensity</td><td>candela</td><td>cd</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>1.3 Fundamental and Derived Units</h2>
+                <p><strong>Fundamental quantities</strong> are the basic building blocks. <strong>Derived quantities</strong> are built from combinations of fundamental quantities.</p>
+                <h3>Common Derived Units in Mechanics</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Quantity</th>
+                            <th>SI Unit</th>
+                            <th>Symbol</th>
+                            <th>In Base Units</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Force</td><td>newton</td><td>N</td><td>$kg \cdot m \cdot s^{-2}$</td></tr>
+                        <tr><td>Energy</td><td>joule</td><td>J</td><td>$kg \cdot m^2 \cdot s^{-2}$</td></tr>
+                        <tr><td>Power</td><td>watt</td><td>W</td><td>$kg \cdot m^2 \cdot s^{-3}$</td></tr>
+                        <tr><td>Pressure</td><td>pascal</td><td>Pa</td><td>$kg \cdot m^{-1} \cdot s^{-2}$</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>1.4 Dimensional Analysis</h2>
+                <p>Every physical quantity has <strong>dimensions</strong> expressed in terms of Mass [M], Length [L], and Time [T].</p>
+                <h3>Dimensional Equations</h3>
+                <ul>
+                    <li>Area: $[L^2]$</li>
+                    <li>Velocity: $[LT^{-1}]$</li>
+                    <li>Force: $[MLT^{-2}]$</li>
+                    <li>Energy: $[ML^2T^{-2}]$</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>1.5 Principle of Homogeneity</h2>
+                <p>The <strong>principle of homogeneity</strong> states that any valid physical equation must be dimensionally consistent—every term must have the same dimensions.</p>
+                <div class="example-box">
+                    <h4>📝 Example Analysis: Kinematic Equation</h4>
+                    <p>Consider: $x = x_0 + v_0t + \frac{1}{2}at^2$</p>
+                    <ul>
+                        <li>$[x] = [L]$</li>
+                        <li>$[x_0] = [L]$</li>
+                        <li>$[v_0t] = [LT^{-1}][T] = [L]$</li>
+                        <li>$[\frac{1}{2}at^2] = [LT^{-2}][T^2] = [L]$</li>
+                    </ul>
+                    <p>✅ All terms have the dimension of length [L], so the equation is consistent.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>1.6 Precision and Significant Figures</h2>
+                <p><strong>Significant figures</strong> are the digits in a number that are known with certainty, plus the first uncertain digit.</p>
+                <h3>Rules for Significant Figures</h3>
+                <div class="highlight-box">
+                    <ul>
+                        <li>Non-zero digits are always significant. (e.g., 123 has 3 sig figs)</li>
+                        <li>Zeros between two significant digits are significant. (e.g., 101 has 3 sig figs)</li>
+                        <li>Leading zeros are not significant. (e.g., 0.05 has 1 sig fig)</li>
+                        <li>Trailing zeros are significant only with a decimal point. (e.g., 100 has 1 sig fig, 100.0 has 4)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section class="practice-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Test Your Understanding</h2>
+                <p class="section-subtitle">Apply what you've learned by tackling conceptual questions, numerical problems, and a comprehensive quiz.</p>
+            </div>
+            <div class="practice-grid">
+                <div class="practice-card">
+                    <div class="icon">🤔</div>
+                    <h3>Conceptual Questions</h3>
+                    <p>Challenge your understanding of the core principles and theoretical concepts.</p>
+                    <a href="conceptual.html" class="btn btn-practice">View Questions</a>
+                </div>
+                <div class="practice-card">
+                    <div class="icon">🧮</div>
+                    <h3>Numerical Problems</h3>
+                    <p>Sharpen your problem-solving skills with a variety of calculations and applications.</p>
+                    <a href="numerical.html" class="btn btn-practice">Solve Problems</a>
+                </div>
+                <div class="practice-card">
+                    <div class="icon">📊</div>
+                    <h3>Assessment Quiz</h3>
+                    <p>Take a timed, comprehensive quiz to test your mastery of the entire chapter.</p>
+                    <a href="mcq.html" class="btn btn-practice">Start Quiz</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Physics Daily. Advancing physics education through interactive learning.</p>
+        </div>
+    </footer>
+
+    <script src="../shared/mechanics-scripts.js"></script>
+</body>
+</html>

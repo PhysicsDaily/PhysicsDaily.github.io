@@ -8,15 +8,625 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../shared/mechanics-style.css">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XN081SR2KP');
-    </script>
     <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #64748b;
+            --accent-color: #06b6d4;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        [data-theme="dark"] {
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --card-bg: #334155;
+            --border-color: #475569;
+            --border-hover: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: all 0.3s ease;
+        }
+        
+        /* Italicize math variables for clarity */
+        em {
+            font-style: italic;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .breadcrumb {
+            background: var(--bg-secondary);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary-color);
+        }
+
+        .separator {
+            margin: 0 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .current {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 25px;
+            padding: 4px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .theme-toggle button {
+            background: none;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle button.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .theme-toggle button:hover {
+            background: var(--bg-secondary);
+        }
+
+        .theme-toggle button.active:hover {
+            background: var(--primary-dark);
+        }
+
+        .timer-section {
+            position: fixed;
+            top: 150px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: var(--shadow-md);
+            min-width: 200px;
+        }
+
+        .timer-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .timer-display {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .timer-select {
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .timer-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .timer-btn {
+            flex: 1;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .timer-btn.start {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .timer-btn.stop {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .timer-btn.reset {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .timer-btn:hover {
+            transform: translateY(-1px);
+            opacity: 0.9;
+        }
+
+        .section {
+            margin: 32px 0;
+            padding: 24px;
+            border-radius: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .section h3 {
+            color: var(--text-primary);
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .section h4 {
+            color: var(--text-primary);
+            margin: 1rem 0 0.5rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .section p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            text-align: justify;
+        }
+
+        .section ul, .section ol {
+            margin: 1rem 0 1rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
+            border-left: 4px solid var(--accent-color);
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+        }
+
+        [data-theme="dark"] .highlight-box {
+            background: linear-gradient(135deg, #164e63, #0c4a6e);
+        }
+
+        .beginner-note {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 4px solid var(--warning-color);
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+        }
+
+        [data-theme="dark"] .beginner-note {
+            background: linear-gradient(135deg, #451a03, #78350f);
+        }
+
+        .advanced-note {
+            background: linear-gradient(135deg, #f3e8ff, #ede9fe);
+            border-left: 4px solid #8b5cf6;
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+        }
+
+        [data-theme="dark"] .advanced-note {
+            background: linear-gradient(135deg, #2d1b69, #3730a3);
+        }
+
+        .formula-box {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 16px 0;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-left: 4px solid var(--success-color);
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+        }
+
+        [data-theme="dark"] .example-box {
+            background: linear-gradient(135deg, #14532d, #166534);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        td {
+            color: var(--text-secondary);
+        }
+
+        .quiz-container {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+        }
+
+        .question {
+            margin: 20px 0;
+            padding: 16px;
+            border-left: 4px solid var(--primary-color);
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 24px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 16px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success-color), var(--accent-color));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .score-display {
+            font-weight: 600;
+            text-align: center;
+            margin: 16px 0;
+            color: var(--text-primary);
+        }
+
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 8px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border-hover);
+        }
+
+        .btn-close {
+            background: var(--danger-color);
+            color: white;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        .btn-close:hover {
+            background: #c82333;
+        }
+
+        .quiz-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .quiz-question {
+            margin: 16px 0;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .quiz-question .option {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+        }
+
+        .quiz-question .option:hover {
+            background: var(--border-color);
+        }
+
+        .quiz-question .option.correct {
+            background: #dcfce7;
+            border: 1px solid var(--success-color);
+        }
+
+        .quiz-question .option.incorrect {
+            background: #fef2f2;
+            border: 1px solid var(--danger-color);
+        }
+
+        [data-theme="dark"] .quiz-question .option.correct {
+            background: #14532d;
+        }
+
+        [data-theme="dark"] .quiz-question .option.incorrect {
+            background: #451a1a;
+        }
+
+        .quiz-question input[type="radio"] {
+            margin: 0 12px 0 0;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+
+        .quiz-question label {
+            color: var(--text-secondary);
+            cursor: pointer;
+            flex: 1;
+            line-height: 1.4;
+        }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .question-counter {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .mcq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .mcq-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .mcq-item:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .mcq-item.answered {
+            border-color: var(--success-color);
+        }
+
+        .mcq-item.incorrect {
+            border-color: var(--danger-color);
+        }
+
+        #results {
+            margin-top: 24px;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .results-header h3 {
+            margin: 0;
+            color: var(--text-primary);
+        }
+
+        .explanation {
+            background: var(--bg-secondary);
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        details {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: .5em .5em 0;
+            margin-top: 1em;
+            background: var(--bg-secondary);
+        }
+
+        summary {
+            font-weight: bold;
+            margin: -.5em -.5em 0;
+            padding: .5em;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
         .practice-section {
             padding: 2rem 0;
             background-color: var(--bg-secondary);
@@ -28,11 +638,11 @@
         }
         .practice-card {
             background: var(--card-bg);
-            border-radius: var(--border-radius);
+            border-radius: 12px;
             padding: 2rem;
             text-decoration: none;
             color: var(--text-primary);
-            transition: var(--transition);
+            transition: all 0.3s ease;
             border: 1px solid var(--border-color);
             box-shadow: var(--shadow-sm);
             text-align: center;
@@ -59,7 +669,69 @@
         .btn-practice {
             width: 100%;
         }
+
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .theme-toggle {
+                top: 70px;
+                right: 10px;
+                scale: 0.9;
+            }
+
+            .timer-section {
+                top: 120px;
+                right: 10px;
+                scale: 0.9;
+            }
+
+            .quiz-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                margin: 4px 0;
+            }
+
+            .results-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mcq-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quiz-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
     </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XN081SR2KP');
+</script>
 </head>
 <body>
     <nav class="nav">
@@ -77,8 +749,28 @@
     </nav>
 
     <div class="theme-toggle">
-        <button id="light-mode" title="Light Mode">☀️</button>
+        <button id="light-mode" class="active" title="Light Mode">☀️</button>
         <button id="dark-mode" title="Dark Mode">🌙</button>
+    </div>
+
+    <div class="timer-section">
+        <div class="timer-display" id="timerDisplay">00:00</div>
+        <div class="timer-controls">
+            <select class="timer-select" id="timerSelect">
+                <option value="300">5 minutes</option>
+                <option value="600">10 minutes</option>
+                <option value="900">15 minutes</option>
+                <option value="1200">20 minutes</option>
+                <option value="1800">30 minutes</option>
+                <option value="2700">45 minutes</option>
+                <option value="3600">60 minutes</option>
+            </select>
+            <div class="timer-buttons">
+                <button class="timer-btn start" id="startTimer">Start</button>
+                <button class="timer-btn stop" id="stopTimer">Stop</button>
+                <button class="timer-btn reset" id="resetTimer">Reset</button>
+            </div>
+        </div>
     </div>
 
     <div class="breadcrumb">
@@ -107,16 +799,21 @@
         <div class="container">
             <div class="section">
                 <h2>🌟 Introduction: Why Measurement Matters in Physics</h2>
+                
                 <div class="beginner-note">
                     <h4>🔰 For Beginners:</h4>
                     <p>Imagine trying to cook without measuring ingredients, or building a house without measuring lumber. Physics is similar - we need precise measurements to understand how the universe works!</p>
                 </div>
+
                 <p><strong>Physics is fundamentally an experimental science.</strong> Every law, theory, and principle we know about the universe comes from careful observation and measurement. When Galileo dropped objects from the Tower of Pisa, when Newton observed apples falling, when Einstein predicted the bending of light - all of these discoveries required precise measurement to verify theoretical predictions.</p>
+
                 <p>Consider this: the GPS in your phone works because engineers understand Einstein's theory of relativity with incredible precision. Without accurate measurement of time (to nanoseconds!) and distance (to centimeters!), your GPS would be off by miles.</p>
+
                 <div class="highlight-box">
                     <h4>The Power of Precise Measurement</h4>
                     <p>The 2017 detection of gravitational waves by LIGO required measuring distance changes smaller than 1/10,000th the width of a proton - that's like measuring the distance to the nearest star to within the width of a human hair!</p>
                 </div>
+
                 <div class="advanced-note">
                     <h4>🎓 Advanced Insight:</h4>
                     <p>Modern physics pushes measurement to quantum limits. The Heisenberg uncertainty principle fundamentally limits how precisely we can simultaneously measure certain pairs of properties. This isn't just a technical limitation - it's a fundamental feature of reality that has practical implications in quantum computing and cryptography.</p>
@@ -125,116 +822,589 @@
 
             <div class="section">
                 <h2>1.1 Physical Quantities, Standards, and Units</h2>
+                
+                <div class="beginner-note">
+                    <h4>🔰 Understanding Physical Quantities:</h4>
+                    <p>A physical quantity is anything you can measure with numbers and units. Think of your height (1.75 m), your weight (70 kg), or the time it takes to walk to school (15 minutes). Each has a number and a unit!</p>
+                </div>
+
                 <h3>What Are Physical Quantities?</h3>
-                <p>A <strong>physical quantity</strong> is any measurable property of matter or energy. These fall into two categories:</p>
-                <ul>
-                    <li><strong>Scalar Quantities:</strong> Have magnitude only (mass, time, temperature, energy)</li>
-                    <li><strong>Vector Quantities:</strong> Have both magnitude and direction (displacement, velocity, acceleration, force)</li>
-                </ul>
+                <p>A <strong>physical quantity</strong> is any measurable property of matter or energy. Every physical quantity consists of two parts: a <em>numerical value</em> and a <em>unit</em>.</p>
+                
+                <div class="formula-box">
+                    <h4>Physical Quantity = Numerical Value × Unit</h4>
+                    <p>Example: Length = 5.2 × meters = 5.2 m</p>
+                    <p>Example: Time = 30 × seconds = 30 s</p>
+                </div>
+
+                <p>Physical quantities fall into two fundamental categories:</p>
+
+                <h4>Scalar Quantities</h4>
+                <p><strong>Scalars</strong> are completely described by magnitude (size) alone. They have no direction associated with them.</p>
+
+                <div class="example-box">
+                    <h4>📝 Examples of Scalar Quantities:</h4>
+                    <ul>
+                        <li><strong>Mass:</strong> <em>m</em> = 2.5 kg (amount of matter)</li>
+                        <li><strong>Time:</strong> <em>t</em> = 10 s (duration)</li>
+                        <li><strong>Temperature:</strong> <em>T</em> = 25°C (thermal state)</li>
+                        <li><strong>Speed:</strong> <em>v</em> = 60 km/h (rate of motion)</li>
+                        <li><strong>Distance:</strong> <em>d</em> = 100 m (path length)</li>
+                        <li><strong>Energy:</strong> <em>E</em> = 500 J (capacity to do work)</li>
+                    </ul>
+                </div>
+
+                <h4>Vector Quantities</h4>
+                <p><strong>Vectors</strong> require both magnitude and direction for complete description. They tell us not just "how much" but also "which way."</p>
+
+                <div class="example-box">
+                    <h4>📝 Examples of Vector Quantities:</h4>
+                    <ul>
+                        <li><strong>Displacement:</strong> <em>s⃗</em> = 5 m north (change in position)</li>
+                        <li><strong>Velocity:</strong> <em>v⃗</em> = 20 m/s eastward (rate and direction of motion)</li>
+                        <li><strong>Acceleration:</strong> <em>a⃗</em> = 9.8 m/s² downward (rate of velocity change)</li>
+                        <li><strong>Force:</strong> <em>F⃗</em> = 50 N upward (push or pull with direction)</li>
+                        <li><strong>Momentum:</strong> <em>p⃗</em> = 10 kg⋅m/s forward (mass times velocity)</li>
+                    </ul>
+                </div>
+
                 <h3>Operational Definitions</h3>
                 <p>Each physical quantity must have an <strong>operational definition</strong> - a precise description of how to measure it.</p>
+
                 <div class="example-box">
-                    <h4>📝 Example: Defining Velocity</h4>
-                    <p><strong>Operational definition:</strong> "Change in position divided by time interval: $v = \Delta x/\Delta t$"</p>
+                    <h4>📝 Operational Definition Examples:</h4>
+                    <p><strong>Length:</strong> "The distance traveled by light in vacuum during a time interval of 1/299,792,458 of a second."</p>
+                    <p><strong>Velocity:</strong> "Change in position divided by time interval: <em>v⃗</em> = Δ<em>r⃗</em>/Δ<em>t</em>"</p>
+                    <p><strong>Acceleration:</strong> "Change in velocity divided by time interval: <em>a⃗</em> = Δ<em>v⃗</em>/Δ<em>t</em>"</p>
                 </div>
+
                 <h3>Characteristics of Good Physical Standards</h3>
                 <div class="highlight-box">
+                    <h4>Essential Properties of Standards:</h4>
                     <ol>
                         <li><strong>Accessibility:</strong> Can be reproduced in laboratories worldwide</li>
                         <li><strong>Invariability:</strong> Unchanging over time and location</li>
                         <li><strong>Precision:</strong> Allows measurement to desired accuracy</li>
                         <li><strong>Reproducibility:</strong> Independent measurements yield consistent results</li>
+                        <li><strong>International Agreement:</strong> Accepted globally for scientific communication</li>
                     </ol>
+                </div>
+
+                <div class="advanced-note">
+                    <h4>🎓 Evolution of Standards:</h4>
+                    <p>Standards have evolved from physical artifacts to natural constants. The meter was once defined by a platinum-iridium bar, but is now based on the speed of light. This evolution provides greater precision and universal accessibility.</p>
                 </div>
             </div>
 
             <div class="section">
                 <h2>1.2 The International System of Units (SI)</h2>
-                <p>The <strong>International System of Units (SI)</strong> is the modern form of the metric system, established by international treaty. It's built on seven fundamental base units that define all other measurements.</p>
+                
+                <div class="beginner-note">
+                    <h4>🔰 Why SI Units?</h4>
+                    <p>Imagine if every country used different units - chaos! SI units provide a universal language for science. Whether you're in Tokyo, London, or New York, a meter is always a meter!</p>
+                </div>
+
+                <p>The <strong>International System of Units (SI)</strong> is the modern form of the metric system, established by international treaty in 1960. It's built on seven fundamental base units that define all other measurements in physics.</p>
+
                 <h3>The Seven SI Base Units</h3>
+                <p>These seven base units are the foundation of all physical measurements:</p>
+
                 <table>
                     <thead>
                         <tr>
-                            <th>Quantity</th>
+                            <th>Physical Quantity</th>
                             <th>Unit Name</th>
                             <th>Symbol</th>
+                            <th>Definition</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>Time</td><td>second</td><td>s</td></tr>
-                        <tr><td>Length</td><td>meter</td><td>m</td></tr>
-                        <tr><td>Mass</td><td>kilogram</td><td>kg</td></tr>
-                        <tr><td>Electric current</td><td>ampere</td><td>A</td></tr>
-                        <tr><td>Temperature</td><td>kelvin</td><td>K</td></tr>
-                        <tr><td>Amount of substance</td><td>mole</td><td>mol</td></tr>
-                        <tr><td>Luminous intensity</td><td>candela</td><td>cd</td></tr>
+                        <tr>
+                            <td>Length</td>
+                            <td>meter</td>
+                            <td>m</td>
+                            <td>Distance light travels in 1/299,792,458 s</td>
+                        </tr>
+                        <tr>
+                            <td>Mass</td>
+                            <td>kilogram</td>
+                            <td>kg</td>
+                            <td>Defined by Planck's constant</td>
+                        </tr>
+                        <tr>
+                            <td>Time</td>
+                            <td>second</td>
+                            <td>s</td>
+                            <td>9,192,631,770 periods of cesium-133 radiation</td>
+                        </tr>
+                        <tr>
+                            <td>Electric current</td>
+                            <td>ampere</td>
+                            <td>A</td>
+                            <td>Defined by elementary charge</td>
+                        </tr>
+                        <tr>
+                            <td>Temperature</td>
+                            <td>kelvin</td>
+                            <td>K</td>
+                            <td>Defined by Boltzmann constant</td>
+                        </tr>
+                        <tr>
+                            <td>Amount of substance</td>
+                            <td>mole</td>
+                            <td>mol</td>
+                            <td>Defined by Avogadro's number</td>
+                        </tr>
+                        <tr>
+                            <td>Luminous intensity</td>
+                            <td>candela</td>
+                            <td>cd</td>
+                            <td>Defined by luminous efficacy</td>
+                        </tr>
                     </tbody>
                 </table>
+
+                <h3>SI Prefixes</h3>
+                <p>SI prefixes allow us to express very large or very small quantities conveniently:</p>
+
+                <div class="example-box">
+                    <h4>📝 Common SI Prefixes:</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Prefix</th>
+                                <th>Symbol</th>
+                                <th>Factor</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>giga</td><td>G</td><td>10⁹</td><td>1 Gb = 10⁹ bytes</td></tr>
+                            <tr><td>mega</td><td>M</td><td>10⁶</td><td>1 MHz = 10⁶ Hz</td></tr>
+                            <tr><td>kilo</td><td>k</td><td>10³</td><td>1 km = 10³ m</td></tr>
+                            <tr><td>centi</td><td>c</td><td>10⁻²</td><td>1 cm = 10⁻² m</td></tr>
+                            <tr><td>milli</td><td>m</td><td>10⁻³</td><td>1 ms = 10⁻³ s</td></tr>
+                            <tr><td>micro</td><td>μ</td><td>10⁻⁶</td><td>1 μm = 10⁻⁶ m</td></tr>
+                            <tr><td>nano</td><td>n</td><td>10⁻⁹</td><td>1 nm = 10⁻⁹ m</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>The 2019 SI Redefinition</h4>
+                    <p>In 2019, all SI base units were redefined in terms of fundamental physical constants, making them more precise and universally accessible. This eliminated the last physical artifact (the international prototype kilogram) from the SI system.</p>
+                </div>
             </div>
 
             <div class="section">
                 <h2>1.3 Fundamental and Derived Units</h2>
-                <p><strong>Fundamental quantities</strong> are the basic building blocks. <strong>Derived quantities</strong> are built from combinations of fundamental quantities.</p>
+                
+                <div class="beginner-note">
+                    <h4>🔰 Building Blocks vs. Combinations:</h4>
+                    <p>Think of fundamental units like primary colors (red, blue, yellow) and derived units like all the colors you can make by mixing them (green = blue + yellow, purple = red + blue)!</p>
+                </div>
+
+                <p><strong>Fundamental quantities</strong> are the basic building blocks that cannot be expressed in terms of other quantities. <strong>Derived quantities</strong> are built from combinations of fundamental quantities.</p>
+
+                <h3>Fundamental Quantities in Mechanics</h3>
+                <p>In mechanics, we work primarily with three fundamental quantities:</p>
+                <ul>
+                    <li><strong>Length [L]:</strong> measured in meters (m)</li>
+                    <li><strong>Mass [M]:</strong> measured in kilograms (kg)</li>
+                    <li><strong>Time [T]:</strong> measured in seconds (s)</li>
+                </ul>
+
                 <h3>Common Derived Units in Mechanics</h3>
+                <p>All other mechanical quantities are derived from these three fundamentals:</p>
+
                 <table>
                     <thead>
                         <tr>
-                            <th>Quantity</th>
+                            <th>Physical Quantity</th>
                             <th>SI Unit</th>
                             <th>Symbol</th>
+                            <th>Definition</th>
                             <th>In Base Units</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>Force</td><td>newton</td><td>N</td><td>$kg \cdot m \cdot s^{-2}$</td></tr>
-                        <tr><td>Energy</td><td>joule</td><td>J</td><td>$kg \cdot m^2 \cdot s^{-2}$</td></tr>
-                        <tr><td>Power</td><td>watt</td><td>W</td><td>$kg \cdot m^2 \cdot s^{-3}$</td></tr>
-                        <tr><td>Pressure</td><td>pascal</td><td>Pa</td><td>$kg \cdot m^{-1} \cdot s^{-2}$</td></tr>
+                        <tr>
+                            <td>Area</td>
+                            <td>square meter</td>
+                            <td>m²</td>
+                            <td><em>A</em> = <em>l</em> × <em>w</em></td>
+                            <td>m²</td>
+                        </tr>
+                        <tr>
+                            <td>Volume</td>
+                            <td>cubic meter</td>
+                            <td>m³</td>
+                            <td><em>V</em> = <em>l</em> × <em>w</em> × <em>h</em></td>
+                            <td>m³</td>
+                        </tr>
+                        <tr>
+                            <td>Velocity</td>
+                            <td>meter per second</td>
+                            <td>m/s</td>
+                            <td><em>v</em> = Δ<em>x</em>/Δ<em>t</em></td>
+                            <td>m⋅s⁻¹</td>
+                        </tr>
+                        <tr>
+                            <td>Acceleration</td>
+                            <td>meter per second squared</td>
+                            <td>m/s²</td>
+                            <td><em>a</em> = Δ<em>v</em>/Δ<em>t</em></td>
+                            <td>m⋅s⁻²</td>
+                        </tr>
+                        <tr>
+                            <td>Force</td>
+                            <td>newton</td>
+                            <td>N</td>
+                            <td><em>F</em> = <em>ma</em></td>
+                            <td>kg⋅m⋅s⁻²</td>
+                        </tr>
+                        <tr>
+                            <td>Energy/Work</td>
+                            <td>joule</td>
+                            <td>J</td>
+                            <td><em>W</em> = <em>F</em> ⋅ <em>d</em></td>
+                            <td>kg⋅m²⋅s⁻²</td>
+                        </tr>
+                        <tr>
+                            <td>Power</td>
+                            <td>watt</td>
+                            <td>W</td>
+                            <td><em>P</em> = <em>E</em>/<em>t</em></td>
+                            <td>kg⋅m²⋅s⁻³</td>
+                        </tr>
+                        <tr>
+                            <td>Pressure</td>
+                            <td>pascal</td>
+                            <td>Pa</td>
+                            <td><em>p</em> = <em>F</em>/<em>A</em></td>
+                            <td>kg⋅m⁻¹⋅s⁻²</td>
+                        </tr>
                     </tbody>
                 </table>
+
+                <div class="example-box">
+                    <h4>📝 Deriving Units Example: Force</h4>
+                    <p>From Newton's second law: <em>F</em> = <em>ma</em></p>
+                    <p>Units: [<em>F</em>] = [<em>m</em>][<em>a</em>] = kg × (m/s²) = kg⋅m⋅s⁻²</p>
+                    <p>This combination is defined as 1 newton (N)</p>
+                    <p>Therefore: 1 N = 1 kg⋅m⋅s⁻²</p>
+                </div>
+
+                <div class="advanced-note">
+                    <h4>🎓 Understanding Unit Relationships:</h4>
+                    <p>The beauty of the SI system lies in its coherence - derived units are naturally related to base units through the physical laws that define them. This makes unit conversions and dimensional analysis much more straightforward.</p>
+                </div>
             </div>
 
             <div class="section">
                 <h2>1.4 Dimensional Analysis</h2>
-                <p>Every physical quantity has <strong>dimensions</strong> expressed in terms of Mass [M], Length [L], and Time [T].</p>
+                
+                <div class="beginner-note">
+                    <h4>🔰 What Are Dimensions?</h4>
+                    <p>Dimensions are like the "DNA" of physical quantities. Just as DNA tells us about an organism's characteristics, dimensions tell us about a quantity's fundamental nature - whether it's a length, time, mass, or combination!</p>
+                </div>
+
+                <p>Every physical quantity has <strong>dimensions</strong> expressed in terms of the fundamental quantities. In mechanics, we use three fundamental dimensions:</p>
+                
+                <div class="formula-box">
+                    <h4>Fundamental Dimensions in Mechanics:</h4>
+                    <p>Mass: [M]</p>
+                    <p>Length: [L]</p>
+                    <p>Time: [T]</p>
+                </div>
+
                 <h3>Dimensional Equations</h3>
-                <ul>
-                    <li>Area: $[L^2]$</li>
-                    <li>Velocity: $[LT^{-1}]$</li>
-                    <li>Force: $[MLT^{-2}]$</li>
-                    <li>Energy: $[ML^2T^{-2}]$</li>
-                </ul>
+                <p>Every derived quantity can be expressed in terms of these fundamental dimensions:</p>
+
+                <div class="example-box">
+                    <h4>📝 Common Dimensional Equations:</h4>
+                    <ul>
+                        <li><strong>Area:</strong> [<em>A</em>] = [L²]</li>
+                        <li><strong>Volume:</strong> [<em>V</em>] = [L³]</li>
+                        <li><strong>Velocity:</strong> [<em>v</em>] = [LT⁻¹]</li>
+                        <li><strong>Acceleration:</strong> [<em>a</em>] = [LT⁻²]</li>
+                        <li><strong>Force:</strong> [<em>F</em>] = [MLT⁻²]</li>
+                        <li><strong>Energy:</strong> [<em>E</em>] = [ML²T⁻²]</li>
+                        <li><strong>Power:</strong> [<em>P</em>] = [ML²T⁻³]</li>
+                        <li><strong>Pressure:</strong> [<em>p</em>] = [ML⁻¹T⁻²]</li>
+                        <li><strong>Density:</strong> [<em>ρ</em>] = [ML⁻³]</li>
+                        <li><strong>Momentum:</strong> [<em>p</em>] = [MLT⁻¹]</li>
+                    </ul>
+                </div>
+
+                <h3>Uses of Dimensional Analysis</h3>
+                <div class="highlight-box">
+                    <h4>Applications of Dimensional Analysis:</h4>
+                    <ol>
+                        <li><strong>Check equation validity:</strong> All terms must have same dimensions</li>
+                        <li><strong>Derive relationships:</strong> Find how quantities depend on each other</li>
+                        <li><strong>Convert units:</strong> Change between different unit systems</li>
+                        <li><strong>Estimate magnitudes:</strong> Get approximate answers quickly</li>
+                        <li><strong>Identify errors:</strong> Catch mistakes in calculations</li>
+                    </ol>
+                </div>
+
+                <div class="example-box">
+                    <h4>📝 Dimensional Analysis Example: Deriving Period of Pendulum</h4>
+                    <p><strong>Problem:</strong> Find how the period <em>T</em> of a pendulum depends on its length <em>l</em> and gravitational acceleration <em>g</em>.</p>
+                    
+                    <p><strong>Step 1:</strong> Assume <em>T</em> = <em>k</em> <em>l</em>ᵃ <em>g</em>ᵇ (where <em>k</em> is dimensionless)</p>
+                    
+                    <p><strong>Step 2:</strong> Write dimensions</p>
+                    <p>[T] = [L]ᵃ [LT⁻²]ᵇ = [L]ᵃ⁺ᵇ [T]⁻²ᵇ</p>
+                    
+                    <p><strong>Step 3:</strong> Compare powers</p>
+                    <p>For time: 1 = -2<em>b</em> → <em>b</em> = -1/2</p>
+                    <p>For length: 0 = <em>a</em> + <em>b</em> → <em>a</em> = 1/2</p>
+                    
+                    <p><strong>Step 4:</strong> Result</p>
+                    <p><em>T</em> = <em>k</em> √(<em>l</em>/<em>g</em>)</p>
+                    <p>(The exact result is <em>T</em> = 2π√(<em>l</em>/<em>g</em>))</p>
+                </div>
+
+                <div class="advanced-note">
+                    <h4>🎓 Limitations of Dimensional Analysis:</h4>
+                    <p>While powerful, dimensional analysis cannot determine dimensionless constants (like 2π in the pendulum formula) or distinguish between quantities with the same dimensions (like work and torque, both having dimensions [ML²T⁻²]).</p>
+                </div>
             </div>
 
             <div class="section">
                 <h2>1.5 Principle of Homogeneity</h2>
-                <p>The <strong>principle of homogeneity</strong> states that any valid physical equation must be dimensionally consistent—every term must have the same dimensions.</p>
+                
+                <div class="beginner-note">
+                    <h4>🔰 The "Same Type" Rule:</h4>
+                    <p>You can't add apples to oranges meaningfully! Similarly, in physics equations, you can only add or subtract quantities with the same dimensions. A length plus a time doesn't make physical sense!</p>
+                </div>
+
+                <p>The <strong>principle of homogeneity</strong> (also called dimensional consistency) states that any valid physical equation must be dimensionally consistent - every term in the equation must have the same dimensions.</p>
+
+                <div class="formula-box">
+                    <h4>Principle of Homogeneity:</h4>
+                    <p>In any valid physical equation:</p>
+                    <p>All terms being added or subtracted must have identical dimensions</p>
+                    <p>Both sides of the equation must have identical dimensions</p>
+                </div>
+
+                <h3>Testing Equation Validity</h3>
+                <p>This principle provides a powerful tool for checking whether an equation could possibly be correct:</p>
+
                 <div class="example-box">
-                    <h4>📝 Example Analysis: Kinematic Equation</h4>
-                    <p>Consider: $x = x_0 + v_0t + \frac{1}{2}at^2$</p>
+                    <h4>📝 Example 1: Valid Kinematic Equation</h4>
+                    <p>Consider: <em>x</em> = <em>x</em>₀ + <em>v</em>₀<em>t</em> + ½<em>at</em>²</p>
+                    
+                    <p><strong>Dimensional analysis:</strong></p>
                     <ul>
-                        <li>$[x] = [L]$</li>
-                        <li>$[x_0] = [L]$</li>
-                        <li>$[v_0t] = [LT^{-1}][T] = [L]$</li>
-                        <li>$[\frac{1}{2}at^2] = [LT^{-2}][T^2] = [L]$</li>
+                        <li>[<em>x</em>] = [L]</li>
+                        <li>[<em>x</em>₀] = [L]</li>
+                        <li>[<em>v</em>₀<em>t</em>] = [LT⁻¹][T] = [L]</li>
+                        <li>[½<em>at</em>²] = [LT⁻²][T²] = [L]</li>
                     </ul>
-                    <p>✅ All terms have the dimension of length [L], so the equation is consistent.</p>
+                    
+                    <p>✅ All terms have dimension [L], so the equation is dimensionally consistent.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>📝 Example 2: Invalid Equation</h4>
+                    <p>Suppose someone claims: <em>v</em> = <em>at</em> + <em>x</em></p>
+                    
+                    <p><strong>Dimensional analysis:</strong></p>
+                    <ul>
+                        <li>[<em>v</em>] = [LT⁻¹]</li>
+                        <li>[<em>at</em>] = [LT⁻²][T] = [LT⁻¹]</li>
+                        <li>[<em>x</em>] = [L]</li>
+                    </ul>
+                    
+                    <p>❌ We're trying to add [LT⁻¹] + [L], which is impossible! This equation is dimensionally inconsistent and therefore wrong.</p>
+                </div>
+
+                <h3>Applications in Problem Solving</h3>
+                <div class="highlight-box">
+                    <h4>Using Dimensional Consistency:</h4>
+                    <ul>
+                        <li><strong>Error detection:</strong> Catch algebraic mistakes early</li>
+                        <li><strong>Formula verification:</strong> Check if derived equations make sense</li>
+                        <li><strong>Unit conversion validation:</strong> Ensure conversions are correct</li>
+                        <li><strong>Exam strategy:</strong> Eliminate impossible answers quickly</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>📝 Example 3: Energy Conservation Check</h4>
+                    <p>In energy problems, check that all energy terms have the same dimensions:</p>
+                    
+                    <p><strong>Kinetic energy:</strong> [½<em>mv</em>²] = [M][L²T⁻²] = [ML²T⁻²]</p>
+                    <p><strong>Potential energy:</strong> [<em>mgh</em>] = [M][LT⁻²][L] = [ML²T⁻²]</p>
+                    <p><strong>Work:</strong> [<em>Fd</em>] = [MLT⁻²][L] = [ML²T⁻²]</p>
+                    
+                    <p>✅ All energy quantities have dimension [ML²T⁻²], confirming our equations are consistent.</p>
+                </div>
+
+                <div class="advanced-note">
+                    <h4>🎓 Beyond Simple Checking:</h4>
+                    <p>Advanced applications include deriving scaling laws in complex systems, checking the validity of approximations in theoretical physics, and ensuring consistency in computational models across different length and time scales.</p>
                 </div>
             </div>
 
             <div class="section">
-                <h2>1.6 Precision and Significant Figures</h2>
-                <p><strong>Significant figures</strong> are the digits in a number that are known with certainty, plus the first uncertain digit.</p>
-                <h3>Rules for Significant Figures</h3>
+                <h2>1.6 Precision, Accuracy, and Significant Figures</h2>
+                
+                <div class="beginner-note">
+                    <h4>🔰 Precision vs. Accuracy:</h4>
+                    <p>Imagine throwing darts: Accuracy is hitting the bullseye, precision is hitting the same spot repeatedly. In measurement, accuracy means close to the true value, precision means consistent repeated measurements!</p>
+                </div>
+
+                <h3>Understanding Precision and Accuracy</h3>
+                <p><strong>Accuracy</strong> refers to how close a measurement is to the true or accepted value. <strong>Precision</strong> refers to how close repeated measurements are to each other.</p>
+
                 <div class="highlight-box">
+                    <h4>Four Possible Scenarios:</h4>
                     <ul>
-                        <li>Non-zero digits are always significant. (e.g., 123 has 3 sig figs)</li>
-                        <li>Zeros between two significant digits are significant. (e.g., 101 has 3 sig figs)</li>
-                        <li>Leading zeros are not significant. (e.g., 0.05 has 1 sig fig)</li>
-                        <li>Trailing zeros are significant only with a decimal point. (e.g., 100 has 1 sig fig, 100.0 has 4)</li>
+                        <li><strong>High accuracy, high precision:</strong> Measurements cluster around true value</li>
+                        <li><strong>High accuracy, low precision:</strong> Measurements scattered around true value</li>
+                        <li><strong>Low accuracy, high precision:</strong> Measurements cluster, but away from true value</li>
+                        <li><strong>Low accuracy, low precision:</strong> Measurements scattered and away from true value</li>
                     </ul>
                 </div>
+
+                <h3>Significant Figures</h3>
+                <p><strong>Significant figures</strong> (or significant digits) represent the precision of a measurement - they include all digits that are known with certainty plus the first uncertain digit.</p>
+
+                <h4>Rules for Identifying Significant Figures</h4>
+                <div class="example-box">
+                    <h4>📝 Significant Figure Rules:</h4>
+                    <ol>
+                        <li><strong>Non-zero digits are always significant</strong>
+                            <ul>
+                                <li>123 has 3 sig figs</li>
+                                <li>45.67 has 4 sig figs</li>
+                            </ul>
+                        </li>
+                        <li><strong>Zeros between non-zero digits are significant</strong>
+                            <ul>
+                                <li>101 has 3 sig figs</li>
+                                <li>30.05 has 4 sig figs</li>
+                            </ul>
+                        </li>
+                        <li><strong>Leading zeros are NOT significant</strong>
+                            <ul>
+                                <li>0.0045 has 2 sig figs</li>
+                                <li>0.000123 has 3 sig figs</li>
+                            </ul>
+                        </li>
+                        <li><strong>Trailing zeros are significant only if there's a decimal point</strong>
+                            <ul>
+                                <li>1200 has 2 sig figs (ambiguous)</li>
+                                <li>1200. has 4 sig figs</li>
+                                <li>1200.0 has 5 sig figs</li>
+                            </ul>
+                        </li>
+                        <li><strong>Scientific notation clarifies trailing zeros</strong>
+                            <ul>
+                                <li>1.2 × 10³ has 2 sig figs</li>
+                                <li>1.200 × 10³ has 4 sig figs</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <h4>Rules for Calculations with Significant Figures</h4>
+                <div class="formula-box">
+                    <h4>Addition and Subtraction:</h4>
+                    <p>Round to the least number of decimal places</p>
+                    <p>Example: 23.45 + 1.2 = 24.65 → 24.7 (1 decimal place)</p>
+                </div>
+
+                <div class="formula-box">
+                    <h4>Multiplication and Division:</h4>
+                    <p>Round to the least number of significant figures</p>
+                    <p>Example: 23.45 × 1.2 = 28.14 → 28 (2 sig figs)</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>📝 Complete Calculation Example:</h4>
+                    <p><strong>Problem:</strong> Calculate the area of a rectangle with length <em>l</em> = 12.50 cm and width <em>w</em> = 3.2 cm</p>
+                    
+                    <p><strong>Solution:</strong></p>
+                    <p><em>A</em> = <em>l</em> × <em>w</em> = 12.50 cm × 3.2 cm = 40.00 cm²</p>
+                    
+                    <p><strong>Significant figures analysis:</strong></p>
+                    <ul>
+                        <li>12.50 has 4 sig figs</li>
+                        <li>3.2 has 2 sig figs</li>
+                        <li>Result should have 2 sig figs</li>
+                    </ul>
+                    
+                    <p><strong>Final answer:</strong> <em>A</em> = 40 cm² or 4.0 × 10¹ cm²</p>
+                </div>
+
+                <h3>Scientific Notation and Significant Figures</h3>
+                <p>Scientific notation makes significant figures unambiguous and helps with very large or small numbers:</p>
+
+                <div class="example-box">
+                    <h4>📝 Scientific Notation Examples:</h4>
+                    <ul>
+                        <li><strong>Speed of light:</strong> <em>c</em> = 2.998 × 10⁸ m/s (4 sig figs)</li>
+                        <li><strong>Planck's constant:</strong> <em>h</em> = 6.626 × 10⁻³⁴ J⋅s (4 sig figs)</li>
+                        <li><strong>Electron mass:</strong> <em>m</em>ₑ = 9.109 × 10⁻³¹ kg (4 sig figs)</li>
+                        <li><strong>Avogadro's number:</strong> <em>N</em>ₐ = 6.022 × 10²³ mol⁻¹ (4 sig figs)</li>
+                    </ul>
+                </div>
+
+                <div class="advanced-note">
+                    <h4>🎓 Uncertainty and Error Analysis:</h4>
+                    <p>In advanced measurements, we quantify uncertainty explicitly using error bars or uncertainty notation (e.g., 9.81 ± 0.02 m/s²). This provides more information than significant figures alone and is essential for comparing experimental results with theoretical predictions.</p>
+                </div>
             </div>
+
+            <div class="section">
+                <h2>🤔 Conceptual Questions</h2>
+                
+                <div class="question">
+                    <strong>1.</strong> Explain why dimensional analysis can help determine the relationship between physical quantities but cannot provide numerical constants. Give an example to illustrate your answer.
+                    <details>
+                        <summary>Answer</summary>
+                        <p>Dimensional analysis can reveal the functional form of relationships between quantities but not numerical constants because constants are dimensionless. For example, when deriving the period of a pendulum, dimensional analysis gives <em>T</em> ∝ √(<em>l</em>/<em>g</em>), but cannot determine the factor of 2π. The complete formula is <em>T</em> = 2π√(<em>l</em>/<em>g</em>), where 2π is a dimensionless constant that must be determined experimentally or through detailed theoretical analysis.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>2.</strong> A student measures the length of a table five times and gets: 152.3 cm, 152.1 cm, 152.4 cm, 152.2 cm, 152.3 cm. The actual length is 155.0 cm. Describe the precision and accuracy of these measurements.
+                    <details>
+                        <summary>Answer</summary>
+                        <p>The measurements show <strong>high precision</strong> because they are very close to each other (range of only 0.3 cm) and have good reproducibility. However, they show <strong>low accuracy</strong> because they are systematically about 2.7 cm away from the true value. This suggests a systematic error in the measurement technique or instrument calibration.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>3.</strong> Why is it important that all terms in a physics equation have the same dimensions? What would it mean if they didn't?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>Terms with different dimensions cannot be meaningfully added or subtracted because they represent fundamentally different physical quantities. If an equation had terms with different dimensions, it would be physically meaningless - like trying to add 5 meters to 3 seconds. The principle of dimensional homogeneity ensures that equations represent physically sensible relationships and provides a powerful tool for detecting errors in mathematical manipulations.</p>
+                    </details>
+                </div>
+            </div>
+
+            <div class="quiz-container">
+                <h2>Test Your Knowledge: Measurement Quiz</h2>
+                <p>Challenge yourself with this comprehensive quiz covering all aspects of measurement in physics.</p>
+                <div id="quiz"></div>
+                <div class="quiz-nav">
+                    <button id="prevBtn" class="btn btn-secondary">Previous</button>
+                    <span id="questionCounter" class="question-counter"></span>
+                    <button id="nextBtn" class="btn">Next</button>
+                </div>
+                <div class="quiz-buttons">
+                    <button id="submitBtn" class="btn">Submit Quiz</button>
+                    <button id="resetBtn" class="btn btn-secondary">Reset Quiz</button>
+                </div>
+                <div id="results" style="display: none;"></div>
+            </div>
+
         </div>
     </main>
 
@@ -273,6 +1443,328 @@
         </div>
     </footer>
 
-    <script src="../shared/mechanics-scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme toggle functionality
+            const lightModeBtn = document.getElementById('light-mode');
+            const darkModeBtn = document.getElementById('dark-mode');
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            if (savedTheme === 'dark') {
+                darkModeBtn.classList.add('active');
+                lightModeBtn.classList.remove('active');
+            }
+
+            lightModeBtn.addEventListener('click', () => {
+                document.documentElement.setAttribute('data-theme', 'light');
+                lightModeBtn.classList.add('active');
+                darkModeBtn.classList.remove('active');
+                localStorage.setItem('theme', 'light');
+            });
+
+            darkModeBtn.addEventListener('click', () => {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                darkModeBtn.classList.add('active');
+                lightModeBtn.classList.remove('active');
+                localStorage.setItem('theme', 'dark');
+            });
+
+            // Timer functionality
+            let timer = null;
+            let timeLeft = 0;
+            let isRunning = false;
+
+            const timerDisplay = document.getElementById('timerDisplay');
+            const timerSelect = document.getElementById('timerSelect');
+            const startTimer = document.getElementById('startTimer');
+            const stopTimer = document.getElementById('stopTimer');
+            const resetTimer = document.getElementById('resetTimer');
+
+            function updateDisplay() {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+
+            function startTimerFunction() {
+                if (!isRunning) {
+                    if (timeLeft === 0) {
+                        timeLeft = parseInt(timerSelect.value);
+                    }
+                    isRunning = true;
+                    timer = setInterval(() => {
+                        timeLeft--;
+                        updateDisplay();
+                        if (timeLeft <= 0) {
+                            stopTimerFunction();
+                            alert('Time\'s up!');
+                        }
+                    }, 1000);
+                    startTimer.textContent = 'Pause';
+                } else {
+                    stopTimerFunction();
+                }
+            }
+
+            function stopTimerFunction() {
+                isRunning = false;
+                if (timer) {
+                    clearInterval(timer);
+                    timer = null;
+                }
+                startTimer.textContent = 'Start';
+            }
+
+            function resetTimerFunction() {
+                stopTimerFunction();
+                timeLeft = 0;
+                updateDisplay();
+            }
+
+            startTimer.addEventListener('click', startTimerFunction);
+            stopTimer.addEventListener('click', stopTimerFunction);
+            resetTimer.addEventListener('click', resetTimerFunction);
+
+            timerSelect.addEventListener('change', () => {
+                if (!isRunning) {
+                    timeLeft = parseInt(timerSelect.value);
+                    updateDisplay();
+                }
+            });
+
+            // Initialize timer display
+            timeLeft = parseInt(timerSelect.value);
+            updateDisplay();
+            
+            // Quiz functionality
+            const quizContainer = document.getElementById('quiz');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const questionCounter = document.getElementById('questionCounter');
+            const resultsContainer = document.getElementById('results');
+
+            const quizData = [
+                {
+                    question: "1. Which of the following is a fundamental quantity in the SI system?",
+                    options: ["Force", "Energy", "Mass", "Velocity"],
+                    answer: "Mass"
+                },
+                {
+                    question: "2. The dimensional formula for acceleration is:",
+                    options: ["[LT⁻¹]", "[LT⁻²]", "[MLT⁻²]", "[ML⁻¹T⁻²]"],
+                    answer: "[LT⁻²]"
+                },
+                {
+                    question: "3. How many significant figures are in the number 0.00450?",
+                    options: ["2", "3", "4", "5"],
+                    answer: "3"
+                },
+                {
+                    question: "4. Which of the following is a vector quantity?",
+                    options: ["Mass", "Time", "Displacement", "Speed"],
+                    answer: "Displacement"
+                },
+                {
+                    question: "5. The SI unit of force is:",
+                    options: ["Joule", "Newton", "Pascal", "Watt"],
+                    answer: "Newton"
+                },
+                {
+                    question: "6. If a physical equation is dimensionally correct, it means:",
+                    options: ["The equation is definitely correct", "The equation might be correct", "The equation is definitely wrong", "Nothing can be concluded"],
+                    answer: "The equation might be correct"
+                },
+                {
+                    question: "7. The number 1200 has how many significant figures?",
+                    options: ["2", "3", "4", "Ambiguous without additional notation"],
+                    answer: "Ambiguous without additional notation"
+                },
+                {
+                    question: "8. Which prefix represents 10⁻⁶?",
+                    options: ["nano", "micro", "milli", "centi"],
+                    answer: "micro"
+                },
+                {
+                    question: "9. The dimensional formula for energy is:",
+                    options: ["[ML²T⁻²]", "[MLT⁻²]", "[ML²T⁻¹]", "[M²LT⁻²]"],
+                    answer: "[ML²T⁻²]"
+                },
+                {
+                    question: "10. Precision in measurement refers to:",
+                    options: ["Closeness to the true value", "Reproducibility of measurements", "The number of decimal places", "The instrument used"],
+                    answer: "Reproducibility of measurements"
+                },
+                {
+                    question: "11. The result of 23.45 + 1.2 with correct significant figures is:",
+                    options: ["24.65", "24.7", "25", "24"],
+                    answer: "24.7"
+                },
+                {
+                    question: "12. Which is NOT a derived unit?",
+                    options: ["Newton", "Joule", "Kilogram", "Pascal"],
+                    answer: "Kilogram"
+                },
+                {
+                    question: "13. The dimensional formula for pressure is:",
+                    options: ["[ML⁻¹T⁻²]", "[MLT⁻²]", "[ML²T⁻²]", "[M⁻¹LT⁻²]"],
+                    answer: "[ML⁻¹T⁻²]"
+                },
+                {
+                    question: "14. In scientific notation, 0.000567 is written as:",
+                    options: ["567 × 10⁻⁶", "5.67 × 10⁻⁴", "56.7 × 10⁻⁵", "0.567 × 10⁻³"],
+                    answer: "5.67 × 10⁻⁴"
+                },
+                {
+                    question: "15. A measurement has high precision but low accuracy. This indicates:",
+                    options: ["Random errors", "Systematic errors", "No errors", "Both random and systematic errors"],
+                    answer: "Systematic errors"
+                },
+                {
+                    question: "16. The SI base unit for luminous intensity is:",
+                    options: ["Lumen", "Lux", "Candela", "Watt"],
+                    answer: "Candela"
+                },
+                {
+                    question: "17. Which equation is dimensionally incorrect?",
+                    options: ["v = u + at", "s = ut + ½at²", "v² = u² + 2as", "a = v + t"],
+                    answer: "a = v + t"
+                },
+                {
+                    question: "18. The result of 4.56 × 2.1 with correct significant figures is:",
+                    options: ["9.576", "9.58", "9.6", "10"],
+                    answer: "9.6"
+                },
+                {
+                    question: "19. The dimensional formula for velocity is:",
+                    options: ["[LT]", "[LT⁻¹]", "[LT²]", "[L²T⁻¹]"],
+                    answer: "[LT⁻¹]"
+                },
+                {
+                    question: "20. How many fundamental quantities are there in mechanics?",
+                    options: ["2", "3", "4", "7"],
+                    answer: "3"
+                }
+            ];
+
+            let currentQuestionIndex = 0;
+            let userAnswers = {};
+
+            function loadQuiz() {
+                quizContainer.innerHTML = '';
+                resultsContainer.style.display = 'none';
+
+                const currentQuizData = quizData[currentQuestionIndex];
+                const questionEl = document.createElement('div');
+                questionEl.classList.add('quiz-question');
+
+                let optionsHtml = '';
+                currentQuizData.options.forEach(option => {
+                    const isChecked = userAnswers[currentQuestionIndex] === option ? 'checked' : '';
+                    const optionId = `q${currentQuestionIndex}_${option.replace(/[^a-zA-Z0-9]/g, "")}`;
+                    optionsHtml += `
+                        <div class="option">
+                            <input type="radio" name="question${currentQuestionIndex}" value="${option}" id="${optionId}" ${isChecked}>
+                            <label for="${optionId}">${option}</label>
+                        </div>
+                    `;
+                });
+
+                questionEl.innerHTML = `
+                    <h4>${currentQuizData.question}</h4>
+                    ${optionsHtml}
+                `;
+
+                quizContainer.appendChild(questionEl);
+                updateCounter();
+                updateButtons();
+
+                const options = questionEl.querySelectorAll('input[type="radio"]');
+                options.forEach(option => {
+                    option.addEventListener('change', () => {
+                        userAnswers[currentQuestionIndex] = option.value;
+                    });
+                });
+            }
+
+            function updateCounter() {
+                questionCounter.textContent = `Question ${currentQuestionIndex + 1} of ${quizData.length}`;
+            }
+
+            function updateButtons() {
+                prevBtn.disabled = currentQuestionIndex === 0;
+                nextBtn.disabled = currentQuestionIndex === quizData.length - 1;
+            }
+
+            function showResults() {
+                let score = 0;
+                resultsContainer.innerHTML = '<h3>Quiz Results</h3>';
+                quizData.forEach((quizItem, index) => {
+                    const userAnswer = userAnswers[index];
+                    const isCorrect = userAnswer === quizItem.answer;
+                    if (isCorrect) {
+                        score++;
+                    }
+                    const resultItem = document.createElement('div');
+                    resultItem.classList.add('quiz-question');
+                    resultItem.innerHTML = `
+                        <h4>${quizItem.question}</h4>
+                        <p>Your answer: <strong>${userAnswer || 'Not answered'}</strong></p>
+                        <p>Correct answer: <strong>${quizItem.answer}</strong></p>
+                        <p style="color: ${isCorrect ? 'var(--success-color)' : 'var(--danger-color)'}; font-weight: bold;">
+                            ${isCorrect ? 'Correct' : 'Incorrect'}
+                        </p>
+                    `;
+                    resultsContainer.appendChild(resultItem);
+                });
+                const scorePercentage = (score / quizData.length) * 100;
+                resultsContainer.insertAdjacentHTML('afterbegin', `<p>Your final score is: <strong>${score}/${quizData.length} (${scorePercentage.toFixed(1)}%)</strong></p>`);
+                resultsContainer.style.display = 'block';
+                quizContainer.style.display = 'none';
+                document.querySelector('.quiz-nav').style.display = 'none';
+                submitBtn.style.display = 'none';
+                resetBtn.style.display = 'inline-block';
+            }
+
+            function resetQuiz() {
+                userAnswers = {};
+                currentQuestionIndex = 0;
+                resultsContainer.style.display = 'none';
+                quizContainer.style.display = 'block';
+                document.querySelector('.quiz-nav').style.display = 'flex';
+                submitBtn.style.display = 'inline-block';
+                loadQuiz();
+            }
+
+            prevBtn.addEventListener('click', () => {
+                if (currentQuestionIndex > 0) {
+                    currentQuestionIndex--;
+                    loadQuiz();
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentQuestionIndex < quizData.length - 1) {
+                    currentQuestionIndex++;
+                    loadQuiz();
+                }
+            });
+            
+            submitBtn.addEventListener('click', () => {
+                const answeredQuestions = Object.keys(userAnswers).length;
+                if (answeredQuestions < quizData.length) {
+                    if (!confirm(`You have answered ${answeredQuestions} of ${quizData.length} questions. Submit anyway?`)) {
+                        return;
+                    }
+                }
+                showResults();
+            });
+
+            resetBtn.addEventListener('click', resetQuiz);
+            
+            loadQuiz();
+        });
+    </script>
 </body>
 </html>
