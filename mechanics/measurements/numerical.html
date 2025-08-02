@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numerical Problems: Measurement - Physics Daily</title>
+    <meta name="description" content="Solve numerical problems related to unit conversion, dimensional analysis, and significant figures.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../shared/mechanics-style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XN081SR2KP');
+    </script>
+    <style>
+        .question {
+            margin: 20px 0;
+            padding: 16px;
+            border-left: 4px solid var(--primary-color);
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+        }
+        details {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: .5em .5em 0;
+            margin-top: 1em;
+            background: var(--bg-secondary);
+        }
+        summary {
+            font-weight: bold;
+            margin: -.5em -.5em 0;
+            padding: .5em;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../../index.html" class="nav-logo">Physics Daily</a>
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../resources.html">Resources</a></li>
+                    <li><a href="../../about.html">About</a></li>
+                    <li><a href="../../contribute.html">Contribute</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="theme-toggle">
+        <button id="light-mode" title="Light Mode">☀️</button>
+        <button id="dark-mode" title="Dark Mode">🌙</button>
+    </div>
+
+    <div class="breadcrumb">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span class="separator">›</span>
+                <a href="../foundations.html">Classical Mechanics</a>
+                <span class="separator">›</span>
+                <a href="index.html">📏 Measurement</a>
+                <span class="separator">›</span>
+                <span class="current">🧮 Numerical Problems</span>
+            </nav>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <h1>Numerical Problems</h1>
+            <p class="subtitle">Chapter 1: Measurement</p>
+            <p class="description">
+                Apply your knowledge to solve quantitative problems and sharpen your calculation skills.
+            </p>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="section">
+                <h2>🧮 Numerical Problems</h2>
+                <div class="question">
+                    <strong>1.</strong> The speed of light is 299,792,458 m/s. Convert this to:
+                    <ul>
+                        <li>a) kilometers per hour (km/h)</li>
+                        <li>b) miles per hour (mph) [1 mile = 1.609 km]</li>
+                    </ul>
+                    <details>
+                        <summary>Answer</summary>
+                        <p><strong>a)</strong> $299,792,458 \, \text{m/s} \times (3600 \, \text{s/h}) \times (1 \, \text{km}/1000 \, \text{m}) = \mathbf{1.079 \times 10^9 \, \text{km/h}}$</p>
+                        <p><strong>b)</strong> $1.079 \times 10^9 \, \text{km/h} \times (1 \, \text{mi}/1.609 \, \text{km}) = \mathbf{6.71 \times 10^8 \, \text{mph}}$</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>2.</strong> The period of a simple pendulum is given by $T = 2\pi\sqrt{L/g}$. Use dimensional analysis to verify this relationship.
+                    <details>
+                        <summary>Answer</summary>
+                        <p>Assume $T \propto L^a g^b$. Dimensionally: $[T] = [L]^a [LT^{-2}]^b = [L^{a+b} T^{-2b}]$.</p>
+                        <p>Comparing exponents: For T: $1 = -2b \implies b = -1/2$. For L: $0 = a+b \implies a = -b = 1/2$.</p>
+                        <p>So, $T \propto L^{1/2} g^{-1/2} \implies T \propto \sqrt{L/g}$. The equation is dimensionally consistent. The constant $2\pi$ is dimensionless and cannot be found this way.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>3.</strong> Verify dimensional consistency for Einstein's mass-energy equation $E = mc^2$.
+                    <details>
+                        <summary>Answer</summary>
+                        <p>LHS: Dimension of Energy $[E] = [ML^2T^{-2}]$.</p>
+                        <p>RHS: Dimension of $[mc^2] = [M][LT^{-1}]^2 = [M][L^2T^{-2}] = [ML^2T^{-2}]$.</p>
+                        <p>✅ Both sides have the same dimension, so the equation is consistent.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>4.</strong> A rectangular swimming pool measures 25.0 m × 12.5 m × 2.0 m. Calculate its volume and the mass of the water it holds (density of water ≈ 1000 kg/m³), respecting significant figures.
+                    <details>
+                        <summary>Answer</summary>
+                        <p><strong>Volume:</strong> $V = 25.0 \times 12.5 \times 2.0 = 625 \, m^3$. Since 2.0 has two sig figs, we should report the volume as $\mathbf{6.2 \times 10^2 \, m^3}$.</p>
+                        <p><strong>Mass:</strong> $m = \rho V = (1000 \, \text{kg/m}^3)(625 \, \text{m}^3) = 625,000 \, \text{kg} = \mathbf{6.2 \times 10^5 \, \text{kg}}$.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>5.</strong> The period of a mass-spring system is $T = 2\pi\sqrt{m/k}$. What are the dimensions of the spring constant $k$?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>From the formula, $T^2 \propto m/k$, so $k \propto m/T^2$.</p>
+                        <p>Dimensions of $k$: $[k] = [M]/[T^2] = \mathbf{[MT^{-2}]}$. This is consistent with the unit of force per unit length (N/m).</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>6.</strong> Perform the following calculations with proper significant figures:
+                    <ul>
+                        <li>a) $23.45 + 1.2 + 0.678$</li>
+                        <li>b) $4.56 \times 2.1$</li>
+                        <li>c) $(2.34 \times 10^3) \div (1.2 \times 10^{-4})$</li>
+                    </ul>
+                    <details>
+                        <summary>Answer</summary>
+                        <p><strong>a)</strong> $23.45 + 1.2 + 0.678 = 25.328 \rightarrow \mathbf{25.3}$ (limited by 1.2, which has one decimal place).</p>
+                        <p><strong>b)</strong> $4.56 \times 2.1 = 9.576 \rightarrow \mathbf{9.6}$ (limited by 2.1, which has two significant figures).</p>
+                        <p><strong>c)</strong> $(2.34 \times 10^3) \div (1.2 \times 10^{-4}) = 1.95 \times 10^7 \rightarrow \mathbf{1.9 \times 10^7}$ (limited by 1.2, which has two significant figures).</p>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; Physics Daily. Advancing physics education through interactive learning.</p>
+        </div>
+    </footer>
+
+    <script src="../shared/mechanics-scripts.js"></script>
+</body>
+</html>
