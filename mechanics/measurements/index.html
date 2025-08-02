@@ -321,12 +321,14 @@
             background: var(--card-bg);
             border-radius: 8px;
             overflow: hidden;
+            font-size: 0.9rem;
         }
 
         th, td {
             border: 1px solid var(--border-color);
-            padding: 12px;
+            padding: 8px 12px;
             text-align: left;
+            vertical-align: top;
         }
 
         th {
@@ -337,6 +339,17 @@
 
         td {
             color: var(--text-secondary);
+        }
+
+        .two-column-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .column-table {
+            overflow-x: auto;
         }
 
         .practice-section {
@@ -427,6 +440,21 @@
             width: 100%;
         }
 
+        .sig-figs-section {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .operation-example {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
         .footer {
             background: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
@@ -448,6 +476,18 @@
 
             .nav-links {
                 display: none;
+            }
+
+            .two-column-table {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 0.8rem;
+            }
+
+            th, td {
+                padding: 6px 8px;
             }
         }
     </style>
@@ -576,48 +616,184 @@
             </div>
 
             <div class="section">
-                <h2>1.3 Fundamental and Derived Units</h2>
+                <h2>1.3 Comprehensive List of Physical Quantities and Their Dimensions</h2>
                 <p><strong>Fundamental quantities</strong> are the basic building blocks of all measurements. <strong>Derived quantities</strong> are built from combinations of fundamental quantities using mathematical relationships.</p>
-                <h3>Common Derived Units in Mechanics</h3>
+                
+                <h3>Mechanical Quantities</h3>
+                <div class="two-column-table">
+                    <div class="column-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Quantity</th>
+                                    <th>Symbol</th>
+                                    <th>SI Unit</th>
+                                    <th>Dimension</th>
+                                    <th>Formula</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Length</td><td>l, x</td><td>meter (m)</td><td>[L]</td><td>fundamental</td></tr>
+                                <tr><td>Mass</td><td>m</td><td>kilogram (kg)</td><td>[M]</td><td>fundamental</td></tr>
+                                <tr><td>Time</td><td>t</td><td>second (s)</td><td>[T]</td><td>fundamental</td></tr>
+                                <tr><td>Area</td><td>A</td><td>m²</td><td>[L²]</td><td>A = l × w</td></tr>
+                                <tr><td>Volume</td><td>V</td><td>m³</td><td>[L³]</td><td>V = l × w × h</td></tr>
+                                <tr><td>Density</td><td>ρ</td><td>kg/m³</td><td>[ML⁻³]</td><td>ρ = m/V</td></tr>
+                                <tr><td>Velocity</td><td>v</td><td>m/s</td><td>[LT⁻¹]</td><td>v = dx/dt</td></tr>
+                                <tr><td>Acceleration</td><td>a</td><td>m/s²</td><td>[LT⁻²]</td><td>a = dv/dt</td></tr>
+                                <tr><td>Force</td><td>F</td><td>newton (N)</td><td>[MLT⁻²]</td><td>F = ma</td></tr>
+                                <tr><td>Momentum</td><td>p</td><td>kg⋅m/s</td><td>[MLT⁻¹]</td><td>p = mv</td></tr>
+                                <tr><td>Impulse</td><td>J</td><td>N⋅s</td><td>[MLT⁻¹]</td><td>J = F⋅Δt</td></tr>
+                                <tr><td>Work/Energy</td><td>W, E</td><td>joule (J)</td><td>[ML²T⁻²]</td><td>W = F⋅d</td></tr>
+                                <tr><td>Power</td><td>P</td><td>watt (W)</td><td>[ML²T⁻³]</td><td>P = W/t</td></tr>
+                                <tr><td>Pressure</td><td>p</td><td>pascal (Pa)</td><td>[ML⁻¹T⁻²]</td><td>p = F/A</td></tr>
+                                <tr><td>Angular velocity</td><td>ω</td><td>rad/s</td><td>[T⁻¹]</td><td>ω = dθ/dt</td></tr>
+                                <tr><td>Angular acceleration</td><td>α</td><td>rad/s²</td><td>[T⁻²]</td><td>α = dω/dt</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="column-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Quantity</th>
+                                    <th>Symbol</th>
+                                    <th>SI Unit</th>
+                                    <th>Dimension</th>
+                                    <th>Formula</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Torque</td><td>τ</td><td>N⋅m</td><td>[ML²T⁻²]</td><td>τ = r × F</td></tr>
+                                <tr><td>Moment of inertia</td><td>I</td><td>kg⋅m²</td><td>[ML²]</td><td>I = Σmr²</td></tr>
+                                <tr><td>Angular momentum</td><td>L</td><td>kg⋅m²/s</td><td>[ML²T⁻¹]</td><td>L = Iω</td></tr>
+                                <tr><td>Frequency</td><td>f</td><td>hertz (Hz)</td><td>[T⁻¹]</td><td>f = 1/T</td></tr>
+                                <tr><td>Period</td><td>T</td><td>second (s)</td><td>[T]</td><td>T = 1/f</td></tr>
+                                <tr><td>Surface tension</td><td>γ</td><td>N/m</td><td>[MT⁻²]</td><td>γ = F/l</td></tr>
+                                <tr><td>Stress</td><td>σ</td><td>Pa</td><td>[ML⁻¹T⁻²]</td><td>σ = F/A</td></tr>
+                                <tr><td>Strain</td><td>ε</td><td>dimensionless</td><td>[1]</td><td>ε = ΔL/L</td></tr>
+                                <tr><td>Young's modulus</td><td>Y</td><td>Pa</td><td>[ML⁻¹T⁻²]</td><td>Y = σ/ε</td></tr>
+                                <tr><td>Bulk modulus</td><td>K</td><td>Pa</td><td>[ML⁻¹T⁻²]</td><td>K = -ΔP/(ΔV/V)</td></tr>
+                                <tr><td>Shear modulus</td><td>G</td><td>Pa</td><td>[ML⁻¹T⁻²]</td><td>G = τ/γ</td></tr>
+                                <tr><td>Viscosity</td><td>η</td><td>Pa⋅s</td><td>[ML⁻¹T⁻¹]</td><td>η = τ/(dv/dy)</td></tr>
+                                <tr><td>Coefficient of friction</td><td>μ</td><td>dimensionless</td><td>[1]</td><td>μ = f/N</td></tr>
+                                <tr><td>Spring constant</td><td>k</td><td>N/m</td><td>[MT⁻²]</td><td>F = kx</td></tr>
+                                <tr><td>Gravitational field</td><td>g</td><td>m/s²</td><td>[LT⁻²]</td><td>g = F/m</td></tr>
+                                <tr><td>Escape velocity</td><td>v<sub>e</sub></td><td>m/s</td><td>[LT⁻¹]</td><td>v<sub>e</sub> = √(2GM/r)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <h3>Thermal and Thermodynamic Quantities</h3>
                 <table>
                     <thead>
                         <tr>
                             <th>Quantity</th>
-                            <th>SI Unit</th>
                             <th>Symbol</th>
-                            <th>In Base Units</th>
-                            <th>Relationship</th>
+                            <th>SI Unit</th>
+                            <th>Dimension</th>
+                            <th>Formula</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>Force</td><td>newton</td><td>N</td><td><span class="equation">kg⋅m⋅s⁻²</span></td><td><span class="equation">F = ma</span></td></tr>
-                        <tr><td>Energy</td><td>joule</td><td>J</td><td><span class="equation">kg⋅m²⋅s⁻²</span></td><td><span class="equation">E = Fd</span></td></tr>
-                        <tr><td>Power</td><td>watt</td><td>W</td><td><span class="equation">kg⋅m²⋅s⁻³</span></td><td><span class="equation">P = E/t</span></td></tr>
-                        <tr><td>Pressure</td><td>pascal</td><td>Pa</td><td><span class="equation">kg⋅m⁻¹⋅s⁻²</span></td><td><span class="equation">P = F/A</span></td></tr>
-                        <tr><td>Frequency</td><td>hertz</td><td>Hz</td><td><span class="equation">s⁻¹</span></td><td><span class="equation">f = 1/T</span></td></tr>
+                        <tr><td>Temperature</td><td>T</td><td>kelvin (K)</td><td>[Θ]</td><td>fundamental</td></tr>
+                        <tr><td>Heat</td><td>Q</td><td>joule (J)</td><td>[ML²T⁻²]</td><td>Q = mcΔT</td></tr>
+                        <tr><td>Specific heat capacity</td><td>c</td><td>J/(kg⋅K)</td><td>[L²T⁻²Θ⁻¹]</td><td>c = Q/(mΔT)</td></tr>
+                        <tr><td>Heat capacity</td><td>C</td><td>J/K</td><td>[ML²T⁻²Θ⁻¹]</td><td>C = Q/ΔT</td></tr>
+                        <tr><td>Thermal conductivity</td><td>k</td><td>W/(m⋅K)</td><td>[MLT⁻³Θ⁻¹]</td><td>q = -k∇T</td></tr>
+                        <tr><td>Stefan-Boltzmann constant</td><td>σ</td><td>W/(m²⋅K⁴)</td><td>[MT⁻³Θ⁻⁴]</td><td>P = σAT⁴</td></tr>
+                        <tr><td>Entropy</td><td>S</td><td>J/K</td><td>[ML²T⁻²Θ⁻¹]</td><td>dS = dQ/T</td></tr>
+                        <tr><td>Gas constant</td><td>R</td><td>J/(mol⋅K)</td><td>[ML²T⁻²Θ⁻¹N⁻¹]</td><td>PV = nRT</td></tr>
+                        <tr><td>Coefficient of expansion</td><td>α</td><td>K⁻¹</td><td>[Θ⁻¹]</td><td>ΔL = αL₀ΔT</td></tr>
+                        <tr><td>Thermal resistance</td><td>R<sub>th</sub></td><td>K/W</td><td>[M⁻¹L⁻²T³Θ]</td><td>R<sub>th</sub> = ΔT/P</td></tr>
                     </tbody>
                 </table>
-                <div class="example-box">
-                    <h4>📝 Example: Understanding Force Units</h4>
-                    <p>A newton (N) is the force needed to accelerate <span class="equation">1 kg</span> at <span class="equation">1 m/s²</span>. This comes from Newton's second law: <span class="equation">F = ma</span>, so <span class="equation">[F] = [M][L][T⁻²] = kg⋅m⋅s⁻²</span></p>
-                </div>
+
+                <h3>Electromagnetic Quantities</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Quantity</th>
+                            <th>Symbol</th>
+                            <th>SI Unit</th>
+                            <th>Dimension</th>
+                            <th>Formula</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Electric current</td><td>I</td><td>ampere (A)</td><td>[I]</td><td>fundamental</td></tr>
+                        <tr><td>Electric charge</td><td>Q</td><td>coulomb (C)</td><td>[IT]</td><td>Q = I⋅t</td></tr>
+                        <tr><td>Electric potential</td><td>V</td><td>volt (V)</td><td>[ML²T⁻³I⁻¹]</td><td>V = W/Q</td></tr>
+                        <tr><td>Electric field</td><td>E</td><td>V/m</td><td>[MLT⁻³I⁻¹]</td><td>E = F/q</td></tr>
+                        <tr><td>Electric resistance</td><td>R</td><td>ohm (Ω)</td><td>[ML²T⁻³I⁻²]</td><td>R = V/I</td></tr>
+                        <tr><td>Capacitance</td><td>C</td><td>farad (F)</td><td>[M⁻¹L⁻²T⁴I²]</td><td>C = Q/V</td></tr>
+                        <tr><td>Inductance</td><td>L</td><td>henry (H)</td><td>[ML²T⁻²I⁻²]</td><td>L = Φ/I</td></tr>
+                        <tr><td>Magnetic field</td><td>B</td><td>tesla (T)</td><td>[MT⁻²I⁻¹]</td><td>F = qvB</td></tr>
+                        <tr><td>Magnetic flux</td><td>Φ</td><td>weber (Wb)</td><td>[ML²T⁻²I⁻¹]</td><td>Φ = B⋅A</td></tr>
+                        <tr><td>Permittivity</td><td>ε</td><td>F/m</td><td>[M⁻¹L⁻³T⁴I²]</td><td>D = εE</td></tr>
+                        <tr><td>Permeability</td><td>μ</td><td>H/m</td><td>[MLT⁻²I⁻²]</td><td>B = μH</td></tr>
+                        <tr><td>Conductivity</td><td>σ</td><td>S/m</td><td>[M⁻¹L⁻³T³I²]</td><td>J = σE</td></tr>
+                        <tr><td>Resistivity</td><td>ρ</td><td>Ω⋅m</td><td>[ML³T⁻³I⁻²]</td><td>ρ = 1/σ</td></tr>
+                        <tr><td>Electric dipole moment</td><td>p</td><td>C⋅m</td><td>[ITL]</td><td>p = qd</td></tr>
+                        <tr><td>Magnetic dipole moment</td><td>m</td><td>A⋅m²</td><td>[IL²]</td><td>τ = m × B</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Wave and Optics Quantities</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Quantity</th>
+                            <th>Symbol</th>
+                            <th>SI Unit</th>
+                            <th>Dimension</th>
+                            <th>Formula</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Wavelength</td><td>λ</td><td>meter (m)</td><td>[L]</td><td>λ = v/f</td></tr>
+                        <tr><td>Wave number</td><td>k</td><td>m⁻¹</td><td>[L⁻¹]</td><td>k = 2π/λ</td></tr>
+                        <tr><td>Amplitude</td><td>A</td><td>varies</td><td>varies</td><td>y = A sin(kx - ωt)</td></tr>
+                        <tr><td>Angular frequency</td><td>ω</td><td>rad/s</td><td>[T⁻¹]</td><td>ω = 2πf</td></tr>
+                        <tr><td>Phase</td><td>φ</td><td>radian</td><td>[1]</td><td>φ = kx - ωt</td></tr>
+                        <tr><td>Refractive index</td><td>n</td><td>dimensionless</td><td>[1]</td><td>n = c/v</td></tr>
+                        <tr><td>Optical power</td><td>P</td><td>diopter (D)</td><td>[L⁻¹]</td><td>P = 1/f</td></tr>
+                        <tr><td>Luminous intensity</td><td>I<sub>v</sub></td><td>candela (cd)</td><td>[J]</td><td>fundamental</td></tr>
+                        <tr><td>Luminous flux</td><td>Φ<sub>v</sub></td><td>lumen (lm)</td><td>[J]</td><td>Φ<sub>v</sub> = I<sub>v</sub>Ω</td></tr>
+                        <tr><td>Illuminance</td><td>E<sub>v</sub></td><td>lux (lx)</td><td>[JL⁻²]</td><td>E<sub>v</sub> = Φ<sub>v</sub>/A</td></tr>
+                        <tr><td>Luminance</td><td>L<sub>v</sub></td><td>cd/m²</td><td>[JL⁻²]</td><td>L<sub>v</sub> = I<sub>v</sub>/A</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Quantum and Atomic Physics Quantities</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Quantity</th>
+                            <th>Symbol</th>
+                            <th>SI Unit</th>
+                            <th>Dimension</th>
+                            <th>Formula</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Planck constant</td><td>h</td><td>J⋅s</td><td>[ML²T⁻¹]</td><td>E = hf</td></tr>
+                        <tr><td>Reduced Planck constant</td><td>ℏ</td><td>J⋅s</td><td>[ML²T⁻¹]</td><td>ℏ = h/2π</td></tr>
+                        <tr><td>Work function</td><td>φ</td><td>joule (J)</td><td>[ML²T⁻²]</td><td>E<sub>k</sub> = hf - φ</td></tr>
+                        <tr><td>Binding energy</td><td>B.E.</td><td>joule (J)</td><td>[ML²T⁻²]</td><td>B.E. = Δmc²</td></tr>
+                        <tr><td>Half-life</td><td>t<sub>½</sub></td><td>second (s)</td><td>[T]</td><td>N = N₀e^(-λt)</td></tr>
+                        <tr><td>Decay constant</td><td>λ</td><td>s⁻¹</td><td>[T⁻¹]</td><td>λ = ln(2)/t<sub>½</sub></td></tr>
+                        <tr><td>Activity</td><td>A</td><td>becquerel (Bq)</td><td>[T⁻¹]</td><td>A = λN</td></tr>
+                        <tr><td>Cross-section</td><td>σ</td><td>m²</td><td>[L²]</td><td>R = σΦ</td></tr>
+                        <tr><td>de Broglie wavelength</td><td>λ<sub>dB</sub></td><td>meter (m)</td><td>[L]</td><td>λ<sub>dB</sub> = h/p</td></tr>
+                    </tbody>
+                </table>
             </div>
 
             <div class="section">
                 <h2>1.4 Dimensional Analysis</h2>
                 <p>Every physical quantity has <strong>dimensions</strong> expressed in terms of the fundamental quantities: Mass [M], Length [L], Time [T], Electric Current [I], Temperature [Θ], Amount of Substance [N], and Luminous Intensity [J].</p>
-                <h3>Common Dimensional Formulas</h3>
-                <div class="formula-box">
-                    <p><strong>Basic Quantities:</strong></p>
-                    <p>Area: <span class="equation">[L²]</span></p>
-                    <p>Volume: <span class="equation">[L³]</span></p>
-                    <p>Velocity: <span class="equation">[LT⁻¹]</span></p>
-                    <p>Acceleration: <span class="equation">[LT⁻²]</span></p>
-                    <p>Force: <span class="equation">[MLT⁻²]</span></p>
-                    <p>Energy: <span class="equation">[ML²T⁻²]</span></p>
-                    <p>Power: <span class="equation">[ML²T⁻³]</span></p>
-                    <p>Pressure: <span class="equation">[ML⁻¹T⁻²]</span></p>
-                </div>
                 <h3>Applications of Dimensional Analysis</h3>
                 <div class="highlight-box">
                     <h4>What Dimensional Analysis Can Do:</h4>
@@ -663,27 +839,138 @@
             <div class="section">
                 <h2>1.6 Precision and Significant Figures</h2>
                 <p><strong>Significant figures</strong> indicate the precision of a measurement - they include all digits that are known with certainty plus the first uncertain digit.</p>
-                <h3>Rules for Determining Significant Figures</h3>
-                <div class="highlight-box">
-                    <ol>
-                        <li><strong>Non-zero digits</strong> are always significant. (e.g., <span class="equation">123</span> has 3 sig figs)</li>
-                        <li><strong>Zeros between significant digits</strong> are significant. (e.g., <span class="equation">101</span> has 3 sig figs)</li>
-                        <li><strong>Leading zeros</strong> are not significant. (e.g., <span class="equation">0.05</span> has 1 sig fig)</li>
-                        <li><strong>Trailing zeros with a decimal point</strong> are significant. (e.g., <span class="equation">100.0</span> has 4 sig figs)</li>
-                        <li><strong>Trailing zeros without a decimal point</strong> are ambiguous. (e.g., <span class="equation">100</span> could have 1, 2, or 3 sig figs)</li>
-                    </ol>
-                </div>
-                <h3>Operations with Significant Figures</h3>
-                <div class="formula-box">
-                    <p><strong>Addition/Subtraction:</strong> Round to the least precise decimal place</p>
-                    <p><strong>Multiplication/Division:</strong> Round to the fewest significant figures</p>
-                    <p><strong>Exact numbers:</strong> Have infinite significant figures</p>
-                </div>
-                <div class="example-box">
-                    <h4>📝 Significant Figure Examples:</h4>
-                    <p><strong>Addition:</strong> <span class="equation">12.345 + 1.2 + 0.07 = 13.6</span> (limited by 1.2)</p>
-                    <p><strong>Multiplication:</strong> <span class="equation">3.14159 × 2.0 = 6.3</span> (limited by 2.0)</p>
-                    <p><strong>Scientific notation:</strong> <span class="equation">1.20 × 10³</span> has 3 sig figs</p>
+                
+                <div class="sig-figs-section">
+                    <h3>📊 Complete Rules for Determining Significant Figures</h3>
+                    
+                    <h4>Basic Rules:</h4>
+                    <div class="highlight-box">
+                        <ol>
+                            <li><strong>Non-zero digits</strong> are always significant
+                                <ul>
+                                    <li>Example: <span class="equation">123</span> has 3 sig figs</li>
+                                    <li>Example: <span class="equation">4.567</span> has 4 sig figs</li>
+                                </ul>
+                            </li>
+                            <li><strong>Zeros between significant digits</strong> are significant
+                                <ul>
+                                    <li>Example: <span class="equation">101</span> has 3 sig figs</li>
+                                    <li>Example: <span class="equation">2.003</span> has 4 sig figs</li>
+                                </ul>
+                            </li>
+                            <li><strong>Leading zeros</strong> are not significant
+                                <ul>
+                                    <li>Example: <span class="equation">0.05</span> has 1 sig fig</li>
+                                    <li>Example: <span class="equation">0.00789</span> has 3 sig figs</li>
+                                </ul>
+                            </li>
+                            <li><strong>Trailing zeros with a decimal point</strong> are significant
+                                <ul>
+                                    <li>Example: <span class="equation">100.0</span> has 4 sig figs</li>
+                                    <li>Example: <span class="equation">2.500</span> has 4 sig figs</li>
+                                </ul>
+                            </li>
+                            <li><strong>Trailing zeros without a decimal point</strong> are ambiguous
+                                <ul>
+                                    <li>Example: <span class="equation">100</span> could have 1, 2, or 3 sig figs</li>
+                                    <li>Use scientific notation to clarify: <span class="equation">1.00 × 10²</span> has 3 sig figs</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <h3>🧮 Operations with Significant Figures</h3>
+                    
+                    <h4>Addition and Subtraction Rule:</h4>
+                    <div class="operation-example">
+                        <p><strong>Rule:</strong> Round to the least precise decimal place (fewest decimal places)</p>
+                        <div class="example-box">
+                            <h4>📝 Addition Examples:</h4>
+                            <p><strong>Example 1:</strong></p>
+                            <p><span class="equation">12.345 + 1.2 + 0.07 = ?</span></p>
+                            <p>Step 1: Identify decimal places: 3, 1, 2</p>
+                            <p>Step 2: Least precise = 1 decimal place (from 1.2)</p>
+                            <p>Step 3: Calculate: 12.345 + 1.2 + 0.07 = 13.615</p>
+                            <p><strong>Answer: 13.6</strong> (rounded to 1 decimal place)</p>
+                            
+                            <p><strong>Example 2:</strong></p>
+                            <p><span class="equation">123.45 + 67 + 8.9 = ?</span></p>
+                            <p>Step 1: Identify decimal places: 2, 0, 1</p>
+                            <p>Step 2: Least precise = 0 decimal places (from 67)</p>
+                            <p>Step 3: Calculate: 123.45 + 67 + 8.9 = 199.35</p>
+                            <p><strong>Answer: 199</strong> (rounded to whole number)</p>
+                        </div>
+                    </div>
+
+                    <h4>Multiplication and Division Rule:</h4>
+                    <div class="operation-example">
+                        <p><strong>Rule:</strong> Round to the fewest significant figures among all numbers</p>
+                        <div class="example-box">
+                            <h4>📝 Multiplication Examples:</h4>
+                            <p><strong>Example 1:</strong></p>
+                            <p><span class="equation">3.14159 × 2.0 = ?</span></p>
+                            <p>Step 1: Count sig figs: 6 and 2</p>
+                            <p>Step 2: Fewest sig figs = 2</p>
+                            <p>Step 3: Calculate: 3.14159 × 2.0 = 6.28318</p>
+                            <p><strong>Answer: 6.3</strong> (rounded to 2 sig figs)</p>
+                            
+                            <p><strong>Example 2:</strong></p>
+                            <p><span class="equation">45.6 ÷ 1.23 = ?</span></p>
+                            <p>Step 1: Count sig figs: 3 and 3</p>
+                            <p>Step 2: Fewest sig figs = 3</p>
+                            <p>Step 3: Calculate: 45.6 ÷ 1.23 = 37.0732...</p>
+                            <p><strong>Answer: 37.1</strong> (rounded to 3 sig figs)</p>
+                        </div>
+                    </div>
+
+                    <h4>Mixed Operations:</h4>
+                    <div class="operation-example">
+                        <p><strong>Rule:</strong> Apply rules in order of operations, keeping extra digits in intermediate steps</p>
+                        <div class="example-box">
+                            <h4>📝 Complex Calculation Example:</h4>
+                            <p><span class="equation">(12.34 + 5.6) × 2.0 = ?</span></p>
+                            <p>Step 1: Addition first: 12.34 + 5.6 = 17.94 → 17.9 (1 decimal place)</p>
+                            <p>Step 2: Keep extra digit: 17.94 (for intermediate calculation)</p>
+                            <p>Step 3: Multiplication: 17.94 × 2.0 = 35.88</p>
+                            <p>Step 4: Apply multiplication rule: 3 sig figs (from 17.9) and 2 sig figs (from 2.0)</p>
+                            <p><strong>Answer: 36</strong> (rounded to 2 sig figs)</p>
+                        </div>
+                    </div>
+
+                    <h4>Special Cases:</h4>
+                    <div class="operation-example">
+                        <div class="highlight-box">
+                            <ul>
+                                <li><strong>Exact numbers</strong> have infinite significant figures
+                                    <ul>
+                                        <li>Counting: 5 books, 12 students</li>
+                                        <li>Definitions: 1 m = 100 cm, 1 kg = 1000 g</li>
+                                        <li>Mathematical constants: π, e (when used as exact values)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Scientific notation</strong> clearly shows significant figures
+                                    <ul>
+                                        <li><span class="equation">1.20 × 10³</span> has 3 sig figs</li>
+                                        <li><span class="equation">3.000 × 10⁻⁴</span> has 4 sig figs</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Logarithms and exponentials</strong>: Number of decimal places in log = sig figs in original number</li>
+                                <li><strong>Powers and roots</strong>: Result has same number of sig figs as original number</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>🎯 Practice Problems:</h3>
+                    <div class="example-box">
+                        <h4>📝 Try These:</h4>
+                        <ol>
+                            <li><span class="equation">23.456 + 12.7 + 1.008 = ?</span> <em>(Answer: 37.2)</em></li>
+                            <li><span class="equation">456.2 - 23.18 = ?</span> <em>(Answer: 433.0)</em></li>
+                            <li><span class="equation">12.5 × 0.0034 = ?</span> <em>(Answer: 0.043)</em></li>
+                            <li><span class="equation">987.6 ÷ 12.3 = ?</span> <em>(Answer: 80.3)</em></li>
+                            <li><span class="equation">(15.67 + 2.3) × 1.2 = ?</span> <em>(Answer: 22)</em></li>
+                        </ol>
+                    </div>
                 </div>
             </div>
 
@@ -779,16 +1066,3 @@
                 docElement.setAttribute('data-theme', 'light');
                 lightModeBtn.classList.add('active');
                 darkModeBtn.classList.remove('active');
-                localStorage.setItem('theme', 'light');
-            });
-
-            darkModeBtn.addEventListener('click', () => {
-                docElement.setAttribute('data-theme', 'dark');
-                darkModeBtn.classList.add('active');
-                lightModeBtn.classList.remove('active');
-                localStorage.setItem('theme', 'dark');
-            });
-        });
-    </script>
-</body>
-</html>
