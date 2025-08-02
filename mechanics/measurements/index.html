@@ -530,7 +530,7 @@
 
     <!-- Vertical theme toggle -->
     <div class="theme-toggle">
-        <button id="light-theme" class="active" title="Light Theme">☀️</button>
+        <button id="light-theme" title="Light Theme">☀️</button>
         <button id="dark-theme" title="Dark Theme">🌙</button>
     </div>
 
@@ -1055,17 +1055,42 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
+            <p>&copy; 2024 Physics Daily. Advancing physics education through interactive learning.</p>
         </div>
     </footer>
 
     <script>
-        // Theme toggle functionality
+        // Complete theme toggle functionality
         document.addEventListener('DOMContentLoaded', function() {
             const lightThemeBtn = document.getElementById('light-theme');
             const darkThemeBtn = document.getElementById('dark-theme');
-            const body = document.body;
-});
+            const docElement = document.documentElement;
+
+            const applyTheme = (theme) => {
+                docElement.setAttribute('data-theme', theme);
+                if (theme === 'dark') {
+                    darkThemeBtn.classList.add('active');
+                    lightThemeBtn.classList.remove('active');
+                } else {
+                    lightThemeBtn.classList.add('active');
+                    darkThemeBtn.classList.remove('active');
+                }
+                localStorage.setItem('theme', theme);
+            };
+
+            // Check for saved theme preference or default to 'light'
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            applyTheme(savedTheme);
+
+            // Event listeners for theme buttons
+            lightThemeBtn.addEventListener('click', () => {
+                applyTheme('light');
+            });
+
+            darkThemeBtn.addEventListener('click', () => {
+                applyTheme('dark');
+            });
+        });
     </script>
 </body>
 </html>
