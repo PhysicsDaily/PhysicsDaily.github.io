@@ -173,36 +173,50 @@
             padding: 2rem 0;
         }
 
+        /* Vertical theme toggle styling */
         .theme-toggle {
             position: fixed;
-            top: 80px;
+            top: 100px;
             right: 20px;
             z-index: 1000;
-            display: flex;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 25px;
-            padding: 4px;
-            box-shadow: var(--shadow-md);
+            padding: 8px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
         }
 
         .theme-toggle button {
             background: none;
             border: none;
-            padding: 8px 12px;
-            border-radius: 20px;
+            padding: 12px;
+            border-radius: 50%;
             cursor: pointer;
-            font-size: 16px;
-            transition: all 0.2s ease;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            color: var(--text-secondary);
+        }
+
+        .theme-toggle button:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            transform: scale(1.05);
         }
 
         .theme-toggle button.active {
             background: var(--primary-color);
             color: white;
-        }
-
-        .theme-toggle button:hover {
-            background: var(--bg-secondary);
+            transform: scale(1.1);
+            box-shadow: var(--shadow-md);
         }
 
         .theme-toggle button.active:hover {
@@ -465,9 +479,9 @@
 
         @media (max-width: 768px) {
             .theme-toggle {
-                top: 70px;
+                top: 80px;
                 right: 10px;
-                scale: 0.9;
+                scale: 0.85;
             }
 
             .header h1 {
@@ -514,9 +528,10 @@
         </div>
     </nav>
 
+    <!-- Vertical theme toggle -->
     <div class="theme-toggle">
-        <button id="light-mode" class="active" title="Light Mode">☀️</button>
-        <button id="dark-mode" title="Dark Mode">🌙</button>
+        <button id="light-theme" class="active" title="Light Theme">☀️</button>
+        <button id="dark-theme" title="Dark Theme">🌙</button>
     </div>
 
     <div class="breadcrumb">
@@ -1040,29 +1055,17 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Physics Daily. Advancing physics education through interactive learning.</p>
+            <p>&copy; © Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
         </div>
     </footer>
 
     <script>
         // Theme toggle functionality
-        document.addEventListener('DOMContentLoaded', () => {
-            const lightModeBtn = document.getElementById('light-mode');
-            const darkModeBtn = document.getElementById('dark-mode');
-            const docElement = document.documentElement;
-
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            docElement.setAttribute('data-theme', savedTheme);
-
-            if (savedTheme === 'dark') {
-                darkModeBtn.classList.add('active');
-                lightModeBtn.classList.remove('active');
-            } else {
-                lightModeBtn.classList.add('active');
-                darkModeBtn.classList.remove('active');
-            }
-
-            lightModeBtn.addEventListener('click', () => {
-                docElement.setAttribute('data-theme', 'light');
-                lightModeBtn.classList.add('active');
-                darkModeBtn.classList.remove('active');
+        document.addEventListener('DOMContentLoaded', function() {
+            const lightThemeBtn = document.getElementById('light-theme');
+            const darkThemeBtn = document.getElementById('dark-theme');
+            const body = document.body;
+});
+    </script>
+</body>
+</html>
