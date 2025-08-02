@@ -8,521 +8,58 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../shared/mechanics-style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XN081SR2KP');
+    </script>
     <style>
-        :root {
-            --primary-color: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary-color: #64748b;
-            --accent-color: #06b6d4;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
-            --text-primary: #1e293b;
-            --text-secondary: #475569;
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --card-bg: #ffffff;
-            --border-color: #e2e8f0;
-            --border-hover: #cbd5e1;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        .practice-section {
+            padding: 2rem 0;
+            background-color: var(--bg-secondary);
         }
-
-        [data-theme="dark"] {
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --card-bg: #334155;
-            --border-color: #475569;
-            --border-hover: #64748b;
+        .practice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background-color: var(--bg-primary);
-            transition: all 0.3s ease;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .nav {
+        .practice-card {
             background: var(--card-bg);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
+            border-radius: var(--border-radius);
+            padding: 2rem;
             text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .breadcrumb {
-            background: var(--bg-secondary);
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .breadcrumb a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        .breadcrumb a:hover {
-            color: var(--primary-color);
-        }
-
-        .separator {
-            margin: 0 0.5rem;
-            color: var(--text-secondary);
-        }
-
-        .current {
             color: var(--text-primary);
-            font-weight: 500;
-        }
-
-        .header {
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            color: white;
-            padding: 4rem 0;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
             text-align: center;
         }
-
-        .header h1 {
-            font-size: 3rem;
+        .practice-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+        .practice-card .icon {
+            font-size: 2.5rem;
             margin-bottom: 1rem;
-            font-weight: 700;
         }
-
-        .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            opacity: 0.9;
-        }
-
-        .description {
-            font-size: 1.1rem;
-            opacity: 0.8;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .main-content {
-            padding: 2rem 0;
-        }
-
-        .theme-toggle {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            z-index: 1000;
-            display: flex;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 25px;
-            padding: 4px;
-            box-shadow: var(--shadow-md);
-        }
-
-        .theme-toggle button {
-            background: none;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.2s ease;
-        }
-
-        .theme-toggle button.active {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .theme-toggle button:hover {
-            background: var(--bg-secondary);
-        }
-
-        .theme-toggle button.active:hover {
-            background: var(--primary-dark);
-        }
-
-        .section {
-            margin: 32px 0;
-            padding: 24px;
-            border-radius: 12px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-        }
-
-        .section h2 {
+        .practice-card h3 {
+            font-size: 1.25rem;
             color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
-            font-weight: 600;
-        }
-
-        .section h3 {
-            color: var(--text-primary);
-            margin: 1.5rem 0 1rem 0;
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
-
-        .section h4 {
-            color: var(--text-primary);
-            margin: 1rem 0 0.5rem 0;
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .section p {
-            margin-bottom: 1rem;
-            color: var(--text-secondary);
-            text-align: justify;
-        }
-
-        .section ul, .section ol {
-            margin: 1rem 0 1rem 2rem;
-            color: var(--text-secondary);
-        }
-
-        .section li {
             margin-bottom: 0.5rem;
         }
-
-        .highlight-box {
-            background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
-            border-left: 4px solid var(--accent-color);
-            padding: 16px;
-            margin: 16px 0;
-            border-radius: 8px;
+        .practice-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
         }
-
-        [data-theme="dark"] .highlight-box {
-            background: linear-gradient(135deg, #164e63, #0c4a6e);
-        }
-
-        .beginner-note {
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
-            border-left: 4px solid var(--warning-color);
-            padding: 16px;
-            margin: 16px 0;
-            border-radius: 8px;
-        }
-
-        [data-theme="dark"] .beginner-note {
-            background: linear-gradient(135deg, #451a03, #78350f);
-        }
-
-        .advanced-note {
-            background: linear-gradient(135deg, #f3e8ff, #ede9fe);
-            border-left: 4px solid #8b5cf6;
-            padding: 16px;
-            margin: 16px 0;
-            border-radius: 8px;
-        }
-
-        [data-theme="dark"] .advanced-note {
-            background: linear-gradient(135deg, #2d1b69, #3730a3);
-        }
-
-        .formula-box {
-            background: var(--bg-secondary);
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            margin: 16px 0;
-            text-align: center;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.2rem;
-            font-weight: 500;
-        }
-
-        .example-box {
-            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
-            border-left: 4px solid var(--success-color);
-            padding: 16px;
-            margin: 16px 0;
-            border-radius: 8px;
-        }
-
-        [data-theme="dark"] .example-box {
-            background: linear-gradient(135deg, #14532d, #166534);
-        }
-
-        table {
+        .btn-practice {
             width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        th, td {
-            border: 1px solid var(--border-color);
-            padding: 12px;
-            text-align: left;
-        }
-
-        th {
-            background: var(--bg-secondary);
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        td {
-            color: var(--text-secondary);
-        }
-
-        .quiz-container {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 24px;
-            margin: 24px 0;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-        }
-
-        .question {
-            margin: 20px 0;
-            padding: 16px;
-            border-left: 4px solid var(--primary-color);
-            background: var(--card-bg);
-            border-radius: 8px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 24px;
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            overflow: hidden;
-            margin: 16px 0;
-            border: 1px solid var(--border-color);
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--success-color), var(--accent-color));
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-
-        .score-display {
-            font-weight: 600;
-            text-align: center;
-            margin: 16px 0;
-            color: var(--text-primary);
-        }
-
-        .btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin: 8px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            display: inline-block;
-            text-decoration: none;
-        }
-
-        .btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
-        }
-
-        .btn-secondary {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-
-        .btn-secondary:hover {
-            background: var(--border-hover);
-        }
-
-        .btn-close {
-            background: var(--danger-color);
-            color: white;
-            padding: 8px 16px;
-            font-size: 14px;
-        }
-
-        .btn-close:hover {
-            background: #c82333;
-        }
-
-        .quiz-buttons {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            justify-content: center;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-
-        .quiz-question {
-            margin: 16px 0;
-            padding: 16px;
-            background: var(--bg-secondary);
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-        }
-
-        .quiz-question .option {
-            display: flex;
-            align-items: center;
-            margin: 8px 0;
-            cursor: pointer;
-        }
-
-        .quiz-question input[type="radio"] {
-            margin: 0 12px 0 0;
-            transform: scale(1.2);
-            cursor: pointer;
-        }
-
-        .quiz-question label {
-            color: var(--text-secondary);
-            cursor: pointer;
-            flex: 1;
-            line-height: 1.4;
-        }
-
-        #results {
-            margin-top: 24px;
-            padding: 20px;
-            background: var(--card-bg);
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-        }
-
-        .results-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .results-header h3 {
-            margin: 0;
-            color: var(--text-primary);
-        }
-
-        details {
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: .5em .5em 0;
-            margin-top: 1em;
-            background: var(--bg-secondary);
-        }
-
-        summary {
-            font-weight: bold;
-            margin: -.5em -.5em 0;
-            padding: .5em;
-            cursor: pointer;
-            color: var(--text-primary);
-        }
-
-        .footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: 2rem 0;
-            text-align: center;
-            color: var(--text-secondary);
-        }
-
-        @media (max-width: 768px) {
-            .theme-toggle {
-                top: 70px;
-                right: 10px;
-                scale: 0.9;
-            }
-
-            .quiz-buttons {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-                margin: 4px 0;
-            }
-
-            .results-header {
-                flex-direction: column;
-                gap: 10px;
-                align-items: flex-start;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
         }
     </style>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-XN081SR2KP');
-</script>
 </head>
 <body>
     <nav class="nav">
@@ -540,7 +77,7 @@
     </nav>
 
     <div class="theme-toggle">
-        <button id="light-mode" class="active" title="Light Mode">☀️</button>
+        <button id="light-mode" title="Light Mode">☀️</button>
         <button id="dark-mode" title="Dark Mode">🌙</button>
     </div>
 
@@ -570,21 +107,16 @@
         <div class="container">
             <div class="section">
                 <h2>🌟 Introduction: Why Measurement Matters in Physics</h2>
-                
                 <div class="beginner-note">
                     <h4>🔰 For Beginners:</h4>
                     <p>Imagine trying to cook without measuring ingredients, or building a house without measuring lumber. Physics is similar - we need precise measurements to understand how the universe works!</p>
                 </div>
-
                 <p><strong>Physics is fundamentally an experimental science.</strong> Every law, theory, and principle we know about the universe comes from careful observation and measurement. When Galileo dropped objects from the Tower of Pisa, when Newton observed apples falling, when Einstein predicted the bending of light - all of these discoveries required precise measurement to verify theoretical predictions.</p>
-
                 <p>Consider this: the GPS in your phone works because engineers understand Einstein's theory of relativity with incredible precision. Without accurate measurement of time (to nanoseconds!) and distance (to centimeters!), your GPS would be off by miles.</p>
-
                 <div class="highlight-box">
                     <h4>The Power of Precise Measurement</h4>
                     <p>The 2017 detection of gravitational waves by LIGO required measuring distance changes smaller than 1/10,000th the width of a proton - that's like measuring the distance to the nearest star to within the width of a human hair!</p>
                 </div>
-
                 <div class="advanced-note">
                     <h4>🎓 Advanced Insight:</h4>
                     <p>Modern physics pushes measurement to quantum limits. The Heisenberg uncertainty principle fundamentally limits how precisely we can simultaneously measure certain pairs of properties. This isn't just a technical limitation - it's a fundamental feature of reality that has practical implications in quantum computing and cryptography.</p>
@@ -593,33 +125,18 @@
 
             <div class="section">
                 <h2>1.1 Physical Quantities, Standards, and Units</h2>
-                
                 <h3>What Are Physical Quantities?</h3>
                 <p>A <strong>physical quantity</strong> is any measurable property of matter or energy. These fall into two categories:</p>
-                
-                <div class="beginner-note">
-                    <h4>🔰 Simple Examples:</h4>
-                    <ul>
-                        <li><strong>Scalar quantities:</strong> Mass (5 kg), temperature (20°C), speed (60 mph)</li>
-                        <li><strong>Vector quantities:</strong> Velocity (60 mph north), force (10 N downward)</li>
-                    </ul>
-                </div>
-
                 <ul>
                     <li><strong>Scalar Quantities:</strong> Have magnitude only (mass, time, temperature, energy)</li>
                     <li><strong>Vector Quantities:</strong> Have both magnitude and direction (displacement, velocity, acceleration, force)</li>
                 </ul>
-
                 <h3>Operational Definitions</h3>
                 <p>Each physical quantity must have an <strong>operational definition</strong> - a precise description of how to measure it.</p>
-
                 <div class="example-box">
                     <h4>📝 Example: Defining Velocity</h4>
-                    <p><strong>Conceptual definition:</strong> "How fast something moves"</p>
-                    <p><strong>Operational definition:</strong> "Change in position divided by time interval: v = Δx/Δt"</p>
-                    <p><strong>Measurement procedure:</strong> Record positions at two different times, calculate the difference, divide by time elapsed.</p>
+                    <p><strong>Operational definition:</strong> "Change in position divided by time interval: $v = \Delta x/\Delta t$"</p>
                 </div>
-
                 <h3>Characteristics of Good Physical Standards</h3>
                 <div class="highlight-box">
                     <ol>
@@ -629,25 +146,11 @@
                         <li><strong>Reproducibility:</strong> Independent measurements yield consistent results</li>
                     </ol>
                 </div>
-
-                <div class="advanced-note">
-                    <h4>🎓 Historical Evolution of Standards:</h4>
-                    <p>Early standards were often based on human anatomy (foot, cubit) or local objects (grain of barley for weight). The French Revolution introduced the metric system based on Earth's dimensions. Modern standards use fundamental constants of nature, making them truly universal - the same everywhere in the universe!</p>
-                </div>
-
-                <p>Without standardized units, scientific communication would be impossible. Imagine if every laboratory used different definitions for the meter or second - experimental results couldn't be compared or verified!</p>
             </div>
 
             <div class="section">
                 <h2>1.2 The International System of Units (SI)</h2>
-                
-                <div class="beginner-note">
-                    <h4>🔰 Why SI Units?</h4>
-                    <p>Just like everyone agrees to drive on the same side of the road in each country, scientists worldwide agree to use the same measurement system. This is SI - the "International System" (from French "Système International").</p>
-                </div>
-
                 <p>The <strong>International System of Units (SI)</strong> is the modern form of the metric system, established by international treaty. It's built on seven fundamental base units that define all other measurements.</p>
-
                 <h3>The Seven SI Base Units</h3>
                 <table>
                     <thead>
@@ -655,114 +158,23 @@
                             <th>Quantity</th>
                             <th>Unit Name</th>
                             <th>Symbol</th>
-                            <th>Modern Definition (2019)</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Time</td>
-                            <td>second</td>
-                            <td>s</td>
-                            <td>Duration of 9,192,631,770 periods of cesium-133 radiation</td>
-                        </tr>
-                        <tr>
-                            <td>Length</td>
-                            <td>meter</td>
-                            <td>m</td>
-                            <td>Distance traveled by light in vacuum in 1/299,792,458 seconds</td>
-                        </tr>
-                        <tr>
-                            <td>Mass</td>
-                            <td>kilogram</td>
-                            <td>kg</td>
-                            <td>Defined by Planck constant h = 6.62607015 × 10⁻³⁴ J⋅s</td>
-                        </tr>
-                        <tr>
-                            <td>Electric current</td>
-                            <td>ampere</td>
-                            <td>A</td>
-                            <td>Defined by elementary charge e = 1.602176634 × 10⁻¹⁹ C</td>
-                        </tr>
-                        <tr>
-                            <td>Temperature</td>
-                            <td>kelvin</td>
-                            <td>K</td>
-                            <td>Defined by Boltzmann constant k = 1.380649 × 10⁻²³ J/K</td>
-                        </tr>
-                        <tr>
-                            <td>Amount of substance</td>
-                            <td>mole</td>
-                            <td>mol</td>
-                            <td>Exactly 6.02214076 × 10²³ elementary entities (Avogadro's number)</td>
-                        </tr>
-                        <tr>
-                            <td>Luminous intensity</td>
-                            <td>candela</td>
-                            <td>cd</td>
-                            <td>Luminous intensity of 540 THz radiation with efficacy 683 lm/W</td>
-                        </tr>
+                        <tr><td>Time</td><td>second</td><td>s</td></tr>
+                        <tr><td>Length</td><td>meter</td><td>m</td></tr>
+                        <tr><td>Mass</td><td>kilogram</td><td>kg</td></tr>
+                        <tr><td>Electric current</td><td>ampere</td><td>A</td></tr>
+                        <tr><td>Temperature</td><td>kelvin</td><td>K</td></tr>
+                        <tr><td>Amount of substance</td><td>mole</td><td>mol</td></tr>
+                        <tr><td>Luminous intensity</td><td>candela</td><td>cd</td></tr>
                     </tbody>
                 </table>
-
-                <div class="advanced-note">
-                    <h4>🎓 The 2019 Redefinition Revolution</h4>
-                    <p>In 2019, SI underwent its most significant change since its creation. All units are now defined by fundamental constants of nature rather than physical artifacts. This makes measurements more precise and truly universal. The kilogram, previously defined by a physical prototype in Paris, is now defined by Planck's constant - a quantum mechanical property that's the same everywhere in the universe!</p>
-                </div>
-
-                <h3>SI Prefixes: Making Large and Small Numbers Manageable</h3>
-                <div class="highlight-box">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Prefix</th>
-                                <th>Symbol</th>
-                                <th>Factor</th>
-                                <th>Example</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>giga</td><td>G</td><td>10⁹</td><td>1 GHz = 1,000,000,000 Hz</td></tr>
-                            <tr><td>mega</td><td>M</td><td>10⁶</td><td>1 MHz = 1,000,000 Hz</td></tr>
-                            <tr><td>kilo</td><td>k</td><td>10³</td><td>1 km = 1,000 m</td></tr>
-                            <tr><td>centi</td><td>c</td><td>10⁻²</td><td>1 cm = 0.01 m</td></tr>
-                            <tr><td>milli</td><td>m</td><td>10⁻³</td><td>1 mm = 0.001 m</td></tr>
-                            <tr><td>micro</td><td>μ</td><td>10⁻⁶</td><td>1 μm = 0.000001 m</td></tr>
-                            <tr><td>nano</td><td>n</td><td>10⁻⁹</td><td>1 nm = 0.000000001 m</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <h3>Alternative Unit Systems</h3>
-                <p>While SI is standard, other systems persist in specialized fields:</p>
-                <ul>
-                    <li><strong>CGS (Gaussian):</strong> centimeter-gram-second, used in some theoretical physics</li>
-                    <li><strong>Imperial/US Customary:</strong> feet, pounds, seconds, still used in some countries</li>
-                    <li><strong>Natural Units:</strong> c = ℏ = 1, used in particle physics and cosmology</li>
-                    <li><strong>Atomic Units:</strong> Used in quantum chemistry and atomic physics</li>
-                </ul>
-
-                <div class="example-box">
-                    <h4>📝 Real-World Example: GPS Satellites</h4>
-                    <p>GPS satellites must account for both special and general relativistic effects. Time runs about 38 microseconds per day faster on satellites due to weaker gravity and slower speed. Without correcting for this using precise SI time standards, GPS would accumulate errors of about 10 kilometers per day!</p>
-                </div>
             </div>
 
             <div class="section">
                 <h2>1.3 Fundamental and Derived Units</h2>
-                
-                <div class="beginner-note">
-                    <h4>🔰 Think of it Like Building Blocks:</h4>
-                    <p>Fundamental units are like basic LEGO bricks - simple, can't be broken down further. Derived units are like LEGO constructions - made by combining the basic bricks in different ways!</p>
-                </div>
-
-                <h3>Fundamental vs. Derived Quantities</h3>
-                <p><strong>Fundamental quantities</strong> are the basic building blocks - they're independently defined and cannot be expressed in terms of other quantities. <strong>Derived quantities</strong> are built from combinations of fundamental quantities.</p>
-
-                <div class="formula-box">
-                    <h4>Key Relationship:</h4>
-                    <p>Derived Quantity = Function of Fundamental Quantities</p>
-                </div>
-
+                <p><strong>Fundamental quantities</strong> are the basic building blocks. <strong>Derived quantities</strong> are built from combinations of fundamental quantities.</p>
                 <h3>Common Derived Units in Mechanics</h3>
                 <table>
                     <thead>
@@ -771,1079 +183,89 @@
                             <th>SI Unit</th>
                             <th>Symbol</th>
                             <th>In Base Units</th>
-                            <th>Physical Meaning</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Area</td>
-                            <td>square meter</td>
-                            <td>m²</td>
-                            <td>m²</td>
-                            <td>Space occupied by a surface</td>
-                        </tr>
-                        <tr>
-                            <td>Volume</td>
-                            <td>cubic meter</td>
-                            <td>m³</td>
-                            <td>m³</td>
-                            <td>Space occupied by an object</td>
-                        </tr>
-                        <tr>
-                            <td>Speed/Velocity</td>
-                            <td>meter per second</td>
-                            <td>m/s</td>
-                            <td>m⋅s⁻¹</td>
-                            <td>Rate of change of position</td>
-                        </tr>
-                        <tr>
-                            <td>Acceleration</td>
-                            <td>meter per second squared</td>
-                            <td>m/s²</td>
-                            <td>m⋅s⁻²</td>
-                            <td>Rate of change of velocity</td>
-                        </tr>
-                        <tr>
-                            <td>Force</td>
-                            <td>newton</td>
-                            <td>N</td>
-                            <td>kg⋅m⋅s⁻²</td>
-                            <td>Push or pull on an object</td>
-                        </tr>
-                        <tr>
-                            <td>Energy</td>
-                            <td>joule</td>
-                            <td>J</td>
-                            <td>kg⋅m²⋅s⁻²</td>
-                            <td>Capacity to do work</td>
-                        </tr>
-                        <tr>
-                            <td>Power</td>
-                            <td>watt</td>
-                            <td>W</td>
-                            <td>kg⋅m²⋅s⁻³</td>
-                            <td>Rate of energy transfer</td>
-                        </tr>
-                        <tr>
-                            <td>Pressure</td>
-                            <td>pascal</td>
-                            <td>Pa</td>
-                            <td>kg⋅m⁻¹⋅s⁻²</td>
-                            <td>Force per unit area</td>
-                        </tr>
-                        <tr>
-                            <td>Frequency</td>
-                            <td>hertz</td>
-                            <td>Hz</td>
-                            <td>s⁻¹</td>
-                            <td>Number of cycles per second</td>
-                        </tr>
+                        <tr><td>Force</td><td>newton</td><td>N</td><td>$kg \cdot m \cdot s^{-2}$</td></tr>
+                        <tr><td>Energy</td><td>joule</td><td>J</td><td>$kg \cdot m^2 \cdot s^{-2}$</td></tr>
+                        <tr><td>Power</td><td>watt</td><td>W</td><td>$kg \cdot m^2 \cdot s^{-3}$</td></tr>
+                        <tr><td>Pressure</td><td>pascal</td><td>Pa</td><td>$kg \cdot m^{-1} \cdot s^{-2}$</td></tr>
                     </tbody>
                 </table>
             </div>
 
             <div class="section">
                 <h2>1.4 Dimensional Analysis</h2>
-                
-                <div class="beginner-note">
-                    <h4>🔰 It's Like Checking Your Units:</h4>
-                    <p>Imagine you're calculating the area of a room and your answer is in "kilograms". Dimensional analysis is the formal way to catch such errors by making sure both sides of an equation have the same type of units (e.g., length = length).</p>
-                </div>
-
-                <p>Every physical quantity has <strong>dimensions</strong> - the fundamental nature of the quantity expressed in terms of basic physical concepts. The main dimensions are:</p>
-                <ul>
-                    <li><strong>Mass [M]</strong></li>
-                    <li><strong>Length [L]</strong></li>
-                    <li><strong>Time [T]</strong></li>
-                </ul>
-
+                <p>Every physical quantity has <strong>dimensions</strong> expressed in terms of Mass [M], Length [L], and Time [T].</p>
                 <h3>Dimensional Equations</h3>
-                <p>We can express derived quantities in terms of these fundamental dimensions:</p>
                 <ul>
-                    <li>Area: [L²]</li>
-                    <li>Velocity: [LT⁻¹]</li>
-                    <li>Acceleration: [LT⁻²]</li>
-                    <li>Force: [MLT⁻²]</li>
-                    <li>Energy: [ML²T⁻²]</li>
-                    <li>Power: [ML²T⁻³]</li>
+                    <li>Area: $[L^2]$</li>
+                    <li>Velocity: $[LT^{-1}]$</li>
+                    <li>Force: $[MLT^{-2}]$</li>
+                    <li>Energy: $[ML^2T^{-2}]$</li>
                 </ul>
-
-                <h3>Applications of Dimensional Analysis</h3>
-                <div class="highlight-box">
-                    <ol>
-                        <li><strong>Checking Equation Validity:</strong> Ensures both sides of an equation are dimensionally consistent.</li>
-                        <li><strong>Deriving Relationships:</strong> Helps determine how quantities are related.</li>
-                        <li><strong>Converting Units:</strong> Provides a systematic way to convert between unit systems.</li>
-                        <li><strong>Identifying Errors:</strong> Catches mistakes in calculations where units don't match.</li>
-                    </ol>
-                </div>
             </div>
 
             <div class="section">
                 <h2>1.5 Principle of Homogeneity</h2>
-                
-                <div class="beginner-note">
-                    <h4>🔰 You Can't Add Apples and Oranges:</h4>
-                    <p>The principle of homogeneity is a fancy way of saying you can only add or subtract quantities that have the same units. You can't add 5 meters to 10 kilograms!</p>
-                </div>
-
-                <p>The <strong>principle of homogeneity</strong> states that any valid physical equation must be dimensionally consistent - every term in the equation must have the same dimensions.</p>
-
+                <p>The <strong>principle of homogeneity</strong> states that any valid physical equation must be dimensionally consistent—every term must have the same dimensions.</p>
                 <div class="example-box">
                     <h4>📝 Example Analysis: Kinematic Equation</h4>
-                    <p>Consider the equation: <strong>x = x₀ + v₀t + ½at²</strong></p>
+                    <p>Consider: $x = x_0 + v_0t + \frac{1}{2}at^2$</p>
                     <ul>
-                        <li>[x] = [L]</li>
-                        <li>[x₀] = [L]</li>
-                        <li>[v₀t] = [LT⁻¹][T] = [L]</li>
-                        <li>[½at²] = [LT⁻²][T²] = [L]</li>
+                        <li>$[x] = [L]$</li>
+                        <li>$[x_0] = [L]$</li>
+                        <li>$[v_0t] = [LT^{-1}][T] = [L]$</li>
+                        <li>$[\frac{1}{2}at^2] = [LT^{-2}][T^2] = [L]$</li>
                     </ul>
-                    <p>✅ All terms have the dimension of length [L], so the equation is dimensionally consistent!</p>
-                </div>
-
-                <div class="advanced-note">
-                    <h4>🎓 Limitations:</h4>
-                    <p>Dimensional consistency is necessary but not sufficient for correctness. An equation can be dimensionally correct but physically wrong due to missing dimensionless constants (like the ½ in the example above) or incorrect relationships.</p>
+                    <p>✅ All terms have the dimension of length [L], so the equation is consistent.</p>
                 </div>
             </div>
 
             <div class="section">
                 <h2>1.6 Precision and Significant Figures</h2>
-                
-                <div class="beginner-note">
-                    <h4>🔰 It's About How Much You Really Know:</h4>
-                    <p>If you measure a pencil with a regular ruler, you might say it's 15.2 cm long. You wouldn't say it's 15.2000 cm, because your ruler isn't that precise! Significant figures are a way of showing how precise your measurement is.</p>
-                </div>
-
-                <p>When we make measurements, it's important to indicate the precision of the measurement. <strong>Significant figures</strong> are the digits in a number that are known with certainty, plus the first uncertain digit. Paying attention to significant figures helps us avoid making errors in calculations and ensures that we are not claiming more precision than we actually have.</p>
-                
+                <p><strong>Significant figures</strong> are the digits in a number that are known with certainty, plus the first uncertain digit.</p>
                 <h3>Rules for Significant Figures</h3>
                 <div class="highlight-box">
                     <ul>
-                        <li><strong>Rule 1:</strong> Non-zero digits are always significant. (e.g., 123 has 3 sig figs)</li>
-                        <li><strong>Rule 2:</strong> Zeros between two significant digits are significant. (e.g., 101 has 3 sig figs)</li>
-                        <li><strong>Rule 3:</strong> Leading zeros are not significant. (e.g., 0.05 has 1 sig fig)</li>
-                        <li><strong>Rule 4:</strong> Trailing zeros are significant only if the number contains a decimal point. (e.g., 100 has 1 sig fig, but 100.0 has 4 sig figs)</li>
+                        <li>Non-zero digits are always significant. (e.g., 123 has 3 sig figs)</li>
+                        <li>Zeros between two significant digits are significant. (e.g., 101 has 3 sig figs)</li>
+                        <li>Leading zeros are not significant. (e.g., 0.05 has 1 sig fig)</li>
+                        <li>Trailing zeros are significant only with a decimal point. (e.g., 100 has 1 sig fig, 100.0 has 4)</li>
                     </ul>
-                </div>
-
-                <h3>Calculations with Significant Figures</h3>
-                <div class="example-box">
-                    <h4>📝 Examples:</h4>
-                    <ul>
-                        <li><strong>Multiplication/Division:</strong> 12.34 (4 sig figs) × 1.2 (2 sig figs) = 14.808 → 15 (2 sig figs)</li>
-                        <li><strong>Addition/Subtraction:</strong> 12.345 (3 decimal places) + 1.2 (1 decimal place) = 13.545 → 13.5 (1 decimal place)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="section">
-                <h2>🤔 Conceptual Questions</h2>
-                <div class="question">
-                    <strong>1.</strong> What are the key characteristics that make a physical standard suitable for scientific measurement? Why are these characteristics essential for scientific progress?
-                    <details>
-                        <summary>Answer</summary>
-                        <p>A good physical standard must be: <strong>Accessible</strong> (reproducible worldwide), <strong>Invariable</strong> (unchanging over time and location), <strong>Precise</strong> (allows desired accuracy), and <strong>Reproducible</strong> (consistent results). These are essential because science depends on comparing results from different experiments and locations. Without consistent standards, scientific communication and verification would be impossible.</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>2.</strong> Why did the SI system transition from physical artifacts to fundamental constants in 2019? What advantages does this provide?
-                    <details>
-                        <summary>Answer</summary>
-                        <p>The transition to fundamental constants provides several advantages: <strong>Universal accessibility</strong> (no need to compare with a physical object in Paris), <strong>Ultimate stability</strong> (constants of nature don't change), <strong>Higher precision</strong> (quantum measurements can be extremely accurate), and <strong>Practical convenience</strong> (measurements can be made anywhere with appropriate equipment). This makes standards truly universal and future-proof.</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>3.</strong> Explain why dimensional analysis can determine the functional form of physical relationships but cannot determine numerical constants. Give an example.
-                    <details>
-                        <summary>Answer</summary>
-                        <p>Dimensional analysis works by ensuring dimensional consistency, which constrains the powers of variables but not dimensionless constants. For example, for a pendulum, dimensional analysis gives T ∝ √(L/g), but cannot determine the factor 2π in T = 2π√(L/g). The 2π comes from the detailed geometry of circular motion, which requires full mathematical analysis, not just dimensional considerations.</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>4.</strong> Can an equation be dimensionally correct but still be physically wrong? Provide a detailed example and explanation.
-                    <details>
-                        <summary>Answer</summary>
-                        <p>Yes! Dimensional consistency is necessary but not sufficient. Example: For kinetic energy, both K = mv² and K = ½mv² are dimensionally correct [ML²T⁻²], but only the second is physically correct. The factor ½ comes from integrating F·dx = ma·dx over the acceleration process. Dimensional analysis cannot determine such numerical factors or distinguish between mathematically different but dimensionally equivalent expressions.</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>5.</strong> What are the fundamental limitations of dimensional analysis? When might it fail to provide useful information?
-                    <details>
-                        <summary>Answer</summary>
-                        <p>Limitations include: <strong>Cannot determine dimensionless constants</strong>, <strong>Cannot distinguish between similar functions</strong> (sin θ vs tan θ for small θ), <strong>Fails with discontinuous relationships</strong>, <strong>Cannot handle complex systems with many competing effects</strong>, and <strong>Cannot determine the exact mathematical form</strong> (e.g., exponential vs power law). It's most useful for simple systems with clear dominant variables.</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>6.</strong> Explain the difference between accuracy and precision in measurement. How do systematic and random errors affect each?
-                    <details>
-                        <summary>Answer</summary>
-                        <p><strong>Accuracy</strong> refers to how close measurements are to the true value, while <strong>precision</strong> refers to how close repeated measurements are to each other. <strong>Systematic errors</strong> (like miscalibration) reduce accuracy but don't affect precision. <strong>Random errors</strong> reduce precision but can average out to maintain accuracy. Ideal measurements have both high accuracy and high precision.</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>7.</strong> Why must arguments of transcendental functions (sin, cos, ln, exp) be dimensionless? What would happen if they weren't?
-                    <details>
-                        <summary>Answer</summary>
-                        <p>Transcendental functions are defined through infinite series or mathematical operations that only make sense for pure numbers. For example, sin(x) = x - x³/3! + x⁵/5! - ... Each term must have the same dimensions, which is only possible if x is dimensionless. If arguments had dimensions, the mathematical definition would be meaningless and the function value would depend on the choice of units.</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>8.</strong> How do modern quantum mechanical limits (like the Heisenberg uncertainty principle) affect our ability to make measurements?
-                    <details>
-                        <summary>Answer</summary>
-                        <p>Quantum mechanics sets fundamental limits: we cannot simultaneously measure position and momentum to arbitrary precision (Δx·Δp ≥ ℏ/2). This isn't a technical limitation but a fundamental property of nature. It affects precision measurements in atomic physics, limits the accuracy of atomic clocks, and sets ultimate bounds on space-time measurements at the Planck scale. These quantum limits become important in cutting-edge experiments and emerging technologies.</p>
-                    </details>
-                </div>
-            </div>
-
-            <div class="section">
-                <h2>🧮 Numerical Problems</h2>
-                
-                <div class="question">
-                    <strong>1.</strong> The speed of light is 299,792,458 m/s. Convert this to:
-                    <ul>
-                        <li>a) kilometers per hour (km/h)</li>
-                        <li>b) miles per hour (mph) [1 mile = 1.609 km]</li>
-                        <li>c) furlongs per fortnight [1 furlong = 201.168 m, 1 fortnight = 14 days]</li>
-                    </ul>
-                    <details>
-                        <summary>Answer</summary>
-                        <p><strong>a)</strong> 299,792,458 m/s × (3600 s/h) × (1 km/1000 m) = <strong>1.079 × 10⁹ km/h</strong></p>
-                        <p><strong>b)</strong> 1.079 × 10⁹ km/h × (1 mi/1.609 km) = <strong>6.71 × 10⁸ mph</strong></p>
-                        <p><strong>c)</strong> 299,792,458 m/s × (1 furlong/201.168 m) × (1,209,600 s/fortnight) = <strong>1.80 × 10¹² furlongs/fortnight</strong></p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>2.</strong> For the simple pendulum equation T = 2π√(L/g), derive this relationship using dimensional analysis and explain what information is missing.
-                    <details>
-                        <summary>Answer</summary>
-                        <p>Assume T ∝ L^a × g^b × m^c</p>
-                        <p>Dimensionally: [T] = [L]^a × [LT⁻²]^b × [M]^c</p>
-                        <p>[T¹M⁰L⁰] = [L^(a+b) T^(-2b) M^c]</p>
-                        <p>Comparing exponents: T: 1 = -2b → b = -1/2; M: 0 = c → c = 0; L: 0 = a + b → a = 1/2</p>
-                        <p>Result: <strong>T ∝ √(L/g)</strong></p>
-                        <p><strong>Missing:</strong> The dimensionless factor 2π, which comes from the geometry of circular motion.</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>3.</strong> Verify dimensional consistency for Einstein's mass-energy equation E = mc² and find the dimensions of each quantity.
-                    <details>
-                        <summary>Answer</summary>
-                        <p>[E] = [ML²T⁻²] (energy)</p>
-                        <p>[m] = [M] (mass)</p>
-                        <p>[c²] = [LT⁻¹]² = [L²T⁻²] (speed squared)</p>
-                        <p>Right side: [m][c²] = [M][L²T⁻²] = [ML²T⁻²]</p>
-                        <p>✅ <strong>Both sides have dimension [ML²T⁻²], confirming consistency</strong></p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>4.</strong> A rectangular swimming pool measures 25.0 m × 12.5 m × 2.0 m. Calculate:
-                    <ul>
-                        <li>a) Volume of water when full</li>
-                        <li>b) Mass of water (density = 1000 kg/m³)</li>
-                        <li>c) Weight of water (g = 9.81 m/s²)</li>
-                        <li>d) Time to fill at 50 L/s</li>
-                    </ul>
-                    <details>
-                        <summary>Answer</summary>
-                        <p><strong>a)</strong> V = 25.0 × 12.5 × 2.0 = <strong>625 m³</strong></p>
-                        <p><strong>b)</strong> m = ρV = 1000 kg/m³ × 625 m³ = <strong>6.25 × 10⁵ kg</strong></p>
-                        <p><strong>c)</strong> W = mg = 6.25 × 10⁵ kg × 9.81 m/s² = <strong>6.13 × 10⁶ N</strong></p>
-                        <p><strong>d)</strong> t = V/flow rate = 625 m³/(50 L/s) = 625,000 L/50 L/s = <strong>12,500 s = 3.47 hours</strong></p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>5.</strong> The period of a mass-spring system is T = 2π√(m/k). If you want to:
-                    <ul>
-                        <li>a) Double the period, how should you change the mass?</li>
-                        <li>b) Halve the period, how should you change the spring constant?</li>
-                        <li>c) What happens if you double both mass and spring constant?</li>
-                    </ul>
-                    <details>
-                        <summary>Answer</summary>
-                        <p><strong>a)</strong> Since T ∝ √m, to double T, we need to quadruple m: <strong>m_new = 4m</strong></p>
-                        <p><strong>b)</strong> Since T ∝ 1/√k, to halve T, we need to quadruple k: <strong>k_new = 4k</strong></p>
-                        <p><strong>c)</strong> T_new = 2π√(2m/2k) = 2π√(m/k) = T: <strong>Period unchanged</strong></p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>6.</strong> Perform the following calculations with proper significant figures:
-                    <ul>
-                        <li>a) 23.45 + 1.2 + 0.678</li>
-                        <li>b) 4.56 × 2.1 × 0.789</li>
-                        <li>c) (2.34 × 10³) ÷ (1.2 × 10⁻⁴)</li>
-                    </ul>
-                    <details>
-                        <summary>Answer</summary>
-                        <p><strong>a)</strong> 23.45 + 1.2 + 0.678 = 25.328 → <strong>25.3</strong> (limited by 1.2, which has 1 decimal place)</p>
-                        <p><strong>b)</strong> 4.56 × 2.1 × 0.789 = 7.55... → <strong>7.6</strong> (limited by 2.1, which has 2 sig figs)</p>
-                        <p><strong>c)</strong> (2.34 × 10³) ÷ (1.2 × 10⁻⁴) = 1.95 × 10⁷ → <strong>2.0 × 10⁷</strong> (limited by 1.2, which has 2 sig figs)</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>7.</strong> Estimate the order of magnitude for:
-                    <ul>
-                        <li>a) Number of atoms in your body</li>
-                        <li>b) Number of heartbeats in a lifetime</li>
-                        <li>c) Energy consumption of a house per year</li>
-                    </ul>
-                    <details>
-                        <summary>Answer</summary>
-                        <p><strong>a)</strong> Body mass ~70 kg, average atomic mass ~10 u = 1.7×10⁻²⁷ kg. Number ≈ 70/(1.7×10⁻²⁷) ≈ <strong>4×10²⁸ atoms</strong></p>
-                        <p><strong>b)</strong> Heart rate ~70 bpm, lifetime ~80 years. Beats ≈ 70 × 60 × 24 × 365 × 80 ≈ <strong>3×10⁹ heartbeats</strong></p>
-                        <p><strong>c)</strong> Power ~3 kW average, year = 8760 hours. Energy ≈ 3000 W × 8760 h ≈ <strong>3×10⁷ Wh = 3×10⁴ kWh</strong></p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>8.</strong> Advanced: A measurement gives L = 5.47 ± 0.05 m and W = 3.82 ± 0.03 m. Calculate the area and its uncertainty using proper uncertainty propagation.
-                    <details>
-                        <summary>Answer</summary>
-                        <p>Area: A = L × W = 5.47 × 3.82 = 20.90 m²</p>
-                        <p>Relative uncertainties: δL/L = 0.05/5.47 = 0.0091, δW/W = 0.03/3.82 = 0.0079</p>
-                        <p>Combined relative uncertainty: δA/A = √[(δL/L)² + (δW/W)²] = √[0.0091² + 0.0079²] = 0.012</p>
-                        <p>Absolute uncertainty: δA = 0.012 × 20.90 = 0.25 m²</p>
-                        <p><strong>Result: A = 20.9 ± 0.3 m²</strong></p>
-                    </details>
-                </div>
-            </div>
-
-            <div class="quiz-container">
-                <h2>📊 Comprehensive Assessment Quiz</h2>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressBar"></div>
-                </div>
-                <div class="score-display" id="scoreDisplay">Progress: 0% | Score: 0/35</div>
-
-                <div class="quiz-question">
-                    <strong>1.</strong> Which of the following is a fundamental SI unit?<br><br>
-                    <div class="option">
-                        <input type="radio" name="q1" value="a" id="q1a">
-                        <label for="q1a">a) Newton (N)</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q1" value="b" id="q1b">
-                        <label for="q1b">b) Joule (J)</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q1" value="c" id="q1c">
-                        <label for="q1c">c) Watt (W)</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q1" value="d" id="q1d">
-                        <label for="q1d">d) Kilogram (kg)</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>2.</strong> The principle of homogeneity states that:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q2" value="a" id="q2a">
-                        <label for="q2a">a) All physical quantities must have the same units</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q2" value="b" id="q2b">
-                        <label for="q2b">b) An equation must be dimensionally consistent</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q2" value="c" id="q2c">
-                        <label for="q2c">c) The universe is uniform and homogeneous</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q2" value="d" id="q2d">
-                        <label for="q2d">d) Derived units are homogeneous with fundamental units</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>3.</strong> The dimensional formula for torque is:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q3" value="a" id="q3a">
-                        <label for="q3a">a) [MLT⁻²]</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q3" value="b" id="q3b">
-                        <label for="q3b">b) [ML²T⁻²]</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q3" value="c" id="q3c">
-                        <label for="q3c">c) [ML⁻¹T⁻²]</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q3" value="d" id="q3d">
-                        <label for="q3d">d) [M⁻¹L³T⁻²]</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>4.</strong> A light-year is a unit of:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q4" value="a" id="q4a">
-                        <label for="q4a">a) Time</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q4" value="b" id="q4b">
-                        <label for="q4b">b) Mass</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q4" value="c" id="q4c">
-                        <label for="q4c">c) Distance</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q4" value="d" id="q4d">
-                        <label for="q4d">d) Energy</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>5.</strong> Which quantity has dimensions [ML⁻¹T⁻²]?<br><br>
-                    <div class="option">
-                        <input type="radio" name="q5" value="a" id="q5a">
-                        <label for="q5a">a) Force</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q5" value="b" id="q5b">
-                        <label for="q5b">b) Pressure</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q5" value="c" id="q5c">
-                        <label for="q5c">c) Energy</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q5" value="d" id="q5d">
-                        <label for="q5d">d) Power</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>6.</strong> The 2019 SI redefinition was based on:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q6" value="a" id="q6a">
-                        <label for="q6a">a) Physical artifacts</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q6" value="b" id="q6b">
-                        <label for="q6b">b) Fundamental constants of nature</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q6" value="c" id="q6c">
-                        <label for="q6c">c) Average measurements from multiple labs</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q6" value="d" id="q6d">
-                        <label for="q6d">d) International committee decisions</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>7.</strong> Dimensional analysis can be used for all EXCEPT:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q7" value="a" id="q7a">
-                        <label for="q7a">a) Checking equation validity</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q7" value="b" id="q7b">
-                        <label for="q7b">b) Converting units</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q7" value="c" id="q7c">
-                        <label for="q7c">c) Determining exact numerical constants</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q7" value="d" id="q7d">
-                        <label for="q7d">d) Deriving relationships between quantities</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>8.</strong> The dimensional formula for angular momentum is:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q8" value="a" id="q8a">
-                        <label for="q8a">a) [MLT⁻¹]</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q8" value="b" id="q8b">
-                        <label for="q8b">b) [ML²T⁻¹]</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q8" value="c" id="q8c">
-                        <label for="q8c">c) [ML²T⁻²]</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q8" value="d" id="q8d">
-                        <label for="q8d">d) [MLT⁻²]</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>9.</strong> Which statement about significant figures is correct?<br><br>
-                    <div class="option">
-                        <input type="radio" name="q9" value="a" id="q9a">
-                        <label for="q9a">a) They represent absolute precision</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q9" value="b" id="q9b">
-                        <label for="q9b">b) They indicate the reliability of a measurement</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q9" value="c" id="q9c">
-                        <label for="q9c">c) They are always equal to the number of decimal places</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q9" value="d" id="q9d">
-                        <label for="q9d">d) They are only important in theoretical physics</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>10.</strong> The meter is currently defined as:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q10" value="a" id="q10a">
-                        <label for="q10a">a) 1/40,000,000 of the Earth's circumference</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q10" value="b" id="q10b">
-                        <label for="q10b">b) The length of a specific platinum-iridium bar</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q10" value="c" id="q10c">
-                        <label for="q10c">c) The distance light travels in vacuum in 1/299,792,458 of a second</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q10" value="d" id="q10d">
-                        <label for="q10d">d) 1,650,763.73 wavelengths of krypton-86 radiation</label>
-                    </div>
-                </div>
-                
-                <div class="quiz-question">
-                    <strong>11.</strong> Which represents the largest number of significant figures?<br><br>
-                    <div class="option">
-                        <input type="radio" name="q11" value="a" id="q11a">
-                        <label for="q11a">a) 0.00456</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q11" value="b" id="q11b">
-                        <label for="q11b">b) 4.560</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q11" value="c" id="q11c">
-                        <label for="q11c">c) 456</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q11" value="d" id="q11d">
-                        <label for="q11d">d) 4.56 × 10²</label>
-                    </div>
-                </div>
-                
-                <div class="quiz-question">
-                    <strong>12.</strong> The main advantage of the 2019 SI redefinition is:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q12" value="a" id="q12a">
-                        <label for="q12a">a) Easier calculations</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q12" value="b" id="q12b">
-                        <label for="q12b">b) Universal reproducibility without physical artifacts</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q12" value="c" id="q12c">
-                        <label for="q12c">c) Simpler unit conversions</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q12" value="d" id="q12d">
-                        <label for="q12d">d) Lower cost of standards</label>
-                    </div>
-                </div>
-                
-                <div class="quiz-question">
-                    <strong>13.</strong> In uncertainty propagation, when adding two measurements A ± δA and B ± δB, the uncertainty in the sum is:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q13" value="a" id="q13a">
-                        <label for="q13a">a) δA + δB</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q13" value="b" id="q13b">
-                        <label for="q13b">b) √(δA² + δB²)</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q13" value="c" id="q13c">
-                        <label for="q13c">c) |δA - δB|</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q13" value="d" id="q13d">
-                        <label for="q13d">d) δA × δB</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>14.</strong> Which is a vector quantity?<br><br>
-                    <div class="option">
-                        <input type="radio" name="q14" value="a" id="q14a">
-                        <label for="q14a">a) Speed</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q14" value="b" id="q14b">
-                        <label for="q14b">b) Distance</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q14" value="c" id="q14c">
-                        <label for="q14c">c) Displacement</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q14" value="d" id="q14d">
-                        <label for="q14d">d) Mass</label>
-                    </div>
-                </div>
-                
-                <div class="quiz-question">
-                    <strong>15.</strong> The sum 12.345 + 1.2 + 0.07 should be reported as:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q15" value="a" id="q15a">
-                        <label for="q15a">a) 13.615</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q15" value="b" id="q15b">
-                        <label for="q15b">b) 13.62</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q15" value="c" id="q15c">
-                        <label for="q15c">c) 13.6</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q15" value="d" id="q15d">
-                        <label for="q15d">d) 14</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>16.</strong> Arguments of transcendental functions must be dimensionless because:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q16" value="a" id="q16a">
-                        <label for="q16a">a) It's a mathematical convention</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q16" value="b" id="q16b">
-                        <label for="q16b">b) Their Taylor series expansions would be dimensionally inconsistent</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q16" value="c" id="q16c">
-                        <label for="q16c">c) They can only be calculated with calculators</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q16" value="d" id="q16d">
-                        <label for="q16d">d) It simplifies the math</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>17.</strong> Which of the following is NOT a fundamental SI unit?<br><br>
-                    <div class="option">
-                        <input type="radio" name="q17" value="a" id="q17a">
-                        <label for="q17a">a) Kelvin</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q17" value="b" id="q17b">
-                        <label for="q17b">b) Candela</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q17" value="c" id="q17c">
-                        <label for="q17c">c) Coulomb</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q17" value="d" id="q17d">
-                        <label for="q17d">d) Mole</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>18.</strong> A furlong is 220 yards, and a fortnight is 2 weeks. If a snail moves at 2.5 mm/s, its speed in furlongs per fortnight is approximately:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q18" value="a" id="q18a">
-                        <label for="q18a">a) 15</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q18" value="b" id="q18b">
-                        <label for="q18b">b) 1.5 × 10³</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q18" value="c" id="q18c">
-                        <label for="q18c">c) 1.5 × 10⁵</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q18" value="d" id="q18d">
-                        <label for="q18d">d) 1.5 × 10⁷</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>19.</strong> The dimensional formula for gravitational constant G is:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q19" value="a" id="q19a">
-                        <label for="q19a">a) [M⁻¹L³T⁻²]</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q19" value="b" id="q19b">
-                        <label for="q19b">b) [MLT⁻²]</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q19" value="c" id="q19c">
-                        <label for="q19c">c) [M⁻¹L²T⁻¹]</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q19" value="d" id="q19d">
-                        <label for="q19d">d) [ML³T⁻²]</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>20.</strong> If length [L] and time [T] are chosen as fundamental quantities, the dimensions of force would be:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q20" value="a" id="q20a">
-                        <label for="q20a">a) [LT⁻²]</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q20" value="b" id="q20b">
-                        <label for="q20b">b) [L²T⁻²]</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q20" value="c" id="q20c">
-                        <label for="q20c">c) [LT⁻¹]</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q20" value="d" id="q20d">
-                        <label for="q20d">d) Force cannot be expressed in terms of L and T alone</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>21.</strong> Which is NOT a characteristic of a good physical standard?<br><br>
-                    <div class="option">
-                        <input type="radio" name="q21" value="a" id="q21a">
-                        <label for="q21a">a) Accessibility</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q21" value="b" id="q21b">
-                        <label for="q21b">b) Invariability</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q21" value="c" id="q21c">
-                        <label for="q21c">c) Uniqueness (exists in only one place)</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q21" value="d" id="q21d">
-                        <label for="q21d">d) Reproducibility</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>22.</strong> The product 3.14159 × 2.0 should be reported as:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q22" value="a" id="q22a">
-                        <label for="q22a">a) 6.28318</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q22" value="b" id="q22b">
-                        <label for="q22b">b) 6.2832</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q22" value="c" id="q22c">
-                        <label for="q22c">c) 6.28</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q22" value="d" id="q22d">
-                        <label for="q22d">d) 6.3</label>
-                    </div>
-                </div>
-                
-                <div class="quiz-question">
-                    <strong>23.</strong> Which quantity has dimensions of energy?<br><br>
-                    <div class="option">
-                        <input type="radio" name="q23" value="a" id="q23a">
-                        <label for="q23a">a) Force × Distance</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q23" value="b" id="q23b">
-                        <label for="q23b">b) Mass × Velocity</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q23" value="c" id="q23c">
-                        <label for="q23c">c) Mass × Acceleration</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q23" value="d" id="q23d">
-                        <label for="q23d">d) Force / Area</label>
-                    </div>
-                </div>
-                
-                <div class="quiz-question">
-                    <strong>24.</strong> Order of magnitude of the number of seconds in a year is:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q24" value="a" id="q24a">
-                        <label for="q24a">a) 10⁵</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q24" value="b" id="q24b">
-                        <label for="q24b">b) 10⁶</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q24" value="c" id="q24c">
-                        <label for="q24c">c) 10⁷</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q24" value="d" id="q24d">
-                        <label for="q24d">d) 10⁸</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>25.</strong> The prefix "pico" stands for:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q25" value="a" id="q25a">
-                        <label for="q25a">a) 10⁻⁹</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q25" value="b" id="q25b">
-                        <label for="q25b">b) 10⁻¹²</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q25" value="c" id="q25c">
-                        <label for="q25c">c) 10⁻¹⁵</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q25" value="d" id="q25d">
-                        <label for="q25d">d) 10⁻⁶</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>26.</strong> A measurement that is very close to the true value is said to be:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q26" value="a" id="q26a">
-                        <label for="q26a">a) Precise</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q26" value="b" id="q26b">
-                        <label for="q26b">b) Accurate</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q26" value="c" id="q26c">
-                        <label for="q26c">c) Significant</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q26" value="d" id="q26d">
-                        <label for="q26d">d) Consistent</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>27.</strong> The dimensional formula for Planck's constant (h) is the same as that for:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q27" value="a" id="q27a">
-                        <label for="q27a">a) Energy</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q27" value="b" id="q27b">
-                        <label for="q27b">b) Momentum</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q27" value="c" id="q27c">
-                        <label for="q27c">c) Angular Momentum</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q27" value="d" id="q27d">
-                        <label for="q27d">d) Power</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>28.</strong> Which error is reduced by taking multiple measurements and averaging?<br><br>
-                    <div class="option">
-                        <input type="radio" name="q28" value="a" id="q28a">
-                        <label for="q28a">a) Systematic error</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q28" value="b" id="q28b">
-                        <label for="q28b">b) Random error</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q28" value="c" id="q28c">
-                        <label for="q28c">c) Both systematic and random errors</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q28" value="d" id="q28d">
-                        <label for="q28d">d) Neither systematic nor random errors</label>
-                    </div>
-                </div>
-                
-                <div class="quiz-question">
-                    <strong>29.</strong> The number of significant figures in 1.20 × 10³ is:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q29" value="a" id="q29a">
-                        <label for="q29a">a) 2</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q29" value="b" id="q29b">
-                        <label for="q29b">b) 3</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q29" value="c" id="q29c">
-                        <label for="q29c">c) 4</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q29" value="d" id="q29d">
-                        <label for="q29d">d) Ambiguous</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>30.</strong> Which of the following is dimensionless?<br><br>
-                    <div class="option">
-                        <input type="radio" name="q30" value="a" id="q30a">
-                        <label for="q30a">a) Angle</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q30" value="b" id="q30b">
-                        <label for="q30b">b) Solid Angle</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q30" value="c" id="q30c">
-                        <label for="q30c">c) Refractive Index</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q30" value="d" id="q30d">
-                        <label for="q30d">d) All of the above</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>31.</strong> What is the SI unit of electric charge?<br><br>
-                    <div class="option">
-                        <input type="radio" name="q31" value="a" id="q31a">
-                        <label for="q31a">a) Ampere</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q31" value="b" id="q31b">
-                        <label for="q31b">b) Volt</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q31" value="c" id="q31c">
-                        <label for="q31c">c) Ohm</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q31" value="d" id="q31d">
-                        <label for="q31d">d) Coulomb</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>32.</strong> The dimensional formula for power is:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q32" value="a" id="q32a">
-                        <label for="q32a">a) [MLT⁻²]</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q32" value="b" id="q32b">
-                        <label for="q32b">b) [ML²T⁻²]</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q32" value="c" id="q32c">
-                        <label for="q32c">c) [ML²T⁻³]</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q32" value="d" id="q32d">
-                        <label for="q32d">d) [MLT⁻¹]</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>33.</strong> Which of these is a derived unit?<br><br>
-                    <div class="option">
-                        <input type="radio" name="q33" value="a" id="q33a">
-                        <label for="q33a">a) Second</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q33" value="b" id="q33b">
-                        <label for="q33b">b) Meter</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q33" value="c" id="q33c">
-                        <label for="q33c">c) Kilogram</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q33" value="d" id="q33d">
-                        <label for="q33d">d) Watt</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>34.</strong> When multiplying 12.3 by 1.23, the result should have how many significant figures?<br><br>
-                    <div class="option">
-                        <input type="radio" name="q34" value="a" id="q34a">
-                        <label for="q34a">a) 2</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q34" value="b" id="q34b">
-                        <label for="q34b">b) 3</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q34" value="c" id="q34c">
-                        <label for="q34c">c) 4</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q34" value="d" id="q34d">
-                        <label for="q34d">d) 5</label>
-                    </div>
-                </div>
-
-                <div class="quiz-question">
-                    <strong>35.</strong> The prefix "femto" stands for:<br><br>
-                    <div class="option">
-                        <input type="radio" name="q35" value="a" id="q35a">
-                        <label for="q35a">a) 10⁻⁹</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q35" value="b" id="q35b">
-                        <label for="q35b">b) 10⁻¹²</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q35" value="c" id="q35c">
-                        <label for="q35c">c) 10⁻¹⁵</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q35" value="d" id="q35d">
-                        <label for="q35d">d) 10⁻¹⁸</label>
-                    </div>
-                </div>
-
-                <div class="quiz-buttons">
-                    <button class="btn" onclick="calculateScore()">📊 Submit Quiz</button>
-                    <button class="btn btn-secondary" onclick="resetQuiz()">🔄 Reset Quiz</button>
-                </div>
-                
-                <div id="results" style="display: none;">
-                    <div class="results-header">
-                        <h3>Quiz Results</h3>
-                        <button class="btn btn-close" onclick="closeResults()">✕ Close</button>
-                    </div>
-                    <div id="feedback"></div>
                 </div>
             </div>
         </div>
     </main>
+
+    <section class="practice-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Test Your Understanding</h2>
+                <p class="section-subtitle">Apply what you've learned by tackling conceptual questions, numerical problems, and a comprehensive quiz.</p>
+            </div>
+            <div class="practice-grid">
+                <div class="practice-card">
+                    <div class="icon">🤔</div>
+                    <h3>Conceptual Questions</h3>
+                    <p>Challenge your understanding of the core principles and theoretical concepts.</p>
+                    <a href="conceptual.html" class="btn btn-practice">View Questions</a>
+                </div>
+                <div class="practice-card">
+                    <div class="icon">🧮</div>
+                    <h3>Numerical Problems</h3>
+                    <p>Sharpen your problem-solving skills with a variety of calculations and applications.</p>
+                    <a href="numerical.html" class="btn btn-practice">Solve Problems</a>
+                </div>
+                <div class="practice-card">
+                    <div class="icon">📊</div>
+                    <h3>Assessment Quiz</h3>
+                    <p>Take a timed, comprehensive quiz to test your mastery of the entire chapter.</p>
+                    <a href="mcq.html" class="btn btn-practice">Start Quiz</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer class="footer">
         <div class="container">
@@ -1851,149 +273,6 @@
         </div>
     </footer>
 
-    <script>
-        const correctAnswers = {
-            q1: 'd', q2: 'b', q3: 'b', q4: 'c', q5: 'b', q6: 'b', q7: 'c', q8: 'b', q9: 'b', q10: 'c',
-            q11: 'b', q12: 'b', q13: 'b', q14: 'c', q15: 'c', q16: 'b', q17: 'c', q18: 'b', q19: 'a', q20: 'd',
-            q21: 'c', q22: 'd', q23: 'a', q24: 'c', q25: 'b', q26: 'b', q27: 'c', q28: 'b', q29: 'b', q30: 'd',
-            q31: 'd', q32: 'c', q33: 'd', q34: 'b', q35: 'c'
-        };
-
-        function calculateScore() {
-            let score = 0;
-            const total = Object.keys(correctAnswers).length;
-            let feedback = '<h4>Answer Analysis:</h4>';
-
-            for (let question in correctAnswers) {
-                const selected = document.querySelector(`input[name="${question}"]:checked`);
-                if (selected && selected.value === correctAnswers[question]) {
-                    score++;
-                    feedback += `<p style="color: var(--success-color, #10b981);">✅ Question ${question.slice(1)}: Correct!</p>`;
-                } else {
-                    const correctAnswerValue = getAnswerText(question, correctAnswers[question]);
-                    feedback += `<p style="color: var(--danger-color, #ef4444);">❌ Question ${question.slice(1)}: Incorrect. Correct answer: ${correctAnswerValue}</p>`;
-                }
-            }
-
-            const percentage = Math.round((score / total) * 100);
-            
-            // Save progress to localStorage
-            localStorage.setItem('chapter-1-progress', percentage);
-            
-            // Update progress bar
-            document.getElementById('progressBar').style.width = percentage + '%';
-            
-            // Determine performance level
-            let level = '';
-            let color = '';
-            if (percentage >= 90) {
-                level = 'Excellent! Chapter Mastered 🎯';
-                color = 'var(--success-color, #10b981)';
-            } else if (percentage >= 75) {
-                level = 'Very Good! Strong Understanding ✅';
-                color = 'var(--accent-color, #06b6d4)';
-            } else if (percentage >= 60) {
-                level = 'Good! Chapter Completed 📚';
-                color = 'var(--warning-color, #f59e0b)';
-            } else if (percentage >= 40) {
-                level = 'Basic Understanding 📖';
-                color = 'var(--warning-color, #f59e0b)';
-            } else {
-                level = 'Needs Review 🔄';
-                color = 'var(--danger-color, #ef4444)';
-            }
-
-            document.getElementById('scoreDisplay').innerHTML = 
-                `<span style="color: ${color};">${level}</span><br>Progress: ${percentage}% | Score: ${score}/${total}`;
-            
-            feedback += `<div style="margin-top: 15px; padding: 15px; background: ${color}; color: white; border-radius: 8px;">
-                <strong>Final Score: ${score}/${total} (${percentage}%)</strong><br>
-                <strong>Status: ${level}</strong>
-            </div>`;
-
-            document.getElementById('feedback').innerHTML = feedback;
-            document.getElementById('results').style.display = 'block';
-            
-            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        function getAnswerText(question, answer) {
-            const answers = {
-                 q1: {a: 'Newton (N)', b: 'Joule (J)', c: 'Watt (W)', d: 'Kilogram (kg)'},
-                 q2: {a: 'All physical quantities must have the same units', b: 'An equation must be dimensionally consistent', c: 'The universe is uniform and homogeneous', d: 'Derived units are homogeneous with fundamental units'},
-                 q3: {a: '[MLT⁻²]', b: '[ML²T⁻²]', c: '[ML⁻¹T⁻²]', d: '[M⁻¹L³T⁻²]'},
-                 q4: {a: 'Time', b: 'Mass', c: 'Distance', d: 'Energy'},
-                 q5: {a: 'Force', b: 'Pressure', c: 'Energy', d: 'Power'},
-                 q6: {a: 'Physical artifacts', b: 'Fundamental constants of nature', c: 'Average measurements from multiple labs', d: 'International committee decisions'},
-                 q7: {a: 'Checking equation validity', b: 'Converting units', c: 'Determining exact numerical constants', d: 'Deriving relationships between quantities'},
-                 q8: {a: '[MLT⁻¹]', b: '[ML²T⁻¹]', c: '[ML²T⁻²]', d: '[MLT⁻²]'},
-                 q9: {a: 'They represent absolute precision', b: 'They indicate the reliability of a measurement', c: 'They are always equal to the number of decimal places', d: 'They are only important in theoretical physics'},
-                 q10: {a: '1/40,000,000 of the Earth\'s circumference', b: 'The length of a specific platinum-iridium bar', c: 'The distance light travels in vacuum in 1/299,792,458 of a second', d: '1,650,763.73 wavelengths of krypton-86 radiation'},
-                 q11: {a: '0.00456', b: '4.560', c: '456', d: '4.56 × 10²'},
-                 q12: {a: 'Easier calculations', b: 'Universal reproducibility without physical artifacts', c: 'Simpler unit conversions', d: 'Lower cost of standards'},
-                 q13: {a: 'δA + δB', b: '√(δA² + δB²)', c: '|δA - δB|', d: 'δA × δB'},
-                 q14: {a: 'Speed', b: 'Distance', c: 'Displacement', d: 'Mass'},
-                 q15: {a: '13.615', b: '13.62', c: '13.6', d: '14'},
-                 q16: {a: 'It\'s a mathematical convention', b: 'Their Taylor series expansions would be dimensionally inconsistent', c: 'They can only be calculated with calculators', d: 'It simplifies the math'},
-                 q17: {a: 'Kelvin', b: 'Candela', c: 'Coulomb', d: 'Mole'},
-                 q18: {a: '15', b: '1.5 × 10³', c: '1.5 × 10⁵', d: '1.5 × 10⁷'},
-                 q19: {a: '[M⁻¹L³T⁻²]', b: '[MLT⁻²]', c: '[M⁻¹L²T⁻¹]', d: '[ML³T⁻²]'},
-                 q20: {a: '[LT⁻²]', b: '[L²T⁻²]', c: '[LT⁻¹]', d: 'Force cannot be expressed in terms of L and T alone'},
-                 q21: {a: 'Accessibility', b: 'Invariability', c: 'Uniqueness (exists in only one place)', d: 'Reproducibility'},
-                 q22: {a: '6.28318', b: '6.2832', c: '6.28', d: '6.3'},
-                 q23: {a: 'Force × Distance', b: 'Mass × Velocity', c: 'Mass × Acceleration', d: 'Force / Area'},
-                 q24: {a: '10⁵', b: '10⁶', c: '10⁷', d: '10⁸'},
-                 q25: {a: '10⁻⁹', b: '10⁻¹²', c: '10⁻¹⁵', d: '10⁻⁶'},
-                 q26: {a: 'Precise', b: 'Accurate', c: 'Significant', d: 'Consistent'},
-                 q27: {a: 'Energy', b: 'Momentum', c: 'Angular Momentum', d: 'Power'},
-                 q28: {a: 'Systematic error', b: 'Random error', c: 'Both systematic and random errors', d: 'Neither systematic nor random errors'},
-                 q29: {a: '2', b: '3', c: '4', d: 'Ambiguous'},
-                 q30: {a: 'Angle', b: 'Solid Angle', c: 'Refractive Index', d: 'All of the above'},
-                 q31: {a: 'Ampere', b: 'Volt', c: 'Ohm', d: 'Coulomb'},
-                 q32: {a: '[MLT⁻²]', b: '[ML²T⁻²]', c: '[ML²T⁻³]', d: '[MLT⁻¹]'},
-                 q33: {a: 'Second', b: 'Meter', c: 'Kilogram', d: 'Watt'},
-                 q34: {a: '2', b: '3', c: '4', d: '5'},
-                 q35: {a: '10⁻⁹', b: '10⁻¹²', c: '10⁻¹⁵', d: '10⁻¹⁸'}
-            };
-            return `<strong>${answer.toUpperCase()}</strong>: ${answers[question][answer]}`;
-        }
-
-        function resetQuiz() {
-            document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
-            document.getElementById('progressBar').style.width = '0%';
-            document.getElementById('scoreDisplay').textContent = 'Progress: 0% | Score: 0/35';
-            document.getElementById('results').style.display = 'none';
-        }
-
-        function closeResults() {
-            document.getElementById('results').style.display = 'none';
-        }
-
-        const lightModeBtn = document.getElementById('light-mode');
-        const darkModeBtn = document.getElementById('dark-mode');
-        const docElement = document.documentElement;
-
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        docElement.setAttribute('data-theme', savedTheme);
-
-        if (savedTheme === 'dark') {
-            darkModeBtn.classList.add('active');
-            lightModeBtn.classList.remove('active');
-        }
-
-        lightModeBtn.addEventListener('click', () => {
-            docElement.setAttribute('data-theme', 'light');
-            lightModeBtn.classList.add('active');
-            darkModeBtn.classList.remove('active');
-            localStorage.setItem('theme', 'light');
-        });
-
-        darkModeBtn.addEventListener('click', () => {
-            docElement.setAttribute('data-theme', 'dark');
-            darkModeBtn.classList.add('active');
-            lightModeBtn.classList.remove('active');
-            localStorage.setItem('theme', 'dark');
-        });
-    </script>
+    <script src="../shared/mechanics-scripts.js"></script>
 </body>
 </html>
