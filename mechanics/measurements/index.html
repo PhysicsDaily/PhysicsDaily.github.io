@@ -303,6 +303,18 @@
         [data-theme="dark"] .advanced-note {
             background: linear-gradient(135deg, #2d1b69, #3730a3);
         }
+        
+        .danger-note {
+            background: linear-gradient(135deg, #ffe4e6, #fee2e2);
+            border-left: 4px solid var(--danger-color);
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+        }
+
+        [data-theme="dark"] .danger-note {
+            background: linear-gradient(135deg, #7f1d1d, #991b1b);
+        }
 
         .formula-box {
             background: var(--bg-secondary);
@@ -699,160 +711,85 @@
                         </table>
                     </div>
                 </div>
-
-                <h3>Thermal and Thermodynamic Quantities</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Quantity</th>
-                            <th>Symbol</th>
-                            <th>SI Unit</th>
-                            <th>Dimension</th>
-                            <th>Formula</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Temperature</td><td>T</td><td>kelvin (K)</td><td>[Θ]</td><td>fundamental</td></tr>
-                        <tr><td>Heat</td><td>Q</td><td>joule (J)</td><td>[ML²T⁻²]</td><td>Q = mcΔT</td></tr>
-                        <tr><td>Specific heat capacity</td><td>c</td><td>J/(kg⋅K)</td><td>[L²T⁻²Θ⁻¹]</td><td>c = Q/(mΔT)</td></tr>
-                        <tr><td>Heat capacity</td><td>C</td><td>J/K</td><td>[ML²T⁻²Θ⁻¹]</td><td>C = Q/ΔT</td></tr>
-                        <tr><td>Thermal conductivity</td><td>k</td><td>W/(m⋅K)</td><td>[MLT⁻³Θ⁻¹]</td><td>q = -k∇T</td></tr>
-                        <tr><td>Stefan-Boltzmann constant</td><td>σ</td><td>W/(m²⋅K⁴)</td><td>[MT⁻³Θ⁻⁴]</td><td>P = σAT⁴</td></tr>
-                        <tr><td>Entropy</td><td>S</td><td>J/K</td><td>[ML²T⁻²Θ⁻¹]</td><td>dS = dQ/T</td></tr>
-                        <tr><td>Gas constant</td><td>R</td><td>J/(mol⋅K)</td><td>[ML²T⁻²Θ⁻¹N⁻¹]</td><td>PV = nRT</td></tr>
-                        <tr><td>Coefficient of expansion</td><td>α</td><td>K⁻¹</td><td>[Θ⁻¹]</td><td>ΔL = αL₀ΔT</td></tr>
-                        <tr><td>Thermal resistance</td><td>R<sub>th</sub></td><td>K/W</td><td>[M⁻¹L⁻²T³Θ]</td><td>R<sub>th</sub> = ΔT/P</td></tr>
-                    </tbody>
-                </table>
-
-                <h3>Electromagnetic Quantities</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Quantity</th>
-                            <th>Symbol</th>
-                            <th>SI Unit</th>
-                            <th>Dimension</th>
-                            <th>Formula</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Electric current</td><td>I</td><td>ampere (A)</td><td>[I]</td><td>fundamental</td></tr>
-                        <tr><td>Electric charge</td><td>Q</td><td>coulomb (C)</td><td>[IT]</td><td>Q = I⋅t</td></tr>
-                        <tr><td>Electric potential</td><td>V</td><td>volt (V)</td><td>[ML²T⁻³I⁻¹]</td><td>V = W/Q</td></tr>
-                        <tr><td>Electric field</td><td>E</td><td>V/m</td><td>[MLT⁻³I⁻¹]</td><td>E = F/q</td></tr>
-                        <tr><td>Electric resistance</td><td>R</td><td>ohm (Ω)</td><td>[ML²T⁻³I⁻²]</td><td>R = V/I</td></tr>
-                        <tr><td>Capacitance</td><td>C</td><td>farad (F)</td><td>[M⁻¹L⁻²T⁴I²]</td><td>C = Q/V</td></tr>
-                        <tr><td>Inductance</td><td>L</td><td>henry (H)</td><td>[ML²T⁻²I⁻²]</td><td>L = Φ/I</td></tr>
-                        <tr><td>Magnetic field</td><td>B</td><td>tesla (T)</td><td>[MT⁻²I⁻¹]</td><td>F = qvB</td></tr>
-                        <tr><td>Magnetic flux</td><td>Φ</td><td>weber (Wb)</td><td>[ML²T⁻²I⁻¹]</td><td>Φ = B⋅A</td></tr>
-                        <tr><td>Permittivity</td><td>ε</td><td>F/m</td><td>[M⁻¹L⁻³T⁴I²]</td><td>D = εE</td></tr>
-                        <tr><td>Permeability</td><td>μ</td><td>H/m</td><td>[MLT⁻²I⁻²]</td><td>B = μH</td></tr>
-                        <tr><td>Conductivity</td><td>σ</td><td>S/m</td><td>[M⁻¹L⁻³T³I²]</td><td>J = σE</td></tr>
-                        <tr><td>Resistivity</td><td>ρ</td><td>Ω⋅m</td><td>[ML³T⁻³I⁻²]</td><td>ρ = 1/σ</td></tr>
-                        <tr><td>Electric dipole moment</td><td>p</td><td>C⋅m</td><td>[ITL]</td><td>p = qd</td></tr>
-                        <tr><td>Magnetic dipole moment</td><td>m</td><td>A⋅m²</td><td>[IL²]</td><td>τ = m × B</td></tr>
-                    </tbody>
-                </table>
-
-                <h3>Wave and Optics Quantities</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Quantity</th>
-                            <th>Symbol</th>
-                            <th>SI Unit</th>
-                            <th>Dimension</th>
-                            <th>Formula</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Wavelength</td><td>λ</td><td>meter (m)</td><td>[L]</td><td>λ = v/f</td></tr>
-                        <tr><td>Wave number</td><td>k</td><td>m⁻¹</td><td>[L⁻¹]</td><td>k = 2π/λ</td></tr>
-                        <tr><td>Amplitude</td><td>A</td><td>varies</td><td>varies</td><td>y = A sin(kx - ωt)</td></tr>
-                        <tr><td>Angular frequency</td><td>ω</td><td>rad/s</td><td>[T⁻¹]</td><td>ω = 2πf</td></tr>
-                        <tr><td>Phase</td><td>φ</td><td>radian</td><td>[1]</td><td>φ = kx - ωt</td></tr>
-                        <tr><td>Refractive index</td><td>n</td><td>dimensionless</td><td>[1]</td><td>n = c/v</td></tr>
-                        <tr><td>Optical power</td><td>P</td><td>diopter (D)</td><td>[L⁻¹]</td><td>P = 1/f</td></tr>
-                        <tr><td>Luminous intensity</td><td>I<sub>v</sub></td><td>candela (cd)</td><td>[J]</td><td>fundamental</td></tr>
-                        <tr><td>Luminous flux</td><td>Φ<sub>v</sub></td><td>lumen (lm)</td><td>[J]</td><td>Φ<sub>v</sub> = I<sub>v</sub>Ω</td></tr>
-                        <tr><td>Illuminance</td><td>E<sub>v</sub></td><td>lux (lx)</td><td>[JL⁻²]</td><td>E<sub>v</sub> = Φ<sub>v</sub>/A</td></tr>
-                        <tr><td>Luminance</td><td>L<sub>v</sub></td><td>cd/m²</td><td>[JL⁻²]</td><td>L<sub>v</sub> = I<sub>v</sub>/A</td></tr>
-                    </tbody>
-                </table>
-
-                <h3>Quantum and Atomic Physics Quantities</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Quantity</th>
-                            <th>Symbol</th>
-                            <th>SI Unit</th>
-                            <th>Dimension</th>
-                            <th>Formula</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Planck constant</td><td>h</td><td>J⋅s</td><td>[ML²T⁻¹]</td><td>E = hf</td></tr>
-                        <tr><td>Reduced Planck constant</td><td>ℏ</td><td>J⋅s</td><td>[ML²T⁻¹]</td><td>ℏ = h/2π</td></tr>
-                        <tr><td>Work function</td><td>φ</td><td>joule (J)</td><td>[ML²T⁻²]</td><td>E<sub>k</sub> = hf - φ</td></tr>
-                        <tr><td>Binding energy</td><td>B.E.</td><td>joule (J)</td><td>[ML²T⁻²]</td><td>B.E. = Δmc²</td></tr>
-                        <tr><td>Half-life</td><td>t<sub>½</sub></td><td>second (s)</td><td>[T]</td><td>N = N₀e^(-λt)</td></tr>
-                        <tr><td>Decay constant</td><td>λ</td><td>s⁻¹</td><td>[T⁻¹]</td><td>λ = ln(2)/t<sub>½</sub></td></tr>
-                        <tr><td>Activity</td><td>A</td><td>becquerel (Bq)</td><td>[T⁻¹]</td><td>A = λN</td></tr>
-                        <tr><td>Cross-section</td><td>σ</td><td>m²</td><td>[L²]</td><td>R = σΦ</td></tr>
-                        <tr><td>de Broglie wavelength</td><td>λ<sub>dB</sub></td><td>meter (m)</td><td>[L]</td><td>λ<sub>dB</sub> = h/p</td></tr>
-                    </tbody>
-                </table>
             </div>
 
             <div class="section">
-                <h2>1.4 Dimensional Analysis</h2>
-                <p>Every physical quantity has <strong>dimensions</strong> expressed in terms of the fundamental quantities: Mass [M], Length [L], Time [T], Electric Current [I], Temperature [Θ], Amount of Substance [N], and Luminous Intensity [J].</p>
-                <h3>Applications of Dimensional Analysis</h3>
-                <div class="highlight-box">
-                    <h4>What Dimensional Analysis Can Do:</h4>
-                    <ul>
-                        <li><strong>Check equation validity:</strong> All terms must have the same dimensions</li>
-                        <li><strong>Convert units:</strong> Use dimensional factors to change units</li>
-                        <li><strong>Derive relationships:</strong> Find how quantities depend on each other</li>
-                        <li><strong>Estimate orders of magnitude:</strong> Get rough answers without detailed calculations</li>
-                    </ul>
-                </div>
-                <div class="example-box">
-                    <h4>📝 Example: Deriving the Period of a Pendulum</h4>
-                    <p>For a simple pendulum, the period <span class="math">T</span> should depend on length <span class="math">l</span>, gravity <span class="math">g</span>, and possibly mass <span class="math">m</span>.</p>
-                    <p>Assume: <span class="equation">T = k × l^a × g^b × m^c</span></p>
-                    <p>Dimensionally: <span class="equation">[T] = [L^a] × [LT⁻²]^b × [M^c]</span></p>
-                    <p>This gives: <span class="equation">[T] = [L^(a+b)] × [T^(-2b)] × [M^c]</span></p>
-                    <p>Comparing powers: <span class="math">a + b = 0</span>, <span class="math">-2b = 1</span>, <span class="math">c = 0</span></p>
-                    <p>Therefore: <span class="math">b = -1/2</span>, <span class="math">a = 1/2</span>, <span class="math">c = 0</span></p>
-                    <p><strong>Result:</strong> <span class="equation">T = k√(l/g)</span> (where <span class="math">k ≈ 2π</span>)</p>
-                </div>
-            </div>
+                <h2>1.4 Dimensional Analysis: Uses and Limitations</h2>
+                <p>Every physical quantity has <strong>dimensions</strong> expressed in terms of the fundamental quantities: Mass [M], Length [L], Time [T], Electric Current [I], Temperature [Θ], Amount of Substance [N], and Luminous Intensity [J]. Dimensional analysis is a powerful tool for checking and understanding physical relationships.</p>
 
-            <div class="section">
-                <h2>1.5 Principle of Homogeneity</h2>
-                <p>The <strong>principle of homogeneity</strong> states that any valid physical equation must be dimensionally consistent—every term on both sides must have the same dimensions.</p>
+                <h3>Four Major Uses of Dimensional Analysis</h3>
+                
+                <h4>1. Checking Dimensional Consistency (Principle of Homogeneity)</h4>
+                <p>Any valid physical equation must be dimensionally consistent—every term on both sides of the equation must have the same dimensions. This is a fundamental check for the validity of an equation.</p>
                 <div class="example-box">
-                    <h4>📝 Example Analysis: Kinematic Equation</h4>
-                    <p>Consider: <span class="equation">x = x₀ + v₀t + ½at²</span></p>
+                    <h4>📝 Example: Kinematic Equation</h4>
+                    <p>Consider the equation of motion: <span class="equation">x = x₀ + v₀t + ½at²</span></p>
                     <ul>
-                        <li><span class="equation">[x] = [L]</span></li>
-                        <li><span class="equation">[x₀] = [L]</span></li>
-                        <li><span class="equation">[v₀t] = [LT⁻¹][T] = [L]</span></li>
-                        <li><span class="equation">[½at²] = [LT⁻²][T²] = [L]</span></li>
+                        <li>Dimension of distance <span class="math">x</span>: <span class="equation">[L]</span></li>
+                        <li>Dimension of initial distance <span class="math">x₀</span>: <span class="equation">[L]</span></li>
+                        <li>Dimension of <span class="math">v₀t</span>: <span class="equation">[LT⁻¹][T] = [L]</span></li>
+                        <li>Dimension of <span class="math">½at²</span> (the constant ½ is dimensionless): <span class="equation">[LT⁻²][T²] = [L]</span></li>
                     </ul>
                     <p>✅ All terms have the dimension of length [L], so the equation is dimensionally consistent.</p>
                 </div>
-                <div class="highlight-box">
-                    <h4>Important Limitations:</h4>
-                    <p><strong>Dimensional consistency is necessary but not sufficient.</strong> An equation can be dimensionally correct but still physically wrong. For example, both <span class="equation">E = mv²</span> and <span class="equation">E = ½mv²</span> are dimensionally correct, but only the second is the correct kinetic energy formula.</p>
+
+                <h4>2. Deriving Relationships Between Physical Quantities</h4>
+                <p>By assuming that a quantity depends on other physical quantities, we can use dimensional analysis to deduce the formula that relates them (up to a dimensionless constant).</p>
+                <div class="example-box">
+                    <h4>📝 Example: Deriving the Period of a Pendulum</h4>
+                    <p>Let's find the formula for the period <span class="math">T</span> of a simple pendulum, assuming it depends on its length <span class="math">l</span>, mass <span class="math">m</span>, and the acceleration due to gravity <span class="math">g</span>.</p>
+                    <p>Assume: <span class="equation">T = k × l^a × m^b × g^c</span> (where k is a dimensionless constant)</p>
+                    <p>Writing the dimensions: <span class="equation">[T] = [L]^a × [M]^b × [LT⁻²]^c = [L^(a+c) M^b T^(-2c)]</span></p>
+                    <p>Comparing powers of [M], [L], and [T] on both sides:</p>
+                    <ul>
+                        <li>For [M]: <span class="math">b = 0</span></li>
+                        <li>For [L]: <span class="math">a + c = 0</span></li>
+                        <li>For [T]: <span class="math">-2c = 1</span>  => <span class="math">c = -1/2</span></li>
+                    </ul>
+                    <p>Solving gives <span class="math">a = 1/2</span>. The period is independent of mass (<span class="math">b=0</span>).</p>
+                    <p><strong>Result:</strong> <span class="equation">T = k × l^(1/2) × g^(-1/2) = k√(l/g)</span></p>
+                </div>
+
+                <h4>3. Converting Units Between Systems</h4>
+                <p>Dimensional analysis provides a systematic way to convert a physical quantity from one system of units (e.g., SI) to another (e.g., CGS).</p>
+                <div class="example-box">
+                    <h4>📝 Example: Converting Newtons to Dynes</h4>
+                    <p>Let's convert 1 Newton (the SI unit of force) to dynes (the CGS unit of force).</p>
+                    <p>The dimensional formula for force is <span class="equation">[MLT⁻²]</span>.</p>
+                    <p>In SI: 1 Newton = 1 kg × 1 m × (1 s)⁻²</p>
+                    <p>In CGS: 1 dyne = 1 g × 1 cm × (1 s)⁻²</p>
+                    <p>We know the conversion factors: <span class="math">1 kg = 1000 g</span> and <span class="math">1 m = 100 cm</span>.</p>
+                    <p>1 Newton = (1000 g) × (100 cm) × (1 s)⁻² = 100,000 g⋅cm⋅s⁻²</p>
+                    <p><strong>Result:</strong> <span class="equation">1 Newton = 10⁵ dynes</span></p>
+                </div>
+
+                <h4>4. Finding the Dimensions of Physical Constants</h4>
+                <p>If we know a physical law, we can use dimensional analysis to determine the dimensions of any constants or coefficients in that law.</p>
+                <div class="example-box">
+                    <h4>📝 Example: Dimensions of the Gravitational Constant (G)</h4>
+                    <p>According to Newton's Law of Universal Gravitation, the force <span class="math">F</span> between two masses <span class="math">m₁</span> and <span class="math">m₂</span> separated by a distance <span class="math">r</span> is: <span class="equation">F = G (m₁m₂ / r²)</span></p>
+                    <p>Rearranging for G: <span class="equation">G = F r² / (m₁m₂)</span></p>
+                    <p>Now, substitute the dimensions of each quantity:</p>
+                    <p><span class="equation">[G] = [MLT⁻²] [L²] / ([M][M])</span></p>
+                    <p><span class="equation">[G] = [ML³T⁻²] / [M²]</span></p>
+                    <p><strong>Result:</strong> The dimensions of G are <span class="equation">[M⁻¹L³T⁻²]</span></p>
+                </div>
+
+                <h3>Limitations of Dimensional Analysis</h3>
+                <div class="danger-note">
+                    <h4>🎓 Important Caveats:</h4>
+                    <p>While powerful, dimensional analysis has several key limitations:</p>
+                    <ul>
+                        <li><strong>Dimensionless Constants:</strong> It cannot determine the value of dimensionless constants like <span class="math">k</span> in the pendulum formula (<span class="math">k=2π</span>), <span class="math">1/2</span> in kinetic energy, etc. These must be found through experiment or deeper theory.</li>
+                        <li><strong>Complex Functions:</strong> It fails for equations involving trigonometric (<span class="math">sin, cos</span>), exponential (<span class="math">e^x</span>), or logarithmic (<span class="math">log x</span>) functions, as these functions are dimensionless.</li>
+                        <li><strong>Sum of Terms:</strong> It cannot derive relationships that involve the sum or difference of physical quantities, such as <span class="equation">s = ut + ½at²</span>. It can only handle product-type relationships.</li>
+                        <li><strong>Number of Variables:</strong> If a quantity depends on more than three fundamental dimensions (in mechanics, M, L, T), the method becomes insufficient as we cannot solve for all the unknown powers.</li>
+                    </ul>
                 </div>
             </div>
 
             <div class="section">
-                <h2>1.6 Precision and Significant Figures</h2>
+                <h2>1.5 Precision and Significant Figures</h2>
                 <p><strong>Significant figures</strong> indicate the precision of a measurement - they include all digits that are known with certainty plus the first uncertain digit.</p>
                 
                 <div class="sig-figs-section">
@@ -861,36 +798,11 @@
                     <h4>Basic Rules:</h4>
                     <div class="highlight-box">
                         <ol>
-                            <li><strong>Non-zero digits</strong> are always significant
-                                <ul>
-                                    <li>Example: <span class="equation">123</span> has 3 sig figs</li>
-                                    <li>Example: <span class="equation">4.567</span> has 4 sig figs</li>
-                                </ul>
-                            </li>
-                            <li><strong>Zeros between significant digits</strong> are significant
-                                <ul>
-                                    <li>Example: <span class="equation">101</span> has 3 sig figs</li>
-                                    <li>Example: <span class="equation">2.003</span> has 4 sig figs</li>
-                                </ul>
-                            </li>
-                            <li><strong>Leading zeros</strong> are not significant
-                                <ul>
-                                    <li>Example: <span class="equation">0.05</span> has 1 sig fig</li>
-                                    <li>Example: <span class="equation">0.00789</span> has 3 sig figs</li>
-                                </ul>
-                            </li>
-                            <li><strong>Trailing zeros with a decimal point</strong> are significant
-                                <ul>
-                                    <li>Example: <span class="equation">100.0</span> has 4 sig figs</li>
-                                    <li>Example: <span class="equation">2.500</span> has 4 sig figs</li>
-                                </ul>
-                            </li>
-                            <li><strong>Trailing zeros without a decimal point</strong> are ambiguous
-                                <ul>
-                                    <li>Example: <span class="equation">100</span> could have 1, 2, or 3 sig figs</li>
-                                    <li>Use scientific notation to clarify: <span class="equation">1.00 × 10²</span> has 3 sig figs</li>
-                                </ul>
-                            </li>
+                            <li><strong>Non-zero digits</strong> are always significant.<br><em>Example: <span class="equation">1.234</span> has 4 significant figures.</em></li>
+                            <li><strong>Zeros between significant digits</strong> are significant.<br><em>Example: <span class="equation">506</span> has 3 significant figures.</em></li>
+                            <li><strong>Leading zeros</strong> (zeros before non-zero digits) are not significant.<br><em>Example: <span class="equation">0.0078</span> has 2 significant figures.</em></li>
+                            <li><strong>Trailing zeros with a decimal point</strong> are significant.<br><em>Example: <span class="equation">90.00</span> has 4 significant figures.</em></li>
+                            <li><strong>Trailing zeros without a decimal point</strong> are ambiguous.<br><em>Example: <span class="equation">1200</span> is ambiguous. Use scientific notation: <span class="equation">1.2 × 10³</span> (2 sig figs) or <span class="equation">1.200 × 10³</span> (4 sig figs).</em></li>
                         </ol>
                     </div>
 
@@ -898,99 +810,106 @@
                     
                     <h4>Addition and Subtraction Rule:</h4>
                     <div class="operation-example">
-                        <p><strong>Rule:</strong> Round to the least precise decimal place (fewest decimal places)</p>
+                        <p><strong>Rule:</strong> The result must be rounded to the same number of decimal places as the measurement with the fewest decimal places.</p>
                         <div class="example-box">
-                            <h4>📝 Addition Examples:</h4>
-                            <p><strong>Example 1:</strong></p>
-                            <p><span class="equation">12.345 + 1.2 + 0.07 = ?</span></p>
-                            <p>Step 1: Identify decimal places: 3, 1, 2</p>
-                            <p>Step 2: Least precise = 1 decimal place (from 1.2)</p>
-                            <p>Step 3: Calculate: 12.345 + 1.2 + 0.07 = 13.615</p>
-                            <p><strong>Answer: 13.6</strong> (rounded to 1 decimal place)</p>
-                            
-                            <p><strong>Example 2:</strong></p>
-                            <p><span class="equation">123.45 + 67 + 8.9 = ?</span></p>
-                            <p>Step 1: Identify decimal places: 2, 0, 1</p>
-                            <p>Step 2: Least precise = 0 decimal places (from 67)</p>
-                            <p>Step 3: Calculate: 123.45 + 67 + 8.9 = 199.35</p>
-                            <p><strong>Answer: 199</strong> (rounded to whole number)</p>
+                            <h4>📝 Examples:</h4>
+                            <p><strong>Addition:</strong> <span class="equation">12.345 + 1.2 = 13.545</span> → <strong>13.5</strong> (limited by 1.2's single decimal place).</p>
+                            <p><strong>Subtraction:</strong> <span class="equation">100.56 - 2.123 = 98.437</span> → <strong>98.44</strong> (limited by 100.56's two decimal places).</p>
                         </div>
                     </div>
 
                     <h4>Multiplication and Division Rule:</h4>
                     <div class="operation-example">
-                        <p><strong>Rule:</strong> Round to the fewest significant figures among all numbers</p>
+                        <p><strong>Rule:</strong> The result must have the same number of significant figures as the measurement with the fewest significant figures.</p>
                         <div class="example-box">
-                            <h4>📝 Multiplication Examples:</h4>
-                            <p><strong>Example 1:</strong></p>
-                            <p><span class="equation">3.14159 × 2.0 = ?</span></p>
-                            <p>Step 1: Count sig figs: 6 and 2</p>
-                            <p>Step 2: Fewest sig figs = 2</p>
-                            <p>Step 3: Calculate: 3.14159 × 2.0 = 6.28318</p>
-                            <p><strong>Answer: 6.3</strong> (rounded to 2 sig figs)</p>
-                            
-                            <p><strong>Example 2:</strong></p>
-                            <p><span class="equation">45.6 ÷ 1.23 = ?</span></p>
-                            <p>Step 1: Count sig figs: 3 and 3</p>
-                            <p>Step 2: Fewest sig figs = 3</p>
-                            <p>Step 3: Calculate: 45.6 ÷ 1.23 = 37.0732...</p>
-                            <p><strong>Answer: 37.1</strong> (rounded to 3 sig figs)</p>
+                             <h4>📝 Examples:</h4>
+                            <p><strong>Multiplication:</strong> <span class="equation">3.14 (3 sig figs) × 2.0 (2 sig figs) = 6.28</span> → <strong>6.3</strong> (rounded to 2 sig figs).</p>
+                             <p><strong>Division:</strong> <span class="equation">8.10 (3 sig figs) ÷ 2.5 (2 sig figs) = 3.24</span> → <strong>3.2</strong> (rounded to 2 sig figs).</p>
                         </div>
-                    </div>
-
-                    <h4>Mixed Operations:</h4>
-                    <div class="operation-example">
-                        <p><strong>Rule:</strong> Apply rules in order of operations, keeping extra digits in intermediate steps</p>
-                        <div class="example-box">
-                            <h4>📝 Complex Calculation Example:</h4>
-                            <p><span class="equation">(12.34 + 5.6) × 2.0 = ?</span></p>
-                            <p>Step 1: Addition first: 12.34 + 5.6 = 17.94 → 17.9 (1 decimal place)</p>
-                            <p>Step 2: Keep extra digit: 17.94 (for intermediate calculation)</p>
-                            <p>Step 3: Multiplication: 17.94 × 2.0 = 35.88</p>
-                            <p>Step 4: Apply multiplication rule: 3 sig figs (from 17.9) and 2 sig figs (from 2.0)</p>
-                            <p><strong>Answer: 36</strong> (rounded to 2 sig figs)</p>
-                        </div>
-                    </div>
-
-                    <h4>Special Cases:</h4>
-                    <div class="operation-example">
-                        <div class="highlight-box">
-                            <ul>
-                                <li><strong>Exact numbers</strong> have infinite significant figures
-                                    <ul>
-                                        <li>Counting: 5 books, 12 students</li>
-                                        <li>Definitions: 1 m = 100 cm, 1 kg = 1000 g</li>
-                                        <li>Mathematical constants: π, e (when used as exact values)</li>
-                                    </ul>
-                                </li>
-                                <li><strong>Scientific notation</strong> clearly shows significant figures
-                                    <ul>
-                                        <li><span class="equation">1.20 × 10³</span> has 3 sig figs</li>
-                                        <li><span class="equation">3.000 × 10⁻⁴</span> has 4 sig figs</li>
-                                    </ul>
-                                </li>
-                                <li><strong>Logarithms and exponentials</strong>: Number of decimal places in log = sig figs in original number</li>
-                                <li><strong>Powers and roots</strong>: Result has same number of sig figs as original number</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <h3>🎯 Practice Problems:</h3>
-                    <div class="example-box">
-                        <h4>📝 Try These:</h4>
-                        <ol>
-                            <li><span class="equation">23.456 + 12.7 + 1.008 = ?</span> <em>(Answer: 37.2)</em></li>
-                            <li><span class="equation">456.2 - 23.18 = ?</span> <em>(Answer: 433.0)</em></li>
-                            <li><span class="equation">12.5 × 0.0034 = ?</span> <em>(Answer: 0.043)</em></li>
-                            <li><span class="equation">987.6 ÷ 12.3 = ?</span> <em>(Answer: 80.3)</em></li>
-                            <li><span class="equation">(15.67 + 2.3) × 1.2 = ?</span> <em>(Answer: 22)</em></li>
-                        </ol>
                     </div>
                 </div>
             </div>
 
             <div class="section">
-                <h2>1.7 Error Analysis and Uncertainty</h2>
+                <h2>1.6 Error Analysis: Quantifying Uncertainty</h2>
+                <p>In physics, every measurement has an associated uncertainty or "error." This section covers how to quantify and combine these errors, a critical skill for experimental physics and competitive exams.</p>
+
+                <h3>Absolute, Relative, and Percentage Error</h3>
+                <p>When we take multiple measurements of a quantity, we can determine the most likely true value and the uncertainty in our measurement.</p>
+                <div class="highlight-box">
+                    <ol>
+                        <li><strong>True Value (Mean):</strong> The best estimate of the true value is the arithmetic mean (<span class="math">a<sub>mean</sub></span>) of the measurements.</li>
+                        <li><strong>Absolute Error:</strong> The magnitude of the difference between the mean value and each individual measurement (<span class="math">Δaᵢ = |a<sub>mean</sub> - aᵢ|</span>).</li>
+                        <li><strong>Mean Absolute Error:</strong> The arithmetic mean of all the absolute errors (<span class="math">Δa<sub>mean</sub></span>). This represents the overall uncertainty of the measurement. A final result is reported as <span class="equation">a = a<sub>mean</sub> ± Δa<sub>mean</sub></span>.</li>
+                        <li><strong>Relative Error:</strong> The ratio of the mean absolute error to the mean value. It shows the error relative to the size of the measurement (<span class="math">δa = Δa<sub>mean</sub> / a<sub>mean</sub></span>).</li>
+                        <li><strong>Percentage Error:</strong> The relative error expressed as a percentage (<span class="math">δa × 100%</span>).</li>
+                    </ol>
+                </div>
+                <div class="example-box">
+                    <h4>📝 Worked Example 1: Measuring the Period of a Pendulum</h4>
+                    <p>The period of a pendulum is measured five times, yielding: 2.63s, 2.56s, 2.42s, 2.71s, 2.80s.</p>
+                    <p><strong>1. Mean Value (a<sub>mean</sub>):</strong> (2.63 + 2.56 + 2.42 + 2.71 + 2.80) / 5 = 13.12 / 5 = <strong>2.624s</strong>. Rounded to 2.62s (sig figs).</p>
+                    <p><strong>2. Absolute Errors (Δaᵢ):</strong> |2.62-2.63|=0.01, |2.62-2.56|=0.06, |2.62-2.42|=0.20, |2.62-2.71|=0.09, |2.62-2.80|=0.18</p>
+                    <p><strong>3. Mean Absolute Error (Δa<sub>mean</sub>):</strong> (0.01 + 0.06 + 0.20 + 0.09 + 0.18) / 5 = 0.54 / 5 = <strong>0.108s</strong>. Rounded to 0.11s.</p>
+                    <p><strong>Final Result:</strong> The period is <span class="equation">T = 2.62 ± 0.11 s</span>.</p>
+                    <p><strong>4. Relative Error:</strong> 0.11s / 2.62s = <strong>0.042</strong>.</p>
+                    <p><strong>5. Percentage Error:</strong> 0.042 × 100% = <strong>4.2%</strong>.</p>
+                </div>
+                 <div class="example-box">
+                    <h4>📝 Worked Example 2: Measuring Refractive Index</h4>
+                    <p>The refractive index of a glass slab is measured: 1.52, 1.50, 1.53, 1.51, 1.54.</p>
+                    <p><strong>1. Mean Value:</strong> (1.52 + 1.50 + 1.53 + 1.51 + 1.54) / 5 = 7.60 / 5 = <strong>1.52</strong>.</p>
+                    <p><strong>2. Absolute Errors:</strong> |1.52-1.52|=0.00, |1.52-1.50|=0.02, |1.52-1.53|=0.01, |1.52-1.51|=0.01, |1.52-1.54|=0.02</p>
+                    <p><strong>3. Mean Absolute Error:</strong> (0.00 + 0.02 + 0.01 + 0.01 + 0.02) / 5 = 0.06 / 5 = <strong>0.012</strong>. Rounded to 0.01.</p>
+                    <p><strong>Final Result:</strong> The refractive index is <span class="equation">n = 1.52 ± 0.01</span>.</p>
+                    <p><strong>4. Relative Error:</strong> 0.01 / 1.52 = <strong>0.0066</strong>.</p>
+                    <p><strong>5. Percentage Error:</strong> 0.0066 × 100% = <strong>0.66%</strong>.</p>
+                </div>
+
+                <h3>Propagation of Errors</h3>
+                <p>When we calculate a result from multiple measurements, their individual errors combine. The rules for this "propagation of errors" are essential.</p>
+                <div class="advanced-note">
+                    <h4>🎓 Rules for Error Combination:</h4>
+                    <p>Let <span class="math">A ± ΔA</span> and <span class="math">B ± ΔB</span> be two measured quantities.</p>
+                    <ul>
+                        <li><strong>Addition/Subtraction (Z = A ± B):</strong> The absolute errors add.
+                            <div class="formula-box"><span class="equation">ΔZ = ΔA + ΔB</span></div>
+                        </li>
+                        <li><strong>Multiplication/Division (Z = A × B or Z = A / B):</strong> The relative errors add.
+                            <div class="formula-box"><span class="equation">ΔZ/Z = ΔA/A + ΔB/B</span></div>
+                        </li>
+                        <li><strong>Powers (Z = Aⁿ):</strong> The relative error is multiplied by the power.
+                            <div class="formula-box"><span class="equation">ΔZ/Z = n (ΔA/A)</span></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="example-box">
+                    <h4>📝 Propagation Example 1: Calculating Density</h4>
+                    <p>A cube has mass <span class="math">m = (100 ± 2) g</span> and side length <span class="math">L = (10 ± 0.1) cm</span>. Find the percentage error in its density (ρ).</p>
+                    <p>Density <span class="math">ρ = m / V = m / L³</span>.</p>
+                    <p>Using the rules for division and powers, the relative error in density is:</p>
+                    <p><span class="equation">Δρ/ρ = Δm/m + 3 (ΔL/L)</span></p>
+                    <p><strong>1. Relative error in mass:</strong> Δm/m = 2g / 100g = 0.02</p>
+                    <p><strong>2. Relative error in length:</strong> ΔL/L = 0.1cm / 10cm = 0.01</p>
+                    <p><strong>3. Combine errors:</strong> Δρ/ρ = 0.02 + 3(0.01) = 0.02 + 0.03 = 0.05</p>
+                    <p><strong>Result:</strong> The percentage error in density is 0.05 × 100% = <strong>5%</strong>.</p>
+                </div>
+                <div class="example-box">
+                    <h4>📝 Propagation Example 2: Calculating Kinetic Energy</h4>
+                    <p>An object has mass <span class="math">m = (4.0 ± 0.2) kg</span> and velocity <span class="math">v = (10.0 ± 0.5) m/s</span>. Find the uncertainty in its kinetic energy (KE).</p>
+                    <p>Kinetic Energy <span class="math">KE = ½mv²</span>. The constant ½ has no error.</p>
+                    <p>Using the rules for multiplication and powers, the relative error in KE is:</p>
+                    <p><span class="equation">ΔKE/KE = Δm/m + 2 (Δv/v)</span></p>
+                    <p><strong>1. Relative error in mass:</strong> Δm/m = 0.2kg / 4.0kg = 0.05</p>
+                    <p><strong>2. Relative error in velocity:</strong> Δv/v = 0.5m/s / 10.0m/s = 0.05</p>
+                    <p><strong>3. Combine relative errors:</strong> ΔKE/KE = 0.05 + 2(0.05) = 0.05 + 0.10 = 0.15 (or 15%)</p>
+                    <p><strong>4. Find absolute error:</strong> First, calculate the mean KE: KE = ½(4.0)(10.0)² = 200 J. The absolute error is ΔKE = 0.15 × 200 J = 30 J.</p>
+                    <p><strong>Result:</strong> The kinetic energy is <span class="equation">KE = (200 ± 30) J</span>.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>1.7 Types of Errors & Accuracy vs. Precision</h2>
                 <div class="beginner-note">
                     <h4>🔰 Understanding Errors:</h4>
                     <p>In physics, "error" doesn't mean "mistake" - it refers to the unavoidable uncertainty in any measurement. No measurement is perfectly exact!</p>
@@ -999,26 +918,24 @@
                 <div class="highlight-box">
                     <h4>Random Errors:</h4>
                     <ul>
-                        <li>Vary unpredictably between measurements</li>
-                        <li>Caused by limitations in measurement precision</li>
-                        <li>Reduced by taking multiple measurements and averaging</li>
-                        <li>Affect <strong>precision</strong> of measurements</li>
+                        <li>Vary unpredictably between measurements (e.g., fluctuations in readings).</li>
+                        <li>Can be reduced by taking multiple measurements and averaging.</li>
+                        <li>Affect the <strong>precision</strong> (reproducibility) of a measurement.</li>
                     </ul>
                     <h4>Systematic Errors:</h4>
                     <ul>
-                        <li>Consistent bias in the same direction</li>
-                        <li>Caused by faulty instruments or experimental design</li>
-                        <li>Not reduced by taking more measurements</li>
-                        <li>Affect <strong>accuracy</strong> of measurements</li>
+                        <li>Consistent bias in the same direction (e.g., a miscalibrated instrument).</li>
+                        <li>Cannot be reduced by repeating measurements. Must be identified and corrected.</li>
+                        <li>Affect the <strong>accuracy</strong> (closeness to the true value) of a measurement.</li>
                     </ul>
                 </div>
                 <h3>Accuracy vs. Precision</h3>
                 <div class="example-box">
                     <h4>📝 Target Analogy:</h4>
-                    <p><strong>High Accuracy, High Precision:</strong> Arrows clustered near the bullseye</p>
-                    <p><strong>High Accuracy, Low Precision:</strong> Arrows scattered around the bullseye</p>
-                    <p><strong>Low Accuracy, High Precision:</strong> Arrows clustered away from the bullseye</p>
-                    <p><strong>Low Accuracy, Low Precision:</strong> Arrows scattered away from the bullseye</p>
+                    <p><strong>High Accuracy, High Precision:</strong> Arrows clustered tightly on the bullseye.</p>
+                    <p><strong>Low Accuracy, High Precision:</strong> Arrows clustered tightly, but far from the bullseye.</p>
+                    <p><strong>High Accuracy, Low Precision:</strong> Arrows scattered, but their average position is the bullseye.</p>
+                    <p><strong>Low Accuracy, Low Precision:</strong> Arrows scattered and their average is far from the bullseye.</p>
                 </div>
             </div>
         </div>
