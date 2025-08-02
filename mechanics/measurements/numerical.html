@@ -4,27 +4,300 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Numerical Problems: Measurement - Physics Daily</title>
-    <meta name="description" content="Solve numerical problems related to unit conversion, dimensional analysis, and significant figures.">
+    <meta name="description" content="Practice numerical problems involving measurement, units, and dimensional analysis.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../shared/mechanics-style.css">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XN081SR2KP');
-    </script>
     <style>
-        .question {
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #64748b;
+            --accent-color: #06b6d4;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --border-radius: 12px;
+            --transition: all 0.2s ease;
+        }
+
+        [data-theme="dark"] {
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --card-bg: #334155;
+            --border-color: #475569;
+            --border-hover: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: all 0.3s ease;
+        }
+
+        /* Math and equation styling */
+        .math {
+            font-family: 'JetBrains Mono', monospace;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .equation {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1em;
+            font-weight: 500;
+            background: var(--bg-secondary);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .breadcrumb {
+            background: var(--bg-secondary);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary-color);
+        }
+
+        .separator {
+            margin: 0 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .current {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 25px;
+            padding: 4px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .theme-toggle button {
+            background: none;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle button.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .theme-toggle button:hover {
+            background: var(--bg-secondary);
+        }
+
+        .theme-toggle button.active:hover {
+            background: var(--primary-dark);
+        }
+
+        .section {
+            margin: 32px 0;
+            padding: 24px;
+            border-radius: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .problem {
             margin: 20px 0;
-            padding: 16px;
+            padding: 20px;
             border-left: 4px solid var(--primary-color);
             background: var(--card-bg);
             border-radius: 8px;
             box-shadow: var(--shadow-sm);
         }
+
+        .problem-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .problem-number {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .difficulty {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .difficulty.easy {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+        }
+
+        .difficulty.medium {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--warning-color);
+        }
+
+        .difficulty.hard {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+        }
+
+        .problem-content p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .given-data {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .given-data h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .given-data ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .given-data li {
+            margin: 0.25rem 0;
+            color: var(--text-secondary);
+        }
+
         details {
             border: 1px solid var(--border-color);
             border-radius: 8px;
@@ -32,14 +305,102 @@
             margin-top: 1em;
             background: var(--bg-secondary);
         }
+
         summary {
             font-weight: bold;
             margin: -.5em -.5em 0;
             padding: .5em;
             cursor: pointer;
             color: var(--text-primary);
+            transition: color 0.2s ease;
+        }
+
+        summary:hover {
+            color: var(--primary-color);
+        }
+
+        details[open] summary {
+            color: var(--primary-color);
+        }
+
+        .solution {
+            padding: 1rem 0;
+        }
+
+        .solution h4 {
+            color: var(--primary-color);
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        .solution ol {
+            padding-left: 1.5rem;
+        }
+
+        .solution li {
+            margin: 0.75rem 0;
+            color: var(--text-secondary);
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-left: 4px solid var(--success-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        [data-theme="dark"] .final-answer {
+            background: linear-gradient(135deg, #14532d, #166534);
+        }
+
+        .formula-box {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .theme-toggle {
+                top: 70px;
+                right: 10px;
+                scale: 0.9;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .problem-header {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
         }
     </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XN081SR2KP');
+    </script>
 </head>
 <body>
     <nav class="nav">
@@ -57,7 +418,7 @@
     </nav>
 
     <div class="theme-toggle">
-        <button id="light-mode" title="Light Mode">☀️</button>
+        <button id="light-mode" class="active" title="Light Mode">☀️</button>
         <button id="dark-mode" title="Dark Mode">🌙</button>
     </div>
 
@@ -80,7 +441,7 @@
             <h1>Numerical Problems</h1>
             <p class="subtitle">Chapter 1: Measurement</p>
             <p class="description">
-                Apply your knowledge to solve quantitative problems and sharpen your calculation skills.
+                Practice your problem-solving skills with quantitative problems involving units, conversions, and calculations.
             </p>
         </div>
     </header>
@@ -89,69 +450,316 @@
         <div class="container">
             <div class="section">
                 <h2>🧮 Numerical Problems</h2>
-                <div class="question">
-                    <strong>1.</strong> The speed of light is 299,792,458 m/s. Convert this to:
-                    <ul>
-                        <li>a) kilometers per hour (km/h)</li>
-                        <li>b) miles per hour (mph) [1 mile = 1.609 km]</li>
-                    </ul>
+                
+                <div class="problem">
+                    <div class="problem-header">
+                        <span class="problem-number">Problem 1</span>
+                        <span class="difficulty easy">Easy</span>
+                    </div>
+                    <div class="problem-content">
+                        <p>Convert the following measurements to the specified units:</p>
+                        <p><strong>a)</strong> <span class="equation">2.5 km</span> to meters</p>
+                        <p><strong>b)</strong> <span class="equation">750 mL</span> to liters</p>
+                        <p><strong>c)</strong> <span class="equation">3.6 × 10⁴ s</span> to hours</p>
+                        <p><strong>d)</strong> <span class="equation">55 mph</span> to <span class="equation">m/s</span></p>
+                    </div>
                     <details>
-                        <summary>Answer</summary>
-                        <p><strong>a)</strong> $299,792,458 \, \text{m/s} \times (3600 \, \text{s/h}) \times (1 \, \text{km}/1000 \, \text{m}) = \mathbf{1.079 \times 10^9 \, \text{km/h}}$</p>
-                        <p><strong>b)</strong> $1.079 \times 10^9 \, \text{km/h} \times (1 \, \text{mi}/1.609 \, \text{km}) = \mathbf{6.71 \times 10^8 \, \text{mph}}$</p>
+                        <summary>Solution</summary>
+                        <div class="solution">
+                            <h4>Step-by-step Solutions:</h4>
+                            <p><strong>a)</strong> <span class="equation">2.5 km = 2.5 × 1000 m = 2500 m = 2.5 × 10³ m</span></p>
+                            <p><strong>b)</strong> <span class="equation">750 mL = 750 × 10⁻³ L = 0.750 L</span></p>
+                            <p><strong>c)</strong> <span class="equation">3.6 × 10⁴ s = 3.6 × 10⁴ s × (1 h / 3600 s) = 10 h</span></p>
+                            <p><strong>d)</strong> <span class="equation">55 mph = 55 × (1609.34 m / 1 mile) × (1 h / 3600 s) = 24.6 m/s</span></p>
+                        </div>
                     </details>
                 </div>
 
-                <div class="question">
-                    <strong>2.</strong> The period of a simple pendulum is given by $T = 2\pi\sqrt{L/g}$. Use dimensional analysis to verify this relationship.
+                <div class="problem">
+                    <div class="problem-header">
+                        <span class="problem-number">Problem 2</span>
+                        <span class="difficulty easy">Easy</span>
+                    </div>
+                    <div class="problem-content">
+                        <p>Express the following numbers in proper scientific notation with the correct number of significant figures:</p>
+                        <p><strong>a)</strong> <span class="equation">0.00456</span></p>
+                        <p><strong>b)</strong> <span class="equation">12,340,000</span></p>
+                        <p><strong>c)</strong> <span class="equation">0.0809</span></p>
+                        <p><strong>d)</strong> Calculate: <span class="equation">(3.14159) × (2.0)</span></p>
+                    </div>
                     <details>
-                        <summary>Answer</summary>
-                        <p>Assume $T \propto L^a g^b$. Dimensionally: $[T] = [L]^a [LT^{-2}]^b = [L^{a+b} T^{-2b}]$.</p>
-                        <p>Comparing exponents: For T: $1 = -2b \implies b = -1/2$. For L: $0 = a+b \implies a = -b = 1/2$.</p>
-                        <p>So, $T \propto L^{1/2} g^{-1/2} \implies T \propto \sqrt{L/g}$. The equation is dimensionally consistent. The constant $2\pi$ is dimensionless and cannot be found this way.</p>
+                        <summary>Solution</summary>
+                        <div class="solution">
+                            <h4>Solutions:</h4>
+                            <p><strong>a)</strong> <span class="equation">4.56 × 10⁻³</span> (3 significant figures)</p>
+                            <p><strong>b)</strong> <span class="equation">1.234 × 10⁷</span> (4 significant figures, assuming trailing zeros are not significant)</p>
+                            <p><strong>c)</strong> <span class="equation">8.09 × 10⁻²</span> (3 significant figures)</p>
+                            <p><strong>d)</strong> <span class="equation">6.3</span> (limited by 2.0 which has 2 significant figures)</p>
+                        </div>
                     </details>
                 </div>
 
-                <div class="question">
-                    <strong>3.</strong> Verify dimensional consistency for Einstein's mass-energy equation $E = mc^2$.
+                <div class="problem">
+                    <div class="problem-header">
+                        <span class="problem-number">Problem 3</span>
+                        <span class="difficulty medium">Medium</span>
+                    </div>
+                    <div class="problem-content">
+                        <p>Using dimensional analysis, derive the units for the following physical quantities:</p>
+                        <p><strong>a)</strong> Gravitational constant <span class="math">G</span> in Newton's law: <span class="equation">F = Gm₁m₂/r²</span></p>
+                        <p><strong>b)</strong> Spring constant <span class="math">k</span> in Hooke's law: <span class="equation">F = kx</span></p>
+                        <p><strong>c)</strong> Surface tension <span class="math">γ</span> where force per unit length: <span class="equation">F = γL</span></p>
+                    </div>
                     <details>
-                        <summary>Answer</summary>
-                        <p>LHS: Dimension of Energy $[E] = [ML^2T^{-2}]$.</p>
-                        <p>RHS: Dimension of $[mc^2] = [M][LT^{-1}]^2 = [M][L^2T^{-2}] = [ML^2T^{-2}]$.</p>
-                        <p>✅ Both sides have the same dimension, so the equation is consistent.</p>
+                        <summary>Solution</summary>
+                        <div class="solution">
+                            <h4>Dimensional Analysis:</h4>
+                            <p><strong>a)</strong> From <span class="equation">F = Gm₁m₂/r²</span>:</p>
+                            <p><span class="equation">[G] = [F][r²]/[m₁][m₂] = [MLT⁻²][L²]/[M²] = [M⁻¹L³T⁻²]</span></p>
+                            <p>Units: <span class="equation">m³ kg⁻¹ s⁻²</span></p>
+                            
+                            <p><strong>b)</strong> From <span class="equation">F = kx</span>:</p>
+                            <p><span class="equation">[k] = [F]/[x] = [MLT⁻²]/[L] = [MT⁻²]</span></p>
+                            <p>Units: <span class="equation">kg s⁻²</span> or <span class="equation">N/m</span></p>
+                            
+                            <p><strong>c)</strong> From <span class="equation">F = γL</span>:</p>
+                            <p><span class="equation">[γ] = [F]/[L] = [MLT⁻²]/[L] = [MT⁻²]</span></p>
+                            <p>Units: <span class="equation">kg s⁻²</span> or <span class="equation">N/m</span></p>
+                        </div>
                     </details>
                 </div>
 
-                <div class="question">
-                    <strong>4.</strong> A rectangular swimming pool measures 25.0 m × 12.5 m × 2.0 m. Calculate its volume and the mass of the water it holds (density of water ≈ 1000 kg/m³), respecting significant figures.
+                <div class="problem">
+                    <div class="problem-header">
+                        <span class="problem-number">Problem 4</span>
+                        <span class="difficulty medium">Medium</span>
+                    </div>
+                    <div class="problem-content">
+                        <p>The period of a simple pendulum depends on its length <span class="math">l</span>, the acceleration due to gravity <span class="math">g</span>, and possibly its mass <span class="math">m</span>. Use dimensional analysis to find the relationship.</p>
+                        <div class="given-data">
+                            <h4>Given:</h4>
+                            <ul>
+                                <li><span class="equation">[T] = [T]</span> (time dimension)</li>
+                                <li><span class="equation">[l] = [L]</span> (length dimension)</li>
+                                <li><span class="equation">[g] = [LT⁻²]</span> (acceleration dimension)</li>
+                                <li><span class="equation">[m] = [M]</span> (mass dimension)</li>
+                            </ul>
+                        </div>
+                    </div>
                     <details>
-                        <summary>Answer</summary>
-                        <p><strong>Volume:</strong> $V = 25.0 \times 12.5 \times 2.0 = 625 \, m^3$. Since 2.0 has two sig figs, we should report the volume as $\mathbf{6.2 \times 10^2 \, m^3}$.</p>
-                        <p><strong>Mass:</strong> $m = \rho V = (1000 \, \text{kg/m}^3)(625 \, \text{m}^3) = 625,000 \, \text{kg} = \mathbf{6.2 \times 10^5 \, \text{kg}}$.</p>
+                        <summary>Solution</summary>
+                        <div class="solution">
+                            <h4>Step 1: Assume the relationship</h4>
+                            <p>Let <span class="equation">T = k × l^a × g^b × m^c</span> where <span class="math">k</span> is dimensionless</p>
+                            
+                            <h4>Step 2: Write dimensional equation</h4>
+                            <p><span class="equation">[T] = [L^a] × [LT⁻²]^b × [M^c]</span></p>
+                            <p><span class="equation">[T] = [L^a] × [L^b T^(-2b)] × [M^c]</span></p>
+                            <p><span class="equation">[T¹] = [L^(a+b) T^(-2b) M^c]</span></p>
+                            
+                            <h4>Step 3: Equate powers</h4>
+                            <p>For <span class="math">M</span>: <span class="equation">0 = c</span> → <span class="equation">c = 0</span></p>
+                            <p>For <span class="math">T</span>: <span class="equation">1 = -2b</span> → <span class="equation">b = -1/2</span></p>
+                            <p>For <span class="math">L</span>: <span class="equation">0 = a + b</span> → <span class="equation">a = -b = 1/2</span></p>
+                            
+                            <div class="final-answer">
+                                <p><strong>Result:</strong> <span class="equation">T = k√(l/g)</span></p>
+                                <p>The period is independent of mass and proportional to <span class="equation">√(l/g)</span></p>
+                            </div>
+                        </div>
                     </details>
                 </div>
 
-                <div class="question">
-                    <strong>5.</strong> The period of a mass-spring system is $T = 2\pi\sqrt{m/k}$. What are the dimensions of the spring constant $k$?
+                <div class="problem">
+                    <div class="problem-header">
+                        <span class="problem-number">Problem 5</span>
+                        <span class="difficulty medium">Medium</span>
+                    </div>
+                    <div class="problem-content">
+                        <p>A rectangular metal sheet has dimensions <span class="equation">2.50 m × 1.20 m</span> and thickness <span class="equation">3.00 mm</span>. Calculate:</p>
+                        <p><strong>a)</strong> The area of the sheet</p>
+                        <p><strong>b)</strong> The volume of the sheet</p>
+                        <p><strong>c)</strong> If the density is <span class="equation">7.85 × 10³ kg/m³</span>, find the mass</p>
+                        <p>Express all answers with proper significant figures.</p>
+                    </div>
                     <details>
-                        <summary>Answer</summary>
-                        <p>From the formula, $T^2 \propto m/k$, so $k \propto m/T^2$.</p>
-                        <p>Dimensions of $k$: $[k] = [M]/[T^2] = \mathbf{[MT^{-2}]}$. This is consistent with the unit of force per unit length (N/m).</p>
+                        <summary>Solution</summary>
+                        <div class="solution">
+                            <h4>Given data:</h4>
+                            <ul>
+                                <li>Length: <span class="equation">l = 2.50 m</span> (3 sig figs)</li>
+                                <li>Width: <span class="equation">w = 1.20 m</span> (3 sig figs)</li>
+                                <li>Thickness: <span class="equation">t = 3.00 mm = 3.00 × 10⁻³ m</span> (3 sig figs)</li>
+                                <li>Density: <span class="equation">ρ = 7.85 × 10³ kg/m³</span> (3 sig figs)</li>
+                            </ul>
+                            
+                            <h4>Solution:</h4>
+                            <p><strong>a) Area:</strong></p>
+                            <p><span class="equation">A = l × w = 2.50 m × 1.20 m = 3.00 m²</span></p>
+                            
+                            <p><strong>b) Volume:</strong></p>
+                            <p><span class="equation">V = l × w × t = 2.50 m × 1.20 m × 3.00 × 10⁻³ m</span></p>
+                            <p><span class="equation">V = 9.00 × 10⁻³ m³</span></p>
+                            
+                            <p><strong>c) Mass:</strong></p>
+                            <p><span class="equation">m = ρV = 7.85 × 10³ kg/m³ × 9.00 × 10⁻³ m³</span></p>
+                            <p><span class="equation">m = 70.7 kg</span></p>
+                            
+                            <div class="final-answer">
+                                <p><strong>Final Answers:</strong></p>
+                                <p>a) Area = <span class="equation">3.00 m²</span></p>
+                                <p>b) Volume = <span class="equation">9.00 × 10⁻³ m³</span></p>
+                                <p>c) Mass = <span class="equation">70.7 kg</span></p>
+                            </div>
+                        </div>
                     </details>
                 </div>
 
-                <div class="question">
-                    <strong>6.</strong> Perform the following calculations with proper significant figures:
-                    <ul>
-                        <li>a) $23.45 + 1.2 + 0.678$</li>
-                        <li>b) $4.56 \times 2.1$</li>
-                        <li>c) $(2.34 \times 10^3) \div (1.2 \times 10^{-4})$</li>
-                    </ul>
+                <div class="problem">
+                    <div class="problem-header">
+                        <span class="problem-number">Problem 6</span>
+                        <span class="difficulty hard">Hard</span>
+                    </div>
+                    <div class="problem-content">
+                        <p>The terminal velocity <span class="math">v</span> of a sphere falling through a fluid depends on:</p>
+                        <ul>
+                            <li>Sphere radius: <span class="math">r</span></li>
+                            <li>Sphere density: <span class="math">ρₛ</span></li>
+                            <li>Fluid density: <span class="math">ρf</span></li>
+                            <li>Fluid viscosity: <span class="math">η</span> (dimensions: <span class="equation">[ML⁻¹T⁻¹]</span>)</li>
+                            <li>Gravitational acceleration: <span class="math">g</span></li>
+                        </ul>
+                        <p>Use dimensional analysis to derive the functional form of terminal velocity.</p>
+                    </div>
                     <details>
-                        <summary>Answer</summary>
-                        <p><strong>a)</strong> $23.45 + 1.2 + 0.678 = 25.328 \rightarrow \mathbf{25.3}$ (limited by 1.2, which has one decimal place).</p>
-                        <p><strong>b)</strong> $4.56 \times 2.1 = 9.576 \rightarrow \mathbf{9.6}$ (limited by 2.1, which has two significant figures).</p>
-                        <p><strong>c)</strong> $(2.34 \times 10^3) \div (1.2 \times 10^{-4}) = 1.95 \times 10^7 \rightarrow \mathbf{1.9 \times 10^7}$ (limited by 1.2, which has two significant figures).</p>
+                        <summary>Solution</summary>
+                        <div class="solution">
+                            <h4>Step 1: Set up the relationship</h4>
+                            <p>Assume: <span class="equation">v = k × r^a × ρₛ^b × ρf^c × η^d × g^e</span></p>
+                            
+                            <h4>Step 2: Write dimensions</h4>
+                            <p><span class="equation">[LT⁻¹] = [L^a] × [ML⁻³]^b × [ML⁻³]^c × [ML⁻¹T⁻¹]^d × [LT⁻²]^e</span></p>
+                            <p><span class="equation">[LT⁻¹] = [L^a M^b L^(-3b) M^c L^(-3c) M^d L^(-d) T^(-d) L^e T^(-2e)]</span></p>
+                            <p><span class="equation">[L¹T⁻¹] = [L^(a-3b-3c-d+e) M^(b+c+d) T^(-d-2e)]</span></p>
+                            
+                            <h4>Step 3: Equate powers</h4>
+                            <p>For <span class="math">M</span>: <span class="equation">0 = b + c + d</span> ... (1)</p>
+                            <p>For <span class="math">T</span>: <span class="equation">-1 = -d - 2e</span> ... (2)</p>
+                            <p>For <span class="math">L</span>: <span class="equation">1 = a - 3b - 3c - d + e</span> ... (3)</p>
+                            
+                            <h4>Step 4: Solve the system</h4>
+                            <p>From (2): <span class="equation">d + 2e = 1</span></p>
+                            <p>From (1): <span class="equation">c = -b - d</span></p>
+                            <p>Substituting into (3): <span class="equation">1 = a - 3b - 3(-b - d) - d + e</span></p>
+                            <p><span class="equation">1 = a - 3b + 3b + 3d - d + e = a + 2d + e</span></p>
+                            
+                            <p>We have more unknowns than equations, so we assume the simplest case where the density difference matters:</p>
+                            <p>Let <span class="equation">b = 1, c = -1</span> (density difference effect)</p>
+                            <p>From (1): <span class="equation">d = -1 - (-1) = 0</span></p>
+                            <p>From (2): <span class="equation">e = 1/2</span></p>
+                            <p>From (3): <span class="equation">a = 1 - 2(0) - 1/2 = 1/2</span></p>
+                            
+                            <p>But this gives <span class="equation">d = 0</span>, which ignores viscosity. Let's try <span class="equation">d = 1</span>:</p>
+                            <p>From (2): <span class="equation">e = 0</span></p>
+                            <p>From (1): <span class="equation">b + c = -1</span></p>
+                            <p>From (3): <span class="equation">a = 1 + 3b + 3c + 1 = 2 + 3(b + c) = 2 - 3 = -1</span></p>
+                            
+                            <p>This gives negative power for radius, which is unphysical. The correct approach requires considering that <span class="equation">(ρₛ - ρf)</span> acts as a single quantity.</p>
+                            
+                            <div class="final-answer">
+                                <p><strong>Result:</strong> <span class="equation">v ∝ r²g(ρₛ - ρf)/η</span></p>
+                                <p>This is consistent with Stokes' law: <span class="equation">v = (2/9) × r²g(ρₛ - ρf)/η</span></p>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="problem">
+                    <div class="problem-header">
+                        <span class="problem-number">Problem 7</span>
+                        <span class="difficulty hard">Hard</span>
+                    </div>
+                    <div class="problem-content">
+                        <p>Error Analysis Problem: A student measures the period of a pendulum multiple times and gets the following results (in seconds):</p>
+                        <p><span class="equation">2.41, 2.38, 2.42, 2.39, 2.40, 2.43, 2.37, 2.41</span></p>
+                        <p>Calculate:</p>
+                        <p><strong>a)</strong> The mean period</p>
+                        <p><strong>b)</strong> The standard deviation</p>
+                        <p><strong>c)</strong> The uncertainty in the mean</p>
+                        <p><strong>d)</strong> Express the result with proper uncertainty notation</p>
+                    </div>
+                    <details>
+                        <summary>Solution</summary>
+                        <div class="solution">
+                            <h4>Given measurements (in seconds):</h4>
+                            <p><span class="equation">2.41, 2.38, 2.42, 2.39, 2.40, 2.43, 2.37, 2.41</span></p>
+                            <p>Number of measurements: <span class="equation">n = 8</span></p>
+                            
+                            <h4>a) Mean period:</h4>
+                            <p><span class="equation">T̄ = (2.41 + 2.38 + 2.42 + 2.39 + 2.40 + 2.43 + 2.37 + 2.41)/8</span></p>
+                            <p><span class="equation">T̄ = 19.21/8 = 2.401 s</span></p>
+                            
+                            <h4>b) Standard deviation:</h4>
+                            <p>First, calculate deviations from mean:</p>
+                            <p><span class="equation">(Tᵢ - T̄)²</span> values: <span class="equation">0.000081, 0.000441, 0.000361, 0.000121, 0.000001, 0.000841, 0.000961, 0.000081</span></p>
+                            <p><span class="equation">σ = √[Σ(Tᵢ - T̄)²/(n-1)] = √(0.002888/7) = √0.000413 = 0.0203 s</span></p>
+                            
+                            <h4>c) Uncertainty in the mean:</h4>
+                            <p><span class="equation">σₘ = σ/√n = 0.0203/√8 = 0.0203/2.828 = 0.0072 s</span></p>
+                            
+                            <h4>d) Result with uncertainty:</h4>
+                            <div class="final-answer">
+                                <p><strong>Final Result:</strong> <span class="equation">T = (2.401 ± 0.007) s</span></p>
+                                <p>or <span class="equation">T = 2.40 ± 0.01 s</span> (rounded to appropriate precision)</p>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="problem">
+                    <div class="problem-header">
+                        <span class="problem-number">Problem 8</span>
+                        <span class="difficulty hard">Hard</span>
+                    </div>
+                    <div class="problem-content">
+                        <p>Order of Magnitude Estimation: Estimate the number of atoms in a human body.</p>
+                        <div class="given-data">
+                            <h4>Useful Information:</h4>
+                            <ul>
+                                <li>Average human mass ≈ <span class="equation">70 kg</span></li>
+                                <li>Human body is mostly water (H₂O)</li>
+                                <li>Avogadro's number: <span class="equation">Nₐ = 6.02 × 10²³ mol⁻¹</span></li>
+                                <li>Atomic masses: H ≈ <span class="equation">1 u</span>, O ≈ <span class="equation">16 u</span></li>
+                                <li>Atomic mass unit: <span class="equation">1 u = 1.66 × 10⁻²⁷ kg</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <details>
+                        <summary>Solution</summary>
+                        <div class="solution">
+                            <h4>Approach: Use water as approximation</h4>
+                            
+                            <h4>Step 1: Mass of water molecule</h4>
+                            <p>H₂O molecular mass = <span class="equation">2(1) + 16 = 18 u</span></p>
+                            <p>Mass of one molecule = <span class="equation">18 × 1.66 × 10⁻²⁷ kg = 2.99 × 10⁻²⁶ kg</span></p>
+                            
+                            <h4>Step 2: Number of molecules in human body</h4>
+                            <p><span class="equation">N_molecules = 70 kg / (2.99 × 10⁻²⁶ kg) = 2.34 × 10²⁷ molecules</span></p>
+                            
+                            <h4>Step 3: Number of atoms</h4>
+                            <p>Each H₂O molecule has 3 atoms (2 H + 1 O)</p>
+                            <p><span class="equation">N_atoms = 3 × 2.34 × 10²⁷ = 7.02 × 10²⁷ atoms</span></p>
+                            
+                            <h4>Alternative approach using moles:</h4>
+                            <p>Moles of H₂O = <span class="equation">70 kg / (0.018 kg/mol) = 3.89 × 10³ mol</span></p>
+                            <p>Molecules = <span class="equation">3.89 × 10³ × 6.02 × 10²³ = 2.34 × 10²⁷</span></p>
+                            <p>Atoms = <span class="equation">3 × 2.34 × 10²⁷ = 7.02 × 10²⁷</span></p>
+                            
+                            <div class="final-answer">
+                                <p><strong>Order of Magnitude:</strong> <span class="equation">~10²⁸ atoms</span></p>
+                                <p><strong>More precise estimate:</strong> <span class="equation">7 × 10²⁷ atoms</span></p>
+                            </div>
+                        </div>
                     </details>
                 </div>
             </div>
@@ -160,10 +768,42 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; Physics Daily. Advancing physics education through interactive learning.</p>
+            <p>&copy; 2024 Physics Daily. Advancing physics education through interactive learning.</p>
         </div>
     </footer>
 
-    <script src="../shared/mechanics-scripts.js"></script>
+    <script>
+        // Theme toggle functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const lightModeBtn = document.getElementById('light-mode');
+            const darkModeBtn = document.getElementById('dark-mode');
+            const docElement = document.documentElement;
+
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            docElement.setAttribute('data-theme', savedTheme);
+
+            if (savedTheme === 'dark') {
+                darkModeBtn.classList.add('active');
+                lightModeBtn.classList.remove('active');
+            } else {
+                lightModeBtn.classList.add('active');
+                darkModeBtn.classList.remove('active');
+            }
+
+            lightModeBtn.addEventListener('click', () => {
+                docElement.setAttribute('data-theme', 'light');
+                lightModeBtn.classList.add('active');
+                darkModeBtn.classList.remove('active');
+                localStorage.setItem('theme', 'light');
+            });
+
+            darkModeBtn.addEventListener('click', () => {
+                docElement.setAttribute('data-theme', 'dark');
+                darkModeBtn.classList.add('active');
+                lightModeBtn.classList.remove('active');
+                localStorage.setItem('theme', 'dark');
+            });
+        });
+    </script>
 </body>
 </html>
