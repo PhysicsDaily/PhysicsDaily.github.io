@@ -27,6 +27,8 @@
             --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
             --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
             --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --border-radius: 12px;
+            --transition: all 0.2s ease;
         }
 
         [data-theme="dark"] {
@@ -53,9 +55,21 @@
             transition: all 0.3s ease;
         }
         
-        /* Italicize math variables for clarity */
-        em {
+        /* Math and equation styling */
+        .math {
+            font-family: 'JetBrains Mono', monospace;
             font-style: italic;
+            font-weight: 500;
+        }
+
+        .equation {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1em;
+            font-weight: 500;
+            background: var(--bg-secondary);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
         }
 
         .container {
@@ -159,36 +173,50 @@
             padding: 2rem 0;
         }
 
+        /* Vertical theme toggle styling */
         .theme-toggle {
             position: fixed;
-            top: 80px;
+            top: 100px;
             right: 20px;
             z-index: 1000;
-            display: flex;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 25px;
-            padding: 4px;
-            box-shadow: var(--shadow-md);
+            padding: 8px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
         }
 
         .theme-toggle button {
             background: none;
             border: none;
-            padding: 8px 12px;
-            border-radius: 20px;
+            padding: 12px;
+            border-radius: 50%;
             cursor: pointer;
-            font-size: 16px;
-            transition: all 0.2s ease;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            color: var(--text-secondary);
+        }
+
+        .theme-toggle button:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            transform: scale(1.05);
         }
 
         .theme-toggle button.active {
             background: var(--primary-color);
             color: white;
-        }
-
-        .theme-toggle button:hover {
-            background: var(--bg-secondary);
+            transform: scale(1.1);
+            box-shadow: var(--shadow-md);
         }
 
         .theme-toggle button.active:hover {
@@ -275,6 +303,18 @@
         [data-theme="dark"] .advanced-note {
             background: linear-gradient(135deg, #2d1b69, #3730a3);
         }
+        
+        .danger-note {
+            background: linear-gradient(135deg, #ffe4e6, #fee2e2);
+            border-left: 4px solid var(--danger-color);
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+        }
+
+        [data-theme="dark"] .danger-note {
+            background: linear-gradient(135deg, #7f1d1d, #991b1b);
+        }
 
         .formula-box {
             background: var(--bg-secondary);
@@ -286,6 +326,7 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 1.2rem;
             font-weight: 500;
+            overflow-x: auto;
         }
 
         .example-box {
@@ -325,48 +366,71 @@
             color: var(--text-secondary);
         }
 
-        .quiz-container {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 24px;
-            margin: 24px 0;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
+        .practice-section {
+            padding: 2rem 0;
+            background-color: var(--bg-secondary);
         }
-
-        .question {
-            margin: 20px 0;
-            padding: 16px;
-            border-left: 4px solid var(--primary-color);
-            background: var(--card-bg);
-            border-radius: 8px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 24px;
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            overflow: hidden;
-            margin: 16px 0;
-            border: 1px solid var(--border-color);
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--success-color), var(--accent-color));
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-
-        .score-display {
-            font-weight: 600;
+        
+        .section-header {
             text-align: center;
-            margin: 16px 0;
-            color: var(--text-primary);
+            margin-bottom: 3rem;
         }
-
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .practice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .practice-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+        
+        .practice-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+        
+        .practice-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .practice-card h3 {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .practice-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+        
         .btn {
             background: var(--primary-color);
             color: white;
@@ -385,159 +449,9 @@
             background: var(--primary-dark);
             transform: translateY(-1px);
         }
-
-        .btn-secondary {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-
-        .btn-secondary:hover {
-            background: var(--border-hover);
-        }
-
-        .btn-close {
-            background: var(--danger-color);
-            color: white;
-            padding: 8px 16px;
-            font-size: 14px;
-        }
-
-        .btn-close:hover {
-            background: #c82333;
-        }
-
-        .quiz-buttons {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            justify-content: center;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-
-        .quiz-question {
-            margin: 16px 0;
-            padding: 16px;
-            background: var(--bg-secondary);
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-        }
-
-        .quiz-question .option {
-            display: flex;
-            align-items: center;
-            margin: 8px 0;
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 4px;
-            transition: background-color 0.2s ease;
-        }
-
-        .quiz-question .option:hover {
-            background: var(--border-color);
-        }
-
-        .quiz-question .option.correct {
-            background: #dcfce7;
-            border: 1px solid var(--success-color);
-        }
-
-        .quiz-question .option.incorrect {
-            background: #fef2f2;
-            border: 1px solid var(--danger-color);
-        }
-
-        [data-theme="dark"] .quiz-question .option.correct {
-            background: #14532d;
-        }
-
-        [data-theme="dark"] .quiz-question .option.incorrect {
-            background: #451a1a;
-        }
-
-        .quiz-question input[type="radio"] {
-            margin: 0 12px 0 0;
-            transform: scale(1.2);
-            cursor: pointer;
-        }
-
-        .quiz-question label {
-            color: var(--text-secondary);
-            cursor: pointer;
-            flex: 1;
-            line-height: 1.4;
-        }
-
-        .quiz-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 20px 0;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .question-counter {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .mcq-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-
-        .mcq-item {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 16px;
-            transition: all 0.2s ease;
-        }
-
-        .mcq-item:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-2px);
-        }
-
-        .mcq-item.answered {
-            border-color: var(--success-color);
-        }
-
-        .mcq-item.incorrect {
-            border-color: var(--danger-color);
-        }
-
-        #results {
-            margin-top: 24px;
-            padding: 20px;
-            background: var(--card-bg);
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-        }
-
-        .results-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .results-header h3 {
-            margin: 0;
-            color: var(--text-primary);
-        }
-
-        .explanation {
-            background: var(--bg-secondary);
-            padding: 12px;
-            border-radius: 6px;
-            margin-top: 10px;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
+        
+        .btn-practice {
+            width: 100%;
         }
 
         details {
@@ -566,24 +480,9 @@
 
         @media (max-width: 768px) {
             .theme-toggle {
-                top: 70px;
+                top: 80px;
                 right: 10px;
-                scale: 0.9;
-            }
-
-            .quiz-buttons {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-                margin: 4px 0;
-            }
-
-            .results-header {
-                flex-direction: column;
-                gap: 10px;
-                align-items: flex-start;
+                scale: 0.85;
             }
 
             .header h1 {
@@ -592,15 +491,6 @@
 
             .nav-links {
                 display: none;
-            }
-
-            .mcq-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .quiz-nav {
-                flex-direction: column;
-                gap: 15px;
             }
         }
     </style>
@@ -628,9 +518,10 @@
         </div>
     </nav>
 
+    <!-- Vertical theme toggle -->
     <div class="theme-toggle">
-        <button id="light-mode" class="active" title="Light Mode">☀️</button>
-        <button id="dark-mode" title="Dark Mode">🌙</button>
+        <button id="light-theme" title="Light Theme">☀️</button>
+        <button id="dark-theme" title="Dark Theme">🌙</button>
     </div>
 
     <div class="breadcrumb">
@@ -729,7 +620,7 @@
 
                 <div class="advanced-note">
                     <h4>🎓 Vector Notation:</h4>
-                    <p>Vectors are denoted with arrows (<em>&#x20D7;v</em>) or bold letters (<strong>v</strong>). The magnitude is written as |<em>v</em>| or simply <em>v</em>. In higher dimensions, vectors become more complex, but the one-dimensional case builds essential intuition.</p>
+                    <p>Vectors are denoted with arrows (<span class="math">&#x20D7;v</span>) or bold letters (<strong>v</strong>). The magnitude is written as |<span class="math">v</span>| or simply <span class="math">v</span>. In higher dimensions, vectors become more complex, but the one-dimensional case builds essential intuition.</p>
                 </div>
 
                 <h3>Why the Distinction Matters</h3>
@@ -751,30 +642,30 @@
 
                 <div class="formula-box">
                     <h4>Position Vector:</h4>
-                    <p><em>x</em>(<em>t</em>) = position at time <em>t</em></p>
-                    <p>Origin: <em>x</em> = 0 (reference point)</p>
+                    <p><span class="math">x(t)</span> = position at time <span class="math">t</span></p>
+                    <p>Origin: <span class="math">x</span> = 0 (reference point)</p>
                     <p>Positive direction: conventionally chosen</p>
                 </div>
 
                 <h3>Displacement: How Did You Move?</h3>
-                <p><strong>Displacement (Δ<em>x</em>)</strong> is the change in position - the straight-line distance from initial to final position, including direction.</p>
+                <p><strong>Displacement (Δ<span class="math">x</span>)</strong> is the change in position - the straight-line distance from initial to final position, including direction.</p>
 
                 <div class="formula-box">
                     <h4>Displacement Formula:</h4>
-                    <p>Δ<em>x</em> = <em>x</em><sub>f</sub> - <em>x</em><sub>i</sub></p>
-                    <p>where <em>x</em><sub>f</sub> = final position, <em>x</em><sub>i</sub> = initial position</p>
+                    <p>Δ<span class="math">x</span> = <span class="math">x</span><sub>f</sub> - <span class="math">x</span><sub>i</sub></p>
+                    <p>where <span class="math">x</span><sub>f</sub> = final position, <span class="math">x</span><sub>i</sub> = initial position</p>
                 </div>
 
                 <div class="example-box">
                     <h4>📝 Displacement Examples:</h4>
-                    <p><strong>Example 1:</strong> Move from <em>x</em> = 2 m to <em>x</em> = 8 m</p>
-                    <p>Δ<em>x</em> = 8 m - 2 m = +6 m (positive direction)</p>
+                    <p><strong>Example 1:</strong> Move from <span class="math">x</span> = 2 m to <span class="math">x</span> = 8 m</p>
+                    <p>Δ<span class="math">x</span> = 8 m - 2 m = +6 m (positive direction)</p>
                     
-                    <p><strong>Example 2:</strong> Move from <em>x</em> = 5 m to <em>x</em> = 1 m</p>
-                    <p>Δ<em>x</em> = 1 m - 5 m = -4 m (negative direction)</p>
+                    <p><strong>Example 2:</strong> Move from <span class="math">x</span> = 5 m to <span class="math">x</span> = 1 m</p>
+                    <p>Δ<span class="math">x</span> = 1 m - 5 m = -4 m (negative direction)</p>
                     
-                    <p><strong>Example 3:</strong> Move from <em>x</em> = 3 m to <em>x</em> = 7 m, then back to <em>x</em> = 3 m</p>
-                    <p>Net displacement: Δ<em>x</em> = 3 m - 3 m = 0 m</p>
+                    <p><strong>Example 3:</strong> Move from <span class="math">x</span> = 3 m to <span class="math">x</span> = 7 m, then back to <span class="math">x</span> = 3 m</p>
+                    <p>Net displacement: Δ<span class="math">x</span> = 3 m - 3 m = 0 m</p>
                 </div>
 
                 <h3>Distance: How Far Did You Travel?</h3>
@@ -792,14 +683,14 @@
 
                 <div class="example-box">
                     <h4>📝 Comprehensive Example: Road Trip</h4>
-                    <p>A car starts at position <em>x</em> = 0 km on a highway:</p>
+                    <p>A car starts at position <span class="math">x</span> = 0 km on a highway:</p>
                     <ul>
-                        <li>Drives 50 km east to position <em>x</em> = +50 km</li>
-                        <li>Continues 30 km east to position <em>x</em> = +80 km</li>
-                        <li>Turns around and drives 60 km west to position <em>x</em> = +20 km</li>
+                        <li>Drives 50 km east to position <span class="math">x</span> = +50 km</li>
+                        <li>Continues 30 km east to position <span class="math">x</span> = +80 km</li>
+                        <li>Turns around and drives 60 km west to position <span class="math">x</span> = +20 km</li>
                     </ul>
                     
-                    <p><strong>Final displacement:</strong> Δ<em>x</em> = 20 km - 0 km = +20 km east</p>
+                    <p><strong>Final displacement:</strong> Δ<span class="math">x</span> = 20 km - 0 km = +20 km east</p>
                     <p><strong>Total distance:</strong> 50 km + 30 km + 60 km = 140 km</p>
                     <p><strong>Interpretation:</strong> The car ends 20 km east of its starting point, but traveled 140 km total.</p>
                 </div>
@@ -823,14 +714,14 @@
 
                 <div class="formula-box">
                     <h4>Average Velocity:</h4>
-                    <p><em>&#x203E;v</em> = Δ<em>x</em>/Δ<em>t</em> = (<em>x</em><sub>f</sub> - <em>x</em><sub>i</sub>)/(<em>t</em><sub>f</sub> - <em>t</em><sub>i</sub>)</p>
+                    <p><span class="math">&#x203E;v</span> = Δ<span class="math">x</span>/Δ<span class="math">t</span> = (<span class="math">x</span><sub>f</sub> - <span class="math">x</span><sub>i</sub>)/(<span class="math">t</span><sub>f</sub> - <span class="math">t</span><sub>i</sub>)</p>
                     <p>Units: meters per second (m/s)</p>
                 </div>
 
                 <div class="example-box">
                     <h4>📝 Average Velocity Example:</h4>
-                    <p>A runner starts at position <em>x</em> = 0 m at <em>t</em> = 0 s and reaches position <em>x</em> = 100 m at <em>t</em> = 20 s.</p>
-                    <p><em>&#x203E;v</em> = (100 m - 0 m)/(20 s - 0 s) = 100 m/20 s = 5 m/s</p>
+                    <p>A runner starts at position <span class="math">x</span> = 0 m at <span class="math">t</span> = 0 s and reaches position <span class="math">x</span> = 100 m at <span class="math">t</span> = 20 s.</p>
+                    <p><span class="math">&#x203E;v</span> = (100 m - 0 m)/(20 s - 0 s) = 100 m/20 s = 5 m/s</p>
                     <p><strong>Interpretation:</strong> On average, the runner moved 5 meters east every second.</p>
                 </div>
 
@@ -839,7 +730,7 @@
 
                 <div class="formula-box">
                     <h4>Instantaneous Velocity:</h4>
-                    <p><em>v</em>(<em>t</em>) = lim(Δ<em>t</em>→0) Δ<em>x</em>/Δ<em>t</em> = d<em>x</em>/d<em>t</em></p>
+                    <p><span class="math">v(t)</span> = lim(Δ<span class="math">t</span>→0) Δ<span class="math">x</span>/Δ<span class="math">t</span> = d<span class="math">x</span>/d<span class="math">t</span></p>
                     <p>This is the derivative of position with respect to time</p>
                 </div>
 
@@ -905,7 +796,7 @@
 
                 <div class="formula-box">
                     <h4>Average Acceleration:</h4>
-                    <p><em>&#x203E;a</em> = Δ<em>v</em>/Δ<em>t</em> = (<em>v</em><sub>f</sub> - <em>v</em><sub>i</sub>)/(<em>t</em><sub>f</sub> - <em>t</em><sub>i</sub>)</p>
+                    <p><span class="math">&#x203E;a</span> = Δ<span class="math">v</span>/Δ<span class="math">t</span> = (<span class="math">v</span><sub>f</sub> - <span class="math">v</span><sub>i</sub>)/(<span class="math">t</span><sub>f</sub> - <span class="math">t</span><sub>i</sub>)</p>
                     <p>Units: meters per second squared (m/s²)</p>
                 </div>
 
@@ -913,15 +804,15 @@
                     <h4>📝 Average Acceleration Examples:</h4>
                     <p><strong>Example 1 - Speeding up:</strong></p>
                     <p>A car accelerates from 20 m/s to 35 m/s in 5 seconds.</p>
-                    <p><em>&#x203E;a</em> = (35 m/s - 20 m/s)/(5 s) = 15 m/s / 5 s = 3 m/s²</p>
+                    <p><span class="math">&#x203E;a</span> = (35 m/s - 20 m/s)/(5 s) = 15 m/s / 5 s = 3 m/s²</p>
                     
                     <p><strong>Example 2 - Slowing down:</strong></p>
                     <p>A bike slows from 15 m/s to 5 m/s in 4 seconds.</p>
-                    <p><em>&#x203E;a</em> = (5 m/s - 15 m/s)/(4 s) = -10 m/s / 4 s = -2.5 m/s²</p>
+                    <p><span class="math">&#x203E;a</span> = (5 m/s - 15 m/s)/(4 s) = -10 m/s / 4 s = -2.5 m/s²</p>
                     
                     <p><strong>Example 3 - Changing direction:</strong></p>
                     <p>A ball moving at +10 m/s bounces and moves at -8 m/s in 0.1 s.</p>
-                    <p><em>&#x203E;a</em> = (-8 m/s - 10 m/s)/(0.1 s) = -18 m/s / 0.1 s = -180 m/s²</p>
+                    <p><span class="math">&#x203E;a</span> = (-8 m/s - 10 m/s)/(0.1 s) = -18 m/s / 0.1 s = -180 m/s²</p>
                 </div>
 
                 <h3>Instantaneous Acceleration</h3>
@@ -929,7 +820,7 @@
 
                 <div class="formula-box">
                     <h4>Instantaneous Acceleration:</h4>
-                    <p><em>a</em>(<em>t</em>) = lim(Δ<em>t</em>→0) Δ<em>v</em>/Δ<em>t</em> = d<em>v</em>/d<em>t</em> = d²<em>x</em>/d<em>t</em>²</p>
+                    <p><span class="math">a(t)</span> = lim(Δ<span class="math">t</span>→0) Δ<span class="math">v</span>/Δ<span class="math">t</span> = d<span class="math">v</span>/d<span class="math">t</span> = d²<span class="math">x</span>/d<span class="math">t</span>²</p>
                     <p>Second derivative of position with respect to time</p>
                 </div>
 
@@ -987,11 +878,11 @@
 
                 <div class="formula-box">
                     <h4>The Five Kinematic Equations:</h4>
-                    <p><strong>Equation 1:</strong> <em>v</em> = <em>v</em>₀ + <em>at</em></p>
-                    <p><strong>Equation 2:</strong> <em>x</em> = <em>x</em>₀ + <em>v</em>₀<em>t</em> + ½<em>at</em>²</p>
-                    <p><strong>Equation 3:</strong> <em>v</em>² = <em>v</em>₀² + 2<em>a</em>(<em>x</em> - <em>x</em>₀)</p>
-                    <p><strong>Equation 4:</strong> <em>x</em> = <em>x</em>₀ + ½(<em>v</em>₀ + <em>v</em>)<em>t</em></p>
-                    <p><strong>Equation 5:</strong> <em>x</em> = <em>x</em>₀ + <em>vt</em> - ½<em>at</em>²</p>
+                    <p><strong>Equation 1:</strong> <span class="math">v = v₀ + at</span></p>
+                    <p><strong>Equation 2:</strong> <span class="math">x = x₀ + v₀t + ½at²</span></p>
+                    <p><strong>Equation 3:</strong> <span class="math">v² = v₀² + 2a(x - x₀)</span></p>
+                    <p><strong>Equation 4:</strong> <span class="math">x = x₀ + ½(v₀ + v)t</span></p>
+                    <p><strong>Equation 5:</strong> <span class="math">x = x₀ + vt - ½at²</span></p>
                 </div>
 
                 <h3>Understanding Each Equation</h3>
@@ -1011,7 +902,7 @@
                     <h4>Systematic Approach:</h4>
                     <ol>
                         <li><strong>Define coordinate system:</strong> Choose positive direction</li>
-                        <li><strong>List known quantities:</strong> <em>x</em>₀, <em>v</em>₀, <em>a</em>, <em>t</em>, <em>x</em>, <em>v</em></li>
+                        <li><strong>List known quantities:</strong> <span class="math">x₀, v₀, a, t, x, v</span></li>
                         <li><strong>Identify unknown:</strong> What are you solving for?</li>
                         <li><strong>Choose equation:</strong> Select equation containing known and unknown quantities</li>
                         <li><strong>Solve algebraically:</strong> Isolate the unknown variable</li>
@@ -1023,20 +914,20 @@
                     <h4>📝 Comprehensive Example: Accelerating Car</h4>
                     <p><strong>Problem:</strong> A car starts from rest and accelerates at 3 m/s² for 8 seconds. Find: (a) final velocity, (b) distance traveled, (c) velocity after traveling 50 m.</p>
                     
-                    <p><strong>Given:</strong> <em>v</em>₀ = 0 m/s, <em>a</em> = 3 m/s², <em>t</em> = 8 s, <em>x</em>₀ = 0 m</p>
+                    <p><strong>Given:</strong> <span class="math">v₀</span> = 0 m/s, <span class="math">a</span> = 3 m/s², <span class="math">t</span> = 8 s, <span class="math">x₀</span> = 0 m</p>
                     
                     <p><strong>Part (a):</strong> Find final velocity</p>
-                    <p>Using <em>v</em> = <em>v</em>₀ + <em>at</em></p>
-                    <p><em>v</em> = 0 + (3)(8) = 24 m/s</p>
+                    <p>Using <span class="math">v = v₀ + at</span></p>
+                    <p><span class="math">v</span> = 0 + (3)(8) = 24 m/s</p>
                     
                     <p><strong>Part (b):</strong> Find distance traveled</p>
-                    <p>Using <em>x</em> = <em>x</em>₀ + <em>v</em>₀<em>t</em> + ½<em>at</em>²</p>
-                    <p><em>x</em> = 0 + 0(8) + ½(3)(8)² = ½(3)(64) = 96 m</p>
+                    <p>Using <span class="math">x = x₀ + v₀t + ½at²</span></p>
+                    <p><span class="math">x</span> = 0 + 0(8) + ½(3)(8)² = ½(3)(64) = 96 m</p>
                     
                     <p><strong>Part (c):</strong> Velocity after 50 m</p>
-                    <p>Using <em>v</em>² = <em>v</em>₀² + 2<em>a</em>(<em>x</em> - <em>x</em>₀)</p>
-                    <p><em>v</em>² = 0² + 2(3)(50 - 0) = 300</p>
-                    <p><em>v</em> = √300 ≈ 17.3 m/s</p>
+                    <p>Using <span class="math">v² = v₀² + 2a(x - x₀)</span></p>
+                    <p><span class="math">v²</span> = 0² + 2(3)(50 - 0) = 300</p>
+                    <p><span class="math">v</span> = √300 ≈ 17.3 m/s</p>
                 </div>
 
                 <div class="advanced-note">
@@ -1058,20 +949,20 @@
 
                 <div class="formula-box">
                     <h4>Free Fall Acceleration:</h4>
-                    <p><em>g</em> = 9.8 m/s² (or 9.81 m/s² for more precision)</p>
+                    <p><span class="math">g</span> = 9.8 m/s² (or 9.81 m/s² for more precision)</p>
                     <p>Direction: Always toward Earth's center (downward)</p>
-                    <p>In equations: <em>a</em> = -<em>g</em> (if upward is positive)</p>
+                    <p>In equations: <span class="math">a = -g</span> (if upward is positive)</p>
                 </div>
 
                 <h3>Applying Kinematic Equations to Free Fall</h3>
-                <p>Free fall is simply constant acceleration motion with <em>a</em> = -<em>g</em>. We use the same kinematic equations, substituting the acceleration due to gravity.</p>
+                <p>Free fall is simply constant acceleration motion with <span class="math">a = -g</span>. We use the same kinematic equations, substituting the acceleration due to gravity.</p>
 
                 <div class="formula-box">
                     <h4>Free Fall Equations (upward positive):</h4>
-                    <p><em>v</em> = <em>v</em>₀ - <em>gt</em></p>
-                    <p><em>y</em> = <em>y</em>₀ + <em>v</em>₀<em>t</em> - ½<em>gt</em>²</p>
-                    <p><em>v</em>² = <em>v</em>₀² - 2<em>g</em>(<em>y</em> - <em>y</em>₀)</p>
-                    <p><em>y</em> = <em>y</em>₀ + ½(<em>v</em>₀ + <em>v</em>)<em>t</em></p>
+                    <p><span class="math">v = v₀ - gt</span></p>
+                    <p><span class="math">y = y₀ + v₀t - ½gt²</span></p>
+                    <p><span class="math">v² = v₀² - 2g(y - y₀)</span></p>
+                    <p><span class="math">y = y₀ + ½(v₀ + v)t</span></p>
                 </div>
 
                 <div class="example-box">
@@ -1079,21 +970,21 @@
                     
                     <p><strong>Example 1 - Dropped Object:</strong></p>
                     <p>A ball is dropped from a 45 m tall building. How long does it take to hit the ground?</p>
-                    <p><strong>Given:</strong> <em>y</em>₀ = 45 m, <em>v</em>₀ = 0 m/s, <em>y</em> = 0 m, <em>g</em> = 9.8 m/s²</p>
-                    <p>Using <em>y</em> = <em>y</em>₀ + <em>v</em>₀<em>t</em> - ½<em>gt</em>²</p>
-                    <p>0 = 45 + 0 - ½(9.8)<em>t</em>²</p>
-                    <p><em>t</em>² = 90/9.8 ≈ 9.18</p>
-                    <p><em>t</em> ≈ 3.03 seconds</p>
+                    <p><strong>Given:</strong> <span class="math">y₀</span> = 45 m, <span class="math">v₀</span> = 0 m/s, <span class="math">y</span> = 0 m, <span class="math">g</span> = 9.8 m/s²</p>
+                    <p>Using <span class="math">y = y₀ + v₀t - ½gt²</span></p>
+                    <p>0 = 45 + 0 - ½(9.8)<span class="math">t</span>²</p>
+                    <p><span class="math">t</span>² = 90/9.8 ≈ 9.18</p>
+                    <p><span class="math">t</span> ≈ 3.03 seconds</p>
                     
                     <p><strong>Example 2 - Thrown Upward:</strong></p>
                     <p>A ball is thrown upward at 20 m/s. Find maximum height and time to return.</p>
-                    <p><strong>At maximum height:</strong> <em>v</em> = 0</p>
-                    <p>Using <em>v</em>² = <em>v</em>₀² - 2<em>g</em>(<em>y</em> - <em>y</em>₀)</p>
-                    <p>0 = (20)² - 2(9.8)(<em>y</em> - 0)</p>
-                    <p><em>y</em> = 400/19.6 ≈ 20.4 m</p>
+                    <p><strong>At maximum height:</strong> <span class="math">v</span> = 0</p>
+                    <p>Using <span class="math">v² = v₀² - 2g(y - y₀)</span></p>
+                    <p>0 = (20)² - 2(9.8)(<span class="math">y</span> - 0)</p>
+                    <p><span class="math">y</span> = 400/19.6 ≈ 20.4 m</p>
                     
-                    <p><strong>Time to return:</strong> Use symmetry or solve <em>y</em> = 0</p>
-                    <p>Total time = 2(<em>v</em>₀/<em>g</em>) = 2(20/9.8) ≈ 4.08 seconds</p>
+                    <p><strong>Time to return:</strong> Use symmetry or solve <span class="math">y</span> = 0</p>
+                    <p>Total time = 2(<span class="math">v₀/g</span>) = 2(20/9.8) ≈ 4.08 seconds</p>
                 </div>
 
                 <h3>Important Free Fall Insights</h3>
@@ -1139,686 +1030,79 @@
                     <strong>2.</strong> Explain why the area under a velocity-time graph gives displacement. What does the area under an acceleration-time graph represent?
                     <details>
                         <summary>Answer</summary>
-                        <p>The area under a velocity-time graph gives displacement because displacement is the integral of velocity over time: Δ<em>x</em> = ∫<em>v</em> d<em>t</em>. Graphically, this integral represents the area between the curve and the time axis. Similarly, the area under an acceleration-time graph gives the change in velocity: Δ<em>v</em> = ∫<em>a</em> d<em>t</em>. This relationship comes from the fundamental theorem of calculus connecting derivatives and integrals.</p>
+                        <p>The area under a velocity-time graph gives displacement because displacement is the integral of velocity over time: Δ<span class="math">x</span> = ∫<span class="math">v</span> d<span class="math">t</span>. Graphically, this integral represents the area between the curve and the time axis. Similarly, the area under an acceleration-time graph gives the change in velocity: Δ<span class="math">v</span> = ∫<span class="math">a</span> d<span class="math">t</span>. This relationship comes from the fundamental theorem of calculus connecting derivatives and integrals.</p>
                     </details>
                 </div>
             </div>
-
-            <div class="quiz-container">
-                <h2>Test Your Knowledge: 100 MCQs</h2>
-                <p>Challenge yourself with this comprehensive quiz covering all aspects of one-dimensional kinematics.</p>
-                <div id="quiz"></div>
-                <div class="quiz-nav">
-                    <button id="prevBtn" class="btn btn-secondary">Previous</button>
-                    <span id="questionCounter" class="question-counter"></span>
-                    <button id="nextBtn" class="btn">Next</button>
-                </div>
-                <div class="quiz-buttons">
-                    <button id="submitBtn" class="btn">Submit Quiz</button>
-                    <button id="resetBtn" class="btn btn-secondary">Reset Quiz</button>
-                </div>
-                <div id="results" style="display: none;"></div>
-            </div>
-
         </div>
     </main>
 
+    <section class="practice-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Test Your Understanding</h2>
+                <p class="section-subtitle">Apply what you've learned by tackling conceptual questions, numerical problems, and a comprehensive quiz.</p>
+            </div>
+            <div class="practice-grid">
+                <div class="practice-card">
+                    <div class="icon">🤔</div>
+                    <h3>Conceptual Questions</h3>
+                    <p>Challenge your understanding of the core principles and theoretical concepts.</p>
+                    <a href="conceptual.html" class="btn btn-practice">View Questions</a>
+                </div>
+                <div class="practice-card">
+                    <div class="icon">🧮</div>
+                    <h3>Numerical Problems</h3>
+                    <p>Sharpen your problem-solving skills with a variety of calculations and applications.</p>
+                    <a href="numerical.html" class="btn btn-practice">Solve Problems</a>
+                </div>
+                <div class="practice-card">
+                    <div class="icon">📊</div>
+                    <h3>Assessment Quiz</h3>
+                    <p>Take a timed, comprehensive quiz to test your mastery of the entire chapter.</p>
+                    <a href="mcq.html" class="btn btn-practice">Start Quiz</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
-        <p>&copy; 2024 Physics Daily. All rights reserved.</p>
+        <div class="container">
+            <p>&copy;  Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
+        </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const lightModeBtn = document.getElementById('light-mode');
-            const darkModeBtn = document.getElementById('dark-mode');
+        // Complete theme toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const lightThemeBtn = document.getElementById('light-theme');
+            const darkThemeBtn = document.getElementById('dark-theme');
+            const docElement = document.documentElement;
+
+            const applyTheme = (theme) => {
+                docElement.setAttribute('data-theme', theme);
+                if (theme === 'dark') {
+                    darkThemeBtn.classList.add('active');
+                    lightThemeBtn.classList.remove('active');
+                } else {
+                    lightThemeBtn.classList.add('active');
+                    darkThemeBtn.classList.remove('active');
+                }
+                localStorage.setItem('theme', theme);
+            };
+
+            // Check for saved theme preference or default to 'light'
             const savedTheme = localStorage.getItem('theme') || 'light';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            if (savedTheme === 'dark') {
-                darkModeBtn.classList.add('active');
-                lightModeBtn.classList.remove('active');
-            }
+            applyTheme(savedTheme);
 
-            lightModeBtn.addEventListener('click', () => {
-                document.documentElement.setAttribute('data-theme', 'light');
-                lightModeBtn.classList.add('active');
-                darkModeBtn.classList.remove('active');
-                localStorage.setItem('theme', 'light');
+            // Event listeners for theme buttons
+            lightThemeBtn.addEventListener('click', () => {
+                applyTheme('light');
             });
 
-            darkModeBtn.addEventListener('click', () => {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                darkModeBtn.classList.add('active');
-                lightModeBtn.classList.remove('active');
-                localStorage.setItem('theme', 'dark');
+            darkThemeBtn.addEventListener('click', () => {
+                applyTheme('dark');
             });
-            
-            const quizContainer = document.getElementById('quiz');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const submitBtn = document.getElementById('submitBtn');
-            const resetBtn = document.getElementById('resetBtn');
-            const questionCounter = document.getElementById('questionCounter');
-            const resultsContainer = document.getElementById('results');
-
-            const quizData = [
-                {
-                    question: "1. A body is said to be in motion if it changes its position with respect to:",
-                    options: ["its own axis", "the observer", "time only", "its mass"],
-                    answer: "the observer"
-                },
-                {
-                    question: "2. Which of the following is a vector quantity?",
-                    options: ["Speed", "Distance", "Time", "Displacement"],
-                    answer: "Displacement"
-                },
-                {
-                    question: "3. The numerical ratio of displacement to distance for a moving object is:",
-                    options: ["always less than 1", "always equal to 1", "always more than 1", "equal to or less than 1"],
-                    answer: "equal to or less than 1"
-                },
-                {
-                    question: "4. A body moves in a full circle of radius <em>R</em>. What is the displacement after completing the circle?",
-                    options: ["2π<em>R</em>", "<em>R</em>", "Zero", "π<em>R</em>"],
-                    answer: "Zero"
-                },
-                {
-                    question: "5. If a body is moving with a constant velocity, then its acceleration is:",
-                    options: ["Non-zero and constant", "Infinite", "Variable", "Zero"],
-                    answer: "Zero"
-                },
-                {
-                    question: "6. The slope of a velocity-time graph represents:",
-                    options: ["Displacement", "Distance", "Acceleration", "Speed"],
-                    answer: "Acceleration"
-                },
-                {
-                    question: "7. A body is thrown vertically upwards. At its highest point, which of the following is true?",
-                    options: ["Its velocity is zero and its acceleration is also zero.", "Its velocity is zero and its acceleration is non-zero.", "Its velocity is non-zero and its acceleration is zero.", "Both velocity and acceleration are non-zero."],
-                    answer: "Its velocity is zero and its acceleration is non-zero."
-                },
-                {
-                    question: "8. The area under an acceleration-time graph represents the:",
-                    options: ["Displacement", "Change in velocity", "Average velocity", "Final velocity"],
-                    answer: "Change in velocity"
-                },
-                {
-                    question: "9. Which of the following situations is impossible?",
-                    options: ["An object has zero velocity but non-zero acceleration.", "An object has constant speed but varying velocity.", "An object has constant velocity but varying speed.", "An object has negative velocity and positive acceleration."],
-                    answer: "An object has constant velocity but varying speed."
-                },
-                {
-                    question: "10. If the velocity and acceleration of a particle have opposite signs, the speed of the particle:",
-                    options: ["Increases", "Decreases", "Remains constant", "Is zero"],
-                    answer: "Decreases"
-                },
-                {
-                    question: "11. The motion of a body under the influence of gravity alone is independent of its:",
-                    options: ["Mass", "Height of fall", "Initial velocity", "Shape"],
-                    answer: "Mass"
-                },
-                {
-                    question: "12. For a body starting from rest and moving with uniform acceleration, the ratio of distances covered in the 1st, 2nd, and 3rd seconds is:",
-                    options: ["1:2:3", "1:4:9", "1:3:5", "1:1:1"],
-                    answer: "1:3:5"
-                },
-                {
-                    question: "13. The SI unit of acceleration is:",
-                    options: ["m/s", "cm/s²", "m/s²", "km/h²"],
-                    answer: "m/s²"
-                },
-                {
-                    question: "14. When can the average velocity of a moving object be zero over a time interval?",
-                    options: ["When the average speed is zero.", "When the total distance covered is zero.", "When the final position is the same as the initial position.", "Only if the object remains at rest."],
-                    answer: "When the final position is the same as the initial position."
-                },
-                {
-                    question: "15. If an object travels at a constant speed in a circular path, its velocity is:",
-                    options: ["Constant", "Continuously changing", "Zero", "Infinite"],
-                    answer: "Continuously changing"
-                },
-                {
-                    question: "16. Which of the following must be true for the magnitude of average velocity to be equal to the average speed?",
-                    options: ["The object must be at rest.", "The object must move in a circle.", "The object must move on a straight path without changing direction.", "The object must have zero acceleration."],
-                    answer: "The object must move on a straight path without changing direction."
-                },
-                {
-                    question: "17. A particle's position is given by <em>x</em> = 5. What is its velocity?",
-                    options: ["5 m/s", "Cannot be determined", "Zero", "1 m/s"],
-                    answer: "Zero"
-                },
-                {
-                    question: "18. Retardation is defined as:",
-                    options: ["Negative velocity", "Negative acceleration", "Rate of change of position", "Positive acceleration"],
-                    answer: "Negative acceleration"
-                },
-                {
-                    question: "19. For a uniformly accelerated motion, the average velocity is given by:",
-                    options: ["<em>v</em>", "<em>u</em>", "(<em>u</em>+<em>v</em>)/2", "(<em>v</em>-<em>u</em>)/2"],
-                    answer: "(<em>u</em>+<em>v</em>)/2"
-                },
-                {
-                    question: "20. If a feather and a stone are dropped simultaneously in a vacuum from the same height, which one reaches the ground first?",
-                    options: ["The feather", "The stone", "They reach at the same time", "Depends on their shape"],
-                    answer: "They reach at the same time"
-                },
-                {
-                    question: "21. A man walks 3 meters east and then 4 meters north. The magnitude of his displacement is:",
-                    options: ["7 m", "1 m", "5 m", "12 m"],
-                    answer: "5 m"
-                },
-                {
-                    question: "22. A car travels at 20 km/hr for the first half of a certain time and at 30 km/hr for the second half of the time. Its average speed is:",
-                    options: ["25 km/hr", "24 km/hr", "28 km/hr", "22 km/hr"],
-                    answer: "25 km/hr"
-                },
-                {
-                    question: "23. A car accelerates from rest to a speed of 30 m/s in 6 seconds. Its uniform acceleration is:",
-                    options: ["180 m/s²", "0.2 m/s²", "5 m/s²", "36 m/s²"],
-                    answer: "5 m/s²"
-                },
-                {
-                    question: "24. An object is dropped from a height of 45 m. How long will it take to reach the ground? (Use <em>g</em> = 10 m/s²)",
-                    options: ["3 s", "4.5 s", "9 s", "1.5 s"],
-                    answer: "3 s"
-                },
-                {
-                    question: "25. A ball is thrown upwards with a velocity of 20 m/s. What is the maximum height it reaches? (Use <em>g</em> = 10 m/s²)",
-                    options: ["10 m", "40 m", "2 m", "20 m"],
-                    answer: "20 m"
-                },
-                {
-                    question: "26. The position of a particle is given by <em>x</em> = 3<em>t</em>² + 2<em>t</em> + 5. What is the velocity at <em>t</em> = 2 s?",
-                    options: ["14 m/s", "21 m/s", "12 m/s", "10 m/s"],
-                    answer: "14 m/s"
-                },
-                {
-                    question: "27. A train 100 m long is moving at 20 m/s. A bird flying in the opposite direction at 5 m/s crosses the train in:",
-                    options: ["5 s", "3 s", "4 s", "2 s"],
-                    answer: "4 s"
-                },
-                {
-                    question: "28. A car travels the first half of a distance at 40 km/hr and the second half at 60 km/hr. The average speed of the car is:",
-                    options: ["50 km/hr", "48 km/hr", "52 km/hr", "55 km/hr"],
-                    answer: "48 km/hr"
-                },
-                {
-                    question: "29. A body starting from rest has an acceleration of 4 m/s². The distance traveled by it in the 5th second is:",
-                    options: ["18 m", "20 m", "36 m", "50 m"],
-                    answer: "18 m"
-                },
-                {
-                    question: "30. An object moving with a speed of 6.25 m/s is decelerated at a rate given by d<em>v</em>/d<em>t</em> = -2.5√<em>v</em>. The time taken by the object to come to rest is:",
-                    options: ["1 s", "2 s", "4 s", "8 s"],
-                    answer: "2 s"
-                },
-                {
-                    question: "31. The speed of a car changes from 36 km/h to 72 km/h in 5 seconds. The acceleration is:",
-                    options: ["1 m/s²", "2 m/s²", "3.6 m/s²", "7.2 m/s²"],
-                    answer: "2 m/s²"
-                },
-                {
-                    question: "32. A body starts from rest and travels for <em>t</em> seconds with uniform acceleration of 2 m/s². If the displacement made by it is 16 m, the time of travel <em>t</em> is:",
-                    options: ["4 s", "3 s", "6 s", "8 s"],
-                    answer: "4 s"
-                },
-                {
-                    question: "33. A particle has an initial velocity of 3 m/s east and a constant acceleration of 1 m/s² west. The distance covered by it in the 4th second of its motion is:",
-                    options: ["0 m", "0.5 m", "2 m", "4 m"],
-                    answer: "0.5 m"
-                },
-                {
-                    question: "34. A car is moving with a velocity of 10 m/s. It is brought to rest by applying brakes which produce a uniform retardation of 2 m/s². The car will come to rest after traveling:",
-                    options: ["10 m", "20 m", "25 m", "50 m"],
-                    answer: "25 m"
-                },
-                {
-                    question: "35. The displacement of a particle is given by <em>x</em> = (<em>t</em>-2)². The distance covered by the particle in the first 4 seconds is:",
-                    options: ["4 m", "8 m", "0 m", "16 m"],
-                    answer: "8 m"
-                },
-                {
-                    question: "36. Two cars are moving in the same direction with the same speed of 30 km/h. They are separated by 5 km. The speed of a car moving in the opposite direction if it meets these two cars at an interval of 4 minutes is:",
-                    options: ["40 km/h", "45 km/h", "30 km/h", "15 km/h"],
-                    answer: "45 km/h"
-                },
-                {
-                    question: "37. A ball is thrown vertically down with a velocity of 20 m/s from the top of a tower. It hits the ground after some time with a velocity of 80 m/s. The height of the tower is (<em>g</em> = 10 m/s²):",
-                    options: ["340 m", "320 m", "300 m", "360 m"],
-                    answer: "300 m"
-                },
-                {
-                    question: "38. A body is dropped from a height of 16m. The time taken by it to reach the ground is (<em>g</em> = 9.8 m/s²):",
-                    options: ["1.8 s", "2.5 s", "3.2 s", "4.1 s"],
-                    answer: "1.8 s"
-                },
-                {
-                    question: "39. A particle moves along a straight line such that its displacement at any time <em>t</em> is given by <em>s</em> = <em>t</em>³ - 3<em>t</em>² + 2. The velocity of the particle when its acceleration is zero is:",
-                    options: ["-3 m/s", "-9 m/s", "2 m/s", "1 m/s"],
-                    answer: "-3 m/s"
-                },
-                {
-                    question: "40. A body covers 20 m in the 2nd second and 40 m in the 4th second of its motion. If the motion is uniformly accelerated, how much distance will it cover in the 6th second?",
-                    options: ["50 m", "55 m", "60 m", "65 m"],
-                    answer: "60 m"
-                },
-                {
-                    question: "41. A particle moves with a constant acceleration. If its displacement is <em>S</em>, initial velocity is <em>u</em>, and final velocity is <em>v</em>, then which statement is incorrect?",
-                    options: ["<em>S</em> = (<em>u</em>+<em>v</em>)<em>t</em>/2", "<em>v</em> = <em>u</em> + <em>at</em>", "The velocity at midpoint of the distance is √((<em>u</em>²+<em>v</em>²)/2)", "The velocity at midpoint of the time interval is (<em>u</em>-<em>v</em>)/2"],
-                    answer: "The velocity at midpoint of the time interval is (<em>u</em>-<em>v</em>)/2"
-                },
-                {
-                    question: "42. If a body loses half of its velocity on penetrating 3 cm in a wooden block, then how much will it penetrate more before coming to rest?",
-                    options: ["1 cm", "2 cm", "3 cm", "4 cm"],
-                    answer: "1 cm"
-                },
-                {
-                    question: "43. A stone is released from an elevator going up with an acceleration '<em>a</em>'. The acceleration of the stone after the release is:",
-                    options: ["<em>a</em> upward", "(<em>g</em>-<em>a</em>) upward", "(<em>g</em>-<em>a</em>) downward", "<em>g</em> downward"],
-                    answer: "<em>g</em> downward"
-                },
-                {
-                    question: "44. A ball is dropped from a height. A second ball is thrown downwards from the same height with some speed after 1 second. They reach the ground simultaneously in 2 seconds. The initial speed of the second ball is:",
-                    options: ["9.8 m/s", "14.7 m/s", "19.6 m/s", "24.5 m/s"],
-                    answer: "14.7 m/s"
-                },
-                {
-                    question: "45. The displacement <em>x</em> of a particle varies with time <em>t</em> as <em>x</em> = α<em>e</em>⁻ᵃᵗ + β<em>e</em>ᵇᵗ. The velocity of the particle will:",
-                    options: ["decrease with time", "be independent of α and β", "drop to zero when α = β", "increase with time"],
-                    answer: "increase with time"
-                },
-                {
-                    question: "46. A particle starts from rest and moves with constant acceleration. The ratio of the distance covered in the <em>n</em>th second to that covered in <em>n</em> seconds is:",
-                    options: ["(2<em>n</em>-1)/<em>n</em>²", "2/<em>n</em> - 1/<em>n</em>²", "(2<em>n</em>+1)/<em>n</em>²", "1/<em>n</em>"],
-                    answer: "2/<em>n</em> - 1/<em>n</em>²"
-                },
-                {
-                    question: "47. A stone is dropped into a well and the sound of the splash is heard after 3 seconds. If the depth of the well is 20 m, what is the velocity of sound?",
-                    options: ["30 m/s", "20 m/s", "40 m/s", "10 m/s"],
-                    answer: "20 m/s"
-                },
-                {
-                    question: "48. An object is moving in a straight line. The velocity is given by <em>v</em> = 2<em>t</em> + 5. The displacement of the object in the first 5 seconds is:",
-                    options: ["25 m", "50 m", "75 m", "100 m"],
-                    answer: "50 m"
-                },
-                {
-                    question: "49. A train is moving with uniform acceleration. The engine of the train passes a signal post with velocity <em>u</em>, and the last carriage passes it with velocity <em>v</em>. The middle point of the train passes the signal post with a velocity of:",
-                    options: ["(<em>u</em>+<em>v</em>)/2", "√(<em>uv</em>)", "√((<em>u</em>²+<em>v</em>²)/2)", "(<em>v</em>-<em>u</em>)/2"],
-                    answer: "√((<em>u</em>²+<em>v</em>²)/2)"
-                },
-                {
-                    question: "50. A ball is thrown vertically upwards. The time of ascent is <em>t</em>₁. The time of descent is <em>t</em>₂. If air resistance is considered, then:",
-                    options: ["<em>t</em>₁ = <em>t</em>₂", "<em>t</em>₁ < <em>t</em>₂", "<em>t</em>₁ > <em>t</em>₂", "Depends on the mass of the ball"],
-                    answer: "<em>t</em>₁ < <em>t</em>₂"
-                },
-                {
-                    question: "51. The velocity of a particle is given by <em>v</em> = (180 - 16<em>x</em>)¹/². Its acceleration will be:",
-                    options: ["Zero", "8 m/s²", "-8 m/s²", "4 m/s²"],
-                    answer: "-8 m/s²"
-                },
-                {
-                    question: "52. A particle starts with an initial velocity of 10.0 m/s along the <em>x</em>-direction and accelerates uniformly at 2.0 m/s². The time taken to reach a velocity of 50.0 m/s is:",
-                    options: ["20 s", "25 s", "30 s", "35 s"],
-                    answer: "20 s"
-                },
-                {
-                    question: "53. A stone is dropped from a building. Two seconds later, another stone is dropped. When the first stone has reached a speed of 30 m/s, the separation between the stones is (<em>g</em> = 10 m/s²):",
-                    options: ["80 m", "60 m", "40 m", "20 m"],
-                    answer: "40 m"
-                },
-                {
-                    question: "54. The motion of a body is given by d<em>v</em>(<em>t</em>)/d<em>t</em> = 6.0 - 3<em>v</em>(<em>t</em>). If the body was at rest at <em>t</em>=0, which statement is wrong?",
-                    options: ["The terminal speed is 2.0 m/s.", "The speed varies as <em>v</em>(<em>t</em>) = 2(1 - <em>e</em>⁻³ᵗ) m/s.", "The speed is 1.0 m/s when the acceleration is half its initial value.", "The magnitude of the initial acceleration is 6.0 m/s²."],
-                    answer: "The speed is 1.0 m/s when the acceleration is half its initial value."
-                },
-                {
-                    question: "55. A man in a balloon rising with an acceleration of 4.9 m/s² releases a ball 2 seconds after the balloon is let go. The greatest height reached by the ball above the ground is (<em>g</em> = 9.8 m/s²):",
-                    options: ["14.7 m", "19.6 m", "9.8 m", "24.5 m"],
-                    answer: "14.7 m"
-                },
-                {
-                    question: "56. A car moving at 150 km/h stops in 27m after braking. If the same car moves at one-third of that speed, the stopping distance will be:",
-                    options: ["3 m", "9 m", "1 m", "6 m"],
-                    answer: "3 m"
-                },
-                {
-                    question: "57. The position of a particle is given by <em>x</em>(<em>t</em>) = <em>at</em> + <em>bt</em>² - <em>ct</em>³. Its velocity when acceleration becomes zero is:",
-                    options: ["<em>a</em> + <em>b</em>²/4<em>c</em>", "<em>a</em> + <em>b</em>²/<em>c</em>", "<em>a</em> + <em>b</em>²/2<em>c</em>", "<em>a</em> + <em>b</em>²/3<em>c</em>"],
-                    answer: "<em>a</em> + <em>b</em>²/3<em>c</em>"
-                },
-                {
-                    question: "58. A thief is running at 9 m/s. A policeman in a jeep chases at 10 m/s. If the jeep is 100m behind, how long will it take for the policeman to catch the thief?",
-                    options: ["1 s", "19 s", "90 s", "100 s"],
-                    answer: "100 s"
-                },
-                {
-                    question: "59. Water drops fall from a tap 5 m high at regular intervals. When the first drop hits the ground, the third is just leaving. The height of the second drop from the ground at that instant is:",
-                    options: ["2.50 m", "3.75 m", "4.00 m", "1.25 m"],
-                    answer: "3.75 m"
-                },
-                {
-                    question: "60. A body is released from a height. Another is released one second later from the same height. The separation between them two seconds after the release of the second body is (<em>g</em>=9.8 m/s²):",
-                    options: ["4.9 m", "9.8 m", "19.6 m", "24.5 m"],
-                    answer: "24.5 m"
-                },
-                {
-                    question: "61. From the top of a tower, a stone is thrown up and it reaches the ground in time <em>t</em>₁. A second stone thrown down with the same speed reaches the ground in time <em>t</em>₂. A third stone released from rest reaches the ground in time <em>t</em>₃. The correct relation is:",
-                    options: ["<em>t</em>₃ = (<em>t</em>₁ + <em>t</em>₂)/2", "<em>t</em>₃ = √(<em>t</em>₁<em>t</em>₂)", "1/<em>t</em>₃ = 1/<em>t</em>₁ - 1/<em>t</em>₂", "<em>t</em>₃² = <em>t</em>₁² - <em>t</em>₂²"],
-                    answer: "<em>t</em>₃ = √(<em>t</em>₁<em>t</em>₂)"
-                },
-                {
-                    question: "62. Car A starts 10 m behind car B. Car A begins from rest with an acceleration of 4 m/s², while car B moves with a constant velocity of 1 m/s. The time when car A overtakes car B is:",
-                    options: ["2.5 s", "7.5 s", "5 s", "1.25 s"],
-                    answer: "2.5 s"
-                },
-                {
-                    question: "63. A particle's velocity is decreased at a rate |<em>a</em>| = α√<em>v</em>, where α is a positive constant. If its initial velocity is <em>v</em>₀, it comes to rest at time:",
-                    options: ["<em>t</em> = 2√<em>v</em>₀ / α", "<em>t</em> = √<em>v</em>₀ / α", "<em>t</em> = 2<em>v</em>₀ / α", "infinity"],
-                    answer: "<em>t</em> = 2√<em>v</em>₀ / α"
-                },
-                {
-                    question: "64. The acceleration of a particle moving rectilinearly is <em>a</em> = 4 - 2<em>x</em>. If it is at rest at <em>x</em>=0, at what other position '<em>x</em>' will the particle momentarily come to rest?",
-                    options: ["2 m", "3 m", "4 m", "5 m"],
-                    answer: "4 m"
-                },
-                {
-                    question: "65. A car starts from rest, accelerates at 5 m/s², then moves uniformly, and finally decelerates at the same rate to come to a stop. The total motion time is 25 s, and the average velocity is 72 km/hr. For how long did the car move uniformly?",
-                    options: ["10 s", "12 s", "15 s", "20 s"],
-                    answer: "15 s"
-                },
-                {
-                    question: "66. A body is projected from the top of a tower vertically upward with 5 m/s. The body lands on the ground in 4 sec. The total height of the tower is:",
-                    options: ["45 m", "60 m", "30 m", "50 m"],
-                    answer: "60 m"
-                },
-                {
-                    question: "67. A particle is dropped under gravity from a height <em>h</em> and travels a distance 9<em>h</em>/25 in the last second. The height <em>h</em> is (<em>g</em>=9.8 m/s²):",
-                    options: ["100 m", "122.5 m", "145 m", "167.5 m"],
-                    answer: "122.5 m"
-                },
-                {
-                    question: "68. A stone is thrown vertically upward with speed <em>u</em> from the top of a tower. It reaches the ground with a velocity 3<em>u</em>. The height of the tower is:",
-                    options: ["3<em>u</em>²/<em>g</em>", "4<em>u</em>²/<em>g</em>", "6<em>u</em>²/<em>g</em>", "9<em>u</em>²/<em>g</em>"],
-                    answer: "4<em>u</em>²/<em>g</em>"
-                },
-                {
-                    question: "69. A particle moves in a straight line with acceleration <em>a</em> = -1/(3<em>v</em>²). If the initial velocity is 5 m/s, the time at which its velocity becomes zero is:",
-                    options: ["5 s", "25 s", "125 s", "50 s"],
-                    answer: "125 s"
-                },
-                {
-                    question: "70. A body is moving from rest under constant acceleration. Let <em>S</em>₁ be the displacement in the first (<em>p</em>-1) sec and <em>S</em>₂ be the displacement in the first <em>p</em> sec. The displacement in the (<em>p</em>² - <em>p</em> + 1)th sec will be:",
-                    options: ["<em>S</em>₁ + <em>S</em>₂", "<em>S</em>₁<em>S</em>₂", "<em>S</em>₁ - <em>S</em>₂", "<em>S</em>₁/<em>S</em>₂"],
-                    answer: "<em>S</em>₁ + <em>S</em>₂"
-                },
-                {
-                    question: "71. A particle starting from rest accelerates at a constant rate '<em>f</em>' through a distance <em>S</em>, then continues at a constant speed for time '<em>t</em>', and then decelerates at the rate <em>f</em>/2 to come to rest. If the total distance traversed is 15<em>S</em>, then:",
-                    options: ["<em>S</em> = (1/2)<em>ft</em>²", "<em>S</em> = (1/4)<em>ft</em>²", "<em>S</em> = (1/72)<em>ft</em>²", "<em>S</em> = (1/6)<em>ft</em>²"],
-                    answer: "<em>S</em> = (1/72)<em>ft</em>²"
-                },
-                {
-                    question: "72. A particle starting from rest experiences an acceleration given by <em>a</em> = <em>t</em>³. The velocity of the particle after 4 seconds is:",
-                    options: ["32 m/s", "64 m/s", "128 m/s", "16 m/s"],
-                    answer: "64 m/s"
-                },
-                {
-                    question: "73. A block is thrown with a velocity of 2 m/s on a belt which is moving with a velocity of 4 m/s in the opposite direction. If the block stops slipping on the belt after 4 s, the magnitude of its displacement with respect to the ground is:",
-                    options: ["0 m", "4 m", "8 m", "12 m"],
-                    answer: "4 m"
-                },
-                {
-                    question: "74. The acceleration of a particle is given by <em>a</em> = -2<em>x</em>. If the velocity at <em>x</em> = 0 is 20 m/s, the position <em>x</em> where its velocity becomes zero is:",
-                    options: ["10√2 m", "5√2 m", "20√2 m", "20 m"],
-                    answer: "10√2 m"
-                },
-                {
-                    question: "75. An open lift moves upwards with velocity 10 m/s and has an upward acceleration of 2 m/s². A ball is projected upwards with velocity 20 m/s relative to the ground. The time when the ball again meets the lift is:",
-                    options: ["5/3 s", "5/2 s", "10/3 s", "2 s"],
-                    answer: "5/3 s"
-                },
-                {
-                    question: "76. The velocity of a particle is <em>v</em> = <em>v</em>₀ + <em>gt</em> + <em>Ft</em>². If its position is <em>x</em> = 0 at <em>t</em> = 0, then its displacement after unit time (<em>t</em>=1) is:",
-                    options: ["<em>v</em>₀ + <em>g</em>/2 + <em>F</em>", "<em>v</em>₀ + <em>g</em> + <em>F</em>", "<em>v</em>₀ + 2<em>g</em> + 3<em>F</em>", "<em>v</em>₀ + <em>g</em>/2 + <em>F</em>/3"],
-                    answer: "<em>v</em>₀ + <em>g</em>/2 + <em>F</em>/3"
-                },
-                {
-                    question: "77. A ball is dropped from a height of 9.8 m. It rebounds to a height of 5.0 m. If the ball is in contact with the floor for 0.2 s, the average acceleration during contact is (<em>g</em>=10 m/s²):",
-                    options: ["60 m/s²", "240 m/s²", "120 m/s²", "100 m/s²"],
-                    answer: "120 m/s²"
-                },
-                {
-                    question: "78. For a train moving at 20 m/s, the driver must apply brakes 500 m before the station to stop at the station. If the brakes were applied at half this distance, the train would cross the station with speed:",
-                    options: ["10 m/s", "10√2 m/s", "20 m/s", "20√2 m/s"],
-                    answer: "10√2 m/s"
-                },
-                {
-                    question: "79. A body is projected vertically up at <em>t</em>=0 with a velocity of 98 m/s. Another body is projected from the same point with the same velocity after 4 seconds. Both bodies will meet at <em>t</em> = :",
-                    options: ["6 s", "8 s", "10 s", "12 s"],
-                    answer: "12 s"
-                },
-                {
-                    question: "80. In a car race, car A takes a time '<em>t</em>' less than car B at the finish and passes with a speed '<em>v</em>' more than car B. Both start from rest and travel with constant accelerations <em>a</em>₁ and <em>a</em>₂. Then '<em>v</em>' is equal to:",
-                    options: ["(2<em>a</em>₁<em>a</em>₂ / (<em>a</em>₁+<em>a</em>₂))<em>t</em>", "√(2<em>a</em>₁<em>a</em>₂)<em>t</em>", "√(<em>a</em>₁<em>a</em>₂)<em>t</em>", "((<em>a</em>₁+<em>a</em>₂)/2)<em>t</em>"],
-                    answer: "√(<em>a</em>₁<em>a</em>₂)<em>t</em>"
-                },
-                {
-                    question: "81. The relation between time '<em>t</em>' and distance '<em>x</em>' is given by <em>t</em> = <em>mx</em>² + <em>nx</em>, where <em>m</em> and <em>n</em> are constants. The retardation of the motion is (where '<em>v</em>' is the velocity):",
-                    options: ["2<em>nv</em>³", "2<em>mnv</em>³", "2<em>mv</em>³", "2<em>n</em>²<em>v</em>²"],
-                    answer: "2<em>mv</em>³"
-                },
-                {
-                    question: "82. A particle moves with constant speed <em>v</em> along a regular hexagon ABCDEF. The magnitude of the average velocity for its motion from A to C is:",
-                    options: ["<em>v</em>", "<em>v</em>√3 / 2", "<em>v</em>/2", "<em>v</em>√3"],
-                    answer: "<em>v</em>√3 / 2"
-                },
-                {
-                    question: "83. A particle is thrown upwards from the ground. It experiences a constant resistance force which produces a retardation of 2 m/s². The ratio of time of ascent to the time of descent is (<em>g</em>=10 m/s²):",
-                    options: ["1:1", "√2:√3", "√3:√2", "2:√6"],
-                    answer: "√2:√3"
-                },
-                {
-                    question: "84. The distance '<em>x</em>' covered by a particle varies with time '<em>t</em>' as <em>x</em>² = <em>at</em>² + 2<em>bt</em> + <em>c</em>. If the particle's acceleration varies as <em>x</em>⁻ⁿ, the integer value of <em>n</em> is:",
-                    options: ["1", "2", "3", "4"],
-                    answer: "3"
-                },
-                {
-                    question: "85. A man jumps off a 202 m high building onto cushions 2 m thick. If the cushions are crushed to a thickness of 0.5 m, what is the man's constant acceleration as he slows down?",
-                    options: ["-1333 m/s²", "-4000/3 m/s²", "-2680 m/s²", "-2020 m/s²"],
-                    answer: "-4000/3 m/s²"
-                },
-                {
-                    question: "86. Two cars A and B run on a highway at 30 m/s. On braking, A retards at 3 m/s² while B retards at 4 m/s². Car A is ahead of B. The response time for the driver of B is 1 sec. The minimum initial distance between them to avoid an accident is:",
-                    options: ["7.5 m", "6.0 m", "8.5 m", "10.0 m"],
-                    answer: "8.5 m"
-                },
-                {
-                    question: "87. A Diwali rocket is launched vertically. It has a constant upward acceleration of 20 m/s² for 2 s, after which it moves freely under gravity (<em>g</em>=10 m/s²). The total time of flight until it reaches the ground is:",
-                    options: ["(2 + 2√6) s", "(4 + 4√2) s", "(4 + 2√6) s", "(4 + 4√3) s"],
-                    answer: "(4 + 2√6) s"
-                },
-                {
-                    question: "88. A steel ball is released from the roof of a building. An observer in front of a 1.2 m high window observes that the ball takes 0.125 s to fall from the top to the bottom of the window. The ball makes a completely elastic collision with the sidewalk and reappears at the bottom of the window 2 s after passing it on the way down. How tall is the building? (<em>g</em>=10 m/s²)",
-                    options: ["50.0 m", "41.5 m", "20.5 m", "15.5 m"],
-                    answer: "20.5 m"
-                },
-                {
-                    question: "89. Two particles A and B start from the same point and move in the positive <em>x</em>-direction. Particle A accelerates at 2 m/s² for 1s and then moves at a constant speed. Particle B accelerates at 1 m/s² for 2s and then moves at a constant speed. The maximum separation between them during the first 2 seconds is:",
-                    options: ["0.25 m", "0.50 m", "0.75 m", "1.25 m"],
-                    answer: "1.25 m"
-                },
-                {
-                    question: "90. Two motorboats that can move with velocities 4.0 m/s and 6.0 m/s relative to water are going upstream in a river. When the faster boat overtakes the slower one, a buoy is dropped from the slower boat. After some time, both boats turn back simultaneously. Their engines are switched off when they reach the buoy again. If the maximum separation between the boats after the buoy is dropped is 200 m and water flow velocity is 1.5 m/s, find the distance between the places where the faster boat passes the buoy.",
-                    options: ["75 m", "300 m", "150 m", "350 m"],
-                    answer: "300 m"
-                },
-                {
-                    question: "91. A particle's acceleration '<em>a</em>' in m/s² is given by <em>a</em> = 3<em>t</em>² + 2<em>t</em> + 2, where <em>t</em> is time. If the particle starts out with a velocity <em>u</em> = 2 m/s at <em>t</em> = 0, then the velocity at the end of 2 seconds is:",
-                    options: ["12 m/s", "18 m/s", "27 m/s", "36 m/s"],
-                    answer: "18 m/s"
-                },
-                {
-                    question: "92. A particle moves along the <em>x</em>-axis with a velocity given by <em>v</em>(<em>x</em>) = <em>k</em>/<em>x</em>, where <em>k</em> is a constant. The acceleration of the particle is:",
-                    options: ["-<em>k</em>²/<em>x</em>³", "0", "<em>k</em>²/<em>x</em>³", "-<em>k</em>/<em>x</em>²"],
-                    answer: "-<em>k</em>²/<em>x</em>³"
-                },
-                {
-                    question: "93. A particle is dropped from a height <em>H</em>. The time it takes to fall the first <em>H</em>/2 is <em>t</em>₁. The time it takes to fall the remaining <em>H</em>/2 is <em>t</em>₂. Then:",
-                    options: ["<em>t</em>₁ = <em>t</em>₂", "<em>t</em>₁ > <em>t</em>₂", "<em>t</em>₁ < <em>t</em>₂", "Cannot be determined"],
-                    answer: "<em>t</em>₁ < <em>t</em>₂"
-                },
-                {
-                    question: "94. A car accelerates from rest at a constant rate α for some time, after which it decelerates at a constant rate β to come to rest. If the total time elapsed is <em>T</em>, the maximum velocity acquired by the car is:",
-                    options: ["(α² - β² / αβ)<em>T</em>", "(α² + β² / αβ)<em>T</em>", "(αβ / α+β)<em>T</em>", "(α+β / αβ)<em>T</em>"],
-                    answer: "(αβ / α+β)<em>T</em>"
-                },
-                {
-                    question: "95. A train is traveling at <em>v</em> m/s along a level straight track. Very near and parallel to the track is a wall. On the wall a naughty boy has drawn a straight line that slopes upward at a 37° angle with the horizontal. A passenger in the train observes the line out of a window (0.90 m high, 1.8 m wide). The line first appears at one corner and finally disappears at the diagonally opposite corner. If it takes 0.4 sec between appearance and disappearance of the line, what is the value of <em>v</em>? (tan37° = 3/4)",
-                    options: ["6.0 m/s", "7.5 m/s", "8.0 m/s", "6.75 m/s"],
-                    answer: "7.5 m/s"
-                },
-                {
-                    question: "96. An object is dropped from rest. If it travels 45 m in the last second of its fall, the height from which it was dropped is (<em>g</em> = 10 m/s²):",
-                    options: ["80 m", "125 m", "180 m", "45 m"],
-                    answer: "125 m"
-                },
-                {
-                    question: "97. A stone is projected vertically up from the ground. It reaches a maximum height <em>H</em>. When it is at a height of 3<em>H</em>/4, the ratio of its kinetic and potential energies is:",
-                    options: ["1:1", "1:3", "3:1", "1:4"],
-                    answer: "1:3"
-                },
-                {
-                    question: "98. A body starting from rest moves along a straight line with a constant acceleration. The variation of speed (<em>v</em>) with distance (<em>s</em>) is represented by the equation:",
-                    options: ["<em>v</em> ∝ <em>s</em>²", "<em>v</em> ∝ <em>s</em>", "<em>v</em> ∝ √<em>s</em>", "<em>v</em> ∝ 1/<em>s</em>"],
-                    answer: "<em>v</em> ∝ √<em>s</em>"
-                },
-                {
-                    question: "99. Two particles are observed at different locations moving towards each other with velocities <em>u</em>₁ and <em>u</em>₂. They are subjected to constant accelerations <em>a</em>₁ and <em>a</em>₂ in directions opposite to their initial velocities. They will meet twice. If the time interval between these two meetings is Δ<em>t</em>, their initial separation is:",
-                    options: ["(<em>u</em>₁+<em>u</em>₂)² / 2(<em>a</em>₁+<em>a</em>₂) + (<em>a</em>₁+<em>a</em>₂) / 4 (Δ<em>t</em>)²", "(<em>u</em>₁+<em>u</em>₂)² / (<em>a</em>₁+<em>a</em>₂) - (<em>a</em>₁+<em>a</em>₂) / 8 (Δ<em>t</em>)²", "(<em>u</em>₁+<em>u</em>₂)² / 2(<em>a</em>₁+<em>a</em>₂) - (<em>a</em>₁+<em>a</em>₂) / 8 (Δ<em>t</em>)²", "(<em>u</em>₁²+<em>u</em>₂²) / 2(<em>a</em>₁+<em>a</em>₂) - (<em>a</em>₁+<em>a</em>₂) / 8 (Δ<em>t</em>)²"],
-                    answer: "(<em>u</em>₁+<em>u</em>₂)² / 2(<em>a</em>₁+<em>a</em>₂) - (<em>a</em>₁+<em>a</em>₂) / 8 (Δ<em>t</em>)²"
-                },
-                {
-                    question: "100. A rubber ball is shot vertically upwards from a spring gun from a tall building. It is observed that the speed of the ball just before it hits the ground is significantly less than its initial speed of projection. This is primarily because:",
-                    options: ["Acceleration due to gravity is less at greater heights.", "The mass of the ball decreases as it rises.", "The effect of air resistance opposes the motion in both ascent and descent.", "The building is located at the equator."],
-                    answer: "The effect of air resistance opposes the motion in both ascent and descent."
-                }
-            ];
-
-            let currentQuestionIndex = 0;
-            let userAnswers = {};
-
-            function loadQuiz() {
-                quizContainer.innerHTML = '';
-                resultsContainer.style.display = 'none';
-
-                const currentQuizData = quizData[currentQuestionIndex];
-                const questionEl = document.createElement('div');
-                questionEl.classList.add('quiz-question');
-
-                let optionsHtml = '';
-                currentQuizData.options.forEach(option => {
-                    const isChecked = userAnswers[currentQuestionIndex] === option ? 'checked' : '';
-                    const optionId = `q${currentQuestionIndex}_${option.replace(/[^a-zA-Z0-9]/g, "")}`;
-                    optionsHtml += `
-                        <div class="option">
-                            <input type="radio" name="question${currentQuestionIndex}" value="${option}" id="${optionId}" ${isChecked}>
-                            <label for="${optionId}">${option}</label>
-                        </div>
-                    `;
-                });
-
-                questionEl.innerHTML = `
-                    <h4>${currentQuizData.question}</h4>
-                    ${optionsHtml}
-                `;
-
-                quizContainer.appendChild(questionEl);
-                updateCounter();
-                updateButtons();
-
-                const options = questionEl.querySelectorAll('input[type="radio"]');
-                options.forEach(option => {
-                    option.addEventListener('change', () => {
-                        userAnswers[currentQuestionIndex] = option.value;
-                    });
-                });
-            }
-
-            function updateCounter() {
-                questionCounter.textContent = `Question ${currentQuestionIndex + 1} of ${quizData.length}`;
-            }
-
-            function updateButtons() {
-                prevBtn.disabled = currentQuestionIndex === 0;
-                nextBtn.disabled = currentQuestionIndex === quizData.length - 1;
-            }
-
-            function showResults() {
-                let score = 0;
-                resultsContainer.innerHTML = '<h3>Quiz Results</h3>';
-                quizData.forEach((quizItem, index) => {
-                    const userAnswer = userAnswers[index];
-                    const isCorrect = userAnswer === quizItem.answer;
-                    if (isCorrect) {
-                        score++;
-                    }
-                    const resultItem = document.createElement('div');
-                    resultItem.classList.add('quiz-question');
-                    resultItem.innerHTML = `
-                        <h4>${quizItem.question}</h4>
-                        <p>Your answer: <strong>${userAnswer || 'Not answered'}</strong></p>
-                        <p>Correct answer: <strong>${quizItem.answer}</strong></p>
-                        <p style="color: ${isCorrect ? 'var(--success-color)' : 'var(--danger-color)'}; font-weight: bold;">
-                            ${isCorrect ? 'Correct' : 'Incorrect'}
-                        </p>
-                    `;
-                    resultsContainer.appendChild(resultItem);
-                });
-                const scorePercentage = (score / quizData.length) * 100;
-                resultsContainer.insertAdjacentHTML('afterbegin', `<p>Your final score is: <strong>${score}/${quizData.length} (${scorePercentage.toFixed(1)}%)</strong></p>`);
-                resultsContainer.style.display = 'block';
-                quizContainer.style.display = 'none';
-                document.querySelector('.quiz-nav').style.display = 'none';
-                submitBtn.style.display = 'none';
-                resetBtn.style.display = 'inline-block';
-            }
-
-            function resetQuiz() {
-                userAnswers = {};
-                currentQuestionIndex = 0;
-                resultsContainer.style.display = 'none';
-                quizContainer.style.display = 'block';
-                document.querySelector('.quiz-nav').style.display = 'flex';
-                submitBtn.style.display = 'inline-block';
-                loadQuiz();
-            }
-
-            prevBtn.addEventListener('click', () => {
-                if (currentQuestionIndex > 0) {
-                    currentQuestionIndex--;
-                    loadQuiz();
-                }
-            });
-
-            nextBtn.addEventListener('click', () => {
-                if (currentQuestionIndex < quizData.length - 1) {
-                    currentQuestionIndex++;
-                    loadQuiz();
-                }
-            });
-            
-            submitBtn.addEventListener('click', () => {
-                const answeredQuestions = Object.keys(userAnswers).length;
-                if (answeredQuestions < quizData.length) {
-                    if (!confirm(`You have answered ${answeredQuestions} of ${quizData.length} questions. Submit anyway?`)) {
-                        return;
-                    }
-                }
-                showResults();
-            });
-
-            resetBtn.addEventListener('click', resetQuiz);
-            
-            loadQuiz();
         });
     </script>
 </body>
