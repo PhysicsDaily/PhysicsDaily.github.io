@@ -1,4 +1,4 @@
-// scripts/main.js
+// mechanics/shared/mechanics-scripts.js
 
 document.addEventListener('DOMContentLoaded', function() {
     const lightModeBtn = document.getElementById('light-mode');
