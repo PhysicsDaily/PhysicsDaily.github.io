@@ -9,490 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <meta name="google-site-verification" content="Ymi0Tv40FP7rKnVowfeCm69EwVaihVBHo5qp8xstwu0" />
-    <style>
-        :root {
-            --primary-color: #2563eb;
-            --primary-dark: #1d4ed8;
-            --primary-light: #3b82f6;
-            --secondary-color: #64748b;
-            --accent-color: #06b6d4;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            
-            /* Light theme colors */
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --bg-tertiary: #f1f5f9;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --text-muted: #94a3b8;
-            --border-color: #e2e8f0;
-            --border-hover: #cbd5e1;
-            --card-bg: #ffffff;
-            --card-shadow: rgba(0, 0, 0, 0.1);
-            --header-bg: #ffffff;
-            
-            /* Gradients for light theme */
-            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-tertiary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --gradient-quaternary: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            --gradient-modern: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-            
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --border-radius: 12px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        [data-theme="dark"] {
-            /* Dark theme colors */
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-tertiary: #334155;
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
-            --border-hover: #475569;
-            --card-bg: #1e293b;
-            --card-shadow: rgba(0, 0, 0, 0.3);
-            --header-bg: #0f172a;
-            
-            /* Darker gradients for dark theme */
-            --gradient-primary: linear-gradient(135deg, #4338ca 0%, #6366f1 100%);
-            --gradient-secondary: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
-            --gradient-tertiary: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
-            --gradient-quaternary: linear-gradient(135deg, #059669 0%, #10b981 100%);
-            --gradient-modern: linear-gradient(135deg, #e11d48 0%, #be185d 100%);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background: var(--bg-primary);
-            min-height: 100vh;
-            transition: var(--transition);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        /* Dark Mode Toggle */
-        .theme-toggle {
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
-            z-index: 1000;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 50px;
-            padding: 0.5rem;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.05);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .theme-toggle button {
-            background: none;
-            border: none;
-            padding: 0.5rem;
-            border-radius: 50%;
-            cursor: pointer;
-            color: var(--text-secondary);
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .theme-toggle button:hover {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-        }
-
-        .theme-toggle button.active {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        /* Header Styles */
-        .header {
-            background: var(--header-bg);
-            border-bottom: 1px solid var(--border-color);
-            padding: 4rem 0 3rem;
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .header h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-        }
-
-        .header .subtitle {
-            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            font-weight: 500;
-        }
-
-        .header .description {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            line-height: 1.7;
-        }
-
-        .header .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            background: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: var(--border-radius);
-            font-weight: 500;
-            transition: var(--transition);
-            box-shadow: var(--shadow-sm);
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn-secondary {
-            background: var(--card-bg);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-
-        .btn-secondary:hover {
-            background: var(--bg-tertiary);
-            border-color: var(--border-hover);
-        }
-
-        /* Main Content */
-        .main-content {
-            padding: 4rem 0;
-            background: var(--bg-secondary);
-            transition: var(--transition);
-        }
-
-        .section {
-            margin-bottom: 4rem;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .topic-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .topic-card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            text-decoration: none;
-            color: var(--text-primary);
-            transition: var(--transition);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .topic-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-primary);
-            transition: var(--transition);
-        }
-
-        .topic-card.mechanics:before {
-            background: var(--gradient-primary);
-        }
-
-        .topic-card.thermodynamics:before {
-            background: var(--gradient-secondary);
-        }
-
-        .topic-card.electromagnetism:before {
-            background: var(--gradient-tertiary);
-        }
-
-        .topic-card.optics:before {
-            background: var(--gradient-quaternary);
-        }
-
-        .topic-card.modern:before {
-            background: var(--gradient-modern);
-        }
-
-        .topic-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--border-hover);
-        }
-
-        .topic-card:hover:before {
-            height: 6px;
-        }
-
-        .chapter-number {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--accent-color);
-            background: rgba(6, 182, 212, 0.1);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
-
-        .topic-card h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            color: var(--text-primary);
-        }
-
-        .topic-description {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .topic-chapters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .chapter-tag {
-            font-size: 0.75rem;
-            background: var(--bg-tertiary);
-            color: var(--text-muted);
-            padding: 0.25rem 0.5rem;
-            border-radius: 6px;
-            font-weight: 500;
-        }
-
-        /* Stats Section */
-        .stats-section {
-            margin: 4rem 0;
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 3rem 2rem;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        /* Hero Section */
-        .hero-section {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
-            color: white;
-            padding: 6rem 0;
-            margin-bottom: 4rem;
-            text-align: center;
-        }
-
-        .hero-section h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .hero-section p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 3rem 0;
-            background: var(--card-bg);
-            border-top: 1px solid var(--border-color);
-            margin-top: 4rem;
-        }
-
-        .footer p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: var(--primary-color);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 1rem;
-            }
-
-            .header {
-                padding: 2rem 0;
-            }
-
-            .theme-toggle {
-                top: 1rem;
-                right: 1rem;
-            }
-
-            .topic-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .topic-card {
-                padding: 1.5rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: fit-content;
-            }
-
-            .hero-section {
-                padding: 4rem 0;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for scroll reveal */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Dark mode transition */
-        * {
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
-    </style>
+    <link rel="stylesheet" href="styles/main.css">
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
 <script>
@@ -553,7 +70,7 @@
                         <span class="stat-label">Major Areas</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number">∞</span>
+                        <span class="stat-number">&infin;</span>
                         <span class="stat-label">Learning Opportunities</span>
                     </div>
                     <div class="stat-item">
@@ -589,7 +106,7 @@
                         </div>
                     </a>
 
-                    <a href="mechanics/rotation.html" class="topic-card mechanics">
+                    <a href="coming-soon.html" class="topic-card mechanics">
                         <div class="chapter-number">Chapters 8-10</div>
                         <h3>Rotational Motion</h3>
                         <p class="topic-description">
@@ -602,7 +119,7 @@
                         </div>
                     </a>
 
-                    <a href="mechanics/energy.html" class="topic-card mechanics">
+                    <a href="coming-soon.html" class="topic-card mechanics">
                         <div class="chapter-number">Chapters 11-14</div>
                         <h3>Energy & Gravitation</h3>
                         <p class="topic-description">
@@ -627,7 +144,7 @@
                     </p>
                 </div>
                 <div class="topic-grid">
-                    <a href="fluids/mechanics.html" class="topic-card thermodynamics">
+                    <a href="coming-soon.html" class="topic-card thermodynamics">
                         <div class="chapter-number">Chapters 15-17</div>
                         <h3>Fluid Mechanics & Oscillations</h3>
                         <p class="topic-description">
@@ -640,7 +157,7 @@
                         </div>
                     </a>
 
-                    <a href="waves/motion-sound.html" class="topic-card thermodynamics">
+                    <a href="coming-soon.html" class="topic-card thermodynamics">
                         <div class="chapter-number">Chapters 18-20</div>
                         <h3>Waves & Special Relativity</h3>
                         <p class="topic-description">
@@ -653,7 +170,7 @@
                         </div>
                     </a>
 
-                    <a href="thermodynamics/thermal.html" class="topic-card thermodynamics">
+                    <a href="coming-soon.html" class="topic-card thermodynamics">
                         <div class="chapter-number">Chapters 21-24</div>
                         <h3>Thermodynamics</h3>
                         <p class="topic-description">
@@ -678,7 +195,7 @@
                     </p>
                 </div>
                 <div class="topic-grid">
-                    <a href="electromagnetism/electrostatics.html" class="topic-card electromagnetism">
+                    <a href="coming-soon.html" class="topic-card electromagnetism">
                         <div class="chapter-number">Chapters 25-30</div>
                         <h3>Electrostatics</h3>
                         <p class="topic-description">
@@ -694,7 +211,7 @@
                         </div>
                     </a>
 
-                    <a href="electromagnetism/current-magnetism.html" class="topic-card electromagnetism">
+                    <a href="coming-soon.html" class="topic-card electromagnetism">
                         <div class="chapter-number">Chapters 31-36</div>
                         <h3>Current & Magnetism</h3>
                         <p class="topic-description">
@@ -710,7 +227,7 @@
                         </div>
                     </a>
 
-                    <a href="electromagnetism/ac-maxwell.html" class="topic-card electromagnetism">
+                    <a href="coming-soon.html" class="topic-card electromagnetism">
                         <div class="chapter-number">Chapters 37-39</div>
                         <h3>AC Circuits & Light</h3>
                         <p class="topic-description">
@@ -734,7 +251,7 @@
                     </p>
                 </div>
                 <div class="topic-grid">
-                    <a href="optics/geometric.html" class="topic-card optics">
+                    <a href="coming-soon.html" class="topic-card optics">
                         <div class="chapter-number">Chapters 40-42</div>
                         <h3>Geometric Optics</h3>
                         <p class="topic-description">
@@ -747,7 +264,7 @@
                         </div>
                     </a>
 
-                    <a href="optics/wave-properties.html" class="topic-card optics">
+                    <a href="coming-soon.html" class="topic-card optics">
                         <div class="chapter-number">Chapters 43-45</div>
                         <h3>Wave Properties of Light</h3>
                         <p class="topic-description">
@@ -771,7 +288,7 @@
                     </p>
                 </div>
                 <div class="topic-grid">
-                    <a href="modern/quantum-atomic.html" class="topic-card modern">
+                    <a href="coming-soon.html" class="topic-card modern">
                         <div class="chapter-number">Chapters 46-49</div>
                         <h3>Quantum & Atomic Physics</h3>
                         <p class="topic-description">
@@ -785,7 +302,7 @@
                         </div>
                     </a>
 
-                    <a href="modern/nuclear-particle.html" class="topic-card modern">
+                    <a href="coming-soon.html" class="topic-card modern">
                         <div class="chapter-number">Chapters 50-52</div>
                         <h3>Nuclear & Particle Physics</h3>
                         <p class="topic-description">
@@ -806,73 +323,13 @@
     <div class="container">
         <div class="footer-links">
             <a href="about.html">About</a>
-            <a href="contribute.html">Contribute</a>
+            <a href="coming-soon.html">Contribute</a>
             <a href="resources.html">Resources</a>
             <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io">GitHub</a>
         </div>
         <p>&copy; Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
     </div>
 </footer>
-    <script>
-        // Dark mode functionality
-        const lightModeBtn = document.getElementById('light-mode');
-        const darkModeBtn = document.getElementById('dark-mode');
-        const body = document.body;
-
-        // Check for saved theme preference or default to light mode
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        
-        if (currentTheme === 'dark') {
-            body.setAttribute('data-theme', 'dark');
-            lightModeBtn.classList.remove('active');
-            darkModeBtn.classList.add('active');
-        }
-
-        lightModeBtn.addEventListener('click', () => {
-            body.removeAttribute('data-theme');
-            localStorage.setItem('theme', 'light');
-            lightModeBtn.classList.add('active');
-            darkModeBtn.classList.remove('active');
-        });
-
-        darkModeBtn.addEventListener('click', () => {
-            body.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-            lightModeBtn.classList.remove('active');
-            darkModeBtn.classList.add('active');
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Scroll reveal animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
+    <script src="scripts/main.js"></script>
 </body>
 </html>
