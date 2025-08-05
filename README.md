@@ -1,5 +1,4 @@
 # Physics Daily
-hi
 
 🔬 **Your comprehensive physics notes and study resources**
 
