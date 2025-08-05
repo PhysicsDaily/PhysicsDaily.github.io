@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: "Physics Daily" }}</title>
+    <meta name="description" content="{{ page.description | default: 'Comprehensive physics notes and study resources.' }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="google-site-verification" content="Ymi0Tv40FP7rKnVowfeCm69EwVaihVBHo5qp8xstwu0" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XN081SR2KP');
+    </script>
+</head>
+<body>
+    {%- include header.html -%}
+    <main>
+        {{ content }}
+    </main>
+    {%- include footer.html -%}
+    <script src="/assets/js/main.js"></script>
+</body>
+</html>
