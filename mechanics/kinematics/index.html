@@ -478,6 +478,193 @@
             color: var(--text-secondary);
         }
 
+        /* Simulation Styles */
+        .simulation-container {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .simulation-wrapper {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .simulation-container h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .simulation-container canvas {
+            display: block;
+            margin: 0 auto 20px auto;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: #f8fafc;
+            max-width: 100%;
+            height: auto;
+        }
+
+        [data-theme="dark"] .simulation-container canvas {
+            background: #1e293b;
+        }
+
+        .simulation-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            align-items: center;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .control-group label {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .control-group input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--bg-tertiary);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .control-group input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .control-group input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .result-display {
+            background: var(--accent-color);
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 600;
+            grid-column: 1 / -1;
+        }
+
+        .simulation-explanation {
+            background: var(--highlight-box);
+            border-left: 4px solid var(--accent-color);
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        [data-theme="dark"] .simulation-explanation {
+            background: linear-gradient(135deg, #164e63, #0c4a6e);
+        }
+
+        /* Displacement Simulation Styles */
+        .displacement-simulation {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .displacement-canvas-container {
+            position: relative;
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .displacement-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .info-item {
+            background: var(--bg-tertiary);
+            padding: 8px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .info-label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* Reset and Help Buttons */
+        .simulation-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .sim-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .sim-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .sim-btn.secondary {
+            background: var(--secondary-color);
+        }
+
+        .sim-btn.secondary:hover {
+            background: #475569;
+        }
+
         @media (max-width: 768px) {
             .theme-toggle {
                 top: 80px;
@@ -491,6 +678,25 @@
 
             .nav-links {
                 display: none;
+            }
+
+            .simulation-container canvas {
+                width: 100%;
+                height: auto;
+            }
+
+            .simulation-controls {
+                grid-template-columns: 1fr;
+            }
+
+            .displacement-info {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .displacement-info {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -630,6 +836,116 @@
             </div>
 
             <div class="section">
+                <h2>2.1.1 Interactive Vector Operations</h2>
+                
+                <div class="beginner-note">
+                    <h4>🔰 Learning by Doing:</h4>
+                    <p>The best way to understand vectors is to manipulate them! Use the interactive simulations below to explore how vectors behave. Drag, resize, and combine vectors to see the mathematical operations come to life.</p>
+                </div>
+
+                <p>Vector operations form the foundation of physics. In one dimension, these operations are simplified but still demonstrate the essential principles you'll use throughout your physics journey.</p>
+
+                <h3>Vector Addition in 1D</h3>
+                <p>When adding vectors in the same line, simply add their magnitudes if they point in the same direction, or subtract if they point in opposite directions.</p>
+
+                <div class="simulation-container">
+                    <h4>🎯 Interactive Vector Addition</h4>
+                    <div class="simulation-wrapper">
+                        <canvas id="vectorAdditionCanvas" width="800" height="300"></canvas>
+                        <div class="simulation-controls">
+                            <div class="control-group">
+                                <label for="vectorA">Vector A:</label>
+                                <input type="range" id="vectorA" min="-100" max="100" value="60" step="5">
+                                <span id="vectorAValue">60</span> units
+                            </div>
+                            <div class="control-group">
+                                <label for="vectorB">Vector B:</label>
+                                <input type="range" id="vectorB" min="-100" max="100" value="40" step="5">
+                                <span id="vectorBValue">40</span> units
+                            </div>
+                            <div class="result-display">
+                                <strong>Resultant Vector: </strong><span id="resultantValue">100</span> units
+                            </div>
+                        </div>
+                    </div>
+                    <div class="simulation-explanation">
+                        <p><strong>Instructions:</strong> Adjust the sliders to change vector magnitudes. Positive values point right, negative values point left. Watch how the resultant vector changes!</p>
+                    </div>
+                </div>
+
+                <h3>Vector Subtraction in 1D</h3>
+                <p>Vector subtraction is equivalent to adding the negative of a vector. This operation is crucial for finding displacement and relative velocity.</p>
+
+                <div class="simulation-container">
+                    <h4>🎯 Interactive Vector Subtraction</h4>
+                    <div class="simulation-wrapper">
+                        <canvas id="vectorSubtractionCanvas" width="800" height="300"></canvas>
+                        <div class="simulation-controls">
+                            <div class="control-group">
+                                <label for="vectorC">Vector C:</label>
+                                <input type="range" id="vectorC" min="-100" max="100" value="80" step="5">
+                                <span id="vectorCValue">80</span> units
+                            </div>
+                            <div class="control-group">
+                                <label for="vectorD">Vector D:</label>
+                                <input type="range" id="vectorD" min="-100" max="100" value="30" step="5">
+                                <span id="vectorDValue">30</span> units
+                            </div>
+                            <div class="result-display">
+                                <strong>C - D = </strong><span id="subtractionResult">50</span> units
+                            </div>
+                        </div>
+                    </div>
+                    <div class="simulation-explanation">
+                        <p><strong>Key Concept:</strong> C - D = C + (-D). Notice how subtracting vector D is the same as adding vector -D (D flipped in direction).</p>
+                    </div>
+                </div>
+
+                <h3>Scalar Multiplication</h3>
+                <p>Multiplying a vector by a scalar changes its magnitude and can reverse its direction if the scalar is negative.</p>
+
+                <div class="simulation-container">
+                    <h4>🎯 Interactive Scalar Multiplication</h4>
+                    <div class="simulation-wrapper">
+                        <canvas id="scalarMultiplicationCanvas" width="800" height="300"></canvas>
+                        <div class="simulation-controls">
+                            <div class="control-group">
+                                <label for="baseVector">Base Vector:</label>
+                                <input type="range" id="baseVector" min="-50" max="50" value="30" step="5">
+                                <span id="baseVectorValue">30</span> units
+                            </div>
+                            <div class="control-group">
+                                <label for="scalarValue">Scalar Multiplier:</label>
+                                <input type="range" id="scalarValue" min="-3" max="3" value="1.5" step="0.1">
+                                <span id="scalarDisplay">1.5</span>
+                            </div>
+                            <div class="result-display">
+                                <strong>Result: </strong><span id="scalarResult">45</span> units
+                            </div>
+                        </div>
+                    </div>
+                    <div class="simulation-explanation">
+                        <p><strong>Observe:</strong> Positive scalars preserve direction while changing magnitude. Negative scalars reverse direction. Zero scalar gives zero vector.</p>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h4>📝 Real-World Vector Applications:</h4>
+                    <ul>
+                        <li><strong>Walking:</strong> If you walk 3 blocks east, then 2 blocks west, your displacement is 1 block east (3 + (-2) = 1)</li>
+                        <li><strong>Driving:</strong> Speed limit signs show scalar values, but velocity includes direction</li>
+                        <li><strong>Elevators:</strong> Going up 5 floors then down 3 floors results in net displacement of 2 floors up</li>
+                        <li><strong>Bank Account:</strong> Deposits (+) and withdrawals (-) are like vector addition</li>
+                    </ul>
+                </div>
+
+                <div class="advanced-note">
+                    <h4>🎓 Mathematical Foundation:</h4>
+                    <p>These 1D vector operations extend naturally to 2D and 3D. In higher dimensions, vectors have components, but the same principles apply. Understanding 1D vectors builds intuition for more complex vector spaces in advanced physics and engineering.</p>
+                </div>
+            </div>
+
+            <div class="section">
                 <h2>2.2 Position, Displacement, and Distance</h2>
                 
                 <div class="beginner-note">
@@ -693,6 +1009,40 @@
                     <p><strong>Final displacement:</strong> Δ<span class="math">x</span> = 20 km - 0 km = +20 km east</p>
                     <p><strong>Total distance:</strong> 50 km + 30 km + 60 km = 140 km</p>
                     <p><strong>Interpretation:</strong> The car ends 20 km east of its starting point, but traveled 140 km total.</p>
+                </div>
+
+                <div class="displacement-simulation">
+                    <h4>🎯 Interactive Displacement Demonstration</h4>
+                    <div class="beginner-note">
+                        <p><strong>Try it yourself!</strong> Drag the ball along the number line to see how displacement and distance differ. Watch the path trace to visualize your journey!</p>
+                    </div>
+                    
+                    <div class="displacement-canvas-container">
+                        <canvas id="displacementCanvas" width="800" height="400"></canvas>
+                        <div class="displacement-info">
+                            <div class="info-item">
+                                <span class="info-label">Start Position</span>
+                                <span class="info-value" id="startPos">0.0 m</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Current Position</span>
+                                <span class="info-value" id="currentPos">0.0 m</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Displacement</span>
+                                <span class="info-value" id="displacement">0.0 m</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Total Distance</span>
+                                <span class="info-value" id="totalDistance">0.0 m</span>
+                            </div>
+                        </div>
+                        <div class="simulation-buttons">
+                            <button class="sim-btn" id="resetDisplacement">Reset Position</button>
+                            <button class="sim-btn secondary" id="clearPath">Clear Path</button>
+                            <button class="sim-btn secondary" id="showHelp">Instructions</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="advanced-note">
@@ -987,6 +1337,55 @@
                     <p>Total time = 2(<span class="math">v₀/g</span>) = 2(20/9.8) ≈ 4.08 seconds</p>
                 </div>
 
+                <div class="simulation-container">
+                    <h4>🎯 Interactive Free Fall Simulation</h4>
+                    <div class="beginner-note">
+                        <p><strong>Experiment with gravity!</strong> Drop objects from different heights, throw them upward, or toggle air resistance to see how it affects motion. Watch the velocity vectors change in real-time!</p>
+                    </div>
+                    
+                    <div class="simulation-wrapper">
+                        <canvas id="freeFallCanvas" width="800" height="500"></canvas>
+                        <div class="simulation-controls">
+                            <div class="control-group">
+                                <label for="initialHeight">Initial Height:</label>
+                                <input type="range" id="initialHeight" min="10" max="200" value="100" step="5">
+                                <span id="heightValue">100</span> m
+                            </div>
+                            <div class="control-group">
+                                <label for="initialVelocity">Initial Velocity:</label>
+                                <input type="range" id="initialVelocity" min="-50" max="50" value="0" step="2">
+                                <span id="velocityValue">0</span> m/s
+                            </div>
+                            <div class="control-group">
+                                <label for="airResistance">Air Resistance:</label>
+                                <input type="checkbox" id="airResistance">
+                                <span>Include air resistance</span>
+                            </div>
+                            <div class="control-group">
+                                <label for="objectType">Object Type:</label>
+                                <select id="objectType">
+                                    <option value="ball">Ball</option>
+                                    <option value="feather">Feather</option>
+                                    <option value="rock">Rock</option>
+                                    <option value="paper">Paper</option>
+                                </select>
+                            </div>
+                            <div class="simulation-buttons">
+                                <button class="sim-btn" id="dropObject">Drop Object</button>
+                                <button class="sim-btn" id="throwObject">Throw Object</button>
+                                <button class="sim-btn secondary" id="resetFreeFall">Reset</button>
+                            </div>
+                            <div class="result-display">
+                                <strong>Time of Flight: </strong><span id="flightTime">--</span> s | 
+                                <strong>Impact Velocity: </strong><span id="impactVelocity">--</span> m/s
+                            </div>
+                        </div>
+                    </div>
+                    <div class="simulation-explanation">
+                        <p><strong>Physics Notes:</strong> Without air resistance, all objects fall at the same rate (9.8 m/s²). With air resistance, lighter objects and those with larger surface areas are affected more. Positive initial velocity means throwing upward.</p>
+                    </div>
+                </div>
+
                 <h3>Important Free Fall Insights</h3>
                 <div class="highlight-box">
                     <h4>Key Concepts:</h4>
@@ -1103,6 +1502,870 @@
             darkThemeBtn.addEventListener('click', () => {
                 applyTheme('dark');
             });
+        });
+
+        // Physics Simulations JavaScript
+        class PhysicsSimulations {
+            constructor() {
+                this.initVectorSimulations();
+                this.initDisplacementSimulation();
+                this.initFreeFallSimulation();
+            }
+
+            // Vector Addition Simulation
+            initVectorSimulations() {
+                // Vector Addition
+                const additionCanvas = document.getElementById('vectorAdditionCanvas');
+                if (additionCanvas) {
+                    const ctx = additionCanvas.getContext('2d');
+                    const vectorASlider = document.getElementById('vectorA');
+                    const vectorBSlider = document.getElementById('vectorB');
+                    const vectorAValue = document.getElementById('vectorAValue');
+                    const vectorBValue = document.getElementById('vectorBValue');
+                    const resultantValue = document.getElementById('resultantValue');
+
+                    const drawVectorAddition = () => {
+                        const vectorA = parseInt(vectorASlider.value);
+                        const vectorB = parseInt(vectorBSlider.value);
+                        const resultant = vectorA + vectorB;
+
+                        vectorAValue.textContent = vectorA;
+                        vectorBValue.textContent = vectorB;
+                        resultantValue.textContent = resultant;
+
+                        ctx.clearRect(0, 0, additionCanvas.width, additionCanvas.height);
+                        
+                        // Set up coordinate system
+                        const centerY = additionCanvas.height / 2;
+                        const scale = 3;
+                        const originX = additionCanvas.width / 2;
+
+                        // Draw coordinate system
+                        ctx.strokeStyle = '#e2e8f0';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(0, centerY);
+                        ctx.lineTo(additionCanvas.width, centerY);
+                        ctx.stroke();
+
+                        // Draw tick marks and labels
+                        ctx.fillStyle = '#64748b';
+                        ctx.font = '12px Inter';
+                        ctx.textAlign = 'center';
+                        for (let i = -100; i <= 100; i += 20) {
+                            const x = originX + i * scale;
+                            if (x >= 0 && x <= additionCanvas.width) {
+                                ctx.beginPath();
+                                ctx.moveTo(x, centerY - 5);
+                                ctx.lineTo(x, centerY + 5);
+                                ctx.stroke();
+                                if (i !== 0) {
+                                    ctx.fillText(i.toString(), x, centerY + 20);
+                                }
+                            }
+                        }
+
+                        // Draw origin
+                        ctx.fillStyle = '#1e293b';
+                        ctx.fillText('0', originX, centerY + 20);
+
+                        // Draw Vector A
+                        if (vectorA !== 0) {
+                            this.drawVector(ctx, originX, centerY - 40, vectorA * scale, '#3b82f6', 'A');
+                        }
+
+                        // Draw Vector B (starting from end of A)
+                        if (vectorB !== 0) {
+                            const startX = originX + vectorA * scale;
+                            this.drawVector(ctx, startX, centerY, vectorB * scale, '#ef4444', 'B');
+                        }
+
+                        // Draw Resultant Vector
+                        if (resultant !== 0) {
+                            this.drawVector(ctx, originX, centerY + 40, resultant * scale, '#10b981', 'A + B');
+                        }
+
+                        // Add environmental context
+                        this.drawEnvironmentalElements(ctx, additionCanvas.width, additionCanvas.height);
+                    };
+
+                    vectorASlider.addEventListener('input', drawVectorAddition);
+                    vectorBSlider.addEventListener('input', drawVectorAddition);
+                    drawVectorAddition();
+                }
+
+                // Vector Subtraction
+                const subtractionCanvas = document.getElementById('vectorSubtractionCanvas');
+                if (subtractionCanvas) {
+                    const ctx = subtractionCanvas.getContext('2d');
+                    const vectorCSlider = document.getElementById('vectorC');
+                    const vectorDSlider = document.getElementById('vectorD');
+                    const vectorCValue = document.getElementById('vectorCValue');
+                    const vectorDValue = document.getElementById('vectorDValue');
+                    const subtractionResult = document.getElementById('subtractionResult');
+
+                    const drawVectorSubtraction = () => {
+                        const vectorC = parseInt(vectorCSlider.value);
+                        const vectorD = parseInt(vectorDSlider.value);
+                        const result = vectorC - vectorD;
+
+                        vectorCValue.textContent = vectorC;
+                        vectorDValue.textContent = vectorD;
+                        subtractionResult.textContent = result;
+
+                        ctx.clearRect(0, 0, subtractionCanvas.width, subtractionCanvas.height);
+                        
+                        const centerY = subtractionCanvas.height / 2;
+                        const scale = 3;
+                        const originX = subtractionCanvas.width / 2;
+
+                        // Draw coordinate system
+                        this.drawCoordinateSystem(ctx, subtractionCanvas.width, subtractionCanvas.height);
+
+                        // Draw Vector C
+                        if (vectorC !== 0) {
+                            this.drawVector(ctx, originX, centerY - 60, vectorC * scale, '#3b82f6', 'C');
+                        }
+
+                        // Draw Vector -D
+                        if (vectorD !== 0) {
+                            this.drawVector(ctx, originX, centerY - 20, -vectorD * scale, '#f59e0b', '-D');
+                        }
+
+                        // Draw Vector D (for reference)
+                        if (vectorD !== 0) {
+                            this.drawVector(ctx, originX, centerY + 20, vectorD * scale, '#ef4444', 'D', true);
+                        }
+
+                        // Draw Result
+                        if (result !== 0) {
+                            this.drawVector(ctx, originX, centerY + 60, result * scale, '#10b981', 'C - D');
+                        }
+
+                        this.drawEnvironmentalElements(ctx, subtractionCanvas.width, subtractionCanvas.height);
+                    };
+
+                    vectorCSlider.addEventListener('input', drawVectorSubtraction);
+                    vectorDSlider.addEventListener('input', drawVectorSubtraction);
+                    drawVectorSubtraction();
+                }
+
+                // Scalar Multiplication
+                const scalarCanvas = document.getElementById('scalarMultiplicationCanvas');
+                if (scalarCanvas) {
+                    const ctx = scalarCanvas.getContext('2d');
+                    const baseVectorSlider = document.getElementById('baseVector');
+                    const scalarSlider = document.getElementById('scalarValue');
+                    const baseVectorValue = document.getElementById('baseVectorValue');
+                    const scalarDisplay = document.getElementById('scalarDisplay');
+                    const scalarResult = document.getElementById('scalarResult');
+
+                    const drawScalarMultiplication = () => {
+                        const baseVector = parseInt(baseVectorSlider.value);
+                        const scalar = parseFloat(scalarSlider.value);
+                        const result = baseVector * scalar;
+
+                        baseVectorValue.textContent = baseVector;
+                        scalarDisplay.textContent = scalar.toFixed(1);
+                        scalarResult.textContent = result.toFixed(1);
+
+                        ctx.clearRect(0, 0, scalarCanvas.width, scalarCanvas.height);
+                        
+                        const centerY = scalarCanvas.height / 2;
+                        const scale = 6;
+                        const originX = scalarCanvas.width / 2;
+
+                        this.drawCoordinateSystem(ctx, scalarCanvas.width, scalarCanvas.height);
+
+                        // Draw Base Vector
+                        if (baseVector !== 0) {
+                            this.drawVector(ctx, originX, centerY - 40, baseVector * scale, '#3b82f6', 'Base Vector');
+                        }
+
+                        // Draw Result Vector
+                        if (result !== 0) {
+                            this.drawVector(ctx, originX, centerY + 40, result * scale, '#10b981', `${scalar.toFixed(1)} × Base`);
+                        }
+
+                        // Draw scalar value indicator
+                        ctx.fillStyle = '#7c3aed';
+                        ctx.font = '16px Inter';
+                        ctx.textAlign = 'center';
+                        ctx.fillText(`Scalar: ${scalar.toFixed(1)}`, originX, 30);
+
+                        this.drawEnvironmentalElements(ctx, scalarCanvas.width, scalarCanvas.height);
+                    };
+
+                    baseVectorSlider.addEventListener('input', drawScalarMultiplication);
+                    scalarSlider.addEventListener('input', drawScalarMultiplication);
+                    drawScalarMultiplication();
+                }
+            }
+
+            // Helper function to draw vectors
+            drawVector(ctx, startX, startY, length, color, label, dashed = false) {
+                if (length === 0) return;
+
+                const endX = startX + length;
+                const arrowSize = 8;
+                
+                ctx.strokeStyle = color;
+                ctx.fillStyle = color;
+                ctx.lineWidth = 3;
+
+                if (dashed) {
+                    ctx.setLineDash([5, 5]);
+                } else {
+                    ctx.setLineDash([]);
+                }
+
+                // Draw line
+                ctx.beginPath();
+                ctx.moveTo(startX, startY);
+                ctx.lineTo(endX, startY);
+                ctx.stroke();
+
+                // Draw arrowhead
+                const direction = length > 0 ? 1 : -1;
+                ctx.beginPath();
+                ctx.moveTo(endX, startY);
+                ctx.lineTo(endX - arrowSize * direction, startY - arrowSize/2);
+                ctx.lineTo(endX - arrowSize * direction, startY + arrowSize/2);
+                ctx.closePath();
+                ctx.fill();
+
+                // Draw label
+                ctx.fillStyle = color;
+                ctx.font = '14px Inter';
+                ctx.textAlign = 'center';
+                ctx.fillText(label, (startX + endX) / 2, startY - 10);
+
+                ctx.setLineDash([]);
+            }
+
+            // Helper function to draw coordinate system
+            drawCoordinateSystem(ctx, width, height) {
+                const centerY = height / 2;
+                const originX = width / 2;
+                const scale = 3;
+
+                ctx.strokeStyle = '#e2e8f0';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(0, centerY);
+                ctx.lineTo(width, centerY);
+                ctx.stroke();
+
+                // Draw tick marks
+                ctx.fillStyle = '#64748b';
+                ctx.font = '12px Inter';
+                ctx.textAlign = 'center';
+                for (let i = -100; i <= 100; i += 20) {
+                    const x = originX + i * scale;
+                    if (x >= 0 && x <= width) {
+                        ctx.beginPath();
+                        ctx.moveTo(x, centerY - 5);
+                        ctx.lineTo(x, centerY + 5);
+                        ctx.stroke();
+                        if (i !== 0 && i % 40 === 0) {
+                            ctx.fillText(i.toString(), x, centerY + 20);
+                        }
+                    }
+                }
+
+                ctx.fillText('0', originX, centerY + 20);
+            }
+
+            // Add environmental elements for context
+            drawEnvironmentalElements(ctx, width, height) {
+                // Draw ground
+                ctx.fillStyle = '#22c55e';
+                ctx.fillRect(0, height - 20, width, 20);
+
+                // Draw simple buildings
+                ctx.fillStyle = '#64748b';
+                ctx.fillRect(50, height - 60, 40, 40);
+                ctx.fillRect(width - 90, height - 80, 40, 60);
+
+                // Draw trees
+                ctx.fillStyle = '#16a34a';
+                ctx.beginPath();
+                ctx.arc(150, height - 35, 15, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = '#a3a3a3';
+                ctx.fillRect(147, height - 35, 6, 15);
+            }
+
+            // Displacement Simulation
+            initDisplacementSimulation() {
+                const canvas = document.getElementById('displacementCanvas');
+                if (!canvas) return;
+
+                const ctx = canvas.getContext('2d');
+                let ball = { x: 400, y: 200, radius: 15, dragging: false };
+                let startPosition = 400;
+                let pathPoints = [];
+                let totalDistance = 0;
+
+                const scale = 2; // pixels per meter
+                const originX = 400; // center of canvas
+
+                // UI elements
+                const startPosElement = document.getElementById('startPos');
+                const currentPosElement = document.getElementById('currentPos');
+                const displacementElement = document.getElementById('displacement');
+                const totalDistanceElement = document.getElementById('totalDistance');
+
+                const resetBtn = document.getElementById('resetDisplacement');
+                const clearPathBtn = document.getElementById('clearPath');
+                const showHelpBtn = document.getElementById('showHelp');
+
+                const updateDisplay = () => {
+                    const currentPos = (ball.x - originX) / scale;
+                    const startPos = (startPosition - originX) / scale;
+                    const displacement = currentPos - startPos;
+
+                    startPosElement.textContent = startPos.toFixed(1) + ' m';
+                    currentPosElement.textContent = currentPos.toFixed(1) + ' m';
+                    displacementElement.textContent = displacement.toFixed(1) + ' m';
+                    totalDistanceElement.textContent = (totalDistance / scale).toFixed(1) + ' m';
+                };
+
+                const draw = () => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    // Draw environment
+                    this.drawDisplacementEnvironment(ctx, canvas.width, canvas.height);
+
+                    // Draw number line
+                    ctx.strokeStyle = '#1e293b';
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.moveTo(50, 300);
+                    ctx.lineTo(canvas.width - 50, 300);
+                    ctx.stroke();
+
+                    // Draw tick marks and numbers
+                    ctx.fillStyle = '#1e293b';
+                    ctx.font = '14px Inter';
+                    ctx.textAlign = 'center';
+                    
+                    for (let i = -150; i <= 150; i += 25) {
+                        const x = originX + i * scale;
+                        if (x >= 50 && x <= canvas.width - 50) {
+                            ctx.beginPath();
+                            ctx.moveTo(x, 295);
+                            ctx.lineTo(x, 305);
+                            ctx.stroke();
+                            ctx.fillText((i).toString() + 'm', x, 320);
+                        }
+                    }
+
+                    // Draw path
+                    if (pathPoints.length > 1) {
+                        ctx.strokeStyle = '#ef4444';
+                        ctx.lineWidth = 2;
+                        ctx.beginPath();
+                        ctx.moveTo(pathPoints[0].x, pathPoints[0].y);
+                        for (let i = 1; i < pathPoints.length; i++) {
+                            ctx.lineTo(pathPoints[i].x, pathPoints[i].y);
+                        }
+                        ctx.stroke();
+                    }
+
+                    // Draw start position marker
+                    ctx.fillStyle = '#10b981';
+                    ctx.beginPath();
+                    ctx.arc(startPosition, 300, 8, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#1e293b';
+                    ctx.font = '12px Inter';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('START', startPosition, 280);
+
+                    // Draw ball
+                    const gradient = ctx.createRadialGradient(ball.x - 5, ball.y - 5, 0, ball.x, ball.y, ball.radius);
+                    gradient.addColorStop(0, '#fbbf24');
+                    gradient.addColorStop(1, '#f59e0b');
+                    
+                    ctx.fillStyle = gradient;
+                    ctx.beginPath();
+                    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    ctx.strokeStyle = '#d97706';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+
+                    // Draw displacement arrow
+                    const displacement = ball.x - startPosition;
+                    if (Math.abs(displacement) > 5) {
+                        this.drawDisplacementArrow(ctx, startPosition, ball.x, 250);
+                    }
+                };
+
+                // Mouse/touch event handlers
+                const getEventPos = (e) => {
+                    const rect = canvas.getBoundingClientRect();
+                    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+                    const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+                    return {
+                        x: clientX - rect.left,
+                        y: clientY - rect.top
+                    };
+                };
+
+                const isPointInBall = (x, y) => {
+                    const dx = x - ball.x;
+                    const dy = y - ball.y;
+                    return Math.sqrt(dx * dx + dy * dy) <= ball.radius;
+                };
+
+                const startDrag = (e) => {
+                    const pos = getEventPos(e);
+                    if (isPointInBall(pos.x, pos.y)) {
+                        ball.dragging = true;
+                        pathPoints = [{ x: ball.x, y: ball.y }];
+                        canvas.style.cursor = 'grabbing';
+                    }
+                };
+
+                const drag = (e) => {
+                    if (!ball.dragging) return;
+                    
+                    const pos = getEventPos(e);
+                    const prevX = ball.x;
+                    
+                    // Constrain ball to number line (horizontal movement only)
+                    ball.x = Math.max(65, Math.min(canvas.width - 65, pos.x));
+                    
+                    // Add to path and calculate distance
+                    pathPoints.push({ x: ball.x, y: ball.y });
+                    totalDistance += Math.abs(ball.x - prevX);
+                    
+                    updateDisplay();
+                    draw();
+                };
+
+                const endDrag = () => {
+                    if (ball.dragging) {
+                        ball.dragging = false;
+                        canvas.style.cursor = 'default';
+                    }
+                };
+
+                // Event listeners
+                canvas.addEventListener('mousedown', startDrag);
+                canvas.addEventListener('mousemove', drag);
+                canvas.addEventListener('mouseup', endDrag);
+                canvas.addEventListener('mouseleave', endDrag);
+
+                // Touch events
+                canvas.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    startDrag(e);
+                });
+                canvas.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+                    drag(e);
+                });
+                canvas.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    endDrag();
+                });
+
+                // Button event listeners
+                resetBtn.addEventListener('click', () => {
+                    ball.x = startPosition;
+                    ball.y = 200;
+                    pathPoints = [];
+                    totalDistance = 0;
+                    updateDisplay();
+                    draw();
+                });
+
+                clearPathBtn.addEventListener('click', () => {
+                    pathPoints = [];
+                    totalDistance = 0;
+                    updateDisplay();
+                    draw();
+                });
+
+                showHelpBtn.addEventListener('click', () => {
+                    alert('Instructions:\n\n1. Drag the yellow ball along the number line\n2. Watch how displacement and distance change\n3. Displacement = final position - start position\n4. Distance = total path length traveled\n5. Use Reset to return ball to start\n6. Use Clear Path to remove the red trail');
+                });
+
+                // Initialize
+                updateDisplay();
+                draw();
+            }
+
+            drawDisplacementEnvironment(ctx, width, height) {
+                // Sky
+                const skyGradient = ctx.createLinearGradient(0, 0, 0, height * 0.6);
+                skyGradient.addColorStop(0, '#87ceeb');
+                skyGradient.addColorStop(1, '#e0f6ff');
+                ctx.fillStyle = skyGradient;
+                ctx.fillRect(0, 0, width, height * 0.6);
+
+                // Ground
+                ctx.fillStyle = '#22c55e';
+                ctx.fillRect(0, height * 0.8, width, height * 0.2);
+
+                // Buildings
+                ctx.fillStyle = '#64748b';
+                ctx.fillRect(100, height * 0.4, 60, height * 0.4);
+                ctx.fillRect(width - 160, height * 0.3, 80, height * 0.5);
+
+                // Trees
+                ctx.fillStyle = '#16a34a';
+                ctx.beginPath();
+                ctx.arc(250, height * 0.7, 25, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(width - 250, height * 0.7, 25, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Tree trunks
+                ctx.fillStyle = '#a3a3a3';
+                ctx.fillRect(247, height * 0.7, 6, height * 0.1);
+                ctx.fillRect(width - 253, height * 0.7, 6, height * 0.1);
+            }
+
+            drawDisplacementArrow(ctx, startX, endX, y) {
+                const arrowSize = 10;
+                ctx.strokeStyle = '#7c3aed';
+                ctx.fillStyle = '#7c3aed';
+                ctx.lineWidth = 3;
+
+                // Arrow line
+                ctx.beginPath();
+                ctx.moveTo(startX, y);
+                ctx.lineTo(endX, y);
+                ctx.stroke();
+
+                // Arrowhead
+                const direction = endX > startX ? 1 : -1;
+                ctx.beginPath();
+                ctx.moveTo(endX, y);
+                ctx.lineTo(endX - arrowSize * direction, y - arrowSize/2);
+                ctx.lineTo(endX - arrowSize * direction, y + arrowSize/2);
+                ctx.closePath();
+                ctx.fill();
+
+                // Label
+                ctx.fillStyle = '#7c3aed';
+                ctx.font = '14px Inter';
+                ctx.textAlign = 'center';
+                const displacement = Math.abs(endX - startX) / 2; // Convert to meters
+                ctx.fillText(`Displacement: ${(displacement).toFixed(1)}m`, (startX + endX) / 2, y - 15);
+            }
+
+            // Free Fall Simulation
+            initFreeFallSimulation() {
+                const canvas = document.getElementById('freeFallCanvas');
+                if (!canvas) return;
+
+                const ctx = canvas.getContext('2d');
+                
+                let simulation = {
+                    active: false,
+                    object: null,
+                    trails: [],
+                    startTime: 0,
+                    g: 9.8, // acceleration due to gravity
+                    airResistanceCoeff: 0.1
+                };
+
+                const heightSlider = document.getElementById('initialHeight');
+                const velocitySlider = document.getElementById('initialVelocity');
+                const airResistanceCheck = document.getElementById('airResistance');
+                const objectTypeSelect = document.getElementById('objectType');
+                
+                const heightValue = document.getElementById('heightValue');
+                const velocityValue = document.getElementById('velocityValue');
+                const flightTimeDisplay = document.getElementById('flightTime');
+                const impactVelocityDisplay = document.getElementById('impactVelocity');
+
+                const dropBtn = document.getElementById('dropObject');
+                const throwBtn = document.getElementById('throwObject');
+                const resetBtn = document.getElementById('resetFreeFall');
+
+                // Object properties
+                const objectTypes = {
+                    ball: { mass: 0.5, dragCoeff: 0.47, radius: 8, color: '#f59e0b' },
+                    feather: { mass: 0.01, dragCoeff: 1.3, radius: 6, color: '#e5e7eb' },
+                    rock: { mass: 2.0, dragCoeff: 0.5, radius: 10, color: '#64748b' },
+                    paper: { mass: 0.02, dragCoeff: 1.1, radius: 7, color: '#f3f4f6' }
+                };
+
+                const updateValues = () => {
+                    heightValue.textContent = heightSlider.value;
+                    velocityValue.textContent = velocitySlider.value;
+                };
+
+                const resetSimulation = () => {
+                    simulation.active = false;
+                    simulation.object = null;
+                    simulation.trails = [];
+                    flightTimeDisplay.textContent = '--';
+                    impactVelocityDisplay.textContent = '--';
+                    draw();
+                };
+
+                const startSimulation = (initialVelocity) => {
+                    const objectType = objectTypes[objectTypeSelect.value];
+                    const height = parseFloat(heightSlider.value);
+                    const vel = parseFloat(initialVelocity);
+
+                    simulation.object = {
+                        x: canvas.width / 2,
+                        y: canvas.height - 50 - height * 2, // Scale height
+                        vx: 0,
+                        vy: vel, // Positive is upward
+                        ...objectType,
+                        initialHeight: height,
+                        initialVelocity: vel
+                    };
+
+                    simulation.trails = [];
+                    simulation.active = true;
+                    simulation.startTime = Date.now();
+                    
+                    animate();
+                };
+
+                const animate = () => {
+                    if (!simulation.active) return;
+
+                    const dt = 0.016; // 60 FPS
+                    const obj = simulation.object;
+
+                    // Physics calculations
+                    let ay = -simulation.g; // Gravity (downward)
+
+                    if (airResistanceCheck.checked) {
+                        // Air resistance force: F = 0.5 * density * dragCoeff * area * velocity^2
+                        const airDensity = 1.225; // kg/m³
+                        const area = Math.PI * (obj.radius / 100) * (obj.radius / 100); // Convert to m²
+                        const speed = Math.sqrt(obj.vx * obj.vx + obj.vy * obj.vy);
+                        
+                        if (speed > 0) {
+                            const dragForce = 0.5 * airDensity * obj.dragCoeff * area * speed * speed;
+                            const dragAccel = dragForce / obj.mass;
+                            
+                            // Apply drag opposite to velocity direction
+                            const dragX = -dragAccel * (obj.vx / speed);
+                            const dragY = -dragAccel * (obj.vy / speed);
+                            
+                            obj.vx += dragX * dt;
+                            ay += dragY;
+                        }
+                    }
+
+                    // Update velocity and position
+                    obj.vy += ay * dt;
+                    obj.x += obj.vx * dt * 10; // Scale for visualization
+                    obj.y += obj.vy * dt * 10; // Scale for visualization
+
+                    // Add to trail
+                    simulation.trails.push({ x: obj.x, y: obj.y });
+                    if (simulation.trails.length > 100) {
+                        simulation.trails.shift();
+                    }
+
+                    // Check for ground collision
+                    if (obj.y >= canvas.height - 50) {
+                        simulation.active = false;
+                        const flightTime = (Date.now() - simulation.startTime) / 1000;
+                        const impactVelocity = Math.abs(obj.vy);
+                        
+                        flightTimeDisplay.textContent = flightTime.toFixed(2);
+                        impactVelocityDisplay.textContent = impactVelocity.toFixed(1);
+                        
+                        obj.y = canvas.height - 50; // Place on ground
+                    }
+
+                    draw();
+
+                    if (simulation.active) {
+                        requestAnimationFrame(animate);
+                    }
+                };
+
+                const draw = () => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    // Draw environment
+                    this.drawFreeFallEnvironment(ctx, canvas.width, canvas.height);
+
+                    // Draw trail
+                    if (simulation.trails.length > 1) {
+                        ctx.strokeStyle = '#ef4444';
+                        ctx.lineWidth = 2;
+                        ctx.setLineDash([3, 3]);
+                        ctx.beginPath();
+                        ctx.moveTo(simulation.trails[0].x, simulation.trails[0].y);
+                        for (let i = 1; i < simulation.trails.length; i++) {
+                            ctx.lineTo(simulation.trails[i].x, simulation.trails[i].y);
+                        }
+                        ctx.stroke();
+                        ctx.setLineDash([]);
+                    }
+
+                    // Draw object
+                    if (simulation.object) {
+                        const obj = simulation.object;
+                        
+                        // Object
+                        ctx.fillStyle = obj.color;
+                        ctx.beginPath();
+                        ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.strokeStyle = '#1e293b';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+
+                        // Velocity vector
+                        if (simulation.active) {
+                            const velocityScale = 2;
+                            const vx = obj.vx * velocityScale;
+                            const vy = obj.vy * velocityScale;
+                            
+                            if (Math.sqrt(vx * vx + vy * vy) > 5) {
+                                ctx.strokeStyle = '#7c3aed';
+                                ctx.lineWidth = 3;
+                                ctx.beginPath();
+                                ctx.moveTo(obj.x, obj.y);
+                                ctx.lineTo(obj.x + vx, obj.y + vy);
+                                ctx.stroke();
+
+                                // Arrowhead
+                                const angle = Math.atan2(vy, vx);
+                                const arrowSize = 8;
+                                ctx.fillStyle = '#7c3aed';
+                                ctx.beginPath();
+                                ctx.moveTo(obj.x + vx, obj.y + vy);
+                                ctx.lineTo(obj.x + vx - arrowSize * Math.cos(angle - Math.PI/6), 
+                                          obj.y + vy - arrowSize * Math.sin(angle - Math.PI/6));
+                                ctx.lineTo(obj.x + vx - arrowSize * Math.cos(angle + Math.PI/6), 
+                                          obj.y + vy - arrowSize * Math.sin(angle + Math.PI/6));
+                                ctx.closePath();
+                                ctx.fill();
+                            }
+                        }
+                    } else {
+                        // Draw initial position marker
+                        const height = parseFloat(heightSlider.value);
+                        const startY = canvas.height - 50 - height * 2;
+                        const objectType = objectTypes[objectTypeSelect.value];
+                        
+                        ctx.fillStyle = objectType.color;
+                        ctx.strokeStyle = '#1e293b';
+                        ctx.lineWidth = 2;
+                        ctx.setLineDash([5, 5]);
+                        ctx.beginPath();
+                        ctx.arc(canvas.width / 2, startY, objectType.radius, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.stroke();
+                        ctx.setLineDash([]);
+                    }
+                };
+
+                // Event listeners
+                heightSlider.addEventListener('input', () => {
+                    updateValues();
+                    if (!simulation.active) draw();
+                });
+                
+                velocitySlider.addEventListener('input', () => {
+                    updateValues();
+                    if (!simulation.active) draw();
+                });
+
+                objectTypeSelect.addEventListener('change', () => {
+                    if (!simulation.active) draw();
+                });
+
+                dropBtn.addEventListener('click', () => {
+                    resetSimulation();
+                    startSimulation(0);
+                });
+
+                throwBtn.addEventListener('click', () => {
+                    resetSimulation();
+                    startSimulation(parseFloat(velocitySlider.value));
+                });
+
+                resetBtn.addEventListener('click', resetSimulation);
+
+                // Initialize
+                updateValues();
+                draw();
+            }
+
+            drawFreeFallEnvironment(ctx, width, height) {
+                // Sky gradient
+                const skyGradient = ctx.createLinearGradient(0, 0, 0, height * 0.7);
+                skyGradient.addColorStop(0, '#87ceeb');
+                skyGradient.addColorStop(1, '#e0f6ff');
+                ctx.fillStyle = skyGradient;
+                ctx.fillRect(0, 0, width, height * 0.9);
+
+                // Ground
+                ctx.fillStyle = '#22c55e';
+                ctx.fillRect(0, height - 50, width, 50);
+
+                // Buildings for scale
+                ctx.fillStyle = '#64748b';
+                ctx.fillRect(50, height - 150, 40, 100);
+                ctx.fillRect(width - 90, height - 200, 50, 150);
+
+                // Trees
+                ctx.fillStyle = '#16a34a';
+                ctx.beginPath();
+                ctx.arc(150, height - 75, 20, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(width - 150, height - 75, 20, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Tree trunks
+                ctx.fillStyle = '#a3a3a3';
+                ctx.fillRect(147, height - 75, 6, 25);
+                ctx.fillRect(width - 153, height - 75, 6, 25);
+
+                // Height scale
+                ctx.strokeStyle = '#64748b';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([3, 3]);
+                ctx.beginPath();
+                ctx.moveTo(30, height - 50);
+                ctx.lineTo(30, 50);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Height markers
+                ctx.fillStyle = '#64748b';
+                ctx.font = '12px Inter';
+                ctx.textAlign = 'right';
+                for (let h = 0; h <= 200; h += 50) {
+                    const y = height - 50 - h * 2;
+                    ctx.beginPath();
+                    ctx.moveTo(25, y);
+                    ctx.lineTo(35, y);
+                    ctx.stroke();
+                    if (h > 0) {
+                        ctx.fillText(h + 'm', 20, y + 4);
+                    }
+                }
+            }
+        }
+
+        // Initialize simulations when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new PhysicsSimulations();
         });
     </script>
 </body>
