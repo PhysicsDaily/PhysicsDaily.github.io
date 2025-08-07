@@ -478,6 +478,26 @@
             color: var(--text-secondary);
         }
 
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            margin-top: 1.5rem;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
         @media (max-width: 768px) {
             .theme-toggle {
                 top: 80px;
@@ -518,7 +538,6 @@
         </div>
     </nav>
 
-    <!-- Vertical theme toggle -->
     <div class="theme-toggle">
         <button id="light-theme" title="Light Theme">☀️</button>
         <button id="dark-theme" title="Dark Theme">🌙</button>
@@ -1032,6 +1051,14 @@
                         <summary>Answer</summary>
                         <p>The area under a velocity-time graph gives displacement because displacement is the integral of velocity over time: Δ<span class="math">x</span> = ∫<span class="math">v</span> d<span class="math">t</span>. Graphically, this integral represents the area between the curve and the time axis. Similarly, the area under an acceleration-time graph gives the change in velocity: Δ<span class="math">v</span> = ∫<span class="math">a</span> d<span class="math">t</span>. This relationship comes from the fundamental theorem of calculus connecting derivatives and integrals.</p>
                     </details>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🎥 Video Summary: The Language of Motion</h2>
+                <p>Watch this comprehensive video to review the key concepts of one-dimensional kinematics, from scalars and vectors to the kinematic equations and free fall. A perfect way to solidify your understanding before tackling the practice problems!</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/ed3pvgV-aPw" title="The Explainer: The Language of Motion" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
