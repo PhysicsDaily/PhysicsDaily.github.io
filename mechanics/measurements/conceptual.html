@@ -8,310 +8,40 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../../assets/css/global.css">
+
     <style>
-        :root {
-            --primary-color: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary-color: #64748b;
-            --accent-color: #06b6d4;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
-            --text-primary: #1e293b;
-            --text-secondary: #475569;
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --card-bg: #ffffff;
-            --border-color: #e2e8f0;
-            --border-hover: #cbd5e1;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            --border-radius: 12px;
-            --transition: all 0.2s ease;
-        }
-
-        [data-theme="dark"] {
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --card-bg: #334155;
-            --border-color: #475569;
-            --border-hover: #64748b;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background-color: var(--bg-primary);
-            transition: all 0.3s ease;
-        }
-
-        /* Math and equation styling */
-        .math {
-            font-family: 'JetBrains Mono', monospace;
-            font-style: italic;
-            font-weight: 500;
-        }
-
-        .equation {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.1em;
-            font-weight: 500;
-            background: var(--bg-secondary);
-            padding: 0.2em 0.4em;
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .nav {
-            background: var(--card-bg);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .breadcrumb {
-            background: var(--bg-secondary);
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .breadcrumb a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        .breadcrumb a:hover {
-            color: var(--primary-color);
-        }
-
-        .separator {
-            margin: 0 0.5rem;
-            color: var(--text-secondary);
-        }
-
-        .current {
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
-        .header {
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            opacity: 0.9;
-        }
-
-        .description {
-            font-size: 1.1rem;
-            opacity: 0.8;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .main-content {
-            padding: 2rem 0;
-        }
-
-        /* Vertical theme toggle styling */
-        .theme-toggle {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            z-index: 1000;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 25px;
-            padding: 8px;
-            box-shadow: var(--shadow-lg);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .theme-toggle button {
-            background: none;
-            border: none;
-            padding: 12px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 18px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            color: var(--text-secondary);
-        }
-
-        .theme-toggle button:hover {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            transform: scale(1.05);
-        }
-
-        .theme-toggle button.active {
-            background: var(--primary-color);
-            color: white;
-            transform: scale(1.1);
-            box-shadow: var(--shadow-md);
-        }
-
-        .theme-toggle button.active:hover {
-            background: var(--primary-dark);
-        }
-
-        .section {
-            margin: 32px 0;
-            padding: 24px;
-            border-radius: 12px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-        }
-
         .section h2 {
             color: var(--primary-color);
             margin-bottom: 1rem;
             font-size: 1.8rem;
-            font-weight: 600;
         }
-
         .question {
             margin: 20px 0;
             padding: 16px;
             border-left: 4px solid var(--primary-color);
-            background: var(--card-bg);
+            background: var(--bg-secondary);
             border-radius: 8px;
-            box-shadow: var(--shadow-sm);
         }
-
         .question strong {
-            color: var(--primary-color);
             font-weight: 600;
         }
-
-        .question p {
-            margin: 0.5rem 0;
-            color: var(--text-secondary);
-        }
-
         details {
             border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: .5em .5em 0;
             margin-top: 1em;
-            background: var(--bg-secondary);
+            background: var(--card-bg);
         }
-
         summary {
             font-weight: bold;
             margin: -.5em -.5em 0;
             padding: .5em;
             cursor: pointer;
-            color: var(--text-primary);
-            transition: color 0.2s ease;
-        }
-
-        summary:hover {
-            color: var(--primary-color);
-        }
-
-        details[open] summary {
-            color: var(--primary-color);
-        }
-
-        details p {
-            padding: 0.5rem 0;
-            line-height: 1.6;
-        }
-
-        .footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: 2rem 0;
-            text-align: center;
-            color: var(--text-secondary);
-        }
-
-        @media (max-width: 768px) {
-            .theme-toggle {
-                top: 80px;
-                right: 10px;
-                scale: 0.85;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
         }
     </style>
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -335,10 +65,9 @@
         </div>
     </nav>
 
-    <!-- Vertical theme toggle -->
     <div class="theme-toggle">
-        <button id="light-theme" title="Light Theme">☀️</button>
-        <button id="dark-theme" title="Dark Theme">🌙</button>
+        <button id="light-mode-btn" title="Light Theme">☀️</button>
+        <button id="dark-mode-btn" title="Dark Theme">🌙</button>
     </div>
 
     <div class="breadcrumb">
@@ -379,162 +108,6 @@
                 </div>
 
                 <div class="question">
-                    <strong>2.</strong> Why did the SI system transition from physical artifacts (like the prototype kilogram) to fundamental constants in 2019? What advantages does this provide?
-                    <details>
-                        <summary>Answer</summary>
-                        <p>The transition provides several advantages: <strong>Universal accessibility</strong> (no need to compare with a physical object in Paris), <strong>Ultimate stability</strong> (fundamental constants don't change or degrade like physical artifacts), and <strong>Improved precision</strong> for future technologies. It makes the SI system truly universal and future-proof.</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>3.</strong> Explain why dimensional analysis can determine the functional form of physical relationships but cannot determine numerical constants. Give an example.
-                    <details>
-                        <summary>Answer</summary>
-                        <p>Dimensional analysis works by ensuring dimensional consistency, which constrains the powers of variables but not dimensionless constants. For example, for a pendulum, dimensional analysis correctly finds that the period <span class="equation">T ∝ √(l/g)</span>. However, it cannot determine the constant of proportionality, which is <span class="equation">2π</span>. This constant must be found through experiment or more advanced mathematical derivation.</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>4.</strong> Can an equation be dimensionally correct but still be physically wrong? Provide a detailed example and explanation.
-                    <details>
-                        <summary>Answer</summary>
-                        <p>Yes. Dimensional consistency is necessary but not sufficient. Example: For kinetic energy, both <span class="equation">K = mv²</span> and <span class="equation">K = ½mv²</span> are dimensionally correct (<span class="equation">[ML²T⁻²]</span>). However, only the second formula is physically correct. Dimensional analysis can't find the error in the first formula because the missing factor (<span class="equation">1/2</span>) is dimensionless.</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>5.</strong> The equation for viscous drag is <span class="equation">F = 6πηrv</span>. If someone proposes the formula <span class="equation">F = 6πr²v</span>, how could you use dimensional analysis to immediately spot a problem?
-                    <details>
-                        <summary>Answer</summary>
-                        <p>You would check the dimensions. The dimension of force <span class="math">F</span> is <span class="equation">[MLT⁻²]</span>. The dimension of viscosity <span class="math">η</span> is <span class="equation">[ML⁻¹T⁻¹]</span>.
-                        <br>Proposed formula: <span class="equation">[r²v] = [L²][LT⁻¹] = [L³T⁻¹]</span>. This is incorrect.
-                        <br>Correct formula: <span class="equation">[ηrv] = [ML⁻¹T⁻¹][L][LT⁻¹] = [MLT⁻²]</span>. This matches the dimensions of force. The proposed formula is dimensionally inconsistent.</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>6.</strong> Explain the difference between accuracy and precision in measurement. How do systematic and random errors affect each?
-                    <details>
-                        <summary>Answer</summary>
-                        <p><strong>Accuracy</strong> refers to how close measurements are to the true value. <strong>Precision</strong> refers to how close repeated measurements are to each other.
-                        <br><strong>Systematic errors</strong> (e.g., a miscalibrated scale) affect accuracy, causing all measurements to be consistently off-target.
-                        <br><strong>Random errors</strong> (e.g., fluctuations in reading a scale) affect precision, causing measurements to be scattered.</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>7.</strong> Why must arguments of transcendental functions (like sin, cos, ln, exp) be dimensionless?
-                    <details>
-                        <summary>Answer</summary>
-                        <p>These functions are defined by their infinite series expansions (e.g., <span class="equation">eˣ = 1 + x + x²/2! + ...</span>). For the sum to be valid, every term must have the same dimension. If <span class="math">x</span> had a dimension (e.g., length [L]), then the terms would have dimensions of [1], [L], [L²], etc., which cannot be added. Therefore, the argument <span class="math">x</span> must be dimensionless.</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>8.</strong> When calculating the area of a circle (<span class="equation">A = πr²</span>), which measurement contributes more to the percentage error in the area: the radius <span class="math">r</span> or the value of <span class="math">π</span>?
-                    <details>
-                        <summary>Answer</summary>
-                        <p>The measurement of the radius <span class="math">r</span> is the sole contributor to the error. The value of <span class="math">π</span> is a defined mathematical constant, not a measured quantity, and is considered to have infinite precision (it's an exact number). The error propagation formula <span class="equation">ΔA/A = 2(Δr/r)</span> shows that the relative error in area is twice the relative error in the radius measurement.</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>9.</strong> Why is it important to distinguish between precision and accuracy when evaluating experimental results?
-                    <details>
-                        <summary>Answer</summary>
-                        <p>This distinction helps identify the source of measurement problems. <strong>High precision with low accuracy</strong> suggests a systematic error that needs to be found and corrected. <strong>Low precision</strong> suggests significant random error, which might be improved by using a better instrument or refining the measurement technique (e.g., taking more data points and averaging).</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>10.</strong> Explain the reasoning behind the different rules for significant figures in addition/subtraction versus multiplication/division.
-                    <details>
-                        <summary>Answer</summary>
-                        <p>In <strong>addition/subtraction</strong>, the uncertainty is determined by the absolute position of the last significant digit (the decimal place). The result cannot be more precise than the least precise number (e.g., adding a value known to the thousandths place to one only known to the tenths place is limited by the tenths place).
-                        In <strong>multiplication/division</strong>, the uncertainty is determined by the relative error, which is related to the number of significant figures. The result's relative uncertainty is limited by the number with the largest relative uncertainty (i.e., the fewest significant figures).</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>11.</strong> A student reports a measurement as <span class="equation">1200 m</span>. Why is this ambiguous regarding precision? How can the student remove this ambiguity?
-                    <details>
-                        <summary>Answer</summary>
-                        <p>It is ambiguous because we don't know if the trailing zeros are placeholders or are actually measured significant digits. It could mean 2, 3, or 4 significant figures. The ambiguity is removed by using scientific notation:
-                        <br>• <span class="equation">1.2 × 10³ m</span> (2 significant figures)
-                        <br>• <span class="equation">1.20 × 10³ m</span> (3 significant figures)
-                        <br>• <span class="equation">1.200 × 10³ m</span> (4 significant figures)</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>12.</strong> When do you add absolute errors, and when do you add relative (or percentage) errors during error propagation?
-                    <details>
-                        <summary>Answer</summary>
-                        <p>You add <strong>absolute errors</strong> when the quantities are being added or subtracted. For example, if <span class="equation">Z = A + B</span>, then <span class="equation">ΔZ = ΔA + ΔB</span>.
-                        <br>You add <strong>relative errors</strong> when the quantities are being multiplied or divided. For example, if <span class="equation">Z = A × B</span>, then <span class="equation">ΔZ/Z = ΔA/A + ΔB/B</span>.</p>
-                    </details>
-                </div>
-
-                 <div class="question">
-                    <strong>13.</strong> Which quantity is generally a better indicator of the quality of a measurement: absolute error or relative error? Why?
-                    <details>
-                        <summary>Answer</summary>
-                        <p><strong>Relative error</strong> is generally a better indicator. An absolute error of 1 cm is very large when measuring the width of a book (e.g., 20 cm), but it is exceptionally small when measuring the distance to the moon. Relative error puts the error into context by comparing it to the magnitude of the measurement itself, providing a better assessment of its quality.</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>14.</strong> If a derived quantity <span class="math">Z</span> is proportional to the cube of a measured quantity <span class="math">A</span> (i.e., <span class="equation">Z = kA³</span>), why does a small percentage error in <span class="math">A</span> lead to a much larger percentage error in <span class="math">Z</span>?
-                    <details>
-                        <summary>Answer</summary>
-                        <p>This is due to the power rule of error propagation: <span class="equation">ΔZ/Z = 3(ΔA/A)</span>. The percentage error in <span class="math">Z</span> is three times the percentage error in <span class="math">A</span>. The cubic relationship amplifies the effect of the initial measurement error. For example, a 2% error in measuring the radius of a sphere leads to a ~6% error in calculating its volume.</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>15.</strong> Can the relative error of a measurement be greater than 1 (or percentage error > 100%)? If so, what does this signify?
-                    <details>
-                        <summary>Answer</summary>
-                        <p>Yes, it is possible. It signifies an extremely poor measurement where the uncertainty (<span class="math">ΔA</span>) is larger than the measured value itself (<span class="math">A</span>). For example, a result of <span class="equation">(2 ± 3) cm</span> has a relative error of 1.5. This means the "true" value is so uncertain it could even be negative (which may be unphysical), and the measurement provides very little useful information.</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>16.</strong> Two quantities, Planck's constant (<span class="math">h</span>) and the speed of light (<span class="math">c</span>), are considered fundamental constants. Are they fundamental quantities in the dimensional sense?
-                    <details>
-                        <summary>Answer</summary>
-                        <p>No. While they are fundamental constants of nature, they are not fundamental quantities in the dimensional sense. Their dimensions are derived from the seven base SI quantities (Mass, Length, Time, etc.).
-                        <br>• Dimension of <span class="math">h</span> is <span class="equation">[ML²T⁻¹]</span>.
-                        <br>• Dimension of <span class="math">c</span> is <span class="equation">[LT⁻¹]</span>.
-                        The fundamental quantities are the base dimensions themselves ([M], [L], [T], etc.).</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>17.</strong> You measure the length of a table twice. First with a meter stick marked in millimeters, and second with a laser interferometer. Which measurement will likely have more significant figures? Which will have a smaller percentage error?
-                    <details>
-                        <summary>Answer</summary>
-                        <p>The laser interferometer measurement will have more significant figures and a smaller percentage error. The precision of the measuring instrument determines the number of significant figures you can confidently report. The laser, being a much more precise instrument, can resolve smaller length increments, leading to more significant figures and a smaller uncertainty (<span class="math">ΔL</span>), which in turn leads to a smaller percentage error (<span class="math">ΔL/L</span>).</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>18.</strong> Why can't dimensional analysis be used to derive the formula <span class="equation">v = u + at</span>?
-                    <details>
-                        <summary>Answer</summary>
-                        <p>Dimensional analysis fails for formulas involving sums or differences. The method works by assuming a product relationship like <span class="equation">v = k × uᵃ × aᵇ × tᶜ</span>. While it can confirm that all terms in <span class="equation">v = u + at</span> have the same dimensions ([LT⁻¹]), it cannot generate a formula that is a sum of terms. This is one of its key limitations.</p>
-                    </details>
-                </div>
-
-                <div class="question">
-                    <strong>19.</strong> A fellow student claims that if an experiment is performed very carefully, it is possible to completely eliminate all errors. Is this claim correct? Explain.
-                    <details>
-                        <summary>Answer</summary>
-                        <p>No, this claim is incorrect. While systematic errors can theoretically be identified and eliminated, random errors are inherent in any measurement process. There will always be limitations in the measuring instrument (its least count) and unavoidable random fluctuations in the environment or the observer's perception. Therefore, every measurement has some degree of uncertainty that can be minimized but never completely eliminated.</p>
-                    </details>
-                </div>
-
-                <div class="question">
                     <strong>20.</strong> Two students measure the same resistance. Student A reports <span class="equation">(100 ± 10) Ω</span>. Student B reports <span class="equation">(105 ± 1) Ω</span>. If the true value is <span class="equation">106 Ω</span>, which student was more precise? Which was more accurate?
                     <details>
                         <summary>Answer</summary>
@@ -552,38 +125,6 @@
         </div>
     </footer>
 
-    <script>
-        // Complete theme toggle functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const lightThemeBtn = document.getElementById('light-theme');
-            const darkThemeBtn = document.getElementById('dark-theme');
-            const docElement = document.documentElement;
-
-            const applyTheme = (theme) => {
-                docElement.setAttribute('data-theme', theme);
-                if (theme === 'dark') {
-                    darkThemeBtn.classList.add('active');
-                    lightThemeBtn.classList.remove('active');
-                } else {
-                    lightThemeBtn.classList.add('active');
-                    darkThemeBtn.classList.remove('active');
-                }
-                localStorage.setItem('theme', theme);
-            };
-
-            // Check for saved theme preference or default to 'light'
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            applyTheme(savedTheme);
-
-            // Event listeners for theme buttons
-            lightThemeBtn.addEventListener('click', () => {
-                applyTheme('light');
-            });
-
-            darkThemeBtn.addEventListener('click', () => {
-                applyTheme('dark');
-            });
-        });
-    </script>
+    <script src="../../assets/js/global.js" defer></script>
 </body>
 </html>
