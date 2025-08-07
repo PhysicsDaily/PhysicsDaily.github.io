@@ -1,190 +1,272 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learning Resources - Physics Daily</title>
-    <meta name="description" content="Comprehensive collection of physics learning resources including textbooks, videos, lectures, and practice materials for all levels from beginner to advanced.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="assets/css/global.css">
-    
-    <style>
-        .main-content {
-            background: var(--bg-secondary);
-        }
-        .section-title {
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            font-weight: 600;
-            margin-bottom: 2rem;
-            position: relative;
-            padding-left: 1rem;
-        }
-        .section-title:before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: var(--primary-color);
-            border-radius: 2px;
-        }
-        .resource-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-        .resource-card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-        }
-        .resource-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-        .resource-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .resource-list {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            border: 1px solid var(--border-color);
-            margin-bottom: 2rem;
-        }
-        .resource-list h3 {
-            background: var(--bg-tertiary);
-            padding: 1rem 1.5rem;
-            font-size: 1.1rem;
-        }
-        .resource-list ul { list-style: none; }
-        .resource-list li { padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-color); }
-        .resource-list li:last-child { border-bottom: none; }
-        .highlight-box {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            margin: 2rem 0;
-            text-align: center;
-        }
-    </style>
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XN081SR2KP');
-    </script>
-</head>
-<body>
-    <div class="theme-toggle">
-        <button id="light-mode-btn" title="Light Mode">☀️</button>
-        <button id="dark-mode-btn" title="Dark Mode">🌙</button>
+---
+layout: page
+title: Learning Resources
+subtitle: Comprehensive collection of physics learning materials
+description: Physics textbooks, videos, lectures, and practice materials for all levels from beginner to advanced
+custom_css:
+  - "/assets/css/mcq-styles.css"
+---
+
+<!-- Physics Textbooks -->
+<section class="section">
+    <h2 class="section-title">📚 Recommended Textbooks</h2>
+    <div class="resource-grid">
+        <div class="resource-card">
+            <h3>University Physics</h3>
+            <p class="resource-author">by Freedman & Young</p>
+            <p class="resource-description">Comprehensive textbook covering all topics from classical mechanics to modern physics. Excellent for undergraduate students.</p>
+            <div class="resource-level">Level: Undergraduate</div>
+        </div>
+        
+        <div class="resource-card">
+            <h3>Fundamentals of Physics</h3>
+            <p class="resource-author">by Halliday, Resnick & Walker</p>
+            <p class="resource-description">Classic physics textbook with clear explanations and numerous practice problems.</p>
+            <div class="resource-level">Level: Undergraduate</div>
+        </div>
+        
+        <div class="resource-card">
+            <h3>Introduction to Electrodynamics</h3>
+            <p class="resource-author">by David J. Griffiths</p>
+            <p class="resource-description">Essential textbook for understanding electromagnetic theory at an advanced undergraduate level.</p>
+            <div class="resource-level">Level: Advanced Undergraduate</div>
+        </div>
+        
+        <div class="resource-card">
+            <h3>Principles of Physics</h3>
+            <p class="resource-author">by Serway & Jewett</p>
+            <p class="resource-description">Algebra-based physics textbook perfect for students beginning their physics journey.</p>
+            <div class="resource-level">Level: Introductory</div>
+        </div>
+        
+        <div class="resource-card">
+            <h3>Quantum Mechanics</h3>
+            <p class="resource-author">by David J. Griffiths</p>
+            <p class="resource-description">The standard introduction to quantum mechanics for advanced undergraduate and graduate students.</p>
+            <div class="resource-level">Level: Advanced Undergraduate/Graduate</div>
+        </div>
+        
+        <div class="resource-card">
+            <h3>Classical Mechanics</h3>
+            <p class="resource-author">by Herbert Goldstein</p>
+            <p class="resource-description">Advanced treatment of classical mechanics using Lagrangian and Hamiltonian formulations.</p>
+            <div class="resource-level">Level: Graduate</div>
+        </div>
     </div>
+</section>
 
-    <nav class="nav">
-        <div class="container">
-            <div class="nav-content">
-                <a href="index.html" class="nav-logo">Physics Daily</a>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="resources.html" class="active">Resources</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contribute.html">Contribute</a></li>
-                </ul>
-            </div>
+<!-- Online Resources -->
+<section class="section">
+    <h2 class="section-title">🌐 Online Learning Platforms</h2>
+    <div class="resource-grid">
+        <div class="resource-card">
+            <h3>Khan Academy Physics</h3>
+            <p class="resource-description">Free online courses covering basic to intermediate physics concepts with excellent video explanations.</p>
+            <a href="https://www.khanacademy.org/science/physics" class="resource-link" target="_blank">Visit Site</a>
+            <div class="resource-level">Level: Beginner to Intermediate</div>
         </div>
-    </nav>
-
-    <header class="header">
-        <div class="container">
-            <h1>Learning Resources</h1>
-            <p>Comprehensive collection of physics learning materials from beginner to advanced levels</p>
+        
+        <div class="resource-card">
+            <h3>MIT OpenCourseWare</h3>
+            <p class="resource-description">Complete physics courses from MIT including lecture notes, assignments, and exams.</p>
+            <a href="https://ocw.mit.edu/courses/physics/" class="resource-link" target="_blank">Visit Site</a>
+            <div class="resource-level">Level: Undergraduate/Graduate</div>
         </div>
-    </header>
-
-    <main class="main-content">
-        <div class="container">
-            <section class="section fade-in">
-                <div class="highlight-box">
-                    <h3>📚 Key Principle for Success</h3>
-                    <p>For each subject, choose <strong>one reliable resource</strong> from the lists below and rely mainly on that! Cohesive resources like a great textbook can help you avoid confusion and maintain a structured learning path.</p>
-                </div>
-            </section>
-
-            <section class="section fade-in">
-                <h2 class="section-title">🎯 Physics Beyond</h2>
-                <div class="resource-grid">
-                    <div class="resource-card">
-                        <h3>Kevin Zhou's Physics Guides</h3>
-                        <p>Comprehensive handouts and guides for advanced physics topics, written with exceptional clarity and depth.</p>
-                        <a href="https://knzhou.github.io/" class="resource-link" target="_blank">
-                            🌐 Visit Website
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section fade-in">
-                <h2 class="section-title">🎥 Video Resources</h2>
-                <div class="resource-grid">
-                     <div class="resource-card">
-                        <h3>Flipping Physics</h3>
-                        <p>A great website to utilize for AP Physics. Highly recommended for complete reliance. If you're confused about a unit, find that corresponding unit here!</p>
-                        <a href="https://www.flippingphysics.com/" class="resource-link" target="_blank">
-                            🎬 Watch Videos
-                        </a>
-                    </div>
-                    </div>
-            </section>
-
-            <section class="section fade-in">
-                <h2 class="section-title">📖 Textbook Recommendations</h2>
-                <div class="resource-list">
-                    <h3>Algebra-based Physics (AP Physics 1&2)</h3>
-                    <ul>
-                        <li><strong>Hewitt</strong> <span>- Conceptual Physics</span></li>
-                        </ul>
-                </div>
-                </section>
-
-            <section class="section fade-in">
-                <div class="highlight-box">
-                    <h3>🚀 Ready to Start Learning?</h3>
-                    <p>Choose your level and dive into our structured physics curriculum. Remember: consistency and choosing the right resources are key to mastering physics!</p>
-                    <br>
-                    <a href="index.html" class="btn" style="background: rgba(255,255,255,0.2); border: 1px solid white;">
-                        📚 Start Learning Physics
-                    </a>
-                </div>
-            </section>
+        
+        <div class="resource-card">
+            <h3>Coursera Physics Courses</h3>
+            <p class="resource-description">University-level physics courses from top institutions worldwide.</p>
+            <a href="https://www.coursera.org/browse/physical-science-and-engineering/physics-and-astronomy" class="resource-link" target="_blank">Visit Site</a>
+            <div class="resource-level">Level: Various</div>
         </div>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="contribute.html">Contribute</a>
-                <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io">GitHub</a>
-            </div>
-            <p>&copy; Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
+        
+        <div class="resource-card">
+            <h3>edX Physics</h3>
+            <p class="resource-description">Physics courses from Harvard, MIT, and other leading universities.</p>
+            <a href="https://www.edx.org/learn/physics" class="resource-link" target="_blank">Visit Site</a>
+            <div class="resource-level">Level: Various</div>
         </div>
-    </footer>
+    </div>
+</section>
 
-    <script src="assets/js/global.js" defer></script>
-</body>
-</html>
+<!-- Video Resources -->
+<section class="section">
+    <h2 class="section-title">🎥 Video Learning</h2>
+    <div class="resource-grid">
+        <div class="resource-card">
+            <h3>Physics with Professor Walter Lewin</h3>
+            <p class="resource-description">Legendary MIT physics lectures known for their clarity and engaging demonstrations.</p>
+            <div class="resource-level">Level: Undergraduate</div>
+        </div>
+        
+        <div class="resource-card">
+            <h3>MinutePhysics</h3>
+            <p class="resource-description">Short, animated videos explaining physics concepts in simple terms.</p>
+            <div class="resource-level">Level: General Audience</div>
+        </div>
+        
+        <div class="resource-card">
+            <h3>3Blue1Brown</h3>
+            <p class="resource-description">Mathematical concepts behind physics explained with beautiful visualizations.</p>
+            <div class="resource-level">Level: Intermediate to Advanced</div>
+        </div>
+        
+        <div class="resource-card">
+            <h3>Veritasium</h3>
+            <p class="resource-description">Physics concepts explored through engaging experiments and demonstrations.</p>
+            <div class="resource-level">Level: General Audience</div>
+        </div>
+    </div>
+</section>
+
+<!-- Practice Resources -->
+<section class="section">
+    <h2 class="section-title">🧮 Practice & Problem Solving</h2>
+    <div class="resource-grid">
+        <div class="resource-card">
+            <h3>Physics Classroom</h3>
+            <p class="resource-description">Interactive physics lessons with practice problems and simulations.</p>
+            <div class="resource-level">Level: High School</div>
+        </div>
+        
+        <div class="resource-card">
+            <h3>PhET Interactive Simulations</h3>
+            <p class="resource-description">Interactive physics simulations from the University of Colorado Boulder.</p>
+            <div class="resource-level">Level: Various</div>
+        </div>
+        
+        <div class="resource-card">
+            <h3>HyperPhysics</h3>
+            <p class="resource-description">Concept maps and explanations connecting different areas of physics.</p>
+            <div class="resource-level">Level: Undergraduate</div>
+        </div>
+        
+        <div class="resource-card">
+            <h3>Physics Problems Database</h3>
+            <p class="resource-description">Large collection of physics problems with step-by-step solutions.</p>
+            <div class="resource-level">Level: Various</div>
+        </div>
+    </div>
+</section>
+
+<!-- Tools and Software -->
+<section class="section">
+    <h2 class="section-title">🛠️ Physics Tools & Software</h2>
+    <div class="resource-grid">
+        <div class="resource-card">
+            <h3>Wolfram Alpha</h3>
+            <p class="resource-description">Computational engine for solving physics equations and visualizing concepts.</p>
+            <div class="resource-level">Level: All</div>
+        </div>
+        
+        <div class="resource-card">
+            <h3>MATLAB/Octave</h3>
+            <p class="resource-description">Programming environments for numerical physics calculations and simulations.</p>
+            <div class="resource-level">Level: Advanced</div>
+        </div>
+        
+        <div class="resource-card">
+            <h3>Python for Physics</h3>
+            <p class="resource-description">Programming language with excellent libraries for physics calculations and plotting.</p>
+            <div class="resource-level">Level: Intermediate to Advanced</div>
+        </div>
+        
+        <div class="resource-card">
+            <h3>LaTeX for Scientific Writing</h3>
+            <p class="resource-description">Document preparation system perfect for writing physics papers and equations.</p>
+            <div class="resource-level">Level: All</div>
+        </div>
+    </div>
+</section>
+
+<style>
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.resource-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.resource-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.resource-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.resource-author {
+    font-size: 0.9rem;
+    color: var(--accent-color);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    font-style: italic;
+}
+
+.resource-description {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.resource-link {
+    display: inline-block;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    transition: var(--transition);
+}
+
+.resource-link:hover {
+    text-decoration: underline;
+}
+
+.resource-level {
+    font-size: 0.8rem;
+    background: var(--bg-tertiary);
+    color: var(--text-muted);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.section-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-left: 1rem;
+    color: var(--text-primary);
+}
+
+.section-title:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--primary-color);
+    border-radius: 2px;
+}
+
+.section {
+    margin-bottom: 4rem;
+}
+</style>

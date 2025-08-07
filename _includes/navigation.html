@@ -1,0 +1,18 @@
+{% unless page.hide_navigation %}
+<nav class="nav">
+    <div class="container">
+        <div class="nav-content">
+            <a href="{{ '/' | relative_url }}" class="nav-logo">Physics Daily</a>
+            <ul class="nav-links">
+                {% for item in site.navigation %}
+                    <li>
+                        <a href="{{ item.url | relative_url }}"{% if page.url == item.url %} class="active"{% endif %}>
+                            {{ item.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endunless %}

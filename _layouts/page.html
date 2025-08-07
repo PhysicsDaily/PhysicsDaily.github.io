@@ -1,0 +1,32 @@
+---
+layout: default
+---
+
+{% include navigation.html %}
+
+<header class="header">
+    <div class="container">
+        <h1>{{ page.title | default: site.title }}</h1>
+        {% if page.subtitle %}
+            <p class="subtitle">{{ page.subtitle }}</p>
+        {% endif %}
+        {% if page.description %}
+            <p class="description">{{ page.description }}</p>
+        {% endif %}
+        {% if page.cta_buttons %}
+            <div class="cta-buttons">
+                {% for button in page.cta_buttons %}
+                    <a href="{{ button.url }}" class="btn{% if button.secondary %} btn-secondary{% endif %}">
+                        {{ button.text }}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</header>
+
+<main class="main-content">
+    <div class="container">
+        {{ content }}
+    </div>
+</main>

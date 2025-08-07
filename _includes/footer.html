@@ -1,0 +1,11 @@
+<footer class="footer">
+    <div class="container">
+        <div class="footer-links">
+            {% for item in site.navigation %}
+                <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+            {% endfor %}
+            <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io">GitHub</a>
+        </div>
+        <p>&copy; {{ site.title }}. Made with ❤️ for physics enthusiasts everywhere.</p>
+    </div>
+</footer>

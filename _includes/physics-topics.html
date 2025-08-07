@@ -1,0 +1,47 @@
+<!-- Statistics Section -->
+<section class="stats-section fade-in">
+    <div class="stats-grid">
+        <div class="stat-item">
+            <span class="stat-number">{{ site.stats.chapters }}</span>
+            <span class="stat-label">Chapters</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">{{ site.stats.areas }}</span>
+            <span class="stat-label">Major Areas</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">{{ site.stats.opportunities }}</span>
+            <span class="stat-label">Learning Opportunities</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">{{ site.stats.access }}</span>
+            <span class="stat-label">Free Access</span>
+        </div>
+    </div>
+</section>
+
+<!-- Physics Areas -->
+{% for area in site.physics_areas %}
+<section id="{% if forloop.first %}foundations{% endif %}" class="section fade-in">
+    <div class="section-header">
+        <h2 class="section-title">{{ area.title }}</h2>
+        <p class="section-subtitle">{{ area.description }}</p>
+    </div>
+    <div class="topic-grid">
+        {% for topic in area.topics %}
+            <a href="{{ topic.url | relative_url }}" class="topic-card {{ area.gradient | replace: 'gradient-', '' }}">
+                <div class="chapter-number">Chapters {{ topic.chapters }}</div>
+                <h3>{{ topic.title }}</h3>
+                <p class="topic-description">{{ topic.description }}</p>
+                {% if topic.chapter_list %}
+                    <div class="topic-chapters">
+                        {% for chapter in topic.chapter_list %}
+                            <span class="chapter-tag">{{ chapter }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </a>
+        {% endfor %}
+    </div>
+</section>
+{% endfor %}

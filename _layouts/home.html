@@ -1,0 +1,38 @@
+---
+layout: default
+---
+
+{% include navigation.html %}
+
+<header class="header">
+    <div class="container">
+        <h1>{{ site.title }}</h1>
+        <p class="subtitle">Advanced Physics Learning Platform</p>
+        <p class="description">
+            Master physics concepts from fundamentals to advanced topics with comprehensive notes, 
+            examples, and interactive content covering mechanics, thermodynamics, electromagnetism, optics, and modern physics.
+        </p>
+        <div class="cta-buttons">
+            <a href="#foundations" class="btn">
+                📚 Start Learning
+            </a>
+            <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io" class="btn btn-secondary">
+                ⭐ Star on GitHub
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <h2>Complete Physics Education</h2>
+        <p>Comprehensive coverage of 52 chapters with modern, interactive learning tools for advanced physics study.</p>
+    </div>
+</section>
+
+<main class="main-content">
+    <div class="container">
+        {{ content }}
+    </div>
+</main>

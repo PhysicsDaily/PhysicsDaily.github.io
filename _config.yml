@@ -1,0 +1,221 @@
+# Site settings
+title: Physics Daily
+email: support@physicsdaily.com
+description: >-
+  Comprehensive physics notes and study resources covering mechanics, 
+  thermodynamics, electromagnetism, optics, and modern physics. 
+  Interactive learning for advanced physics concepts.
+
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://physicsdaily.github.io" # the base hostname & protocol for your site
+twitter_username: physicsdaily
+github_username: PhysicsDaily
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+
+# Collections
+collections:
+  chapters:
+    output: true
+    permalink: /:collection/:name/
+
+# Sass configuration
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# Permalink structure
+permalink: pretty
+
+# Timezone
+timezone: UTC
+
+# Site data
+author:
+  name: Anjit Kandel
+  bio: Creator of Physics Daily
+  avatar: https://via.placeholder.com/150
+
+# Navigation
+navigation:
+  - title: Home
+    url: /
+  - title: Resources
+    url: /resources/
+  - title: About
+    url: /about/
+  - title: Contribute
+    url: /contribute/
+
+# Physics topics configuration
+physics_areas:
+  - title: Classical Mechanics
+    description: Foundations of physics - measurement, kinematics, dynamics, energy, momentum, and rotational motion
+    chapters: "1-14"
+    gradient: "gradient-primary"
+    topics:
+      - title: Foundations & Kinematics
+        chapters: "1-7"
+        url: /mechanics/foundations/
+        description: Measurement, motion in 1D/2D/3D, Newton's laws, applications, momentum, and particle systems
+        chapter_list:
+          - "Ch 1: Measurement"
+          - "Ch 2: Motion in One Dimension"
+          - "Ch 3: Force and Newton's Laws"
+          - "Ch 4: Motion in 2D & 3D"
+          - "Ch 5: Applications of Newton's Laws"
+          - "Ch 6: Momentum"
+          - "Ch 7: Systems of Particles"
+      - title: Rotational Motion
+        chapters: "8-10"  
+        url: /mechanics/rotation/
+        description: Rotational kinematics, dynamics, moment of inertia, torque, and angular momentum conservation
+        chapter_list:
+          - "Ch 8: Rotational Kinematics"
+          - "Ch 9: Rotational Dynamics"
+          - "Ch 10: Angular Momentum"
+      - title: Energy & Gravitation
+        chapters: "11-14"
+        url: /mechanics/energy/
+        description: Work-energy theorem, potential energy, conservation of energy, and universal gravitation
+        chapter_list:
+          - "Ch 11: Work and Kinetic Energy"
+          - "Ch 12: Potential Energy"
+          - "Ch 13: Energy Conservation"
+          - "Ch 14: Gravitation"
+
+  - title: Fluids, Waves & Thermodynamics
+    description: Fluid mechanics, oscillations, wave motion, sound, special relativity, and thermal physics
+    chapters: "15-24"
+    gradient: "gradient-secondary"
+    topics:
+      - title: Fluid Mechanics & Oscillations
+        chapters: "15-17"
+        url: /fluids/mechanics/
+        description: Fluid statics and dynamics, Bernoulli's equation, simple harmonic motion, and oscillating systems
+        chapter_list:
+          - "Ch 15: Fluid Statics"
+          - "Ch 16: Fluid Dynamics"
+          - "Ch 17: Oscillations"
+      - title: Waves & Special Relativity
+        chapters: "18-20"
+        url: /waves/motion-sound/
+        description: Wave motion, sound waves, Doppler effect, and Einstein's special theory of relativity
+        chapter_list:
+          - "Ch 18: Wave Motion"
+          - "Ch 19: Sound Waves"
+          - "Ch 20: Special Relativity"
+      - title: Thermodynamics
+        chapters: "21-24"
+        url: /thermodynamics/thermal/
+        description: Temperature, molecular properties of gases, first and second laws of thermodynamics, entropy
+        chapter_list:
+          - "Ch 21: Temperature"
+          - "Ch 22: Molecular Properties"
+          - "Ch 23: First Law"
+          - "Ch 24: Second Law & Entropy"
+
+  - title: Electricity & Magnetism
+    description: Electric fields, potential, capacitors, current, magnetic fields, induction, and AC circuits
+    chapters: "25-39"
+    gradient: "gradient-tertiary"
+    topics:
+      - title: Electrostatics
+        chapters: "25-30"
+        url: /electromagnetism/electrostatics/
+        description: Electric charge, electric field, Gauss's law, electric potential, capacitors, and dielectrics
+        chapter_list:
+          - "Ch 25: Electric Charge"
+          - "Ch 26: Electric Field"
+          - "Ch 27: Gauss's Law"
+          - "Ch 28: Electric Potential"
+          - "Ch 29: Electric Potential Energy"
+          - "Ch 30: Capacitors"
+      - title: Current & Magnetism
+        chapters: "31-36"
+        url: /electromagnetism/current-magnetism/
+        description: DC circuits, magnetic fields of currents, magnetic forces, electromagnetic induction, and inductance
+        chapter_list:
+          - "Ch 31: DC Circuits"
+          - "Ch 32: Magnetic Field"
+          - "Ch 33: Magnetic Field of Current"
+          - "Ch 34: Faraday's Law"
+          - "Ch 35: Magnetic Properties"
+          - "Ch 36: Inductance"
+      - title: AC Circuits & Light
+        chapters: "37-39"
+        url: /electromagnetism/ac-maxwell/
+        description: Alternating current circuits, Maxwell's equations, electromagnetic waves, and the nature of light
+        chapter_list:
+          - "Ch 37: AC Circuits"
+          - "Ch 38: Maxwell's Equations"
+          - "Ch 39: Light Waves"
+
+  - title: Optics
+    description: Geometric optics, wave optics, interference, diffraction, and polarization
+    chapters: "40-45"
+    gradient: "gradient-quaternary"
+    topics:
+      - title: Geometric Optics
+        chapters: "40-42"
+        url: /optics/geometric/
+        description: Mirrors, lenses, optical instruments, interference phenomena, and diffraction patterns
+        chapter_list:
+          - "Ch 40: Mirrors and Lenses"
+          - "Ch 41: Interference"
+          - "Ch 42: Diffraction"
+      - title: Wave Properties of Light
+        chapters: "43-45"
+        url: /optics/wave-properties/
+        description: Gratings, spectra, polarization, thermal radiation, photoelectric effect, and photon interactions
+        chapter_list:
+          - "Ch 43: Gratings and Spectra"
+          - "Ch 44: Polarization"
+          - "Ch 45: Nature of Light"
+
+  - title: Modern Physics
+    description: Quantum mechanics, atomic physics, nuclear physics, and elementary particles
+    chapters: "46-52"
+    gradient: "gradient-modern"
+    topics:
+      - title: Quantum & Atomic Physics
+        chapters: "46-49"
+        url: /modern/quantum-atomic/
+        description: Matter waves, Schrödinger equation, electrons in potential wells, atomic structure, and electron configurations
+        chapter_list:
+          - "Ch 46: Nature of Matter"
+          - "Ch 47: Electrons in Potential Wells"
+          - "Ch 48: Atomic Structure"
+          - "Ch 49: Electrical Conduction"
+      - title: Nuclear & Particle Physics
+        chapters: "50-52"
+        url: /modern/nuclear-particle/
+        description: Nuclear structure, radioactive decay, nuclear reactions, energy from the nucleus, and elementary particles
+        chapter_list:
+          - "Ch 50: Nuclear Physics"
+          - "Ch 51: Energy from Nucleus"
+          - "Ch 52: Particle Physics"
+
+# Statistics
+stats:
+  chapters: 52
+  areas: 5
+  opportunities: "∞"
+  access: "100%"
