@@ -97,10 +97,9 @@ Successfully converted Physics Daily from a static HTML/CSS/JS website to a mode
 - **Future-Proof**: Easy to extend with new features and content
 
 ## Next Steps
-1. Convert mechanics section pages to use Jekyll layouts
-2. Add automated deployment with GitHub Actions
-3. Implement content collections for physics chapters
-4. Add search functionality
-5. Integrate MathJax for mathematical equations
+1. ✅ **Done:** Convert mechanics section pages to use Jekyll layouts
+2. Implement content collections for physics chapters
+3. Add search functionality
+4. Integrate MathJax for mathematical equations
 
 The conversion successfully modernizes the codebase while maintaining all existing functionality, providing a solid foundation for future development and content expansion.

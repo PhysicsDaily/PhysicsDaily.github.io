@@ -1,0 +1,40 @@
+---
+layout: default
+---
+
+{% include navigation.html %}
+
+<div class="breadcrumb">
+    <div class="container">
+        <nav aria-label="Breadcrumb">
+            <a href="{{ '/' | relative_url }}">Home</a>
+            <span class="separator">›</span>
+            <a href="{{ '/mechanics/foundations.html' | relative_url }}">Classical Mechanics</a>
+            {% if page.breadcrumb %}
+                {% for crumb in page.breadcrumb %}
+                    <span class="separator">›</span>
+                    {% if crumb.url %}
+                        <a href="{{ crumb.url | relative_url }}">{{ crumb.title }}</a>
+                    {% else %}
+                        <span class="current">{{ crumb.title }}</span>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </nav>
+    </div>
+</div>
+
+<header class="header">
+    <div class="container">
+        <h1>{{ page.title }}</h1>
+        {% if page.subtitle %}
+            <p class="subtitle">{{ page.subtitle }}</p>
+        {% endif %}
+    </div>
+</header>
+
+<main class="main-content">
+    <div class="container">
+        {{ content }}
+    </div>
+</main>

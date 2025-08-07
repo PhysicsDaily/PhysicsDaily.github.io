@@ -1,0 +1,28 @@
+.section h2 { color: var(--primary-color); font-size: 1.8rem; font-weight: 600; }
+.section h3 { font-size: 1.3rem; margin: 1.5rem 0 1rem 0; }
+.section p { text-align: justify; }
+.section ul, .section ol { margin-left: 2rem; }
+
+.highlight-box, .beginner-note, .advanced-note, .danger-note, .example-box { padding: 16px; margin: 16px 0; border-radius: 8px; border-left-width: 4px; border-left-style: solid;}
+.highlight-box { background: linear-gradient(135deg, #e0f2fe, #f0f9ff); border-color: var(--accent-color); }
+.beginner-note { background: linear-gradient(135deg, #fef3c7, #fde68a); border-color: var(--warning-color); }
+.advanced-note { background: linear-gradient(135deg, #f3e8ff, #ede9fe); border-color: #8b5cf6; }
+.example-box { background: linear-gradient(135deg, #dcfce7, #bbf7d0); border-color: var(--success-color); }
+
+[data-theme="dark"] .highlight-box { background: linear-gradient(135deg, #164e63, #0c4a6e); }
+[data-theme="dark"] .beginner-note { background: linear-gradient(135deg, #451a03, #78350f); }
+[data-theme="dark"] .advanced-note { background: linear-gradient(135deg, #2d1b69, #3730a3); }
+[data-theme="dark"] .example-box { background: linear-gradient(135deg, #14532d, #166534); }
+
+.formula-box { background: var(--bg-secondary); border: 2px solid var(--border-color); padding: 20px; margin: 16px 0; text-align: center; }
+.video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: var(--border-radius); }
+.video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+.practice-section { padding: 2rem 0; background-color: var(--bg-secondary); }
+.section-header { text-align: center; margin-bottom: 3rem; }
+.section-title { font-size: 2.5rem; }
+.practice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+.practice-card { background: var(--card-bg); padding: 2rem; text-decoration: none; border: 1px solid var(--border-color); text-align: center; }
+.practice-card .icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.practice-card h3 { font-size: 1.25rem; color: var(--primary-color); }
+.btn-practice { width: 100%; margin-top: 1rem; }

@@ -1,402 +1,264 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Numerical Problems: Measurement - Physics Daily</title>
-    <meta name="description" content="Practice numerical problems involving measurement, units, and dimensional analysis.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+---
+layout: page-mechanics
+title: "Numerical Problems: Measurement"
+subtitle: "Chapter 1: Measurement"
+description: "Practice your problem-solving skills with quantitative problems involving units, conversions, and calculations."
+custom_css:
+  - "/assets/css/mechanics-content-page.css"
+breadcrumb:
+  - title: "📏 Measurement"
+    url: "/mechanics/measurements/"
+  - title: "🧮 Numerical Problems"
+---
+<div class="section">
+    <h2>🧮 Numerical Problems</h2>
     
-    <link rel="stylesheet" href="../../assets/css/global.css">
+    <div class="problem">
+        <div class="problem-header">
+            <span class="problem-number">Problem 1</span>
+            <span class="difficulty easy">Easy</span>
+        </div>
+        <div class="problem-content">
+            <p>A student measures the sides of a rectangular block as <span class="equation">l = 15.12 cm</span>, <span class="equation">w = 3.45 cm</span>, and <span class="equation">h = 1.78 cm</span>. Calculate the volume of the block, expressing the answer with the correct number of significant figures.</p>
+        </div>
+        <details>
+            <summary>Solution</summary>
+            <div class="solution">
+                <h4>Step 1: Identify the operation and rule</h4>
+                <p>The volume <span class="math">V</span> is calculated by multiplication: <span class="equation">V = l × w × h</span>. The rule for multiplication is that the result must have the same number of significant figures as the measurement with the fewest significant figures.</p>
+                
+                <h4>Step 2: Count significant figures</h4>
+                <ul>
+                    <li><span class="equation">l = 15.12 cm</span> has 4 significant figures.</li>
+                    <li><span class="equation">w = 3.45 cm</span> has 3 significant figures.</li>
+                    <li><span class="equation">h = 1.78 cm</span> has 3 significant figures.</li>
+                </ul>
+                <p>The result must be rounded to 3 significant figures.</p>
 
-    <style>
-        .section h2 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
-        }
-        .problem {
-            margin: 20px 0;
-            padding: 20px;
-            border-left: 4px solid var(--primary-color);
-            background: var(--bg-secondary);
-            border-radius: 8px;
-        }
-        .problem-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        .problem-number {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-        .difficulty {
-            padding: 0.25rem 0.75rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        .difficulty.easy { background-color: rgba(16, 185, 129, 0.1); color: var(--success-color); }
-        .difficulty.medium { background-color: rgba(245, 158, 11, 0.1); color: var(--warning-color); }
-        .difficulty.hard { background-color: rgba(239, 68, 68, 0.1); color: var(--danger-color); }
-        .problem-content p { margin-bottom: 1rem; }
-        .given-data {
-            background: var(--bg-tertiary);
-            padding: 1rem;
-            border-radius: 6px;
-            margin: 1rem 0;
-            border-left: 3px solid var(--accent-color);
-        }
-        details {
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: .5em .5em 0;
-            margin-top: 1em;
-            background: var(--bg-tertiary);
-        }
-        summary {
-            font-weight: bold;
-            margin: -.5em -.5em 0;
-            padding: .5em;
-            cursor: pointer;
-        }
-        .solution h4 {
-            color: var(--primary-color);
-            margin-top: 1rem;
-        }
-        .final-answer {
-            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
-            border-left: 4px solid var(--success-color);
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 6px;
-            font-weight: 600;
-        }
-        [data-theme="dark"] .final-answer {
-            background: linear-gradient(135deg, #14532d, #166534);
-        }
-    </style>
+                <h4>Step 3: Calculate the volume</h4>
+                <p><span class="equation">V = 15.12 cm × 3.45 cm × 1.78 cm = 92.78592 cm³</span></p>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XN081SR2KP');
-    </script>
-</head>
-<body>
-    <nav class="nav">
-        <div class="container">
-            <div class="nav-content">
-                <a href="../../index.html" class="nav-logo">Physics Daily</a>
-                <ul class="nav-links">
-                    <li><a href="../../index.html">Home</a></li>
-                    <li><a href="../../resources.html">Resources</a></li>
-                    <li><a href="../../about.html">About</a></li>
-                    <li><a href="../../contribute.html">Contribute</a></li>
+                <h4>Step 4: Round to the correct number of significant figures</h4>
+                <p>Rounding 92.78592 to 3 significant figures gives 92.8.</p>
+
+                <div class="final-answer">
+                    <p><strong>Final Answer:</strong> The volume is <span class="equation">92.8 cm³</span>.</p>
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <div class="problem">
+        <div class="problem-header">
+            <span class="problem-number">Problem 2</span>
+            <span class="difficulty easy">Easy</span>
+        </div>
+        <div class="problem-content">
+            <p>The speed of light is approximately <span class="equation">3.00 × 10⁸ m/s</span>. Convert this speed to kilometers per hour (km/h).</p>
+        </div>
+        <details>
+            <summary>Solution</summary>
+            <div class="solution">
+                <h4>Step 1: Set up the conversion factors</h4>
+                <ul>
+                    <li>Meters to kilometers: <span class="equation">1 km = 1000 m</span></li>
+                    <li>Seconds to hours: <span class="equation">1 hour = 3600 s</span></li>
+                </ul>
+
+                <h4>Step 2: Perform the conversion</h4>
+                <p>Speed = <span class="equation">(3.00 × 10⁸ m/s) × (1 km / 1000 m) × (3600 s / 1 hour)</span></p>
+                <p>The units of meters and seconds cancel out, leaving km/hour.</p>
+                <p>Speed = <span class="equation">(3.00 × 10⁸ × 3600) / 1000 km/h</span></p>
+                <p>Speed = <span class="equation">10.8 × 10⁸ km/h</span></p>
+
+                <h4>Step 3: Express in proper scientific notation</h4>
+                <p>Move the decimal to get <span class="equation">1.08 × 10⁹ km/h</span>.</p>
+
+                <div class="final-answer">
+                    <p><strong>Final Answer:</strong> The speed of light is <span class="equation">1.08 × 10⁹ km/h</span>.</p>
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <div class="problem">
+        <div class="problem-header">
+            <span class="problem-number">Problem 3</span>
+            <span class="difficulty medium">Medium</span>
+        </div>
+        <div class="problem-content">
+            <p>The period of oscillation <span class="math">T</span> of a body of mass <span class="math">m</span> suspended from a spring with spring constant <span class="math">k</span> is given by <span class="equation">T = 2π√(m/k)</span>. Check if this formula is dimensionally correct.</p>
+            <div class="given-data">
+                <h4>Dimensions:</h4>
+                <ul>
+                    <li>Period <span class="math">T</span>: <span class="equation">[T]</span></li>
+                    <li>Mass <span class="math">m</span>: <span class="equation">[M]</span></li>
+                    <li>Spring constant <span class="math">k</span> (Force/length): <span class="equation">[MLT⁻²]/[L] = [MT⁻²]</span></li>
                 </ul>
             </div>
         </div>
-    </nav>
+        <details>
+            <summary>Solution</summary>
+            <div class="solution">
+                <h4>Step 1: Analyze the Left-Hand Side (LHS)</h4>
+                <p>The dimension of the LHS is the dimension of the period <span class="math">T</span>, which is <span class="equation">[T]</span>.</p>
 
-    <div class="theme-toggle">
-        <button id="light-mode-btn" title="Light Theme">☀️</button>
-        <button id="dark-mode-btn" title="Dark Theme">🌙</button>
-    </div>
+                <h4>Step 2: Analyze the Right-Hand Side (RHS)</h4>
+                <p>The term <span class="equation">2π</span> is dimensionless. The dimensions of the RHS are those of <span class="equation">√(m/k)</span>.</p>
+                <p>Dimension of <span class="equation">m/k = [M] / [MT⁻²] = [T²]</span>.</p>
+                <p>Now, take the square root: <span class="equation">√([T²]) = [T]</span>.</p>
 
-    <div class="breadcrumb">
-        <div class="container">
-            <nav aria-label="Breadcrumb">
-                <a href="../../index.html">Home</a>
-                <span class="separator">›</span>
-                <a href="../foundations.html">Classical Mechanics</a>
-                <span class="separator">›</span>
-                <a href="index.html">📏 Measurement</a>
-                <span class="separator">›</span>
-                <span class="current">🧮 Numerical Problems</span>
-            </nav>
-        </div>
-    </div>
+                <h4>Step 3: Compare LHS and RHS</h4>
+                <p>LHS = <span class="equation">[T]</span>, RHS = <span class="equation">[T]</span>. They match.</p>
 
-    <header class="header">
-        <div class="container">
-            <h1>Numerical Problems</h1>
-            <p class="subtitle">Chapter 1: Measurement</p>
-            <p class="description">
-                Practice your problem-solving skills with quantitative problems involving units, conversions, and calculations.
-            </p>
-        </div>
-    </header>
-
-    <main class="main-content">
-        <div class="container">
-            <div class="section">
-                <h2>🧮 Numerical Problems</h2>
-                
-                <div class="problem">
-                    <div class="problem-header">
-                        <span class="problem-number">Problem 1</span>
-                        <span class="difficulty easy">Easy</span>
-                    </div>
-                    <div class="problem-content">
-                        <p>A student measures the sides of a rectangular block as <span class="equation">l = 15.12 cm</span>, <span class="equation">w = 3.45 cm</span>, and <span class="equation">h = 1.78 cm</span>. Calculate the volume of the block, expressing the answer with the correct number of significant figures.</p>
-                    </div>
-                    <details>
-                        <summary>Solution</summary>
-                        <div class="solution">
-                            <h4>Step 1: Identify the operation and rule</h4>
-                            <p>The volume <span class="math">V</span> is calculated by multiplication: <span class="equation">V = l × w × h</span>. The rule for multiplication is that the result must have the same number of significant figures as the measurement with the fewest significant figures.</p>
-                            
-                            <h4>Step 2: Count significant figures</h4>
-                            <ul>
-                                <li><span class="equation">l = 15.12 cm</span> has 4 significant figures.</li>
-                                <li><span class="equation">w = 3.45 cm</span> has 3 significant figures.</li>
-                                <li><span class="equation">h = 1.78 cm</span> has 3 significant figures.</li>
-                            </ul>
-                            <p>The result must be rounded to 3 significant figures.</p>
-                            
-                            <h4>Step 3: Calculate the volume</h4>
-                            <p><span class="equation">V = 15.12 cm × 3.45 cm × 1.78 cm = 92.78592 cm³</span></p>
-
-                            <h4>Step 4: Round to the correct number of significant figures</h4>
-                            <p>Rounding 92.78592 to 3 significant figures gives 92.8.</p>
-                            
-                            <div class="final-answer">
-                                <p><strong>Final Answer:</strong> The volume is <span class="equation">92.8 cm³</span>.</p>
-                            </div>
-                        </div>
-                    </details>
-                </div>
-
-                <div class="problem">
-                    <div class="problem-header">
-                        <span class="problem-number">Problem 2</span>
-                        <span class="difficulty easy">Easy</span>
-                    </div>
-                    <div class="problem-content">
-                        <p>The speed of light is approximately <span class="equation">3.00 × 10⁸ m/s</span>. Convert this speed to kilometers per hour (km/h).</p>
-                    </div>
-                    <details>
-                        <summary>Solution</summary>
-                        <div class="solution">
-                            <h4>Step 1: Set up the conversion factors</h4>
-                            <ul>
-                                <li>Meters to kilometers: <span class="equation">1 km = 1000 m</span></li>
-                                <li>Seconds to hours: <span class="equation">1 hour = 3600 s</span></li>
-                            </ul>
-
-                            <h4>Step 2: Perform the conversion</h4>
-                            <p>Speed = <span class="equation">(3.00 × 10⁸ m/s) × (1 km / 1000 m) × (3600 s / 1 hour)</span></p>
-                            <p>The units of meters and seconds cancel out, leaving km/hour.</p>
-                            <p>Speed = <span class="equation">(3.00 × 10⁸ × 3600) / 1000 km/h</span></p>
-                            <p>Speed = <span class="equation">10.8 × 10⁸ km/h</span></p>
-
-                            <h4>Step 3: Express in proper scientific notation</h4>
-                            <p>Move the decimal to get <span class="equation">1.08 × 10⁹ km/h</span>.</p>
-                            
-                            <div class="final-answer">
-                                <p><strong>Final Answer:</strong> The speed of light is <span class="equation">1.08 × 10⁹ km/h</span>.</p>
-                            </div>
-                        </div>
-                    </details>
-                </div>
-
-                <div class="problem">
-                    <div class="problem-header">
-                        <span class="problem-number">Problem 3</span>
-                        <span class="difficulty medium">Medium</span>
-                    </div>
-                    <div class="problem-content">
-                        <p>The period of oscillation <span class="math">T</span> of a body of mass <span class="math">m</span> suspended from a spring with spring constant <span class="math">k</span> is given by <span class="equation">T = 2π√(m/k)</span>. Check if this formula is dimensionally correct.</p>
-                        <div class="given-data">
-                            <h4>Dimensions:</h4>
-                            <ul>
-                                <li>Period <span class="math">T</span>: <span class="equation">[T]</span></li>
-                                <li>Mass <span class="math">m</span>: <span class="equation">[M]</span></li>
-                                <li>Spring constant <span class="math">k</span> (Force/length): <span class="equation">[MLT⁻²]/[L] = [MT⁻²]</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <details>
-                        <summary>Solution</summary>
-                        <div class="solution">
-                            <h4>Step 1: Analyze the Left-Hand Side (LHS)</h4>
-                            <p>The dimension of the LHS is the dimension of the period <span class="math">T</span>, which is <span class="equation">[T]</span>.</p>
-
-                            <h4>Step 2: Analyze the Right-Hand Side (RHS)</h4>
-                            <p>The term <span class="equation">2π</span> is dimensionless. The dimensions of the RHS are those of <span class="equation">√(m/k)</span>.</p>
-                            <p>Dimension of <span class="equation">m/k = [M] / [MT⁻²] = [T²]</span>.</p>
-                            <p>Now, take the square root: <span class="equation">√([T²]) = [T]</span>.</p>
-
-                            <h4>Step 3: Compare LHS and RHS</h4>
-                            <p>LHS = <span class="equation">[T]</span>, RHS = <span class="equation">[T]</span>. They match.</p>
-                            
-                            <div class="final-answer">
-                                <p><strong>Conclusion:</strong> The formula is <strong>dimensionally correct</strong>.</p>
-                            </div>
-                        </div>
-                    </details>
-                </div>
-
-                <div class="problem">
-                    <div class="problem-header">
-                        <span class="problem-number">Problem 4</span>
-                        <span class="difficulty medium">Medium</span>
-                    </div>
-                    <div class="problem-content">
-                        <p>The resistance of a wire is measured as: <span class="equation">4.10 Ω, 4.14 Ω, 4.08 Ω, 4.12 Ω</span>. Calculate:
-                        <strong>a)</strong> The mean resistance.
-                        <strong>b)</strong> The mean absolute error.
-                        <strong>c)</strong> The percentage error.
-                        <strong>d)</strong> The final result in the form <span class="equation">R ± ΔR</span>.</p>
-                    </div>
-                    <details>
-                        <summary>Solution</summary>
-                        <div class="solution">
-                            <h4>a) Calculate the mean resistance</h4>
-                            <p><span class="equation">R_mean = (4.10 + 4.14 + 4.08 + 4.12) / 4 = 4.11 Ω</span></p>
-
-                            <h4>b) Calculate the mean absolute error</h4>
-                            <p>Absolute errors: |4.11 - 4.10|=0.01, |4.11 - 4.14|=0.03, |4.11 - 4.08|=0.03, |4.11 - 4.12|=0.01.</p>
-                            <p><span class="equation">ΔR_mean = (0.01 + 0.03 + 0.03 + 0.01) / 4 = 0.02 Ω</span></p>
-
-                            <h4>c) Calculate the percentage error</h4>
-                            <p>Percentage Error = (<span class="equation">ΔR_mean / R_mean</span>) * 100% = (0.02 / 4.11) * 100% ≈ 0.49%</p>
-
-                            <h4>d) Express the final result</h4>
-                            <div class="final-answer">
-                                <p><strong>Final Result:</strong> <span class="equation">R = (4.11 ± 0.02) Ω</span></p>
-                            </div>
-                        </div>
-                    </details>
-                </div>
-
-                <div class="problem">
-                    <div class="problem-header">
-                        <span class="problem-number">Problem 5</span>
-                        <span class="difficulty medium">Medium</span>
-                    </div>
-                    <div class="problem-content">
-                        <p>The voltage across a resistor is <span class="equation">V = (10.0 ± 0.2) V</span> and the current is <span class="equation">I = (2.50 ± 0.05) A</span>. Calculate the resistance <span class="math">R</span> (<span class="equation">R = V/I</span>) and its percentage error.</p>
-                    </div>
-                    <details>
-                        <summary>Solution</summary>
-                        <div class="solution">
-                            <h4>Step 1: Calculate the mean resistance</h4>
-                            <p><span class="equation">R_mean = 10.0 V / 2.50 A = 4.00 Ω</span></p>
-
-                            <h4>Step 2: Calculate the percentage error</h4>
-                            <p>For division, percentage errors add up. % Error in V = (0.2/10.0)*100% = 2%. % Error in I = (0.05/2.50)*100% = 2%.</p>
-                            <p>Total % Error in R = 2% + 2% = 4%.</p>
-                            
-                            <div class="final-answer">
-                                <p><strong>Final Answer:</strong> The resistance is <span class="equation">4.00 Ω</span> with a percentage error of <strong>4%</strong>.</p>
-                            </div>
-                        </div>
-                    </details>
-                </div>
-                
-                <div class="problem">
-                    <div class="problem-header">
-                        <span class="problem-number">Problem 6</span>
-                        <span class="difficulty hard">Hard</span>
-                    </div>
-                    <div class="problem-content">
-                        <p>The frequency <span class="math">f</span> of a vibrating string depends on its length <span class="math">L</span>, tension <span class="math">F</span>, and mass per unit length <span class="math">μ</span>. Use dimensional analysis to find the relationship.</p>
-                         <div class="given-data">
-                            <h4>Dimensions:</h4>
-                            <ul>
-                                <li>Frequency <span class="math">f</span>: <span class="equation">[T⁻¹]</span></li>
-                                <li>Length <span class="math">L</span>: <span class="equation">[L]</span></li>
-                                <li>Tension <span class="math">F</span>: <span class="equation">[MLT⁻²]</span></li>
-                                <li>Mass per length <span class="math">μ</span>: <span class="equation">[ML⁻¹]</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <details>
-                        <summary>Solution</summary>
-                        <div class="solution">
-                            <h4>Step 1: Assume the relationship</h4>
-                            <p>Let <span class="equation">f = k Lᵃ Fᵇ μᶜ</span>.</p>
-
-                            <h4>Step 2: Write the dimensional equation</h4>
-                            <p><span class="equation">[T⁻¹] = [L]ᵃ [MLT⁻²]ᵇ [ML⁻¹]ᶜ = Mᵇ⁺ᶜ Lᵃ⁺ᵇ⁻ᶜ T⁻²ᵇ</span></p>
-
-                            <h4>Step 3: Equate the powers</h4>
-                            <p>M: b+c=0. L: a+b-c=0. T: -2b=-1. Solving gives b=1/2, c=-1/2, a=-1.</p>
-                            
-                            <div class="final-answer">
-                                <p><strong>Final Relationship:</strong> <span class="equation">f ∝ (1/L)√(F/μ)</span>.</p>
-                            </div>
-                        </div>
-                    </details>
-                </div>
-
-                <div class="problem">
-                    <div class="problem-header">
-                        <span class="problem-number">Problem 7</span>
-                        <span class="difficulty hard">Hard</span>
-                    </div>
-                    <div class="problem-content">
-                        <p>A quantity <span class="math">P</span> is related to observables <span class="math">a, b, c, d</span> as: <span class="equation">P = a³b² / (√c d)</span>. The percentage errors in <span class="math">a, b, c, d</span> are 1%, 3%, 4%, and 2%, respectively. What is the percentage error in <span class="math">P</span>?</p>
-                    </div>
-                    <details>
-                        <summary>Solution</summary>
-                        <div class="solution">
-                            <h4>Step 1: Use the error propagation formula</h4>
-                            <p>The percentage error in P is the sum of the percentage errors of each variable multiplied by the magnitude of its power.</p>
-                            <p>% Error in P = 3*(% Error in a) + 2*(% Error in b) + (1/2)*(% Error in c) + 1*(% Error in d)</p>
-                            
-                            <h4>Step 2: Substitute values</h4>
-                            <p>% Error in P = 3(1%) + 2(3%) + (1/2)(4%) + 1(2%) = 3% + 6% + 2% + 2%</p>
-
-                            <div class="final-answer">
-                                <p><strong>Final Answer:</strong> The percentage error in <span class="math">P</span> is <strong>13%</strong>.</p>
-                            </div>
-                        </div>
-                    </details>
-                </div>
-
-                <div class="problem">
-                    <div class="problem-header">
-                        <span class="problem-number">Problem 8</span>
-                        <span class="difficulty hard">Hard</span>
-                    </div>
-                    <div class="problem-content">
-                        <p>The radius of a sphere is <span class="equation">r = (2.15 ± 0.05) cm</span>. Calculate the surface area and volume with error limits.</p>
-                    </div>
-                    <details>
-                        <summary>Solution</summary>
-                        <div class="solution">
-                            <h4>Part 1: Surface Area (<span class="equation">A = 4πr²</span>)</h4>
-                            <p>Mean Area: A = 4π(2.15)² ≈ 58.09 cm². Relative Error: ΔA/A = 2(Δr/r) = 2(0.05/2.15) ≈ 0.0465. Absolute Error: ΔA = 0.0465 * 58.09 ≈ 2.7 cm². Rounded to one sig fig, ΔA ≈ 3 cm². So, Area = (58 ± 3) cm².</p>
-
-                            <h4>Part 2: Volume (<span class="equation">V = (4/3)πr³</span>)</h4>
-                            <p>Mean Volume: V = (4/3)π(2.15)³ ≈ 41.63 cm³. Relative Error: ΔV/V = 3(Δr/r) = 3(0.05/2.15) ≈ 0.0698. Absolute Error: ΔV = 0.0698 * 41.63 ≈ 2.9 cm³. Rounded to one sig fig, ΔV ≈ 3 cm³. So, Volume = (42 ± 3) cm³.</p>
-
-                            <div class="final-answer">
-                                <p><strong>Surface Area:</strong> <span class="equation">(58 ± 3) cm²</span><br>
-                                <strong>Volume:</strong> <span class="equation">(42 ± 3) cm³</span></p>
-                            </div>
-                        </div>
-                    </details>
+                <div class="final-answer">
+                    <p><strong>Conclusion:</strong> The formula is <strong>dimensionally correct</strong>.</p>
                 </div>
             </div>
-        </div>
-    </main>
+        </details>
+    </div>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
+    <div class="problem">
+        <div class="problem-header">
+            <span class="problem-number">Problem 4</span>
+            <span class="difficulty medium">Medium</span>
         </div>
-    </footer>
+        <div class="problem-content">
+            <p>The resistance of a wire is measured as: <span class="equation">4.10 Ω, 4.14 Ω, 4.08 Ω, 4.12 Ω</span>. Calculate:
+            <strong>a)</strong> The mean resistance.
+            <strong>b)</strong> The mean absolute error.
+            <strong>c)</strong> The percentage error.
+            <strong>d)</strong> The final result in the form <span class="equation">R ± ΔR</span>.</p>
+        </div>
+        <details>
+            <summary>Solution</summary>
+            <div class="solution">
+                <h4>a) Calculate the mean resistance</h4>
+                <p><span class="equation">R_mean = (4.10 + 4.14 + 4.08 + 4.12) / 4 = 4.11 Ω</span></p>
 
-    <script src="../../assets/js/global.js" defer></script>
-</body>
-</html>
+                <h4>b) Calculate the mean absolute error</h4>
+                <p>Absolute errors: |4.11 - 4.10|=0.01, |4.11 - 4.14|=0.03, |4.11 - 4.08|=0.03, |4.11 - 4.12|=0.01.</p>
+                <p><span class="equation">ΔR_mean = (0.01 + 0.03 + 0.03 + 0.01) / 4 = 0.02 Ω</span></p>
+
+                <h4>c) Calculate the percentage error</h4>
+                <p>Percentage Error = (<span class="equation">ΔR_mean / R_mean</span>) * 100% = (0.02 / 4.11) * 100% ≈ 0.49%</p>
+
+                <h4>d) Express the final result</h4>
+                <div class="final-answer">
+                    <p><strong>Final Result:</strong> <span class="equation">R = (4.11 ± 0.02) Ω</span></p>
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <div class="problem">
+        <div class="problem-header">
+            <span class="problem-number">Problem 5</span>
+            <span class="difficulty medium">Medium</span>
+        </div>
+        <div class="problem-content">
+            <p>The voltage across a resistor is <span class="equation">V = (10.0 ± 0.2) V</span> and the current is <span class="equation">I = (2.50 ± 0.05) A</span>. Calculate the resistance <span class="math">R</span> (<span class="equation">R = V/I</span>) and its percentage error.</p>
+        </div>
+        <details>
+            <summary>Solution</summary>
+            <div class="solution">
+                <h4>Step 1: Calculate the mean resistance</h4>
+                <p><span class="equation">R_mean = 10.0 V / 2.50 A = 4.00 Ω</span></p>
+
+                <h4>Step 2: Calculate the percentage error</h4>
+                <p>For division, percentage errors add up. % Error in V = (0.2/10.0)*100% = 2%. % Error in I = (0.05/2.50)*100% = 2%.</p>
+                <p>Total % Error in R = 2% + 2% = 4%.</p>
+                
+                <div class="final-answer">
+                    <p><strong>Final Answer:</strong> The resistance is <span class="equation">4.00 Ω</span> with a percentage error of <strong>4%</strong>.</p>
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <div class="problem">
+        <div class="problem-header">
+            <span class="problem-number">Problem 6</span>
+            <span class="difficulty hard">Hard</span>
+        </div>
+        <div class="problem-content">
+            <p>The frequency <span class="math">f</span> of a vibrating string depends on its length <span class="math">L</span>, tension <span class="math">F</span>, and mass per unit length <span class="math">μ</span>. Use dimensional analysis to find the relationship.</p>
+             <div class="given-data">
+                <h4>Dimensions:</h4>
+                <ul>
+                    <li>Frequency <span class="math">f</span>: <span class="equation">[T⁻¹]</span></li>
+                    <li>Length <span class="math">L</span>: <span class="equation">[L]</span></li>
+                    <li>Tension <span class="math">F</span>: <span class="equation">[MLT⁻²]</span></li>
+                    <li>Mass per length <span class="math">μ</span>: <span class="equation">[ML⁻¹]</span></li>
+                </ul>
+            </div>
+        </div>
+        <details>
+            <summary>Solution</summary>
+            <div class="solution">
+                <h4>Step 1: Assume the relationship</h4>
+                <p>Let <span class="equation">f = k Lᵃ Fᵇ μᶜ</span>.</p>
+
+                <h4>Step 2: Write the dimensional equation</h4>
+                <p><span class="equation">[T⁻¹] = [L]ᵃ [MLT⁻²]ᵇ [ML⁻¹]ᶜ = Mᵇ⁺ᶜ Lᵃ⁺ᵇ⁻ᶜ T⁻²ᵇ</span></p>
+
+                <h4>Step 3: Equate the powers</h4>
+                <p>M: b+c=0. L: a+b-c=0. T: -2b=-1. Solving gives b=1/2, c=-1/2, a=-1.</p>
+
+                <div class="final-answer">
+                    <p><strong>Final Relationship:</strong> <span class="equation">f ∝ (1/L)√(F/μ)</span>.</p>
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <div class="problem">
+        <div class="problem-header">
+            <span class="problem-number">Problem 7</span>
+            <span class="difficulty hard">Hard</span>
+        </div>
+        <div class="problem-content">
+            <p>A quantity <span class="math">P</span> is related to observables <span class="math">a, b, c, d</span> as: <span class="equation">P = a³b² / (√c d)</span>. The percentage errors in <span class="math">a, b, c, d</span> are 1%, 3%, 4%, and 2%, respectively. What is the percentage error in <span class="math">P</span>?</p>
+        </div>
+        <details>
+            <summary>Solution</summary>
+            <div class="solution">
+                <h4>Step 1: Use the error propagation formula</h4>
+                <p>The percentage error in P is the sum of the percentage errors of each variable multiplied by the magnitude of its power.</p>
+                <p>% Error in P = 3*(% Error in a) + 2*(% Error in b) + (1/2)*(% Error in c) + 1*(% Error in d)</p>
+
+                <h4>Step 2: Substitute values</h4>
+                <p>% Error in P = 3(1%) + 2(3%) + (1/2)(4%) + 1(2%) = 3% + 6% + 2% + 2%</p>
+
+                <div class="final-answer">
+                    <p><strong>Final Answer:</strong> The percentage error in <span class="math">P</span> is <strong>13%</strong>.</p>
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <div class="problem">
+        <div class="problem-header">
+            <span class="problem-number">Problem 8</span>
+            <span class="difficulty hard">Hard</span>
+        </div>
+        <div class="problem-content">
+            <p>The radius of a sphere is <span class="equation">r = (2.15 ± 0.05) cm</span>. Calculate the surface area and volume with error limits.</p>
+        </div>
+        <details>
+            <summary>Solution</summary>
+            <div class="solution">
+                <h4>Part 1: Surface Area (<span class="equation">A = 4πr²</span>)</h4>
+                <p>Mean Area: A = 4π(2.15)² ≈ 58.09 cm². Relative Error: ΔA/A = 2(Δr/r) = 2(0.05/2.15) ≈ 0.0465. Absolute Error: ΔA = 0.0465 * 58.09 ≈ 2.7 cm². Rounded to one sig fig, ΔA ≈ 3 cm². So, Area = (58 ± 3) cm².</p>
+
+                <h4>Part 2: Volume (<span class="equation">V = (4/3)πr³</span>)</h4>
+                <p>Mean Volume: V = (4/3)π(2.15)³ ≈ 41.63 cm³. Relative Error: ΔV/V = 3(Δr/r) = 3(0.05/2.15) ≈ 0.0698. Absolute Error: ΔV = 0.0698 * 41.63 ≈ 2.9 cm³. Rounded to one sig fig, ΔV ≈ 3 cm³. So, Volume = (42 ± 3) cm³.</p>
+
+                <div class="final-answer">
+                    <p><strong>Surface Area:</strong> <span class="equation">(58 ± 3) cm²</span><br>
+                    <strong>Volume:</strong> <span class="equation">(42 ± 3) cm³</span></p>
+                </div>
+            </div>
+        </details>
+    </div>
+</div>
