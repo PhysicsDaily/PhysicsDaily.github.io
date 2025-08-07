@@ -4,14 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Physics Daily - Comprehensive Physics Learning Platform</title>
-    <meta name="description" content="Comprehensive physics notes and study resources covering mechanics, thermodynamics, electromagnetism, optics, and modern physics. Interactive learning for advanced physics concepts.">
+    <meta name="description" content="A comprehensive directory of physics notes covering mechanics, thermodynamics, electromagnetism, optics, and modern physics.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <meta name="google-site-verification" content="Ymi0Tv40FP7rKnVowfeCm69EwVaihVBHo5qp8xstwu0" />
     
     <link rel="stylesheet" href="assets/css/global.css">
     
+    <style>
+        .main-content {
+            padding: 3rem 0;
+        }
+        .physics-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .physics-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .section-heading {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .section-heading h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        .section-heading p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .topic-group h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        .topic-group .chapter-list {
+            margin-top: 1rem;
+        }
+        .topic-group .chapter-list a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.25rem 0;
+            transition: color 0.2s ease;
+        }
+        .topic-group .chapter-list a:hover {
+            color: var(--primary-color);
+        }
+    </style>
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -19,8 +72,6 @@
       gtag('js', new Date());
       gtag('config', 'G-XN081SR2KP');
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4062746224225625"
-     crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="theme-toggle">
@@ -28,286 +79,198 @@
         <button id="dark-mode-btn" title="Dark Mode">🌙</button>
     </div>
 
-    <header class="header">
+    <nav class="nav">
         <div class="container">
-            <h1>Physics Daily</h1>
-            <p class="subtitle">Advanced Physics Learning Platform</p>
-            <p class="description">
-                Master physics concepts from fundamentals to advanced topics with comprehensive notes, 
-                examples, and interactive content covering mechanics, thermodynamics, electromagnetism, optics, and modern physics.
-            </p>
-            <div class="cta-buttons">
-                <a href="#foundations" class="btn">
-                    📚 Start Learning
-                </a>
-                <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io" class="btn btn-secondary">
-                    ⭐ Star on GitHub
-                </a>
+            <div class="nav-content">
+                <a href="index.html" class="nav-logo">Physics Daily</a>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contribute.html">Contribute</a></li>
+                </ul>
             </div>
         </div>
-    </header>
-
-    <section class="hero-section" style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%); color: white; padding: 6rem 0; margin-bottom: 4rem; text-align: center;">
-        <div class="container">
-            <h2 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; margin-bottom: 1rem;">Complete Physics Education</h2>
-            <p style="font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto 2rem;">Comprehensive coverage of 52 chapters with modern, interactive learning tools for advanced physics study.</p>
-        </div>
-    </section>
+    </nav>
 
     <main class="main-content">
         <div class="container">
-            <section class="stats-section fade-in" style="margin: 4rem 0; background: var(--card-bg); border-radius: var(--border-radius); padding: 3rem 2rem; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
-                <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
-                    <div class="stat-item" style="text-align: center;">
-                        <span class="stat-number" style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); display: block; margin-bottom: 0.5rem;">52</span>
-                        <span class="stat-label" style="font-size: 1rem; color: var(--text-secondary); font-weight: 500;">Chapters</span>
-                    </div>
-                    <div class="stat-item" style="text-align: center;">
-                        <span class="stat-number" style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); display: block; margin-bottom: 0.5rem;">5</span>
-                        <span class="stat-label" style="font-size: 1rem; color: var(--text-secondary); font-weight: 500;">Major Areas</span>
-                    </div>
-                    <div class="stat-item" style="text-align: center;">
-                        <span class="stat-number" style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); display: block; margin-bottom: 0.5rem;">∞</span>
-                        <span class="stat-label" style="font-size: 1rem; color: var(--text-secondary); font-weight: 500;">Learning Opportunities</span>
-                    </div>
-                    <div class="stat-item" style="text-align: center;">
-                        <span class="stat-number" style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); display: block; margin-bottom: 0.5rem;">100%</span>
-                        <span class="stat-label" style="font-size: 1rem; color: var(--text-secondary); font-weight: 500;">Free Access</span>
-                    </div>
-                </div>
-            </section>
 
-            <section id="foundations" class="section fade-in">
-                <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
-                    <h2 class="section-title" style="font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">Classical Mechanics</h2>
-                    <p class="section-subtitle" style="font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
-                        Foundations of physics: measurement, kinematics, dynamics, energy, momentum, and rotational motion
-                    </p>
+            <section class="physics-section fade-in">
+                <div class="section-heading">
+                    <h2>Classical Mechanics</h2>
+                    <p>Foundations of physics: measurement, kinematics, dynamics, energy, momentum, and rotational motion</p>
                 </div>
-                <div class="topic-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
-                    <a href="mechanics/foundations.html" class="topic-card mechanics" style="background: var(--card-bg); border-radius: var(--border-radius); padding: 2rem; text-decoration: none; color: var(--text-primary); transition: var(--transition); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); position: relative; overflow: hidden;">
-                        <div class="chapter-number">Chapters 1-7</div>
+                <div class="topic-grid">
+                    <div class="topic-group">
                         <h3>Foundations & Kinematics</h3>
-                        <p class="topic-description">
-                            Measurement, motion in 1D/2D/3D, Newton's laws, applications, momentum, and particle systems
-                        </p>
-                        <div class="topic-chapters">
-                            <span class="chapter-tag">Ch 1: Measurement</span>
-                            <span class="chapter-tag">Ch 2: Motion in One Dimension</span>
-                            <span class="chapter-tag">Ch 3: Force and Newton's Laws</span>
-                            <span class="chapter-tag">Ch 4: Motion in 2D & 3D</span>
-                            <span class="chapter-tag">Ch 5: Applications of Newton's Laws</span>
-                            <span class="chapter-tag">Ch 6: Momentum</span>
-                            <span class="chapter-tag">Ch 7: Systems of Particles</span>
+                        <p class="description">Chapters 1-7</p>
+                        <div class="chapter-list">
+                            <a href="mechanics/measurements/index.html">Ch 1: Measurement</a>
+                            <a href="mechanics/kinematics/index.html">Ch 2: Motion in One Dimension</a>
+                            <a href="#">Ch 3: Force and Newton's Laws</a>
+                            <a href="#">Ch 4: Motion in 2D & 3D</a>
+                            <a href="#">Ch 5: Applications of Newton's Laws</a>
+                            <a href="#">Ch 6: Momentum</a>
+                            <a href="#">Ch 7: Systems of Particles</a>
                         </div>
-                    </a>
-
-                    <a href="mechanics/rotation.html" class="topic-card mechanics" style="background: var(--card-bg); border-radius: var(--border-radius); padding: 2rem; text-decoration: none; color: var(--text-primary); transition: var(--transition); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); position: relative; overflow: hidden;">
-                        <div class="chapter-number">Chapters 8-10</div>
+                    </div>
+                    <div class="topic-group">
                         <h3>Rotational Motion</h3>
-                        <p class="topic-description">
-                            Rotational kinematics, dynamics, moment of inertia, torque, and angular momentum conservation
-                        </p>
-                        <div class="topic-chapters">
-                            <span class="chapter-tag">Ch 8: Rotational Kinematics</span>
-                            <span class="chapter-tag">Ch 9: Rotational Dynamics</span>
-                            <span class="chapter-tag">Ch 10: Angular Momentum</span>
+                        <p class="description">Chapters 8-10</p>
+                         <div class="chapter-list">
+                            <a href="#">Ch 8: Rotational Kinematics</a>
+                            <a href="#">Ch 9: Rotational Dynamics</a>
+                            <a href="#">Ch 10: Angular Momentum</a>
                         </div>
-                    </a>
-
-                    <a href="mechanics/energy.html" class="topic-card mechanics" style="background: var(--card-bg); border-radius: var(--border-radius); padding: 2rem; text-decoration: none; color: var(--text-primary); transition: var(--transition); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); position: relative; overflow: hidden;">
-                        <div class="chapter-number">Chapters 11-14</div>
+                    </div>
+                    <div class="topic-group">
                         <h3>Energy & Gravitation</h3>
-                        <p class="topic-description">
-                            Work-energy theorem, potential energy, conservation of energy, and universal gravitation
-                        </p>
-                        <div class="topic-chapters">
-                            <span class="chapter-tag">Ch 11: Work and Kinetic Energy</span>
-                            <span class="chapter-tag">Ch 12: Potential Energy</span>
-                            <span class="chapter-tag">Ch 13: Energy Conservation</span>
-                            <span class="chapter-tag">Ch 14: Gravitation</span>
+                        <p class="description">Chapters 11-14</p>
+                         <div class="chapter-list">
+                            <a href="#">Ch 11: Work and Kinetic Energy</a>
+                            <a href="#">Ch 12: Potential Energy</a>
+                            <a href="#">Ch 13: Energy Conservation</a>
+                            <a href="#">Ch 14: Gravitation</a>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </section>
 
-            <section class="section fade-in">
-                 <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
-                    <h2 class="section-title">Fluids, Waves & Thermodynamics</h2>
-                    <p class="section-subtitle">
-                        Fluid mechanics, oscillations, wave motion, sound, special relativity, and thermal physics
-                    </p>
+            <section class="physics-section fade-in">
+                <div class="section-heading">
+                    <h2>Fluids, Waves & Thermodynamics</h2>
+                    <p>Fluid mechanics, oscillations, wave motion, sound, special relativity, and thermal physics</p>
                 </div>
                 <div class="topic-grid">
-                    <a href="fluids/mechanics.html" class="topic-card thermodynamics">
-                        <div class="chapter-number">Chapters 15-17</div>
+                    <div class="topic-group">
                         <h3>Fluid Mechanics & Oscillations</h3>
-                        <p class="topic-description">
-                            Fluid statics and dynamics, Bernoulli's equation, simple harmonic motion, and oscillating systems
-                        </p>
-                        <div class="topic-chapters">
-                            <span class="chapter-tag">Ch 15: Fluid Statics</span>
-                            <span class="chapter-tag">Ch 16: Fluid Dynamics</span>
-                            <span class="chapter-tag">Ch 17: Oscillations</span>
+                        <p class="description">Chapters 15-17</p>
+                        <div class="chapter-list">
+                            <a href="#">Ch 15: Fluid Statics</a>
+                            <a href="#">Ch 16: Fluid Dynamics</a>
+                            <a href="#">Ch 17: Oscillations</a>
                         </div>
-                    </a>
-
-                    <a href="waves/motion-sound.html" class="topic-card thermodynamics">
-                        <div class="chapter-number">Chapters 18-20</div>
+                    </div>
+                    <div class="topic-group">
                         <h3>Waves & Special Relativity</h3>
-                        <p class="topic-description">
-                            Wave motion, sound waves, Doppler effect, and Einstein's special theory of relativity
-                        </p>
-                        <div class="topic-chapters">
-                            <span class="chapter-tag">Ch 18: Wave Motion</span>
-                            <span class="chapter-tag">Ch 19: Sound Waves</span>
-                            <span class="chapter-tag">Ch 20: Special Relativity</span>
+                        <p class="description">Chapters 18-20</p>
+                        <div class="chapter-list">
+                            <a href="#">Ch 18: Wave Motion</a>
+                            <a href="#">Ch 19: Sound Waves</a>
+                            <a href="#">Ch 20: Special Relativity</a>
                         </div>
-                    </a>
-
-                    <a href="thermodynamics/thermal.html" class="topic-card thermodynamics">
-                        <div class="chapter-number">Chapters 21-24</div>
+                    </div>
+                    <div class="topic-group">
                         <h3>Thermodynamics</h3>
-                        <p class="topic-description">
-                            Temperature, molecular properties of gases, first and second laws of thermodynamics, entropy
-                        </p>
-                        <div class="topic-chapters">
-                            <span class="chapter-tag">Ch 21: Temperature</span>
-                            <span class="chapter-tag">Ch 22: Molecular Properties</span>
-                            <span class="chapter-tag">Ch 23: First Law</span>
-                            <span class="chapter-tag">Ch 24: Second Law & Entropy</span>
+                        <p class="description">Chapters 21-24</p>
+                        <div class="chapter-list">
+                            <a href="#">Ch 21: Temperature</a>
+                            <a href="#">Ch 22: Molecular Properties</a>
+                            <a href="#">Ch 23: First Law</a>
+                            <a href="#">Ch 24: Second Law & Entropy</a>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </section>
-
-            <section class="section fade-in">
-                <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
-                    <h2 class="section-title">Electricity & Magnetism</h2>
-                    <p class="section-subtitle">
-                        Electric fields, potential, capacitors, current, magnetic fields, induction, and AC circuits
-                    </p>
+            
+            <section class="physics-section fade-in">
+                <div class="section-heading">
+                    <h2>Electricity & Magnetism</h2>
+                    <p>Electric fields, potential, capacitors, current, magnetic fields, induction, and AC circuits</p>
                 </div>
                 <div class="topic-grid">
-                    <a href="electromagnetism/electrostatics.html" class="topic-card electromagnetism">
-                        <div class="chapter-number">Chapters 25-30</div>
+                    <div class="topic-group">
                         <h3>Electrostatics</h3>
-                        <p class="topic-description">
-                            Electric charge, electric field, Gauss's law, electric potential, capacitors, and dielectrics
-                        </p>
-                        <div class="topic-chapters">
-                            <span class="chapter-tag">Ch 25: Electric Charge</span>
-                            <span class="chapter-tag">Ch 26: Electric Field</span>
-                            <span class="chapter-tag">Ch 27: Gauss's Law</span>
-                            <span class="chapter-tag">Ch 28: Electric Potential</span>
-                            <span class="chapter-tag">Ch 29: Electric Potential Energy</span>
-                            <span class="chapter-tag">Ch 30: Capacitors</span>
+                        <p class="description">Chapters 25-30</p>
+                        <div class="chapter-list">
+                            <a href="#">Ch 25: Electric Charge</a>
+                            <a href="#">Ch 26: Electric Field</a>
+                            <a href="#">Ch 27: Gauss's Law</a>
+                            <a href="#">Ch 28: Electric Potential</a>
+                            <a href="#">Ch 29: Electric Potential Energy</a>
+                            <a href="#">Ch 30: Capacitors</a>
                         </div>
-                    </a>
-
-                    <a href="electromagnetism/current-magnetism.html" class="topic-card electromagnetism">
-                        <div class="chapter-number">Chapters 31-36</div>
+                    </div>
+                    <div class="topic-group">
                         <h3>Current & Magnetism</h3>
-                        <p class="topic-description">
-                            DC circuits, magnetic fields of currents, magnetic forces, electromagnetic induction, and inductance
-                        </p>
-                        <div class="topic-chapters">
-                            <span class="chapter-tag">Ch 31: DC Circuits</span>
-                            <span class="chapter-tag">Ch 32: Magnetic Field</span>
-                            <span class="chapter-tag">Ch 33: Magnetic Field of Current</span>
-                            <span class="chapter-tag">Ch 34: Faraday's Law</span>
-                            <span class="chapter-tag">Ch 35: Magnetic Properties</span>
-                            <span class="chapter-tag">Ch 36: Inductance</span>
+                        <p class="description">Chapters 31-36</p>
+                        <div class="chapter-list">
+                            <a href="#">Ch 31: DC Circuits</a>
+                            <a href="#">Ch 32: Magnetic Field</a>
+                            <a href="#">Ch 33: Magnetic Field of Current</a>
+                            <a href="#">Ch 34: Faraday's Law</a>
+                            <a href="#">Ch 35: Magnetic Properties</a>
+                            <a href="#">Ch 36: Inductance</a>
                         </div>
-                    </a>
-
-                    <a href="electromagnetism/ac-maxwell.html" class="topic-card electromagnetism">
-                        <div class="chapter-number">Chapters 37-39</div>
+                    </div>
+                    <div class="topic-group">
                         <h3>AC Circuits & Light</h3>
-                        <p class="topic-description">
-                            Alternating current circuits, Maxwell's equations, electromagnetic waves, and the nature of light
-                        </p>
-                        <div class="topic-chapters">
-                            <span class="chapter-tag">Ch 37: AC Circuits</span>
-                            <span class="chapter-tag">Ch 38: Maxwell's Equations</span>
-                            <span class="chapter-tag">Ch 39: Light Waves</span>
+                        <p class="description">Chapters 37-39</p>
+                        <div class="chapter-list">
+                            <a href="#">Ch 37: AC Circuits</a>
+                            <a href="#">Ch 38: Maxwell's Equations</a>
+                            <a href="#">Ch 39: Light Waves</a>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </section>
 
-            <section class="section fade-in">
-                 <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
-                    <h2 class="section-title">Optics</h2>
-                    <p class="section-subtitle">
-                        Geometric optics, wave optics, interference, diffraction, and polarization
-                    </p>
+            <section class="physics-section fade-in">
+                <div class="section-heading">
+                    <h2>Optics</h2>
+                    <p>Geometric optics, wave optics, interference, diffraction, and polarization</p>
                 </div>
                 <div class="topic-grid">
-                    <a href="optics/geometric.html" class="topic-card optics">
-                        <div class="chapter-number">Chapters 40-42</div>
+                    <div class="topic-group">
                         <h3>Geometric Optics</h3>
-                        <p class="topic-description">
-                            Mirrors, lenses, optical instruments, interference phenomena, and diffraction patterns
-                        </p>
-                        <div class="topic-chapters">
-                            <span class="chapter-tag">Ch 40: Mirrors and Lenses</span>
-                            <span class="chapter-tag">Ch 41: Interference</span>
-                            <span class="chapter-tag">Ch 42: Diffraction</span>
+                        <p class="description">Chapters 40-42</p>
+                        <div class="chapter-list">
+                           <a href="#">Ch 40: Mirrors and Lenses</a>
+                           <a href="#">Ch 41: Interference</a>
+                           <a href="#">Ch 42: Diffraction</a>
                         </div>
-                    </a>
-
-                    <a href="optics/wave-properties.html" class="topic-card optics">
-                        <div class="chapter-number">Chapters 43-45</div>
+                    </div>
+                    <div class="topic-group">
                         <h3>Wave Properties of Light</h3>
-                        <p class="topic-description">
-                            Gratings, spectra, polarization, thermal radiation, photoelectric effect, and photon interactions
-                        </p>
-                        <div class="topic-chapters">
-                            <span class="chapter-tag">Ch 43: Gratings and Spectra</span>
-                            <span class="chapter-tag">Ch 44: Polarization</span>
-                            <span class="chapter-tag">Ch 45: Nature of Light</span>
+                        <p class="description">Chapters 43-45</p>
+                        <div class="chapter-list">
+                           <a href="#">Ch 43: Gratings and Spectra</a>
+                           <a href="#">Ch 44: Polarization</a>
+                           <a href="#">Ch 45: Nature of Light</a>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </section>
-
-            <section class="section fade-in">
-                <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
-                    <h2 class="section-title">Modern Physics</h2>
-                    <p class="section-subtitle">
-                        Quantum mechanics, atomic physics, nuclear physics, and elementary particles
-                    </p>
+            
+            <section class="physics-section fade-in">
+                <div class="section-heading">
+                    <h2>Modern Physics</h2>
+                    <p>Quantum mechanics, atomic physics, nuclear physics, and elementary particles</p>
                 </div>
                 <div class="topic-grid">
-                    <a href="modern/quantum-atomic.html" class="topic-card modern">
-                        <div class="chapter-number">Chapters 46-49</div>
+                    <div class="topic-group">
                         <h3>Quantum & Atomic Physics</h3>
-                        <p class="topic-description">
-                            Matter waves, Schrödinger equation, electrons in potential wells, atomic structure, and electron configurations
-                        </p>
-                        <div class="topic-chapters">
-                            <span class="chapter-tag">Ch 46: Nature of Matter</span>
-                            <span class="chapter-tag">Ch 47: Electrons in Potential Wells</span>
-                            <span class="chapter-tag">Ch 48: Atomic Structure</span>
-                            <span class="chapter-tag">Ch 49: Electrical Conduction</span>
+                        <p class="description">Chapters 46-49</p>
+                        <div class="chapter-list">
+                            <a href="#">Ch 46: Nature of Matter</a>
+                            <a href="#">Ch 47: Electrons in Potential Wells</a>
+                            <a href="#">Ch 48: Atomic Structure</a>
+                            <a href="#">Ch 49: Electrical Conduction</a>
                         </div>
-                    </a>
-
-                    <a href="modern/nuclear-particle.html" class="topic-card modern">
-                        <div class="chapter-number">Chapters 50-52</div>
+                    </div>
+                    <div class="topic-group">
                         <h3>Nuclear & Particle Physics</h3>
-                        <p class="topic-description">
-                            Nuclear structure, radioactive decay, nuclear reactions, energy from the nucleus, and elementary particles
-                        </p>
-                        <div class="topic-chapters">
-                            <span class="chapter-tag">Ch 50: Nuclear Physics</span>
-                            <span class="chapter-tag">Ch 51: Energy from Nucleus</span>
-                            <span class="chapter-tag">Ch 52: Particle Physics</span>
+                        <p class="description">Chapters 50-52</p>
+                        <div class="chapter-list">
+                            <a href="#">Ch 50: Nuclear Physics</a>
+                            <a href="#">Ch 51: Energy from Nucleus</a>
+                            <a href="#">Ch 52: Particle Physics</a>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </section>
+
         </div>
     </main>
 
