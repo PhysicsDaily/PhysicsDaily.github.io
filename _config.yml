@@ -1,0 +1,7 @@
+# Site settings
+title: Physics Daily
+description: "Your comprehensive physics notes and study resources"
+
+# Build settings
+markdown: kramdown
+permalink: pretty
