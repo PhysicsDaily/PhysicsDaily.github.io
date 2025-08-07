@@ -1,16 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const lightThemeBtn = document.getElementById('light-theme-btn');
-    const darkThemeBtn = document.getElementById('dark-theme-btn');
-    const docElement = document.documentElement;
+    // --- Theme Toggle Functionality ---
+    const lightModeBtn = document.getElementById('light-mode-btn');
+    const darkModeBtn = document.getElementById('dark-mode-btn');
+    const docElement = document.documentElement; // Use documentElement (<html>) for setting attribute
 
+    // Function to apply the theme
     const applyTheme = (theme) => {
         docElement.setAttribute('data-theme', theme);
         if (theme === 'dark') {
-            darkThemeBtn.classList.add('active');
-            lightThemeBtn.classList.remove('active');
+            if(darkModeBtn) darkModeBtn.classList.add('active');
+            if(lightModeBtn) lightModeBtn.classList.remove('active');
         } else {
-            lightThemeBtn.classList.add('active');
-            darkThemeBtn.classList.remove('active');
+            if(lightModeBtn) lightModeBtn.classList.add('active');
+            if(darkModeBtn) darkModeBtn.classList.remove('active');
         }
         localStorage.setItem('theme', theme);
     };
@@ -20,11 +22,33 @@ document.addEventListener('DOMContentLoaded', function() {
     applyTheme(savedTheme);
 
     // Event listeners for theme buttons
-    lightThemeBtn.addEventListener('click', () => {
-        applyTheme('light');
-    });
+    if(lightModeBtn) {
+        lightModeBtn.addEventListener('click', () => {
+            applyTheme('light');
+        });
+    }
 
-    darkThemeBtn.addEventListener('click', () => {
-        applyTheme('dark');
+    if(darkModeBtn) {
+        darkModeBtn.addEventListener('click', () => {
+            applyTheme('dark');
+        });
+    }
+
+    // --- Scroll Reveal Animation ---
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+        observer.observe(el);
     });
 });
