@@ -1,6 +1,15 @@
 // Global scripts
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Create and inject the theme toggle
+    const themeToggleHTML = `
+        <div class="theme-toggle">
+            <button id="light-mode" title="Light Mode">☀️</button>
+            <button id="dark-mode" title="Dark Mode">🌙</button>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', themeToggleHTML);
+
     const lightModeBtn = document.getElementById('light-mode');
     const darkModeBtn = document.getElementById('dark-mode');
     const body = document.body;
@@ -10,8 +19,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (currentTheme === 'dark') {
         body.setAttribute('data-theme', 'dark');
-        if(lightModeBtn) lightModeBtn.classList.remove('active');
         if(darkModeBtn) darkModeBtn.classList.add('active');
+    } else {
+        if(lightModeBtn) lightModeBtn.classList.add('active');
     }
 
     if(lightModeBtn) {
