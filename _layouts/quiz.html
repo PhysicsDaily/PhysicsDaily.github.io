@@ -1,0 +1,92 @@
+---
+layout: default
+---
+
+<div class="breadcrumb">
+    <div class="container">
+        <nav aria-label="Breadcrumb">
+            <a href="{{ site.baseurl }}/">Home</a>
+            <span class="separator">›</span>
+            <a href="{{ site.baseurl }}/mechanics/foundations.html">Classical Mechanics</a>
+            <span class="separator">›</span>
+            <a href="{{ site.baseurl }}/mechanics/kinematics/">🚀 One-Dimensional Kinematics</a>
+            <span class="separator">›</span>
+            <span class="current">📊 Assessment Quiz</span>
+        </nav>
+    </div>
+</div>
+
+<main>
+    <div id="instructions-container" class="instructions-container">
+        <header class="header">
+            <div class="container">
+                <h1>{{ page.title }}</h1>
+                <p class="subtitle">{{ page.subtitle }}</p>
+            </div>
+        </header>
+        <h2>📝 Instructions</h2>
+        <ul>
+            <li>This test contains up to <strong>100 multiple-choice questions</strong>.</li>
+            <li>Each correct answer awards <strong>+4 marks</strong>.</li>
+            <li>Each incorrect answer results in a penalty of <strong>-1 mark</strong>.</li>
+            <li>Unanswered questions receive <strong>0 marks</strong>.</li>
+            <li>Use the question palette to navigate between questions.</li>
+        </ul>
+        <div class="quiz-setup">
+             <div class="setup-item">
+                <label for="question-count-select">Number of Questions:</label>
+                <select id="question-count-select">
+                    <option value="10">10 (Quick Test)</option>
+                    <option value="25">25 (Standard Test)</option>
+                    <option value="50">50 (Thorough Test)</option>
+                    <option value="100" selected>100 (Full Chapter)</option>
+                </select>
+            </div>
+            <div class="setup-item">
+                <label for="timer-input">Set Timer (minutes):</label>
+                <input type="number" id="timer-input" value="60" min="1">
+            </div>
+        </div>
+        <button id="start-test-btn" class="btn" style="margin-top: 1.5rem;">Start Test</button>
+    </div>
+
+    <div id="quiz-interface" class="quiz-interface">
+        <div class="test-container">
+            <div class="test-main">
+                <div class="timer-container">
+                    <div class="timer-label">Time Remaining</div>
+                    <div id="timer-display">00:00:00</div>
+                </div>
+                <div id="question-header" class="question-header"></div>
+                <div id="question-content" class="question-content"></div>
+                <ul id="options-list" class="options-list"></ul>
+                <div class="quiz-navigation">
+                    <button id="prev-btn" class="btn btn-secondary">Previous</button>
+                    <button id="mark-review-btn" class="btn btn-secondary">Mark for Review</button>
+                    <button id="next-btn" class="btn">Save & Next</button>
+                </div>
+            </div>
+            <aside class="test-sidebar">
+                <div class="sidebar-header">Question Palette</div>
+                <div id="question-palette" class="question-palette"></div>
+                <button id="submit-test-btn" class="btn" style="width: 100%;">Submit Test</button>
+            </aside>
+        </div>
+    </div>
+
+    <div id="results-container" class="container results-container" style="display: none;">
+         <header class="header">
+            <div class="container">
+                <h1>Quiz Results</h1>
+            </div>
+        </header>
+        <div id="results-summary" class="results-summary"></div>
+        <div id="detailed-results"></div>
+         <button onclick="location.reload()" class="btn">Take Another Test</button>
+    </div>
+</main>
+
+<script>
+    const fullQuizData = {{ site.data.kinematics_questions | jsonify }};
+</script>
+<script src="{{ '/assets/js/mcq-logic.js' | relative_url }}"></script>

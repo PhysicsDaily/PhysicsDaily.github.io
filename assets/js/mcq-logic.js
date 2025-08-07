@@ -1,14 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Check if quizData is defined. If not, don't run the quiz logic.
-    if (typeof quizData === 'undefined') {
-        console.error("Quiz data is not loaded. Make sure to include a question data file.");
-        return;
-    }
+    // Theme toggle is handled by global.js, so it's removed from here.
 
     // Quiz State
+    let activeQuizData = [];
     let currentQuestionIndex = 0;
-    let userAnswers = new Array(quizData.length).fill(null);
-    let questionStatus = new Array(quizData.length).fill('not-visited');
+    let userAnswers = [];
+    let questionStatus = []; // 'not-visited', 'answered', 'review', 'answered-review'
     let timerInterval;
 
     // DOM Elements
@@ -16,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const quizInterface = document.getElementById('quiz-interface');
     const startBtn = document.getElementById('start-test-btn');
     const timerInput = document.getElementById('timer-input');
+    const questionCountSelect = document.getElementById('question-count-select');
     const timerDisplay = document.getElementById('timer-display');
     const questionHeaderEl = document.getElementById('question-header');
     const questionContentEl = document.getElementById('question-content');
@@ -29,19 +27,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultsSummaryEl = document.getElementById('results-summary');
     const detailedResultsEl = document.getElementById('detailed-results');
 
+    // This is a global variable now, defined in the quiz layout
+    // const fullQuizData = [ ... ];
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
     function startTimer(duration) {
         let timer = duration * 60;
         timerInterval = setInterval(() => {
             let hours = Math.floor(timer / 3600);
             let minutes = Math.floor((timer % 3600) / 60);
             let seconds = timer % 60;
-
             hours = hours < 10 ? "0" + hours : hours;
             minutes = minutes < 10 ? "0" + minutes : minutes;
             seconds = seconds < 10 ? "0" + seconds : seconds;
-
             timerDisplay.textContent = `${hours}:${minutes}:${seconds}`;
-
             if (--timer < 0) {
                 clearInterval(timerInterval);
                 alert("Time's up!");
@@ -56,6 +62,15 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("Please enter a valid time in minutes.");
             return;
         }
+
+        const questionCount = parseInt(questionCountSelect.value, 10);
+        const shuffledData = shuffleArray([...window.fullQuizData]);
+        activeQuizData = shuffledData.slice(0, questionCount);
+
+        userAnswers = new Array(activeQuizData.length).fill(null);
+        questionStatus = new Array(activeQuizData.length).fill('not-visited');
+        currentQuestionIndex = 0;
+
         instructionsContainer.style.display = 'none';
         quizInterface.style.display = 'block';
         startTimer(duration);
@@ -64,35 +79,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function renderQuestion() {
-        const currentQuestion = quizData[currentQuestionIndex];
+        const currentQuestion = activeQuizData[currentQuestionIndex];
         
-        questionHeaderEl.innerHTML = `
-            <span class="question-number">Question ${currentQuestionIndex + 1}</span>
-            <div class="marks">
-                <span class="mark-tag positive">+4</span>
-                <span class="mark-tag negative">-1</span>
-            </div>
-        `;
+        questionHeaderEl.innerHTML = `<span class="question-number">Question ${currentQuestionIndex + 1}</span><div class="marks"><span class="mark-tag positive">+4</span><span class="mark-tag negative">-1</span></div>`;
         questionContentEl.innerHTML = `<p>${currentQuestion.question}</p>`;
         
         optionsListEl.innerHTML = '';
         currentQuestion.options.forEach((option, index) => {
             const optionId = `q${currentQuestionIndex}-opt${index}`;
             const isChecked = userAnswers[currentQuestionIndex] === option;
-            optionsListEl.innerHTML += `
-                <li class="option-item">
-                    <label for="${optionId}">
-                        <input type="radio" name="question${currentQuestionIndex}" id="${optionId}" value="${option}" ${isChecked ? 'checked' : ''}>
-                        <span>${option}</span>
-                    </label>
-                </li>
-            `;
+            optionsListEl.innerHTML += `<li class="option-item"><label for="${optionId}"><input type="radio" name="question${currentQuestionIndex}" id="${optionId}" value="${option}" ${isChecked ? 'checked' : ''}><span>${option}</span></label></li>`;
         });
 
         optionsListEl.querySelectorAll('input[type="radio"]').forEach(input => {
             input.addEventListener('change', (e) => {
                 userAnswers[currentQuestionIndex] = e.target.value;
-                if (questionStatus[currentQuestionIndex] !== 'review' && questionStatus[currentQuestionIndex] !== 'answered-review') {
+                if (questionStatus[currentQuestionIndex] === 'review' || questionStatus[currentQuestionIndex] === 'answered-review') {
+                    questionStatus[currentQuestionIndex] = 'answered-review';
+                } else {
                     questionStatus[currentQuestionIndex] = 'answered';
                 }
                 renderPalette();
@@ -100,15 +104,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         prevBtn.disabled = currentQuestionIndex === 0;
-        nextBtn.textContent = (currentQuestionIndex === quizData.length - 1) ? 'Submit Test' : 'Save & Next';
+        nextBtn.textContent = (currentQuestionIndex === activeQuizData.length - 1) ? 'Submit Test' : 'Save & Next';
     }
     
     function renderPalette() {
         paletteContainer.innerHTML = '';
-        quizData.forEach((_, index) => {
+        activeQuizData.forEach((_, index) => {
             const btn = document.createElement('button');
             btn.textContent = index + 1;
-            btn.classList.add('palette-btn');
+            btn.className = 'palette-btn';
             if (index === currentQuestionIndex) btn.classList.add('current');
             
             const status = questionStatus[index];
@@ -122,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function handleNext() {
-         if (currentQuestionIndex === quizData.length - 1) {
+        if (currentQuestionIndex === activeQuizData.length - 1) {
             if (confirm('Are you sure you want to submit the test?')) {
                 submitTest();
             }
@@ -143,13 +147,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function handleMarkReview() {
         const currentStatus = questionStatus[currentQuestionIndex];
-        if (currentStatus === 'review' || currentStatus === 'answered-review') {
-            questionStatus[currentQuestionIndex] = userAnswers[currentQuestionIndex] ? 'answered' : 'not-visited';
-        } else {
-            questionStatus[currentQuestionIndex] = userAnswers[currentQuestionIndex] ? 'answered-review' : 'review';
-        }
+        questionStatus[currentQuestionIndex] = (userAnswers[currentQuestionIndex] !== null) ? 'answered-review' : 'review';
         renderPalette();
-        if (currentQuestionIndex < quizData.length - 1) handleNext();
+        if (currentQuestionIndex < activeQuizData.length - 1) handleNext();
     }
 
     function jumpToQuestion(index) {
@@ -160,12 +160,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function submitTest() {
         clearInterval(timerInterval);
-        let score = 0;
-        let correct = 0;
-        let incorrect = 0;
-        let unanswered = 0;
+        let score = 0, correct = 0, incorrect = 0, unanswered = 0;
 
-        quizData.forEach((q, index) => {
+        activeQuizData.forEach((q, index) => {
             if (userAnswers[index] === null) {
                 unanswered++;
             } else if (userAnswers[index] === q.answer) {
@@ -180,40 +177,37 @@ document.addEventListener('DOMContentLoaded', () => {
         quizInterface.style.display = 'none';
         resultsContainer.style.display = 'block';
 
-        resultsSummaryEl.innerHTML = `
-            <h2>Final Score: ${score} / ${quizData.length * 4}</h2>
-            <p><strong>Correct Answers:</strong> ${correct}</p>
-            <p><strong>Incorrect Answers:</strong> ${incorrect}</p>
-            <p><strong>Unanswered:</strong> ${unanswered}</p>
-        `;
+        resultsSummaryEl.innerHTML = `<h2>Final Score: ${score} / ${activeQuizData.length * 4}</h2><p><strong>Correct:</strong> ${correct} | <strong>Incorrect:</strong> ${incorrect} | <strong>Unanswered:</strong> ${unanswered}</p>`;
 
         detailedResultsEl.innerHTML = '<h3>Detailed Analysis</h3>';
-        quizData.forEach((q, index) => {
+        activeQuizData.forEach((q, index) => {
             const userAnswer = userAnswers[index];
             const isCorrect = userAnswer === q.answer;
             
             if (userAnswer === null || !isCorrect) {
                 const resultClass = userAnswer === null ? '' : 'incorrect-answer';
-                detailedResultsEl.innerHTML += `
-                    <div class="result-question">
-                        <p><strong>Q${index + 1}:</strong> ${q.question}</p>
-                        <p>Your Answer: <span class="${resultClass}">${userAnswer || 'Not Answered'}</span></p>
-                        <p>Correct Answer: <span class="correct-answer">${q.answer}</span></p>
-                        <div class="solution"><strong>Solution:</strong> ${q.solution}</div>
-                    </div>
-                `;
+                detailedResultsEl.innerHTML += `<div class="result-question"><p><strong>Q${index + 1}:</strong> ${q.question}</p><p>Your Answer: <span class="${resultClass}">${userAnswer || 'Not Answered'}</span></p><p>Correct Answer: <span class="correct-answer">${q.answer}</span></p><div class="solution"><strong>Solution:</strong> ${q.solution}</div></div>`;
             }
         });
     }
     
-    // Event Listeners
-    startBtn.addEventListener('click', startTest);
-    nextBtn.addEventListener('click', handleNext);
-    prevBtn.addEventListener('click', handlePrev);
-    markReviewBtn.addEventListener('click', handleMarkReview);
-    submitBtn.addEventListener('click', () => {
-         if (confirm('Are you sure you want to submit the test?')) {
-            submitTest();
-        }
-    });
+    if (startBtn) {
+        startBtn.addEventListener('click', startTest);
+    }
+    if (nextBtn) {
+        nextBtn.addEventListener('click', handleNext);
+    }
+    if (prevBtn) {
+        prevBtn.addEventListener('click', handlePrev);
+    }
+    if (markReviewBtn) {
+        markReviewBtn.addEventListener('click', handleMarkReview);
+    }
+    if (submitBtn) {
+        submitBtn.addEventListener('click', () => {
+            if (confirm('Are you sure you want to submit the test?')) {
+                submitTest();
+            }
+        });
+    }
 });
