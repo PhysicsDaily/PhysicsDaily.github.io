@@ -3,238 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conceptual Questions: 1D Kinematics - Physics Daily</title>
-    <meta name="description" content="Test your understanding of one-dimensional kinematics with these thought-provoking conceptual questions.">
+    <title>Conceptual Questions: Measurement - Physics Daily</title>
+    <meta name="description" content="Test your understanding of measurement, units, and dimensional analysis with these conceptual questions.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../../assets/css/global.css">
+
     <style>
-        :root {
-            --primary-color: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary-color: #64748b;
-            --accent-color: #06b6d4;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
-            --text-primary: #1e293b;
-            --text-secondary: #475569;
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --card-bg: #ffffff;
-            --border-color: #e2e8f0;
-            --border-hover: #cbd5e1;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            --border-radius: 12px;
-            --transition: all 0.2s ease;
-        }
-
-        [data-theme="dark"] {
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --card-bg: #334155;
-            --border-color: #475569;
-            --border-hover: #64748b;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background-color: var(--bg-primary);
-            transition: all 0.3s ease;
-        }
-        
-        .math {
-            font-family: 'JetBrains Mono', monospace;
-            font-style: italic;
-            font-weight: 500;
-        }
-
-        .equation {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.1em;
-            font-weight: 500;
-            background: var(--bg-secondary);
-            padding: 0.2em 0.4em;
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .nav {
-            background: var(--card-bg);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-logo {
-            font-size: 1.5rem;
-            font-weight: 700;
+        .section h2 {
             color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .breadcrumb {
-            background: var(--bg-secondary);
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .breadcrumb a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        .breadcrumb a:hover {
-            color: var(--primary-color);
-        }
-
-        .separator {
-            margin: 0 0.5rem;
-            color: var(--text-secondary);
-        }
-
-        .current {
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
-        .header {
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 3rem;
             margin-bottom: 1rem;
-            font-weight: 700;
+            font-size: 1.8rem;
         }
-
-        .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            opacity: 0.9;
-        }
-        
-        .main-content {
-            padding: 2rem 0;
-        }
-
-        .theme-toggle {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            z-index: 1000;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 25px;
-            padding: 8px;
-            box-shadow: var(--shadow-lg);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .theme-toggle button {
-            background: none;
-            border: none;
-            padding: 12px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 18px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            color: var(--text-secondary);
-        }
-
-        .theme-toggle button:hover {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            transform: scale(1.05);
-        }
-
-        .theme-toggle button.active {
-            background: var(--primary-color);
-            color: white;
-            transform: scale(1.1);
-            box-shadow: var(--shadow-md);
-        }
-
-        .theme-toggle button.active:hover {
-            background: var(--primary-dark);
-        }
-
-        .section {
-            margin: 32px 0;
-            padding: 24px;
-            border-radius: 12px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-        }
-
         .question {
-            margin-bottom: 1.5rem;
-            padding: 1rem;
+            margin: 20px 0;
+            padding: 16px;
             border-left: 4px solid var(--primary-color);
             background: var(--bg-secondary);
             border-radius: 8px;
         }
-        
-        .question p {
-            margin-bottom: 0;
+        .question strong {
+            font-weight: 600;
+            color: var(--primary-color);
         }
-
         details {
             border: 1px solid var(--border-color);
             border-radius: 8px;
@@ -242,45 +35,22 @@
             margin-top: 1em;
             background: var(--card-bg);
         }
-
         summary {
             font-weight: bold;
             margin: -.5em -.5em 0;
             padding: .5em;
             cursor: pointer;
-            color: var(--text-primary);
         }
-
-        .footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: 2rem 0;
-            text-align: center;
-            color: var(--text-secondary);
-        }
-
-        @media (max-width: 768px) {
-            .theme-toggle {
-                top: 80px;
-                right: 10px;
-                scale: 0.85;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
+        details p {
+            padding: 0.5rem 0;
         }
     </style>
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-XN081SR2KP');
     </script>
 </head>
@@ -300,8 +70,8 @@
     </nav>
 
     <div class="theme-toggle">
-        <button id="light-theme" title="Light Theme">☀️</button>
-        <button id="dark-theme" title="Dark Theme">🌙</button>
+        <button id="light-mode-btn" title="Light Mode">☀️</button>
+        <button id="dark-mode-btn" title="Dark Mode">🌙</button>
     </div>
 
     <div class="breadcrumb">
@@ -311,7 +81,7 @@
                 <span class="separator">›</span>
                 <a href="../foundations.html">Classical Mechanics</a>
                 <span class="separator">›</span>
-                <a href="kinematics-1d.html">One-Dimensional Kinematics</a>
+                <a href="index.html">📏 Measurement</a>
                 <span class="separator">›</span>
                 <span class="current">🤔 Conceptual Questions</span>
             </nav>
@@ -321,116 +91,200 @@
     <header class="header">
         <div class="container">
             <h1>Conceptual Questions</h1>
-            <p class="subtitle">Chapter 2: One-Dimensional Kinematics</p>
+            <p class="subtitle">Chapter 1: Measurement</p>
+            <p class="description">
+                Test your understanding of the core concepts without complex calculations.
+            </p>
         </div>
     </header>
 
     <main class="main-content">
         <div class="container">
             <div class="section">
+                <h2>🤔 Conceptual Questions</h2>
+                
                 <div class="question">
-                    <strong>1. Can an object have zero velocity but non-zero acceleration? Provide a specific example and explain the physics involved.</strong>
+                    <strong>1.</strong> What are the key characteristics that make a physical standard suitable for scientific measurement? Why are these characteristics essential for scientific progress?
                     <details>
-                        <summary>View Answer</summary>
-                        <p>Yes. The classic example is an object thrown vertically upward. At the very peak of its trajectory, its instantaneous velocity is zero as it changes direction from moving up to moving down. However, the acceleration due to gravity (<span class="math">g</span> ≈ 9.8 m/s²) is still acting on it, pulling it downward. Acceleration is the rate of *change* of velocity, and at that peak moment, the velocity is indeed changing (from positive to negative), even if its value is momentarily zero.</p>
+                        <summary>Answer</summary>
+                        <p>A good physical standard must be: <strong>Accessible</strong> (reproducible worldwide), <strong>Invariable</strong> (unchanging over time and location), <strong>Precise</strong> (allows measurement to desired accuracy), and <strong>Reproducible</strong>. These are essential because science relies on verifying results. If standards varied, experiments in different labs or at different times would not be comparable, hindering scientific progress.</p>
                     </details>
                 </div>
 
                 <div class="question">
-                    <strong>2. Is it possible for an object to have a constant speed but a changing velocity? Explain.</strong>
+                    <strong>2.</strong> Why did the SI system transition from physical artifacts (like the prototype kilogram) to fundamental constants in 2019? What advantages does this provide?
                     <details>
-                        <summary>View Answer</summary>
-                        <p>Yes. This occurs when an object moves in a circular path at a constant speed (uniform circular motion). Speed is a scalar quantity (magnitude only), while velocity is a vector (magnitude and direction). In circular motion, the direction of the velocity vector is constantly changing (it's always tangent to the circle), even if its magnitude (the speed) remains the same. Since the velocity is changing, the object is accelerating (this is called centripetal acceleration).</p>
+                        <summary>Answer</summary>
+                        <p>The transition provides several advantages: <strong>Universal accessibility</strong> (no need to compare with a physical object in Paris), <strong>Ultimate stability</strong> (fundamental constants don't change or degrade like physical artifacts), and <strong>Improved precision</strong> for future technologies. It makes the SI system truly universal and future-proof.</p>
                     </details>
                 </div>
 
                 <div class="question">
-                    <strong>3. If the average velocity of an object over a certain time interval is zero, what can you say about its displacement over that interval? What can you say about its total distance traveled?</strong>
+                    <strong>3.</strong> Explain why dimensional analysis can determine the functional form of physical relationships but cannot determine numerical constants. Give an example.
                     <details>
-                        <summary>View Answer</summary>
-                        <p>If the average velocity is zero, the displacement must also be zero. Average velocity is defined as displacement divided by time (<span class="math">&#x203E;v</span> = Δ<span class="math">x</span>/Δ<span class="math">t</span>). For this to be zero, the numerator (displacement) must be zero. This means the object ended up in the exact same position where it started. However, you cannot conclude that the total distance traveled is zero. The object could have moved away from its starting point and then returned, covering a non-zero distance (like running a lap around a track).</p>
+                        <summary>Answer</summary>
+                        <p>Dimensional analysis works by ensuring dimensional consistency, which constrains the powers of variables but not dimensionless constants. For example, for a pendulum, dimensional analysis correctly finds that the period <span class="equation">T ∝ √(l/g)</span>. However, it cannot determine the constant of proportionality, which is <span class="equation">2π</span>. This constant must be found through experiment or more advanced mathematical derivation.</p>
                     </details>
                 </div>
 
                 <div class="question">
-                    <strong>4. A car and a truck start from rest and accelerate at the same rate. However, the car accelerates for twice the amount of time as the truck. Compare the distances traveled by the car and the truck.</strong>
+                    <strong>4.</strong> Can an equation be dimensionally correct but still be physically wrong? Provide a detailed example and explanation.
                     <details>
-                        <summary>View Answer</summary>
-                        <p>The car will travel four times the distance of the truck. The relevant kinematic equation is <span class="math">x = v₀t + ½at²</span>. Since both start from rest (<span class="math">v₀</span> = 0), the equation simplifies to <span class="math">x = ½at²</span>. Distance is proportional to the square of time (<span class="math">x ∝ t²</span>). If the car accelerates for twice the time (<span class="math">2t</span>), the distance it travels will be proportional to <span class="math">(2t)² = 4t²</span>. Therefore, it covers four times the distance.</p>
+                        <summary>Answer</summary>
+                        <p>Yes. Dimensional consistency is necessary but not sufficient. Example: For kinetic energy, both <span class="equation">K = mv²</span> and <span class="equation">K = ½mv²</span> are dimensionally correct (<span class="equation">[ML²T⁻²]</span>). However, only the second formula is physically correct. Dimensional analysis can't find the error in the first formula because the missing factor (<span class="equation">1/2</span>) is dimensionless.</p>
                     </details>
                 </div>
 
                 <div class="question">
-                    <strong>5. You drop a stone from a cliff. At the same instant, your friend throws another stone straight down from the same cliff with an initial velocity. Which stone has the greater acceleration just after release? Which stone hits the ground first?</strong>
+                    <strong>5.</strong> The equation for viscous drag is <span class="equation">F = 6πηrv</span>. If someone proposes the formula <span class="equation">F = 6πr²v</span>, how could you use dimensional analysis to immediately spot a problem?
                     <details>
-                        <summary>View Answer</summary>
-                        <p>Both stones have the exact same acceleration. Once they are in the air, the only force acting on them (neglecting air resistance) is gravity. Therefore, both accelerate downwards at <span class="math">g</span> ≈ 9.8 m/s². The stone that was thrown downwards will hit the ground first because it starts with a higher initial velocity and will maintain a greater velocity throughout its entire fall compared to the dropped stone.</p>
+                        <summary>Answer</summary>
+                        <p>You would check the dimensions. The dimension of force <span class="math">F</span> is <span class="equation">[MLT⁻²]</span>. The dimension of viscosity <span class="math">η</span> is <span class="equation">[ML⁻¹T⁻¹]</span>.
+                        <br>Proposed formula: <span class="equation">[r²v] = [L²][LT⁻¹] = [L³T⁻¹]</span>. This is incorrect.
+                        <br>Correct formula: <span class="equation">[ηrv] = [ML⁻¹T⁻¹][L][LT⁻¹] = [MLT⁻²]</span>. This matches the dimensions of force. The proposed formula is dimensionally inconsistent.</p>
                     </details>
                 </div>
 
                 <div class="question">
-                    <strong>6. A position-time graph for a particle is a straight line with a negative slope. What can you conclude about the particle's motion?</strong>
+                    <strong>6.</strong> Explain the difference between accuracy and precision in measurement. How do systematic and random errors affect each?
                     <details>
-                        <summary>View Answer</summary>
-                        <p>The particle is moving with a constant negative velocity. The slope of a position-time graph represents velocity. Since the slope is a constant (it's a straight line), the velocity is constant. Since the slope is negative, the velocity is in the negative direction. Because the velocity is constant, the acceleration is zero.</p>
+                        <summary>Answer</summary>
+                        <p><strong>Accuracy</strong> refers to how close measurements are to the true value. <strong>Precision</strong> refers to how close repeated measurements are to each other.
+                        <br><strong>Systematic errors</strong> (e.g., a miscalibrated scale) affect accuracy, causing all measurements to be consistently off-target.
+                        <br><strong>Random errors</strong> (e.g., fluctuations in reading a scale) affect precision, causing measurements to be scattered.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>7.</strong> Why must arguments of transcendental functions (like sin, cos, ln, exp) be dimensionless?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>These functions are defined by their infinite series expansions (e.g., <span class="equation">eˣ = 1 + x + x²/2! + ...</span>). For the sum to be valid, every term must have the same dimension. If <span class="math">x</span> had a dimension (e.g., length [L]), then the terms would have dimensions of [1], [L], [L²], etc., which cannot be added. Therefore, the argument <span class="math">x</span> must be dimensionless.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>8.</strong> When calculating the area of a circle (<span class="equation">A = πr²</span>), which measurement contributes more to the percentage error in the area: the radius <span class="math">r</span> or the value of <span class="math">π</span>?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>The measurement of the radius <span class="math">r</span> is the sole contributor to the error. The value of <span class="math">π</span> is a defined mathematical constant, not a measured quantity, and is considered to have infinite precision (it's an exact number). The error propagation formula <span class="equation">ΔA/A = 2(Δr/r)</span> shows that the relative error in area is twice the relative error in the radius measurement.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>9.</strong> Why is it important to distinguish between precision and accuracy when evaluating experimental results?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>This distinction helps identify the source of measurement problems. <strong>High precision with low accuracy</strong> suggests a systematic error that needs to be found and corrected. <strong>Low precision</strong> suggests significant random error, which might be improved by using a better instrument or refining the measurement technique (e.g., taking more data points and averaging).</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>10.</strong> Explain the reasoning behind the different rules for significant figures in addition/subtraction versus multiplication/division.
+                    <details>
+                        <summary>Answer</summary>
+                        <p>In <strong>addition/subtraction</strong>, the uncertainty is determined by the absolute position of the last significant digit (the decimal place). The result cannot be more precise than the least precise number (e.g., adding a value known to the thousandths place to one only known to the tenths place is limited by the tenths place).
+                        In <strong>multiplication/division</strong>, the uncertainty is determined by the relative error, which is related to the number of significant figures. The result's relative uncertainty is limited by the number with the largest relative uncertainty (i.e., the fewest significant figures).</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>11.</strong> A student reports a measurement as <span class="equation">1200 m</span>. Why is this ambiguous regarding precision? How can the student remove this ambiguity?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>It is ambiguous because we don't know if the trailing zeros are placeholders or are actually measured significant digits. It could mean 2, 3, or 4 significant figures. The ambiguity is removed by using scientific notation:
+                        <br>• <span class="equation">1.2 × 10³ m</span> (2 significant figures)
+                        <br>• <span class="equation">1.20 × 10³ m</span> (3 significant figures)
+                        <br>• <span class="equation">1.200 × 10³ m</span> (4 significant figures)</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>12.</strong> When do you add absolute errors, and when do you add relative (or percentage) errors during error propagation?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>You add <strong>absolute errors</strong> when the quantities are being added or subtracted. For example, if <span class="equation">Z = A + B</span>, then <span class="equation">ΔZ = ΔA + ΔB</span>.
+                        <br>You add <strong>relative errors</strong> when the quantities are being multiplied or divided. For example, if <span class="equation">Z = A × B</span>, then <span class="equation">ΔZ/Z = ΔA/A + ΔB/B</span>.</p>
                     </details>
                 </div>
 
                  <div class="question">
-                    <strong>7. Can the direction of an object's velocity be opposite to the direction of its acceleration? If so, describe such a motion.</strong>
+                    <strong>13.</strong> Which quantity is generally a better indicator of the quality of a measurement: absolute error or relative error? Why?
                     <details>
-                        <summary>View Answer</summary>
-                        <p>Yes. This happens whenever an object is slowing down (decelerating). For example, if a car is moving to the right (positive velocity) but the driver applies the brakes, the acceleration is to the left (negative acceleration). Similarly, a ball thrown upward has an upward (positive) velocity but a downward (negative) acceleration due to gravity.</p>
+                        <summary>Answer</summary>
+                        <p><strong>Relative error</strong> is generally a better indicator. An absolute error of 1 cm is very large when measuring the width of a book (e.g., 20 cm), but it is exceptionally small when measuring the distance to the moon. Relative error puts the error into context by comparing it to the magnitude of the measurement itself, providing a better assessment of its quality.</p>
                     </details>
                 </div>
 
-                 <div class="question">
-                    <strong>8. Two objects are dropped from the same height, one second apart. As they fall, does the distance between them increase, decrease, or stay the same?</strong>
+                <div class="question">
+                    <strong>14.</strong> If a derived quantity <span class="math">Z</span> is proportional to the cube of a measured quantity <span class="math">A</span> (i.e., <span class="equation">Z = kA³</span>), why does a small percentage error in <span class="math">A</span> lead to a much larger percentage error in <span class="math">Z</span>?
                     <details>
-                        <summary>View Answer</summary>
-                        <p>The distance between them increases. The first object dropped will always have a greater instantaneous velocity than the second object. Since the first object is always moving faster than the second, the gap between them will continuously widen as they fall.</p>
+                        <summary>Answer</summary>
+                        <p>This is due to the power rule of error propagation: <span class="equation">ΔZ/Z = 3(ΔA/A)</span>. The percentage error in <span class="math">Z</span> is three times the percentage error in <span class="math">A</span>. The cubic relationship amplifies the effect of the initial measurement error. For example, a 2% error in measuring the radius of a sphere leads to a ~6% error in calculating its volume.</p>
                     </details>
                 </div>
 
+                <div class="question">
+                    <strong>15.</strong> Can the relative error of a measurement be greater than 1 (or percentage error > 100%)? If so, what does this signify?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>Yes, it is possible. It signifies an extremely poor measurement where the uncertainty (<span class="math">ΔA</span>) is larger than the measured value itself (<span class="math">A</span>). For example, a result of <span class="equation">(2 ± 3) cm</span> has a relative error of 1.5. This means the "true" value is so uncertain it could even be negative (which may be unphysical), and the measurement provides very little useful information.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>16.</strong> Two quantities, Planck's constant (<span class="math">h</span>) and the speed of light (<span class="math">c</span>), are considered fundamental constants. Are they fundamental quantities in the dimensional sense?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>No. While they are fundamental constants of nature, they are not fundamental quantities in the dimensional sense. Their dimensions are derived from the seven base SI quantities (Mass, Length, Time, etc.).
+                        <br>• Dimension of <span class="math">h</span> is <span class="equation">[ML²T⁻¹]</span>.
+                        <br>• Dimension of <span class="math">c</span> is <span class="equation">[LT⁻¹]</span>.
+                        The fundamental quantities are the base dimensions themselves ([M], [L], [T], etc.).</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>17.</strong> You measure the length of a table twice. First with a meter stick marked in millimeters, and second with a laser interferometer. Which measurement will likely have more significant figures? Which will have a smaller percentage error?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>The laser interferometer measurement will have more significant figures and a smaller percentage error. The precision of the measuring instrument determines the number of significant figures you can confidently report. The laser, being a much more precise instrument, can resolve smaller length increments, leading to more significant figures and a smaller uncertainty (<span class="math">ΔL</span>), which in turn leads to a smaller percentage error (<span class="math">ΔL/L</span>).</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>18.</strong> Why can't dimensional analysis be used to derive the formula <span class="equation">v = u + at</span>?
+                    <details>
+                        <summary>Answer</summary>
+                        <p>Dimensional analysis fails for formulas involving sums or differences. The method works by assuming a product relationship like <span class="equation">v = k × uᵃ × aᵇ × tᶜ</span>. While it can confirm that all terms in <span class="equation">v = u + at</span> have the same dimensions ([LT⁻¹]), it cannot generate a formula that is a sum of terms. This is one of its key limitations.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>19.</strong> A fellow student claims that if an experiment is performed very carefully, it is possible to completely eliminate all errors. Is this claim correct? Explain.
+                    <details>
+                        <summary>Answer</summary>
+                        <p>No, this claim is incorrect. While systematic errors can theoretically be identified and eliminated, random errors are inherent in any measurement process. There will always be limitations in the measuring instrument (its least count) and unavoidable random fluctuations in the environment or the observer's perception. Therefore, every measurement has some degree of uncertainty that can be minimized but never completely eliminated.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>20.</strong> Two students measure the same resistance. Student A reports <span class="equation">(100 ± 10) Ω</span>. Student B reports <span class="equation">(105 ± 1) Ω</span>. If the true value is <span class="equation">106 Ω</span>, which student was more precise? Which was more accurate?
+                    <details>
+                        <summary>Answer</summary>
+                        <p><strong>Precision</strong> relates to the size of the uncertainty. Student B's uncertainty is <span class="equation">±1 Ω</span>, while Student A's is <span class="equation">±10 Ω</span>. Therefore, <strong>Student B was more precise</strong>.
+                        <br><strong>Accuracy</strong> relates to how close the result is to the true value. Student B's range (<span class="equation">104-106 Ω</span>) includes the true value. Student A's range (<span class="equation">90-110 Ω</span>) also includes the true value, but Student B's central value (105 Ω) is much closer to the true value (106 Ω) than Student A's (100 Ω). Therefore, <strong>Student B was also more accurate</strong>.</p>
+                    </details>
+                </div>
             </div>
         </div>
     </main>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy;  Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
+            <p>&copy; Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const lightThemeBtn = document.getElementById('light-theme');
-            const darkThemeBtn = document.getElementById('dark-theme');
-            const docElement = document.documentElement;
-
-            const applyTheme = (theme) => {
-                docElement.setAttribute('data-theme', theme);
-                if (theme === 'dark') {
-                    darkThemeBtn.classList.add('active');
-                    lightThemeBtn.classList.remove('active');
-                } else {
-                    lightThemeBtn.classList.add('active');
-                    darkThemeBtn.classList.remove('active');
-                }
-                localStorage.setItem('theme', theme);
-            };
-
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            applyTheme(savedTheme);
-
-            lightThemeBtn.addEventListener('click', () => {
-                applyTheme('light');
-            });
-
-            darkThemeBtn.addEventListener('click', () => {
-                applyTheme('dark');
-            });
-        });
-    </script>
+    <script src="../../assets/js/global.js" defer></script>
 </body>
 </html>
