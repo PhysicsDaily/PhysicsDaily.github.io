@@ -1,0 +1,307 @@
+---
+layout: page
+title: Contribute to Physics Daily
+subtitle: Help us improve and expand our physics learning platform
+description: Guidelines for contributing to Physics Daily - from content creation to bug reports and feature suggestions
+---
+
+<section class="section">
+    <h2 class="section-title">🤝 How to Contribute</h2>
+    <div class="contribute-options">
+        <div class="contribute-card">
+            <h3>📝 Content Creation</h3>
+            <p>Help us expand our physics content by contributing new chapters, examples, or explanations.</p>
+            <ul>
+                <li>Write clear, comprehensive explanations of physics concepts</li>
+                <li>Create worked examples and practice problems</li>
+                <li>Review existing content for accuracy and clarity</li>
+                <li>Suggest improvements to existing chapters</li>
+            </ul>
+        </div>
+        
+        <div class="contribute-card">
+            <h3>🐛 Bug Reports</h3>
+            <p>Found an error or issue? Help us fix it by reporting problems you encounter.</p>
+            <ul>
+                <li>Mathematical errors in equations or calculations</li>
+                <li>Broken links or missing resources</li>
+                <li>Website functionality issues</li>
+                <li>Mobile responsiveness problems</li>
+            </ul>
+        </div>
+        
+        <div class="contribute-card">
+            <h3>💡 Feature Suggestions</h3>
+            <p>Have ideas for new features or improvements? We'd love to hear them!</p>
+            <ul>
+                <li>Interactive simulations and animations</li>
+                <li>Additional practice problems and quizzes</li>
+                <li>New learning tools and resources</li>
+                <li>Accessibility improvements</li>
+            </ul>
+        </div>
+        
+        <div class="contribute-card">
+            <h3>🔧 Technical Contributions</h3>
+            <p>Help improve the website's functionality and user experience.</p>
+            <ul>
+                <li>Jekyll templating and site structure</li>
+                <li>CSS styling and responsive design</li>
+                <li>JavaScript functionality improvements</li>
+                <li>Performance optimizations</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="section-title">📋 Contribution Guidelines</h2>
+    <div class="guidelines">
+        <div class="guideline-item">
+            <h3>1. Fork the Repository</h3>
+            <p>Start by forking our <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io" target="_blank">GitHub repository</a> to your own account.</p>
+        </div>
+        
+        <div class="guideline-item">
+            <h3>2. Create a Branch</h3>
+            <p>Create a descriptive branch name for your contribution (e.g., <code>add-thermodynamics-examples</code> or <code>fix-mobile-navigation</code>).</p>
+        </div>
+        
+        <div class="guideline-item">
+            <h3>3. Make Your Changes</h3>
+            <p>Follow our coding standards and content guidelines when making changes:</p>
+            <ul>
+                <li>Use clear, concise language for physics explanations</li>
+                <li>Include proper mathematical notation using LaTeX/MathJax</li>
+                <li>Test your changes locally using Jekyll</li>
+                <li>Ensure mobile responsiveness</li>
+            </ul>
+        </div>
+        
+        <div class="guideline-item">
+            <h3>4. Submit a Pull Request</h3>
+            <p>When ready, submit a pull request with:</p>
+            <ul>
+                <li>Clear description of changes made</li>
+                <li>Screenshots for visual changes</li>
+                <li>Testing information</li>
+                <li>Reference to any related issues</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="section-title">📞 Get in Touch</h2>
+    <div class="contact-options">
+        <div class="contact-card">
+            <h3>GitHub Issues</h3>
+            <p>The best way to report bugs or suggest features is through our GitHub issues.</p>
+            <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io/issues" class="btn" target="_blank">
+                Open an Issue
+            </a>
+        </div>
+        
+        <div class="contact-card">
+            <h3>GitHub Discussions</h3>
+            <p>For general questions, ideas, or community discussion, use GitHub Discussions.</p>
+            <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io/discussions" class="btn btn-secondary" target="_blank">
+                Join Discussion
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="section-title">🌟 Recognition</h2>
+    <p class="recognition-text">
+        All contributors will be recognized in our <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io#contributors" target="_blank">contributors list</a> 
+        and have our sincere gratitude for helping make physics education more accessible to everyone.
+    </p>
+</section>
+
+<style>
+.contribute-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.contribute-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.contribute-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.contribute-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.contribute-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.contribute-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contribute-card li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.contribute-card li:before {
+    content: "•";
+    color: var(--primary-color);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.guidelines {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.guideline-item {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.guideline-item h3 {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.guideline-item p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.guideline-item ul {
+    margin-top: 0.75rem;
+    padding-left: 1.5rem;
+}
+
+.guideline-item li {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.guideline-item code {
+    background: var(--bg-tertiary);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.contact-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.contact-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.contact-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.contact-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.contact-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.section-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-left: 1rem;
+    color: var(--text-primary);
+}
+
+.section-title:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--primary-color);
+    border-radius: 2px;
+}
+
+.section {
+    margin-bottom: 4rem;
+}
+
+.recognition-text {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    text-align: center;
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.recognition-text a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.recognition-text a:hover {
+    text-decoration: underline;
+}
+</style>
