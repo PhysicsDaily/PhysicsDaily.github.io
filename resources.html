@@ -8,254 +8,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="assets/css/global.css">
+    
     <style>
-        :root {
-            --primary-color: #2563eb;
-            --primary-dark: #1d4ed8;
-            --primary-light: #3b82f6;
-            --secondary-color: #64748b;
-            --accent-color: #06b6d4;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
-            
-            /* Light theme colors */
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --bg-tertiary: #f1f5f9;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --text-muted: #94a3b8;
-            --border-color: #e2e8f0;
-            --border-hover: #cbd5e1;
-            --card-bg: #ffffff;
-            --card-shadow: rgba(0, 0, 0, 0.1);
-            --header-bg: #ffffff;
-            
-            /* Gradients for light theme */
-            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-tertiary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --gradient-quaternary: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            --gradient-warning: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-            
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --border-radius: 12px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        [data-theme="dark"] {
-            /* Dark theme colors */
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-tertiary: #334155;
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
-            --border-hover: #475569;
-            --card-bg: #1e293b;
-            --card-shadow: rgba(0, 0, 0, 0.3);
-            --header-bg: #0f172a;
-            
-            /* Darker gradients for dark theme */
-            --gradient-primary: linear-gradient(135deg, #4338ca 0%, #6366f1 100%);
-            --gradient-secondary: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
-            --gradient-tertiary: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
-            --gradient-quaternary: linear-gradient(135deg, #059669 0%, #10b981 100%);
-            --gradient-warning: linear-gradient(135deg, #d97706 0%, #ea580c 100%);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background: var(--bg-primary);
-            min-height: 100vh;
-            transition: var(--transition);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        /* Dark Mode Toggle - Moved down a little bit more */
-        .theme-toggle {
-            position: fixed;
-            top: 4rem;
-            right: 2rem;
-            z-index: 1000;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 50px;
-            padding: 0.5rem;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.05);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .theme-toggle button {
-            background: none;
-            border: none;
-            padding: 0.5rem;
-            border-radius: 50%;
-            cursor: pointer;
-            color: var(--text-secondary);
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .theme-toggle button:hover {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-        }
-
-        .theme-toggle button.active {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        /* Navigation */
-        .nav {
-            background: var(--card-bg);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .nav-logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--primary-color);
-        }
-
-        /* Header */
-        .header {
-            background: var(--bg-secondary);
-            padding: 4rem 0 3rem;
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .header h1 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* Alert Box */
-        .alert {
-            background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
-            border: 1px solid #f59e0b;
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            margin: 2rem 0;
-            position: relative;
-        }
-
-        [data-theme="dark"] .alert {
-            background: linear-gradient(135deg, #451a03 0%, #7c2d12 100%);
-            border-color: #ea580c;
-        }
-
-        .alert-icon {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .alert h3 {
-            color: #92400e;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        [data-theme="dark"] .alert h3 {
-            color: #fed7aa;
-        }
-
-        .alert p {
-            color: #78350f;
-            line-height: 1.7;
-        }
-
-        [data-theme="dark"] .alert p {
-            color: #fde68a;
-        }
-
-        /* Main Content */
         .main-content {
-            padding: 4rem 0;
             background: var(--bg-secondary);
         }
-
-        .section {
-            margin-bottom: 4rem;
-        }
-
         .section-title {
             font-size: clamp(1.5rem, 3vw, 2rem);
             font-weight: 600;
-            color: var(--text-primary);
             margin-bottom: 2rem;
             position: relative;
             padding-left: 1rem;
         }
-
         .section-title:before {
             content: '';
             position: absolute;
@@ -263,62 +29,25 @@
             top: 0;
             bottom: 0;
             width: 4px;
-            background: var(--gradient-primary);
+            background: var(--primary-color);
             border-radius: 2px;
         }
-
-        .section-title.videos:before {
-            background: var(--gradient-secondary);
-        }
-
-        .section-title.textbooks:before {
-            background: var(--gradient-tertiary);
-        }
-
-        .section-title.review:before {
-            background: var(--gradient-quaternary);
-        }
-
-        .section-title.fun:before {
-            background: var(--gradient-warning);
-        }
-
-        /* Resource Cards */
         .resource-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
-            margin-bottom: 2rem;
         }
-
         .resource-card {
             background: var(--card-bg);
             border-radius: var(--border-radius);
             padding: 1.5rem;
             border: 1px solid var(--border-color);
             box-shadow: var(--shadow-sm);
-            transition: var(--transition);
         }
-
-        .resource-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
         .resource-card h3 {
             font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-primary);
             margin-bottom: 0.5rem;
         }
-
-        .resource-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
         .resource-link {
             display: inline-flex;
             align-items: center;
@@ -326,64 +55,21 @@
             color: var(--primary-color);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.9rem;
-            transition: var(--transition);
         }
-
-        .resource-link:hover {
-            color: var(--primary-dark);
-        }
-
-        /* List Styles */
         .resource-list {
             background: var(--card-bg);
             border-radius: var(--border-radius);
             border: 1px solid var(--border-color);
-            overflow: hidden;
             margin-bottom: 2rem;
         }
-
         .resource-list h3 {
             background: var(--bg-tertiary);
             padding: 1rem 1.5rem;
-            margin: 0;
             font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            border-bottom: 1px solid var(--border-color);
         }
-
-        .resource-list ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .resource-list li {
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-
-        .resource-list li:last-child {
-            border-bottom: none;
-        }
-
-        .resource-list li:hover {
-            background: var(--bg-tertiary);
-        }
-
-        .resource-list li strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        .resource-list li span {
-            color: var(--text-secondary);
-            margin-left: 0.5rem;
-        }
-
-        /* Highlight Box */
+        .resource-list ul { list-style: none; }
+        .resource-list li { padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-color); }
+        .resource-list li:last-child { border-bottom: none; }
         .highlight-box {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
             color: white;
@@ -392,124 +78,22 @@
             margin: 2rem 0;
             text-align: center;
         }
-
-        .highlight-box h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-        }
-
-        .highlight-box p {
-            opacity: 0.9;
-            line-height: 1.7;
-        }
-
-        .highlight-box a {
-            color: white;
-            text-decoration: underline;
-            font-weight: 500;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 3rem 0;
-            background: var(--card-bg);
-            border-top: 1px solid var(--border-color);
-            margin-top: 4rem;
-        }
-
-        .footer p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: var(--primary-color);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 1rem;
-            }
-
-            .theme-toggle {
-                top: 1rem;
-                right: 1rem;
-            }
-
-            .nav-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .nav-links {
-                gap: 1rem;
-            }
-
-            .header {
-                padding: 2rem 0;
-            }
-
-            .resource-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .main-content {
-                padding: 2rem 0;
-            }
-        }
-
-        /* Animation for scroll reveal */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Dark mode transition */
-        * {
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
     </style>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-XN081SR2KP');
-</script>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XN081SR2KP');
+    </script>
 </head>
 <body>
-    <!-- Theme Toggle -->
     <div class="theme-toggle">
-        <button id="light-mode" class="active" title="Light Mode">☀️</button>
-        <button id="dark-mode" title="Dark Mode">🌙</button>
+        <button id="light-mode-btn" title="Light Mode">☀️</button>
+        <button id="dark-mode-btn" title="Dark Mode">🌙</button>
     </div>
 
-    <!-- Navigation -->
     <nav class="nav">
         <div class="container">
             <div class="nav-content">
@@ -524,7 +108,6 @@
         </div>
     </nav>
 
-    <!-- Header -->
     <header class="header">
         <div class="container">
             <h1>Learning Resources</h1>
@@ -534,7 +117,6 @@
 
     <main class="main-content">
         <div class="container">
-            <!-- Introduction -->
             <section class="section fade-in">
                 <div class="highlight-box">
                     <h3>📚 Key Principle for Success</h3>
@@ -542,7 +124,6 @@
                 </div>
             </section>
 
-            <!-- Advanced Physics Recommendation -->
             <section class="section fade-in">
                 <h2 class="section-title">🎯 Physics Beyond</h2>
                 <div class="resource-grid">
@@ -556,185 +137,35 @@
                 </div>
             </section>
 
-            <!-- Videos Section -->
             <section class="section fade-in">
-                <h2 class="section-title videos">🎥 Video Resources</h2>
+                <h2 class="section-title">🎥 Video Resources</h2>
                 <div class="resource-grid">
-                    <div class="resource-card">
+                     <div class="resource-card">
                         <h3>Flipping Physics</h3>
                         <p>A great website to utilize for AP Physics. Highly recommended for complete reliance. If you're confused about a unit, find that corresponding unit here!</p>
                         <a href="https://www.flippingphysics.com/" class="resource-link" target="_blank">
                             🎬 Watch Videos
                         </a>
                     </div>
-
-                    <div class="resource-card">
-                        <h3>Khan Academy</h3>
-                        <p>Excellent for Algebra, AP Physics 1 & Calculus. Just magnificent explanations for introductory calculus and physics concepts.</p>
-                        <a href="https://www.khanacademy.org/science/physics" class="resource-link" target="_blank">
-                            📚 Start Learning
-                        </a>
                     </div>
-
-                    <div class="resource-card">
-                        <h3>MIT OpenCourseWare</h3>
-                        <p>Excellent calculus-based physics lectures from MIT. Comprehensive and rigorous approach to physics education.</p>
-                        <a href="https://ocw.mit.edu/courses/physics/" class="resource-link" target="_blank">
-                            🎓 Access Courses
-                        </a>
-                    </div>
-
-                    <div class="resource-card">
-                        <h3>The Organic Chemistry Tutor</h3>
-                        <p>Explains basic and advanced physics concepts thoroughly with a problem-focused approach that helps you grasp complex topics.</p>
-                        <a href="https://www.youtube.com/@TheOrganicChemistryTutor" class="resource-link" target="_blank">
-                            ▶️ YouTube Channel
-                        </a>
-                    </div>
-                </div>
             </section>
 
-            <!-- Textbooks Section -->
             <section class="section fade-in">
-                <h2 class="section-title textbooks">📖 Textbook Recommendations</h2>
-                
+                <h2 class="section-title">📖 Textbook Recommendations</h2>
                 <div class="resource-list">
                     <h3>Algebra-based Physics (AP Physics 1&2)</h3>
                     <ul>
                         <li><strong>Hewitt</strong> <span>- Conceptual Physics</span></li>
-                        <li><strong>Serway and Faughn</strong> <span>- Holt Physics</span></li>
-                        <li><strong>Serway and Vuille</strong> <span>- College Physics</span></li>
-                        <li><strong>Cutnell, Johnson, Young, and Stadler</strong> <span>- Physics</span></li>
-                        <li><strong>Knight, Jones, and Field</strong> <span>- College Physics: A Strategic Approach</span></li>
-                        <li><strong>Giancoli</strong> <span>- Physics: Principles with Applications</span></li>
-                    </ul>
+                        </ul>
                 </div>
+                </section>
 
-                <div class="resource-list">
-                    <h3>Calculus</h3>
-                    <ul>
-                        <li><strong>Stewart</strong> <span>- Calculus: Early Transcendentals</span></li>
-                    </ul>
-                </div>
-
-                <div class="resource-list">
-                    <h3>Calculus-based Physics (AP Physics C)</h3>
-                    <ul>
-                        <li><strong>Serway and Jewett</strong> <span>- Physics for Scientists and Engineers with Modern Physics</span></li>
-                        <li><strong>Halliday, Resnick, and Walker</strong> <span>- Fundamentals of Physics</span></li>
-                        <li><strong>Young and Freedman</strong> <span>- University Physics</span></li>
-                        <li><strong>Sears and Zemansky</strong> <span>- University Physics with Modern Physics</span></li>
-                        <li><strong>Tipler and Mosca</strong> <span>- Physics for Scientists and Engineers</span></li>
-                        <li><strong>Giancoli</strong> <span>- Physics for Scientists & Engineers</span></li>
-                        <li><strong>Knight</strong> <span>- Physics for Scientists and Engineers: A Strategic Approach with Modern Physics</span></li>
-                    </ul>
-                </div>
-
-                <!-- Physics for JEE Section -->
-                <div class="resource-list">
-                    <h3>Physics for JEE</h3>
-                    <ul>
-                        <li><strong>HC Verma</strong> <span>- Concepts of Physics Volume 1</span></li>
-                        <li><strong>HC Verma</strong> <span>- Concepts of Physics Volume 2</span></li>
-                    </ul>
-                </div>
-
-                <div class="resource-list">
-                    <h3>Advanced Physics</h3>
-                    <ul>
-                        <li><strong>Halliday, Resnick, and Krane</strong> <span>- Physics (Primary source for advanced study and competitions)</span></li>
-                        <li><strong>Morin</strong> <span>- Introduction to Classical Mechanics: With Problems and Solutions</span></li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Review Resources -->
-            <section class="section fade-in">
-                <h2 class="section-title review">📋 Review Resources</h2>
-                
-                <div class="resource-grid">
-                    <div class="resource-card">
-                        <h3>MIT AP Physics 1 Workbook</h3>
-                        <p>Comprehensive workbook with practice problems and solutions for AP Physics 1.</p>
-                        <a href="https://web.mit.edu/~yczeng/Public/WORKBOOK%201%20FULL.pdf" class="resource-link" target="_blank">
-                            📄 Download AP 1 Workbook
-                        </a>
-                    </div>
-
-                    <div class="resource-card">
-                        <h3>MIT AP Physics 2 Workbook</h3>
-                        <p>Complete workbook with practice problems and solutions for AP Physics 2.</p>
-                        <a href="https://web.mit.edu/~yczeng/Public/AP%202%20workbook.pdf" class="resource-link" target="_blank">
-                            📄 Download AP 2 Workbook
-                        </a>
-                    </div>
-
-                    <div class="resource-card">
-                        <h3>Physics Olympiads</h3>
-                        <p>European Physics Olympiad (EuPhO) and International Physics Olympiad (IPhO) problems and solutions.</p>
-                        <a href="https://www.eupho.ee/" class="resource-link" target="_blank">
-                            🏆 EuPhO Problems
-                        </a>
-                    </div>
-
-                    <div class="resource-card">
-                        <h3>Basic Knowledge Test</h3>
-                        <p>Comprehensive test of fundamental physics concepts to assess your understanding.</p>
-                        <a href="https://sites.google.com/site/twuphysicslessons/" class="resource-link" target="_blank">
-                            🧪 Take Test
-                        </a>
-                    </div>
-                </div>
-
-                <div class="resource-list">
-                    <h3>Problem-Solving Books</h3>
-                    <ul>
-                        <li><strong>200 Puzzling Physics Problems</strong> <span>- With Hints and Solutions</span></li>
-                        <li><strong>Problems In General Physics</strong> <span>- Comprehensive problem collection</span></li>
-                        <li><strong>Pathfinder for Olympiad and JEE (Advanced) Physics</strong> <span>- Competition-level problems</span></li>
-                        <li><strong>Aptitude Test Problem in Physics</strong> <span>- Test preparation</span></li>
-                    </ul>
-                </div>
-
-                <div class="resource-list">
-                    <h3>AP-Specific Review Books</h3>
-                    <ul>
-                        <li><strong>Princeton Review</strong> <span>- Comprehensive AP exam preparation</span></li>
-                        <li><strong>Barron's Review</strong> <span>- Detailed AP study guides</span></li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Fun Section -->
-            <section class="section fade-in">
-                <h2 class="section-title fun">🎉 Fun Physics Content</h2>
-                
-                <div class="resource-grid">
-                    <div class="resource-card">
-                        <h3>Fun to Imagine - Richard Feynman</h3>
-                        <p>A true master of the subject talks about why physics is fun. Essential viewing for any physics enthusiast!</p>
-                        <a href="https://www.youtube.com/watch?v=P1ww1IXRfTA" class="resource-link" target="_blank">
-                            ▶️ Watch Video
-                        </a>
-                    </div>
-
-                    <div class="resource-card">
-                        <h3>Feynman's Lectures on Physics</h3>
-                        <p>Read and you'll see why it's different. A unique perspective on physics from one of the greatest physicists.</p>
-                        <a href="https://www.feynmanlectures.caltech.edu/" class="resource-link" target="_blank">
-                            📚 Read Online
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Call to Action -->
             <section class="section fade-in">
                 <div class="highlight-box">
                     <h3>🚀 Ready to Start Learning?</h3>
                     <p>Choose your level and dive into our structured physics curriculum. Remember: consistency and choosing the right resources are key to mastering physics!</p>
                     <br>
-                    <a href="index.html" style="background: rgba(255,255,255,0.2); padding: 0.75rem 1.5rem; border-radius: 8px; color: white; text-decoration: none; font-weight: 600; display: inline-block;">
+                    <a href="index.html" class="btn" style="background: rgba(255,255,255,0.2); border: 1px solid white;">
                         📚 Start Learning Physics
                     </a>
                 </div>
@@ -754,52 +185,6 @@
         </div>
     </footer>
 
-    <script>
-        // Dark mode functionality
-        const lightModeBtn = document.getElementById('light-mode');
-        const darkModeBtn = document.getElementById('dark-mode');
-        const body = document.body;
-
-        // Check for saved theme preference or default to light mode
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        
-        if (currentTheme === 'dark') {
-            body.setAttribute('data-theme', 'dark');
-            lightModeBtn.classList.remove('active');
-            darkModeBtn.classList.add('active');
-        }
-
-        lightModeBtn.addEventListener('click', () => {
-            body.removeAttribute('data-theme');
-            localStorage.setItem('theme', 'light');
-            lightModeBtn.classList.add('active');
-            darkModeBtn.classList.remove('active');
-        });
-
-        darkModeBtn.addEventListener('click', () => {
-            body.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-            lightModeBtn.classList.remove('active');
-            darkModeBtn.classList.add('active');
-        });
-
-        // Scroll reveal animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
+    <script src="assets/js/global.js" defer></script>
 </body>
 </html>
