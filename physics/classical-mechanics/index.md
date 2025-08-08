@@ -1,0 +1,330 @@
+---
+layout: default
+title: Classical Mechanics: Foundations & Kinematics
+description: Master classical mechanics fundamentals including measurement, motion, Newton's laws, and momentum. Comprehensive study guide for Chapters 1-7.
+breadcrumb:
+    - label: Home
+        url: /
+    - label: Classical Mechanics
+---
+<!-- Page-specific styles for layout -->
+<style>
+        .objectives-section { padding: 3rem 0; background: var(--bg-primary); }
+        .objectives-card { background: var(--card-bg); border-radius: var(--border-radius); padding: 2rem; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); }
+        .objectives-card h2 { font-size: 1.5rem; color: var(--text-primary); margin-bottom: 2rem; text-align: center; }
+        .objectives-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .objective-item { text-align: center; padding: 1rem; }
+        .objective-icon { font-size: 2rem; display: block; margin-bottom: 1rem; }
+        .objective-item h3 { font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .objective-item p { color: var(--text-secondary); font-size: 0.9rem; }
+
+        .main-content { background: var(--bg-secondary); }
+        .progress-section, .chapters-section, .quick-access-section { margin-bottom: 4rem; }
+        .progress-section h2, .chapters-section h2, .quick-access-section h2 { font-size: 1.5rem; color: var(--text-primary); margin-bottom: 2rem; }
+        
+        .progress-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+        .stat-item { text-align: center; background: var(--card-bg); padding: 1.5rem; border-radius: var(--border-radius); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); }
+        .stat-number { font-size: 2rem; font-weight: 700; color: var(--primary-color); display: block; margin-bottom: 0.5rem; }
+        .stat-label { color: var(--text-secondary); font-weight: 500; }
+
+        .chapter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
+        .chapter-card { background: var(--card-bg); border-radius: var(--border-radius); padding: 1.5rem; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); }
+        .chapter-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .chapter-number { font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: var(--accent-color); background: rgba(6, 182, 212, 0.1); padding: 0.25rem 0.75rem; border-radius: 20px; }
+        .difficulty-badge { padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+        .difficulty-badge.beginner { background: rgba(16, 185, 129, 0.1); color: var(--success-color); }
+        .difficulty-badge.intermediate { background: rgba(245, 158, 11, 0.1); color: var(--warning-color); }
+        .difficulty-badge.advanced { background: rgba(239, 68, 68, 0.1); color: var(--danger-color); }
+        .chapter-card h3 { font-size: 1.25rem; margin-bottom: 0.75rem; }
+        .chapter-description { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem; }
+        .chapter-stats { display: flex; gap: 1rem; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted); }
+        .chapter-topics { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .topic-tag { font-size: 0.75rem; background: var(--bg-tertiary); color: var(--text-muted); padding: 0.25rem 0.5rem; border-radius: 6px; }
+        .chapter-actions { display: flex; align-items: center; gap: 1rem; }
+        .progress-indicator { flex: 1; height: 6px; background: var(--bg-tertiary); border-radius: 3px; overflow: hidden; }
+        .progress-bar { height: 100%; background: var(--primary-color); border-radius: 3px; width: 0%; }
+        
+        .quick-access-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .quick-access-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius); padding: 1.5rem; text-decoration: none; color: var(--text-primary); text-align: center; box-shadow: var(--shadow-sm); }
+        .access-icon { font-size: 2rem; display: block; margin-bottom: 1rem; }
+        .quick-access-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .quick-access-card p { color: var(--text-secondary); font-size: 0.9rem; }
+    </style>
+
+    <header class="header">
+        <div class="container">
+            <h1>Classical Mechanics: Foundations & Kinematics</h1>
+            <p class="subtitle">Chapters 1-7: Master the fundamentals of physics</p>
+            <p class="description">
+                Build a solid foundation in physics with comprehensive coverage of measurement, motion, forces, and momentum.
+                These seven chapters form the cornerstone of classical mechanics.
+            </p>
+        </div>
+    </header>
+
+    <section class="objectives-section">
+        <div class="container">
+            <div class="objectives-card">
+                <h2>🎯 Learning Objectives</h2>
+                <div class="objectives-grid">
+                    <div class="objective-item">
+                        <span class="objective-icon">📏</span>
+                        <h3>Measurement & Units</h3>
+                        <p>Master scientific measurement, significant figures, and dimensional analysis</p>
+                    </div>
+                    <div class="objective-item">
+                        <span class="objective-icon">🚀</span>
+                        <h3>Motion Analysis</h3>
+                        <p>Understand kinematics in 1D, 2D, and 3D coordinate systems</p>
+                    </div>
+                    <div class="objective-item">
+                        <span class="objective-icon">⚖️</span>
+                        <h3>Newton's Laws</h3>
+                        <p>Apply fundamental principles to solve real-world problems</p>
+                    </div>
+                    <div class="objective-item">
+                        <span class="objective-icon">💫</span>
+                        <h3>Momentum</h3>
+                        <p>Analyze collisions and particle systems using conservation laws</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="progress-section">
+                <h2>📊 Your Progress</h2>
+                <div class="progress-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="completed-chapters">0</span>
+                        <span class="stat-label">Chapters Completed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="total-topics">21</span>
+                        <span class="stat-label">Total Topics</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="study-time">~35</span>
+                        <span class="stat-label">Hours (Estimated)</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="chapters-section">
+                <h2>📚 Chapters Overview</h2>
+                <div class="chapter-grid">
+                    <div class="chapter-card" data-chapter="1">
+                        <div class="chapter-header">
+                            <div class="chapter-number">Chapter 1</div>
+                            <div class="difficulty-badge beginner">Beginner</div>
+                        </div>
+                        <h3>Measurement</h3>
+                        <p class="chapter-description">
+                            Learn the foundations of scientific measurement, units, significant figures, and dimensional analysis.
+                        </p>
+                        <div class="chapter-stats">
+                            <span class="study-time">⏱️ 4-5 hours</span>
+                            <span class="topics-count">📖 3 topics</span>
+                        </div>
+                        <div class="chapter-topics">
+                            <span class="topic-tag">Units & Standards</span>
+                            <span class="topic-tag">Significant Figures</span>
+                            <span class="topic-tag">Dimensional Analysis</span>
+                        </div>
+                        <div class="chapter-actions">
+                            <a href="measurements/index.html" class="btn btn-primary">Start Chapter</a>
+                            <div class="progress-indicator">
+                                <div class="progress-bar" data-progress="0"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chapter-card" data-chapter="2">
+                        <div class="chapter-header">
+                            <div class="chapter-number">Chapter 2</div>
+                            <div class="difficulty-badge beginner">Beginner</div>
+                        </div>
+                        <h3>Motion in One Dimension</h3>
+                        <p class="chapter-description">
+                            Master the concepts of position, velocity, acceleration, and kinematic equations for 1D motion.
+                        </p>
+                        <div class="chapter-stats">
+                            <span class="study-time">⏱️ 5-6 hours</span>
+                            <span class="topics-count">📖 3 topics</span>
+                        </div>
+                        <div class="chapter-topics">
+                            <span class="topic-tag">Position & Displacement</span>
+                            <span class="topic-tag">Velocity & Acceleration</span>
+                            <span class="topic-tag">Kinematic Equations</span>
+                        </div>
+                        <div class="chapter-actions">
+                            <a href="kinematics/index.html" class="btn btn-primary">Start Chapter</a>
+                            <div class="progress-indicator">
+                                <div class="progress-bar" data-progress="0"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chapter-card" data-chapter="3">
+                        <div class="chapter-header">
+                            <div class="chapter-number">Chapter 3</div>
+                            <div class="difficulty-badge intermediate">Intermediate</div>
+                        </div>
+                        <h3>Force and Newton's Laws</h3>
+                        <p class="chapter-description">
+                            Understand force concepts and master Newton's three laws of motion with practical applications.
+                        </p>
+                        <div class="chapter-stats">
+                            <span class="study-time">⏱️ 6-7 hours</span>
+                            <span class="topics-count">📖 3 topics</span>
+                        </div>
+                        <div class="chapter-topics">
+                            <span class="topic-tag">Newton's Laws</span>
+                            <span class="topic-tag">Force Diagrams</span>
+                            <span class="topic-tag">Applications</span>
+                        </div>
+                        <div class="chapter-actions">
+                            <a href="chapter3/index.html" class="btn btn-primary">Start Chapter</a>
+                            <div class="progress-indicator">
+                                <div class="progress-bar" data-progress="0"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chapter-card" data-chapter="4">
+                        <div class="chapter-header">
+                            <div class="chapter-number">Chapter 4</div>
+                            <div class="difficulty-badge intermediate">Intermediate</div>
+                        </div>
+                        <h3>Motion in 2D & 3D</h3>
+                        <p class="chapter-description">
+                            Extend motion analysis to multiple dimensions including projectile motion and circular motion.
+                        </p>
+                        <div class="chapter-stats">
+                            <span class="study-time">⏱️ 5-6 hours</span>
+                            <span class="topics-count">📖 3 topics</span>
+                        </div>
+                        <div class="chapter-topics">
+                            <span class="topic-tag">Projectile Motion</span>
+                            <span class="topic-tag">Circular Motion</span>
+                            <span class="topic-tag">Relative Motion</span>
+                        </div>
+                        <div class="chapter-actions">
+                            <a href="chapter4/index.html" class="btn btn-primary">Start Chapter</a>
+                            <div class="progress-indicator">
+                                <div class="progress-bar" data-progress="0"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chapter-card" data-chapter="5">
+                        <div class="chapter-header">
+                            <div class="chapter-number">Chapter 5</div>
+                            <div class="difficulty-badge intermediate">Intermediate</div>
+                        </div>
+                        <h3>Applications of Newton's Laws</h3>
+                        <p class="chapter-description">
+                            Apply Newton's laws to real-world scenarios including friction, inclined planes, and pulley systems.
+                        </p>
+                        <div class="chapter-stats">
+                            <span class="study-time">⏱️ 6-7 hours</span>
+                            <span class="topics-count">📖 3 topics</span>
+                        </div>
+                        <div class="chapter-topics">
+                            <span class="topic-tag">Friction</span>
+                            <span class="topic-tag">Inclined Planes</span>
+                            <span class="topic-tag">Dynamics Applications</span>
+                        </div>
+                        <div class="chapter-actions">
+                            <a href="chapter5/index.html" class="btn btn-primary">Start Chapter</a>
+                            <div class="progress-indicator">
+                                <div class="progress-bar" data-progress="0"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chapter-card" data-chapter="6">
+                        <div class="chapter-header">
+                            <div class="chapter-number">Chapter 6</div>
+                            <div class="difficulty-badge intermediate">Intermediate</div>
+                        </div>
+                        <h3>Momentum</h3>
+                        <p class="chapter-description">
+                            Master momentum conservation, impulse-momentum theorem, and collision analysis.
+                        </p>
+                        <div class="chapter-stats">
+                            <span class="study-time">⏱️ 5-6 hours</span>
+                            <span class="topics-count">📖 3 topics</span>
+                        </div>
+                        <div class="chapter-topics">
+                            <span class="topic-tag">Momentum & Impulse</span>
+                            <span class="topic-tag">Conservation</span>
+                            <span class="topic-tag">Collisions</span>
+                        </div>
+                        <div class="chapter-actions">
+                            <a href="chapter6/index.html" class="btn btn-primary">Start Chapter</a>
+                            <div class="progress-indicator">
+                                <div class="progress-bar" data-progress="0"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chapter-card" data-chapter="7">
+                        <div class="chapter-header">
+                            <div class="chapter-number">Chapter 7</div>
+                            <div class="difficulty-badge advanced">Advanced</div>
+                        </div>
+                        <h3>Systems of Particles</h3>
+                        <p class="chapter-description">
+                            Analyze multi-particle systems, center of mass motion, and variable mass systems.
+                        </p>
+                        <div class="chapter-stats">
+                            <span class="study-time">⏱️ 4-5 hours</span>
+                            <span class="topics-count">📖 3 topics</span>
+                        </div>
+                        <div class="chapter-topics">
+                            <span class="topic-tag">Center of Mass</span>
+                            <span class="topic-tag">Systems</span>
+                            <span class="topic-tag">Variable Mass</span>
+                        </div>
+                        <div class="chapter-actions">
+                            <a href="chapter7/index.html" class="btn btn-primary">Start Chapter</a>
+                            <div class="progress-indicator">
+                                <div class="progress-bar" data-progress="0"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="quick-access-section">
+                <h2>🚀 Quick Access</h2>
+                <div class="quick-access-grid">
+                    <a href="#" class="quick-access-card">
+                        <span class="access-icon">📊</span>
+                        <h3>Practice Problems</h3>
+                        <p>Comprehensive problem sets for all chapters</p>
+                    </a>
+                    <a href="#" class="quick-access-card">
+                        <span class="access-icon">📋</span>
+                        <h3>Formula Sheets</h3>
+                        <p>Quick reference for all key equations</p>
+                    </a>
+                    <a href="#" class="quick-access-card">
+                        <span class="access-icon">🧪</span>
+                        <h3>Lab Exercises</h3>
+                        <p>Hands-on experiments and simulations</p>
+                    </a>
+                    <a href="#" class="quick-access-card">
+                        <span class="access-icon">📝</span>
+                        <h3>Study Notes</h3>
+                        <p>Concise summaries for quick review</p>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    

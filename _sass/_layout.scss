@@ -1,0 +1,63 @@
+// Layout components
+.header {
+    background: var(--bg-secondary);
+    padding: 4rem 0 3rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+
+    h1 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+    }
+
+    p,
+    .subtitle,
+    .description {
+        font-size: 1.2rem;
+        color: var(--text-secondary);
+        max-width: 700px;
+        margin: 0 auto;
+    }
+}
+
+.main-content {
+    padding: 2rem 0;
+}
+
+.section {
+    margin-bottom: 3rem;
+}
+
+.footer {
+    text-align: center;
+    padding: 3rem 0;
+    background: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    margin-top: 4rem;
+
+    p {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+    }
+
+    &-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+
+        a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+
+            &:hover {
+                color: var(--primary-color);
+            }
+        }
+    }
+}

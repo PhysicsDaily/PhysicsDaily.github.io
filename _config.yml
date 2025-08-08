@@ -5,22 +5,41 @@ baseurl: ""
 
 permalink: pretty
 
+# Collections for organized content
 collections:
-  mechanics:
+  physics:
     output: true
+    permalink: /physics/:path/
 
+# Default layouts
 defaults:
   - scope:
       path: ""
     values:
       layout: default
+  - scope:
+      path: "pages"
+    values:
+      layout: default
+  - scope:
+      path: "_physics"
+    values:
+      layout: default
 
+# Sass configuration
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# Analytics
 google_analytics: G-XN081SR2KP
 google_site_verification: Ymi0Tv40FP7rKnVowfeCm69EwVaihVBHo5qp8xstwu0
 
+# Build settings
 exclude:
   - README.md
   - node_modules
   - vendor
   - Gemfile
   - Gemfile.lock
+  - build.sh
