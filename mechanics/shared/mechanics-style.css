@@ -1,3 +1,6 @@
+/* Deprecated legacy file: mechanics/shared/mechanics-style.css
+    Site now uses assets/css/global.css and _layouts/default.html for global styles.
+    Do not include this file in any page. Retained temporarily for reference. */
 :root {
     --primary-color: #2563eb;
     --primary-dark: #1d4ed8;

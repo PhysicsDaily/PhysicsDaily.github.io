@@ -78,6 +78,28 @@ This website is actively being developed. Each physics topic section will includ
 - **JavaScript** - Interactive features (coming soon)
 - **GitHub Pages** - Free hosting and deployment
 
+## ▶️ Run locally (Windows PowerShell)
+
+This site uses Jekyll (GitHub Pages). To render Liquid front matter correctly, run a local server:
+
+1) Install Ruby + DevKit, then install Bundler:
+	- https://rubyinstaller.org/
+	- In PowerShell: `gem install bundler`
+
+2) Install dependencies in the repo root:
+
+```powershell
+bundle install
+```
+
+3) Serve the site with GitHub Pages config:
+
+```powershell
+bundle exec jekyll serve --livereload
+```
+
+Then open http://127.0.0.1:4000 — the YAML front matter will not be visible; pages will render with the Jekyll layouts/includes.
+
 ## 📖 How to Use
 
 1. Visit the [live website](https://physicsdaily.github.io)

@@ -1,0 +1,26 @@
+title: Physics Daily
+description: Learn physics every day with clean notes, examples, and practice.
+url: ""
+baseurl: ""
+
+permalink: pretty
+
+collections:
+  mechanics:
+    output: true
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+google_analytics: G-XN081SR2KP
+google_site_verification: Ymi0Tv40FP7rKnVowfeCm69EwVaihVBHo5qp8xstwu0
+
+exclude:
+  - README.md
+  - node_modules
+  - vendor
+  - Gemfile
+  - Gemfile.lock

@@ -1,141 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Numerical Problems: Measurement - Physics Daily</title>
-    <meta name="description" content="Practice numerical problems involving measurement, units, and dimensional analysis.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="../../assets/css/global.css">
+---
+layout: default
+title: Numerical Problems: Measurement
+description: Practice numerical problems involving measurement, units, and dimensional analysis.
+breadcrumb:
+  - label: Home
+    url: "/"
+  - label: Classical Mechanics
+    url: "/mechanics/foundations.html"
+  - label: "📏 Measurement"
+    url: "/mechanics/measurements/index.html"
+  - label: "🧮 Numerical Problems"
+    url: "/mechanics/measurements/numerical.html"
+---
 
-    <style>
-        .section h2 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
-        }
-        .problem {
-            margin: 20px 0;
-            padding: 20px;
-            border-left: 4px solid var(--primary-color);
-            background: var(--bg-secondary);
-            border-radius: 8px;
-        }
-        .problem-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        .problem-number {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-        .difficulty {
-            padding: 0.25rem 0.75rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        .difficulty.easy { background-color: rgba(16, 185, 129, 0.1); color: var(--success-color); }
-        .difficulty.medium { background-color: rgba(245, 158, 11, 0.1); color: var(--warning-color); }
-        .difficulty.hard { background-color: rgba(239, 68, 68, 0.1); color: var(--danger-color); }
-        .problem-content p { margin-bottom: 1rem; }
-        .given-data {
-            background: var(--bg-tertiary);
-            padding: 1rem;
-            border-radius: 6px;
-            margin: 1rem 0;
-            border-left: 3px solid var(--accent-color);
-        }
-        details {
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: .5em .5em 0;
-            margin-top: 1em;
-            background: var(--bg-tertiary);
-        }
-        summary {
-            font-weight: bold;
-            margin: -.5em -.5em 0;
-            padding: .5em;
-            cursor: pointer;
-        }
-        .solution h4 {
-            color: var(--primary-color);
-            margin-top: 1rem;
-        }
-        .final-answer {
-            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
-            border-left: 4px solid var(--success-color);
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 6px;
-            font-weight: 600;
-        }
-        [data-theme="dark"] .final-answer {
-            background: linear-gradient(135deg, #14532d, #166534);
-        }
-    </style>
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XN081SR2KP');
-    </script>
-</head>
-<body>
-    <nav class="nav">
-        <div class="container">
-            <div class="nav-content">
-                <a href="../../index.html" class="nav-logo">Physics Daily</a>
-                <ul class="nav-links">
-                    <li><a href="../../index.html">Home</a></li>
-                    <li><a href="../../resources.html">Resources</a></li>
-                    <li><a href="../../about.html">About</a></li>
-                    <li><a href="../../contribute.html">Contribute</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="theme-toggle">
-        <button id="light-mode-btn" title="Light Theme">☀️</button>
-        <button id="dark-mode-btn" title="Dark Theme">🌙</button>
+<header class="header">
+    <div class="container">
+        <h1>Numerical Problems</h1>
+        <p class="subtitle">Chapter 1: Measurement</p>
+        <p class="description">
+            Practice your problem-solving skills with quantitative problems involving units, conversions, and calculations.
+        </p>
     </div>
+</header>
 
-    <div class="breadcrumb">
-        <div class="container">
-            <nav aria-label="Breadcrumb">
-                <a href="../../index.html">Home</a>
-                <span class="separator">›</span>
-                <a href="../foundations.html">Classical Mechanics</a>
-                <span class="separator">›</span>
-                <a href="index.html">📏 Measurement</a>
-                <span class="separator">›</span>
-                <span class="current">🧮 Numerical Problems</span>
-            </nav>
-        </div>
-    </div>
+<style>
+    .section h2 {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+        font-size: 1.8rem;
+    }
+    .problem {
+        margin: 20px 0;
+        padding: 20px;
+        border-left: 4px solid var(--primary-color);
+        background: var(--bg-secondary);
+        border-radius: 8px;
+    }
+    .problem-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    .problem-number {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+    .difficulty {
+        padding: 0.25rem 0.75rem;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+    .difficulty.easy { background-color: rgba(16, 185, 129, 0.1); color: var(--success-color); }
+    .difficulty.medium { background-color: rgba(245, 158, 11, 0.1); color: var(--warning-color); }
+    .difficulty.hard { background-color: rgba(239, 68, 68, 0.1); color: var(--danger-color); }
+    .problem-content p { margin-bottom: 1rem; }
+    .given-data {
+        background: var(--bg-tertiary);
+        padding: 1rem;
+        border-radius: 6px;
+        margin: 1rem 0;
+        border-left: 3px solid var(--accent-color);
+    }
+    details {
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: .5em .5em 0;
+        margin-top: 1em;
+        background: var(--bg-tertiary);
+    }
+    summary {
+        font-weight: bold;
+        margin: -.5em -.5em 0;
+        padding: .5em;
+        cursor: pointer;
+    }
+    .solution h4 {
+        color: var(--primary-color);
+        margin-top: 1rem;
+    }
+    .final-answer {
+        background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+        border-left: 4px solid var(--success-color);
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 6px;
+        font-weight: 600;
+    }
+    [data-theme="dark"] .final-answer {
+        background: linear-gradient(135deg, #14532d, #166534);
+    }
+</style>
 
-    <header class="header">
-        <div class="container">
-            <h1>Numerical Problems</h1>
-            <p class="subtitle">Chapter 1: Measurement</p>
-            <p class="description">
-                Practice your problem-solving skills with quantitative problems involving units, conversions, and calculations.
-            </p>
-        </div>
-    </header>
-
-    <main class="main-content">
-        <div class="container">
+<main class="main-content">
+    <div class="container">
             <div class="section">
                 <h2>🧮 Numerical Problems</h2>
                 
@@ -390,13 +350,3 @@
             </div>
         </div>
     </main>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
-        </div>
-    </footer>
-
-    <script src="../../assets/js/global.js" defer></script>
-</body>
-</html>

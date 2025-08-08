@@ -1,14 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Check if quizData is defined. If not, don't run the quiz logic.
-    if (typeof quizData === 'undefined') {
-        console.error("Quiz data is not loaded. Make sure to include a question data file.");
+    // Resolve quiz data: prefer global quizData; else parse from embedded JSON script.
+    let resolvedQuizData = (typeof quizData !== 'undefined') ? quizData : null;
+    if (!resolvedQuizData) {
+        const dataScript = document.getElementById('quiz-data');
+        if (dataScript) {
+            try { resolvedQuizData = JSON.parse(dataScript.textContent); } catch (e) { console.error('Failed to parse embedded quiz data JSON', e); }
+        }
+    }
+    if (!resolvedQuizData) {
+        console.error("Quiz data is not loaded. Make sure to include a question data file or embed JSON with id 'quiz-data'.");
         return;
     }
 
     // Quiz State
     let currentQuestionIndex = 0;
-    let userAnswers = new Array(quizData.length).fill(null);
-    let questionStatus = new Array(quizData.length).fill('not-visited');
+    let userAnswers = new Array(resolvedQuizData.length).fill(null);
+    let questionStatus = new Array(resolvedQuizData.length).fill('not-visited');
     let timerInterval;
 
     // DOM Elements
@@ -17,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-test-btn');
     const timerInput = document.getElementById('timer-input');
     const timerDisplay = document.getElementById('timer-display');
+    const questionCountInput = document.getElementById('question-count-input');
     const questionHeaderEl = document.getElementById('question-header');
     const questionContentEl = document.getElementById('question-content');
     const optionsListEl = document.getElementById('options-list');
@@ -56,6 +64,22 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("Please enter a valid time in minutes.");
             return;
         }
+        // Determine how many questions to use
+        let desiredCount = resolvedQuizData.length;
+        if (questionCountInput) {
+            const n = parseInt(questionCountInput.value, 10);
+            if (!isNaN(n) && n > 0) {
+                desiredCount = Math.min(Math.max(1, n), resolvedQuizData.length);
+            }
+        }
+        // Choose first N by default; if you want randomness, shuffle deterministically later
+        if (desiredCount < resolvedQuizData.length) {
+            resolvedQuizData = resolvedQuizData.slice(0, desiredCount);
+        }
+        // Reset state arrays to selected length
+        currentQuestionIndex = 0;
+        userAnswers = new Array(resolvedQuizData.length).fill(null);
+        questionStatus = new Array(resolvedQuizData.length).fill('not-visited');
         instructionsContainer.style.display = 'none';
         quizInterface.style.display = 'block';
         startTimer(duration);
@@ -64,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function renderQuestion() {
-        const currentQuestion = quizData[currentQuestionIndex];
+    const currentQuestion = resolvedQuizData[currentQuestionIndex];
         
         questionHeaderEl.innerHTML = `
             <span class="question-number">Question ${currentQuestionIndex + 1}</span>
@@ -100,12 +124,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         prevBtn.disabled = currentQuestionIndex === 0;
-        nextBtn.textContent = (currentQuestionIndex === quizData.length - 1) ? 'Submit Test' : 'Save & Next';
+    nextBtn.textContent = (currentQuestionIndex === resolvedQuizData.length - 1) ? 'Submit Test' : 'Save & Next';
     }
     
     function renderPalette() {
         paletteContainer.innerHTML = '';
-        quizData.forEach((_, index) => {
+    resolvedQuizData.forEach((_, index) => {
             const btn = document.createElement('button');
             btn.textContent = index + 1;
             btn.classList.add('palette-btn');
@@ -122,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function handleNext() {
-         if (currentQuestionIndex === quizData.length - 1) {
+         if (currentQuestionIndex === resolvedQuizData.length - 1) {
             if (confirm('Are you sure you want to submit the test?')) {
                 submitTest();
             }
@@ -149,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
             questionStatus[currentQuestionIndex] = userAnswers[currentQuestionIndex] ? 'answered-review' : 'review';
         }
         renderPalette();
-        if (currentQuestionIndex < quizData.length - 1) handleNext();
+    if (currentQuestionIndex < resolvedQuizData.length - 1) handleNext();
     }
 
     function jumpToQuestion(index) {
@@ -165,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let incorrect = 0;
         let unanswered = 0;
 
-        quizData.forEach((q, index) => {
+    resolvedQuizData.forEach((q, index) => {
             if (userAnswers[index] === null) {
                 unanswered++;
             } else if (userAnswers[index] === q.answer) {
@@ -181,14 +205,14 @@ document.addEventListener('DOMContentLoaded', () => {
         resultsContainer.style.display = 'block';
 
         resultsSummaryEl.innerHTML = `
-            <h2>Final Score: ${score} / ${quizData.length * 4}</h2>
+            <h2>Final Score: ${score} / ${resolvedQuizData.length * 4}</h2>
             <p><strong>Correct Answers:</strong> ${correct}</p>
             <p><strong>Incorrect Answers:</strong> ${incorrect}</p>
             <p><strong>Unanswered:</strong> ${unanswered}</p>
         `;
 
         detailedResultsEl.innerHTML = '<h3>Detailed Analysis</h3>';
-        quizData.forEach((q, index) => {
+    resolvedQuizData.forEach((q, index) => {
             const userAnswer = userAnswers[index];
             const isCorrect = userAnswer === q.answer;
             

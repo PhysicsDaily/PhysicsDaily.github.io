@@ -1,138 +1,99 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 1: Measurement - Physics Daily</title>
-    <meta name="description" content="Master scientific measurement, significant figures, and dimensional analysis in physics.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+---
+layout: default
+title: Chapter 1: Measurement
+description: Master scientific measurement, significant figures, and dimensional analysis in physics.
+breadcrumb:
+  - label: Home
+    url: "/"
+  - label: Classical Mechanics
+    url: "/mechanics/foundations.html"
+  - label: "📏 Measurement"
+    url: "/mechanics/measurements/index.html"
+---
+
+<style>
+    .section h2 {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+        font-size: 1.8rem;
+        font-weight: 600;
+    }
+    .section h3 {
+        margin: 1.5rem 0 1rem 0;
+        font-size: 1.3rem;
+    }
+    .section p {
+        text-align: justify;
+    }
+    .section ul, .section ol {
+        margin-left: 2rem;
+    }
+
+    /* Note and Example Boxes */
+    .highlight-box, .beginner-note, .advanced-note, .danger-note, .example-box {
+        padding: 16px;
+        margin: 16px 0;
+        border-radius: 8px;
+        border-left: 4px solid;
+    }
+    .highlight-box { background: linear-gradient(135deg, #e0f2fe, #f0f9ff); border-color: var(--accent-color); }
+    .beginner-note { background: linear-gradient(135deg, #fef3c7, #fde68a); border-color: var(--warning-color); }
+    .advanced-note { background: linear-gradient(135deg, #f3e8ff, #ede9fe); border-color: #8b5cf6; }
+    .danger-note { background: linear-gradient(135deg, #ffe4e6, #fee2e2); border-color: var(--danger-color); }
+    .example-box { background: linear-gradient(135deg, #dcfce7, #bbf7d0); border-color: var(--success-color); }
+
+    [data-theme="dark"] .highlight-box { background: linear-gradient(135deg, #164e63, #0c4a6e); }
+    [data-theme="dark"] .beginner-note { background: linear-gradient(135deg, #451a03, #78350f); }
+    [data-theme="dark"] .advanced-note { background: linear-gradient(135deg, #2d1b69, #3730a3); }
+    [data-theme="dark"] .danger-note { background: linear-gradient(135deg, #7f1d1d, #991b1b); }
+    [data-theme="dark"] .example-box { background: linear-gradient(135deg, #14532d, #166534); }
     
-    <link rel="stylesheet" href="../../assets/css/global.css">
+    .formula-box {
+        background: var(--bg-secondary);
+        border: 2px solid var(--border-color);
+        padding: 20px;
+        margin: 16px 0;
+        text-align: center;
+    }
 
-    <style>
-        .section h2 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
-            font-weight: 600;
-        }
-        .section h3 {
-            margin: 1.5rem 0 1rem 0;
-            font-size: 1.3rem;
-        }
-        .section p {
-            text-align: justify;
-        }
-        .section ul, .section ol {
-            margin-left: 2rem;
-        }
+    /* Table Styles */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    th, td { border: 1px solid var(--border-color); padding: 8px 12px; text-align: left; }
+    th { background: var(--bg-secondary); }
+    .two-column-table { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    @media (min-width: 768px) { .two-column-table { grid-template-columns: 1fr 1fr; } }
+    .column-table { overflow-x: auto; }
+    
+    /* Practice Section */
+    .practice-section { padding: 2rem 0; background-color: var(--bg-secondary); }
+    .section-header { text-align: center; margin-bottom: 3rem; }
+    .section-title { font-size: 2.5rem; margin-bottom: 1rem; }
+    .practice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .practice-card { background: var(--card-bg); padding: 2rem; text-decoration: none; border: 1px solid var(--border-color); text-align: center; }
+    .practice-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--primary-color); }
+    .practice-card .icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .practice-card h3 { font-size: 1.25rem; color: var(--primary-color); }
+    .btn-practice { width: 100%; margin-top: 1rem; }
+</style>
 
-        /* Note and Example Boxes */
-        .highlight-box, .beginner-note, .advanced-note, .danger-note, .example-box {
-            padding: 16px;
-            margin: 16px 0;
-            border-radius: 8px;
-            border-left: 4px solid;
-        }
-        .highlight-box { background: linear-gradient(135deg, #e0f2fe, #f0f9ff); border-color: var(--accent-color); }
-        .beginner-note { background: linear-gradient(135deg, #fef3c7, #fde68a); border-color: var(--warning-color); }
-        .advanced-note { background: linear-gradient(135deg, #f3e8ff, #ede9fe); border-color: #8b5cf6; }
-        .danger-note { background: linear-gradient(135deg, #ffe4e6, #fee2e2); border-color: var(--danger-color); }
-        .example-box { background: linear-gradient(135deg, #dcfce7, #bbf7d0); border-color: var(--success-color); }
-
-        [data-theme="dark"] .highlight-box { background: linear-gradient(135deg, #164e63, #0c4a6e); }
-        [data-theme="dark"] .beginner-note { background: linear-gradient(135deg, #451a03, #78350f); }
-        [data-theme="dark"] .advanced-note { background: linear-gradient(135deg, #2d1b69, #3730a3); }
-        [data-theme="dark"] .danger-note { background: linear-gradient(135deg, #7f1d1d, #991b1b); }
-        [data-theme="dark"] .example-box { background: linear-gradient(135deg, #14532d, #166534); }
-        
-        .formula-box {
-            background: var(--bg-secondary);
-            border: 2px solid var(--border-color);
-            padding: 20px;
-            margin: 16px 0;
-            text-align: center;
-        }
-
-        /* Table Styles */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        th, td { border: 1px solid var(--border-color); padding: 8px 12px; text-align: left; }
-        th { background: var(--bg-secondary); }
-        .two-column-table { display: grid; grid-template-columns: 1fr; gap: 20px; }
-        @media (min-width: 768px) { .two-column-table { grid-template-columns: 1fr 1fr; } }
-        .column-table { overflow-x: auto; }
-        
-        /* Practice Section */
-        .practice-section { padding: 2rem 0; background-color: var(--bg-secondary); }
-        .section-header { text-align: center; margin-bottom: 3rem; }
-        .section-title { font-size: 2.5rem; margin-bottom: 1rem; }
-        .practice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-        .practice-card { background: var(--card-bg); padding: 2rem; text-decoration: none; border: 1px solid var(--border-color); text-align: center; }
-        .practice-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--primary-color); }
-        .practice-card .icon { font-size: 2.5rem; margin-bottom: 1rem; }
-        .practice-card h3 { font-size: 1.25rem; color: var(--primary-color); }
-        .btn-practice { width: 100%; margin-top: 1rem; }
-    </style>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XN081SR2KP');
-    </script>
-</head>
-<body>
-    <nav class="nav">
-        <div class="container">
-            <div class="nav-content">
-                <a href="../../index.html" class="nav-logo">Physics Daily</a>
-                <ul class="nav-links">
-                    <li><a href="../../index.html">Home</a></li>
-                    <li><a href="../../resources.html">Resources</a></li>
-                    <li><a href="../../about.html">About</a></li>
-                    <li><a href="../../contribute.html">Contribute</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="theme-toggle">
-        <button id="light-mode-btn" title="Light Theme">☀️</button>
-        <button id="dark-mode-btn" title="Dark Theme">🌙</button>
+<header class="header" style="background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); color: white;">
+    <div class="container">
+        <h1>Chapter 1: Measurement</h1>
+        <p class="subtitle">Foundation of Scientific Physics</p>
+        <p class="description">
+            Master the fundamental concepts of measurement, units, and dimensional analysis that form the bedrock of all physics - from basic concepts to advanced applications.
+        </p>
     </div>
+</header>
 
-    <div class="breadcrumb">
-        <div class="container">
-            <nav aria-label="Breadcrumb">
-                <a href="../../index.html">Home</a>
-                <span class="separator">›</span>
-                <a href="../foundations.html">Classical Mechanics</a>
-                <span class="separator">›</span>
-                <span class="current">📏 Measurement</span>
-            </nav>
-        </div>
-    </div>
-
-    <header class="header" style="background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); color: white;">
-        <div class="container">
-            <h1>Chapter 1: Measurement</h1>
-            <p class="subtitle">Foundation of Scientific Physics</p>
-            <p class="description">
-                Master the fundamental concepts of measurement, units, and dimensional analysis that form the bedrock of all physics - from basic concepts to advanced applications.
-            </p>
-        </div>
-    </header>
-
-    <main class="main-content">
-        <div class="container">
+<main class="main-content">
+    <div class="container">
             <div class="section">
                 <h2>🌟 Introduction: Why Measurement Matters in Physics</h2>
                 <div class="beginner-note">
@@ -532,13 +493,3 @@
             </div>
         </div>
     </section>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy;  Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
-        </div>
-    </footer>
-
-    <script src="../../assets/js/global.js" defer></script>
-</body>
-</html>

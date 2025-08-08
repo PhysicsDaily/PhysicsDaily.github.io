@@ -1,4 +1,6 @@
-// mechanics/shared/mechanics-scripts.js
+// Deprecated legacy file: mechanics/shared/mechanics-scripts.js
+// Site now uses global includes and assets (assets/js/global.js, _layouts/default.html).
+// This file is retained only for historical reference and should not be included by any page.
 
 document.addEventListener('DOMContentLoaded', function() {
     const lightModeBtn = document.getElementById('light-mode');

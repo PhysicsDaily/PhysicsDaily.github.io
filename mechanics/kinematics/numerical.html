@@ -1,14 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Numerical Problems: 1D Kinematics - Physics Daily</title>
-    <meta name="description" content="Solve numerical problems on one-dimensional kinematics, covering acceleration, free fall, and motion graphs.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
+---
+layout: default
+title: Numerical Problems: 1D Kinematics
+description: Solve numerical problems on one-dimensional kinematics, covering acceleration, free fall, and motion graphs.
+breadcrumb:
+    - label: Home
+        url: /
+    - label: Classical Mechanics
+        url: /mechanics/foundations.html
+    - label: 🚀 One-Dimensional Kinematics
+        url: /mechanics/kinematics/
+    - label: 🧮 Numerical Problems
+---
+<style>
         :root {
             --primary-color: #2563eb;
             --primary-dark: #1d4ed8;
@@ -280,48 +283,6 @@
             }
         }
     </style>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-XN081SR2KP');
-    </script>
-</head>
-<body>
-    <nav class="nav">
-        <div class="container">
-            <div class="nav-content">
-                <a href="../../index.html" class="nav-logo">Physics Daily</a>
-                <ul class="nav-links">
-                    <li><a href="../../index.html">Home</a></li>
-                    <li><a href="../../resources.html">Resources</a></li>
-                    <li><a href="../../about.html">About</a></li>
-                    <li><a href="../../contribute.html">Contribute</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="theme-toggle">
-        <button id="light-theme" title="Light Theme">☀️</button>
-        <button id="dark-theme" title="Dark Theme">🌙</button>
-    </div>
-
-    <div class="breadcrumb">
-        <div class="container">
-            <nav aria-label="Breadcrumb">
-                <a href="../../index.html">Home</a>
-                <span class="separator">›</span>
-                <a href="../foundations.html">Classical Mechanics</a>
-                <span class="separator">›</span>
-                <a href="kinematics-1d.html">One-Dimensional Kinematics</a>
-                <span class="separator">›</span>
-                <span class="current">🧮 Numerical Problems</span>
-            </nav>
-        </div>
-    </div>
 
     <header class="header">
         <div class="container">
@@ -736,42 +697,4 @@
             </div>
         </div>
     </main>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
-        </div>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const lightThemeBtn = document.getElementById('light-theme');
-            const darkThemeBtn = document.getElementById('dark-theme');
-            const docElement = document.documentElement;
-
-            const applyTheme = (theme) => {
-                docElement.setAttribute('data-theme', theme);
-                if (theme === 'dark') {
-                    darkThemeBtn.classList.add('active');
-                    lightThemeBtn.classList.remove('active');
-                } else {
-                    lightThemeBtn.classList.add('active');
-                    darkThemeBtn.classList.remove('active');
-                }
-                localStorage.setItem('theme', theme);
-            };
-
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            applyTheme(savedTheme);
-
-            lightThemeBtn.addEventListener('click', () => {
-                applyTheme('light');
-            });
-
-            darkThemeBtn.addEventListener('click', () => {
-                applyTheme('dark');
-            });
-        });
-    </script>
-</body>
-</html>
+    

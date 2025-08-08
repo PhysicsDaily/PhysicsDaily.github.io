@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  {% include head.html %}
+  {% include analytics.html %}
+</head>
+<body>
+  {% include nav.html %}
+  {% include theme-toggle.html %}
+  {% include breadcrumb.html %}
+  <main>
+    {{ content }}
+  </main>
+  {% include footer.html %}
+  <script src="{{ '/assets/js/global.js' | relative_url }}" defer></script>
+</body>
+</html>
