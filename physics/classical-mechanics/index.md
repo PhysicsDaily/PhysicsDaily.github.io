@@ -5,7 +5,6 @@ description: "Master classical mechanics fundamentals including measurement, mot
 breadcrumb:
   - label: "Home"
     url: "/"
-  - label: "Classical Mechanics"
 ---
 <!-- Page-specific styles for layout -->
 <style>
