@@ -1,344 +1,272 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classical Mechanics: Foundations & Kinematics - Physics Daily</title>
-    <meta name="description" content="Master classical mechanics fundamentals including measurement, motion, Newton's laws, and momentum. Comprehensive study guide for Chapters 1-7.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="shared/mechanics-style.css">
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+---
+layout: chapter
+title: "Classical Mechanics: Foundations & Kinematics"
+subtitle: "Chapters 1-7: Master the fundamentals of physics"
+description: "Build a solid foundation in physics with comprehensive coverage of measurement, motion, forces, and momentum. These seven chapters form the cornerstone of classical mechanics."
+category: "Classical Mechanics"
+category_link: "/#foundations"
+breadcrumb_title: "Foundations & Kinematics"
+---
 
-  gtag('config', 'G-XN081SR2KP');
-</script>
-</head>
-<body>
-    <nav class="nav">
-        <div class="container">
-            <div class="nav-content">
-                <a href="../index.html" class="nav-logo">Physics Daily</a>
-                <ul class="nav-links">
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="../resources.html">Resources</a></li>
-                    <li><a href="../about.html">About</a></li>
-                    <li><a href="../contribute.html">Contribute</a></li>
-                </ul>
+<section class="objectives-section">
+    <div class="container">
+        <div class="objectives-card">
+            <h2>🎯 Learning Objectives</h2>
+            <div class="objectives-grid">
+                <div class="objective-item">
+                    <span class="objective-icon">📏</span>
+                    <h3>Measurement & Units</h3>
+                    <p>Master scientific measurement, significant figures, and dimensional analysis</p>
+                </div>
+                <div class="objective-item">
+                    <span class="objective-icon">🚀</span>
+                    <h3>Motion Analysis</h3>
+                    <p>Understand kinematics in 1D, 2D, and 3D coordinate systems</p>
+                </div>
+                <div class="objective-item">
+                    <span class="objective-icon">⚖️</span>
+                    <h3>Newton's Laws</h3>
+                    <p>Apply fundamental principles to solve real-world problems</p>
+                </div>
+                <div class="objective-item">
+                    <span class="objective-icon">💫</span>
+                    <h3>Momentum</h3>
+                    <p>Analyze collisions and particle systems using conservation laws</p>
+                </div>
             </div>
         </div>
-    </nav>
-
-    <div class="theme-toggle">
-        <button id="light-mode" class="active" title="Light Mode">☀️</button>
-        <button id="dark-mode" title="Dark Mode">🌙</button>
     </div>
+</section>
 
-    <div class="breadcrumb">
-        <div class="container">
-            <nav aria-label="Breadcrumb">
-                <a href="../index.html">Home</a>
-                <span class="separator">›</span>
-                <a href="../index.html#foundations">Classical Mechanics</a>
-                <span class="separator">›</span>
-                <span class="current">Foundations & Kinematics</span>
-            </nav>
+<section class="progress-section">
+    <h2>📊 Your Progress</h2>
+    <div class="progress-stats">
+        <div class="stat-item">
+            <span class="stat-number" id="completed-chapters">0</span>
+            <span class="stat-label">Chapters Completed</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number" id="total-topics">21</span>
+            <span class="stat-label">Total Topics</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number" id="study-time">~35</span>
+            <span class="stat-label">Hours (Estimated)</span>
         </div>
     </div>
+</section>
 
-    <header class="header">
-        <div class="container">
-            <h1>Classical Mechanics: Foundations & Kinematics</h1>
-            <p class="subtitle">Chapters 1-7: Master the fundamentals of physics</p>
-            <p class="description">
-                Build a solid foundation in physics with comprehensive coverage of measurement, motion, forces, and momentum.
-                These seven chapters form the cornerstone of classical mechanics.
+<section class="chapters-section">
+    <h2>📚 Chapters Overview</h2>
+    <div class="chapter-grid">
+        <div class="chapter-card" data-chapter="1">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter 1</div>
+                <div class="difficulty-badge beginner">Beginner</div>
+            </div>
+            <h3>Measurement</h3>
+            <p class="chapter-description">
+                Learn the foundations of scientific measurement, units, significant figures, and dimensional analysis.
             </p>
-        </div>
-    </header>
-
-    <section class="objectives-section">
-        <div class="container">
-            <div class="objectives-card">
-                <h2>🎯 Learning Objectives</h2>
-                <div class="objectives-grid">
-                    <div class="objective-item">
-                        <span class="objective-icon">📏</span>
-                        <h3>Measurement & Units</h3>
-                        <p>Master scientific measurement, significant figures, and dimensional analysis</p>
-                    </div>
-                    <div class="objective-item">
-                        <span class="objective-icon">🚀</span>
-                        <h3>Motion Analysis</h3>
-                        <p>Understand kinematics in 1D, 2D, and 3D coordinate systems</p>
-                    </div>
-                    <div class="objective-item">
-                        <span class="objective-icon">⚖️</span>
-                        <h3>Newton's Laws</h3>
-                        <p>Apply fundamental principles to solve real-world problems</p>
-                    </div>
-                    <div class="objective-item">
-                        <span class="objective-icon">💫</span>
-                        <h3>Momentum</h3>
-                        <p>Analyze collisions and particle systems using conservation laws</p>
-                    </div>
+            <div class="chapter-stats">
+                <span class="study-time">⏱️ 4-5 hours</span>
+                <span class="topics-count">📖 3 topics</span>
+            </div>
+            <div class="chapter-topics">
+                <span class="topic-tag">Units & Standards</span>
+                <span class="topic-tag">Significant Figures</span>
+                <span class="topic-tag">Dimensional Analysis</span>
+            </div>
+            <div class="chapter-actions">
+                <a href="measurements/index.html" class="btn btn-primary">Start Chapter</a>
+                <div class="progress-indicator">
+                    <div class="progress-bar" data-progress="0"></div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <main class="main-content">
-        <div class="container">
-            <section class="progress-section">
-                <h2>📊 Your Progress</h2>
-                <div class="progress-stats">
-                    <div class="stat-item">
-                        <span class="stat-number" id="completed-chapters">0</span>
-                        <span class="stat-label">Chapters Completed</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="total-topics">21</span>
-                        <span class="stat-label">Total Topics</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="study-time">~35</span>
-                        <span class="stat-label">Hours (Estimated)</span>
-                    </div>
-                </div>
-            </section>
-
-            <section class="chapters-section">
-                <h2>📚 Chapters Overview</h2>
-                <div class="chapter-grid">
-                    <div class="chapter-card" data-chapter="1">
-                        <div class="chapter-header">
-                            <div class="chapter-number">Chapter 1</div>
-                            <div class="difficulty-badge beginner">Beginner</div>
-                        </div>
-                        <h3>Measurement</h3>
-                        <p class="chapter-description">
-                            Learn the foundations of scientific measurement, units, significant figures, and dimensional analysis.
-                        </p>
-                        <div class="chapter-stats">
-                            <span class="study-time">⏱️ 4-5 hours</span>
-                            <span class="topics-count">📖 3 topics</span>
-                        </div>
-                        <div class="chapter-topics">
-                            <span class="topic-tag">Units & Standards</span>
-                            <span class="topic-tag">Significant Figures</span>
-                            <span class="topic-tag">Dimensional Analysis</span>
-                        </div>
-                        <div class="chapter-actions">
-                            <a href="measurements/index.html" class="btn btn-primary">Start Chapter</a>
-                            <div class="progress-indicator">
-                                <div class="progress-bar" data-progress="0"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="chapter-card" data-chapter="2">
-                        <div class="chapter-header">
-                            <div class="chapter-number">Chapter 2</div>
-                            <div class="difficulty-badge beginner">Beginner</div>
-                        </div>
-                        <h3>Motion in One Dimension</h3>
-                        <p class="chapter-description">
-                            Master the concepts of position, velocity, acceleration, and kinematic equations for 1D motion.
-                        </p>
-                        <div class="chapter-stats">
-                            <span class="study-time">⏱️ 5-6 hours</span>
-                            <span class="topics-count">📖 3 topics</span>
-                        </div>
-                        <div class="chapter-topics">
-                            <span class="topic-tag">Position & Displacement</span>
-                            <span class="topic-tag">Velocity & Acceleration</span>
-                            <span class="topic-tag">Kinematic Equations</span>
-                        </div>
-                        <div class="chapter-actions">
-                            <a href="kinematics/index.html" class="btn btn-primary">Start Chapter</a>
-                            <div class="progress-indicator">
-                                <div class="progress-bar" data-progress="0"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="chapter-card" data-chapter="3">
-                        <div class="chapter-header">
-                            <div class="chapter-number">Chapter 3</div>
-                            <div class="difficulty-badge intermediate">Intermediate</div>
-                        </div>
-                        <h3>Force and Newton's Laws</h3>
-                        <p class="chapter-description">
-                            Understand force concepts and master Newton's three laws of motion with practical applications.
-                        </p>
-                        <div class="chapter-stats">
-                            <span class="study-time">⏱️ 6-7 hours</span>
-                            <span class="topics-count">📖 3 topics</span>
-                        </div>
-                        <div class="chapter-topics">
-                            <span class="topic-tag">Newton's Laws</span>
-                            <span class="topic-tag">Force Diagrams</span>
-                            <span class="topic-tag">Applications</span>
-                        </div>
-                        <div class="chapter-actions">
-                            <a href="chapter3/index.html" class="btn btn-primary">Start Chapter</a>
-                            <div class="progress-indicator">
-                                <div class="progress-bar" data-progress="0"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="chapter-card" data-chapter="4">
-                        <div class="chapter-header">
-                            <div class="chapter-number">Chapter 4</div>
-                            <div class="difficulty-badge intermediate">Intermediate</div>
-                        </div>
-                        <h3>Motion in 2D & 3D</h3>
-                        <p class="chapter-description">
-                            Extend motion analysis to multiple dimensions including projectile motion and circular motion.
-                        </p>
-                        <div class="chapter-stats">
-                            <span class="study-time">⏱️ 5-6 hours</span>
-                            <span class="topics-count">📖 3 topics</span>
-                        </div>
-                        <div class="chapter-topics">
-                            <span class="topic-tag">Projectile Motion</span>
-                            <span class="topic-tag">Circular Motion</span>
-                            <span class="topic-tag">Relative Motion</span>
-                        </div>
-                        <div class="chapter-actions">
-                            <a href="chapter4/index.html" class="btn btn-primary">Start Chapter</a>
-                            <div class="progress-indicator">
-                                <div class="progress-bar" data-progress="0"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="chapter-card" data-chapter="5">
-                        <div class="chapter-header">
-                            <div class="chapter-number">Chapter 5</div>
-                            <div class="difficulty-badge intermediate">Intermediate</div>
-                        </div>
-                        <h3>Applications of Newton's Laws</h3>
-                        <p class="chapter-description">
-                            Apply Newton's laws to real-world scenarios including friction, inclined planes, and pulley systems.
-                        </p>
-                        <div class="chapter-stats">
-                            <span class="study-time">⏱️ 6-7 hours</span>
-                            <span class="topics-count">📖 3 topics</span>
-                        </div>
-                        <div class="chapter-topics">
-                            <span class="topic-tag">Friction</span>
-                            <span class="topic-tag">Inclined Planes</span>
-                            <span class="topic-tag">Dynamics Applications</span>
-                        </div>
-                        <div class="chapter-actions">
-                            <a href="chapter5/index.html" class="btn btn-primary">Start Chapter</a>
-                            <div class="progress-indicator">
-                                <div class="progress-bar" data-progress="0"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="chapter-card" data-chapter="6">
-                        <div class="chapter-header">
-                            <div class="chapter-number">Chapter 6</div>
-                            <div class="difficulty-badge intermediate">Intermediate</div>
-                        </div>
-                        <h3>Momentum</h3>
-                        <p class="chapter-description">
-                            Master momentum conservation, impulse-momentum theorem, and collision analysis.
-                        </p>
-                        <div class="chapter-stats">
-                            <span class="study-time">⏱️ 5-6 hours</span>
-                            <span class="topics-count">📖 3 topics</span>
-                        </div>
-                        <div class="chapter-topics">
-                            <span class="topic-tag">Momentum & Impulse</span>
-                            <span class="topic-tag">Conservation</span>
-                            <span class="topic-tag">Collisions</span>
-                        </div>
-                        <div class="chapter-actions">
-                            <a href="chapter6/index.html" class="btn btn-primary">Start Chapter</a>
-                            <div class="progress-indicator">
-                                <div class="progress-bar" data-progress="0"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="chapter-card" data-chapter="7">
-                        <div class="chapter-header">
-                            <div class="chapter-number">Chapter 7</div>
-                            <div class="difficulty-badge advanced">Advanced</div>
-                        </div>
-                        <h3>Systems of Particles</h3>
-                        <p class="chapter-description">
-                            Analyze multi-particle systems, center of mass motion, and variable mass systems.
-                        </p>
-                        <div class="chapter-stats">
-                            <span class="study-time">⏱️ 4-5 hours</span>
-                            <span class="topics-count">📖 3 topics</span>
-                        </div>
-                        <div class="chapter-topics">
-                            <span class="topic-tag">Center of Mass</span>
-                            <span class="topic-tag">Systems</span>
-                            <span class="topic-tag">Variable Mass</span>
-                        </div>
-                        <div class="chapter-actions">
-                            <a href="chapter7/index.html" class="btn btn-primary">Start Chapter</a>
-                            <div class="progress-indicator">
-                                <div class="progress-bar" data-progress="0"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="quick-access-section">
-                <h2>🚀 Quick Access</h2>
-                <div class="quick-access-grid">
-                    <a href="#" class="quick-access-card">
-                        <span class="access-icon">📊</span>
-                        <h3>Practice Problems</h3>
-                        <p>Comprehensive problem sets for all chapters</p>
-                    </a>
-                    <a href="#" class="quick-access-card">
-                        <span class="access-icon">📋</span>
-                        <h3>Formula Sheets</h3>
-                        <p>Quick reference for all key equations</p>
-                    </a>
-                    <a href="#" class="quick-access-card">
-                        <span class="access-icon">🧪</span>
-                        <h3>Lab Exercises</h3>
-                        <p>Hands-on experiments and simulations</p>
-                    </a>
-                    <a href="#" class="quick-access-card">
-                        <span class="access-icon">📝</span>
-                        <h3>Study Notes</h3>
-                        <p>Concise summaries for quick review</p>
-                    </a>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-links">
-                <a href="../index.html">Home</a>
-                <a href="../about.html">About</a>
-                <a href="../contribute.html">Contribute</a>
-                <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io">GitHub</a>
+        <div class="chapter-card" data-chapter="2">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter 2</div>
+                <div class="difficulty-badge beginner">Beginner</div>
             </div>
-            <p>&copy; Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
+            <h3>Motion in One Dimension</h3>
+            <p class="chapter-description">
+                Master the concepts of position, velocity, acceleration, and kinematic equations for 1D motion.
+            </p>
+            <div class="chapter-stats">
+                <span class="study-time">⏱️ 5-6 hours</span>
+                <span class="topics-count">📖 3 topics</span>
+            </div>
+            <div class="chapter-topics">
+                <span class="topic-tag">Position & Displacement</span>
+                <span class="topic-tag">Velocity & Acceleration</span>
+                <span class="topic-tag">Kinematic Equations</span>
+            </div>
+            <div class="chapter-actions">
+                <a href="kinematics/index.html" class="btn btn-primary">Start Chapter</a>
+                <div class="progress-indicator">
+                    <div class="progress-bar" data-progress="0"></div>
+                </div>
+            </div>
         </div>
-    </footer>
 
-    <script src="shared/mechanics-scripts.js"></script>
-</body>
-</html>
+        <div class="chapter-card" data-chapter="3">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter 3</div>
+                <div class="difficulty-badge beginner">Beginner</div>
+            </div>
+            <h3>Motion in Two & Three Dimensions</h3>
+            <p class="chapter-description">
+                Extend kinematics to multiple dimensions including projectile motion and circular motion.
+            </p>
+            <div class="chapter-stats">
+                <span class="study-time">⏱️ 6-7 hours</span>
+                <span class="topics-count">📖 4 topics</span>
+            </div>
+            <div class="chapter-topics">
+                <span class="topic-tag">Vector Motion</span>
+                <span class="topic-tag">Projectiles</span>
+                <span class="topic-tag">Circular Motion</span>
+                <span class="topic-tag">Relative Motion</span>
+            </div>
+            <div class="chapter-actions">
+                <a href="chapter3/index.html" class="btn btn-primary">Start Chapter</a>
+                <div class="progress-indicator">
+                    <div class="progress-bar" data-progress="0"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-card" data-chapter="4">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter 4</div>
+                <div class="difficulty-badge intermediate">Intermediate</div>
+            </div>
+            <h3>Newton's Laws of Motion</h3>
+            <p class="chapter-description">
+                Master the fundamental laws that govern motion and learn to analyze force interactions.
+            </p>
+            <div class="chapter-stats">
+                <span class="study-time">⏱️ 6-7 hours</span>
+                <span class="topics-count">📖 4 topics</span>
+            </div>
+            <div class="chapter-topics">
+                <span class="topic-tag">First Law</span>
+                <span class="topic-tag">Second Law</span>
+                <span class="topic-tag">Third Law</span>
+                <span class="topic-tag">Free Body Diagrams</span>
+            </div>
+            <div class="chapter-actions">
+                <a href="chapter4/index.html" class="btn btn-primary">Start Chapter</a>
+                <div class="progress-indicator">
+                    <div class="progress-bar" data-progress="0"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-card" data-chapter="5">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter 5</div>
+                <div class="difficulty-badge intermediate">Intermediate</div>
+            </div>
+            <h3>Applying Newton's Laws</h3>
+            <p class="chapter-description">
+                Apply Newton's laws to solve real-world problems involving friction, inclined planes, and dynamics.
+            </p>
+            <div class="chapter-stats">
+                <span class="study-time">⏱️ 7-8 hours</span>
+                <span class="topics-count">📖 3 topics</span>
+            </div>
+            <div class="chapter-topics">
+                <span class="topic-tag">Friction</span>
+                <span class="topic-tag">Inclined Planes</span>
+                <span class="topic-tag">Dynamics Applications</span>
+            </div>
+            <div class="chapter-actions">
+                <a href="chapter5/index.html" class="btn btn-primary">Start Chapter</a>
+                <div class="progress-indicator">
+                    <div class="progress-bar" data-progress="0"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-card" data-chapter="6">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter 6</div>
+                <div class="difficulty-badge intermediate">Intermediate</div>
+            </div>
+            <h3>Momentum</h3>
+            <p class="chapter-description">
+                Master momentum conservation, impulse-momentum theorem, and collision analysis.
+            </p>
+            <div class="chapter-stats">
+                <span class="study-time">⏱️ 5-6 hours</span>
+                <span class="topics-count">📖 3 topics</span>
+            </div>
+            <div class="chapter-topics">
+                <span class="topic-tag">Momentum & Impulse</span>
+                <span class="topic-tag">Conservation</span>
+                <span class="topic-tag">Collisions</span>
+            </div>
+            <div class="chapter-actions">
+                <a href="chapter6/index.html" class="btn btn-primary">Start Chapter</a>
+                <div class="progress-indicator">
+                    <div class="progress-bar" data-progress="0"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-card" data-chapter="7">
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter 7</div>
+                <div class="difficulty-badge advanced">Advanced</div>
+            </div>
+            <h3>Systems of Particles</h3>
+            <p class="chapter-description">
+                Analyze multi-particle systems, center of mass motion, and variable mass systems.
+            </p>
+            <div class="chapter-stats">
+                <span class="study-time">⏱️ 4-5 hours</span>
+                <span class="topics-count">📖 3 topics</span>
+            </div>
+            <div class="chapter-topics">
+                <span class="topic-tag">Center of Mass</span>
+                <span class="topic-tag">Systems</span>
+                <span class="topic-tag">Variable Mass</span>
+            </div>
+            <div class="chapter-actions">
+                <a href="chapter7/index.html" class="btn btn-primary">Start Chapter</a>
+                <div class="progress-indicator">
+                    <div class="progress-bar" data-progress="0"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="quick-access-section">
+    <h2>🚀 Quick Access</h2>
+    <div class="quick-access-grid">
+        <a href="#" class="quick-access-card">
+            <span class="access-icon">📊</span>
+            <h3>Practice Problems</h3>
+            <p>Comprehensive problem sets for all chapters</p>
+        </a>
+        <a href="#" class="quick-access-card">
+            <span class="access-icon">📋</span>
+            <h3>Formula Sheets</h3>
+            <p>Quick reference for all key equations</p>
+        </a>
+        <a href="#" class="quick-access-card">
+            <span class="access-icon">🧪</span>
+            <h3>Lab Exercises</h3>
+            <p>Hands-on experiments and simulations</p>
+        </a>
+        <a href="#" class="quick-access-card">
+            <span class="access-icon">📝</span>
+            <h3>Study Notes</h3>
+            <p>Concise summaries for quick review</p>
+        </a>
+    </div>
+</section>
