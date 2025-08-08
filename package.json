@@ -1,0 +1,12 @@
+{
+  "name": "physics-daily",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "bundle install && bundle exec jekyll build",
+    "dev": "bundle exec jekyll serve"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=14"
+  }
+}
