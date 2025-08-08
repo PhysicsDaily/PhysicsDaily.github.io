@@ -1,0 +1,41 @@
+/*
+  styles/Navigation.module.css
+  Styles for the Navigation.js component.
+*/
+
+/* The <ul> element that holds the list of links */
+.navLinks {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+/* Styling for each individual link */
+.navLinks a, .navLinks div[class*="active"] {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+/* Style for when you hover over a link */
+.navLinks a:hover div, .navLinks div:hover {
+  color: var(--primary-color);
+}
+
+/*
+  This new 'active' class style will be applied by React
+  to the link of the page you are currently on.
+*/
+.navLinks .active {
+  color: var(--primary-color);
+  font-weight: 600; /* Make it slightly bolder to stand out */
+}
+
+/* On screens smaller than 768px, hide the navigation links */
+@media (max-width: 768px) {
+  .navLinks {
+    display: none;
+  }
+}
