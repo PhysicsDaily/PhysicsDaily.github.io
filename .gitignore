@@ -6,3 +6,5 @@ vendor/
 .DS_Store
 Gemfile.lock
 index_original.html
+resources_original.html
+about_original.html
