@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include head.html %}
+    {% seo %}
+  </head>
+  <body>
+    {% include header.html %}
+
+    <main id="content" role="main">
+      {{ content }}
+    </main>
+
+    {% include footer.html %}
+    <script src="{{ '/assets/js/site.js' | relative_url }}"></script>
+  </body>
+</html>

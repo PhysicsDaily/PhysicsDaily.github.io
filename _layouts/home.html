@@ -1,0 +1,19 @@
+---
+layout: default
+---
+<section class="home">
+  <h1>{{ site.title }}</h1>
+  <p>{{ site.description }}</p>
+
+  {% if site.posts and site.posts.size > 0 %}
+    <h2>Latest posts</h2>
+    <ul class="post-list">
+      {% for post in site.posts limit:10 %}
+        <li>
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          <small>— {{ post.date | date: "%Y-%m-%d" }}</small>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</section>

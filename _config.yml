@@ -1,0 +1,45 @@
+title: "PhysicsDaily"
+description: "Physics news, notes, and resources"
+url: "https://physicsdaily.github.io"  # Your user site URL
+baseurl: ""  # Keep empty for user/organization sites like username.github.io
+timezone: "UTC"
+
+# Do NOT set a theme to preserve your existing styles
+# theme: minima
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+markdown: kramdown
+highlighter: rouge
+
+# Optional: collections and permalinks for posts
+collections:
+  posts:
+    output: true
+    permalink: /posts/:year/:month/:day/:title/
+
+# Paths and build config
+sass:
+  style: compressed
+
+# Exclude non-site files from the build
+exclude:
+  - README.md
+  - node_modules
+  - vendor
+  - package.json
+  - package-lock.json
+  - yarn.lock
+  - .gitignore
+  - .github
+  - .vscode
+  - .idea
+  - .bundle
+  - Gemfile.lock
+
+# Include folder for custom pages
+include:
+  - _pages

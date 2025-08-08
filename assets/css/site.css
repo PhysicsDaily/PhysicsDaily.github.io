@@ -1,0 +1,16 @@
+/* Base styles (you can replace with your existing CSS) */
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif; line-height: 1.6; }
+main { max-width: 70ch; padding: 2rem; margin: auto; }
+
+.site-header, .site-footer { padding: 1rem 2rem; background: #111; color: #fff; }
+.nav a { color: #fff; text-decoration: none; margin-right: 1rem; }
+.nav a:hover { text-decoration: underline; }
+
+h1, h2, h3 { line-height: 1.25; }
+.post-meta { color: #666; font-size: 0.9rem; }
+.post-list { list-style: none; padding-left: 0; }
+.post-list li { margin: 0.25rem 0; }
+a { color: #0b74de; }
+a:visited { color: #6a38c2; }
