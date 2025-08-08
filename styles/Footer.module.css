@@ -1,0 +1,14 @@
+/*
+  styles/Footer.module.css
+  Styles for the Footer.js component.
+*/
+
+.footer {
+  /* Use CSS variables for colors and borders so the theme switch works */
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  padding: 2rem 0;
+  text-align: center;
+  color: var(--text-secondary);
+  margin-top: 4rem; /* Adds some space above the footer */
+}
