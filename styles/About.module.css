@@ -1,0 +1,55 @@
+// pages/about.js
+
+import Head from 'next/head';
+import Image from 'next/image'; // Import the Next.js Image component
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import styles from '../styles/About.module.css'; // Import styles specific to this page
+
+export default function AboutPage() {
+  return (
+    <div>
+      <Head>
+        <title>About - Physics Daily</title>
+        <meta name="description" content="About Physics Daily and its creator, Anjit Kandel." />
+      </Head>
+
+      <Header />
+
+      <main>
+        {/* Page Header, using styles from the About.module.css file */}
+        <header className={styles.header}>
+          <div className="container">
+            <h1>About Physics Daily</h1>
+            <p>The story and the person behind the project.</p>
+          </div>
+        </header>
+
+        {/* Main content section of the page */}
+        <div className={styles.mainContent}>
+          <div className={`${styles.aboutSection} container`}>
+            {/* Using the Next.js Image component for optimization.
+              NOTE: You will need to place your profile image inside the `public` folder.
+              For now, we use a placeholder. Let's assume you'll add an image at `public/images/profile.jpg`.
+            */}
+            <Image
+              // src="/images/profile.jpg" // Replace with your actual image path
+              src="/images/placeholder.png" // Placeholder
+              alt="Anjit Kandel"
+              width={150}
+              height={150}
+              className={styles.profileImage}
+            />
+            <h2>Anjit Kandel</h2>
+            <h3>Creator of Physics Daily</h3>
+            <p>
+              Physics Daily was created out of a passion for making physics accessible and understandable to everyone. My goal is to provide a comprehensive, well-structured learning platform for students, educators, and enthusiasts alike. Physics is the language of the universe, and I believe everyone deserves the opportunity to learn it in a clear and engaging way. This project is a labor of love, built with the hope of inspiring the next generation of scientists and problem-solvers.
+            </p>
+          </div>
+        </div>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
