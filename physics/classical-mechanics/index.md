@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Classical Mechanics: Foundations & Kinematics
-description: Master classical mechanics fundamentals including measurement, motion, Newton's laws, and momentum. Comprehensive study guide for Chapters 1-7.
+title: "Classical Mechanics - Foundations & Kinematics"
+description: "Master classical mechanics fundamentals including measurement, motion, Newton's laws, and momentum. Comprehensive study guide for Chapters 1-7."
 breadcrumb:
-    - label: Home
-        url: /
-    - label: Classical Mechanics
+  - label: "Home"
+    url: "/"
+  - label: "Classical Mechanics"
 ---
 <!-- Page-specific styles for layout -->
 <style>
@@ -43,6 +43,7 @@ breadcrumb:
         .chapter-actions { display: flex; align-items: center; gap: 1rem; }
         .progress-indicator { flex: 1; height: 6px; background: var(--bg-tertiary); border-radius: 3px; overflow: hidden; }
         .progress-bar { height: 100%; background: var(--primary-color); border-radius: 3px; width: 0%; }
+        .btn-secondary:disabled { background: var(--bg-tertiary); color: var(--text-muted); cursor: not-allowed; border-color: var(--border-color); }
         
         .quick-access-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
         .quick-access-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius); padding: 1.5rem; text-decoration: none; color: var(--text-primary); text-align: center; box-shadow: var(--shadow-sm); }
@@ -186,7 +187,7 @@ breadcrumb:
                             <span class="topic-tag">Applications</span>
                         </div>
                         <div class="chapter-actions">
-                            <a href="chapter3/index.html" class="btn btn-primary">Start Chapter</a>
+                            <button class="btn btn-secondary" disabled>Coming Soon</button>
                             <div class="progress-indicator">
                                 <div class="progress-bar" data-progress="0"></div>
                             </div>
@@ -212,7 +213,7 @@ breadcrumb:
                             <span class="topic-tag">Relative Motion</span>
                         </div>
                         <div class="chapter-actions">
-                            <a href="chapter4/index.html" class="btn btn-primary">Start Chapter</a>
+                            <button class="btn btn-secondary" disabled>Coming Soon</button>
                             <div class="progress-indicator">
                                 <div class="progress-bar" data-progress="0"></div>
                             </div>
@@ -238,7 +239,7 @@ breadcrumb:
                             <span class="topic-tag">Dynamics Applications</span>
                         </div>
                         <div class="chapter-actions">
-                            <a href="chapter5/index.html" class="btn btn-primary">Start Chapter</a>
+                            <button class="btn btn-secondary" disabled>Coming Soon</button>
                             <div class="progress-indicator">
                                 <div class="progress-bar" data-progress="0"></div>
                             </div>
@@ -264,7 +265,7 @@ breadcrumb:
                             <span class="topic-tag">Collisions</span>
                         </div>
                         <div class="chapter-actions">
-                            <a href="chapter6/index.html" class="btn btn-primary">Start Chapter</a>
+                            <button class="btn btn-secondary" disabled>Coming Soon</button>
                             <div class="progress-indicator">
                                 <div class="progress-bar" data-progress="0"></div>
                             </div>
@@ -290,7 +291,7 @@ breadcrumb:
                             <span class="topic-tag">Variable Mass</span>
                         </div>
                         <div class="chapter-actions">
-                            <a href="chapter7/index.html" class="btn btn-primary">Start Chapter</a>
+                            <button class="btn btn-secondary" disabled>Coming Soon</button>
                             <div class="progress-indicator">
                                 <div class="progress-bar" data-progress="0"></div>
                             </div>

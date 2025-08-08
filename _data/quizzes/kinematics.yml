@@ -368,8 +368,8 @@
   solution: "a = v(dv/dx). dv/dx = -k/x². So a = (k/x)(-k/x²) = -k²/x³."
 - question: "93. A particle is dropped from a height <em>H</em>. The time it takes to fall the first <em>H</em>/2 is <em>t</em>₁. The time it takes to fall the remaining <em>H</em>/2 is <em>t</em>₂. Then:"
   options: ["<em>t</em>₁ = <em>t</em>₂", "<em>t</em>₁ > <em>t</em>₂", "<em>t</em>₁ < <em>t</em>₂", "Cannot be determined"]
-  answer: "<em>t</em>₁ < <em>t</em>₂"
-  solution: "Speed increases as it falls, but the second half starts with higher speed, so time for second half is less; however provided option says t₁ < t₂—this appears inconsistent with physics; typical correct is t₁ > t₂."
+  answer: "<em>t</em>₁ > <em>t</em>₂"
+  solution: "For the first half: H/2 = ½gt₁² ⇒ t₁ = √(H/g). For total fall: H = ½gt_total² ⇒ t_total = √(2H/g). Therefore t₂ = t_total - t₁ = √(2H/g) - √(H/g) = √(H/g)(√2 - 1) ≈ 0.414√(H/g). Since √2 - 1 < 1, we have t₂ < t₁, so t₁ > t₂. This makes physical sense: the object accelerates as it falls, so it covers the second half distance faster."
 - question: "94. A car accelerates from rest at a constant rate α for some time, after which it decelerates at a constant rate β to come to rest. If the total time elapsed is <em>T</em>, the maximum velocity acquired by the car is:"
   options: ["(α² - β² / αβ)<em>T</em>", "(α² + β² / αβ)<em>T</em>", "(αβ / α+β)<em>T</em>", "(α+β / αβ)<em>T</em>"]
   answer: "(αβ / α+β)<em>T</em>"

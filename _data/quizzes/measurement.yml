@@ -136,5 +136,5 @@
   solution: "Femto (f) is the SI prefix for a factor of 10⁻¹⁵."
 - question: "35. A furlong is 220 yards, and a fortnight is 2 weeks. If a snail moves at 2.5 mm/s, its speed in furlongs per fortnight is approximately:"
   options: ["15","1.5 × 10³","1.5 × 10⁵","1.5 × 10⁷"]
-  answer: "1.5 × 10³"
-  solution: "This is a unit conversion problem. 2.5 mm/s ≈ 1.5 × 10³ furlongs/fortnight. The key is careful conversion of length (mm to furlongs) and time (seconds to fortnights)."
+  answer: "15"
+  solution: "Converting units step by step: 1 furlong = 220 yards = 220 × 0.9144 m = 201.17 m. 1 fortnight = 2 weeks = 14 days = 14 × 24 × 3600 s = 1,209,600 s. Speed = 2.5 × 10⁻³ m/s × (1 furlong/201.17 m) × (1,209,600 s/1 fortnight) = 2.5 × 10⁻³ × 1,209,600/201.17 ≈ 15 furlongs/fortnight."

@@ -1,15 +1,15 @@
 ---
 layout: default
-title: Numerical Problems: 1D Kinematics
-description: Solve numerical problems on one-dimensional kinematics, covering acceleration, free fall, and motion graphs.
+title: "Numerical Problems - 1D Kinematics"
+description: "Solve numerical problems on one-dimensional kinematics, covering acceleration, free fall, and motion graphs."
 breadcrumb:
-    - label: Home
-        url: /
-    - label: Classical Mechanics
-        url: /mechanics/foundations.html
-    - label: 🚀 One-Dimensional Kinematics
-        url: /mechanics/kinematics/
-    - label: 🧮 Numerical Problems
+  - label: "Home"
+    url: "/"
+  - label: "Classical Mechanics"
+    url: "/physics/classical-mechanics/"
+  - label: "One-Dimensional Kinematics"
+    url: "/physics/classical-mechanics/kinematics/"
+  - label: "Numerical Problems"
 ---
 <style>
         :root {
@@ -495,31 +495,32 @@ breadcrumb:
 
                 <div class="problem">
                     <strong>Problem 9: Meeting Point in Free Fall</strong>
-                    <p>A ball is thrown upward from the ground with a speed of 20 m/s. At the same instant, another ball is dropped from rest from a building 100 m high. After how long and at what height will the balls collide?</p>
+                    <p>A ball is thrown upward from the ground with a speed of 30 m/s. At the same instant, another ball is dropped from rest from a building 45 m high. After how long and at what height will the balls collide?</p>
                     <details>
                         <summary>View Solution</summary>
                         <div class="solution-step">
                             <strong>Strategy:</strong> Write position equations for both balls and set them equal to find the collision time and height. Let the ground be <span class="math">y</span>=0.
                         </div>
                         <div class="solution-step">
-                            <strong>Position of Ball 1 (Thrown Up):</strong> <span class="math">v₀₁</span> = +20 m/s, <span class="math">y₀₁</span> = 0.
-                            <p><span class="equation">y₁(t) = y₀₁ + v₀₁t + ½at² = 20t - 4.9t²</span></p>
+                            <strong>Position of Ball 1 (Thrown Up):</strong> <span class="math">v₀₁</span> = +30 m/s, <span class="math">y₀₁</span> = 0.
+                            <p><span class="equation">y₁(t) = y₀₁ + v₀₁t + ½at² = 30t - 4.9t²</span></p>
                         </div>
                         <div class="solution-step">
-                            <strong>Position of Ball 2 (Dropped):</strong> <span class="math">v₀₂</span> = 0 m/s, <span class="math">y₀₂</span> = +100 m.
-                            <p><span class="equation">y₂(t) = y₀₂ + v₀₂t + ½at² = 100 - 4.9t²</span></p>
+                            <strong>Position of Ball 2 (Dropped):</strong> <span class="math">v₀₂</span> = 0 m/s, <span class="math">y₀₂</span> = +45 m.
+                            <p><span class="equation">y₂(t) = y₀₂ + v₀₂t + ½at² = 45 - 4.9t²</span></p>
                         </div>
                         <div class="solution-step">
                             <strong>Set Positions Equal:</strong> Collision occurs when <span class="math">y₁(t) = y₂(t)</span>.
-                            <p><span class="equation">20t - 4.9t² = 100 - 4.9t²</span></p>
+                            <p><span class="equation">30t - 4.9t² = 45 - 4.9t²</span></p>
                             <p>The <span class="math">-4.9t²</span> terms cancel out.</p>
-                            <p>20<span class="math">t</span> = 100</p>
-                            <p><span class="math">t</span> = 100 / 20 = <strong>5.0 s</strong>. The balls collide after 5.0 seconds.</p>
+                            <p>30<span class="math">t</span> = 45</p>
+                            <p><span class="math">t</span> = 45 / 30 = <strong>1.5 s</strong>. The balls collide after 1.5 seconds.</p>
                         </div>
                         <div class="solution-step">
-                            <strong>Find Collision Height:</strong> Substitute <span class="math">t</span> = 5.0 s into either position equation.
-                            <p><span class="math">y₁</span>(5) = 20(5) - 4.9(5)² = 100 - 4.9(25) = 100 - 122.5 = <strong>-22.5 m</strong>.</p>
-                            <p><strong>Wait!</strong> A negative height means they collide below the ground, which is impossible. Let's re-check. The time for the first ball to reach its peak is t = v/a = 20/9.8 = 2.04s. Its max height is y = 20(2.04) - 4.9(2.04)^2 = 20.4m. The problem statement implies they collide mid-air. Let's assume the building is shorter. If the building was 50m high: 20t = 50, so t=2.5s. y1(2.5) = 20(2.5) - 4.9(2.5)^2 = 50 - 30.6 = 19.4m. The original problem as stated has no mid-air collision. Let's assume the question meant to find when their separation is minimized before one hits the ground. However, based on the direct question, they would not collide in the air. Let's solve as intended: they collide at t=5.0s, which means the thrown ball has already hit the ground and is at y=0, while the dropped ball is at y=100-4.9(25) = -22.5m. The premise is flawed, but the mathematical answer for when their y-equations are equal is 5.0s.</p>
+                            <strong>Find Collision Height:</strong> Substitute <span class="math">t</span> = 1.5 s into either position equation.
+                            <p><span class="math">y₁</span>(1.5) = 30(1.5) - 4.9(1.5)² = 45 - 4.9(2.25) = 45 - 11.0 = <strong>34.0 m</strong>.</p>
+                            <p><strong>Verification:</strong> <span class="math">y₂</span>(1.5) = 45 - 4.9(1.5)² = 45 - 11.0 = 34.0 m ✓</p>
+                            <p><strong>Physical Check:</strong> The thrown ball reaches maximum height at t = 30/9.8 = 3.06 s with max height = 45.9 m, so collision at 34.0 m after 1.5 s is physically reasonable.</p>
                         </div>
                     </details>
                 </div>
