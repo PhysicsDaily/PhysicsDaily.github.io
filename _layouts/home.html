@@ -1,19 +1,25 @@
 ---
 layout: default
 ---
-<section class="home">
-  <h1>{{ site.title }}</h1>
-  <p>{{ site.description }}</p>
 
-  {% if site.posts and site.posts.size > 0 %}
-    <h2>Latest posts</h2>
-    <ul class="post-list">
-      {% for post in site.posts limit:10 %}
-        <li>
-          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-          <small>— {{ post.date | date: "%Y-%m-%d" }}</small>
-        </li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-</section>
+<!-- Page Header -->
+<header class="header">
+    <div class="container">
+        <h1>Physics Daily</h1>
+        <p class="subtitle">Advanced Physics Learning Platform</p>
+        <p class="description">
+            Master physics concepts from fundamentals to advanced topics with comprehensive notes, 
+            examples, and interactive content covering mechanics, thermodynamics, electromagnetism, optics, and modern physics.
+        </p>
+        <div class="cta-buttons">
+            <a href="#foundations" class="btn">
+                📚 Start Learning
+            </a>
+            <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io" class="btn btn-secondary">
+                ⭐ Star on GitHub
+            </a>
+        </div>
+    </div>
+</header>
+
+{{ content }}
