@@ -1,55 +1,68 @@
-// pages/about.js
+/*
+  styles/About.module.css
+  Styles specifically for the About page (pages/about.js)
+*/
 
-import Head from 'next/head';
-import Image from 'next/image'; // Import the Next.js Image component
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import styles from '../styles/About.module.css'; // Import styles specific to this page
+/* Header specific to the About page */
+.header {
+  background: var(--bg-secondary);
+  padding: 4rem 0 3rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+}
+.header h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+.header p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto;
+}
 
-export default function AboutPage() {
-  return (
-    <div>
-      <Head>
-        <title>About - Physics Daily</title>
-        <meta name="description" content="About Physics Daily and its creator, Anjit Kandel." />
-      </Head>
+/* Main content wrapper */
+.mainContent {
+  padding: 4rem 0;
+  background: var(--bg-primary);
+}
 
-      <Header />
+/* Container for the about text and image */
+.aboutSection {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
 
-      <main>
-        {/* Page Header, using styles from the About.module.css file */}
-        <header className={styles.header}>
-          <div className="container">
-            <h1>About Physics Daily</h1>
-            <p>The story and the person behind the project.</p>
-          </div>
-        </header>
+.profileImage {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+  border: 4px solid var(--primary-color);
+  box-shadow: var(--shadow-lg);
+}
 
-        {/* Main content section of the page */}
-        <div className={styles.mainContent}>
-          <div className={`${styles.aboutSection} container`}>
-            {/* Using the Next.js Image component for optimization.
-              NOTE: You will need to place your profile image inside the `public` folder.
-              For now, we use a placeholder. Let's assume you'll add an image at `public/images/profile.jpg`.
-            */}
-            <Image
-              // src="/images/profile.jpg" // Replace with your actual image path
-              src="/images/placeholder.png" // Placeholder
-              alt="Anjit Kandel"
-              width={150}
-              height={150}
-              className={styles.profileImage}
-            />
-            <h2>Anjit Kandel</h2>
-            <h3>Creator of Physics Daily</h3>
-            <p>
-              Physics Daily was created out of a passion for making physics accessible and understandable to everyone. My goal is to provide a comprehensive, well-structured learning platform for students, educators, and enthusiasts alike. Physics is the language of the universe, and I believe everyone deserves the opportunity to learn it in a clear and engaging way. This project is a labor of love, built with the hope of inspiring the next generation of scientists and problem-solvers.
-            </p>
-          </div>
-        </div>
-      </main>
+.aboutSection h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
 
-      <Footer />
-    </div>
-  );
+.aboutSection h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+.aboutSection p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.8;
+  text-align: justify;
 }
