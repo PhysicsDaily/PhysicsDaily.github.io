@@ -1,0 +1,37 @@
+---
+layout: default
+---
+
+<!-- Breadcrumb Navigation -->
+<div class="breadcrumb">
+    <div class="container">
+        <nav aria-label="Breadcrumb">
+            <a href="{{ '/' | relative_url }}">Home</a>
+            <span class="separator">›</span>
+            {% if page.category %}
+            <a href="{{ page.category_link | default: '/' | relative_url }}">{{ page.category }}</a>
+            <span class="separator">›</span>
+            {% endif %}
+            <span class="current">{{ page.breadcrumb_title | default: page.title }}</span>
+        </nav>
+    </div>
+</div>
+
+<!-- Chapter Header -->
+<header class="header">
+    <div class="container">
+        <h1>{{ page.title }}</h1>
+        {% if page.subtitle %}
+        <p class="subtitle">{{ page.subtitle }}</p>
+        {% endif %}
+        {% if page.description %}
+        <p class="description">{{ page.description }}</p>
+        {% endif %}
+    </div>
+</header>
+
+<main class="main-content">
+    <div class="container">
+        {{ content }}
+    </div>
+</main>
