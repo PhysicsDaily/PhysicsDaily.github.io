@@ -2,7 +2,7 @@ name: Deploy site with GitHub Pages
 
 on:
   push:
-    branches: ["Try"]
+    branches: ["main", "Try"]
   workflow_dispatch:
 
 permissions:
@@ -33,6 +33,8 @@ jobs:
           path: ./_site
 
   deploy:
+    # Only deploy from the main branch to satisfy GitHub Pages environment protection rules
+    if: github.ref == 'refs/heads/main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
