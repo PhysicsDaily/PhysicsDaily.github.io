@@ -43,5 +43,5 @@ const quizQuestions = [
     { question: "33. When multiplying 12.3 by 1.23, the result should have how many significant figures?", options: ["2", "3", "4", "5"], answer: "3", solution: "Both numbers have three significant figures, so the result should be rounded to three significant figures." },
     { question: "34. The prefix 'femto' stands for:", options: ["10⁻⁹", "10⁻¹²", "10⁻¹⁵", "10⁻¹⁸"], answer: "10⁻¹⁵", solution: "Femto (f) is the SI prefix for a factor of 10⁻¹⁵." },
     { question: "35. A furlong is 220 yards, and a fortnight is 2 weeks. If a snail moves at 2.5 mm/s, its speed in furlongs per fortnight is approximately:", options: ["15", "1.5 × 10³", "1.5 × 10⁵", "1.5 × 10⁷"], answer: "1.5 × 10³", solution: "This is a unit conversion problem. 2.5 mm/s ≈ 1.5 × 10³ furlongs/fortnight. The key is careful conversion of length (mm to furlongs) and time (seconds to fortnights)." }
-
+    };
 export default function MCQPage() { /* ... same component code as before ... */ }
