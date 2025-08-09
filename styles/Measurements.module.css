@@ -192,6 +192,81 @@
   z-index: 1000;
 }
 
+/* Practice Section Styles */
+.practiceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.practiceCard {
+  background: linear-gradient(135deg, #fff8e1, #fff3e0);
+  border: 2px solid #ffcc02;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.practiceCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+  border-color: #667eea;
+}
+
+.practiceCard:hover .practiceIcon {
+  transform: scale(1.1);
+}
+
+.practiceIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.practiceCard h3 {
+  color: #667eea;
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+  margin-top: 0;
+}
+
+.practiceCard p {
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.practiceFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid #ffcc02;
+}
+
+.questionCount {
+  background: #667eea;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.difficulty {
+  color: #ff9800;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
 @media (max-width: 768px) {
   .pageHeader h1 {
     font-size: 2rem;
@@ -208,5 +283,18 @@
   
   .section table {
     font-size: 0.8rem;
+  }
+  
+  .practiceGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .practiceCard {
+    padding: 1.2rem;
+  }
+  
+  .practiceIcon {
+    font-size: 2rem;
   }
 }

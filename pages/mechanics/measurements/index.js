@@ -196,7 +196,52 @@ export default function MeasurementsPage() {
             </div>
           </section>
 
-          {/* Add more sections as needed - the pattern continues... */}
+          {/* Practice Section */}
+          <section id="practice" className={styles.section}>
+            <h2>🎯 Practice & Assessment</h2>
+            
+            <div className={styles.keyPoint}>
+              <h4>🏆 Test Your Understanding</h4>
+              <p>Now that you&apos;ve learned the fundamentals of measurement, put your knowledge to the test! Choose from different types of practice problems below:</p>
+            </div>
+            
+            <div className={styles.practiceGrid}>
+              <Link href="/mechanics/measurements/conceptual" className={styles.practiceCard}>
+                <div className={styles.practiceIcon}>🤔</div>
+                <h3>Conceptual Questions</h3>
+                <p>Test your understanding of measurement principles, accuracy vs precision, dimensional analysis concepts, and more.</p>
+                <div className={styles.practiceFooter}>
+                  <span className={styles.questionCount}>15+ Questions</span>
+                  <span className={styles.difficulty}>All Levels</span>
+                </div>
+              </Link>
+              
+              <Link href="/mechanics/measurements/numerical" className={styles.practiceCard}>
+                <div className={styles.practiceIcon}>🧮</div>
+                <h3>Numerical Problems</h3>
+                <p>Solve step-by-step problems involving significant figures, error analysis, unit conversions, and more.</p>
+                <div className={styles.practiceFooter}>
+                  <span className={styles.questionCount}>20+ Problems</span>
+                  <span className={styles.difficulty}>Easy to Hard</span>
+                </div>
+              </Link>
+              
+              <Link href="/mechanics/measurements/mcq" className={styles.practiceCard}>
+                <div className={styles.practiceIcon}>📊</div>
+                <h3>Assessment Quiz</h3>
+                <p>Comprehensive multiple-choice quiz covering all measurement topics with instant feedback.</p>
+                <div className={styles.practiceFooter}>
+                  <span className={styles.questionCount}>25+ MCQs</span>
+                  <span className={styles.difficulty}>Comprehensive</span>
+                </div>
+              </Link>
+            </div>
+            
+            <div className={styles.beginnerNote}>
+              <h4>💡 Study Tip:</h4>
+              <p>Start with <strong>Conceptual Questions</strong> to solidify your understanding, then move to <strong>Numerical Problems</strong> for practice, and finally take the <strong>Assessment Quiz</strong> to test your overall mastery!</p>
+            </div>
+          </section>
           
         </div>
       </main>
