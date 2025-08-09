@@ -15,7 +15,6 @@ const topicSections = [
         title: 'Classical Mechanics',
         subtitle: 'Foundations of physics: measurement, kinematics, dynamics, energy, momentum, and rotational motion',
         icon: '⚙️',
-        difficulty: 'Beginner',
         cards: [
           { chapters: '1-7', title: 'Foundations & Kinematics', description: "Measurement, motion in 1D/2D/3D, Newton's laws, applications, momentum, and particle systems.", topics: ['Measurement', '1D Motion', 'Force & Newton\'s Laws', '2D & 3D Motion', 'Applications of Newton\'s Laws', 'Momentum', 'Systems of Particles'], href: '/mechanics/foundations' },
           { chapters: '8-10', title: 'Rotational Motion', description: "Rotational kinematics, dynamics, moment of inertia, torque, and angular momentum conservation.", topics: ['Rotational Kinematics', 'Rotational Dynamics', 'Angular Momentum'], href: '/mechanics/rotation' },
@@ -27,7 +26,6 @@ const topicSections = [
         title: 'Fluids, Waves & Thermodynamics',
         subtitle: 'Fluid mechanics, oscillations, wave motion, sound, special relativity, and thermal physics',
         icon: '🌊',
-        difficulty: 'Intermediate',
         cards: [
             { chapters: '15-17', title: 'Fluid Mechanics & Oscillations', description: "Fluid statics and dynamics, Bernoulli's equation, simple harmonic motion, and oscillating systems.", topics: ['Fluid Statics', 'Fluid Dynamics', 'Oscillations'], href: '/fluids/mechanics' },
             { chapters: '18-20', title: 'Waves & Special Relativity', description: "Wave motion, sound waves, Doppler effect, and Einstein's special theory of relativity.", topics: ['Wave Motion', 'Sound Waves', 'Special Relativity'], href: '/waves/motion-sound' },
@@ -39,7 +37,6 @@ const topicSections = [
         title: 'Electricity & Magnetism',
         subtitle: 'Electric fields, potential, capacitors, current, magnetic fields, induction, and AC circuits',
         icon: '⚡',
-        difficulty: 'Intermediate',
         cards: [
             { chapters: '25-30', title: 'Electrostatics', description: "Electric charge, electric field, Gauss's law, electric potential, capacitors, and dielectrics.", topics: ['Electric Charge', 'Electric Field', 'Gauss\'s Law', 'Electric Potential', 'Potential Energy', 'Capacitors'], href: '/electromagnetism/electrostatics' },
             { chapters: '31-36', title: 'Current & Magnetism', description: "DC circuits, magnetic fields of currents, magnetic forces, electromagnetic induction, and inductance.", topics: ['DC Circuits', 'Magnetic Field', 'Field of Current', 'Faraday\'s Law', 'Magnetic Properties', 'Inductance'], href: '/electromagnetism/current-magnetism' },
@@ -51,7 +48,6 @@ const topicSections = [
         title: 'Optics',
         subtitle: 'Geometric optics, wave optics, interference, diffraction, and polarization',
         icon: '🔬',
-        difficulty: 'Advanced',
         cards: [
             { chapters: '40-42', title: 'Geometric Optics', description: "Mirrors, lenses, optical instruments, interference phenomena, and diffraction patterns.", topics: ['Mirrors & Lenses', 'Interference', 'Diffraction'], href: '/optics/geometric' },
             { chapters: '43-45', title: 'Wave Properties of Light', description: "Gratings, spectra, polarization, thermal radiation, photoelectric effect, and photon interactions.", topics: ['Gratings & Spectra', 'Polarization', 'Nature of Light'], href: '/optics/wave-properties' },
@@ -62,7 +58,6 @@ const topicSections = [
         title: 'Modern Physics',
         subtitle: 'Quantum mechanics, atomic physics, nuclear physics, and elementary particles',
         icon: '🔬',
-        difficulty: 'Advanced',
         cards: [
             { chapters: '46-49', title: 'Quantum & Atomic Physics', description: "Matter waves, Schrödinger equation, electrons in potential wells, atomic structure, and electron configurations.", topics: ['Nature of Matter', 'Electrons in Wells', 'Atomic Structure', 'Conduction'], href: '/modern/quantum-atomic' },
             { chapters: '50-52', title: 'Nuclear & Particle Physics', description: "Nuclear structure, radioactive decay, nuclear reactions, energy from the nucleus, and elementary particles.", topics: ['Nuclear Physics', 'Energy from Nucleus', 'Particle Physics'], href: '/modern/nuclear-particle' },
@@ -165,11 +160,6 @@ export default function Home() {
               <div className={styles.sectionHeader}>
                 <div className={styles.sectionMeta}>
                   <span className={styles.sectionIcon}>{section.icon}</span>
-                  <div className={styles.sectionBadges}>
-                    <span className={`${styles.difficultyBadge} ${styles[section.difficulty.toLowerCase()]}`}>
-                      {section.difficulty}
-                    </span>
-                  </div>
                 </div>
                 <h2 className={styles.sectionTitle}>{section.title}</h2>
                 <p className={styles.sectionSubtitle}>{section.subtitle}</p>
@@ -197,6 +187,16 @@ export default function Home() {
                   <h3 className={styles.featureTitle}>{feature.title}</h3>
                   <p className={styles.featureDescription}>{feature.description}</p>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
               ))}
             </div>
           </div>
