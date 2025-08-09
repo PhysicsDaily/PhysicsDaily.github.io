@@ -171,7 +171,7 @@ export default function MeasurementsPage() {
             <h2>1.2 The International System of Units (SI)</h2>
             <p>The <strong>International System of Units (SI)</strong> is the modern metric system, defined from fundamental constants and built on seven base units.</p>
             <h3>The Seven SI Base Units</h3>
-            <div className="column-table">
+            <div className={styles.tableWrapper}>
               <table>
                 <thead>
                   <tr><th>Quantity</th><th>Unit Name</th><th>Symbol</th></tr>
@@ -208,7 +208,7 @@ export default function MeasurementsPage() {
             <h2>1.3 Comprehensive List of Physical Quantities and Their Dimensions</h2>
             <p>Fundamental quantities form the basis; derived quantities combine them via relationships.</p>
             <h3>Mechanical Quantities (Selected)</h3>
-            <div className="column-table">
+            <div className={styles.tableWrapper}>
               <table>
                 <thead>
                   <tr><th>Quantity</th><th>Symbol</th><th>SI Unit</th><th>Dimension</th><th>Formula</th></tr>
@@ -347,7 +347,7 @@ export default function MeasurementsPage() {
             <h2>1.8 SI Prefixes, Scientific Notation, and Orders of Magnitude</h2>
             <p>Use scientific notation and SI prefixes to express very large/small values cleanly and to minimize rounding mistakes.</p>
             <h3>Common SI Prefixes</h3>
-            <div className="column-table">
+            <div className={styles.tableWrapper}>
               <table>
                 <thead><tr><th>Prefix</th><th>Symbol</th><th>Factor</th></tr></thead>
                 <tbody>
@@ -419,7 +419,7 @@ export default function MeasurementsPage() {
           <div id="greek-alphabet" className={styles.section}>
             <h2>1.15 Greek Alphabet Reference</h2>
             <p>Common Greek symbols used across physics (uppercase, lowercase) with typical meanings.</p>
-            <div className="column-table">
+            <div className={styles.tableWrapper}>
               <table>
                 <thead>
                   <tr><th>Name</th><th>Uppercase</th><th>Lowercase</th><th>Common Uses</th></tr>
