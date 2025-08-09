@@ -1,0 +1,19 @@
+{
+  "sections": [
+    {
+      "id": "intro",
+      "title": "Introduction — What is Measurement and Why Care?",
+      "content": "<p>Measurement is the bridge between physical reality and mathematical description. A measurement assigns numbers to properties (quantities) of objects or events according to agreed rules. Physics uses measurement to test hypotheses, estimate parameters, and build predictive theories.</p><div class='highlightBox'><h4>Key Pillars</h4><ul><li><strong>Standards:</strong> shared definitions (e.g., the second) that let everyone measure the same way.</li><li><strong>Traceability:</strong> chain of calibrations back to national/international standards.</li><li><strong>Uncertainty:</strong> quantified doubt about a measurement.</li></ul></div>"
+    },
+    {
+      "id": "theory-of-measurement",
+      "title": "Theory of Measurement — Overview",
+      "content": "<p>The mathematical theory of measurement addresses how to map empirical observations to numbers consistently. It uses concepts from metrology and statistics: measurement models, noise, bias, repeatability, reproducibility, and calibration. For competitive exams, understanding the practical rules and how to apply them is key; for olympiads, you should also understand the derivations and limiting cases.</p><h3>Measurement Model</h3><p>Every measurement can be written as: <span class='equation'>y = f(x) + ε</span>, where <em>f(x)</em> is the deterministic relation and <em>ε</em> is the error (random + systematic). Properly separating these and quantifying them is the main job of experimental analysis.</p><h3>Operational vs. Theoretical Definitions</h3><p>An operational definition tells you “how to measure” (e.g., time by counting oscillations of a cesium atom's transition). A theoretical definition places the quantity inside a broader model (e.g., temperature as related to average kinetic energy). For exams, prefer operational definitions when asked what “a measurement” means.</p><div class='exampleBox'><h4>Example</h4><p>Measuring gravitational acceleration with a simple pendulum: theoretical period <span class='equation'>T = 2π√(l/g)</span>. Rearranging measures <span class='equation'>g = (2π)² l / T²</span>. The experiment's uncertainty depends on how precisely you measure <span class='equation'>l</span> and <span class='equation'>T</span>, and on systematic effects (air resistance, amplitude corrections).</p></div>"
+    },
+    {
+        "id": "quantities-units",
+        "title": "Physical Quantities & Units",
+        "content": "<h3>Definitions</h3><p>A <strong>quantity</strong> is a property that can be measured (length, mass, time). A <strong>unit</strong> is a specific magnitude of a quantity agreed upon for reference (meter, kilogram, second). Quantities are either base (independent) or derived (built from base quantities).</p><h3>Scalars, Vectors & Tensors</h3><p>Most early physics deals with scalars and vectors. Advanced topics (continuum mechanics, relativity) use tensors. For measurement theory, be comfortable with representing units and dimensions of scalars and components of vectors (each component has the same dimension as the scalar quantity it represents).</p><h3>Dimensional Symbols</h3><p>Common base dimension symbols: [M] mass, [L] length, [T] time, [I] current, [Θ] temperature, [N] amount (mole), [J] luminous intensity.</p>"
+    }
+  ]
+}
