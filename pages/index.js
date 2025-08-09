@@ -44,9 +44,11 @@ export default function Home({ topicSections }) {
               Master physics concepts with comprehensive notes, examples, and interactive content.
             </p>
             <div className={styles.ctaButtons}>
-              <Link href="/mechanics/measurements" passHref>
+              {/* FIX: The Link component now directly wraps the <a> tag for clarity and compatibility. */}
+              <Link href="/mechanics/measurements" legacyBehavior passHref>
                 <a className="btn">📚 Start Learning</a>
               </Link>
+              {/* FIX: This external link is already correct. No changes needed. */}
               <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io" className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
                 ⭐ Star on GitHub
               </a>
