@@ -4,13 +4,14 @@ import Head from 'next/head';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import TopicCard from '../components/TopicCard';
-import useScrollAnimation from '../hooks/useScrollAnimation'; // Import the new hook
+// import useScrollAnimation from '../hooks/useScrollAnimation'; // Animation hook removed for stability
 import styles from '../styles/Home.module.css';
 
 // Data for all the topic sections on the homepage.
 const topicSections = [
     {
-        id: 'mechanics',
+        id: 'foundations', // Changed ID to 'foundations' to match the "Start Learning" button link
+        card_type: 'mechanics', // Added a separate key for styling to preserve the card's look
         title: 'Classical Mechanics',
         subtitle: 'Foundations of physics: measurement, kinematics, dynamics, energy, momentum, and rotational motion',
         cards: [
@@ -60,8 +61,7 @@ const topicSections = [
 ];
 
 export default function Home() {
-  // Activate the scroll animation hook for this page
-  useScrollAnimation();
+  // useScrollAnimation(); // Removed this line to prevent content from being hidden
 
   return (
     <div>
@@ -100,8 +100,7 @@ export default function Home() {
         </section>
 
         <div className={`${styles.mainContent} container`}>
-          {/* Added 'fade-in' class to this section */}
-          <section className={`${styles.statsSection} fade-in`}>
+          <section className={styles.statsSection}>
             <div className={styles.statsGrid}>
               <div className={styles.statItem}><span className={styles.statNumber}>52</span><span className={styles.statLabel}>Chapters</span></div>
               <div className={styles.statItem}><span className={styles.statNumber}>5</span><span className={styles.statLabel}>Major Areas</span></div>
@@ -110,16 +109,15 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Topic sections remain the same */}
           {topicSections.map((section) => (
-            <section key={section.id} id={section.id} className={`${styles.section} fade-in`}>
+            <section key={section.id} id={section.id} className={styles.section}>
               <div className={styles.sectionHeader}>
                 <h2 className={styles.sectionTitle}>{section.title}</h2>
                 <p className={styles.sectionSubtitle}>{section.subtitle}</p>
               </div>
               <div className={styles.topicGrid}>
                 {section.cards.map((card) => (
-                  <TopicCard key={card.title} cardData={card} type={section.id} />
+                  <TopicCard key={card.title} cardData={card} type={section.card_type || section.id} />
                 ))}
               </div>
             </section>
