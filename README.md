@@ -1,2 +1,0 @@
-# physics-daily-nextjs
-Physicsdaily
