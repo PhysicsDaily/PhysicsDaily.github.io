@@ -1,0 +1,159 @@
+/*
+  styles/Foundations.module.css
+  Styles specifically for the Foundations page (pages/mechanics/foundations.js)
+*/
+
+/* Page Header */
+.header {
+  background: var(--bg-secondary);
+  padding: 4rem 0 3rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+}
+.header h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.description {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Learning Objectives Section */
+.objectivesSection {
+  padding: 3rem 0;
+  background: var(--bg-primary);
+}
+.objectivesCard {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+.objectivesCard h2 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.objectivesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+.objectiveItem {
+  text-align: center;
+  padding: 1rem;
+}
+.objectiveIcon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+.objectiveItem h3 {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+.objectiveItem p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Main Content Area */
+.mainContent {
+  padding: 4rem 0;
+  background: var(--bg-secondary);
+}
+
+/* Chapters Section */
+.chaptersSection h2 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+}
+.chapterGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+.chapterCard {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+.chapterCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.chapterHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.chapterNumber {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--accent-color);
+  background: rgba(6, 182, 212, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+}
+.difficultyBadge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.beginner {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success-color);
+}
+.intermediate {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--warning-color);
+}
+.advanced {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger-color);
+}
+.chapterCard h3 {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+.chapterDescription {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+.chapterStats {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.chapterActions {
+  margin-top: 1.5rem;
+}

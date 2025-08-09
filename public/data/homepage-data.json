@@ -1,0 +1,84 @@
+{
+  "topicSections": [
+    {
+        "id": "foundations",
+        "card_type": "mechanics",
+        "title": "Classical Mechanics",
+        "subtitle": "Foundations of physics: measurement, kinematics, dynamics, energy, momentum, and rotational motion",
+        "icon": "⚙️",
+        "cards": [
+          { "chapters": "1-7", "title": "Foundations & Kinematics", "description": "Measurement, motion in 1D/2D/3D, Newton's laws, applications, momentum, and particle systems.", "topics": ["Measurement", "1D Motion", "Force & Newton's Laws", "2D & 3D Motion", "Applications of Newton's Laws", "Momentum", "Systems of Particles"], "href": "/mechanics/foundations" },
+          { "chapters": "8-10", "title": "Rotational Motion", "description": "Rotational kinematics, dynamics, moment of inertia, torque, and angular momentum conservation.", "topics": ["Rotational Kinematics", "Rotational Dynamics", "Angular Momentum"], "href": "/mechanics/rotation" },
+          { "chapters": "11-14", "title": "Energy & Gravitation", "description": "Work-energy theorem, potential energy, conservation of energy, and universal gravitation.", "topics": ["Work & Kinetic Energy", "Potential Energy", "Energy Conservation", "Gravitation"], "href": "/mechanics/energy" }
+        ]
+    },
+    {
+        "id": "thermodynamics",
+        "card_type": "thermodynamics",
+        "title": "Fluids, Waves & Thermodynamics",
+        "subtitle": "Fluid mechanics, oscillations, wave motion, sound, special relativity, and thermal physics",
+        "icon": "🌊",
+        "cards": [
+            { "chapters": "15-17", "title": "Fluid Mechanics & Oscillations", "description": "Fluid statics and dynamics, Bernoulli's equation, simple harmonic motion, and oscillating systems.", "topics": ["Fluid Statics", "Fluid Dynamics", "Oscillations"], "href": "/fluids/mechanics" },
+            { "chapters": "18-20", "title": "Waves & Special Relativity", "description": "Wave motion, sound waves, Doppler effect, and Einstein's special theory of relativity.", "topics": ["Wave Motion", "Sound Waves", "Special Relativity"], "href": "/waves/motion-sound" },
+            { "chapters": "21-24", "title": "Thermodynamics", "description": "Temperature, molecular properties of gases, first and second laws of thermodynamics, and entropy.", "topics": ["Temperature", "Molecular Properties", "First Law", "Second Law & Entropy"], "href": "/thermodynamics/thermal" }
+        ]
+    },
+    {
+        "id": "electromagnetism",
+        "card_type": "electromagnetism",
+        "title": "Electricity & Magnetism",
+        "subtitle": "Electric fields, potential, capacitors, current, magnetic fields, induction, and AC circuits",
+        "icon": "⚡",
+        "cards": [
+            { "chapters": "25-30", "title": "Electrostatics", "description": "Electric charge, electric field, Gauss's law, electric potential, capacitors, and dielectrics.", "topics": ["Electric Charge", "Electric Field", "Gauss's Law", "Electric Potential", "Potential Energy", "Capacitors"], "href": "/electromagnetism/electrostatics" },
+            { "chapters": "31-36", "title": "Current & Magnetism", "description": "DC circuits, magnetic fields of currents, magnetic forces, electromagnetic induction, and inductance.", "topics": ["DC Circuits", "Magnetic Field", "Field of Current", "Faraday's Law", "Magnetic Properties", "Inductance"], "href": "/electromagnetism/current-magnetism" },
+            { "chapters": "37-39", "title": "AC Circuits & Light", "description": "Alternating current circuits, Maxwell's equations, electromagnetic waves, and the nature of light.", "topics": ["AC Circuits", "Maxwell's Equations", "Light Waves"], "href": "/electromagnetism/ac-maxwell" }
+        ]
+    },
+    {
+        "id": "optics",
+        "card_type": "optics",
+        "title": "Optics",
+        "subtitle": "Geometric optics, wave optics, interference, diffraction, and polarization",
+        "icon": "🔬",
+        "cards": [
+            { "chapters": "40-42", "title": "Geometric Optics", "description": "Mirrors, lenses, optical instruments, interference phenomena, and diffraction patterns.", "topics": ["Mirrors & Lenses", "Interference", "Diffraction"], "href": "/optics/geometric" },
+            { "chapters": "43-45", "title": "Wave Properties of Light", "description": "Gratings, spectra, polarization, thermal radiation, photoelectric effect, and photon interactions.", "topics": ["Gratings & Spectra", "Polarization", "Nature of Light"], "href": "/optics/wave-properties" }
+        ]
+    },
+    {
+        "id": "modern",
+        "card_type": "modern",
+        "title": "Modern Physics",
+        "subtitle": "Quantum mechanics, atomic physics, nuclear physics, and elementary particles",
+        "icon": "⚛️",
+        "cards": [
+            { "chapters": "46-49", "title": "Quantum & Atomic Physics", "description": "Matter waves, Schrödinger equation, electrons in potential wells, atomic structure, and electron configurations.", "topics": ["Nature of Matter", "Electrons in Wells", "Atomic Structure", "Conduction"], "href": "/modern/quantum-atomic" },
+            { "chapters": "50-52", "title": "Nuclear & Particle Physics", "description": "Nuclear structure, radioactive decay, nuclear reactions, energy from the nucleus, and elementary particles.", "topics": ["Nuclear Physics", "Energy from Nucleus", "Particle Physics"], "href": "/modern/nuclear-particle" }
+        ]
+    }
+  ],
+  "features": [
+    {
+      "icon": "📚",
+      "title": "Comprehensive Coverage",
+      "description": "Complete physics curriculum covering 52 chapters from classical mechanics to modern physics"
+    },
+    {
+      "icon": "🎯",
+      "title": "Structured Learning",
+      "description": "Carefully organized progression from fundamentals to advanced concepts"
+    },
+    {
+      "icon": "💡",
+      "title": "Interactive Examples",
+      "description": "Real-world applications and problem-solving techniques"
+    },
+    {
+      "icon": "🚀",
+      "title": "Self-Paced Study",
+      "description": "Learn at your own pace with flexible content access"
+    }
+  ]
+}
