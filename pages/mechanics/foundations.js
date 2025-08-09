@@ -4,19 +4,17 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-// We will create the ChapterCard and its styles later. For now, we just import it.
-// import ChapterCard from '../../components/ChapterCard';
 import styles from '../../styles/Foundations.module.css';
 
 // Data for the learning objectives section
 const objectives = [
-  { icon: '📏', title: 'Measurement & Units', description: 'Master scientific measurement, significant figures, and dimensional analysis' },
-  { icon: '🚀', title: 'Motion Analysis', description: 'Understand kinematics in 1D, 2D, and 3D coordinate systems' },
-  { icon: '⚖️', title: 'Newton\'s Laws', description: 'Apply fundamental principles to solve real-world problems' },
-  { icon: '💫', title: 'Momentum', description: 'Analyze collisions and particle systems using conservation laws' },
+  { icon: '📏', title: 'Measurement & Units', description: 'Master scientific measurement, significant figures, and dimensional analysis.' },
+  { icon: '🚀', title: 'Motion Analysis', description: 'Understand kinematics in 1D, 2D, and 3D coordinate systems.' },
+  { icon: '⚖️', title: 'Newton\'s Laws', description: 'Apply fundamental principles to solve real-world problems.' },
+  { icon: '💫', title: 'Momentum', description: 'Analyze collisions and particle systems using conservation laws.' },
 ];
 
-// Data for the chapter cards
+// Data for all seven chapter cards in this section
 const chapters = [
   { 
     id: 1, 
@@ -24,7 +22,6 @@ const chapters = [
     difficulty: 'Beginner', 
     description: "Learn the foundations of scientific measurement, units, significant figures, and dimensional analysis.",
     stats: { time: '4-5 hours', topics: 3 },
-    topics: ['Units & Standards', 'Significant Figures', 'Dimensional Analysis'],
     href: '/mechanics/measurements'
   },
   { 
@@ -33,10 +30,48 @@ const chapters = [
     difficulty: 'Beginner', 
     description: "Master the concepts of position, velocity, acceleration, and kinematic equations for 1D motion.",
     stats: { time: '5-6 hours', topics: 3 },
-    topics: ['Position & Displacement', 'Velocity & Acceleration', 'Kinematic Equations'],
     href: '/mechanics/kinematics' 
   },
-  // Add other chapters here as they are built
+  { 
+    id: 3, 
+    title: 'Force and Newton\'s Laws', 
+    difficulty: 'Intermediate', 
+    description: "Understand force concepts and master Newton's three laws of motion with practical applications.",
+    stats: { time: '6-7 hours', topics: 3 },
+    href: '/mechanics/newtons-laws'
+  },
+  { 
+    id: 4, 
+    title: 'Motion in 2D & 3D', 
+    difficulty: 'Intermediate', 
+    description: "Extend motion analysis to multiple dimensions including projectile motion and circular motion.",
+    stats: { time: '5-6 hours', topics: 3 },
+    href: '/mechanics/motion-2d-3d'
+  },
+  { 
+    id: 5, 
+    title: 'Applications of Newton\'s Laws', 
+    difficulty: 'Intermediate', 
+    description: "Apply Newton's laws to real-world scenarios including friction, inclined planes, and pulley systems.",
+    stats: { time: '6-7 hours', topics: 3 },
+    href: '/mechanics/applications'
+  },
+  { 
+    id: 6, 
+    title: 'Momentum', 
+    difficulty: 'Intermediate', 
+    description: "Master momentum conservation, the impulse-momentum theorem, and collision analysis.",
+    stats: { time: '5-6 hours', topics: 3 },
+    href: '/mechanics/momentum'
+  },
+  { 
+    id: 7, 
+    title: 'Systems of Particles', 
+    difficulty: 'Advanced', 
+    description: "Analyze multi-particle systems, center of mass motion, and systems with variable mass.",
+    stats: { time: '4-5 hours', topics: 3 },
+    href: '/mechanics/particle-systems'
+  },
 ];
 
 
@@ -55,7 +90,7 @@ export default function FoundationsPage() {
           <nav>
             <Link href="/">Home</Link>
             <span className="separator">›</span>
-            <Link href="/#foundations">Classical Mechanics</Link>
+            <Link href="/#mechanics">Classical Mechanics</Link>
             <span className="separator">›</span>
             <span className="current">Foundations & Kinematics</span>
           </nav>
@@ -67,7 +102,7 @@ export default function FoundationsPage() {
           <h1>Classical Mechanics: Foundations & Kinematics</h1>
           <p className={styles.subtitle}>Chapters 1-7: Master the fundamentals of physics</p>
           <p className={styles.description}>
-            Build a solid foundation in physics with comprehensive coverage of measurement, motion, forces, and momentum.
+            Build a solid foundation in physics with comprehensive coverage of measurement, motion, forces, and momentum. These seven chapters form the cornerstone of classical mechanics.
           </p>
         </div>
       </header>
@@ -94,7 +129,6 @@ export default function FoundationsPage() {
             <section className={styles.chaptersSection}>
                 <h2>📚 Chapters Overview</h2>
                 <div className={styles.chapterGrid}>
-                    {/* This part will be replaced by a ChapterCard component later */}
                     {chapters.map(chapter => (
                         <div key={chapter.id} className={styles.chapterCard}>
                              <div className={styles.chapterHeader}>
@@ -108,7 +142,7 @@ export default function FoundationsPage() {
                                 <span>📖 {chapter.stats.topics} topics</span>
                             </div>
                              <div className={styles.chapterActions}>
-                                <Link href={chapter.href} className="btn btn-primary">Start Chapter</Link>
+                                <Link href={chapter.href} className="btn">Start Chapter</Link>
                             </div>
                         </div>
                     ))}
