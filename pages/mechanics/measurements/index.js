@@ -222,7 +222,7 @@ export default function MeasurementsPage() {
             <h3>Further Checks and Examples</h3>
             <div className={styles.exampleBox}>
               <h4>📝 Example: RC Discharge</h4>
-              <p>q(t) = q₀ {'e^{-t/RC}'} . Exponent must be dimensionless ⇒ [RC] = [T].</p>
+              <p>q(t) = q₀ {'$e^{-t/RC}$'}. Exponent must be dimensionless ⇒ [RC] = [T].</p>
             </div>
             <div className={styles.exampleBox}>
               <h4>📝 Example: Capillary Rise</h4>
@@ -494,7 +494,7 @@ export default function MeasurementsPage() {
             <h3>Linearization</h3>
             <ul>
               <li>Power law y = A xⁿ ⇒ log y = log A + n log x (slope n on log–log plot).</li>
-              <li>Exponential y = A {'e^{kx}'} ⇒ ln y = ln A + kx (semi-log plot).</li>
+              <li>Exponential y = A {'$e^{kx}$'} ⇒ ln y = ln A + kx (semi-log plot).</li>
             </ul>
             <h3>Estimating Slope and Its Uncertainty (Quick Method)</h3>
             <ul>
