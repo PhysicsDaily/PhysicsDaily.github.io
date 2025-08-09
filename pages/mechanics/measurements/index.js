@@ -3,9 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import Header from '../../../components/Header';
-import Footer from '../../../components/Footer';
-import styles from '../../../styles/ContentPage.module.css';
+import Script from 'next/script';
 
 // Data for Table of Contents and section rendering
 const sections = [
@@ -30,7 +28,21 @@ const sections = [
 
 export default function MeasurementsPage() {
   const [activeSection, setActiveSection] = useState('');
+  const [theme, setTheme] = useState('light');
   const observer = useRef(null);
+
+  useEffect(() => {
+    // Check for saved theme preference or default to 'light'
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  }, []);
+
+  const applyTheme = (newTheme) => {
+    setTheme(newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
 
   useEffect(() => {
     // Disconnect previous observer if it exists
@@ -61,35 +73,587 @@ export default function MeasurementsPage() {
 
 
   return (
-    <div>
+    <>
       <Head>
         <title>Chapter 1: Measurement - Physics Daily</title>
         <meta name="description" content="Master scientific measurement, significant figures, and dimensional analysis in physics." />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+        <style jsx global>{`
+          :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #64748b;
+            --accent-color: #06b6d4;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --border-radius: 12px;
+            --transition: all 0.2s ease;
+          }
+
+          [data-theme="dark"] {
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --card-bg: #334155;
+            --border-color: #475569;
+            --border-hover: #64748b;
+          }
+
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+
+          body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: all 0.3s ease;
+          }
+
+          .math {
+            font-family: 'JetBrains Mono', monospace;
+            font-style: italic;
+            font-weight: 500;
+          }
+
+          .equation {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1em;
+            font-weight: 500;
+            background: var(--bg-secondary);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+          }
+
+          .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+          }
+
+          .nav {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+          }
+
+          .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+
+          .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+          }
+
+          .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+          }
+
+          .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+          }
+
+          .nav-links a:hover {
+            color: var(--primary-color);
+          }
+
+          .breadcrumb {
+            background: var(--bg-secondary);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+          }
+
+          .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+          }
+
+          .breadcrumb a:hover {
+            color: var(--primary-color);
+          }
+
+          .separator {
+            margin: 0 0.5rem;
+            color: var(--text-secondary);
+          }
+
+          .current {
+            color: var(--text-primary);
+            font-weight: 500;
+          }
+
+          .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+          }
+
+          .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+          }
+
+          .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+          }
+
+          .description {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+          }
+
+          .main-content {
+            padding: 2rem 0;
+          }
+
+          .theme-toggle {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 25px;
+            padding: 8px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+          }
+
+          .theme-toggle button {
+            background: none;
+            border: none;
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            color: var(--text-secondary);
+          }
+
+          .theme-toggle button:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            transform: scale(1.05);
+          }
+
+          .theme-toggle button.active {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: var(--shadow-md);
+          }
+
+          .theme-toggle button.active:hover {
+            background: var(--primary-dark);
+          }
+
+          .section {
+            margin: 32px 0;
+            padding: 24px;
+            border-radius: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+          }
+
+          .section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+          }
+
+          .section h3 {
+            color: var(--text-primary);
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+          }
+
+          .section h4 {
+            color: var(--text-primary);
+            margin: 1rem 0 0.5rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+          }
+
+          .section p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            text-align: justify;
+          }
+
+          .section ul, .section ol {
+            margin: 1rem 0 1rem 2rem;
+            color: var(--text-secondary);
+          }
+
+          .section li {
+            margin-bottom: 0.5rem;
+          }
+
+          .highlight-box {
+            background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
+            border-left: 4px solid var(--accent-color);
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+          }
+
+          [data-theme="dark"] .highlight-box {
+            background: linear-gradient(135deg, #164e63, #0c4a6e);
+          }
+
+          .beginner-note {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 4px solid var(--warning-color);
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+          }
+
+          [data-theme="dark"] .beginner-note {
+            background: linear-gradient(135deg, #451a03, #78350f);
+          }
+
+          .advanced-note {
+            background: linear-gradient(135deg, #f3e8ff, #ede9fe);
+            border-left: 4px solid #8b5cf6;
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+          }
+
+          [data-theme="dark"] .advanced-note {
+            background: linear-gradient(135deg, #2d1b69, #3730a3);
+          }
+          
+          .danger-note {
+            background: linear-gradient(135deg, #ffe4e6, #fee2e2);
+            border-left: 4px solid var(--danger-color);
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+          }
+
+          [data-theme="dark"] .danger-note {
+            background: linear-gradient(135deg, #7f1d1d, #991b1b);
+          }
+
+          .formula-box {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 16px 0;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 500;
+          }
+
+          .example-box {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-left: 4px solid var(--success-color);
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+          }
+
+          [data-theme="dark"] .example-box {
+            background: linear-gradient(135deg, #14532d, #166534);
+          }
+
+          table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 0.9rem;
+          }
+
+          th, td {
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            text-align: left;
+            vertical-align: top;
+          }
+
+          th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+            color: var(--text-primary);
+          }
+
+          td {
+            color: var(--text-secondary);
+          }
+
+          .two-column-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+          }
+
+          .column-table {
+            overflow-x: auto;
+          }
+
+          .practice-section {
+            padding: 2rem 0;
+            background-color: var(--bg-secondary);
+          }
+          
+          .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+          }
+          
+          .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+          }
+          
+          .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+          }
+          
+          .practice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+          }
+          
+          .practice-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+          }
+          
+          .practice-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+          }
+          
+          .practice-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+          }
+          
+          .practice-card h3 {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+          }
+          
+          .practice-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+          }
+          
+          .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 8px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: inline-block;
+            text-decoration: none;
+          }
+
+          .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+          }
+          
+          .btn-practice {
+            width: 100%;
+          }
+
+          .sig-figs-section {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+          }
+
+          .operation-example {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+          }
+
+          .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+          }
+
+          @media (max-width: 768px) {
+            .theme-toggle {
+              top: 80px;
+              right: 10px;
+              scale: 0.85;
+            }
+
+            .header h1 {
+              font-size: 2rem;
+            }
+
+            .nav-links {
+              display: none;
+            }
+
+            .two-column-table {
+              grid-template-columns: 1fr;
+            }
+
+            table {
+              font-size: 0.8rem;
+            }
+
+            th, td {
+              padding: 6px 8px;
+            }
+          }
+        `}</style>
       </Head>
 
-      <Header />
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP" />
+      <Script id="google-analytics">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-XN081SR2KP');
+        `}
+      </Script>
+
+      <nav className="nav">
+        <div className="container">
+          <div className="nav-content">
+            <Link href="/" className="nav-logo">Physics Daily</Link>
+            <ul className="nav-links">
+              <li><Link href="/">Home</Link></li>
+              <li><Link href="/resources">Resources</Link></li>
+              <li><Link href="/about">About</Link></li>
+              <li><Link href="/contribute">Contribute</Link></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div className="theme-toggle">
+        <button 
+          onClick={() => applyTheme('light')}
+          className={theme === 'light' ? 'active' : ''}
+          title="Light Theme"
+        >
+          ☀️
+        </button>
+        <button 
+          onClick={() => applyTheme('dark')}
+          className={theme === 'dark' ? 'active' : ''}
+          title="Dark Theme"
+        >
+          🌙
+        </button>
+      </div>
 
       <div className="breadcrumb">
         <div className="container">
-          <nav>
-            <Link href="/">Home</Link><span className="separator">›</span>
-            <Link href="/mechanics/foundations">Classical Mechanics</Link><span className="separator">›</span>
+          <nav aria-label="Breadcrumb">
+            <Link href="/">Home</Link>
+            <span className="separator">›</span>
+            <Link href="/mechanics/foundations">Classical Mechanics</Link>
+            <span className="separator">›</span>
             <span className="current">📏 Measurement</span>
           </nav>
         </div>
       </div>
 
-      <header className={styles.pageHeader}>
+      <header className="header">
         <div className="container">
           <h1>Chapter 1: Measurement</h1>
-          <p className={styles.pageSubtitle}>The Foundation of Scientific Physics</p>
-          <p className={styles.pageDescription}>Master the fundamental concepts of measurement, units, and dimensional analysis that form the bedrock of all physics.</p>
+          <p className="subtitle">Foundation of Scientific Physics</p>
+          <p className="description">
+            Master the fundamental concepts of measurement, units, and dimensional analysis that form the bedrock of all physics - from basic concepts to advanced applications.
+          </p>
         </div>
       </header>
 
-      <div className={`${styles.mainLayout} container`}>
-        {/* Main Content Column */}
-        <main className={styles.contentColumn}>
+      <main className="main-content">
+        <div className="container">
           <div id="intro" className={styles.section}>
             <h2>🌟 Introduction: Why Measurement Matters</h2>
             <div className={styles.beginnerNote}>
@@ -438,44 +1002,40 @@ export default function MeasurementsPage() {
                 </tbody>
               </table>
             </div>
+        </div>
+      </main>
+
+      <section className="practice-section">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">Test Your Understanding</h2>
+            <p className="section-subtitle">Apply what you've learned by tackling conceptual questions, numerical problems, and a comprehensive quiz.</p>
           </div>
+          <div className="practice-grid">
+            <Link href="/mechanics/measurements/conceptual" className="practice-card">
+              <div className="icon">🤔</div>
+              <h3>Conceptual Questions</h3>
+              <p>Challenge your understanding of the core principles and theoretical concepts.</p>
+            </Link>
+            <Link href="/mechanics/measurements/numerical" className="practice-card">
+              <div className="icon">🧮</div>
+              <h3>Numerical Problems</h3>
+              <p>Sharpen your problem-solving skills with a variety of calculations and applications.</p>
+            </Link>
+            <Link href="/mechanics/measurements/mcq" className="practice-card">
+              <div className="icon">📊</div>
+              <h3>Assessment Quiz</h3>
+              <p>Take a timed, comprehensive quiz to test your mastery of the entire chapter.</p>
+            </Link>
+          </div>
+        </div>
+      </section>
 
-          <section id="practice" className={styles.practiceSection}>
-            <div className="container">
-              <div className={styles.sectionHeader}>
-                <h2 className={styles.sectionTitle}>Test Your Understanding</h2>
-                <p className={styles.sectionSubtitle}>Apply what you've learned by tackling conceptual questions, numerical problems, and a comprehensive quiz.</p>
-              </div>
-              <div className={styles.practiceGrid}>
-                <Link href="/mechanics/measurements/conceptual" passHref><div className={styles.practiceCard}><div className={styles.icon}>🤔</div><h3>Conceptual Questions</h3><p>Challenge your understanding of the core principles and theoretical concepts.</p></div></Link>
-                <Link href="/mechanics/measurements/numerical" passHref><div className={styles.practiceCard}><div className={styles.icon}>🧮</div><h3>Numerical Problems</h3><p>Sharpen your problem-solving skills with a variety of calculations and applications.</p></div></Link>
-                <Link href="/mechanics/measurements/mcq" passHref><div className={styles.practiceCard}><div className={styles.icon}>📊</div><h3>Assessment Quiz</h3><p>Take a timed, comprehensive quiz to test your mastery of the entire chapter.</p></div></Link>
-              </div>
-            </div>
-          </section>
-        </main>
-
-        {/* Sidebar with Table of Contents */}
-        <aside className={styles.sidebar}>
-          <nav className={styles.toc}>
-            <h3>On this page</h3>
-            <ul className={styles.tocNav}>
-              {sections.map((sec) => (
-                <li key={sec.id}>
-                  <a 
-                    href={`#${sec.id}`} 
-                    className={`${styles.tocLink} ${activeSection === sec.id ? styles.activeTocLink : ''}`}
-                  >
-                    {sec.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </aside>
-      </div>
-
-      <Footer />
-    </div>
+      <footer className="footer">
+        <div className="container">
+          <p>&copy; Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
+        </div>
+      </footer>
+    </>
   );
 }
