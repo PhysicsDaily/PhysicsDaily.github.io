@@ -1,4 +1,4 @@
-// pages/mechanics/measurements/measurements_overview.js
+// pages/mechanics/measurements/index.js
 
 import { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
@@ -8,7 +8,6 @@ import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
 import styles from '../../../styles/ContentPage.module.css';
 
-// Table of contents
 const sections = [
   { id: 'intro', title: 'Introduction & Roadmap' },
   { id: 'foundations', title: '0. Foundations: Quantities, Models, and Metrology' },
@@ -36,13 +35,12 @@ const sections = [
   { id: 'practice', title: 'Practice Problems' },
 ];
 
-export default function MeasurementsOverview() {
+export default function MeasurementsPage() {
   const [activeSection, setActiveSection] = useState('');
   const observer = useRef(null);
 
   useEffect(() => {
     if (observer.current) observer.current.disconnect();
-
     observer.current = new IntersectionObserver(
       (entries) => {
         const first = entries.find((e) => e.isIntersecting);
@@ -50,22 +48,20 @@ export default function MeasurementsOverview() {
       },
       { rootMargin: '-20% 0px -79% 0px' }
     );
-
     sections.forEach((sec) => {
       const el = document.getElementById(sec.id);
       if (el) observer.current.observe(el);
     });
-
     return () => observer.current?.disconnect();
   }, []);
 
   return (
     <>
       <Head>
-        <title>Measurement: Complete Theory & Practice - Physics Daily</title>
+        <title>Chapter 1: Measurement - Physics Daily</title>
         <meta
           name="description"
-          content="A complete, step-by-step theory of measurements for physics: SI units, dimensional analysis, uncertainty, significant figures, calibration, graphs, and advanced methods."
+          content="Complete theory of measurements: SI units, dimensional analysis, significant figures, uncertainty (GUM), calibration, graphs, and scaling laws with examples."
         />
       </Head>
 
@@ -88,18 +84,17 @@ export default function MeasurementsOverview() {
             <span className="separator">›</span>
             <Link href="/mechanics/foundations">Classical Mechanics</Link>
             <span className="separator">›</span>
-            <span className="current">📏 Measurement (Complete)</span>
+            <span className="current">📏 Measurement</span>
           </nav>
         </div>
       </div>
 
       <header className={styles.pageHeader}>
         <div className="container">
-          <h1>Measurement: From Basics to Advanced</h1>
-          <p className={styles.subtitle}>Theory, Methods, Precision, and Problem Solving</p>
+          <h1>Chapter 1: Measurement</h1>
+          <p className={styles.subtitle}>From Basics to Advanced Methods</p>
           <p className={styles.description}>
-            Start from first principles of measurement and build up to advanced tools used in experimental physics: SI units, dimensional analysis, uncertainty (GUM),
-            calibration, data fitting, and scaling laws—with worked examples and practice.
+            Build a rigorous foundation in measurement: units, dimensional analysis, significant figures, uncertainty, calibration, graphing, and scaling laws—with worked examples and practice.
           </p>
         </div>
       </header>
@@ -138,18 +133,14 @@ export default function MeasurementsOverview() {
           <div id="foundations" className={styles.section}>
             <h2>0. Foundations: Quantities, Models, and Metrology</h2>
             <h3>Physical Quantity</h3>
-            <p>
-              A measurable attribute of a system (e.g., length, time, mass, current, temperature). Each has an operational definition: a clear procedure to measure it.
-            </p>
+            <p>A measurable attribute (length, time, mass, current, temperature). Each has an operational definition: a clear procedure to measure it.</p>
             <ul>
               <li>Scalar: magnitude only (mass, time, temperature, energy).</li>
               <li>Vector: magnitude + direction (velocity, force, electric field).</li>
               <li>Tensor: multi-index object (stress, inertia tensor, permittivity tensor).</li>
             </ul>
             <h3>Measurement Model</h3>
-            <p>
-              A model maps signals to quantities: reading = true value + systematic bias + random noise. The goal is to estimate the true value and its uncertainty.
-            </p>
+            <p>Reading = true value + systematic bias + random noise. The goal is to estimate the true value and its uncertainty.</p>
             <h3>Metrology Pillars</h3>
             <ul>
               <li>Traceability: unbroken chain to SI standards via calibrations with stated uncertainties.</li>
@@ -164,9 +155,7 @@ export default function MeasurementsOverview() {
 
           <div id="si-units" className={styles.section}>
             <h2>1. SI Units and Standards (Post-2019)</h2>
-            <p>
-              The International System of Units (SI) uses seven base quantities; all units are defined by exact values of fundamental constants (since 2019).
-            </p>
+            <p>The International System of Units (SI) uses seven base quantities; all units are defined by exact values of fundamental constants.</p>
             <div className={styles.tableWrapper}>
               <table>
                 <thead>
@@ -337,7 +326,7 @@ export default function MeasurementsOverview() {
           </div>
 
           <div id="sig-figs" className={styles.section}>
-          <h2>9. Precision & Significant Figures</h2>
+            <h2>9. Precision & Significant Figures</h2>
             <p>Significant figures communicate precision. Keep guard digits during intermediate steps; round at the end.</p>
             <div className={styles.highlightBox}>
               <h4>Rules</h4>
@@ -376,12 +365,10 @@ export default function MeasurementsOverview() {
 
           <div id="propagation" className={styles.section}>
             <h2>11. Propagation of Uncertainty (with Covariance)</h2>
-            <p>
-              For y = f(x₁,…,x_m), linearize around means: u²(y) ≈ ΣΣ (∂f/∂x_i)(∂f/∂x_j) cov(x_i, x_j).
-            </p>
+            <p>For y = f(x₁,…,x_m), linearize around means: u²(y) ≈ ΣΣ (∂f/∂x_i)(∂f/∂x_j) cov(x_i, x_j).</p>
             <ul>
               <li>Independent: cov = 0 → u²(y) = Σ (∂f/∂x_i)² u²(x_i)</li>
-              <li>Relative form (products/powers): u(y)/y = √[Σ (a_i u(x_i)/x_i)² + 2ΣΣ a_i a_j ρ_{ij} u_i u_j/(x_i x_j)]</li>
+              <li>Relative form (products/powers): u(y)/y = √[Σ (a_i u(x_i)/x_i)² + 2ΣΣ a_i a_j ρ<sub>ij</sub> u_i u_j/(x_i x_j)]</li>
             </ul>
             <div className={styles.exampleBox}>
               <h4>Example: Density of a Cylinder</h4>
@@ -399,7 +386,7 @@ export default function MeasurementsOverview() {
             <ul>
               <li>Normal distribution: many noise sources sum to Gaussian by CLT.</li>
               <li>Small n: mean confidence interval uses Student’s t with ν = n−1.</li>
-              <li>Standard error of mean (SEM): s/√n; 95% CI: x̄ ± t_{0.975,ν}·SEM.</li>
+              <li>Standard error of mean (SEM): s/√n; 95% CI: x̄ ± t<sub>0.975,ν</sub>·SEM.</li>
             </ul>
             <div className={styles.exampleBox}>
               <h4>Example: 5 Timing Trials</h4>
@@ -459,7 +446,7 @@ export default function MeasurementsOverview() {
             <h2>16. Graphs, Linearization & Weighted Fits</h2>
             <ul>
               <li>Power law y = A xⁿ → log y = log A + n log x (slope = n).</li>
-              <li>Exponential y = A e^{kx} → ln y = ln A + kx.</li>
+              <li>Exponential y = A e<sup>kx</sup> → ln y = ln A + kx.</li>
               <li>Error bars: show ±u (or ±1σ). Use weighted least squares if σ varies: weights wᵢ = 1/σᵢ².</li>
               <li>Goodness-of-fit: χ² = Σ wᵢ (yᵢ − ŷᵢ)²; reduced χ² ≈ 1 indicates consistent uncertainties.</li>
               <li>Residuals: check for trends (model misspecification) and non-constant variance.</li>
@@ -509,7 +496,7 @@ export default function MeasurementsOverview() {
                   <tr><td>Boltzmann constant</td><td>k_B</td><td>1.380649×10⁻²³ J·K⁻¹</td><td>exact</td></tr>
                   <tr><td>Avogadro constant</td><td>N_A</td><td>6.02214076×10²³ mol⁻¹</td><td>exact</td></tr>
                   <tr><td>Magnetic constant</td><td>μ₀</td><td>4π×10⁻⁷ N·A⁻²</td><td>defined value</td></tr>
-                  <tr><td>Grav. constant</td><td>G</td><td>≈ 6.674×10⁻¹¹ m³·kg⁻¹·s⁻²</td><td>measured</td></tr>
+                  <tr><td>Gravitational constant</td><td>G</td><td>≈ 6.674×10⁻¹¹ m³·kg⁻¹·s⁻²</td><td>measured</td></tr>
                 </tbody>
               </table>
             </div>
@@ -594,29 +581,29 @@ export default function MeasurementsOverview() {
                 A pendulum’s period T depends on length l, gravity g, and amplitude θ₀. Use Π theorem to propose a functional form and discuss limits θ₀→0, θ₀→π/2.
               </li>
               <li>
-                For y = A xⁿ e^{kx}, derive the Jacobian-based propagation of uncertainty for y given u(A), u(n), u(k), u(x) and correlations ρ.
+                For y = A xⁿ e<sup>kx</sup>, derive the Jacobian-based propagation of uncertainty for y given u(A), u(n), u(k), u(x) and correlations ρ<sub>ij</sub>.
               </li>
             </ol>
 
             <div className={styles.highlightBox}>
               <h4>Answer Sketches</h4>
               <ul>
-                <li>Dimless arguments: θ in sin θ; kx in e^{kx}. Example: simple harmonic motion, wave phase kx−ωt.</li>
+                <li>Dimensionless arguments: θ in sin θ; kx in e<sup>kx</sup>. Examples: SHM phase, wave phase kx−ωt.</li>
                 <li>Accuracy vs precision: a miscalibrated scale can be precise but inaccurate.</li>
                 <li>Type A: repeat readings; Type B: spec sheet resolution, calibration certificate.</li>
-                <li>χ²_red ≫ 1: under-estimated uncertainties or wrong model; χ²_red ≪ 1: over-estimated uncertainties.</li>
+                <li>χ²<sub>red</sub> ≫ 1: under-estimated uncertainties or wrong model; χ²<sub>red</sub> ≪ 1: over-estimated uncertainties.</li>
               </ul>
             </div>
 
             <div className={styles.practiceGrid}>
               <Link href="/mechanics/measurements/conceptual" className={styles.practiceCard}>
                 <div className={styles.icon}>🤔</div>
-                <h3>Conceptual Set</h3>
+                <h3>Conceptual Questions</h3>
                 <p>Deepen understanding of core principles with qualitative reasoning.</p>
               </Link>
               <Link href="/mechanics/measurements/numerical" className={styles.practiceCard}>
                 <div className={styles.icon}>🧮</div>
-                <h3>Numerical Set</h3>
+                <h3>Numerical Problems</h3>
                 <p>Sharpen calculations, conversions, and uncertainty propagation.</p>
               </Link>
               <Link href="/mechanics/measurements/mcq" className={styles.practiceCard}>
