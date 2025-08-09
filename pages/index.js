@@ -44,9 +44,11 @@ export default function Home({ topicSections }) {
               Master physics concepts with comprehensive notes, examples, and interactive content.
             </p>
             <div className={styles.ctaButtons}>
-              <Link href="/mechanics/measurements" className="btn">
+              {/* FIX: Changed the href to scroll to the #foundations section on the current page */}
+              <Link href="/#foundations" className="btn">
                 📚 Start Learning
               </Link>
+              {/* This button is already correct */}
               <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io" className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
                 ⭐ Star on GitHub
               </a>
