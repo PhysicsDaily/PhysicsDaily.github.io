@@ -44,7 +44,7 @@ export default function Home({ topicSections }) {
               Master physics concepts with comprehensive notes, examples, and interactive content.
             </p>
             <div className={styles.ctaButtons}>
-              <Link href="#mechanics" className="btn">
+              <Link href="/mechanics/measurements" className="btn">
                 📚 Start Learning
               </Link>
               <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io" className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
