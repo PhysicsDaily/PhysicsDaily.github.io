@@ -44,11 +44,9 @@ export default function Home({ topicSections }) {
               Master physics concepts with comprehensive notes, examples, and interactive content.
             </p>
             <div className={styles.ctaButtons}>
-              {/* FIX: The href now correctly points to the ID of the first learning section, which is "mechanics" */}
-              <Link href="/#mechanics" className="btn">
+              <Link href="/#mechanics" className="btn" scroll>
                 📚 Start Learning
               </Link>
-              {/* This link is correct and opens in a new tab */}
               <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io" className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
                 ⭐ Star on GitHub
               </a>
