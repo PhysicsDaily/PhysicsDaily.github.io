@@ -1,5 +1,6 @@
-/* THIS CLASS IS NOW GLOBAL */
-:global(.finalAnswer) { 
+/* styles/ContentPage.module.css */
+
+.solution :global(.finalAnswer) { 
   background: var(--bg-tertiary); 
   border-left: 4px solid var(--success-color); 
   padding: 1rem; 
@@ -7,6 +8,7 @@
   border-radius: 6px; 
   font-weight: 600; 
 }
-[data-theme="dark"] :global(.finalAnswer) { 
+
+[data-theme="dark"] .solution :global(.finalAnswer) { 
   background: linear-gradient(135deg, #14532d, #166534); 
 }
