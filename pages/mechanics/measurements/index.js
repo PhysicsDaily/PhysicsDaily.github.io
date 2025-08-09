@@ -280,10 +280,10 @@ export default function MeasurementsPage() {
               For repeated measurements x_i (i=1..N), the basic statistics are:
             </p>
             <ul>
-              <li><strong>Mean:</strong> <span className="equation">\bar{x} = (1/N) Σ x_i</span></li>
-              <li><strong>Variance:</strong> <span className="equation">s² = (1/(N-1)) Σ (x_i - \bar{x})²</span> (sample variance)</li>
+              <li><strong>Mean:</strong> <span className="equation">x̄ = (1/N) &Sigma; x_i</span></li>
+              <li><strong>Variance:</strong> <span className="equation">s² = (1/(N-1)) &Sigma; (x_i - x̄)²</span> (sample variance)</li>
               <li><strong>Standard deviation:</strong> s = √(s²)</li>
-              <li><strong>Standard error of the mean:</strong> <span className="equation">s_{\bar{x}} = s / √N</span></li>
+              <li><strong>Standard error of the mean:</strong> <span className="equation">s_{x̄} = s / √N</span></li>
             </ul>
 
             <h3>Confidence Intervals</h3>
@@ -362,13 +362,13 @@ export default function MeasurementsPage() {
 
             <h3>Least Squares (Simple Linear)</h3>
             <p>
-              For points (x_i, y_i) with uncertainties σ_i on y (assumed independent), the best-fit slope m and intercept c minimize χ² = Σ[(y_i − (m x_i + c))/σ_i]². For equal σ_i, use simple formulas for m and c. Understanding derivation of these formulas is beneficial for olympiad-level problems.
+              For points (x_i, y_i) with uncertainties σ_i on y (assumed independent), the best-fit slope m and intercept c minimize χ² = &Sigma;[(y_i − (m x_i + c))/σ_i]². For equal σ_i, use simple formulas for m and c. Understanding derivation of these formulas is beneficial for olympiad-level problems.
             </p>
 
             <div className={styles.exampleBox}>
               <h4>Worked Example</h4>
               <p>
-                Fit y = mx + c to points (0,1), (1,3), (2,5). The slope m = 2, intercept c =1 (exact here). For noisy data, compute sums Σx, Σy, Σxy, Σx² and use m = (NΣxy − ΣxΣy)/(NΣx² − (Σx)²).
+                Fit y = mx + c to points (0,1), (1,3), (2,5). The slope m = 2, intercept c =1 (exact here). For noisy data, compute sums &Sigma;x, &Sigma;y, &Sigma;xy, &Sigma;x² and use m = (N&Sigma;xy − &Sigma;x&Sigma;y)/(N&Sigma;x² − (&Sigma;x)²).
               </p>
             </div>
 
@@ -439,7 +439,7 @@ export default function MeasurementsPage() {
                   <tr><td>Nu</td><td>Ν</td><td>ν</td><td>Frequency ν, kinematic viscosity</td></tr>
                   <tr><td>Pi</td><td>Π</td><td>π</td><td>Ratio of circle circumference, product operator</td></tr>
                   <tr><td>Rho</td><td>Ρ</td><td>ρ</td><td>Density, resistivity</td></tr>
-                  <tr><td>Sigma</td><td>Σ</td><td>σ</td><td>Sum operator Σ, standard deviation σ, stress</td></tr>
+                  <tr><td>Sigma</td><td>&Sigma;</td><td>σ</td><td>Sum operator &Sigma;, standard deviation σ, stress</td></tr>
                   <tr><td>Tau</td><td>Τ</td><td>τ</td><td>Torque, time constant</td></tr>
                   <tr><td>Phi</td><td>Φ</td><td>φ</td><td>Magnetic flux, angle, potential</td></tr>
                   <tr><td>Chi</td><td>Χ</td><td>χ</td><td>Susceptibility</td></tr>
