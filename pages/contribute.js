@@ -25,7 +25,7 @@ export default function ContributePage() {
         <div className="container">
           <section className={styles.section}>
             <h2>Why Contribute?</h2>
-            <p>Physics Daily is a community-driven project. Your contributions, no matter how small, help us create a more accurate, comprehensive, and engaging resource for students and enthusiasts around the world. By sharing your knowledge, you can make a real impact on someone's learning journey.</p>
+            <p>Physics Daily is a community-driven project. Your contributions, no matter how small, help us create a more accurate, comprehensive, and engaging resource for students and enthusiasts around the world. By sharing your knowledge, you can make a real impact on someone&apos;s learning journey.</p>
           </section>
 
           <section className={styles.section}>
@@ -33,7 +33,7 @@ export default function ContributePage() {
             <div className={styles.grid}>
               <div className={styles.card}>
                 <h3>📝 Add or Improve Content</h3>
-                <p>Find a topic you're passionate about and help us expand our notes. You can add new sections, write detailed explanations, or provide worked examples.</p>
+                <p>Find a topic you&apos;re passionate about and help us expand our notes. You can add new sections, write detailed explanations, or provide worked examples.</p>
               </div>
               <div className={styles.card}>
                 <h3>🐞 Report Errors</h3>
@@ -41,7 +41,7 @@ export default function ContributePage() {
               </div>
               <div className={styles.card}>
                 <h3>💡 Suggest Features</h3>
-                <p>Have an idea for a new interactive feature, a simulation, or a topic we should cover? We'd love to hear your suggestions to make the platform even better.</p>
+                <p>Have an idea for a new interactive feature, a simulation, or a topic we should cover? We&apos;d love to hear your suggestions to make the platform even better.</p>
               </div>
             </div>
           </section>
