@@ -4,6 +4,9 @@ import { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Script from 'next/script';
+import Header from '../../../components/Header';
+import Footer from '../../../components/Footer';
+import styles from '../../../styles/ContentPage.module.css'; // Using the consistent stylesheet
 
 // Data for Table of Contents and section rendering
 const sections = [
@@ -28,48 +31,28 @@ const sections = [
 
 export default function MeasurementsPage() {
   const [activeSection, setActiveSection] = useState('');
-  const [theme, setTheme] = useState('light');
   const observer = useRef(null);
 
   useEffect(() => {
-    // Check for saved theme preference or default to 'light'
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setTheme(savedTheme);
-    document.documentElement.setAttribute('data-theme', savedTheme);
-  }, []);
-
-  const applyTheme = (newTheme) => {
-    setTheme(newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-  };
-
-  useEffect(() => {
-    // Disconnect previous observer if it exists
     if (observer.current) {
       observer.current.disconnect();
     }
 
-    // Create a new IntersectionObserver
     observer.current = new IntersectionObserver(
       (entries) => {
-        // Find the entry that is most visible in the viewport
         const intersectingEntry = entries.find(entry => entry.isIntersecting);
         if (intersectingEntry) {
           setActiveSection(intersectingEntry.target.id);
         }
       },
-      // Options: trigger when a section is 20% from the top and 79% from the bottom
       { rootMargin: '-20% 0px -79% 0px' }
     );
 
-    // Observe all section elements
     const elements = sections.map(sec => document.getElementById(sec.id)).filter(el => el);
     elements.forEach((el) => observer.current.observe(el));
     
-    // Cleanup function to disconnect the observer
     return () => observer.current.disconnect();
-  }, []); // Empty dependency array ensures this runs once on mount
+  }, []);
 
 
   return (
@@ -77,516 +60,6 @@ export default function MeasurementsPage() {
       <Head>
         <title>Chapter 1: Measurement - Physics Daily</title>
         <meta name="description" content="Master scientific measurement, significant figures, and dimensional analysis in physics." />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-        <style jsx global>{`
-          :root {
-            --primary-color: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary-color: #64748b;
-            --accent-color: #06b6d4;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
-            --text-primary: #1e293b;
-            --text-secondary: #475569;
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --card-bg: #ffffff;
-            --border-color: #e2e8f0;
-            --border-hover: #cbd5e1;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            --border-radius: 12px;
-            --transition: all 0.2s ease;
-          }
-
-          [data-theme="dark"] {
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --card-bg: #334155;
-            --border-color: #475569;
-            --border-hover: #64748b;
-          }
-
-          * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-          }
-
-          body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background-color: var(--bg-primary);
-            transition: all 0.3s ease;
-          }
-
-          .math {
-            font-family: 'JetBrains Mono', monospace;
-            font-style: italic;
-            font-weight: 500;
-          }
-
-          .equation {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.1em;
-            font-weight: 500;
-            background: var(--bg-secondary);
-            padding: 0.2em 0.4em;
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
-          }
-
-          .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-          }
-
-          .nav {
-            background: var(--card-bg);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-          }
-
-          .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-          }
-
-          .nav-logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-decoration: none;
-          }
-
-          .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-          }
-
-          .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s ease;
-          }
-
-          .nav-links a:hover {
-            color: var(--primary-color);
-          }
-
-          .breadcrumb {
-            background: var(--bg-secondary);
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border-color);
-          }
-
-          .breadcrumb a {
-            color: var(--text-secondary);
-            text-decoration: none;
-          }
-
-          .breadcrumb a:hover {
-            color: var(--primary-color);
-          }
-
-          .separator {
-            margin: 0 0.5rem;
-            color: var(--text-secondary);
-          }
-
-          .current {
-            color: var(--text-primary);
-            font-weight: 500;
-          }
-
-          .header {
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
-          }
-
-          .header h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-          }
-
-          .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            opacity: 0.9;
-          }
-
-          .description {
-            font-size: 1.1rem;
-            opacity: 0.8;
-            max-width: 600px;
-            margin: 0 auto;
-          }
-
-          .main-content {
-            padding: 2rem 0;
-          }
-
-          .theme-toggle {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            z-index: 1000;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 25px;
-            padding: 8px;
-            box-shadow: var(--shadow-lg);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-          }
-
-          .theme-toggle button {
-            background: none;
-            border: none;
-            padding: 12px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 18px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            color: var(--text-secondary);
-          }
-
-          .theme-toggle button:hover {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            transform: scale(1.05);
-          }
-
-          .theme-toggle button.active {
-            background: var(--primary-color);
-            color: white;
-            transform: scale(1.1);
-            box-shadow: var(--shadow-md);
-          }
-
-          .theme-toggle button.active:hover {
-            background: var(--primary-dark);
-          }
-
-          .section {
-            margin: 32px 0;
-            padding: 24px;
-            border-radius: 12px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-          }
-
-          .section h2 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
-            font-weight: 600;
-          }
-
-          .section h3 {
-            color: var(--text-primary);
-            margin: 1.5rem 0 1rem 0;
-            font-size: 1.3rem;
-            font-weight: 600;
-          }
-
-          .section h4 {
-            color: var(--text-primary);
-            margin: 1rem 0 0.5rem 0;
-            font-size: 1.1rem;
-            font-weight: 600;
-          }
-
-          .section p {
-            margin-bottom: 1rem;
-            color: var(--text-secondary);
-            text-align: justify;
-          }
-
-          .section ul, .section ol {
-            margin: 1rem 0 1rem 2rem;
-            color: var(--text-secondary);
-          }
-
-          .section li {
-            margin-bottom: 0.5rem;
-          }
-
-          .highlight-box {
-            background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
-            border-left: 4px solid var(--accent-color);
-            padding: 16px;
-            margin: 16px 0;
-            border-radius: 8px;
-          }
-
-          [data-theme="dark"] .highlight-box {
-            background: linear-gradient(135deg, #164e63, #0c4a6e);
-          }
-
-          .beginner-note {
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
-            border-left: 4px solid var(--warning-color);
-            padding: 16px;
-            margin: 16px 0;
-            border-radius: 8px;
-          }
-
-          [data-theme="dark"] .beginner-note {
-            background: linear-gradient(135deg, #451a03, #78350f);
-          }
-
-          .advanced-note {
-            background: linear-gradient(135deg, #f3e8ff, #ede9fe);
-            border-left: 4px solid #8b5cf6;
-            padding: 16px;
-            margin: 16px 0;
-            border-radius: 8px;
-          }
-
-          [data-theme="dark"] .advanced-note {
-            background: linear-gradient(135deg, #2d1b69, #3730a3);
-          }
-          
-          .danger-note {
-            background: linear-gradient(135deg, #ffe4e6, #fee2e2);
-            border-left: 4px solid var(--danger-color);
-            padding: 16px;
-            margin: 16px 0;
-            border-radius: 8px;
-          }
-
-          [data-theme="dark"] .danger-note {
-            background: linear-gradient(135deg, #7f1d1d, #991b1b);
-          }
-
-          .formula-box {
-            background: var(--bg-secondary);
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            margin: 16px 0;
-            text-align: center;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.2rem;
-            font-weight: 500;
-          }
-
-          .example-box {
-            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
-            border-left: 4px solid var(--success-color);
-            padding: 16px;
-            margin: 16px 0;
-            border-radius: 8px;
-          }
-
-          [data-theme="dark"] .example-box {
-            background: linear-gradient(135deg, #14532d, #166534);
-          }
-
-          table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            font-size: 0.9rem;
-          }
-
-          th, td {
-            border: 1px solid var(--border-color);
-            padding: 8px 12px;
-            text-align: left;
-            vertical-align: top;
-          }
-
-          th {
-            background: var(--bg-secondary);
-            font-weight: 600;
-            color: var(--text-primary);
-          }
-
-          td {
-            color: var(--text-secondary);
-          }
-
-          .two-column-table {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin: 20px 0;
-          }
-
-          .column-table {
-            overflow-x: auto;
-          }
-
-          .practice-section {
-            padding: 2rem 0;
-            background-color: var(--bg-secondary);
-          }
-          
-          .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-          }
-          
-          .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-          }
-          
-          .section-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-          }
-          
-          .practice-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-          }
-          
-          .practice-card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            text-decoration: none;
-            color: var(--text-primary);
-            transition: var(--transition);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-            text-align: center;
-          }
-          
-          .practice-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary-color);
-          }
-          
-          .practice-card .icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-          }
-          
-          .practice-card h3 {
-            font-size: 1.25rem;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-          }
-          
-          .practice-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-          }
-          
-          .btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin: 8px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            display: inline-block;
-            text-decoration: none;
-          }
-
-          .btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
-          }
-          
-          .btn-practice {
-            width: 100%;
-          }
-
-          .sig-figs-section {
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            padding: 20px;
-            margin: 20px 0;
-          }
-
-          .operation-example {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 15px;
-            margin: 10px 0;
-          }
-
-          .footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: 2rem 0;
-            text-align: center;
-            color: var(--text-secondary);
-          }
-
-          @media (max-width: 768px) {
-            .theme-toggle {
-              top: 80px;
-              right: 10px;
-              scale: 0.85;
-            }
-
-            .header h1 {
-              font-size: 2rem;
-            }
-
-            .nav-links {
-              display: none;
-            }
-
-            .two-column-table {
-              grid-template-columns: 1fr;
-            }
-
-            table {
-              font-size: 0.8rem;
-            }
-
-            th, td {
-              padding: 6px 8px;
-            }
-          }
-        `}</style>
       </Head>
 
       <Script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP" />
@@ -599,36 +72,7 @@ export default function MeasurementsPage() {
         `}
       </Script>
 
-      <nav className="nav">
-        <div className="container">
-          <div className="nav-content">
-            <Link href="/" className="nav-logo">Physics Daily</Link>
-            <ul className="nav-links">
-              <li><Link href="/">Home</Link></li>
-              <li><Link href="/resources">Resources</Link></li>
-              <li><Link href="/about">About</Link></li>
-              <li><Link href="/contribute">Contribute</Link></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
-      <div className="theme-toggle">
-        <button 
-          onClick={() => applyTheme('light')}
-          className={theme === 'light' ? 'active' : ''}
-          title="Light Theme"
-        >
-          ☀️
-        </button>
-        <button 
-          onClick={() => applyTheme('dark')}
-          className={theme === 'dark' ? 'active' : ''}
-          title="Dark Theme"
-        >
-          🌙
-        </button>
-      </div>
+      <Header />
 
       <div className="breadcrumb">
         <div className="container">
@@ -642,36 +86,37 @@ export default function MeasurementsPage() {
         </div>
       </div>
 
-      <header className="header">
+      <header className={styles.pageHeader}>
         <div className="container">
           <h1>Chapter 1: Measurement</h1>
-          <p className="subtitle">Foundation of Scientific Physics</p>
-          <p className="description">
+          <p className={styles.subtitle}>Foundation of Scientific Physics</p>
+          <p className={styles.description}>
             Master the fundamental concepts of measurement, units, and dimensional analysis that form the bedrock of all physics - from basic concepts to advanced applications.
           </p>
         </div>
       </header>
 
-      <main className="main-content">
+      <main className={styles.mainContent}>
         <div className="container">
-          <div id="intro" className="section">
+          {/* ... all the section divs from the original file ... */}
+          <div id="intro" className={styles.section}>
             <h2>🌟 Introduction: Why Measurement Matters</h2>
-            <div className="beginner-note">
+            <div className={styles.beginnerNote}>
               <h4>🔰 For Beginners:</h4>
               <p>Imagine trying to cook without measuring ingredients. Physics is similar - we need precise measurements to understand how the universe works! Every law of physics started with careful observations.</p>
             </div>
             <p><strong>Physics is fundamentally an experimental science.</strong> Every law, theory, and principle comes from careful observation and measurement. The GPS in your phone works because engineers understand Einstein's theory of relativity with incredible precision. Without it, your GPS would be off by miles!</p>
-            <div className="highlight-box">
+            <div className={styles.highlightBox}>
               <h4>The Power of Precise Measurement</h4>
               <p>The detection of gravitational waves required measuring distance changes smaller than 1/10,000th the width of a proton!</p>
             </div>
-            <div className="advanced-note">
+            <div className={styles.advancedNote}>
               <h4>🎓 Advanced Insight:</h4>
               <p>Modern physics reaches quantum limits of precision. The Heisenberg uncertainty principle imposes a fundamental bound on simultaneous measurements (like position and momentum). This is not a technological constraint—it's built into nature.</p>
             </div>
             <h3>Measurement Chain and Traceability</h3>
             <p>Reliable measurements trace back to national/international standards via calibrated instruments. This “traceability chain” ensures comparability across labs and time.</p>
-            <div className="highlight-box">
+            <div className={styles.highlightBox}>
               <h4>Key Ideas</h4>
               <ul>
                 <li><strong>Resolution:</strong> smallest distinguishable change (instrument property).</li>
@@ -681,7 +126,7 @@ export default function MeasurementsPage() {
             </div>
           </div>
 
-          <div id="physical-quantities" className="section">
+          <div id="physical-quantities" className={styles.section}>
             <h2>1.1 Physical Quantities, Standards, and Units</h2>
             <h3>What Are Physical Quantities?</h3>
             <p>A <strong>physical quantity</strong> is any measurable property of matter or energy.</p>
@@ -691,12 +136,12 @@ export default function MeasurementsPage() {
             </ul>
             <h3>Operational Definitions</h3>
             <p>Each quantity needs a clear operational definition—how it is measured.</p>
-            <div className="example-box">
+            <div className={styles.exampleBox}>
               <h4>📝 Example: Defining Velocity</h4>
               <p>Operational definition: change in position per time interval: <span className="equation">v = Δx/Δt</span>.</p>
             </div>
             <h3>Characteristics of Good Standards</h3>
-            <div className="highlight-box">
+            <div className={styles.highlightBox}>
               <ol>
                 <li><strong>Accessibility:</strong> reproducible anywhere.</li>
                 <li><strong>Invariability:</strong> unchanging over time and space.</li>
@@ -716,13 +161,13 @@ export default function MeasurementsPage() {
               <li>pascal (Pa) = N·m⁻², coulomb (C) = A·s, volt (V) = W·A⁻¹</li>
               <li>ohm (Ω) = V·A⁻¹, tesla (T) = N·A⁻¹·m⁻¹, henry (H) = Ω·s</li>
             </ul>
-            <div className="example-box">
+            <div className={styles.exampleBox}>
               <h4>📝 Olympiad Tip</h4>
               <p>Introduce or eliminate units quickly via coherence: if P = Fv, then [P] = [F][v] = (kg·m·s⁻²)(m·s⁻¹) = kg·m²·s⁻³ = W.</p>
             </div>
           </div>
 
-          <div id="si-units" className="section">
+          <div id="si-units" className={styles.section}>
             <h2>1.2 The International System of Units (SI)</h2>
             <p>The <strong>International System of Units (SI)</strong> is the modern metric system, defined from fundamental constants and built on seven base units.</p>
             <h3>The Seven SI Base Units</h3>
@@ -742,7 +187,7 @@ export default function MeasurementsPage() {
                 </tbody>
               </table>
             </div>
-            <div className="advanced-note">
+            <div className={styles.advancedNote}>
               <h4>🎓 The 2019 SI Redefinition:</h4>
               <p>All SI units are defined via fundamental constants (c, h, e, k, N<sub>A</sub>, etc.), eliminating dependence on physical artifacts and enabling universal reproducibility.</p>
             </div>
@@ -753,13 +198,13 @@ export default function MeasurementsPage() {
               <li>h = 6.62607015×10⁻³⁴ J·s defines the kilogram via Kibble balance.</li>
               <li>e, k<sub>B</sub>, N<sub>A</sub>, K<sub>cd</sub>, Δν<sub>Cs</sub> define A, K, mol, cd, s respectively.</li>
             </ul>
-            <div className="highlight-box">
+            <div className={styles.highlightBox}>
               <h4>Practice</h4>
               <p>Angles (rad) and solid angles (sr) are dimensionless in SI but carry named units for clarity.</p>
             </div>
           </div>
 
-          <div id="quantities-list" className="section">
+          <div id="quantities-list" className={styles.section}>
             <h2>1.3 Comprehensive List of Physical Quantities and Their Dimensions</h2>
             <p>Fundamental quantities form the basis; derived quantities combine them via relationships.</p>
             <h3>Mechanical Quantities (Selected)</h3>
@@ -799,31 +244,31 @@ export default function MeasurementsPage() {
             </div>
           </div>
 
-          <div id="dimensional-analysis" className="section">
+          <div id="dimensional-analysis" className={styles.section}>
             <h2>1.4 Dimensional Analysis: Uses and Limitations</h2>
             <p>Dimensions are expressed using base symbols like [M], [L], [T], [I], [Θ], [N], [J]. Dimensional analysis helps validate, derive, convert, and interpret relationships.</p>
             <h3>1) Checking Dimensional Consistency</h3>
             <p>All terms in a valid equation must share the same dimension.</p>
-            <div className="example-box">
+            <div className={styles.exampleBox}>
               <h4>📝 Example: Kinematics</h4>
               <p><span className="equation">x = x₀ + v₀t + ½at²</span>. Each term has dimension [L] ⇒ consistent.</p>
             </div>
             <h3>2) Deriving Relationships</h3>
-            <div className="example-box">
+            <div className={styles.exampleBox}>
               <h4>📝 Example: Period of a Pendulum</h4>
               <p>Assume <span className="equation">T ∝ l^a m^b g^c</span>. Matching dimensions gives <span className="equation">b=0, c=-½, a=½</span> → <span className="equation">T = k√(l/g)</span> (k is dimensionless).</p>
             </div>
             <h3>3) Converting Units</h3>
-            <div className="example-box">
+            <div className={styles.exampleBox}>
               <h4>📝 Example: Newtons to Dynes</h4>
               <p>1 N = 1 kg·m·s⁻² = (10³ g)(10² cm)s⁻² = <span className="equation">10⁵ dyn</span>.</p>
             </div>
             <h3>4) Dimensions of Constants</h3>
-            <div className="example-box">
+            <div className={styles.exampleBox}>
               <h4>📝 Example: Gravitational Constant G</h4>
               <p>From <span className="equation">F = G m₁ m₂ / r²</span> → <span className="equation">[G] = [M⁻¹L³T⁻²]</span>.</p>
             </div>
-            <div className="highlight-box">
+            <div className={styles.highlightBox}>
               <h4>Pitfalls</h4>
               <ul>
                 <li>Trigonometric/exponential/log arguments must be dimensionless.</li>
@@ -832,10 +277,10 @@ export default function MeasurementsPage() {
             </div>
           </div>
 
-          <div id="sig-figs" className="section">
+          <div id="sig-figs" className={styles.section}>
             <h2>1.5 Precision and Significant Figures</h2>
             <p><strong>Significant figures</strong> indicate the precision of a measurement - they include all digits that are known with certainty plus the first uncertain digit.</p>
-            <div className="highlight-box">
+            <div className={styles.highlightBox}>
               <h4>📊 Rules for Significant Figures</h4>
               <ol>
                 <li>Non-zero digits are always significant. (e.g., 1.234 has 4)</li>
@@ -849,11 +294,11 @@ export default function MeasurementsPage() {
             <p><strong>Multiplication/Division Rule:</strong> The result has the same number of significant figures as the measurement with the fewest significant figures. (e.g., 3.14 × 2.0 = 6.3)</p>
           </div>
 
-          <div id="error-analysis" className="section">
+          <div id="error-analysis" className={styles.section}>
             <h2>1.6 Error Analysis: Quantifying Uncertainty</h2>
             <p>Every measurement has uncertainty. Report results with both a value and an uncertainty.</p>
             <h3>Absolute, Relative, and Percentage Error</h3>
-            <div className="highlight-box">
+            <div className={styles.highlightBox}>
               <ol>
                 <li><strong>Mean (best estimate):</strong> average of measurements.</li>
                 <li><strong>Absolute error:</strong> |mean − individual|.</li>
@@ -863,28 +308,28 @@ export default function MeasurementsPage() {
               </ol>
             </div>
             <h3>Propagation of Errors</h3>
-            <div className="advanced-note">
+            <div className={styles.advancedNote}>
               <ul>
                 <li><strong>Add/Sub:</strong> <span className="equation">ΔZ = ΔA + ΔB</span></li>
                 <li><strong>Mul/Div:</strong> <span className="equation">ΔZ/Z = ΔA/A + ΔB/B</span></li>
                 <li><strong>Powers:</strong> <span className="equation">Z = Aⁿ ⇒ ΔZ/Z = n(ΔA/A)</span></li>
               </ul>
             </div>
-            <div className="example-box">
+            <div className={styles.exampleBox}>
               <h4>📝 Example: Density of a Cube</h4>
               <p><span className="equation">m = (100 ± 2) g</span>, <span className="equation">L = (10.0 ± 0.1) cm</span>, <span className="equation">ρ = m/L³</span>.</p>
               <p><span className="equation">Δρ/ρ = Δm/m + 3(ΔL/L) = 0.02 + 0.03 = 0.05</span> → 5%.</p>
             </div>
           </div>
 
-          <div id="error-types" className="section">
+          <div id="error-types" className={styles.section}>
             <h2>1.7 Types of Errors & Accuracy vs. Precision</h2>
-            <div className="beginner-note">
+            <div className={styles.beginnerNote}>
               <h4>🔰 Note:</h4>
               <p>“Error” means uncertainty, not a mistake. No measurement is perfectly exact.</p>
             </div>
             <h3>Types of Errors</h3>
-            <div className="highlight-box">
+            <div className={styles.highlightBox}>
               <h4>Random Errors</h4>
               <ul>
                 <li>Unpredictable fluctuations; reduce by averaging.</li>
@@ -898,7 +343,7 @@ export default function MeasurementsPage() {
             </div>
           </div>
 
-          <div id="prefixes-notation" className="section">
+          <div id="prefixes-notation" className={styles.section}>
             <h2>1.8 SI Prefixes, Scientific Notation, and Orders of Magnitude</h2>
             <p>Use scientific notation and SI prefixes to express very large/small values cleanly and to minimize rounding mistakes.</p>
             <h3>Common SI Prefixes</h3>
@@ -918,7 +363,7 @@ export default function MeasurementsPage() {
             </div>
           </div>
 
-          <div id="instruments" className="section">
+          <div id="instruments" className={styles.section}>
             <h2>1.9 Measurement Instruments: Least Count, Zero Error, Calibration</h2>
             <h3>Least Count (LC)</h3>
             <p>Smallest change an instrument can resolve.</p>
@@ -933,7 +378,7 @@ export default function MeasurementsPage() {
             </ul>
           </div>
 
-          <div id="reporting-rounding" className="section">
+          <div id="reporting-rounding" className={styles.section}>
             <h2>1.10 Reporting, Rounding, Logs, and Antilogs</h2>
             <h3>Reporting with Uncertainty</h3>
             <ul>
@@ -942,12 +387,12 @@ export default function MeasurementsPage() {
             </ul>
           </div>
 
-          <div id="pi-theorem" className="section">
+          <div id="pi-theorem" className={styles.section}>
             <h2>1.11 Buckingham Pi Theorem, Similarity, and Scaling Laws</h2>
             <p>Dimensional analysis generalizes via the Pi theorem: with n variables and k fundamental dimensions, expect n−k independent dimensionless groups (π terms).</p>
           </div>
 
-          <div id="graphing" className="section">
+          <div id="graphing" className={styles.section}>
             <h2>1.12 Graphing, Linearization, and Uncertainty of Fit</h2>
             <h3>Linearization</h3>
             <ul>
@@ -956,12 +401,12 @@ export default function MeasurementsPage() {
             </ul>
           </div>
 
-          <div id="fermi-estimation" className="section">
+          <div id="fermi-estimation" className={styles.section}>
             <h2>1.13 Fermi Estimation and Sanity Checks</h2>
             <p>Fast, rough estimates are vital in olympiads and entrance exams to eliminate options.</p>
           </div>
 
-          <div id="exam-tips" className="section">
+          <div id="exam-tips" className={styles.section}>
             <h2>1.14 Quick Conversions and Exam Tips</h2>
             <h3>Exam Technique</h3>
             <ul>
@@ -971,7 +416,7 @@ export default function MeasurementsPage() {
             </ul>
           </div>
 
-          <div id="greek-alphabet" className="section">
+          <div id="greek-alphabet" className={styles.section}>
             <h2>1.15 Greek Alphabet Reference</h2>
             <p>Common Greek symbols used across physics (uppercase, lowercase) with typical meanings.</p>
             <div className="column-table">
@@ -1003,28 +448,28 @@ export default function MeasurementsPage() {
               </table>
             </div>
           </div>
-          </div>
+        </div>
       </main>
 
-      <section className="practice-section">
+      <section className={styles.practiceSection}>
         <div className="container">
-          <div className="section-header">
-            <h2 className="section-title">Test Your Understanding</h2>
-            <p className="section-subtitle">Apply what you've learned by tackling conceptual questions, numerical problems, and a comprehensive quiz.</p>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>Test Your Understanding</h2>
+            <p className={styles.sectionSubtitle}>Apply what you've learned by tackling conceptual questions, numerical problems, and a comprehensive quiz.</p>
           </div>
-          <div className="practice-grid">
-            <Link href="/mechanics/measurements/conceptual" className="practice-card">
-              <div className="icon">🤔</div>
+          <div className={styles.practiceGrid}>
+            <Link href="/mechanics/measurements/conceptual" className={styles.practiceCard}>
+              <div className={styles.icon}>🤔</div>
               <h3>Conceptual Questions</h3>
               <p>Challenge your understanding of the core principles and theoretical concepts.</p>
             </Link>
-            <Link href="/mechanics/measurements/numerical" className="practice-card">
-              <div className="icon">🧮</div>
+            <Link href="/mechanics/measurements/numerical" className={styles.practiceCard}>
+              <div className={styles.icon}>🧮</div>
               <h3>Numerical Problems</h3>
               <p>Sharpen your problem-solving skills with a variety of calculations and applications.</p>
             </Link>
-            <Link href="/mechanics/measurements/mcq" className="practice-card">
-              <div className="icon">📊</div>
+            <Link href="/mechanics/measurements/mcq" className={styles.practiceCard}>
+              <div className={styles.icon}>📊</div>
               <h3>Assessment Quiz</h3>
               <p>Take a timed, comprehensive quiz to test your mastery of the entire chapter.</p>
             </Link>
@@ -1032,11 +477,7 @@ export default function MeasurementsPage() {
         </div>
       </section>
 
-      <footer className="footer">
-        <div className="container">
-          <p>&copy; Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }
