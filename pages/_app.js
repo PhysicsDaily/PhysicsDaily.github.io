@@ -1,13 +1,42 @@
-// Import the global CSS file. This file will contain all the styles
-// that are shared across your entire website, like fonts, colors,
-// and the dark mode theme variables.
 import '../styles/globals.css';
+import Script from 'next/script'; // Import the Script component
 
-// This is the main App component that Next.js uses.
-// The 'Component' prop is the actual page being displayed (e.g., your homepage or about page).
-// 'pageProps' are any initial properties that the page might have.
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  // Your actual tracking IDs have been added below
+  const GA_TRACKING_ID = 'G-XN081SR2KP';
+  const GOOGLE_ADS_CLIENT_ID = 'ca-pub-4062746224225625';
+
+  return (
+    <>
+      {/* --- Google Analytics Script --- */}
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+      />
+      <Script
+        id="google-analytics"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_TRACKING_ID}');
+          `,
+        }}
+      />
+      
+      {/* --- Google AdSense Script --- */}
+      <Script
+        id="google-ads"
+        strategy="afterInteractive"
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${GOOGLE_ADS_CLIENT_ID}`}
+        crossOrigin="anonymous"
+      />
+
+      <Component {...pageProps} />
+    </>
+  );
 }
 
 export default MyApp;
