@@ -147,7 +147,11 @@
   background: linear-gradient(135deg, #14532d, #166534);
 }
 
-:global(table) {
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.tableWrapper :global(table) {
   width: 100%;
   border-collapse: collapse;
   margin: 20px 0;
@@ -157,25 +161,22 @@
   font-size: 0.9rem;
 }
 
-:global(th), :global(td) {
+.tableWrapper :global(th),
+.tableWrapper :global(td) {
   border: 1px solid var(--border-color);
   padding: 8px 12px;
   text-align: left;
   vertical-align: top;
 }
 
-:global(th) {
+.tableWrapper :global(th) {
   background: var(--bg-secondary);
   font-weight: 600;
   color: var(--text-primary);
 }
 
-:global(td) {
+.tableWrapper :global(td) {
   color: var(--text-secondary);
-}
-
-.column-table {
-  overflow-x: auto;
 }
 
 .practice-section {
