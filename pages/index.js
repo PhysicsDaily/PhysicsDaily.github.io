@@ -142,7 +142,7 @@ export default function Home() {
               </div>
               <div className={styles.statItem}>
                 <span className={styles.statNumber}>∞</span>
-                <span classclassName={styles.statLabel}>Learning Opportunities</span>
+                <span className={styles.statLabel}>Learning Opportunities</span>
                 <span className={styles.statDetail}>Unlimited practice</span>
               </div>
               <div className={styles.statItem}>
@@ -188,59 +188,6 @@ export default function Home() {
                   <p className={styles.featureDescription}>{feature.description}</p>
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <Footer />
-    </div>
-  );
-}
-              ))}
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <Footer />
-    </div>
-  );
-}
-                  <div className={styles.sectionBadges}>
-                    <span className={`${styles.difficultyBadge} ${styles[section.difficulty.toLowerCase()]}`}>
-                      {section.difficulty}
-                    </span>
-                    <span className={styles.timeBadge}>⏱️ {section.estimatedTime}</span>
-                  </div>
-                </div>
-                <h2 className={styles.sectionTitle}>{section.title}</h2>
-                <p className={styles.sectionSubtitle}>{section.subtitle}</p>
-                <div className={styles.progressIndicator}>
-                  <span className={styles.stepNumber}>Step {index + 1} of {topicSections.length}</span>
-                </div>
-              </div>
-              <div className={styles.topicGrid}>
-                {section.cards.map((card) => (
-                  <TopicCard key={card.title} cardData={card} type={section.card_type || section.id} />
-                ))}
-              </div>
-            </section>
-          ))}
-        </div>
-
-        {/* Call to Action Section */}
-        <section className={styles.ctaSection}>
-          <div className="container">
-            <h2>Ready to Master Physics?</h2>
-            <p>Join thousands of students learning physics with our comprehensive platform</p>
-            <div className={styles.ctaButtons}>
-              <a href="#foundations" className="btn btn-primary btn-large">
-                🚀 Begin Your Journey
-              </a>
-              <a href="/about" className="btn btn-secondary">
-                📖 Learn More
-              </a>
             </div>
           </div>
         </section>
