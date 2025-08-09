@@ -129,11 +129,13 @@ export default function Quiz({ quizData }) {
         <div className={styles.quizSetup}>
           <div className={styles.setupItem}>
             <label htmlFor="question-count">Number of Questions:</label>
+            {/* THIS IS THE MODIFIED PART */}
             <select id="question-count" name="count" value={settings.count} onChange={handleSettingChange}>
-              <option value="10">10 (Quick Test)</option>
-              <option value="25">25 (Standard Test)</option>
-              <option value="50">50 (Thorough Test)</option>
-              <option value={quizData.length}>All ({quizData.length})</option>
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="75">75</option>
+              <option value="100">100</option>
             </select>
           </div>
           <div className={styles.setupItem}>
