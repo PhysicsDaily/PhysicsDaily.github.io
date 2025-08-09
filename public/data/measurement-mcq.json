@@ -898,5 +898,5 @@
         options: ["[ML⁻¹]", "[ML]", "[M]", "[M L⁻²]"],
         answer: "[ML⁻¹]",
         solution: "F = kv². So k = F/v². Dimensions of k = [MLT⁻²] / [LT⁻¹]² = [MLT⁻²] / [L²T⁻²] = [ML⁻¹]."
-    },
+    }
 ]
