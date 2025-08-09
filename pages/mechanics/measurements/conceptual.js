@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
+import useMathJax from '../../../hooks/useMathJax';
 import styles from '../../../styles/ContentPage.module.css';
 
 const questions = [
@@ -11,6 +12,8 @@ const questions = [
 ];
 
 export default function ConceptualPage() {
+  useMathJax([questions]);
+
   const getDifficultyClass = (difficulty) => {
     switch (difficulty.toLowerCase()) {
       case 'easy': return styles.easy;
