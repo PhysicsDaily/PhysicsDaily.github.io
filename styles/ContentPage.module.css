@@ -147,7 +147,7 @@
   background: linear-gradient(135deg, #14532d, #166534);
 }
 
-table {
+:global(table) {
   width: 100%;
   border-collapse: collapse;
   margin: 20px 0;
@@ -157,20 +157,20 @@ table {
   font-size: 0.9rem;
 }
 
-th, td {
+:global(th), :global(td) {
   border: 1px solid var(--border-color);
   padding: 8px 12px;
   text-align: left;
   vertical-align: top;
 }
 
-th {
+:global(th) {
   background: var(--bg-secondary);
   font-weight: 600;
   color: var(--text-primary);
 }
 
-td {
+:global(td) {
   color: var(--text-secondary);
 }
 
