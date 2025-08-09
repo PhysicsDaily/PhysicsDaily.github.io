@@ -1,5 +1,5 @@
 import '../styles/globals.css';
-import Script from 'next/script'; // Import the Script component
+import Script from 'next/script';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
@@ -8,22 +8,24 @@ function MyApp({ Component, pageProps }) {
   const GOOGLE_ADS_CLIENT_ID = 'ca-pub-4062746224225625';
   const router = useRouter();
 
-  // Re-typeset MathJax on route changes
+  // This hook tells MathJax to re-render equations on page changes
   useEffect(() => {
-    const typeset = async () => {
-      if (typeof window === 'undefined' || !window.MathJax || !window.MathJax.typesetPromise) return;
-      try {
-        await window.MathJax.typesetPromise();
-      } catch (e) {
-        // no-op
+    const handleRouteChange = () => {
+      if (window.MathJax) {
+        window.MathJax.typeset();
       }
     };
-    typeset();
-  }, [router.asPath]);
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
 
   return (
     <>
-      {/* --- MathJax global configuration (must load before MathJax library) --- */}
+      {/* --- MathJax global configuration (must load before the library) --- */}
       <Script
         id="mathjax-config"
         strategy="beforeInteractive"
@@ -31,26 +33,24 @@ function MyApp({ Component, pageProps }) {
           __html: `
             window.MathJax = {
               tex: {
-                inlineMath: [['$', '$'], ['\\\(', '\\\)']],
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
                 displayMath: [['$$', '$$'], ['\\[', '\\]']],
                 processEscapes: true,
-                packages: {'[+]': ['noerrors', 'noundefined']}
               },
-              options: {
-                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-              },
-              startup: {
-                typeset: true,
-                ready: () => {
-                  MathJax.startup.defaultReady();
-                  // Initial typeset once MathJax is ready
-                  MathJax.typesetPromise && MathJax.typesetPromise();
-                }
+              svg: {
+                fontCache: 'global'
               }
             };
           `,
         }}
       />
+      
+      {/* --- Main MathJax Library --- */}
+      <Script
+        strategy="afterInteractive"
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"
+      />
+
       {/* --- Google Analytics Script --- */}
       <Script
         strategy="afterInteractive"
@@ -75,17 +75,6 @@ function MyApp({ Component, pageProps }) {
         strategy="afterInteractive"
         src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${GOOGLE_ADS_CLIENT_ID}`}
         crossOrigin="anonymous"
-      />
-
-      {/* --- MathJax Script for LaTeX Rendering --- */}
-      <Script
-        strategy="afterInteractive"
-        src="https://polyfill.io/v3/polyfill.min.js?features=es6"
-      />
-      <Script
-        id="mathjax"
-        strategy="afterInteractive"
-        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
       />
 
       <Component {...pageProps} />
