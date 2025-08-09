@@ -3,7 +3,7 @@
 import Head from 'next/head';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import styles from '../styles/Resources.module.css'; // We will create this file next
+import styles from '../styles/Resources.module.css';
 
 // --- COMPLETE DATA ARRAYS ---
 
@@ -130,12 +130,57 @@ const funContent = [
     }
 ];
 
+// Small reusable card component for external resources
+const ResourceCard = ({ title, description, href, linkText }) => (
+  <article className={styles.resourceCard}>
+    <h3>{title}</h3>
+    <p>{description}</p>
+    <a
+      href={href}
+      className={styles.resourceLink}
+      target="_blank"
+      rel="noopener noreferrer nofollow external"
+      aria-label={`${title}: ${linkText}`}
+    >
+      {linkText}
+    </a>
+  </article>
+);
+
+// Structured data for SEO
+const resourcesJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Learning Resources - Physics Daily',
+  description:
+    'Comprehensive collection of physics learning resources including textbooks, videos, lectures, and practice materials for all levels.',
+  url: 'https://physicsdaily.github.io/resources',
+};
+
 export default function ResourcesPage() {
   return (
     <div>
       <Head>
         <title>Learning Resources - Physics Daily</title>
         <meta name="description" content="Comprehensive collection of physics learning resources including textbooks, videos, lectures, and practice materials for all levels." />
+        <link rel="canonical" href="https://physicsdaily.github.io/resources" />
+        <meta property="og:title" content="Learning Resources - Physics Daily" />
+        <meta
+          property="og:description"
+          content="Comprehensive collection of physics learning resources including textbooks, videos, lectures, and practice materials for all levels."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://physicsdaily.github.io/resources" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Learning Resources - Physics Daily" />
+        <meta
+          name="twitter:description"
+          content="Comprehensive collection of physics learning resources including textbooks, videos, lectures, and practice materials for all levels."
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(resourcesJsonLd) }}
+        />
       </Head>
 
       <Header />
@@ -157,24 +202,30 @@ export default function ResourcesPage() {
             </div>
           </section>
 
-          <section className={styles.section}>
-            <h2 className={`${styles.sectionTitle} ${styles.videos}`}>🎥 Video Resources</h2>
+          <section
+            className={styles.section}
+            id="video-resources"
+            aria-labelledby="videos-heading"
+          >
+            <h2 id="videos-heading" className={`${styles.sectionTitle} ${styles.videos}`}>
+              🎥 Video Resources
+            </h2>
             <div className={styles.resourceGrid}>
-              {videoResources.map(resource => (
-                <div key={resource.title} className={styles.resourceCard}>
-                  <h3>{resource.title}</h3>
-                  <p>{resource.description}</p>
-                  <a href={resource.href} className={styles.resourceLink} target="_blank" rel="noopener noreferrer">
-                    {resource.linkText}
-                  </a>
-                </div>
+              {videoResources.map((resource) => (
+                <ResourceCard key={resource.title} {...resource} />
               ))}
             </div>
           </section>
 
-          <section className={styles.section}>
-             <h2 className={`${styles.sectionTitle} ${styles.textbooks}`}>📖 Textbook Recommendations</h2>
-             {textbookLists.map(list => (
+          <section
+            className={styles.section}
+            id="textbook-recommendations"
+            aria-labelledby="textbooks-heading"
+          >
+            <h2 id="textbooks-heading" className={`${styles.sectionTitle} ${styles.textbooks}`}>
+              📖 Textbook Recommendations
+            </h2>
+            {textbookLists.map(list => (
                 <div key={list.title} className={styles.resourceList}>
                     <h3>{list.title}</h3>
                     <ul>
@@ -189,17 +240,17 @@ export default function ResourcesPage() {
              ))}
           </section>
 
-          <section className={styles.section}>
-            <h2 className={`${styles.sectionTitle} ${styles.review}`}>📋 Review Resources</h2>
+          <section
+            className={styles.section}
+            id="review-resources"
+            aria-labelledby="review-heading"
+          >
+            <h2 id="review-heading" className={`${styles.sectionTitle} ${styles.review}`}>
+              📋 Review Resources
+            </h2>
             <div className={styles.resourceGrid}>
-              {reviewResources.map(resource => (
-                <div key={resource.title} className={styles.resourceCard}>
-                  <h3>{resource.title}</h3>
-                  <p>{resource.description}</p>
-                  <a href={resource.href} className={styles.resourceLink} target="_blank" rel="noopener noreferrer">
-                    {resource.linkText}
-                  </a>
-                </div>
+              {reviewResources.map((resource) => (
+                <ResourceCard key={resource.title} {...resource} />
               ))}
             </div>
             <div className={styles.resourceList}>
@@ -215,17 +266,13 @@ export default function ResourcesPage() {
             </div>
           </section>
 
-          <section className={styles.section}>
-            <h2 className={`${styles.sectionTitle} ${styles.fun}`}>🎉 Fun Physics Content</h2>
+          <section className={styles.section} id="fun-physics-content" aria-labelledby="fun-heading">
+            <h2 id="fun-heading" className={`${styles.sectionTitle} ${styles.fun}`}>
+              🎉 Fun Physics Content
+            </h2>
             <div className={styles.resourceGrid}>
-              {funContent.map(resource => (
-                <div key={resource.title} className={styles.resourceCard}>
-                  <h3>{resource.title}</h3>
-                  <p>{resource.description}</p>
-                  <a href={resource.href} className={styles.resourceLink} target="_blank" rel="noopener noreferrer">
-                    {resource.linkText}
-                  </a>
-                </div>
+              {funContent.map((resource) => (
+                <ResourceCard key={resource.title} {...resource} />
               ))}
             </div>
           </section>
