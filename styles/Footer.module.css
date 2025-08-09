@@ -1,14 +1,82 @@
-/*
-  styles/Footer.module.css
-  Styles for the Footer.js component.
-*/
-
+/* styles/Footer.module.css */
 .footer {
-  /* Use CSS variables for colors and borders so the theme switch works */
-  background: var(--bg-secondary);
-  border-top: 1px solid var(--border-color);
-  padding: 2rem 0;
+  background: var(--footer-bg, #f8f9fa);
+  border-top: 1px solid var(--border-color, #e9ecef);
+  margin-top: auto;
+  padding: 2rem 0 1rem 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary, #6c757d);
+}
+
+.footerContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footerMain {
   text-align: center;
-  color: var(--text-secondary);
-  margin-top: 4rem; /* Adds some space above the footer */
+}
+
+.footerMain p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.footerLinks {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footerLink {
+  color: var(--link-color, #007bff);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.footerLink:hover {
+  color: var(--link-hover-color, #0056b3);
+  text-decoration: underline;
+}
+
+/* Dark theme support */
+[data-theme="dark"] .footer {
+  background: var(--footer-bg-dark, #1a1a1a);
+  border-top-color: var(--border-color-dark, #333);
+  color: var(--text-secondary-dark, #adb5bd);
+}
+
+[data-theme="dark"] .footerLink {
+  color: var(--link-color-dark, #66b3ff);
+}
+
+[data-theme="dark"] .footerLink:hover {
+  color: var(--link-hover-color-dark, #99ccff);
+}
+
+/* Responsive design */
+@media (min-width: 768px) {
+  .footerContent {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .footerMain {
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 1.5rem 0 1rem 0;
+  }
+  
+  .footerLinks {
+    gap: 1rem;
+  }
 }
