@@ -654,24 +654,24 @@ export default function MeasurementsPage() {
 
       <main className="main-content">
         <div className="container">
-          <div id="intro" className={styles.section}>
+          <div id="intro" className="section">
             <h2>🌟 Introduction: Why Measurement Matters</h2>
-            <div className={styles.beginnerNote}>
+            <div className="beginner-note">
               <h4>🔰 For Beginners:</h4>
               <p>Imagine trying to cook without measuring ingredients. Physics is similar - we need precise measurements to understand how the universe works! Every law of physics started with careful observations.</p>
             </div>
             <p><strong>Physics is fundamentally an experimental science.</strong> Every law, theory, and principle comes from careful observation and measurement. The GPS in your phone works because engineers understand Einstein's theory of relativity with incredible precision. Without it, your GPS would be off by miles!</p>
-            <div className={styles.highlightBox}>
+            <div className="highlight-box">
               <h4>The Power of Precise Measurement</h4>
               <p>The detection of gravitational waves required measuring distance changes smaller than 1/10,000th the width of a proton!</p>
             </div>
-            <div className={styles.advancedNote}>
+            <div className="advanced-note">
               <h4>🎓 Advanced Insight:</h4>
               <p>Modern physics reaches quantum limits of precision. The Heisenberg uncertainty principle imposes a fundamental bound on simultaneous measurements (like position and momentum). This is not a technological constraint—it's built into nature.</p>
             </div>
             <h3>Measurement Chain and Traceability</h3>
             <p>Reliable measurements trace back to national/international standards via calibrated instruments. This “traceability chain” ensures comparability across labs and time.</p>
-            <div className={styles.highlightBox}>
+            <div className="highlight-box">
               <h4>Key Ideas</h4>
               <ul>
                 <li><strong>Resolution:</strong> smallest distinguishable change (instrument property).</li>
@@ -681,7 +681,7 @@ export default function MeasurementsPage() {
             </div>
           </div>
 
-          <div id="physical-quantities" className={styles.section}>
+          <div id="physical-quantities" className="section">
             <h2>1.1 Physical Quantities, Standards, and Units</h2>
             <h3>What Are Physical Quantities?</h3>
             <p>A <strong>physical quantity</strong> is any measurable property of matter or energy.</p>
@@ -691,12 +691,12 @@ export default function MeasurementsPage() {
             </ul>
             <h3>Operational Definitions</h3>
             <p>Each quantity needs a clear operational definition—how it is measured.</p>
-            <div className={styles.exampleBox}>
+            <div className="example-box">
               <h4>📝 Example: Defining Velocity</h4>
               <p>Operational definition: change in position per time interval: <span className="equation">v = Δx/Δt</span>.</p>
             </div>
             <h3>Characteristics of Good Standards</h3>
-            <div className={styles.highlightBox}>
+            <div className="highlight-box">
               <ol>
                 <li><strong>Accessibility:</strong> reproducible anywhere.</li>
                 <li><strong>Invariability:</strong> unchanging over time and space.</li>
@@ -716,17 +716,17 @@ export default function MeasurementsPage() {
               <li>pascal (Pa) = N·m⁻², coulomb (C) = A·s, volt (V) = W·A⁻¹</li>
               <li>ohm (Ω) = V·A⁻¹, tesla (T) = N·A⁻¹·m⁻¹, henry (H) = Ω·s</li>
             </ul>
-            <div className={styles.exampleBox}>
+            <div className="example-box">
               <h4>📝 Olympiad Tip</h4>
               <p>Introduce or eliminate units quickly via coherence: if P = Fv, then [P] = [F][v] = (kg·m·s⁻²)(m·s⁻¹) = kg·m²·s⁻³ = W.</p>
             </div>
           </div>
 
-          <div id="si-units" className={styles.section}>
+          <div id="si-units" className="section">
             <h2>1.2 The International System of Units (SI)</h2>
             <p>The <strong>International System of Units (SI)</strong> is the modern metric system, defined from fundamental constants and built on seven base units.</p>
             <h3>The Seven SI Base Units</h3>
-            <div className={styles.tableContainer}>
+            <div className="column-table">
               <table>
                 <thead>
                   <tr><th>Quantity</th><th>Unit Name</th><th>Symbol</th></tr>
@@ -742,7 +742,7 @@ export default function MeasurementsPage() {
                 </tbody>
               </table>
             </div>
-            <div className={styles.advancedNote}>
+            <div className="advanced-note">
               <h4>🎓 The 2019 SI Redefinition:</h4>
               <p>All SI units are defined via fundamental constants (c, h, e, k, N<sub>A</sub>, etc.), eliminating dependence on physical artifacts and enabling universal reproducibility.</p>
             </div>
@@ -753,17 +753,17 @@ export default function MeasurementsPage() {
               <li>h = 6.62607015×10⁻³⁴ J·s defines the kilogram via Kibble balance.</li>
               <li>e, k<sub>B</sub>, N<sub>A</sub>, K<sub>cd</sub>, Δν<sub>Cs</sub> define A, K, mol, cd, s respectively.</li>
             </ul>
-            <div className={styles.highlightBox}>
+            <div className="highlight-box">
               <h4>Practice</h4>
               <p>Angles (rad) and solid angles (sr) are dimensionless in SI but carry named units for clarity.</p>
             </div>
           </div>
 
-          <div id="quantities-list" className={styles.section}>
+          <div id="quantities-list" className="section">
             <h2>1.3 Comprehensive List of Physical Quantities and Their Dimensions</h2>
             <p>Fundamental quantities form the basis; derived quantities combine them via relationships.</p>
             <h3>Mechanical Quantities (Selected)</h3>
-            <div className={styles.tableContainer}>
+            <div className="column-table">
               <table>
                 <thead>
                   <tr><th>Quantity</th><th>Symbol</th><th>SI Unit</th><th>Dimension</th><th>Formula</th></tr>
@@ -799,31 +799,31 @@ export default function MeasurementsPage() {
             </div>
           </div>
 
-          <div id="dimensional-analysis" className={styles.section}>
+          <div id="dimensional-analysis" className="section">
             <h2>1.4 Dimensional Analysis: Uses and Limitations</h2>
             <p>Dimensions are expressed using base symbols like [M], [L], [T], [I], [Θ], [N], [J]. Dimensional analysis helps validate, derive, convert, and interpret relationships.</p>
             <h3>1) Checking Dimensional Consistency</h3>
             <p>All terms in a valid equation must share the same dimension.</p>
-            <div className={styles.exampleBox}>
+            <div className="example-box">
               <h4>📝 Example: Kinematics</h4>
               <p><span className="equation">x = x₀ + v₀t + ½at²</span>. Each term has dimension [L] ⇒ consistent.</p>
             </div>
             <h3>2) Deriving Relationships</h3>
-            <div className={styles.exampleBox}>
+            <div className="example-box">
               <h4>📝 Example: Period of a Pendulum</h4>
               <p>Assume <span className="equation">T ∝ l^a m^b g^c</span>. Matching dimensions gives <span className="equation">b=0, c=-½, a=½</span> → <span className="equation">T = k√(l/g)</span> (k is dimensionless).</p>
             </div>
             <h3>3) Converting Units</h3>
-            <div className={styles.exampleBox}>
+            <div className="example-box">
               <h4>📝 Example: Newtons to Dynes</h4>
               <p>1 N = 1 kg·m·s⁻² = (10³ g)(10² cm)s⁻² = <span className="equation">10⁵ dyn</span>.</p>
             </div>
             <h3>4) Dimensions of Constants</h3>
-            <div className={styles.exampleBox}>
+            <div className="example-box">
               <h4>📝 Example: Gravitational Constant G</h4>
               <p>From <span className="equation">F = G m₁ m₂ / r²</span> → <span className="equation">[G] = [M⁻¹L³T⁻²]</span>.</p>
             </div>
-            <div className={styles.highlightBox}>
+            <div className="highlight-box">
               <h4>Pitfalls</h4>
               <ul>
                 <li>Trigonometric/exponential/log arguments must be dimensionless.</li>
@@ -832,10 +832,10 @@ export default function MeasurementsPage() {
             </div>
           </div>
 
-          <div id="sig-figs" className={styles.section}>
+          <div id="sig-figs" className="section">
             <h2>1.5 Precision and Significant Figures</h2>
             <p><strong>Significant figures</strong> indicate the precision of a measurement - they include all digits that are known with certainty plus the first uncertain digit.</p>
-            <div className={styles.highlightBox}>
+            <div className="highlight-box">
               <h4>📊 Rules for Significant Figures</h4>
               <ol>
                 <li>Non-zero digits are always significant. (e.g., 1.234 has 4)</li>
@@ -849,11 +849,11 @@ export default function MeasurementsPage() {
             <p><strong>Multiplication/Division Rule:</strong> The result has the same number of significant figures as the measurement with the fewest significant figures. (e.g., 3.14 × 2.0 = 6.3)</p>
           </div>
 
-          <div id="error-analysis" className={styles.section}>
+          <div id="error-analysis" className="section">
             <h2>1.6 Error Analysis: Quantifying Uncertainty</h2>
             <p>Every measurement has uncertainty. Report results with both a value and an uncertainty.</p>
             <h3>Absolute, Relative, and Percentage Error</h3>
-            <div className={styles.highlightBox}>
+            <div className="highlight-box">
               <ol>
                 <li><strong>Mean (best estimate):</strong> average of measurements.</li>
                 <li><strong>Absolute error:</strong> |mean − individual|.</li>
@@ -863,28 +863,28 @@ export default function MeasurementsPage() {
               </ol>
             </div>
             <h3>Propagation of Errors</h3>
-            <div className={styles.advancedNote}>
+            <div className="advanced-note">
               <ul>
                 <li><strong>Add/Sub:</strong> <span className="equation">ΔZ = ΔA + ΔB</span></li>
                 <li><strong>Mul/Div:</strong> <span className="equation">ΔZ/Z = ΔA/A + ΔB/B</span></li>
                 <li><strong>Powers:</strong> <span className="equation">Z = Aⁿ ⇒ ΔZ/Z = n(ΔA/A)</span></li>
               </ul>
             </div>
-            <div className={styles.exampleBox}>
+            <div className="example-box">
               <h4>📝 Example: Density of a Cube</h4>
               <p><span className="equation">m = (100 ± 2) g</span>, <span className="equation">L = (10.0 ± 0.1) cm</span>, <span className="equation">ρ = m/L³</span>.</p>
               <p><span className="equation">Δρ/ρ = Δm/m + 3(ΔL/L) = 0.02 + 0.03 = 0.05</span> → 5%.</p>
             </div>
           </div>
 
-          <div id="error-types" className={styles.section}>
+          <div id="error-types" className="section">
             <h2>1.7 Types of Errors & Accuracy vs. Precision</h2>
-            <div className={styles.beginnerNote}>
+            <div className="beginner-note">
               <h4>🔰 Note:</h4>
               <p>“Error” means uncertainty, not a mistake. No measurement is perfectly exact.</p>
             </div>
             <h3>Types of Errors</h3>
-            <div className={styles.highlightBox}>
+            <div className="highlight-box">
               <h4>Random Errors</h4>
               <ul>
                 <li>Unpredictable fluctuations; reduce by averaging.</li>
@@ -898,11 +898,11 @@ export default function MeasurementsPage() {
             </div>
           </div>
 
-          <div id="prefixes-notation" className={styles.section}>
+          <div id="prefixes-notation" className="section">
             <h2>1.8 SI Prefixes, Scientific Notation, and Orders of Magnitude</h2>
             <p>Use scientific notation and SI prefixes to express very large/small values cleanly and to minimize rounding mistakes.</p>
             <h3>Common SI Prefixes</h3>
-            <div className={styles.tableContainer}>
+            <div className="column-table">
               <table>
                 <thead><tr><th>Prefix</th><th>Symbol</th><th>Factor</th></tr></thead>
                 <tbody>
@@ -918,7 +918,7 @@ export default function MeasurementsPage() {
             </div>
           </div>
 
-          <div id="instruments" className={styles.section}>
+          <div id="instruments" className="section">
             <h2>1.9 Measurement Instruments: Least Count, Zero Error, Calibration</h2>
             <h3>Least Count (LC)</h3>
             <p>Smallest change an instrument can resolve.</p>
@@ -933,7 +933,7 @@ export default function MeasurementsPage() {
             </ul>
           </div>
 
-          <div id="reporting-rounding" className={styles.section}>
+          <div id="reporting-rounding" className="section">
             <h2>1.10 Reporting, Rounding, Logs, and Antilogs</h2>
             <h3>Reporting with Uncertainty</h3>
             <ul>
@@ -942,12 +942,12 @@ export default function MeasurementsPage() {
             </ul>
           </div>
 
-          <div id="pi-theorem" className={styles.section}>
+          <div id="pi-theorem" className="section">
             <h2>1.11 Buckingham Pi Theorem, Similarity, and Scaling Laws</h2>
             <p>Dimensional analysis generalizes via the Pi theorem: with n variables and k fundamental dimensions, expect n−k independent dimensionless groups (π terms).</p>
           </div>
 
-          <div id="graphing" className={styles.section}>
+          <div id="graphing" className="section">
             <h2>1.12 Graphing, Linearization, and Uncertainty of Fit</h2>
             <h3>Linearization</h3>
             <ul>
@@ -956,12 +956,12 @@ export default function MeasurementsPage() {
             </ul>
           </div>
 
-          <div id="fermi-estimation" className={styles.section}>
+          <div id="fermi-estimation" className="section">
             <h2>1.13 Fermi Estimation and Sanity Checks</h2>
             <p>Fast, rough estimates are vital in olympiads and entrance exams to eliminate options.</p>
           </div>
 
-          <div id="exam-tips" className={styles.section}>
+          <div id="exam-tips" className="section">
             <h2>1.14 Quick Conversions and Exam Tips</h2>
             <h3>Exam Technique</h3>
             <ul>
@@ -971,10 +971,10 @@ export default function MeasurementsPage() {
             </ul>
           </div>
 
-          <div id="greek-alphabet" className={styles.section}>
+          <div id="greek-alphabet" className="section">
             <h2>1.15 Greek Alphabet Reference</h2>
             <p>Common Greek symbols used across physics (uppercase, lowercase) with typical meanings.</p>
-            <div className={styles.tableContainer}>
+            <div className="column-table">
               <table>
                 <thead>
                   <tr><th>Name</th><th>Uppercase</th><th>Lowercase</th><th>Common Uses</th></tr>
@@ -1002,7 +1002,8 @@ export default function MeasurementsPage() {
                 </tbody>
               </table>
             </div>
-        </div>
+          </div>
+          </div>
       </main>
 
       <section className="practice-section">
