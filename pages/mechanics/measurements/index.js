@@ -4,7 +4,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
-// We will create this new CSS module in the next step
 import styles from '../../../styles/ContentPage.module.css';
 
 export default function MeasurementsPage() {
@@ -20,10 +19,8 @@ export default function MeasurementsPage() {
       <div className="breadcrumb">
         <div className="container">
           <nav>
-            <Link href="/">Home</Link>
-            <span className="separator">›</span>
-            <Link href="/mechanics/foundations">Classical Mechanics</Link>
-            <span className="separator">›</span>
+            <Link href="/">Home</Link><span className="separator">›</span>
+            <Link href="/mechanics/foundations">Classical Mechanics</Link><span className="separator">›</span>
             <span className="current">📏 Measurement</span>
           </nav>
         </div>
@@ -33,9 +30,7 @@ export default function MeasurementsPage() {
         <div className="container">
           <h1>Chapter 1: Measurement</h1>
           <p className={styles.subtitle}>Foundation of Scientific Physics</p>
-          <p className={styles.description}>
-            Master the fundamental concepts of measurement, units, and dimensional analysis that form the bedrock of all physics.
-          </p>
+          <p className={styles.description}>Master the fundamental concepts of measurement, units, and dimensional analysis that form the bedrock of all physics.</p>
         </div>
       </header>
 
@@ -60,13 +55,7 @@ export default function MeasurementsPage() {
             <h3>The Seven SI Base Units</h3>
             <div className={styles.tableContainer}>
               <table>
-                <thead>
-                  <tr>
-                    <th>Quantity</th>
-                    <th>Unit Name</th>
-                    <th>Symbol</th>
-                  </tr>
-                </thead>
+                <thead><tr><th>Quantity</th><th>Unit Name</th><th>Symbol</th></tr></thead>
                 <tbody>
                   <tr><td>Time</td><td>second</td><td>s</td></tr>
                   <tr><td>Length</td><td>meter</td><td>m</td></tr>
@@ -98,6 +87,22 @@ export default function MeasurementsPage() {
                 <p>✅ All terms have the dimension of length [L], so the equation is dimensionally consistent.</p>
             </div>
           </div>
+          <div className={styles.section}>
+                <h2>1.5 Precision and Significant Figures</h2>
+                <p><strong>Significant figures</strong> indicate the precision of a measurement - they include all digits that are known with certainty plus the first uncertain digit.</p>
+                <div className={styles.highlightBox}>
+                    <h4>📊 Rules for Significant Figures</h4>
+                    <ol>
+                        <li>Non-zero digits are always significant. (e.g., 1.234 has 4)</li>
+                        <li>Zeros between significant digits are significant. (e.g., 506 has 3)</li>
+                        <li>Leading zeros are not significant. (e.g., 0.0078 has 2)</li>
+                        <li>Trailing zeros with a decimal point are significant. (e.g., 90.00 has 4)</li>
+                    </ol>
+                </div>
+                <h4>🧮 Operations with Significant Figures</h4>
+                <p><strong>Addition/Subtraction Rule:</strong> The result is rounded to the same number of decimal places as the measurement with the fewest decimal places. (e.g., 12.345 + 1.2 = 13.5)</p>
+                <p><strong>Multiplication/Division Rule:</strong> The result has the same number of significant figures as the measurement with the fewest significant figures. (e.g., 3.14 × 2.0 = 6.3)</p>
+          </div>
         </div>
       </main>
 
@@ -108,27 +113,9 @@ export default function MeasurementsPage() {
             <p className={styles.sectionSubtitle}>Apply what you've learned by tackling conceptual questions, numerical problems, and a comprehensive quiz.</p>
           </div>
           <div className={styles.practiceGrid}>
-            <Link href="/mechanics/measurements/conceptual" passHref>
-              <div className={styles.practiceCard}>
-                  <div className={styles.icon}>🤔</div>
-                  <h3>Conceptual Questions</h3>
-                  <p>Challenge your understanding of the core principles and theoretical concepts.</p>
-              </div>
-            </Link>
-            <Link href="/mechanics/measurements/numerical" passHref>
-              <div className={styles.practiceCard}>
-                <div className={styles.icon}>🧮</div>
-                <h3>Numerical Problems</h3>
-                <p>Sharpen your problem-solving skills with a variety of calculations and applications.</p>
-              </div>
-            </Link>
-            <Link href="/mechanics/measurements/mcq" passHref>
-              <div className={styles.practiceCard}>
-                <div className={styles.icon}>📊</div>
-                <h3>Assessment Quiz</h3>
-                <p>Take a timed, comprehensive quiz to test your mastery of the entire chapter.</p>
-              </div>
-            </Link>
+            <Link href="/mechanics/measurements/conceptual" passHref><div className={styles.practiceCard}><div className={styles.icon}>🤔</div><h3>Conceptual Questions</h3><p>Challenge your understanding of the core principles and theoretical concepts.</p></div></Link>
+            <Link href="/mechanics/measurements/numerical" passHref><div className={styles.practiceCard}><div className={styles.icon}>🧮</div><h3>Numerical Problems</h3><p>Sharpen your problem-solving skills with a variety of calculations and applications.</p></div></Link>
+            <Link href="/mechanics/measurements/mcq" passHref><div className={styles.practiceCard}><div className={styles.icon}>📊</div><h3>Assessment Quiz</h3><p>Take a timed, comprehensive quiz to test your mastery of the entire chapter.</p></div></Link>
           </div>
         </div>
       </section>
