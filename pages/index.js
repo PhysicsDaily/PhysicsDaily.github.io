@@ -63,17 +63,48 @@ const topicSections = [
 export default function Home() {
   // useScrollAnimation(); // Removed this line to prevent content from being hidden
 
+  // SEO helpers
+  const siteUrl = 'https://physicsdaily.github.io';
+  const ogImage = `${siteUrl}/og-image.png`;
+  const seoDescription = "Master physics concepts from fundamentals to advanced topics with comprehensive notes, examples, and interactive content.";
+
   return (
     <div>
       <Head>
         <title>Physics Daily - Comprehensive Physics Learning Platform</title>
-        <meta name="description" content="Master physics concepts from fundamentals to advanced topics with comprehensive notes, examples, and interactive content." />
+        <meta name="description" content={seoDescription} />
         <link rel="icon" href="/favicon.ico" />
+        {/* SEO enhancements */}
+        <link rel="canonical" href={`${siteUrl}/`} />
+        <meta name="robots" content="index,follow" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Physics Daily" />
+        <meta property="og:title" content="Physics Daily - Comprehensive Physics Learning Platform" />
+        <meta property="og:description" content={seoDescription} />
+        <meta property="og:url" content={`${siteUrl}/`} />
+        <meta property="og:image" content={ogImage} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Physics Daily - Comprehensive Physics Learning Platform" />
+        <meta name="twitter:description" content={seoDescription} />
+        <meta name="twitter:image" content={ogImage} />
+        <script
+          type="application/ld+json"
+          // Structured data (WebSite)
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Physics Daily",
+              url: `${siteUrl}/`,
+              description: seoDescription
+            })
+          }}
+        />
       </Head>
 
       <Header />
 
-      <main>
+      <main id="main-content">
         <div className={styles.pageHeader}>
           <div className="container">
             <h1>Physics Daily</h1>
@@ -81,38 +112,62 @@ export default function Home() {
             <p className={styles.description}>
               Master physics concepts with comprehensive notes, examples, and interactive content.
             </p>
-            <div className={styles.ctaButtons}>
-              <a href="#foundations" className="btn">
+            <div className={styles.ctaButtons} aria-label="Primary actions">
+              <a href="#foundations" className="btn" title="Jump to Classical Mechanics foundations">
                 📚 Start Learning
               </a>
-              <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io" className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://github.com/PhysicsDaily/PhysicsDaily.github.io"
+                className="btn btn-secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open PhysicsDaily repository on GitHub"
+                title="Open PhysicsDaily repository on GitHub"
+              >
                 ⭐ Star on GitHub
               </a>
             </div>
           </div>
         </div>
 
-        <section className={styles.heroSection}>
+        <section className={styles.heroSection} aria-labelledby="hero-title">
           <div className="container">
-            <h2>Complete Physics Education</h2>
+            <h2 id="hero-title">Complete Physics Education</h2>
             <p>Comprehensive coverage of 52 chapters with modern, interactive learning tools for advanced physics study.</p>
           </div>
         </section>
 
         <div className={`${styles.mainContent} container`}>
-          <section className={styles.statsSection}>
-            <div className={styles.statsGrid}>
-              <div className={styles.statItem}><span className={styles.statNumber}>52</span><span className={styles.statLabel}>Chapters</span></div>
-              <div className={styles.statItem}><span className={styles.statNumber}>5</span><span className={styles.statLabel}>Major Areas</span></div>
-              <div className={styles.statItem}><span className={styles.statNumber}>∞</span><span className={styles.statLabel}>Learning Opportunities</span></div>
-              <div className={styles.statItem}><span className={styles.statNumber}>100%</span><span className={styles.statLabel}>Free Access</span></div>
+          <section className={styles.statsSection} aria-label="Site statistics">
+            <div className={styles.statsGrid} role="list">
+              <div className={styles.statItem} role="listitem" aria-label="52 Chapters">
+                <span className={styles.statNumber}>52</span>
+                <span className={styles.statLabel}>Chapters</span>
+              </div>
+              <div className={styles.statItem} role="listitem" aria-label="5 Major Areas">
+                <span className={styles.statNumber}>5</span>
+                <span className={styles.statLabel}>Major Areas</span>
+              </div>
+              <div className={styles.statItem} role="listitem" aria-label="Unlimited Learning Opportunities">
+                <span className={styles.statNumber}>∞</span>
+                <span className={styles.statLabel}>Learning Opportunities</span>
+              </div>
+              <div className={styles.statItem} role="listitem" aria-label="100% Free Access">
+                <span className={styles.statNumber}>100%</span>
+                <span className={styles.statLabel}>Free Access</span>
+              </div>
             </div>
           </section>
 
           {topicSections.map((section) => (
-            <section key={section.id} id={section.id} className={styles.section}>
+            <section
+              key={section.id}
+              id={section.id}
+              className={styles.section}
+              aria-labelledby={`${section.id}-title`}
+            >
               <div className={styles.sectionHeader}>
-                <h2 className={styles.sectionTitle}>{section.title}</h2>
+                <h2 id={`${section.id}-title`} className={styles.sectionTitle}>{section.title}</h2>
                 <p className={styles.sectionSubtitle}>{section.subtitle}</p>
               </div>
               <div className={styles.topicGrid}>
