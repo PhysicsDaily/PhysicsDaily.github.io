@@ -110,7 +110,7 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Added 'fade-in' class to each topic section */}
+          {/* Topic sections remain the same */}
           {topicSections.map((section) => (
             <section key={section.id} id={section.id} className={`${styles.section} fade-in`}>
               <div className={styles.sectionHeader}>
