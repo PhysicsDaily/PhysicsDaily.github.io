@@ -3,397 +3,7 @@
   This file contains styles that are applied to your entire application.
 */
 
-:root {/* styles/globals.css */
 :root {
-  /* Light theme colors */
-  --primary-color: #007bff;
-  --primary-hover-color: #0056b3;
-  --secondary-color: #6c757d;
-  
-  --text-primary: #212529;
-  --text-secondary: #6c757d;
-  --text-muted: #adb5bd;
-  
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --bg-tertiary: #e9ecef;
-  
-  --border-color: #dee2e6;
-  --shadow-color: rgba(0, 0, 0, 0.1);
-  
-  --success-color: #28a745;
-  --success-bg: #d4edda;
-  --success-text: #155724;
-  
-  --warning-color: #ffc107;
-  --warning-bg: #fff3cd;
-  --warning-text: #856404;
-  
-  --danger-color: #dc3545;
-  --danger-bg: #f8d7da;
-  --danger-text: #721c24;
-  
-  --info-color: #17a2b8;
-  --info-bg: #d1ecf1;
-  --info-text: #0c5460;
-  
-  /* Component specific */
-  --header-bg: #ffffff;
-  --footer-bg: #f8f9fa;
-  --card-bg: #ffffff;
-  --button-bg: #f8f9fa;
-  --button-hover-bg: #e9ecef;
-  --link-color: #007bff;
-  --link-hover-color: #0056b3;
-  --nav-hover-bg: #f8f9fa;
-  
-  /* Quiz specific */
-  --option-bg: #f8f9fa;
-  --option-hover-bg: #e7f3ff;
-  --option-letter-bg: #ffffff;
-  --progress-bg: #e9ecef;
-  --timer-bg: #f8f9fa;
-  --review-bg: #f8f9fa;
-  --explanation-bg: #e7f3ff;
-  --disabled-bg: #6c757d;
-}
-
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --primary-color: #66b3ff;
-  --primary-hover-color: #99ccff;
-  --secondary-color: #adb5bd;
-  
-  --text-primary: #ffffff;
-  --text-secondary: #adb5bd;
-  --text-muted: #6c757d;
-  
-  --bg-primary: #121212;
-  --bg-secondary: #1e1e1e;
-  --bg-tertiary: #2d2d2d;
-  
-  --border-color: #404040;
-  --shadow-color: rgba(0, 0, 0, 0.3);
-  
-  --success-color: #4caf50;
-  --success-bg: #1b4332;
-  --success-text: #a7f3d0;
-  
-  --warning-color: #ff9800;
-  --warning-bg: #7c2d12;
-  --warning-text: #fed7aa;
-  
-  --danger-color: #f44336;
-  --danger-bg: #7f1d1d;
-  --danger-text: #fecaca;
-  
-  --info-color: #2196f3;
-  --info-bg: #1e3a8a;
-  --info-text: #bfdbfe;
-  
-  /* Component specific dark */
-  --header-bg: #1a1a1a;
-  --footer-bg: #1a1a1a;
-  --card-bg: #2d2d2d;
-  --button-bg: #333333;
-  --button-hover-bg: #404040;
-  --link-color: #66b3ff;
-  --link-hover-color: #99ccff;
-  --nav-hover-bg: #333333;
-  
-  /* Quiz specific dark */
-  --option-bg: #333333;
-  --option-hover-bg: #404040;
-  --option-letter-bg: #404040;
-  --progress-bg: #404040;
-  --timer-bg: #333333;
-  --review-bg: #333333;
-  --explanation-bg: #1a3a5c;
-  --disabled-bg: #555555;
-}
-
-/* Reset and base styles */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  line-height: 1.6;
-  font-size: 16px;
-  scroll-behavior: smooth;
-}
-
-body {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-#__next {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-/* Container utility */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-  color: var(--text-primary);
-  font-weight: 600;
-  line-height: 1.3;
-  margin-bottom: 1rem;
-}
-
-h1 { font-size: 2.5rem; }
-h2 { font-size: 2rem; }
-h3 { font-size: 1.75rem; }
-h4 { font-size: 1.5rem; }
-h5 { font-size: 1.25rem; }
-h6 { font-size: 1rem; }
-
-p {
-  margin-bottom: 1rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-/* Links */
-a {
-  color: var(--link-color);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  color: var(--link-hover-color);
-}
-
-/* Buttons */
-button {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  border: none;
-  background: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-button:focus {
-  outline: 2px solid var(--primary-color);
-  outline-offset: 2px;
-}
-
-/* Form elements */
-input, textarea, select {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  border: 1px solid var(--border-color);
-  border-radius: 0.375rem;
-  padding: 0.5rem 0.75rem;
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-input:focus, textarea:focus, select:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
-}
-
-/* Utility classes */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-.text-right { text-align: right; }
-
-.mt-1 { margin-top: 0.25rem; }
-.mt-2 { margin-top: 0.5rem; }
-.mt-3 { margin-top: 1rem; }
-.mt-4 { margin-top: 1.5rem; }
-.mt-5 { margin-top: 3rem; }
-
-.mb-1 { margin-bottom: 0.25rem; }
-.mb-2 { margin-bottom: 0.5rem; }
-.mb-3 { margin-bottom: 1rem; }
-.mb-4 { margin-bottom: 1.5rem; }
-.mb-5 { margin-bottom: 3rem; }
-
-.p-1 { padding: 0.25rem; }
-.p-2 { padding: 0.5rem; }
-.p-3 { padding: 1rem; }
-.p-4 { padding: 1.5rem; }
-.p-5 { padding: 3rem; }
-
-/* Main content area */
-main {
-  flex: 1;
-  padding: 2rem 0;
-}
-
-/* Cards */
-.card {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-  box-shadow: 0 2px 4px var(--shadow-color);
-  transition: all 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px var(--shadow-color);
-}
-
-/* Loading states */
-.loading {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--border-color);
-  border-radius: 50%;
-  border-top-color: var(--primary-color);
-  animation: spin 1s ease-in-out infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* Responsive images */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Print styles */
-@media print {
-  * {
-    background: transparent !important;
-    color: black !important;
-    box-shadow: none !important;
-  }
-  
-  .no-print {
-    display: none !important;
-  }
-}
-
-/* Responsive design */
-@media (max-width: 1200px) {
-  .container {
-    max-width: 960px;
-  }
-}
-
-@media (max-width: 992px) {
-  .container {
-    max-width: 720px;
-  }
-  
-  h1 { font-size: 2.25rem; }
-  h2 { font-size: 1.875rem; }
-  h3 { font-size: 1.5rem; }
-}
-
-@media (max-width: 768px) {
-  .container {
-    max-width: 540px;
-    padding: 0 0.75rem;
-  }
-  
-  main {
-    padding: 1.5rem 0;
-  }
-  
-  h1 { font-size: 2rem; }
-  h2 { font-size: 1.75rem; }
-  h3 { font-size: 1.25rem; }
-  
-  .card {
-    padding: 1rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .container {
-    padding: 0 0.5rem;
-  }
-  
-  main {
-    padding: 1rem 0;
-  }
-  
-  h1 { font-size: 1.75rem; }
-  h2 { font-size: 1.5rem; }
-  h3 { font-size: 1.125rem; }
-}
-
-/* Accessibility improvements */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  :root {
-    --border-color: #000000;
-    --shadow-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  [data-theme="dark"] {
-    --border-color: #ffffff;
-    --shadow-color: rgba(255, 255, 255, 0.3);
-  }
-}
-
-/* Focus visible for better keyboard navigation */
-:focus-visible {
-  outline: 2px solid var(--primary-color);
-  outline-offset: 2px;
-}
-
-/* Smooth scrolling for reduced motion users */
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
-}
   /* Color Palette */
   --primary-color: #2563eb;
   --primary-dark: #1d4ed8;
@@ -426,10 +36,6 @@ img {
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* This block defines the colors for your dark mode.
-  When the <html> tag has the attribute data-theme="dark", these variables
-  will override the default :root variables above.
-*/
 [data-theme="dark"] {
   --bg-primary: #0f172a;
   --bg-secondary: #1e293b;
@@ -443,10 +49,6 @@ img {
   --header-bg: #0f172a;
 }
 
-/*
-  Global Resets and Base Styles
-  These apply to every element on the site.
-*/
 * {
   box-sizing: border-box;
   padding: 0;
@@ -472,20 +74,12 @@ a {
   text-decoration: none;
 }
 
-/*
-  Container Utility
-  This class centers your content and gives it a max-width.
-*/
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
 
-/*
-  Button Utility Classes
-  These are global button styles used across the site.
-*/
 .btn {
   display: inline-flex;
   align-items: center;
@@ -520,10 +114,6 @@ a {
   border-color: var(--border-hover);
 }
 
-/*
-  Scroll Reveal Animation
-  This was in your global.js file. We define the styles here.
-*/
 .fade-in {
   opacity: 0;
   transform: translateY(30px);
@@ -535,10 +125,6 @@ a {
   transform: translateY(0);
 }
 
-/*
-  LaTeX Math Styling
-  For rendering math equations beautifully.
-*/
 .math {
   font-family: 'JetBrains Mono', monospace;
   font-style: italic;
@@ -557,10 +143,6 @@ a {
   overflow-x: auto;
 }
 
-/*
-  Breadcrumb Navigation Styles
-  This is used on sub-pages to show the user's location.
-*/
 .breadcrumb {
   background: var(--bg-secondary);
   padding: 1rem 0;
@@ -587,9 +169,7 @@ a {
   color: var(--text-primary);
   font-weight: 500;
 }
-/* ADD THIS BLOCK TO THE END OF globals.css */
 
-/* Styles for Details/Summary dropdowns used on content pages */
 details {
   border: 1px solid var(--border-color);
   border-radius: 8px;
