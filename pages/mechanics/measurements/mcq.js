@@ -1,4 +1,5 @@
 // pages/mechanics/measurements/mcq.js
+
 import Head from 'next/head';
 import Link from 'next/link';
 import Header from '../../../components/Header';
@@ -6,7 +7,7 @@ import Footer from '../../../components/Footer';
 import Quiz from '../../../components/Quiz';
 import styles from '../../../styles/ContentPage.module.css';
 
-// Full list of 35 questions
+// Full list of 35 questions for the quiz
 const quizQuestions = [
     { question: "1. Which of the following is a fundamental SI unit?", options: ["Newton (N)", "Joule (J)", "Watt (W)", "Kilogram (kg)"], answer: "Kilogram (kg)", solution: "The SI system has seven base units. Newton, Joule, and Watt are derived units. Kilogram (mass) is a fundamental unit." },
     { question: "2. The principle of homogeneity states that:", options: ["All physical quantities must have the same units", "An equation must be dimensionally consistent", "The universe is uniform and homogeneous", "Derived units are homogeneous with fundamental units"], answer: "An equation must be dimensionally consistent", solution: "The principle of homogeneity requires that all terms added or subtracted in a physical equation must have the same dimensions." },
@@ -43,5 +44,43 @@ const quizQuestions = [
     { question: "33. When multiplying 12.3 by 1.23, the result should have how many significant figures?", options: ["2", "3", "4", "5"], answer: "3", solution: "Both numbers have three significant figures, so the result should be rounded to three significant figures." },
     { question: "34. The prefix 'femto' stands for:", options: ["10⁻⁹", "10⁻¹²", "10⁻¹⁵", "10⁻¹⁸"], answer: "10⁻¹⁵", solution: "Femto (f) is the SI prefix for a factor of 10⁻¹⁵." },
     { question: "35. A furlong is 220 yards, and a fortnight is 2 weeks. If a snail moves at 2.5 mm/s, its speed in furlongs per fortnight is approximately:", options: ["15", "1.5 × 10³", "1.5 × 10⁵", "1.5 × 10⁷"], answer: "1.5 × 10³", solution: "This is a unit conversion problem. 2.5 mm/s ≈ 1.5 × 10³ furlongs/fortnight. The key is careful conversion of length (mm to furlongs) and time (seconds to fortnights)." }
-    };
-export default function MCQPage() { /* ... same component code as before ... */ }
+]; // This closing bracket was missing
+
+export default function MCQPage() {
+  return (
+    <div>
+      <Head>
+        <title>Assessment Quiz: Measurement - Physics Daily</title>
+        <meta name="description" content="A comprehensive multiple-choice quiz on measurement, units, and dimensional analysis." />
+      </Head>
+
+      <Header />
+
+      <div className="breadcrumb">
+        <div className="container">
+          <nav>
+            <Link href="/">Home</Link>
+            <span className="separator">›</span>
+            <Link href="/mechanics/foundations">Classical Mechanics</Link>
+            <span className="separator">›</span>
+            <Link href="/mechanics/measurements">📏 Measurement</Link>
+            <span className="separator">›</span>
+            <span className="current">📊 Assessment Quiz</span>
+          </nav>
+        </div>
+      </div>
+
+      <main className={styles.mainContent}>
+        <div className="container">
+          <header className={styles.header} style={{ background: 'none', padding: '1rem 0' }}>
+              <h1>Chapter 1: Assessment Quiz</h1>
+              <p className={styles.subtitle}>Test your mastery of Measurement</p>
+          </header>
+          <Quiz quizData={quizQuestions} />
+        </div>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
