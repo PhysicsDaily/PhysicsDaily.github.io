@@ -4,14 +4,13 @@ import Head from 'next/head';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import TopicCard from '../components/TopicCard';
-// import useScrollAnimation from '../hooks/useScrollAnimation'; // Animation hook removed for stability
 import styles from '../styles/Home.module.css';
 
 // Data for all the topic sections on the homepage.
 const topicSections = [
     {
-        id: 'foundations', // Changed ID to 'foundations' to match the "Start Learning" button link
-        card_type: 'mechanics', // Added a separate key for styling to preserve the card's look
+        id: 'foundations', // ID matches the "Start Learning" button
+        card_type: 'mechanics',
         title: 'Classical Mechanics',
         subtitle: 'Foundations of physics: measurement, kinematics, dynamics, energy, momentum, and rotational motion',
         icon: '⚙️',
@@ -23,6 +22,7 @@ const topicSections = [
     },
     {
         id: 'thermodynamics',
+        card_type: 'thermodynamics',
         title: 'Fluids, Waves & Thermodynamics',
         subtitle: 'Fluid mechanics, oscillations, wave motion, sound, special relativity, and thermal physics',
         icon: '🌊',
@@ -34,6 +34,7 @@ const topicSections = [
     },
     {
         id: 'electromagnetism',
+        card_type: 'electromagnetism',
         title: 'Electricity & Magnetism',
         subtitle: 'Electric fields, potential, capacitors, current, magnetic fields, induction, and AC circuits',
         icon: '⚡',
@@ -45,6 +46,7 @@ const topicSections = [
     },
     {
         id: 'optics',
+        card_type: 'optics',
         title: 'Optics',
         subtitle: 'Geometric optics, wave optics, interference, diffraction, and polarization',
         icon: '🔬',
@@ -55,9 +57,10 @@ const topicSections = [
     },
     {
         id: 'modern',
+        card_type: 'modern',
         title: 'Modern Physics',
         subtitle: 'Quantum mechanics, atomic physics, nuclear physics, and elementary particles',
-        icon: '🔬',
+        icon: '⚛️',
         cards: [
             { chapters: '46-49', title: 'Quantum & Atomic Physics', description: "Matter waves, Schrödinger equation, electrons in potential wells, atomic structure, and electron configurations.", topics: ['Nature of Matter', 'Electrons in Wells', 'Atomic Structure', 'Conduction'], href: '/modern/quantum-atomic' },
             { chapters: '50-52', title: 'Nuclear & Particle Physics', description: "Nuclear structure, radioactive decay, nuclear reactions, energy from the nucleus, and elementary particles.", topics: ['Nuclear Physics', 'Energy from Nucleus', 'Particle Physics'], href: '/modern/nuclear-particle' },
@@ -89,8 +92,6 @@ const features = [
 ];
 
 export default function Home() {
-  // useScrollAnimation(); // Removed this line to prevent content from being hidden
-
   return (
     <div>
       <Head>
