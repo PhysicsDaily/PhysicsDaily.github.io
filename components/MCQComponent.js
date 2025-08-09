@@ -1,5 +1,6 @@
 // components/MCQComponent.js
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import useMathJax from '../hooks/useMathJax';
 import styles from '../styles/MCQ.module.css';
 
 export default function MCQComponent({ questions }) {
@@ -9,6 +10,7 @@ export default function MCQComponent({ questions }) {
   const [isFinished, setIsFinished] = useState(false);
   const [timeLeft, setTimeLeft] = useState(900); // 15 minutes in seconds
   const [userAnswers, setUserAnswers] = useState([]);
+  const rootRef = useRef(null);
 
   useEffect(() => {
     if (isFinished) return;
@@ -24,6 +26,9 @@ export default function MCQComponent({ questions }) {
     }, 1000);
     return () => clearInterval(timer);
   }, [isFinished]);
+
+  // Typeset on question change or when finishing
+  useMathJax(rootRef, [currentQuestionIndex, isFinished, questions]);
 
   const handleAnswerSelect = (option) => {
     setSelectedAnswer(option);
@@ -63,7 +68,7 @@ export default function MCQComponent({ questions }) {
 
   if (isFinished) {
     return (
-      <div className={styles.resultsContainer}>
+  <div className={styles.resultsContainer} ref={rootRef}>
         <h2>Quiz Completed!</h2>
         <p className={styles.finalScore}>Your Score: {score} out of {questions.length}</p>
         <div className={styles.review}>
@@ -85,7 +90,7 @@ export default function MCQComponent({ questions }) {
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
   return (
-    <div className={styles.quizInterface}>
+  <div className={styles.quizInterface} ref={rootRef}>
       <div className={styles.quizHeader}>
         <div className={styles.progress}>
           Question {currentQuestionIndex + 1} of {questions.length}
@@ -96,7 +101,7 @@ export default function MCQComponent({ questions }) {
         <div className={styles.timer}>Time Left: {formatTime(timeLeft)}</div>
       </div>
       <div className={styles.questionContainer}>
-        <h3>{currentQuestion.question}</h3>
+  <h3>{currentQuestion.question}</h3>
       </div>
       <div className={styles.optionsContainer}>
         {currentQuestion.options.map((option, index) => (
