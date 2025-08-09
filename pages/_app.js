@@ -1,5 +1,3 @@
-// pages/_app.js
-
 import '../styles/globals.css';
 import Script from 'next/script';
 
@@ -9,14 +7,14 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      {/* --- Google Analytics Script --- */}
+      {/* --- Google Analytics Script (Lazy Loaded) --- */}
       <Script
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
       />
       <Script
         id="google-analytics"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];
@@ -27,13 +25,18 @@ function MyApp({ Component, pageProps }) {
         }}
       />
       
-      {/* --- Google AdSense Script --- */}
+      {/* --- Google AdSense Script (Lazy Loaded) --- */}
       <Script
         id="google-ads"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${GOOGLE_ADS_CLIENT_ID}`}
         crossOrigin="anonymous"
       />
+
+      {/* --- MathJax Scripts (Loaded Early as they are critical for rendering) --- */}
+      <Script src="/mathjax-config.js" strategy="beforeInteractive" />
+      <Script src="https://polyfill.io/v3/polyfill.min.js?features=es6" strategy="beforeInteractive" />
+      <Script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" strategy="beforeInteractive" />
 
       <Component {...pageProps} />
     </>
