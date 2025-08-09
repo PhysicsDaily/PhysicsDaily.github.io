@@ -1,145 +1,165 @@
-/*
-  styles/Home.module.css
-  Styles specifically for the homepage (pages/index.js)
-*/
+/* styles/Home.module.css */
 
-/* --- Page Header (replaces old .hero) --- */
-.pageHeader {
-  background: var(--bg-secondary);
-  padding: 4rem 0 3rem;
-  text-align: center;
-  border-bottom: 1px solid var(--border-color);
-}
-.pageHeader h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 1rem;
-  letter-spacing: -0.02em;
-}
-.subtitle {
-  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-  color: var(--text-secondary);
-  margin-bottom: 2rem;
-  font-weight: 500;
-}
-.description {
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-  max-width: 600px;
-  margin: 0 auto 2rem;
-  line-height: 1.7;
-}
-.ctaButtons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 2rem;
+.header {
+    background: var(--header-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 4rem 0 3rem;
+    text-align: center;
+    transition: var(--transition);
 }
 
-/* --- Hero Section --- */
+.header h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+}
+
+.header .subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+.header .description {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+}
+
+.header .ctaButtons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+/* Hero Section */
 .heroSection {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
-  color: white;
-  padding: 6rem 0;
-  margin-bottom: 4rem;
-  text-align: center;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    color: white;
+    padding: 6rem 0;
+    margin-bottom: 4rem;
+    text-align: center;
 }
+
 .heroSection h2 {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  margin-bottom: 1rem;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
 }
+
 .heroSection p {
-  font-size: 1.2rem;
-  opacity: 0.9;
-  max-width: 600px;
-  margin: 0 auto;
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto 2rem;
 }
 
-/* --- Main Content Wrapper --- */
+/* Main Content */
 .mainContent {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-}
-
-/* --- Stats Section --- */
-.statsSection {
-  margin-bottom: 4rem;
-  background: var(--card-bg);
-  border-radius: var(--border-radius);
-  padding: 3rem 2rem;
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-sm);
-}
-.statsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-}
-.statItem {
-  text-align: center;
-}
-.statNumber {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  display: block;
-  margin-bottom: 0.5rem;
-}
-.statLabel {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-
-/* --- Topic Sections --- */
-.section {
-  margin-bottom: 4rem;
-}
-.sectionHeader {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-.sectionTitle {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 0.5rem;
-}
-.sectionSubtitle {
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-  max-width: 600px;
-  margin: 0 auto;
-}
-.topicGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .pageHeader {
-    padding: 2rem 0;
-  }
-  .heroSection {
     padding: 4rem 0;
-  }
-  .statsGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-  .ctaButtons {
-    flex-direction: column;
-    align-items: center;
-  }
+    background: var(--bg-secondary);
+    transition: var(--transition);
 }
+
+.section {
+    margin-bottom: 4rem;
+}
+
+.sectionHeader {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.sectionTitle {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.sectionSubtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.topicGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* Stats Section */
+.statsSection {
+    margin: 4rem 0;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 3rem 2rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.statItem {
+    text-align: center;
+}
+
+.statNumber {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.statLabel {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        padding: 2rem 0;
+    }
+
+    .topicGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .statsGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .ctaButtons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .heroSection {
+        padding: 4rem 0;
+    }
+}
+
 @media (max-width: 480px) {
-  .statsGrid {
-    grid-template-columns: 1fr;
-  }
+    .statsGrid {
+        grid-template-columns: 1fr;
+    }
 }
