@@ -1,16 +1,15 @@
 // pages/mechanics/measurements/mcq.js
-
+import fs from 'fs';
+import path from 'path';
 import Head from 'next/head';
 import Link from 'next/link';
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
-import Quiz from '../../../components/Quiz';
+import MCQComponent from '../../../components/MCQComponent'; // FIX: Changed import from Quiz to MCQComponent
 import styles from '../../../styles/ContentPage.module.css';
 
 // This function runs at build time to fetch the data
 export async function getStaticProps() {
-  const fs = await import('fs');
-  const path = await import('path');
   const filePath = path.join(process.cwd(), 'public', 'data', 'measurement-mcq.json');
   const jsonData = fs.readFileSync(filePath, 'utf8');
   const quizQuestions = JSON.parse(jsonData);
@@ -49,10 +48,11 @@ export default function MCQPage({ quizQuestions }) {
       <main className={styles.mainContent}>
         <div className="container">
           <header className={styles.header} style={{ background: 'none', padding: '1rem 0' }}>
-            <h1>Chapter 1: Assessment Quiz</h1>
-            <p className={styles.subtitle}>Test your mastery of Measurement</p>
+              <h1>Chapter 1: Assessment Quiz</h1>
+              <p className={styles.subtitle}>Test your mastery of Measurement</p>
           </header>
-          <Quiz quizData={quizQuestions} />
+          {/* FIX: Changed component from Quiz to MCQComponent */}
+          <MCQComponent questions={quizQuestions} />
         </div>
       </main>
 
