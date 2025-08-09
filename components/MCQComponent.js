@@ -1,6 +1,5 @@
 // components/MCQComponent.js
-import { useState, useEffect, useRef } from 'react';
-import useMathJax from '../hooks/useMathJax';
+import { useState, useEffect } from 'react';
 import styles from '../styles/MCQ.module.css';
 
 export default function MCQComponent({ questions }) {
@@ -10,7 +9,6 @@ export default function MCQComponent({ questions }) {
   const [isFinished, setIsFinished] = useState(false);
   const [timeLeft, setTimeLeft] = useState(900); // 15 minutes in seconds
   const [userAnswers, setUserAnswers] = useState([]);
-  const rootRef = useRef(null);
 
   useEffect(() => {
     if (isFinished) return;
@@ -27,8 +25,7 @@ export default function MCQComponent({ questions }) {
     return () => clearInterval(timer);
   }, [isFinished]);
 
-  // Typeset on question change or when finishing
-  useMathJax(rootRef, [currentQuestionIndex, isFinished, questions]);
+  //
 
   const handleAnswerSelect = (option) => {
     setSelectedAnswer(option);
@@ -68,7 +65,7 @@ export default function MCQComponent({ questions }) {
 
   if (isFinished) {
     return (
-  <div className={styles.resultsContainer} ref={rootRef}>
+  <div className={styles.resultsContainer}>
         <h2>Quiz Completed!</h2>
         <p className={styles.finalScore}>Your Score: {score} out of {questions.length}</p>
         <div className={styles.review}>
@@ -90,7 +87,7 @@ export default function MCQComponent({ questions }) {
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
   return (
-  <div className={styles.quizInterface} ref={rootRef}>
+  <div className={styles.quizInterface}>
       <div className={styles.quizHeader}>
         <div className={styles.progress}>
           Question {currentQuestionIndex + 1} of {questions.length}

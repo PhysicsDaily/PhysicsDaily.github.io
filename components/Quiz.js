@@ -1,6 +1,5 @@
 // components/Quiz.js
-import { useState, useEffect, useRef } from 'react';
-import useMathJax from '../hooks/useMathJax';
+import { useState, useEffect } from 'react';
 import styles from '../styles/Quiz.module.css';
 
 export default function Quiz({ quizData }) {
@@ -14,7 +13,6 @@ export default function Quiz({ quizData }) {
   const [timeLeft, setTimeLeft] = useState(0);
   const [timerInterval, setTimerInterval] = useState(null);
   const [finalScore, setFinalScore] = useState(null);
-  const quizRootRef = useRef(null);
 
   // Effect to handle the timer countdown
   useEffect(() => {
@@ -34,8 +32,7 @@ export default function Quiz({ quizData }) {
     }
   }, [gameState]);
 
-  // MathJax: typeset whenever the active question or game state changes
-  useMathJax(quizRootRef, [gameState, currentQuestionIndex, activeQuiz]);
+  //
   
   // --- Setup Phase ---
   const handleSettingChange = (e) => {
@@ -123,7 +120,7 @@ export default function Quiz({ quizData }) {
 
   if (gameState === 'setup') {
     return (
-      <div className={styles.instructionsContainer} ref={quizRootRef}>
+  <div className={styles.instructionsContainer}>
         <h2>📝 Instructions</h2>
         <ul>
           <li>Select the number of questions and set your desired timer.</li>
@@ -155,7 +152,7 @@ export default function Quiz({ quizData }) {
 
   if (gameState === 'finished') {
     return (
-        <div className={styles.resultsContainer} ref={quizRootRef}>
+  <div className={styles.resultsContainer}>
              <div className={styles.resultsSummary}>
                 <h2>Quiz Results</h2>
                 <p>Final Score: {finalScore.score} / {activeQuiz.length * 4}</p>
