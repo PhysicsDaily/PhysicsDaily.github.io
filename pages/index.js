@@ -44,11 +44,11 @@ export default function Home({ topicSections }) {
               Master physics concepts with comprehensive notes, examples, and interactive content.
             </p>
             <div className={styles.ctaButtons}>
-              {/* FIX: Changed the href to scroll to the #foundations section on the current page */}
-              <Link href="/#foundations" className="btn">
+              {/* FIX: The href now correctly points to the ID of the first learning section, which is "mechanics" */}
+              <Link href="/#mechanics" className="btn">
                 📚 Start Learning
               </Link>
-              {/* This button is already correct */}
+              {/* This link is correct and opens in a new tab */}
               <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io" className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
                 ⭐ Star on GitHub
               </a>
@@ -65,7 +65,8 @@ export default function Home({ topicSections }) {
               <div className={styles.statItem}><span className={styles.statNumber}>100%</span><span className={styles.statLabel}>Free Access</span></div>
             </div>
           </section>
-
+          
+          {/* This section now has the correct ID "mechanics" to be targeted by the button */}
           {topicSections.map((section) => (
             <section key={section.id} id={section.id} className={`${styles.topicSection} fade-in`}>
               <div className={styles.sectionHeader}>
