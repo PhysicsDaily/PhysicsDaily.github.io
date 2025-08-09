@@ -101,17 +101,17 @@ export default function MeasurementsPage() {
               <h4>🔰 For Beginners:</h4>
               <p>Imagine trying to cook without measuring ingredients. Physics is similar - we need precise measurements to understand how the universe works! Every law of physics started with careful observations.</p>
             </div>
-            <p><strong>Physics is fundamentally an experimental science.</strong> Every law, theory, and principle comes from careful observation and measurement. The GPS in your phone works because engineers understand Einstein's theory of relativity with incredible precision. Without it, your GPS would be off by miles!</p>
+            <p><strong>Physics is fundamentally an experimental science.</strong> Every law, theory, and principle comes from careful observation and measurement. The GPS in your phone works because engineers understand Einstein&apos;s theory of relativity with incredible precision. Without it, your GPS would be off by miles!</p>
             <div className={styles.highlightBox}>
               <h4>The Power of Precise Measurement</h4>
               <p>The detection of gravitational waves required measuring distance changes smaller than 1/10,000th the width of a proton!</p>
             </div>
             <div className={styles.advancedNote}>
               <h4>🎓 Advanced Insight:</h4>
-              <p>Modern physics reaches quantum limits of precision. The Heisenberg uncertainty principle imposes a fundamental bound on simultaneous measurements (like position and momentum). This is not a technological constraint—it's built into nature.</p>
+              <p>Modern physics reaches quantum limits of precision. The Heisenberg uncertainty principle imposes a fundamental bound on simultaneous measurements (like position and momentum). This is not a technological constraint—it&apos;s built into nature.</p>
             </div>
             <h3>Measurement Chain and Traceability</h3>
-            <p>Reliable measurements trace back to national/international standards via calibrated instruments. This "traceability chain" ensures comparability across labs and time.</p>
+            <p>Reliable measurements trace back to national/international standards via calibrated instruments. This &quot;traceability chain&quot; ensures comparability across labs and time.</p>
             <div className={styles.highlightBox}>
               <h4>Key Ideas</h4>
               <ul>
@@ -231,7 +231,7 @@ export default function MeasurementsPage() {
                   <tr><td>Period</td><td>T</td><td>s</td><td>[T]</td><td>T = 1/f</td></tr>
                   <tr><td>Stress</td><td>σ</td><td>Pa</td><td>[ML⁻¹T⁻²]</td><td>σ = F/A</td></tr>
                   <tr><td>Strain</td><td>ε</td><td>1</td><td>[1]</td><td>ε = ΔL/L</td></tr>
-                  <tr><td>Young's modulus</td><td>Y</td><td>Pa</td><td>[ML⁻¹T⁻²]</td><td>Y = σ/ε</td></tr>
+                  <tr><td>Young&apos;s modulus</td><td>Y</td><td>Pa</td><td>[ML⁻¹T⁻²]</td><td>Y = σ/ε</td></tr>
                   <tr><td>Viscosity</td><td>η</td><td>Pa·s</td><td>[ML⁻¹T⁻¹]</td><td>η = τ/(dv/dy)</td></tr>
                   <tr><td>Spring constant</td><td>k</td><td>N/m</td><td>[MT⁻²]</td><td>F = kx</td></tr>
                   <tr><td>Gravitational field</td><td>g</td><td>m/s²</td><td>[LT⁻²]</td><td>g = F/m</td></tr>
@@ -322,7 +322,7 @@ export default function MeasurementsPage() {
             <h2>1.7 Types of Errors & Accuracy vs. Precision</h2>
             <div className={styles.beginnerNote}>
               <h4>🔰 Note:</h4>
-              <p>"Error" means uncertainty, not a mistake. No measurement is perfectly exact.</p>
+              <p>&quot;Error&quot; means uncertainty, not a mistake. No measurement is perfectly exact.</p>
             </div>
             <h3>Types of Errors</h3>
             <div className={styles.highlightBox}>
@@ -378,7 +378,7 @@ export default function MeasurementsPage() {
             <h2>1.10 Reporting, Rounding, Logs, and Antilogs</h2>
             <h3>Reporting with Uncertainty</h3>
             <ul>
-              <li>Match the value's decimals to the uncertainty's first significant digit.</li>
+              <li>Match the value&apos;s decimals to the uncertainty&apos;s first significant digit.</li>
               <li>Prefer one significant digit in the uncertainty (two if the first digit is 1–2).</li>
             </ul>
           </div>
@@ -451,7 +451,7 @@ export default function MeasurementsPage() {
         <div className="container">
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>Test Your Understanding</h2>
-            <p className={styles.sectionSubtitle}>Apply what you've learned by tackling conceptual questions, numerical problems, and a comprehensive quiz.</p>
+            <p className={styles.sectionSubtitle}>Apply what you&apos;ve learned by tackling conceptual questions, numerical problems, and a comprehensive quiz.</p>
           </div>
           <div className={styles.practiceGrid}>
             <Link href="/mechanics/measurements/conceptual" className={styles.practiceCard}>
