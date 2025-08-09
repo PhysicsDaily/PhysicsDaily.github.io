@@ -607,7 +607,7 @@ const quizQuestions = [
         options: ["[M⁰L⁰T¹]", "[M⁰L⁰T⁻¹]", "[M¹L¹T⁻²]", "[MLT⁻²A⁻¹]"],
         answer: "[M⁰L⁰T¹]",
         solution: "L/R is the time constant of an LR circuit and thus has the dimensions of time, [T]."
-    }
+    },
     {
         question: "101. The dimensions of the ratio of pressure to stress are:",
         options: ["[M⁰L⁰T⁰]", "[ML⁻¹T⁻²]", "[MLT⁻²]", "[ML²T⁻²]"],
