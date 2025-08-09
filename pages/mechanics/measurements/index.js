@@ -1,6 +1,6 @@
-// pages/mechanics/measurements/index.js
+// pages/mechanics/measurements/measurements_overview.js
 
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Script from 'next/script';
@@ -8,70 +8,75 @@ import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
 import styles from '../../../styles/ContentPage.module.css';
 
+// Table of contents
 const sections = [
-  { id: 'intro', title: 'Introduction' },
-  { id: 'theory-of-measurement', title: 'Theory of Measurement — Overview' },
-  { id: 'quantities-units', title: 'Physical Quantities & Units' },
-  { id: 'si-units', title: 'The SI System (2019 Redefinition)' },
-  { id: 'dimensional-analysis', title: 'Dimensional Analysis & Buckingham Pi' },
-  { id: 'significant-figures', title: 'Significant Figures & Rounding Rules' },
-  { id: 'error-types', title: 'Types of Errors: Random vs Systematic' },
-  { id: 'statistical-analysis', title: 'Statistical Treatment & Uncertainty' },
-  { id: 'propagation', title: 'Propagation of Uncertainty (Advanced)' },
-  { id: 'instruments-calibration', title: 'Instruments, Least Count & Calibration' },
-  { id: 'graphing-fitting', title: 'Graphing, Linearization & Least Squares' },
-  { id: 'special-topics', title: 'Special Topics: Metrology & Quantum Limits' },
-  { id: 'prefixes-notation', title: 'SI Prefixes, Scientific Notation & Orders of Magnitude' },
-  { id: 'greek-alphabet', title: 'Greek Alphabet — Upper & Lowercase (Reference)' },
-  { id: 'exam-tips', title: 'Exam Techniques & Topic-Specific Tips' },
-  { id: 'practice', title: 'Practice Problems & Solutions' },
-  { id: 'references', title: 'Further Reading & References' },
+  { id: 'intro', title: 'Introduction & Roadmap' },
+  { id: 'foundations', title: '0. Foundations: Quantities, Models, and Metrology' },
+  { id: 'si-units', title: '1. SI Units and Standards (Post-2019)' },
+  { id: 'prefixes', title: '2. SI Prefixes & Scientific Notation' },
+  { id: 'physical-quantities', title: '3. Physical Quantities and Dimensions' },
+  { id: 'derived-mechanical', title: '4. Derived Quantities: Mechanics' },
+  { id: 'derived-em', title: '5. Derived Quantities: Electricity & Magnetism' },
+  { id: 'derived-thermal', title: '6. Derived Quantities: Thermo & Waves' },
+  { id: 'dimensional-analysis', title: '7. Dimensional Analysis & Non-dimensionalization' },
+  { id: 'pi-theorem', title: '8. Buckingham Π Theorem & Similarity' },
+  { id: 'sig-figs', title: '9. Precision & Significant Figures' },
+  { id: 'uncertainty', title: '10. Uncertainty: Type A/B, GUM approach' },
+  { id: 'propagation', title: '11. Propagation of Uncertainty (with Covariance)' },
+  { id: 'statistics', title: '12. Statistics: Distributions, SEM, t-tests' },
+  { id: 'outliers', title: '13. Outliers: Grubbs, Chauvenet, Residuals' },
+  { id: 'instruments', title: '14. Instruments: LC, Zero Error, ADC & Noise' },
+  { id: 'calibration', title: '15. Calibration, Traceability & Uncertainty Budget' },
+  { id: 'graphing', title: '16. Graphs, Linearization & Weighted Fits' },
+  { id: 'fermi', title: '17. Fermi Estimates & Orders of Magnitude' },
+  { id: 'conversions', title: '18. Unit Conversions & Non-SI Units' },
+  { id: 'constants', title: '19. Fundamental Constants (Exact & Measured)' },
+  { id: 'greek-alphabet', title: '20. Greek Alphabet Reference' },
+  { id: 'checklist', title: '21. Problem-Solving Checklist' },
+  { id: 'practice', title: 'Practice Problems' },
 ];
 
-export default function MeasurementsPage() {
+export default function MeasurementsOverview() {
   const [activeSection, setActiveSection] = useState('');
   const observer = useRef(null);
 
   useEffect(() => {
-    if (observer.current) {
-      observer.current.disconnect();
-    }
+    if (observer.current) observer.current.disconnect();
 
-    const io = new IntersectionObserver(
+    observer.current = new IntersectionObserver(
       (entries) => {
-        const intersectingEntry = entries.find(entry => entry.isIntersecting);
-        if (intersectingEntry) {
-          setActiveSection(intersectingEntry.target.id);
-        }
+        const first = entries.find((e) => e.isIntersecting);
+        if (first) setActiveSection(first.target.id);
       },
       { rootMargin: '-20% 0px -79% 0px' }
     );
 
-    observer.current = io;
+    sections.forEach((sec) => {
+      const el = document.getElementById(sec.id);
+      if (el) observer.current.observe(el);
+    });
 
-    const elements = sections
-      .map(sec => typeof document !== 'undefined' ? document.getElementById(sec.id) : null)
-      .filter(Boolean);
-
-    elements.forEach((el) => io.observe(el));
-
-    return () => {
-      if (observer.current) {
-        observer.current.disconnect();
-      }
-    };
+    return () => observer.current?.disconnect();
   }, []);
 
   return (
     <>
       <Head>
-        <title>Chapter 1: Measurement — Complete Theory & Practice</title>
-        <meta name="description" content="Comprehensive chapter on measurement, units, errors, uncertainty, dimensional analysis and exam-focused practice for Olympiad, JEE, IOE, CEE." />
+        <title>Measurement: Complete Theory & Practice - Physics Daily</title>
+        <meta
+          name="description"
+          content="A complete, step-by-step theory of measurements for physics: SI units, dimensional analysis, uncertainty, significant figures, calibration, graphs, and advanced methods."
+        />
       </Head>
 
       <Script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP" />
       <Script id="google-analytics">
-        {`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-XN081SR2KP');`}
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-XN081SR2KP');
+        `}
       </Script>
 
       <Header />
@@ -83,17 +88,18 @@ export default function MeasurementsPage() {
             <span className="separator">›</span>
             <Link href="/mechanics/foundations">Classical Mechanics</Link>
             <span className="separator">›</span>
-            <span className="current">📏 Measurement — Full Theory</span>
+            <span className="current">📏 Measurement (Complete)</span>
           </nav>
         </div>
       </div>
 
       <header className={styles.pageHeader}>
         <div className="container">
-          <h1>Chapter 1: Measurement — From Basics to Advanced</h1>
-          <p className={styles.subtitle}>Complete theory, worked examples, olympiad tips, and practice problems</p>
+          <h1>Measurement: From Basics to Advanced</h1>
+          <p className={styles.subtitle}>Theory, Methods, Precision, and Problem Solving</p>
           <p className={styles.description}>
-            This chapter starts with foundations — what measurement means — and gradually builds to advanced metrology, statistical uncertainty, least-squares fitting, Buckingham Pi theorem and exam-focused problems for JEE, IOE, and physics olympiads.
+            Start from first principles of measurement and build up to advanced tools used in experimental physics: SI units, dimensional analysis, uncertainty (GUM),
+            calibration, data fitting, and scaling laws—with worked examples and practice.
           </p>
         </div>
       </header>
@@ -101,442 +107,528 @@ export default function MeasurementsPage() {
       <main className={styles.mainContent}>
         <div className="container">
 
-          <aside className={styles.toc} aria-label="Table of contents">
-            <h3>Contents</h3>
-            <ul>
-              {sections.map(s => (
-                <li key={s.id} className={activeSection === s.id ? styles.activeTocItem : ''}>
-                  <a href={`#${s.id}`}>{s.title}</a>
-                </li>
-              ))}
-            </ul>
-          </aside>
-
           <div id="intro" className={styles.section}>
-            <h2>Introduction — What is Measurement and Why Care?</h2>
-            <p>
-              Measurement is the bridge between physical reality and mathematical description. A measurement assigns numbers to properties (quantities) of objects or events according to agreed rules. Physics uses measurement to test hypotheses, estimate parameters, and build predictive theories.
-            </p>
+            <h2>Introduction & Roadmap</h2>
+            <div className={styles.beginnerNote}>
+              <h4>For Beginners</h4>
+              <p>
+                Measurement tells us “how much” of a physical quantity we have. Good measurements are repeatable (precise) and close to the true value (accurate).
+                This chapter builds your toolkit to measure, report, and reason with confidence.
+              </p>
+            </div>
+            <div className={styles.advancedNote}>
+              <h4>Advanced Angle</h4>
+              <p>
+                Modern metrology defines units via fundamental constants. Uncertainty is quantified rigorously (GUM), and analysis blends dimensional reasoning,
+                statistical inference, and calibration models to achieve traceable, reproducible results.
+              </p>
+            </div>
             <div className={styles.highlightBox}>
-              <h4>Key Pillars</h4>
+              <h4>Roadmap</h4>
               <ul>
-                <li><strong>Standards:</strong> shared definitions (e.g., the second) that let everyone measure the same way.</li>
-                <li><strong>Traceability:</strong> chain of calibrations back to national/international standards.</li>
-                <li><strong>Uncertainty:</strong> quantified doubt about a measurement.</li>
+                <li>Foundations: quantities, SI, dimensions</li>
+                <li>Precision: significant figures and uncertainty (Type A/B)</li>
+                <li>Analysis: propagation with covariance, weighted fits, residuals</li>
+                <li>Design: instruments, ADC, noise, calibration, traceability</li>
+                <li>Reasoning: dimensional analysis, Π theorem, scaling laws, Fermi estimates</li>
               </ul>
             </div>
           </div>
 
-          <div id="theory-of-measurement" className={styles.section}>
-            <h2>Theory of Measurement — Overview</h2>
+          <div id="foundations" className={styles.section}>
+            <h2>0. Foundations: Quantities, Models, and Metrology</h2>
+            <h3>Physical Quantity</h3>
             <p>
-              The mathematical theory of measurement addresses how to map empirical observations to numbers consistently. It uses concepts from metrology and statistics: measurement models, noise, bias, repeatability, reproducibility, and calibration. For competitive exams, understanding the practical rules and how to apply them is key; for olympiads, you should also understand the derivations and limiting cases.
+              A measurable attribute of a system (e.g., length, time, mass, current, temperature). Each has an operational definition: a clear procedure to measure it.
             </p>
-
+            <ul>
+              <li>Scalar: magnitude only (mass, time, temperature, energy).</li>
+              <li>Vector: magnitude + direction (velocity, force, electric field).</li>
+              <li>Tensor: multi-index object (stress, inertia tensor, permittivity tensor).</li>
+            </ul>
             <h3>Measurement Model</h3>
             <p>
-              Every measurement can be written as: <span className="equation">y = f(x) + ε</span>, where <em>f(x)</em> is the deterministic relation and <em>ε</em> is the error (random + systematic). Properly separating these and quantifying them is the main job of experimental analysis.
+              A model maps signals to quantities: reading = true value + systematic bias + random noise. The goal is to estimate the true value and its uncertainty.
             </p>
-
-            <h3>Operational vs. Theoretical Definitions</h3>
-            <p>
-              An operational definition tells you “how to measure” (e.g., time by counting oscillations of a cesium atom's transition). A theoretical definition places the quantity inside a broader model (e.g., temperature as related to average kinetic energy). For exams, prefer operational definitions when asked what “a measurement” means.
-            </p>
-
+            <h3>Metrology Pillars</h3>
+            <ul>
+              <li>Traceability: unbroken chain to SI standards via calibrations with stated uncertainties.</li>
+              <li>Reproducibility: independent labs obtain consistent results.</li>
+              <li>Comparability: results across time and space are comparable because definitions are stable.</li>
+            </ul>
             <div className={styles.exampleBox}>
-              <h4>Example</h4>
-              <p>Measuring gravitational acceleration with a simple pendulum: theoretical period <span className="equation">T = 2π√(l/g)</span>. Rearranging measures <span className="equation">g = (2π)² l / T²</span>. The experiment's uncertainty depends on how precisely you measure <span className="equation">l</span> and <span className="equation">T</span>, and on systematic effects (air resistance, amplitude corrections).</p>
+              <h4>Example: Defining Average Speed</h4>
+              <p>Operational definition: v_avg = Δx / Δt, measured with a meter and a stopwatch.</p>
             </div>
-
-          </div>
-
-          <div id="quantities-units" className={styles.section}>
-            <h2>Physical Quantities & Units</h2>
-            <h3>Definitions</h3>
-            <p>
-              A <strong>quantity</strong> is a property that can be measured (length, mass, time). A <strong>unit</strong> is a specific magnitude of a quantity agreed upon for reference (meter, kilogram, second). Quantities are either base (independent) or derived (built from base quantities).
-            </p>
-
-            <h3>Scalars, Vectors & Tensors</h3>
-            <p>
-              Most early physics deals with scalars and vectors. Advanced topics (continuum mechanics, relativity) use tensors. For measurement theory, be comfortable with representing units and dimensions of scalars and components of vectors (each component has the same dimension as the scalar quantity it represents).
-            </p>
-
-            <h3>Dimensional Symbols</h3>
-            <p>Common base dimension symbols: [M] mass, [L] length, [T] time, [I] current, [Θ] temperature, [N] amount (mole), [J] luminous intensity.</p>
-
           </div>
 
           <div id="si-units" className={styles.section}>
-            <h2>The SI System (2019 Redefinition)</h2>
+            <h2>1. SI Units and Standards (Post-2019)</h2>
             <p>
-              The SI system currently defines base units by fixing exact numerical values of fundamental constants (e.g., the speed of light <span className="equation">c</span>, Planck constant <span className="equation">h</span>, elementary charge <span className="equation">e</span>, Boltzmann constant <span className="equation">k_B</span>, Avogadro constant <span className="equation">N_A</span>, cesium hyperfine frequency <span className="equation">Δν_{Cs}</span>, and luminous efficacy <span className="equation">K_{cd}</span>).</p>
-
-            <h3>Seven Base Units (quick table)</h3>
+              The International System of Units (SI) uses seven base quantities; all units are defined by exact values of fundamental constants (since 2019).
+            </p>
             <div className={styles.tableWrapper}>
               <table>
                 <thead>
-                  <tr><th>Quantity</th><th>Unit</th><th>Symbol</th></tr>
+                  <tr><th>Quantity</th><th>Unit</th><th>Symbol</th><th>Defined via</th></tr>
                 </thead>
                 <tbody>
-                  <tr><td>Time</td><td>second</td><td>s</td></tr>
-                  <tr><td>Length</td><td>metre</td><td>m</td></tr>
-                  <tr><td>Mass</td><td>kilogram</td><td>kg</td></tr>
-                  <tr><td>Electric current</td><td>ampere</td><td>A</td></tr>
-                  <tr><td>Temperature</td><td>kelvin</td><td>K</td></tr>
-                  <tr><td>Amount of substance</td><td>mole</td><td>mol</td></tr>
-                  <tr><td>Luminous intensity</td><td>candela</td><td>cd</td></tr>
+                  <tr><td>Time</td><td>second</td><td>s</td><td>Δν(Cs) = 9,192,631,770 Hz (exact)</td></tr>
+                  <tr><td>Length</td><td>meter</td><td>m</td><td>c = 299,792,458 m·s⁻¹ (exact)</td></tr>
+                  <tr><td>Mass</td><td>kilogram</td><td>kg</td><td>h = 6.62607015×10⁻³⁴ J·s (exact)</td></tr>
+                  <tr><td>Electric current</td><td>ampere</td><td>A</td><td>e = 1.602176634×10⁻¹⁹ C (exact)</td></tr>
+                  <tr><td>Temperature</td><td>kelvin</td><td>K</td><td>k_B = 1.380649×10⁻²³ J·K⁻¹ (exact)</td></tr>
+                  <tr><td>Amount of substance</td><td>mole</td><td>mol</td><td>N_A = 6.02214076×10²³ mol⁻¹ (exact)</td></tr>
+                  <tr><td>Luminous intensity</td><td>candela</td><td>cd</td><td>K_cd = 683 lm·W⁻¹ at 540 THz (exact)</td></tr>
                 </tbody>
               </table>
             </div>
+            <p>Coherence: derived units are products/powers of base units without extra numerical factors.</p>
+          </div>
 
-            <h3>Useful Exam Note</h3>
-            <p>
-              JEE/IOE style problems assume SI unless otherwise stated. Many errors in conversion problems come from mixing base units (e.g., using cm with kg & s requires converting cm → m consistently).
-            </p>
+          <div id="prefixes" className={styles.section}>
+            <h2>2. SI Prefixes & Scientific Notation</h2>
+            <p>Use scientific notation and SI prefixes to express very small/large numbers cleanly.</p>
+            <div className={styles.tableWrapper}>
+              <table>
+                <thead>
+                  <tr><th>Prefix</th><th>Symbol</th><th>Factor</th><th>Prefix</th><th>Symbol</th><th>Factor</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>yocto</td><td>y</td><td>10⁻²⁴</td><td>yotta</td><td>Y</td><td>10²⁴</td></tr>
+                  <tr><td>ronto</td><td>r</td><td>10⁻²⁷</td><td>ronna</td><td>R</td><td>10²⁷</td></tr>
+                  <tr><td>quecto</td><td>q</td><td>10⁻³⁰</td><td>quetta</td><td>Q</td><td>10³⁰</td></tr>
+                  <tr><td>zepto</td><td>z</td><td>10⁻²¹</td><td>zetta</td><td>Z</td><td>10²¹</td></tr>
+                  <tr><td>atto</td><td>a</td><td>10⁻¹⁸</td><td>exa</td><td>E</td><td>10¹⁸</td></tr>
+                  <tr><td>femto</td><td>f</td><td>10⁻¹⁵</td><td>peta</td><td>P</td><td>10¹⁵</td></tr>
+                  <tr><td>pico</td><td>p</td><td>10⁻¹²</td><td>tera</td><td>T</td><td>10¹²</td></tr>
+                  <tr><td>nano</td><td>n</td><td>10⁻⁹</td><td>giga</td><td>G</td><td>10⁹</td></tr>
+                  <tr><td>micro</td><td>μ</td><td>10⁻⁶</td><td>mega</td><td>M</td><td>10⁶</td></tr>
+                  <tr><td>milli</td><td>m</td><td>10⁻³</td><td>kilo</td><td>k</td><td>10³</td></tr>
+                  <tr><td>centi</td><td>c</td><td>10⁻²</td><td>hecto</td><td>h</td><td>10²</td></tr>
+                  <tr><td>deci</td><td>d</td><td>10⁻¹</td><td>deka</td><td>da</td><td>10¹</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div className={styles.exampleBox}>
+              <h4>Example: Converting Units Quickly</h4>
+              <p>1 N = 1 kg·m·s⁻² = (10³ g)(10² cm)s⁻² = 10⁵ dyn.</p>
+            </div>
+          </div>
+
+          <div id="physical-quantities" className={styles.section}>
+            <h2>3. Physical Quantities and Dimensions</h2>
+            <p>Dimensions express how a quantity depends on base quantities: [M], [L], [T], [I], [Θ], [N], [J]. Angles (rad), solid angles (sr) are dimensionless.</p>
+            <div className={styles.exampleBox}>
+              <h4>Check: Dimensional Consistency</h4>
+              <p>x = x₀ + v₀t + ½at² → each term has [L]. Equation is consistent.</p>
+            </div>
+          </div>
+
+          <div id="derived-mechanical" className={styles.section}>
+            <h2>4. Derived Quantities: Mechanics</h2>
+            <div className={styles.tableWrapper}>
+              <table>
+                <thead>
+                  <tr><th>Quantity</th><th>Symbol</th><th>Unit</th><th>Dimension</th><th>Relation</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Velocity</td><td>v</td><td>m·s⁻¹</td><td>[LT⁻¹]</td><td>v = dx/dt</td></tr>
+                  <tr><td>Acceleration</td><td>a</td><td>m·s⁻²</td><td>[LT⁻²]</td><td>a = dv/dt</td></tr>
+                  <tr><td>Force</td><td>F</td><td>N</td><td>[MLT⁻²]</td><td>F = ma</td></tr>
+                  <tr><td>Work/Energy</td><td>W, E</td><td>J</td><td>[ML²T⁻²]</td><td>W = ∫F·dr</td></tr>
+                  <tr><td>Power</td><td>P</td><td>W</td><td>[ML²T⁻³]</td><td>P = dW/dt = F·v</td></tr>
+                  <tr><td>Momentum</td><td>p</td><td>kg·m·s⁻¹</td><td>[MLT⁻¹]</td><td>p = mv</td></tr>
+                  <tr><td>Pressure</td><td>p</td><td>Pa</td><td>[ML⁻¹T⁻²]</td><td>p = F/A</td></tr>
+                  <tr><td>Angular momentum</td><td>L</td><td>kg·m²·s⁻¹</td><td>[ML²T⁻¹]</td><td>L = Iω</td></tr>
+                  <tr><td>Torque</td><td>τ</td><td>N·m</td><td>[ML²T⁻²]</td><td>τ = r × F</td></tr>
+                  <tr><td>Moment of inertia</td><td>I</td><td>kg·m²</td><td>[ML²]</td><td>I = Σmr²</td></tr>
+                  <tr><td>Stress</td><td>σ</td><td>Pa</td><td>[ML⁻¹T⁻²]</td><td>σ = F/A</td></tr>
+                  <tr><td>Strain</td><td>ε</td><td>1</td><td>[1]</td><td>ε = ΔL/L</td></tr>
+                  <tr><td>Young’s modulus</td><td>Y</td><td>Pa</td><td>[ML⁻¹T⁻²]</td><td>Y = σ/ε</td></tr>
+                  <tr><td>Viscosity (dyn.)</td><td>η</td><td>Pa·s</td><td>[ML⁻¹T⁻¹]</td><td>τ = η dv/dy</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div className={styles.exampleBox}>
+              <h4>Example: Dimensional Derivation (Pendulum)</h4>
+              <p>Assume T ∝ lᵃ gᶜ. Match [T] = [L]ᵃ [LT⁻²]ᶜ ⇒ a = 1/2, c = −1/2 → T = k√(l/g).</p>
+            </div>
+          </div>
+
+          <div id="derived-em" className={styles.section}>
+            <h2>5. Derived Quantities: Electricity & Magnetism</h2>
+            <div className={styles.tableWrapper}>
+              <table>
+                <thead>
+                  <tr><th>Quantity</th><th>Symbol</th><th>Unit</th><th>Dimension</th><th>Relation</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Charge</td><td>q</td><td>C</td><td>[IT]</td><td>q = ∫i dt</td></tr>
+                  <tr><td>Potential</td><td>V</td><td>V</td><td>[ML²T⁻³I⁻¹]</td><td>V = W/q</td></tr>
+                  <tr><td>Capacitance</td><td>C</td><td>F</td><td>[M⁻¹L⁻²T⁴I²]</td><td>q = CV</td></tr>
+                  <tr><td>Resistance</td><td>R</td><td>Ω</td><td>[ML²T⁻³I⁻²]</td><td>V = iR</td></tr>
+                  <tr><td>Conductance</td><td>G</td><td>S</td><td>[M⁻¹L⁻²T³I²]</td><td>G = 1/R</td></tr>
+                  <tr><td>Inductance</td><td>L</td><td>H</td><td>[ML²T⁻²I⁻²]</td><td>V = L di/dt</td></tr>
+                  <tr><td>Magnetic flux</td><td>Φ</td><td>Wb</td><td>[ML²T⁻²I⁻¹]</td><td>Φ = ∫B·dA</td></tr>
+                  <tr><td>Magnetic field</td><td>B</td><td>T</td><td>[MT⁻²I⁻¹]</td><td>F = qvB (⊥)</td></tr>
+                  <tr><td>Permittivity</td><td>ε</td><td>F·m⁻¹</td><td>[M⁻¹L⁻³T⁴I²]</td><td>ε₀ ≈ 8.854×10⁻¹²</td></tr>
+                  <tr><td>Permeability</td><td>μ</td><td>N·A⁻²</td><td>[MLT⁻²I⁻²]</td><td>μ₀ = 4π×10⁻⁷</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="derived-thermal" className={styles.section}>
+            <h2>6. Derived Quantities: Thermo & Waves</h2>
+            <div className={styles.tableWrapper}>
+              <table>
+                <thead>
+                  <tr><th>Quantity</th><th>Symbol</th><th>Unit</th><th>Dimension</th><th>Relation</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Heat</td><td>Q</td><td>J</td><td>[ML²T⁻²]</td><td>Q = mcΔT</td></tr>
+                  <tr><td>Specific heat</td><td>c</td><td>J·kg⁻¹·K⁻¹</td><td>[L²T⁻²Θ⁻¹]</td><td>c = Q/(mΔT)</td></tr>
+                  <tr><td>Entropy</td><td>S</td><td>J·K⁻¹</td><td>[ML²T⁻²Θ⁻¹]</td><td>dS = dQ_rev/T</td></tr>
+                  <tr><td>Thermal conductivity</td><td>k</td><td>W·m⁻¹·K⁻¹</td><td>[MLT⁻³Θ⁻¹]</td><td>Q̇ = −kA dT/dx</td></tr>
+                  <tr><td>Frequency</td><td>f</td><td>Hz</td><td>[T⁻¹]</td><td>f = 1/T</td></tr>
+                  <tr><td>Wavelength</td><td>λ</td><td>m</td><td>[L]</td><td>v = fλ</td></tr>
+                  <tr><td>Wavenumber</td><td>k</td><td>m⁻¹</td><td>[L⁻¹]</td><td>k = 2π/λ</td></tr>
+                  <tr><td>Intensity</td><td>I</td><td>W·m⁻²</td><td>[MT⁻³]</td><td>I ∝ A² (wave amplitude)</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <div id="dimensional-analysis" className={styles.section}>
-            <h2>Dimensional Analysis & Buckingham Pi Theorem</h2>
-            <p>
-              Dimensional analysis treats dimensions as algebraic quantities. It is used to check equations, derive scaling laws, and reduce the number of variables (Buckingham Pi).
-            </p>
-
-            <h3>Rules & Uses</h3>
-            <ol>
-              <li>Every term added/subtracted must have the same dimensions.</li>
-              <li>Only dimensionless combinations can appear in transcendental functions (sin, exp, log).</li>
-              <li>Buckingham Pi theorem: With <em>n</em> variables and <em>k</em> fundamental dimensions, form <em>n − k</em> independent dimensionless groups.</li>
-            </ol>
-
+            <h2>7. Dimensional Analysis & Non-dimensionalization</h2>
+            <p>Use dimensions to check equations, derive forms, and scale problems.</p>
+            <ul>
+              <li>Arguments of exp, log, sin, cos must be dimensionless.</li>
+              <li>Non-dimensionalization reveals controlling parameters and limits.</li>
+            </ul>
             <div className={styles.exampleBox}>
-              <h4>Worked Example: Period of Small Oscillations — Pendulum</h4>
-              <p>We want T depending on length l, mass m, gravitational acceleration g, and amplitude θ₀ (small). List dimensions: [T], [L], [M], [LT⁻²], and dimensionless θ₀. Eliminating mass and dimensionless amplitude, we find T ∝ √(l/g) as usual. Buckingham Pi formalizes this and predicts the dimensionless group T√(g/l) as constant.</p>
+              <h4>Example: Drag Force Form</h4>
+              <p>
+                Assume F depends on ρ (fluid density), v (speed), A (area), μ (viscosity). Dimensional reasoning yields regimes:
+                low Re: F ∝ μvA/L; high Re: F ∝ ½C_D ρv²A.
+              </p>
             </div>
+          </div>
 
-            <div className={styles.exampleBox}>
-              <h4>Buckingham Pi — Fluid Drag Example</h4>
-              <p>Drag force F depends on speed v, density ρ, viscosity η, and size L. Variables n=5, dimensions k=3 ([M],[L],[T]) ⇒ 2 π-groups. Usually choose Reynolds number Re = ρvL/η and C_d = F/(ρv²L²). Relationship: C_d = f(Re).</p>
-            </div>
-
+          <div id="pi-theorem" className={styles.section}>
+            <h2>8. Buckingham Π Theorem & Similarity</h2>
+            <p>With n variables and k base dimensions ⇒ expect n−k independent dimensionless groups (Π terms).</p>
             <div className={styles.highlightBox}>
-              <h4>Olympiad Tip</h4>
-              <p>Dimensional analysis can quickly eliminate impossible answer choices and find dependence exponents up to a dimensionless constant. Combine with limiting-case tests to determine constants when possible.</p>
+              <h4>Common Dimensionless Numbers</h4>
+              <ul>
+                <li>Reynolds: Re = ρvL/μ (inertia/viscosity)</li>
+                <li>Froude: Fr = v/√(gL) (inertia/gravity)</li>
+                <li>Mach: Ma = v/c (flow/compressibility)</li>
+                <li>Strouhal: St = fL/v (unsteadiness)</li>
+                <li>Prandtl: Pr = ν/α (momentum/thermal diffusion)</li>
+                <li>Grashof: Gr = gβΔTL³/ν² (buoyancy/viscous)</li>
+              </ul>
+            </div>
+            <div className={styles.exampleBox}>
+              <h4>Example: Pendulum with Amplitude</h4>
+              <p>Variables: T, l, g, θ₀ ⇒ k = 2 (L,T) ⇒ expect 2 Π groups. One choice: Π₁ = T√(g/l), Π₂ = θ₀. Small-angle: Π₁ ≈ constant.</p>
             </div>
           </div>
 
-          <div id="significant-figures" className={styles.section}>
-            <h2>Significant Figures & Rounding Rules</h2>
-            <p>
-              Significant figures communicate a measurement's precision. Exams expect you to round correctly and not falsely imply precision.
-            </p>
-
-            <h3>Rules (concise)</h3>
-            <ol>
-              <li>All non-zero digits are significant.</li>
-              <li>Zeros between non-zero digits are significant.</li>
-              <li>Leading zeros are not.</li>
-              <li>Trailing zeros are significant only if there's a decimal point (or an overbar/notation indicates it).</li>
-            </ol>
-
-            <h3>Arithmetic Rules</h3>
-            <p><strong>Add/Subtract:</strong> Round to the least precise decimal place. <strong>Multiply/Divide:</strong> Round to the least number of significant figures.</p>
-
-            <h3>Exam Advice</h3>
-            <p>
-              For multi-step problems, carry extra guard digits through calculations and only round at the end unless instructed otherwise. If a number is exact (like π when symbolically used, or conversion factors like 1000 g = 1 kg when stated), it doesn't limit significant figures.
-            </p>
-          </div>
-
-          <div id="error-types" className={styles.section}>
-            <h2>Types of Errors — Random and Systematic</h2>
-            <p>
-              Errors are not "mistakes" but uncertainties. Distinguish between random (statistical scatter) and systematic (bias) errors.
-            </p>
-
-            <h3>Random Errors</h3>
-            <ul>
-              <li>Cause scatter; reduced by more measurements.</li>
-              <li>Described by standard deviation.</li>
-            </ul>
-
-            <h3>Systematic Errors</h3>
-            <ul>
-              <li>Bias caused by miscalibration, environmental effects, or model assumptions.</li>
-              <li>Cannot be reduced by averaging; must be identified and corrected or included as an uncertainty term.</li>
-            </ul>
-
+          <div id="sig-figs" className={styles.section}>
+          <h2>9. Precision & Significant Figures</h2>
+            <p>Significant figures communicate precision. Keep guard digits during intermediate steps; round at the end.</p>
+            <div className={styles.highlightBox}>
+              <h4>Rules</h4>
+              <ol>
+                <li>Non-zero digits significant; zeros between significant digits count.</li>
+                <li>Leading zeros not significant; trailing zeros after a decimal are significant.</li>
+                <li>Add/Sub: match least decimal places; Mul/Div: match least significant figures.</li>
+                <li>Rounding: round-to-even for halves reduces bias (e.g., 2.5 → 2, 3.5 → 4).</li>
+              </ol>
+            </div>
             <div className={styles.exampleBox}>
               <h4>Example</h4>
-              <p>
-                A weighing scale reads 0.5 g too high. All mass measurements have a +0.5 g systematic error. Averaging many measurements won't remove it.
-              </p>
+              <p>3.1416 × 2.0 = 6.2832 → 6.3 (2 significant figures).</p>
             </div>
           </div>
 
-          <div id="statistical-analysis" className={styles.section}>
-            <h2>Statistical Treatment & Uncertainty</h2>
-            <p>
-              For repeated measurements x_i (i=1..N), the basic statistics are:
-            </p>
+          <div id="uncertainty" className={styles.section}>
+            <h2>10. Uncertainty: Type A/B, GUM approach</h2>
+            <p>Every measurement is incomplete without its uncertainty. Report X = x ± u with coverage (e.g., 95%).</p>
             <ul>
-              <li><strong>Mean:</strong> <span className="equation">x̄ = (1/N) &Sigma; x_i</span></li>
-              <li><strong>Variance:</strong> <span className="equation">s² = (1/(N-1)) &Sigma; (x_i - x̄)²</span> (sample variance)</li>
-              <li><strong>Standard deviation:</strong> s = √(s²)</li>
-              <li><strong>Standard error of the mean:</strong> <span className="equation">s_{x̄} = s / √N</span></li>
+              <li>Type A: statistical evaluation (repeatability, standard deviation).</li>
+              <li>Type B: other information (spec sheets, calibration, resolution, prior knowledge).</li>
             </ul>
-
-            <h3>Confidence Intervals</h3>
-            <p>
-              Report uncertainties as ±1σ (68% CL) or ±2σ (≈95% CL). For few measurements (small N), use t-distribution tables when quoting confidence intervals.
-            </p>
-
+            <h3>Basic Quantities</h3>
+            <ul>
+              <li>Mean: x̄ = (1/n) Σxᵢ</li>
+              <li>Sample standard deviation: s = √[Σ(xᵢ−x̄)²/(n−1)]</li>
+              <li>Standard uncertainty of mean: u(x̄) = s/√n</li>
+              <li>Coverage: expanded uncertainty U = k·u_c (k ≈ 2 for ≈95% if normal).</li>
+            </ul>
             <div className={styles.exampleBox}>
-              <h4>Worked Example</h4>
-              <p>
-                Five repeated measurements of time: 1.02, 1.00, 1.01, 0.99, 1.03 s. Mean = 1.01 s. Sample sd s ≈ 0.0141 s. Standard error = 0.0141/√5 ≈ 0.0063 s. Report as 1.01 ± 0.006 s (1σ).
-              </p>
+              <h4>Example: Reading a Ruler</h4>
+              <p>Resolution ±0.5 mm (uniform). Type B standard u = a/√3 = 0.5/√3 mm.</p>
             </div>
-
-            <h3>Combining Random and Systematic</h3>
-            <p>
-              When both exist, combine in quadrature if they're independent: <span className="equation">Δ_{total} = √(Δ_{rand}² + Δ_{sys}²)</span>. Document both components separately when possible.
-            </p>
           </div>
 
           <div id="propagation" className={styles.section}>
-            <h2>Propagation of Uncertainty (Advanced)</h2>
+            <h2>11. Propagation of Uncertainty (with Covariance)</h2>
             <p>
-              If z = f(x, y, ...), and x, y have uncertainties Δx, Δy, then to first order:
+              For y = f(x₁,…,x_m), linearize around means: u²(y) ≈ ΣΣ (∂f/∂x_i)(∂f/∂x_j) cov(x_i, x_j).
             </p>
-            <p><span className="equation">(Δz)² = (∂f/∂x)² (Δx)² + (∂f/∂y)² (Δy)² + 2 (∂f/∂x)(∂f/∂y) Cov(x,y) + ...</span></p>
-            <p>
-              For uncorrelated variables, covariance terms vanish. This derivative method is essential for accurate olympiad/advanced exam answers when functions are nonlinear.
-            </p>
-
+            <ul>
+              <li>Independent: cov = 0 → u²(y) = Σ (∂f/∂x_i)² u²(x_i)</li>
+              <li>Relative form (products/powers): u(y)/y = √[Σ (a_i u(x_i)/x_i)² + 2ΣΣ a_i a_j ρ_{ij} u_i u_j/(x_i x_j)]</li>
+            </ul>
             <div className={styles.exampleBox}>
-              <h4>Example: Area of Rectangle</h4>
-              <p>
-                A = l × w. ΔA ≈ √((w Δl)² + (l Δw)²). If l=(10.0±0.1) cm and w=(5.00±0.05) cm → ΔA = √((5×0.1)² + (10×0.05)²) = √(0.25 + 0.25) = √0.5 ≈ 0.707 cm².
-              </p>
+              <h4>Example: Density of a Cylinder</h4>
+              <p>ρ = m/(πr²h). Independent m, r, h.</p>
+              <p>Relative: (uρ/ρ)² = (um/m)² + (2 ur/r)² + (uh/h)².</p>
             </div>
-
-            <h3>Higher-order Corrections</h3>
-            <p>
-              If uncertainties are not small, include second-order terms or use Monte Carlo propagation (simulate many draws from distributions of inputs and compute distribution of output). For olympiad / exam settings first-order linear propagation is usually sufficient unless stated otherwise.
-            </p>
+            <div className={styles.advancedNote}>
+              <h4>Advanced</h4>
+              <p>For non-linear, large-uncertainty cases, use Monte Carlo propagation: sample inputs per their PDFs and compute y distribution.</p>
+            </div>
           </div>
 
-          <div id="instruments-calibration" className={styles.section}>
-            <h2>Measurement Instruments, Least Count, Zero Error & Calibration</h2>
-            <h3>Least Count</h3>
-            <p>
-              Least count is the smallest unit that an instrument can resolve (e.g., 1 mm on certain rulers). It is a component of measurement uncertainty; typical practice is to take an uncertainty of ±(LC/2) for analog scales if no better estimate exists.
-            </p>
-
-            <h3>Zero Error</h3>
-            <p>
-              If an instrument reads a non-zero value on true-zero, this is zero error. Correct readings by subtracting/adding the zero error and include uncertainty of that correction.
-            </p>
-
-            <h3>Calibration</h3>
-            <p>
-              Calibration compares an instrument to a standard to determine corrections and uncertainties. Labs maintain traceability chains to national institutes (NIST, BIPM, etc.). For exams, know how to correct readings and propagate the uncertainty introduced by calibration.
-            </p>
-
-            <h3>Common Instruments & Quick Notes</h3>
+          <div id="statistics" className={styles.section}>
+            <h2>12. Statistics: Distributions, SEM, t-tests</h2>
             <ul>
-              <li><strong>Vernier Calipers:</strong> Learn how to read main scale and vernier scale; LC typically 0.1 mm or 0.02 mm depending on caliper.</li>
-              <li><strong>Screw Gauge (Micrometer):</strong> Understand pitch, circular scale, and calculation of least count.</li>
-              <li><strong>Stopwatch/Photogate:</strong> For timing — photogates reduce human reaction time errors drastically.</li>
-              <li><strong>Digital Multimeter:</strong> Know resolution and input impedance; measure voltage, current, resistance carefully with ranges.</li>
+              <li>Normal distribution: many noise sources sum to Gaussian by CLT.</li>
+              <li>Small n: mean confidence interval uses Student’s t with ν = n−1.</li>
+              <li>Standard error of mean (SEM): s/√n; 95% CI: x̄ ± t_{0.975,ν}·SEM.</li>
+            </ul>
+            <div className={styles.exampleBox}>
+              <h4>Example: 5 Timing Trials</h4>
+              <p>n=5, x̄=2.13 s, s=0.05 s. SEM = 0.022 s. t≈2.776 → 95% CI: 2.13 ± 0.061 s.</p>
+            </div>
+          </div>
+
+          <div id="outliers" className={styles.section}>
+            <h2>13. Outliers: Grubbs, Chauvenet, Residuals</h2>
+            <p>Outlier handling must be principled; document decisions.</p>
+            <ul>
+              <li>Chauvenet: reject if probability of deviation less than 1/(2n).</li>
+              <li>Grubbs: test largest |xᵢ−x̄|/s against threshold.</li>
+              <li>Model-based: examine residuals after fit; look for non-normality/heteroscedasticity.</li>
             </ul>
           </div>
 
-          <div id="graphing-fitting" className={styles.section}>
-            <h2>Graphing, Linearization & Least Squares Fitting</h2>
-            <h3>Linearization</h3>
-            <p>
-              Many relationships can be linearized for parameter extraction. E.g., y = A x^n → log y = log A + n log x. Slope gives exponent n.
-            </p>
+          <div id="instruments" className={styles.section}>
+            <h2>14. Instruments: LC, Zero Error, ADC & Noise</h2>
+            <h3>Least Count (Resolution)</h3>
+            <ul>
+              <li>Analog scale: smallest subdivision; digital: 1 count of display/ADC.</li>
+              <li>Vernier: LC = 1 MSD − 1 VSD (commonly 0.1 mm). Screw gauge: LC = pitch/number of divisions.</li>
+            </ul>
+            <h3>Zero Error</h3>
+            <ul>
+              <li>Positive zero error: reading high at zero; subtract correction.</li>
+              <li>Negative zero error: reading low at zero; add correction.</li>
+            </ul>
+            <h3>ADC & Quantization</h3>
+            <ul>
+              <li>n-bit ADC full-scale V_FS: LSB = V_FS/2ⁿ; quantization RMS ≈ LSB/√12.</li>
+              <li>Sampling theorem: f_s ≥ 2 f_max to avoid aliasing; use anti-alias filters.</li>
+            </ul>
+            <h3>Noise & Drift</h3>
+            <ul>
+              <li>White noise (flat), 1/f noise (low-frequency), thermal noise: √(4k_BTRΔf).</li>
+              <li>Drift (slow change), hysteresis (path-dependence), dead band, backlash (mechanical).</li>
+            </ul>
+          </div>
 
-            <h3>Least Squares (Simple Linear)</h3>
-            <p>
-              For points (x_i, y_i) with uncertainties σ_i on y (assumed independent), the best-fit slope m and intercept c minimize χ² = &Sigma;[(y_i − (m x_i + c))/σ_i]². For equal σ_i, use simple formulas for m and c. Understanding derivation of these formulas is beneficial for olympiad-level problems.
-            </p>
-
+          <div id="calibration" className={styles.section}>
+            <h2>15. Calibration, Traceability & Uncertainty Budget</h2>
+            <p>Calibration relates instrument readings to reference standards, providing a calibration curve and uncertainty.</p>
+            <ul>
+              <li>Procedures: compare to standard at multiple points; model bias; estimate uncertainty.</li>
+              <li>Least-squares calibration: y = a + bx; use weighted fit if variances differ.</li>
+              <li>Uncertainty budget: list all sources (Type A/B), sensitivity coefficients, combine in quadrature.</li>
+            </ul>
             <div className={styles.exampleBox}>
-              <h4>Worked Example</h4>
-              <p>
-                Fit y = mx + c to points (0,1), (1,3), (2,5). The slope m = 2, intercept c =1 (exact here). For noisy data, compute sums &Sigma;x, &Sigma;y, &Sigma;xy, &Sigma;x² and use m = (N&Sigma;xy − &Sigma;x&Sigma;y)/(N&Sigma;x² − (&Sigma;x)²).
-              </p>
+              <h4>Example: Thermistor Calibration</h4>
+              <p>Fit 1/T = A + B ln R + C (ln R)³ (Steinhart–Hart); propagate uncertainties in R and fit parameters to T.</p>
             </div>
-
-            <h3>Uncertainty of Fit</h3>
-            <p>
-              After finding m and c, their uncertainties come from covariance matrix. Propagate these to any derived quantity (e.g., when using fit to estimate physical constants) using the usual propagation formula.
-            </p>
           </div>
 
-          <div id="special-topics" className={styles.section}>
-            <h2>Special Topics: Metrology, Quantum Limits & Modern Methods</h2>
-            <h3>Metrology</h3>
-            <p>
-              Metrology is the science of measurement — includes definitions of units, traceability, uncertainty budgets, and inter-lab comparisons. For advanced students, reading about Kibble balances (defining kilogram) and atomic clocks (defining the second) is instructive.
-            </p>
-
-            <h3>Quantum Limits</h3>
-            <p>
-              The Heisenberg uncertainty principle places fundamental limits on simultaneous measurements (e.g., position & momentum). Quantum metrology explores entanglement and squeezed states to beat classical limits in certain contexts; this is active research but beyond most exam syllabi.
-            </p>
+          <div id="graphing" className={styles.section}>
+            <h2>16. Graphs, Linearization & Weighted Fits</h2>
+            <ul>
+              <li>Power law y = A xⁿ → log y = log A + n log x (slope = n).</li>
+              <li>Exponential y = A e^{kx} → ln y = ln A + kx.</li>
+              <li>Error bars: show ±u (or ±1σ). Use weighted least squares if σ varies: weights wᵢ = 1/σᵢ².</li>
+              <li>Goodness-of-fit: χ² = Σ wᵢ (yᵢ − ŷᵢ)²; reduced χ² ≈ 1 indicates consistent uncertainties.</li>
+              <li>Residuals: check for trends (model misspecification) and non-constant variance.</li>
+            </ul>
+            <div className={styles.exampleBox}>
+              <h4>Example: Weighted Linear Fit</h4>
+              <p>Fit y = a + bx with weights wᵢ. b = [S_w S_xy − S_x S_y]/[S_w S_xx − S_x²], where S_x = Σ wᵢ xᵢ, etc.</p>
+            </div>
           </div>
 
-          <div id="prefixes-notation" className={styles.section}>
-            <h2>SI Prefixes, Scientific Notation & Orders of Magnitude</h2>
-            <p>
-              Use scientific notation to avoid errors and show orders of magnitude. SI prefixes help present numbers cleanly.
-            </p>
+          <div id="fermi" className={styles.section}>
+            <h2>17. Fermi Estimates & Orders of Magnitude</h2>
+            <p>Break problems into factors, estimate each, and multiply. Use order-of-magnitude thinking to bound answers and sanity-check results.</p>
+            <div className={styles.exampleBox}>
+              <h4>Example: Air Molecules in a Room</h4>
+              <p>Room 5×4×3 m → V≈60 m³; at STP n≈(P V)/(R T) ≈ (10⁵·60)/(8.3·300) ≈ 2.4×10³ mol → ~1.4×10²⁷ molecules.</p>
+            </div>
+          </div>
+
+          <div id="conversions" className={styles.section}>
+            <h2>18. Unit Conversions & Non-SI Units</h2>
+            <ul>
+              <li>Time: min = 60 s; h = 3600 s; day = 86400 s.</li>
+              <li>Length: 1 in = 2.54 cm (exact); 1 Å = 10⁻¹⁰ m.</li>
+              <li>Volume: 1 L = 10⁻³ m³; 1 mL = 1 cm³.</li>
+              <li>Pressure: 1 bar = 10⁵ Pa; 1 atm = 101325 Pa; 1 torr ≈ 133.322 Pa.</li>
+              <li>Energy: 1 eV = 1.602176634×10⁻¹⁹ J (exact); 1 cal ≈ 4.184 J.</li>
+              <li>Angles: degree: 180° = π rad.</li>
+            </ul>
+            <div className={styles.highlightBox}>
+              <h4>Tip</h4>
+              <p>Convert all inputs to base SI before computing. Keep guard digits; round at the end.</p>
+            </div>
+          </div>
+
+          <div id="constants" className={styles.section}>
+            <h2>19. Fundamental Constants (Exact & Measured)</h2>
             <div className={styles.tableWrapper}>
               <table>
-                <thead><tr><th>Prefix</th><th>Symbol</th><th>Factor</th></tr></thead>
+                <thead>
+                  <tr><th>Constant</th><th>Symbol</th><th>Value</th><th>Note</th></tr>
+                </thead>
                 <tbody>
-                  <tr><td>pico</td><td>p</td><td>10⁻¹²</td></tr>
-                  <tr><td>nano</td><td>n</td><td>10⁻⁹</td></tr>
-                  <tr><td>micro</td><td>μ</td><td>10⁻⁶</td></tr>
-                  <tr><td>milli</td><td>m</td><td>10⁻³</td></tr>
-                  <tr><td>centi</td><td>c</td><td>10⁻²</td></tr>
-                  <tr><td>kilo</td><td>k</td><td>10³</td></tr>
-                  <tr><td>mega</td><td>M</td><td>10⁶</td></tr>
-                  <tr><td>giga</td><td>G</td><td>10⁹</td></tr>
-                  <tr><td>tera</td><td>T</td><td>10¹²</td></tr>
+                  <tr><td>Speed of light</td><td>c</td><td>299,792,458 m·s⁻¹</td><td>exact</td></tr>
+                  <tr><td>Planck constant</td><td>h</td><td>6.62607015×10⁻³⁴ J·s</td><td>exact</td></tr>
+                  <tr><td>Elementary charge</td><td>e</td><td>1.602176634×10⁻¹⁹ C</td><td>exact</td></tr>
+                  <tr><td>Boltzmann constant</td><td>k_B</td><td>1.380649×10⁻²³ J·K⁻¹</td><td>exact</td></tr>
+                  <tr><td>Avogadro constant</td><td>N_A</td><td>6.02214076×10²³ mol⁻¹</td><td>exact</td></tr>
+                  <tr><td>Magnetic constant</td><td>μ₀</td><td>4π×10⁻⁷ N·A⁻²</td><td>defined value</td></tr>
+                  <tr><td>Grav. constant</td><td>G</td><td>≈ 6.674×10⁻¹¹ m³·kg⁻¹·s⁻²</td><td>measured</td></tr>
                 </tbody>
               </table>
             </div>
-
-            <h3>Orders of Magnitude</h3>
-            <p>
-              Quickly compare scales: electron radius ~10⁻¹⁵ m, atom ~10⁻¹⁰ m, human ~1 m, earth ~10⁷ m. Estimation skills (Fermi problems) are invaluable in multiple-choice exams to reject options.
-            </p>
           </div>
 
           <div id="greek-alphabet" className={styles.section}>
-            <h2>Greek Alphabet — Uppercase & Lowercase (Reference)</h2>
-            <p>Commonly used Greek letters in physics with typical meanings:</p>
+            <h2>20. Greek Alphabet Reference</h2>
+            <p>Common uppercase/lowercase symbols with typical uses.</p>
             <div className={styles.tableWrapper}>
               <table>
-                <thead><tr><th>Name</th><th>Uppercase</th><th>Lowercase</th><th>Common Uses</th></tr></thead>
+                <thead>
+                  <tr><th>Name</th><th>Uppercase</th><th>Lowercase</th><th>Common Uses</th></tr>
+                </thead>
                 <tbody>
-                  <tr><td>Alpha</td><td>Α</td><td>α</td><td>Angular acceleration, fine-structure constant</td></tr>
-                  <tr><td>Beta</td><td>Β</td><td>β</td><td>Coefficient or velocity/c, beta decay</td></tr>
-                  <tr><td>Gamma</td><td>Γ</td><td>γ</td><td>Lorentz factor γ, photon</td></tr>
-                  <tr><td>Delta</td><td>Δ</td><td>δ</td><td>Finite change Δ, small change δ</td></tr>
-                  <tr><td>Epsilon</td><td>Ε</td><td>ε</td><td>Permittivity, strain</td></tr>
-                  <tr><td>Zeta</td><td>Ζ</td><td>ζ</td><td>Damping ratio</td></tr>
-                  <tr><td>Eta</td><td>Η</td><td>η</td><td>Efficiency η, viscosity</td></tr>
-                  <tr><td>Theta</td><td>Θ</td><td>θ</td><td>Angles, potential temperature</td></tr>
-                  <tr><td>Lambda</td><td>Λ</td><td>λ</td><td>Wavelength λ, eigenvalues</td></tr>
-                  <tr><td>Mu</td><td>Μ</td><td>μ</td><td>Coefficient of friction, permeability, micro-</td></tr>
-                  <tr><td>Nu</td><td>Ν</td><td>ν</td><td>Frequency ν, kinematic viscosity</td></tr>
-                  <tr><td>Pi</td><td>Π</td><td>π</td><td>Ratio of circle circumference, product operator</td></tr>
-                  <tr><td>Rho</td><td>Ρ</td><td>ρ</td><td>Density, resistivity</td></tr>
-                  <tr><td>Sigma</td><td>&Sigma;</td><td>σ</td><td>Sum operator &Sigma;, standard deviation σ, stress</td></tr>
-                  <tr><td>Tau</td><td>Τ</td><td>τ</td><td>Torque, time constant</td></tr>
-                  <tr><td>Phi</td><td>Φ</td><td>φ</td><td>Magnetic flux, angle, potential</td></tr>
-                  <tr><td>Chi</td><td>Χ</td><td>χ</td><td>Susceptibility</td></tr>
+                  <tr><td>Alpha</td><td>Α</td><td>α</td><td>Angular acceleration, fine-structure constant, coefficients</td></tr>
+                  <tr><td>Beta</td><td>Β</td><td>β</td><td>Beta decay, velocity ratio v/c, coefficients</td></tr>
+                  <tr><td>Gamma</td><td>Γ</td><td>γ</td><td>Lorentz factor γ, surface tension, photons</td></tr>
+                  <tr><td>Delta</td><td>Δ</td><td>δ</td><td>Finite change (Δ), small variation/error (δ)</td></tr>
+                  <tr><td>Epsilon</td><td>Ε</td><td>ε</td><td>Permittivity ε, strain ε, small quantity</td></tr>
+                  <tr><td>Zeta</td><td>Ζ</td><td>ζ</td><td>Damping ratio ζ</td></tr>
+                  <tr><td>Eta</td><td>Η</td><td>η</td><td>Efficiency η, dynamic viscosity η</td></tr>
+                  <tr><td>Theta</td><td>Θ</td><td>θ</td><td>Angles, absolute temperature (Θ in some contexts)</td></tr>
+                  <tr><td>Lambda</td><td>Λ</td><td>λ</td><td>Wavelength λ, cosmological constant Λ</td></tr>
+                  <tr><td>Mu</td><td>Μ</td><td>μ</td><td>Friction μ, permeability μ, micro- prefix</td></tr>
+                  <tr><td>Nu</td><td>Ν</td><td>ν</td><td>Frequency ν, kinematic viscosity ν</td></tr>
+                  <tr><td>Xi</td><td>Ξ</td><td>ξ</td><td>Random variable, displacement, damping</td></tr>
+                  <tr><td>Omicron</td><td>Ο</td><td>ο</td><td>Rare in physics notation</td></tr>
+                  <tr><td>Pi</td><td>Π</td><td>π</td><td>3.14159…, Π theorem, osmotic pressure</td></tr>
+                  <tr><td>Rho</td><td>Ρ</td><td>ρ</td><td>Density ρ, charge density</td></tr>
+                  <tr><td>Sigma</td><td>Σ</td><td>σ</td><td>Sum Σ, stress σ, cross-section σ</td></tr>
+                  <tr><td>Tau</td><td>Τ</td><td>τ</td><td>Torque τ, time constant τ</td></tr>
+                  <tr><td>Upsilon</td><td>Υ</td><td>υ</td><td>Upsilon particle, velocity (rarely)</td></tr>
+                  <tr><td>Phi</td><td>Φ</td><td>φ</td><td>Magnetic flux Φ, potential φ, angles</td></tr>
+                  <tr><td>Chi</td><td>Χ</td><td>χ</td><td>Susceptibility χ, chi-squared χ²</td></tr>
                   <tr><td>Psi</td><td>Ψ</td><td>ψ</td><td>Wavefunction ψ</td></tr>
-                  <tr><td>Omega</td><td>Ω</td><td>ω</td><td>Ohm (Ω), angular frequency ω</td></tr>
+                  <tr><td>Omega</td><td>Ω</td><td>ω</td><td>Ohm Ω, angular frequency ω</td></tr>
                 </tbody>
               </table>
             </div>
-            <p className={styles.smallNote}>Tip: Learn the visual shapes and common uses — it speeds up reading problems during exams.</p>
           </div>
 
-          <div id="exam-tips" className={styles.section}>
-            <h2>Exam Techniques & Topic-Specific Tips</h2>
+          <div id="checklist" className={styles.section}>
+            <h2>21. Problem-Solving Checklist</h2>
             <ul>
-              <li><strong>Dimension Check:</strong> Before calculation, check dimensional homogeneity to catch algebraic mistakes quickly.</li>
-              <li><strong>Guard Digits:</strong> Keep 2-3 extra significant digits during intermediate steps; round only at the end.</li>
-              <li><strong>Units Consistency:</strong> Convert everything to SI base units before plugging into formulas.</li>
-              <li><strong>Estimate First:</strong> Use Fermi estimation to eliminate wildly wrong multiple-choice options.</li>
-              <li><strong>Answer Format:</strong> For JEE/Advanced, present numeric answers with appropriate precision; for olympiads, justify scaling arguments and limiting cases.</li>
+              <li>Define the physical quantities and choose consistent SI units.</li>
+              <li>Check dimensional homogeneity of equations.</li>
+              <li>Identify assumptions and limiting cases (small-angle, steady state, etc.).</li>
+              <li>Estimate orders of magnitude to sanity-check the answer.</li>
+              <li>Quantify uncertainty; propagate and report with appropriate sig figs.</li>
+              <li>Graph data with error bars; use weighted fits when needed; inspect residuals.</li>
             </ul>
-
-            <h3>Topic-Specific Notes</h3>
-            <p>
-              For pendulum and oscillation problems be careful with small-angle approximations (sin θ ≈ θ only if θ ≪ 1 rad). For fluid mechanics dimensional problems, remember Reynolds number and typical drag scaling. For energy/power problems check units of power (kg·m²·s⁻³).
-            </p>
           </div>
 
           <div id="practice" className={styles.section}>
-            <h2>Practice Problems & Solutions</h2>
+            <h2>Practice Problems</h2>
 
-            <h3>Conceptual (Short)</h3>
+            <h3>A) Conceptual</h3>
+            <ol>
+              <li>Why must the argument of a sine function be dimensionless? Give two physical examples.</li>
+              <li>Explain the difference between accuracy and precision with an instrument example.</li>
+              <li>Describe Type A vs. Type B uncertainty with one example of each.</li>
+              <li>What information does a reduced χ² ≫ 1 convey about your model/uncertainties?</li>
+            </ol>
+
+            <h3>B) Numerical</h3>
             <ol>
               <li>
-                <strong>Question:</strong> If a scale has a systematic offset of +0.2 kg, and repeated measurements have a random standard deviation of 0.05 kg, what is the combined uncertainty? <br/>
-                <strong>Solution:</strong> Combine in quadrature: √(0.2² + 0.05²) ≈ √(0.04 + 0.0025) ≈ √0.0425 ≈ 0.206 kg. Report measurement as x ± 0.21 kg (rounded).
+                A length is measured as 12.34 ± 0.02 cm and time as 2.0 ± 0.1 s. Compute speed and its uncertainty.
+                Show significant-figure reasoning and final rounding.
               </li>
-
               <li>
-                <strong>Question:</strong> You measure length l with a vernier caliper (LC = 0.1 mm) three times: 10.10, 10.12, 10.11 cm. What is the best way to report the result? <br/>
-                <strong>Solution:</strong> Mean = 10.11 cm. Random sd ≈ 0.01 cm, LC/2 = 0.005 cm. Combine uncertainty ≈ √(0.01² + 0.005²) ≈ 0.011 cm. Report l = 10.11 ± 0.01 cm.
+                A sphere’s diameter D = (2.000 ± 0.005) cm and mass m = (33.51 ± 0.03) g. Compute density with uncertainty.
+              </li>
+              <li>
+                Output voltage V depends linearly on temperature T. Data have unequal standard deviations. Perform a weighted fit and estimate the slope with uncertainty.
               </li>
             </ol>
 
-            <h3>Numerical (Longer)</h3>
-            <ol start={3}>
+            <h3>C) Challenge</h3>
+            <ol>
               <li>
-                <strong>Problem — Density with Propagation:</strong> A cube's mass m = (100.0 ± 0.5) g, side L = (10.00 ± 0.02) cm. Find density ρ and its uncertainty.
-                <br/>
-                <strong>Solution:</strong> ρ = m/L³. Convert units: m = 0.1000 ± 0.0005 kg, L = 0.1000 ± 0.0002 m. Relative uncertainty: Δρ/ρ = Δm/m + 3(ΔL/L) = 0.005/0.1000 + 3(0.0002/0.1000) = 0.005 + 3(0.002) = 0.005 + 0.006 = 0.011. ρ = (0.1000)/(0.001000) = 100 kg/m³. Δρ = 100 × 0.011 = 1.1 kg/m³. Report: ρ = (100 ± 1.1) kg/m³.
+                A pendulum’s period T depends on length l, gravity g, and amplitude θ₀. Use Π theorem to propose a functional form and discuss limits θ₀→0, θ₀→π/2.
               </li>
-
               <li>
-                <strong>Problem — Buckingham Pi (Simple):</strong> Drag force F depends on velocity v, density ρ, viscosity η, and characteristic length L. Identify the π-groups.
-                <br/>
-                <strong>Solution:</strong> Choose ρ, v, L for repeating variables. Dimensionless groups: Re = ρvL/η and C_d = F/(ρ v² L²). So F = ρ v² L² × f(Re).
+                For y = A xⁿ e^{kx}, derive the Jacobian-based propagation of uncertainty for y given u(A), u(n), u(k), u(x) and correlations ρ.
               </li>
             </ol>
 
-            <h3>Olympiad-Level Question</h3>
-            <p>
-              <strong>Problem:</strong> A simple pendulum of length l oscillates with amplitude θ_0 (small but finite). Show to first nonlinear correction that the period depends weakly on amplitude: T(θ_0) ≈ 2π√(l/g) [1 + (1/16) θ_0² + ...]. (Sketch idea: expand integral expression for period).
-              <br/>
-              <strong>Sketch of Solution:</strong> The exact expression for period is T = 4√(l/g) ∫_0^{π/2} (1 − k² sin²φ)^(−1/2) dφ where k = sin(θ_0/2). Expand elliptic integral for small k: T ≈ 2π√(l/g) [1 + (1/16) θ_0² + ...]. This derivation uses series expansion of complete elliptic integrals; knowing the leading correction is often sufficient for olympiad answers.
-            </p>
-
-            <div className={styles.practiceFooter}>
-              <p>Additional practice sets (MCQ, full-length timed quizzes, and interactive graph-fitting) are available through linked practice pages.</p>
-              <Link href="/mechanics/measurements/conceptual" className={styles.button}>Conceptual Questions</Link>
-              <Link href="/mechanics/measurements/numerical" className={styles.button}>Numerical Problems</Link>
-              <Link href="/mechanics/measurements/mcq" className={styles.button}>Assessment Quiz</Link>
+            <div className={styles.highlightBox}>
+              <h4>Answer Sketches</h4>
+              <ul>
+                <li>Dimless arguments: θ in sin θ; kx in e^{kx}. Example: simple harmonic motion, wave phase kx−ωt.</li>
+                <li>Accuracy vs precision: a miscalibrated scale can be precise but inaccurate.</li>
+                <li>Type A: repeat readings; Type B: spec sheet resolution, calibration certificate.</li>
+                <li>χ²_red ≫ 1: under-estimated uncertainties or wrong model; χ²_red ≪ 1: over-estimated uncertainties.</li>
+              </ul>
             </div>
-          </div>
 
-          <div id="references" className={styles.section}>
-            <h2>Further Reading & References</h2>
-            <ul>
-              <li>JCGM 100:2008 (GUM) — Guide to the Expression of Uncertainty in Measurement.</li>
-              <li>SI Brochure (BIPM) — current definition of SI units.</li>
-              <li>Any thorough undergraduate physics lab manual (for practical calibration & instrument details).</li>
-            </ul>
-            <p className={styles.smallNote}>If you'd like, I can convert this chapter into a printable PDF, split it into smaller lesson pages, or add interactive problems with auto-grading. Tell me which you prefer.</p>
+            <div className={styles.practiceGrid}>
+              <Link href="/mechanics/measurements/conceptual" className={styles.practiceCard}>
+                <div className={styles.icon}>🤔</div>
+                <h3>Conceptual Set</h3>
+                <p>Deepen understanding of core principles with qualitative reasoning.</p>
+              </Link>
+              <Link href="/mechanics/measurements/numerical" className={styles.practiceCard}>
+                <div className={styles.icon}>🧮</div>
+                <h3>Numerical Set</h3>
+                <p>Sharpen calculations, conversions, and uncertainty propagation.</p>
+              </Link>
+              <Link href="/mechanics/measurements/mcq" className={styles.practiceCard}>
+                <div className={styles.icon}>📊</div>
+                <h3>Assessment Quiz</h3>
+                <p>Timed mixed-topic questions to test mastery.</p>
+              </Link>
+            </div>
           </div>
 
         </div>
       </main>
-
-      <section className={styles.practiceSection}>
-        <div className="container">
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Want More — Tailored for Your Exam?</h2>
-            <p className={styles.sectionSubtitle}>I can add: topic-wise past JEE/IOE/CEE questions, timed tests, or printable notes.</p>
-            <div className={styles.ctaRow}>
-              <Link href="/contact" className={styles.ctaButton}>Request Custom Problem Set</Link>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <Footer />
     </>
