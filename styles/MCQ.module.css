@@ -265,15 +265,6 @@
     margin-bottom: 0.6rem;
 }
 
-/* Ensure question stays visible without scrolling by clamping lines */
-.questionContent {
-    /* --q-lines: 4; */
-    /* display: -webkit-box; */
-    /* -webkit-line-clamp: var(--q-lines); */
-    /* line-clamp: var(--q-lines); */
-    /* -webkit-box-orient: vertical; */
-    /* overflow: hidden; */
-}
 
 .optionsList {
     list-style: none;
