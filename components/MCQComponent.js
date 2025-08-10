@@ -4,17 +4,17 @@ import Link from 'next/link';
 import styles from '../styles/MCQ.module.css';
 import useMathJax from '../hooks/useMathJax';
 
-export default function MCQComponent({ 
-  questions = [], 
+export default function MCQComponent({
+  questions = [],
   timeLimit = 900, // 15 minutes default
   showReview = true,
-  onQuizComplete = null 
+  onQuizComplete = null
 }) {
   // New state for quiz selection
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [numQuestions, setNumQuestions] = useState(25);
   const [allQuestions] = useState(questions); // Store original questions
-  
+
   // Quiz State
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
@@ -23,39 +23,31 @@ export default function MCQComponent({
   const [showInstructions, setShowInstructions] = useState(true);
   const [timeLeft, setTimeLeft] = useState(timeLimit);
   const [customTimeLimit, setCustomTimeLimit] = useState(15); // Default 15 minutes
-  
+
   useMathJax([selectedQuestions, currentQuestionIndex, isFinished]);
-  
-  // Initialize arrays when quiz starts
-  useEffect(() => {
-    if (selectedQuestions.length > 0) {
-      setUserAnswers(new Array(selectedQuestions.length).fill(null));
-      setQuestionStatus(new Array(selectedQuestions.length).fill('not-visited'));
-    }
-  }, [selectedQuestions]);
-  
+
   // Shuffle and select random questions
   const selectRandomQuestions = (allQuestions, count) => {
     const shuffled = [...allQuestions].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, Math.min(count, allQuestions.length));
   };
-  
+
   // Format time for display (HH:MM:SS)
   const formatTime = (seconds) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
-    
+
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
-  
+
   // Submit the test and calculate results
   const submitTest = useCallback(() => {
     let score = 0;
     let correct = 0;
     let incorrect = 0;
     let unanswered = 0;
-    
+
     selectedQuestions.forEach((q, index) => {
       if (userAnswers[index] === null) {
         unanswered++;
@@ -67,9 +59,9 @@ export default function MCQComponent({
         incorrect++;
       }
     });
-    
+
     setIsFinished(true);
-    
+
     if (onQuizComplete) {
       onQuizComplete({
         score,
@@ -82,29 +74,32 @@ export default function MCQComponent({
     }
   }, [selectedQuestions, userAnswers, onQuizComplete]);
 
-  // Start the quiz with custom time limit
-  const startQuiz = () => {
-    const duration = parseInt(customTimeLimit, 10);
-    if (isNaN(duration) || duration <= 0) {
-      alert("Please enter a valid time in minutes.");
-      return;
-    }
-    
-    // Select random questions based on user choice
-    const randomQuestions = selectRandomQuestions(allQuestions, numQuestions);
-    setSelectedQuestions(randomQuestions);
-    
-    setShowInstructions(false);
-    setTimeLeft(duration * 60);
-    setCurrentQuestionIndex(0);
-    
-    // Will be set by useEffect when selectedQuestions updates
-  };
-  
+    // Start the quiz with custom time limit
+    const startQuiz = () => {
+        const duration = parseInt(customTimeLimit, 10);
+        if (isNaN(duration) || duration <= 0) {
+            alert("Please enter a valid time in minutes.");
+            return;
+        }
+
+        const randomQuestions = selectRandomQuestions(allQuestions, numQuestions);
+        setSelectedQuestions(randomQuestions);
+        setShowInstructions(false);
+        setTimeLeft(duration * 60);
+        setCurrentQuestionIndex(0);
+        setUserAnswers(new Array(randomQuestions.length).fill(null));
+        const initialStatus = new Array(randomQuestions.length).fill('not-visited');
+        if (initialStatus.length > 0) {
+            initialStatus[0] = 'current';
+        }
+        setQuestionStatus(initialStatus);
+    };
+
+
   // Timer effect
   useEffect(() => {
     if (showInstructions || isFinished || selectedQuestions.length === 0) return;
-    
+
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
         if (prevTime <= 1) {
@@ -115,20 +110,20 @@ export default function MCQComponent({
         return prevTime - 1;
       });
     }, 1000);
-    
+
     return () => clearInterval(timer);
   }, [showInstructions, isFinished, selectedQuestions.length, submitTest]);
-  
+
   // Handle option selection
   const handleAnswerSelect = (option) => {
     const newAnswers = [...userAnswers];
     newAnswers[currentQuestionIndex] = option;
     setUserAnswers(newAnswers);
-    
+
     // Update status based on current state
     const newStatus = [...questionStatus];
     const currentState = questionStatus[currentQuestionIndex];
-    
+
     if (currentState === 'review') {
       // If marked for review, make it answered-review
       newStatus[currentQuestionIndex] = 'answered-review';
@@ -139,50 +134,46 @@ export default function MCQComponent({
       // Normal answered state
       newStatus[currentQuestionIndex] = 'answered';
     }
-    
+
     setQuestionStatus(newStatus);
   };
-  
+
+  const updateQuestionStatusOnNavigate = (newIndex) => {
+    const newStatus = [...questionStatus];
+    if (newStatus[currentQuestionIndex] === 'current') {
+        newStatus[currentQuestionIndex] = 'not-visited';
+    }
+    newStatus[newIndex] = 'current';
+    setQuestionStatus(newStatus);
+};
+
+
   // Handle next question
   const handleNext = () => {
-    if (currentQuestionIndex === selectedQuestions.length - 1) {
-      if (confirm('Are you sure you want to submit the test?')) {
-        submitTest();
-      }
+    if (currentQuestionIndex < selectedQuestions.length - 1) {
+        updateQuestionStatusOnNavigate(currentQuestionIndex + 1);
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      // Update current question marker
-      const newStatus = [...questionStatus];
-      if (newStatus[currentQuestionIndex] === 'current') {
-        newStatus[currentQuestionIndex] = 'not-visited';
-      }
-      newStatus[currentQuestionIndex + 1] = 'current';
-      setQuestionStatus(newStatus);
-      
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
+        if (confirm('Are you sure you want to submit the test?')) {
+            submitTest();
+        }
     }
-  };
-  
+};
+
   // Handle previous question
   const handlePrev = () => {
     if (currentQuestionIndex > 0) {
-      // Update current question marker
-      const newStatus = [...questionStatus];
-      if (newStatus[currentQuestionIndex] === 'current') {
-        newStatus[currentQuestionIndex] = 'not-visited';
-      }
-      newStatus[currentQuestionIndex - 1] = 'current';
-      setQuestionStatus(newStatus);
-      
-      setCurrentQuestionIndex(currentQuestionIndex - 1);
+        updateQuestionStatusOnNavigate(currentQuestionIndex - 1);
+        setCurrentQuestionIndex(currentQuestionIndex - 1);
     }
-  };
-  
-  // Handle mark for review - FIXED: Don't move to next question
+};
+
+  // Handle mark for review
   const handleMarkReview = () => {
     const currentStatus = questionStatus[currentQuestionIndex];
     const newStatus = [...questionStatus];
     const hasAnswer = userAnswers[currentQuestionIndex] !== null;
-    
+
     if (currentStatus === 'review' || currentStatus === 'answered-review') {
       // Unmark for review
       newStatus[currentQuestionIndex] = hasAnswer ? 'answered' : 'not-visited';
@@ -190,24 +181,18 @@ export default function MCQComponent({
       // Mark for review
       newStatus[currentQuestionIndex] = hasAnswer ? 'answered-review' : 'review';
     }
-    
+
     setQuestionStatus(newStatus);
-    // Removed the automatic move to next question
   };
-  
+
   // Jump to a specific question from the palette
   const jumpToQuestion = (index) => {
-    // Update current question marker
-    const newStatus = [...questionStatus];
-    if (newStatus[currentQuestionIndex] === 'current') {
-      newStatus[currentQuestionIndex] = 'not-visited';
+    if (index !== currentQuestionIndex) {
+        updateQuestionStatusOnNavigate(index);
+        setCurrentQuestionIndex(index);
     }
-    newStatus[index] = 'current';
-    setQuestionStatus(newStatus);
-    
-    setCurrentQuestionIndex(index);
-  };
-  
+};
+
   // Reset the quiz to start again
   const resetQuiz = () => {
     setCurrentQuestionIndex(0);
@@ -218,7 +203,7 @@ export default function MCQComponent({
     setShowInstructions(true);
     setTimeLeft(timeLimit);
   };
-  
+
   // Calculate score percentage and grade
   const getScorePercentage = () => {
     let score = 0;
@@ -227,9 +212,9 @@ export default function MCQComponent({
       else if (userAnswers[index] !== null) score -= 1;
     });
     const maxScore = selectedQuestions.length * 4;
-    return Math.round((score / maxScore) * 100);
+    return maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
   };
-  
+
   const getScoreGrade = () => {
     const percentage = getScorePercentage();
     if (percentage >= 90) return 'Excellent';
@@ -238,7 +223,7 @@ export default function MCQComponent({
     if (percentage >= 60) return 'Below Average';
     return 'Poor';
   };
-  
+
   // Error state
   if (!questions || questions.length === 0) {
     return (
@@ -248,11 +233,11 @@ export default function MCQComponent({
       </div>
     );
   }
-  
+
   // Instructions screen
   if (showInstructions) {
     return (
-      <div className={styles.instructionsContainer} id="instructions-container">
+        <div className={styles.instructionsContainer} id="instructions-container">
         <h2>Measurement and Units Assessment Quiz</h2>
         <p>This quiz will test your understanding of physical quantities, units, dimensions and measurement techniques.</p>
         
@@ -303,14 +288,14 @@ export default function MCQComponent({
       </div>
     );
   }
-  
+
   // Results screen
   if (isFinished) {
     let score = 0;
     let correct = 0;
     let incorrect = 0;
     let unanswered = 0;
-    
+
     selectedQuestions.forEach((q, index) => {
       if (userAnswers[index] === null) {
         unanswered++;
@@ -322,13 +307,13 @@ export default function MCQComponent({
         incorrect++;
       }
     });
-    
+
     const percentage = getScorePercentage();
     const grade = getScoreGrade();
     const maxScore = selectedQuestions.length * 4;
-    
+
     return (
-      <div className={styles.resultsContainer} id="results-container">
+        <div className={styles.resultsContainer} id="results-container">
         <div className={styles.resultsSummary} id="results-summary">
           <div className={styles.celebrationHeader}>
             <h2>Quiz Completed! 🎉</h2>
@@ -366,7 +351,7 @@ export default function MCQComponent({
             </div>
             <div className={styles.metricCard}>
               <div className={styles.metricIcon}>📊</div>
-              <div className={styles.metricValue}>{Math.round((correct/selectedQuestions.length)*100)}%</div>
+              <div className={styles.metricValue}>{selectedQuestions.length > 0 ? Math.round((correct/selectedQuestions.length)*100) : 0}%</div>
               <div className={styles.metricLabel}>Accuracy</div>
             </div>
           </div>
@@ -378,7 +363,6 @@ export default function MCQComponent({
           </div>
         </div>
 
-        {/* Only show detailed review for poor performance */}
         {showReview && percentage < 70 && (
           <div className={styles.detailedResults} id="detailed-results">
             <div className={styles.analysisHeader}>
@@ -395,8 +379,7 @@ export default function MCQComponent({
                 const userAnswer = userAnswers[index];
                 const isCorrect = userAnswer === question.answer;
                 const isUnanswered = userAnswer === null;
-                
-                // Only show incorrect or unanswered questions in detailed analysis
+
                 if (isUnanswered || !isCorrect) {
                   return (
                     <div key={index} className={styles.reviewItem}>
@@ -449,7 +432,6 @@ export default function MCQComponent({
           </div>
         )}
 
-        {/* Smart Navigation Section - Always show after quiz completion */}
         <div className={styles.smartNavigation}>
           <div className={styles.navigationHeader}>
             <h3>🎯 What's Next?</h3>
@@ -465,7 +447,6 @@ export default function MCQComponent({
           
           <div className={styles.navigationCards}>
             {percentage < 70 ? (
-              // Poor performance - recommend practice (Easy → Medium → Hard progression)
               <>
                 <Link href="/mechanics/measurements/numerical" className={styles.navCard}>
                   <div className={styles.navIcon}>🧮</div>
@@ -480,7 +461,6 @@ export default function MCQComponent({
                 </Link>
               </>
             ) : (
-              // Good performance - move to next chapter
               <>
                 <Link href="/mechanics/foundations" className={styles.navCard}>
                   <div className={styles.navIcon}>🚀</div>
@@ -506,10 +486,16 @@ export default function MCQComponent({
       </div>
     );
   }
-  
+
   // Quiz interface
   const currentQuestion = selectedQuestions[currentQuestionIndex];
   const progress = selectedQuestions.length > 0 ? ((currentQuestionIndex + 1) / selectedQuestions.length) * 100 : 0;
+
+  if (!currentQuestion) {
+    // This can happen briefly before the state is fully updated.
+    // Or if the questions array is empty.
+    return <div>Loading questions...</div>;
+  }
   
   return (
     <div className={styles.testContainer}>
@@ -598,15 +584,7 @@ export default function MCQComponent({
           <button 
             type="button" 
             id="next-btn"
-            onClick={() => {
-              if (currentQuestionIndex < selectedQuestions.length - 1) {
-                handleNext();
-              } else {
-                if (confirm('Are you sure you want to submit the test?')) {
-                  submitTest();
-                }
-              }
-            }}
+            onClick={handleNext}
             className={styles.nextButton}
           >
             {currentQuestionIndex < selectedQuestions.length - 1 ? 'Save & Next' : 'Submit Test'}
@@ -622,20 +600,14 @@ export default function MCQComponent({
             
             if (index === currentQuestionIndex) {
               buttonClasses += ` ${styles.current}`;
-            }
-            
-            if (questionStatus[index] === 'answered') {
+            } else if (questionStatus[index] === 'answered') {
               buttonClasses += ` ${styles.answered}`;
-            }
-            
-            if (questionStatus[index] === 'review') {
+            } else if (questionStatus[index] === 'review') {
               buttonClasses += ` ${styles.review}`;
+            } else if (questionStatus[index] === 'answered-review') {
+                buttonClasses += ` ${styles.answered} ${styles.review}`;
             }
-            
-            if (questionStatus[index] === 'answered-review') {
-              buttonClasses += ` ${styles.answered} ${styles.review}`;
-            }
-            
+
             return (
               <button 
                 key={index}
