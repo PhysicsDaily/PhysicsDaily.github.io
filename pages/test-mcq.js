@@ -1,8 +1,18 @@
 import Head from 'next/head';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import MCQComponent from '../components/MCQComponent';
+import path from 'path';
+import fs from 'fs';
 
-export default function TestMCQPage() {
+export async function getStaticProps() {
+  const filePath = path.join(process.cwd(), 'public', 'data', 'measurement-mcq.json');
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+  const questions = JSON.parse(fileContents);
+  return { props: { questions } };
+}
+
+export default function TestMCQPage({ questions }) {
   return (
     <div>
       <Head>
@@ -12,9 +22,9 @@ export default function TestMCQPage() {
 
       <Header />
 
-      <main style={{ padding: '2rem', textAlign: 'center' }}>
-        <h1>Test MCQ Page</h1>
-        <p>This is a test page for MCQ functionality.</p>
+      <main style={{ padding: '2rem', maxWidth: 900, margin: '0 auto' }}>
+        <h1 style={{ textAlign: 'center', marginBottom: '2rem' }}>Test MCQ Quiz</h1>
+        <MCQComponent questions={questions} timeLimit={900} />
       </main>
 
       <Footer />
