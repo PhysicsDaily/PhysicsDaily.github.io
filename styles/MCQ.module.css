@@ -67,8 +67,9 @@
     max-width: 700px;
     margin: 0.5rem auto;
     box-shadow: var(--shadow-sm, 0 1px 3px rgba(0,0,0,0.1));
-    max-height: calc(100vh - 200px);
-    overflow-y: auto;
+    /* No internal scroll on instructions */
+    max-height: none;
+    overflow: visible;
 }
 
 .instructionsContainer h2 {
@@ -147,9 +148,11 @@
 .contentScroll {
     flex: 1 1 auto;
     min-height: 0;
-    overflow: auto;
+    /* Remove internal scroll: content must fit within viewport */
+    overflow: visible;
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
 }
 
 .quizHeader {
@@ -258,14 +261,24 @@
 
 .questionContent p {
     font-size: 0.9rem;
-    line-height: 1.35;
+    line-height: 1.3;
     margin-bottom: 0.6rem;
+}
+
+/* Ensure question stays visible without scrolling by clamping lines */
+.questionContent {
+    /* --q-lines: 4; */
+    /* display: -webkit-box; */
+    /* -webkit-line-clamp: var(--q-lines); */
+    /* line-clamp: var(--q-lines); */
+    /* -webkit-box-orient: vertical; */
+    /* overflow: hidden; */
 }
 
 .optionsList {
     list-style: none;
     padding: 0;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.4rem;
 }
 
 .optionItem {
@@ -275,7 +288,7 @@
 .optionItem label {
     display: flex;
     align-items: center;
-    padding: 0.75rem;
+    padding: 0.6rem 0.65rem;
     background-color: var(--bg-secondary, #f9fafb);
     border: 1px solid var(--border-color, #e5e7eb);
     border-radius: 8px;
@@ -290,7 +303,7 @@
 }
 
 .optionItem input[type="radio"] {
-    margin-right: 0.75rem;
+    margin-right: 0.6rem;
     transform: scale(1.0);
     cursor: pointer;
 }
@@ -300,15 +313,24 @@
     color: var(--primary-color, #3b82f6);
 }
 
+/* Clamp option text to two lines to avoid overflow */
+.optionItem label span {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
 .quizNavigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 0.5rem;
-    padding-top: 0.75rem;
+    margin-top: 0.4rem;
+    padding-top: 0.6rem;
     border-top: 1px solid var(--border-color, #e5e7eb);
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 0.6rem;
     position: sticky;
     bottom: 0;
     background: var(--card-bg, white);
@@ -1037,12 +1059,12 @@
         grid-template-columns: 1fr;
         gap: 0.5rem;
         margin: 0.25rem;
-        height: calc(100vh - 120px);
+    height: calc(100dvh - 120px);
     }
     
     .testMain {
-        padding: 0.8rem;
-        height: calc(100vh - 140px);
+    padding: 0.7rem;
+    height: calc(100dvh - 140px);
     }
     
     .testSidebar {
@@ -1092,18 +1114,20 @@
     }
     
     .questionContent p {
-        font-size: 0.85rem;
-        line-height: 1.3;
+        font-size: 0.84rem;
+        line-height: 1.25;
         margin-bottom: 0.6rem;
     }
+
+    .questionContent { --q-lines: 5; }
     
     .optionItem {
         margin-bottom: 0.4rem;
     }
     
     .optionItem label {
-        padding: 0.6rem;
-        font-size: 0.85rem;
+    padding: 0.55rem 0.6rem;
+    font-size: 0.84rem;
     }
     
     .questionPalette {
@@ -1118,8 +1142,8 @@
     }
     
     .navButton, .reviewButton, .nextButton {
-        padding: 0.5rem 0.8rem;
-        font-size: 0.8rem;
+    padding: 0.45rem 0.75rem;
+    font-size: 0.8rem;
     }
     
     .quizNavigation {
@@ -1132,7 +1156,7 @@
     }
     
     .timer {
-        font-size: 0.85rem;
+    font-size: 0.82rem;
         gap: 0.3rem;
     }
 

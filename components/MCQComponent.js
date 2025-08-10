@@ -13,7 +13,6 @@ export default function MCQComponent({
   // New state for quiz selection
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [numQuestions, setNumQuestions] = useState(25);
-  const [allQuestions] = useState(questions); // Store original questions
   
   // Quiz State
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -36,6 +35,9 @@ export default function MCQComponent({
   
   // Shuffle and select random questions
   const selectRandomQuestions = (allQuestions, count) => {
+    if (!allQuestions || allQuestions.length === 0) {
+      return [];
+    }
     const shuffled = [...allQuestions].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, Math.min(count, allQuestions.length));
   };
@@ -91,7 +93,7 @@ export default function MCQComponent({
     }
     
     // Select random questions based on user choice
-    const randomQuestions = selectRandomQuestions(allQuestions, numQuestions);
+    const randomQuestions = selectRandomQuestions(questions, numQuestions);
     setSelectedQuestions(randomQuestions);
     
     setShowInstructions(false);
@@ -507,8 +509,28 @@ export default function MCQComponent({
     );
   }
   
-  // Quiz interface
+  // Quiz interface - only if selectedQuestions exist and currentQuestion is valid
+  if (selectedQuestions.length === 0) {
+    return (
+      <div className={styles.errorContainer}>
+        <h3>No questions selected</h3>
+        <p>Please start the quiz to see questions.</p>
+      </div>
+    );
+  }
+
   const currentQuestion = selectedQuestions[currentQuestionIndex];
+  
+  // Additional safety check
+  if (!currentQuestion) {
+    return (
+      <div className={styles.errorContainer}>
+        <h3>Question not found</h3>
+        <p>Unable to load the current question. Please restart the quiz.</p>
+      </div>
+    );
+  }
+  
   const progress = selectedQuestions.length > 0 ? ((currentQuestionIndex + 1) / selectedQuestions.length) * 100 : 0;
   
   return (

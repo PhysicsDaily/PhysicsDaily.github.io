@@ -13,6 +13,7 @@ export async function getStaticProps() {
   const filePath = path.join(process.cwd(), 'public', 'data', 'measurement-mcq.json');
   const jsonData = fs.readFileSync(filePath, 'utf8');
   const quizQuestions = JSON.parse(jsonData);
+  
   return {
     props: {
       quizQuestions,
@@ -54,7 +55,7 @@ export default function MCQPage({ quizQuestions }) {
 
       <main className={styles.mainContent}>
         <div className="container">
-          <MCQComponent questions={quizQuestions} />
+          <MCQComponent questions={quizQuestions || []} />
         </div>
       </main>
 
