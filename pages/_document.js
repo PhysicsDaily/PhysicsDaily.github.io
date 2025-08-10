@@ -13,10 +13,11 @@ export default function Document() {
         />
         
         {/* MathJax Configuration and Scripts */}
-        <script src="/mathjax-config.js"></script>
+        <script src="/mathjax-config.js" async></script>
         <script
           id="MathJax-script"
           src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+          async
         ></script>
       </Head>
       <body>
