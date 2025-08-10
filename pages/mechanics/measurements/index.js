@@ -18,12 +18,6 @@ const sections = [
   { id: 'error-types', title: '1.7 Types of Errors' },
   { id: 'prefixes-notation', title: '1.8 Prefixes & Notation' },
   { id: 'instruments', title: '1.9 Instruments & Calibration' },
-  { id: 'reporting-rounding', title: '1.10 Reporting & Rounding' },
-  { id: 'pi-theorem', title: '1.11 Buckingham Pi Theorem' },
-  { id: 'graphing', title: '1.12 Graphing & Linearization' },
-  { id: 'fermi-estimation', title: '1.13 Fermi Estimation' },
-  { id: 'exam-tips', title: '1.14 Conversions & Tips' },
-  { id: 'greek-alphabet', title: '1.15 Greek Alphabet' },
   { id: 'practice', title: 'Practice Problems' },
 ];
 
@@ -95,6 +89,21 @@ export default function MeasurementsPage() {
 
       <main className={styles.mainContent}>
         <div className="container">
+          {/* Go to Questions Button - Fixed position (scroll down) */}
+          <div className={styles.questionsButton}>
+            <button
+              type="button"
+              aria-label="Jump to Questions"
+              className={styles.goToQuestions}
+              onClick={() => {
+                const el = document.getElementById('questions-section');
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+            >
+              <span className={styles.questionsIcon} aria-hidden="true">⬇️</span>
+            </button>
+          </div>
+
           <div id="intro" className={styles.section}>
             <h2>🌟 Introduction: Why Measurement Matters</h2>
             <div className={styles.beginnerNote}>
@@ -105,10 +114,6 @@ export default function MeasurementsPage() {
             <div className={styles.highlightBox}>
               <h4>The Power of Precise Measurement</h4>
               <p>The detection of gravitational waves required measuring distance changes smaller than 1/10,000th the width of a proton!</p>
-            </div>
-            <div className={styles.advancedNote}>
-              <h4>🎓 Advanced Insight:</h4>
-              <p>Modern physics reaches quantum limits of precision. The Heisenberg uncertainty principle imposes a fundamental bound on simultaneous measurements (like position and momentum). This is not a technological constraint—it&apos;s built into nature.</p>
             </div>
             <h3>Measurement Chain and Traceability</h3>
             <p>Reliable measurements trace back to national/international standards via calibrated instruments. This &quot;traceability chain&quot; ensures comparability across labs and time.</p>
@@ -183,10 +188,6 @@ export default function MeasurementsPage() {
                 </tbody>
               </table>
             </div>
-            <div className={styles.advancedNote}>
-              <h4>🎓 The 2019 SI Redefinition:</h4>
-              <p>All SI units are defined via fundamental constants (c, h, e, k, N<sub>A</sub>, etc.), eliminating dependence on physical artifacts and enabling universal reproducibility.</p>
-            </div>
             <h3>Defining Constants (Exact)</h3>
             <p>After 2019, fixed exact values define base units: c, h, e, k<sub>B</sub>, N<sub>A</sub>, K<sub>cd</sub>, Δν<sub>Cs</sub>.</p>
             <ul>
@@ -248,28 +249,84 @@ export default function MeasurementsPage() {
             <div className={styles.exampleBox}>
               <h4>📝 Example: Kinematics</h4>
               <p><span className="equation">x = x₀ + v₀t + ½at²</span>. Each term has dimension [L] ⇒ consistent.</p>
+              <p><strong>Check:</strong> [x] = [L], [v₀t] = [LT⁻¹][T] = [L], [at²] = [LT⁻²][T²] = [L] ✓</p>
             </div>
+            
             <h3>2) Deriving Relationships</h3>
             <div className={styles.exampleBox}>
               <h4>📝 Example: Period of a Pendulum</h4>
               <p>Assume <span className="equation">T ∝ l^a m^b g^c</span>. Matching dimensions gives <span className="equation">b=0, c=-½, a=½</span> → <span className="equation">T = k√(l/g)</span> (k is dimensionless).</p>
+              <p><strong>Step-by-step:</strong></p>
+              <p>[T] = [L]^a [M]^b [LT⁻²]^c = [L^(a+c)][M^b][T^(-2c)]</p>
+              <p>For dimensional consistency: a+c = 0, b = 0, -2c = 1</p>
+              <p>Solving: c = -½, a = ½, b = 0</p>
             </div>
+
+            <div className={styles.exampleBox}>
+              <h4>📝 Advanced Example: Drag Force on a Sphere</h4>
+              <p>For a sphere moving through a fluid, assume drag depends on:</p>
+              <ul>
+                <li>Velocity v [LT⁻¹]</li>
+                <li>Sphere radius r [L]</li>
+                <li>Fluid density ρ [ML⁻³]</li>
+                <li>Fluid viscosity η [ML⁻¹T⁻¹]</li>
+              </ul>
+              <p>Let <span className="equation">F_d = k v^a r^b ρ^c η^d</span></p>
+              <p>[MLT⁻²] = [LT⁻¹]^a [L]^b [ML⁻³]^c [ML⁻¹T⁻¹]^d</p>
+              <p>This gives us two possible regimes:</p>
+              <ul>
+                <li><strong>Stokes regime (low Re):</strong> F_d ∝ ηrv</li>
+                <li><strong>Newton regime (high Re):</strong> F_d ∝ ρr²v²</li>
+              </ul>
+            </div>
+            
             <h3>3) Converting Units</h3>
             <div className={styles.exampleBox}>
               <h4>📝 Example: Newtons to Dynes</h4>
               <p>1 N = 1 kg·m·s⁻² = (10³ g)(10² cm)s⁻² = <span className="equation">10⁵ dyn</span>.</p>
             </div>
+
+            <div className={styles.exampleBox}>
+              <h4>📝 Advanced Conversion: Energy Units</h4>
+              <p>Convert 1 eV (electron volt) to Joules:</p>
+              <p>1 eV = energy gained by electron through 1V potential difference</p>
+              <p>1 eV = e × 1V = (1.602 × 10⁻¹⁹ C)(1 V) = 1.602 × 10⁻¹⁹ J</p>
+              <p><strong>Useful conversions:</strong></p>
+              <ul>
+                <li>1 eV = 1.602 × 10⁻¹⁹ J</li>
+                <li>1 u (atomic mass unit) = 931.5 MeV/c²</li>
+                <li>1 cal = 4.184 J (thermochemical calorie)</li>
+                <li>1 kWh = 3.6 × 10⁶ J</li>
+              </ul>
+            </div>
+            
             <h3>4) Dimensions of Constants</h3>
             <div className={styles.exampleBox}>
               <h4>📝 Example: Gravitational Constant G</h4>
               <p>From <span className="equation">F = G m₁ m₂ / r²</span> → <span className="equation">[G] = [M⁻¹L³T⁻²]</span>.</p>
             </div>
+            
             <div className={styles.highlightBox}>
-              <h4>Pitfalls</h4>
+              <h4>Pitfalls and Limitations</h4>
               <ul>
                 <li>Trigonometric/exponential/log arguments must be dimensionless.</li>
                 <li>Linear sums can&apos;t be deduced; only product-type relations up to constants.</li>
+                <li>Cannot determine dimensionless constants (like 2π in pendulum formula).</li>
+                <li>Cannot handle discontinuous relationships or phase transitions.</li>
+                <li>Assumes all relevant variables are included in analysis.</li>
               </ul>
+            </div>
+
+            <div className={styles.exampleBox}>
+              <h4>📝 Problem-Solving Strategy</h4>
+              <ol>
+                <li><strong>Identify</strong> all relevant physical variables</li>
+                <li><strong>Write</strong> their dimensions in terms of fundamental units</li>
+                <li><strong>Set up</strong> the general functional form</li>
+                <li><strong>Equate</strong> powers of fundamental dimensions</li>
+                <li><strong>Solve</strong> the resulting system of equations</li>
+                <li><strong>Check</strong> limiting cases and physical reasonableness</li>
+              </ol>
             </div>
           </div>
 
@@ -283,38 +340,218 @@ export default function MeasurementsPage() {
                 <li>Zeros between significant digits are significant. (e.g., 506 has 3)</li>
                 <li>Leading zeros are not significant. (e.g., 0.0078 has 2)</li>
                 <li>Trailing zeros with a decimal point are significant. (e.g., 90.00 has 4)</li>
+                <li>Trailing zeros in whole numbers without decimal points are ambiguous</li>
               </ol>
             </div>
+
+            <div className={styles.exampleBox}>
+              <h4>📝 Detailed Examples</h4>
+              <div className={styles.tableWrapper}>
+                <table>
+                  <thead>
+                    <tr><th>Number</th><th>Sig Figs</th><th>Explanation</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>123.45</td><td>5</td><td>All digits are significant</td></tr>
+                    <tr><td>0.00456</td><td>3</td><td>Leading zeros don&apos;t count</td></tr>
+                    <tr><td>1.200</td><td>4</td><td>Trailing zeros after decimal count</td></tr>
+                    <tr><td>1200</td><td>2 or 4</td><td>Ambiguous - use scientific notation</td></tr>
+                    <tr><td>1.200 × 10³</td><td>4</td><td>Clear with scientific notation</td></tr>
+                    <tr><td>5.67 × 10⁻⁸</td><td>3</td><td>Exponent doesn&apos;t affect sig figs</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
             <h4>🧮 Operations with Significant Figures</h4>
-            <p><strong>Addition/Subtraction Rule:</strong> The result is rounded to the same number of decimal places as the measurement with the fewest decimal places. (e.g., 12.345 + 1.2 = 13.5)</p>
-            <p><strong>Multiplication/Division Rule:</strong> The result has the same number of significant figures as the measurement with the fewest significant figures. (e.g., 3.14 × 2.0 = 6.3)</p>
+            <p><strong>Addition/Subtraction Rule:</strong> The result is rounded to the same number of decimal places as the measurement with the fewest decimal places.</p>
+            
+            <div className={styles.exampleBox}>
+              <h4>📝 Addition/Subtraction Examples</h4>
+              <p><strong>Example 1:</strong> 12.345 + 1.2 = 13.545 → 13.5 (limited by 1.2&apos;s one decimal place)</p>
+              <p><strong>Example 2:</strong> 156.7 - 0.32 = 156.38 → 156.4 (limited by 156.7&apos;s one decimal place)</p>
+              <p><strong>Complex Example:</strong></p>
+              <p>125.67 + 12.1 + 0.456 = 138.226</p>
+              <p>Limiting factor: 12.1 (one decimal place) → Answer: 138.2</p>
+            </div>
+
+            <p><strong>Multiplication/Division Rule:</strong> The result has the same number of significant figures as the measurement with the fewest significant figures.</p>
+            
+            <div className={styles.exampleBox}>
+              <h4>📝 Multiplication/Division Examples</h4>
+              <p><strong>Example 1:</strong> 3.14 × 2.0 = 6.28 → 6.3 (limited by 2.0&apos;s 2 sig figs)</p>
+              <p><strong>Example 2:</strong> 45.678 ÷ 1.23 = 37.1365... → 37.1 (limited by 1.23&apos;s 3 sig figs)</p>
+              <p><strong>Complex Example:</strong></p>
+              <p>(2.54 × 10²) × (3.1 × 10⁻⁴) ÷ (1.234 × 10⁻¹)</p>
+              <p>= 6.389... × 10⁻¹ → 6.4 × 10⁻¹ (limited by 3.1&apos;s 2 sig figs)</p>
+            </div>
+
+            <h4>🎯 Special Cases and Advanced Rules</h4>
+            <div className={styles.advancedNote}>
+              <h4>🎓 Professional Considerations</h4>
+              <ul>
+                <li><strong>Exact numbers:</strong> π, e, conversion factors (12 inches = 1 foot) have infinite precision</li>
+                <li><strong>Counting:</strong> &quot;5 students&quot; is exact, not measured</li>
+                <li><strong>Intermediate calculations:</strong> Keep extra digits, round only final answer</li>
+                <li><strong>Logarithms:</strong> Number of decimal places = sig figs of argument</li>
+                <li><strong>Powers:</strong> Result has same sig figs as base (exponent can be exact)</li>
+              </ul>
+            </div>
+
+            <div className={styles.exampleBox}>
+              <h4>📝 Logarithm Examples</h4>
+              <p><strong>log(2.54 × 10³):</strong> 2.54 has 3 sig figs → answer has 3 decimal places</p>
+              <p>log(2540) = 3.405 (3 decimal places)</p>
+              <p><strong>ln(6.02 × 10²³):</strong> 6.02 has 3 sig figs → answer has 3 decimal places</p>
+              <p>ln(6.02 × 10²³) = 54.972</p>
+            </div>
+
+            <h4>🔧 Practical Tips for Calculations</h4>
+            <div className={styles.highlightBox}>
+              <ol>
+                <li><strong>Identify</strong> the limiting measurement first</li>
+                <li><strong>Perform</strong> calculations with extra digits</li>
+                <li><strong>Round</strong> only the final answer</li>
+                <li><strong>Use scientific notation</strong> to avoid ambiguity</li>
+                <li><strong>Be consistent</strong> with measurement uncertainty</li>
+              </ol>
+            </div>
+
+            <div className={styles.exampleBox}>
+              <h4>📝 Multi-step Problem</h4>
+              <p><strong>Problem:</strong> Calculate density of a rectangular block</p>
+              <p>Mass = 45.67 g, Length = 12.1 cm, Width = 3.45 cm, Height = 2.1 cm</p>
+              <p><strong>Solution:</strong></p>
+              <p>Volume = L × W × H = 12.1 × 3.45 × 2.1 = 87.6105 cm³</p>
+              <p>For volume: limited by 2.1 (2 sig figs) → V = 88 cm³</p>
+              <p>Density = m/V = 45.67/88 = 0.5189... g/cm³</p>
+              <p>For density: limited by 88 (2 sig figs) → ρ = 0.52 g/cm³</p>
+            </div>
           </div>
 
           <div id="error-analysis" className={styles.section}>
             <h2>1.6 Error Analysis: Quantifying Uncertainty</h2>
             <p>Every measurement has uncertainty. Report results with both a value and an uncertainty.</p>
+            
+            <h3>Types of Uncertainty</h3>
+            <div className={styles.highlightBox}>
+              <h4>Statistical vs. Systematic Uncertainty</h4>
+              <ul>
+                <li><strong>Statistical (Random):</strong> Varies unpredictably, reduced by repeated measurements</li>
+                <li><strong>Systematic:</strong> Consistent bias, must be identified and corrected</li>
+              </ul>
+            </div>
+
+            <h3>Statistical Analysis of Repeated Measurements</h3>
+            <p><strong>For n repeated measurements x₁, x₂, ..., xₙ:</strong></p>
+            <ul>
+              <li><strong>Mean:</strong> x̄ = (x₁ + x₂ + ... + xₙ)/n</li>
+              <li><strong>Standard deviation:</strong> σ = √[Σ(xᵢ - x̄)²/(n-1)]</li>
+              <li><strong>Standard error:</strong> σₘ = σ/√n (uncertainty in the mean)</li>
+              <li><strong>Result:</strong> x̄ ± σₘ (for large n) or x̄ ± tσₘ (for small n, t from t-distribution)</li>
+            </ul>
+
+            <div className={styles.exampleBox}>
+              <h4>📝 Statistical Analysis Example</h4>
+              <p><strong>Problem:</strong> Five measurements of a pendulum period (s): 2.01, 1.98, 2.03, 1.99, 2.02</p>
+              <p><strong>Solution:</strong></p>
+              <p>Mean: x̄ = (2.01 + 1.98 + 2.03 + 1.99 + 2.02)/5 = 2.006 s</p>
+              <p>Deviations: -0.004, 0.026, -0.024, 0.016, -0.014</p>
+              <p>σ = √[(0.004² + 0.026² + 0.024² + 0.016² + 0.014²)/4] = 0.019 s</p>
+              <p>σₘ = 0.019/√5 = 0.0085 s</p>
+              <p><strong>Result:</strong> T = 2.01 ± 0.01 s (rounded appropriately)</p>
+            </div>
+
             <h3>Absolute, Relative, and Percentage Error</h3>
             <div className={styles.highlightBox}>
               <ol>
-                <li><strong>Mean (best estimate):</strong> average of measurements.</li>
-                <li><strong>Absolute error:</strong> |mean − individual|.</li>
-                <li><strong>Mean absolute error:</strong> average of absolute errors.</li>
-                <li><strong>Relative error:</strong> (mean absolute error)/(mean).</li>
-                <li><strong>Percentage error:</strong> relative error × 100%.</li>
+                <li><strong>Absolute uncertainty:</strong> Δx (same units as measurement)</li>
+                <li><strong>Relative uncertainty:</strong> Δx/x (dimensionless)</li>
+                <li><strong>Percentage uncertainty:</strong> (Δx/x) × 100%</li>
               </ol>
             </div>
-            <h3>Propagation of Errors</h3>
-            <div className={styles.advancedNote}>
+
+            <div className={styles.exampleBox}>
+              <h4>📝 Error Types Example</h4>
+              <p>Measurement: L = 25.4 ± 0.2 cm</p>
               <ul>
-                <li><strong>Add/Sub:</strong> <span className="equation">ΔZ = ΔA + ΔB</span></li>
-                <li><strong>Mul/Div:</strong> <span className="equation">ΔZ/Z = ΔA/A + ΔB/B</span></li>
-                <li><strong>Powers:</strong> <span className="equation">Z = Aⁿ ⇒ ΔZ/Z = n(ΔA/A)</span></li>
+                <li><strong>Absolute uncertainty:</strong> ±0.2 cm</li>
+                <li><strong>Relative uncertainty:</strong> 0.2/25.4 = 0.0079</li>
+                <li><strong>Percentage uncertainty:</strong> 0.79%</li>
               </ul>
             </div>
+
+            <h3>Propagation of Uncertainties</h3>
+            <p>When combining measurements, uncertainties propagate according to specific rules:</p>
+            
+            <p><strong>General Propagation Formula:</strong></p>
+            <p>For f(x,y,z,...), the uncertainty is:</p>
+            <p><span className="equation">Δf = √[(∂f/∂x)²(Δx)² + (∂f/∂y)²(Δy)² + (∂f/∂z)²(Δz)² + ...]</span></p>
+            <p><strong>Common cases:</strong></p>
+            <ul>
+              <li><strong>Addition/Subtraction:</strong> f = x ± y → Δf = √[(Δx)² + (Δy)²]</li>
+              <li><strong>Multiplication/Division:</strong> f = xy or x/y → Δf/f = √[(Δx/x)² + (Δy/y)²]</li>
+              <li><strong>Powers:</strong> f = xⁿ → Δf/f = |n|(Δx/x)</li>
+              <li><strong>Exponentials:</strong> f = eˣ → Δf/f = Δx</li>
+              <li><strong>Logarithms:</strong> f = ln(x) → Δf = Δx/x</li>
+            </ul>
+
             <div className={styles.exampleBox}>
-              <h4>📝 Example: Density of a Cube</h4>
-              <p><span className="equation">m = (100 ± 2) g</span>, <span className="equation">L = (10.0 ± 0.1) cm</span>, <span className="equation">ρ = m/L³</span>.</p>
-              <p><span className="equation">Δρ/ρ = Δm/m + 3(ΔL/L) = 0.02 + 0.03 = 0.05</span> → 5%.</p>
+              <h4>📝 Comprehensive Propagation Example</h4>
+              <p><strong>Problem:</strong> Calculate the volume and its uncertainty for a cylinder</p>
+              <p>Radius: r = 5.2 ± 0.1 cm, Height: h = 12.3 ± 0.2 cm</p>
+              <p>Volume: V = πr²h</p>
+              <p><strong>Solution using relative uncertainties:</strong></p>
+              <p>V = π(5.2)²(12.3) = 1048 cm³</p>
+              <p>Δr/r = 0.1/5.2 = 0.0192</p>
+              <p>Δh/h = 0.2/12.3 = 0.0163</p>
+              <p>Since V = πr²h, we have: ΔV/V = √[(2 × Δr/r)² + (Δh/h)²]</p>
+              <p>ΔV/V = √[(2 × 0.0192)² + (0.0163)²] = √[0.00147 + 0.000266] = 0.0416</p>
+              <p>ΔV = 0.0416 × 1048 = 44 cm³</p>
+              <p><strong>Result:</strong> V = 1048 ± 44 cm³ or V = (1.05 ± 0.04) × 10³ cm³</p>
+            </div>
+
+            <h3>Advanced Topics in Error Analysis</h3>
+            
+            <div className={styles.advancedNote}>
+              <h4>🎓 Covariance and Correlated Errors</h4>
+              <p>When measurements x and y are correlated, the general formula becomes:</p>
+              <p>Δf = √[(∂f/∂x)²(Δx)² + (∂f/∂y)²(Δy)² + 2(∂f/∂x)(∂f/∂y)cov(x,y)]</p>
+              <p>This is crucial when the same instrument measures both quantities.</p>
+            </div>
+
+            <div className={styles.exampleBox}>
+              <h4>📝 Weighted Averages</h4>
+              <p>When combining measurements with different uncertainties:</p>
+              <p><strong>Weighted mean:</strong> x̄ = Σ(wᵢxᵢ)/Σwᵢ where wᵢ = 1/(Δxᵢ)²</p>
+              <p><strong>Uncertainty:</strong> Δx̄ = 1/√(Σwᵢ)</p>
+              <p><strong>Example:</strong> Combining x₁ = 10.2 ± 0.3 and x₂ = 10.6 ± 0.1</p>
+              <p>w₁ = 1/0.3² = 11.11, w₂ = 1/0.1² = 100</p>
+              <p>x̄ = (11.11 × 10.2 + 100 × 10.6)/(11.11 + 100) = 10.56</p>
+              <p>Δx̄ = 1/√111.11 = 0.095</p>
+              <p><strong>Result:</strong> x̄ = 10.56 ± 0.10</p>
+            </div>
+
+            <h3>Reporting Uncertainties</h3>
+            <div className={styles.highlightBox}>
+              <h4>📋 Best Practices</h4>
+              <ol>
+                <li><strong>Round uncertainty</strong> to 1 significant figure (2 if first digit is 1)</li>
+                <li><strong>Match decimal places</strong> of value to uncertainty</li>
+                <li><strong>Use scientific notation</strong> for clarity</li>
+                <li><strong>Include confidence level</strong> when appropriate</li>
+                <li><strong>State measurement method</strong> and conditions</li>
+              </ol>
+            </div>
+
+            <div className={styles.exampleBox}>
+              <h4>📝 Proper Reporting Examples</h4>
+              <ul>
+                <li><strong>Good:</strong> g = 9.81 ± 0.05 m/s² (95% confidence)</li>
+                <li><strong>Good:</strong> E = (1.602 ± 0.003) × 10⁻¹⁹ C</li>
+                <li><strong>Poor:</strong> g = 9.8134 ± 0.05432 m/s² (too many digits)</li>
+                <li><strong>Poor:</strong> g = 9.8 ± 0.054 m/s² (mismatched precision)</li>
+              </ul>
             </div>
           </div>
 
@@ -373,81 +610,10 @@ export default function MeasurementsPage() {
               <li>Negative zero error: reading is low at zero; add correction.</li>
             </ul>
           </div>
-
-          <div id="reporting-rounding" className={styles.section}>
-            <h2>1.10 Reporting, Rounding, Logs, and Antilogs</h2>
-            <h3>Reporting with Uncertainty</h3>
-            <ul>
-              <li>Match the value&apos;s decimals to the uncertainty&apos;s first significant digit.</li>
-              <li>Prefer one significant digit in the uncertainty (two if the first digit is 1–2).</li>
-            </ul>
-          </div>
-
-          <div id="pi-theorem" className={styles.section}>
-            <h2>1.11 Buckingham Pi Theorem, Similarity, and Scaling Laws</h2>
-            <p>Dimensional analysis generalizes via the Pi theorem: with n variables and k fundamental dimensions, expect n−k independent dimensionless groups (π terms).</p>
-          </div>
-
-          <div id="graphing" className={styles.section}>
-            <h2>1.12 Graphing, Linearization, and Uncertainty of Fit</h2>
-            <h3>Linearization</h3>
-            <ul>
-              <li>Power law y = A xⁿ ⇒ log y = log A + n log x (slope n on log–log plot).</li>
-              <li>Exponential y = A e^(kx) ⇒ ln y = ln A + kx (semi-log plot).</li>
-            </ul>
-          </div>
-
-          <div id="fermi-estimation" className={styles.section}>
-            <h2>1.13 Fermi Estimation and Sanity Checks</h2>
-            <p>Fast, rough estimates are vital in olympiads and entrance exams to eliminate options.</p>
-          </div>
-
-          <div id="exam-tips" className={styles.section}>
-            <h2>1.14 Quick Conversions and Exam Tips</h2>
-            <h3>Exam Technique</h3>
-            <ul>
-              <li>Always check dimensional homogeneity and limiting cases.</li>
-              <li>Convert to base SI before plugging numbers; keep guard digits.</li>
-              <li>State assumptions clearly (small-angle, negligible drag, rigid body, etc.).</li>
-            </ul>
-          </div>
-
-          <div id="greek-alphabet" className={styles.section}>
-            <h2>1.15 Greek Alphabet Reference</h2>
-            <p>Common Greek symbols used across physics (uppercase, lowercase) with typical meanings.</p>
-            <div className={styles.tableWrapper}>
-              <table>
-                <thead>
-                  <tr><th>Name</th><th>Uppercase</th><th>Lowercase</th><th>Common Uses</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td>Alpha</td><td>Α</td><td>α</td><td>Angular acceleration, fine-structure constant</td></tr>
-                  <tr><td>Beta</td><td>Β</td><td>β</td><td>Beta decay, coefficient</td></tr>
-                  <tr><td>Gamma</td><td>Γ</td><td>γ</td><td>Lorentz factor (γ), surface tension (γ), photons</td></tr>
-                  <tr><td>Delta</td><td>Δ</td><td>δ</td><td>Finite change (Δ), small variation/error (δ)</td></tr>
-                  <tr><td>Epsilon</td><td>Ε</td><td>ε</td><td>Permittivity, strain (ε), small quantity</td></tr>
-                  <tr><td>Zeta</td><td>Ζ</td><td>ζ</td><td>Damping ratio</td></tr>
-                  <tr><td>Eta</td><td>Η</td><td>η</td><td>Efficiency (η), viscosity (η)</td></tr>
-                  <tr><td>Theta</td><td>Θ</td><td>θ</td><td>Angle, temperature (Θ) in some contexts</td></tr>
-                  <tr><td>Lambda</td><td>Λ</td><td>λ</td><td>Cosmological constant (Λ), wavelength (λ)</td></tr>
-                  <tr><td>Mu</td><td>Μ</td><td>μ</td><td>Coefficient of friction (μ), permeability (μ)</td></tr>
-                  <tr><td>Nu</td><td>Ν</td><td>ν</td><td>Frequency, kinematic viscosity (ν)</td></tr>
-                  <tr><td>Pi</td><td>Π</td><td>π</td><td>3.14159…, osmotic pressure</td></tr>
-                  <tr><td>Rho</td><td>Ρ</td><td>ρ</td><td>Density (ρ), charge density</td></tr>
-                  <tr><td>Sigma</td><td>Σ</td><td>σ</td><td>Sum (Σ), stress, cross-section</td></tr>
-                  <tr><td>Tau</td><td>Τ</td><td>τ</td><td>Torque (τ), time constant (RC)</td></tr>
-                  <tr><td>Phi</td><td>Φ</td><td>φ</td><td>Magnetic flux (Φ), potential (φ), angle</td></tr>
-                  <tr><td>Chi</td><td>Χ</td><td>χ</td><td>Susceptibility (χ)</td></tr>
-                  <tr><td>Psi</td><td>Ψ</td><td>ψ</td><td>Wavefunction (ψ)</td></tr>
-                  <tr><td>Omega</td><td>Ω</td><td>ω</td><td>Ohm (Ω), angular speed (ω)</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
         </div>
       </main>
 
-      <section className={styles.practiceSection}>
+  <section id="questions-section" className={styles.practiceSection}>
         <div className="container">
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>Test Your Understanding</h2>

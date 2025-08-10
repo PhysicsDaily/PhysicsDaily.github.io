@@ -23,8 +23,8 @@ export default function Header() {
     <header className={styles.nav}>
       <div className="container">
         <div className={styles.navContent}>
-          <Link href="/" passHref>
-            <div className={styles.navLogo}>Physics Daily</div>
+          <Link href="/" passHref legacyBehavior>
+            <a className={styles.navLogo}>Physics Daily</a>
           </Link>
           <Navigation />
           <div className={styles.themeToggle}>

@@ -122,8 +122,8 @@
     {
         "question": "21. A physical quantity X is given by X = (a²b³)/(c√d). If the percentage errors of a, b, c, d are 2%, 1%, 4%, 2% respectively, what is the percentage error in X?",
         "options": ["9%", "12%", "11%", "10%"],
-        "answer": "11%",
-        "solution": "The percentage error in X is 2(%a) + 3(%b) + (1/2)(%c) + (1/2)(%d) = 2(2%) + 3(1%) + (1/2)(4%) + (1/2)(2%) = 4% + 3% + 2% + 1% = 10%."
+        "answer": "12%",
+        "solution": "The percentage error in X is 2(%a) + 3(%b) + (%c) + (1/2)(%d) = 2(2%) + 3(1%) + 4% + (1/2)(2%) = 4% + 3% + 4% + 1% = 12%."
     },
     {
         "question": "22. The length of a rod is measured as (5.2 ± 0.1) cm. What is the percentage error in the measurement?",
@@ -291,7 +291,7 @@
         "question": "49. Which of the following is the most precise measurement?",
         "options": ["3 x 10⁻³ m", "30 x 10⁻⁴ m", "300 x 10⁻⁵ m", "0.0030 m"],
         "answer": "300 x 10⁻⁵ m",
-        "solution": "Precision is related to the least count. 3 x 10⁻³ m (least count 0.001 m). 30 x 10⁻⁴ m = 0.0030 m (least count 0.0001 m). 300 x 10⁻⁵ m = 0.00300 m (least count 0.00001 m). This is the most precise."
+        "solution": "Precision is related to the least count of the measuring instrument. 3 x 10⁻³ m = 0.003 m (least count 0.001 m). 30 x 10⁻⁴ m = 0.0030 m (least count 0.0001 m). 300 x 10⁻⁵ m = 0.00300 m (least count 0.00001 m). 0.0030 m has a least count of 0.0001 m. The smallest least count corresponds to the most precise measurement."
     },
     {
         "question": "50. The dimensions of ε₀ (permittivity of free space) are:",
@@ -429,7 +429,7 @@
         "question": "72. The least count error is a type of:",
         "options": ["Systematic Error", "Random Error", "Personal Error", "Gross Error"],
         "answer": "Random Error",
-        "solution": "While related to the instrument's limitation (a systematic feature), the error it introduces in a single measurement is random, as the true value may lie anywhere within the least count interval. In practice, it's often treated as a component of random error that can be analyzed statistically."
+        "solution": "While related to the instrument's limitation (a systematic feature), the error it introduces in a single measurement is random, as the true value may lie anywhere within the least count interval. In practice, it's often treated as a component of random error."
     },
     {
         "question": "73. The prefix for the factor 10⁹ is:",
@@ -447,7 +447,7 @@
         "question": "75. A quantity is represented by X = MᵃLᵇTᶜ. The percentage error in measurement of M, L and T are α%, β% and γ% respectively. The percentage error in X would be:",
         "options": ["(aα + bβ + cγ)%", "|aα + bβ + cγ|%", "(aα + bβ - cγ)%", "None of these"],
         "answer": "|aα + bβ + cγ|%",
-        "solution": "For error analysis, the absolute values of the powers are used, and errors are always added to find the maximum possible error. More accurately, it's |a|α + |b|β + |c|γ, but given the options, this is the closest."
+        "solution": "For error analysis, the absolute values of the powers are used, and errors are always added to find the maximum possible error. More accurately, it's |a|α + |b|β + |c|γ."
     },
     {
         "question": "76. The resistance R = V/I where V = (100 ± 5)V and I = (10 ± 0.2)A. The percentage error in R is:",
@@ -741,7 +741,7 @@
         "question": "124. A student measures the length of a pendulum as 1.0 m with an error of 0.01 m and measures the time for 50 oscillations as 100 s with a clock of 1 s resolution. The percentage error in 'g' is:",
         "options": ["3%", "2%", "1%", "5%"],
         "answer": "3%",
-        "solution": "g ∝ L/T². T = 100s/50 = 2s. ΔT = Δt/n = 1s/50 = 0.02s. %error(g) = %error(L) + 2*%error(T) = (0.01/1.0)*100 + 2*(0.02/2)*100 = 1% + 2(1%) = 3%."
+        "solution": "g ∝ L/T². T = 100s/50 = 2s. ΔT_period = Δt_total/n = 1s/50 = 0.02s. %error(g) = %error(L) + 2*%error(T_period) = (0.01/1.0)*100 + 2*(0.02/2)*100 = 1% + 2(1%) = 3%."
     },
     {
         "question": "125. Which of the following measurements is most precise?",
@@ -837,7 +837,7 @@
         "question": "140. If the units of mass, length, and time are all doubled, the unit of force will be:",
         "options": ["Doubled", "Halved", "Quadrupled", "Unchanged"],
         "answer": "Unchanged",
-        "solution": "Force F = ma = m(L/T²). Let the new units be M'=2M, L'=2L, T'=2T. The new unit of force F' = M'L'/(T'²) = (2M)(2L)/(2T)² = 4ML/(4T²) = ML/T² = F. The unit is unchanged."
+        "solution": "Force F = ma = m(L/T²). Let the new units be M'=2M, L'=2L, T'=2T. The new unit of force F' = M'L'/(T'²) = (2M)(2L)/(2T)² = 4ML/(4T²) = ML/T² = F. The magnitude of the unit is unchanged."
     },
     {
         "question": "141. The number 1.050 has how many significant figures?",
