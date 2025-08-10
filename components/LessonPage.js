@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import PageLayout from './PageLayout';
 import useMathJax from '../hooks/useMathJax';
-import styles from '../styles/Measurements.module.css';
+import styles from '../styles/ContentPage.module.css';
 
 export default function LessonPage({
   title,
@@ -40,16 +40,16 @@ export default function LessonPage({
       breadcrumbItems={breadcrumbItems}
     >
       <header className={styles.pageHeader}>
-        <div className={styles.container}>
+        <div className="container">
           <h1>{chapterTitle}</h1>
           <p className={styles.subtitle}>{chapterSubtitle}</p>
         </div>
       </header>
 
       {navigationLinks.length > 0 && (
-        <nav className={styles.pageNav}>
-          <div className={styles.container}>
-            <div className={styles.navLinks}>
+        <nav className="nav">
+          <div className="container">
+            <div className="nav-links">
               {navigationLinks.map((link, index) => (
                 <a key={index} href={link.href}>{link.label}</a>
               ))}
@@ -59,17 +59,17 @@ export default function LessonPage({
       )}
 
       <main>
-        <div className={styles.container}>
+        <div className="container">
           {children}
         </div>
       </main>
 
       <button 
-        className={styles.scrollToTop}
+        className="btn"
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         title="Scroll to top"
       >
-        ↑
+        Scroll to top ↑
       </button>
     </PageLayout>
   );

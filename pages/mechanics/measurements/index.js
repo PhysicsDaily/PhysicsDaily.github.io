@@ -268,7 +268,7 @@ export default function MeasurementsPage() {
               <h4>Pitfalls</h4>
               <ul>
                 <li>Trigonometric/exponential/log arguments must be dimensionless.</li>
-                <li>Linear sums can't be deduced; only product-type relations up to constants.</li>
+                <li>Linear sums can&apos;t be deduced; only product-type relations up to constants.</li>
               </ul>
             </div>
           </div>

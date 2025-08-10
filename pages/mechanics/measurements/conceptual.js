@@ -34,22 +34,28 @@ export default function ConceptualPage() {
 
       <div className="breadcrumb">
         <div className="container">
-          <nav>
-            <Link href="/">Home</Link><span className="separator">›</span>
-            <Link href="/mechanics/foundations">Classical Mechanics</Link><span className="separator">›</span>
-            <Link href="/mechanics/measurements">📏 Measurement</Link><span className="separator">›</span>
+          <nav aria-label="Breadcrumb">
+            <Link href="/">Home</Link>
+            <span className="separator">›</span>
+            <Link href="/mechanics/foundations">Classical Mechanics</Link>
+            <span className="separator">›</span>
+            <Link href="/mechanics/measurements">📏 Measurement</Link>
+            <span className="separator">›</span>
             <span className="current">🤔 Conceptual Questions</span>
           </nav>
         </div>
       </div>
+
+      <header className={styles.pageHeader}>
+        <div className="container">
+          <h1>Conceptual Questions</h1>
+          <p className={styles.subtitle}>Chapter 1: Measurement</p>
+        </div>
+      </header>
       
       <main className={styles.mainContent}>
         <div className="container">
           <div className={styles.section}>
-            <header className={styles.header} style={{ background: 'none', padding: 0, textAlign: 'left' }}>
-              <h1>Conceptual Questions</h1>
-              <p className={styles.subtitle}>Chapter 1: Measurement</p>
-            </header>
             {questions.map(q => (
               <div key={q.id} className={styles.problem}>
                 <div className={styles.problemHeader}>

@@ -7,6 +7,9 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
+  {/* --- MathJax (must load before any page uses MathJax) --- */}
+  <Script src="/mathjax-config.js" strategy="afterInteractive" />
+  <Script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" strategy="afterInteractive" />
       {/* --- Google Analytics Script (Lazy Loaded) --- */}
       <Script
         strategy="lazyOnload"
@@ -25,7 +28,7 @@ function MyApp({ Component, pageProps }) {
         }}
       />
       
-      {/* --- Google AdSense Script (Lazy Loaded) --- */}
+  {/* --- Google AdSense Script (Lazy Loaded) --- */}
       <Script
         id="google-ads"
         strategy="lazyOnload"

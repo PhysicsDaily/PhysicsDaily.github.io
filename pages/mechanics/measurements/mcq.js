@@ -5,7 +5,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
-import MCQComponent from '../../../components/MCQComponent'; // FIX: Changed import from Quiz to MCQComponent
+import MCQComponent from '../../../components/MCQComponent'; 
 import styles from '../../../styles/ContentPage.module.css';
 
 // This function runs at build time to fetch the data
@@ -33,7 +33,7 @@ export default function MCQPage({ quizQuestions }) {
 
       <div className="breadcrumb">
         <div className="container">
-          <nav>
+          <nav aria-label="Breadcrumb">
             <Link href="/">Home</Link>
             <span className="separator">›</span>
             <Link href="/mechanics/foundations">Classical Mechanics</Link>
@@ -45,13 +45,15 @@ export default function MCQPage({ quizQuestions }) {
         </div>
       </div>
 
+      <header className={styles.pageHeader}>
+        <div className="container">
+          <h1>Assessment Quiz</h1>
+          <p className={styles.subtitle}>Chapter 1: Measurement</p>
+        </div>
+      </header>
+
       <main className={styles.mainContent}>
         <div className="container">
-          <header className={styles.header} style={{ background: 'none', padding: '1rem 0' }}>
-              <h1>Chapter 1: Assessment Quiz</h1>
-              <p className={styles.subtitle}>Test your mastery of Measurement</p>
-          </header>
-          {/* FIX: Changed component from Quiz to MCQComponent */}
           <MCQComponent questions={quizQuestions} />
         </div>
       </main>

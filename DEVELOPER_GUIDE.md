@@ -10,7 +10,7 @@ For new lesson pages, use the `LessonPage` component:
 
 ```javascript
 import LessonPage from '../../../components/LessonPage';
-import styles from '../../../styles/Measurements.module.css';
+import styles from '../../../styles/ContentPage.module.css';
 
 export default function YourLessonPage() {
   const breadcrumbItems = [
@@ -46,7 +46,7 @@ export default function YourLessonPage() {
 
 ### 2. Available CSS Classes
 
-Use these predefined classes from `styles/Measurements.module.css`:
+Use these predefined classes from `styles/ContentPage.module.css`:
 
 - `styles.section` - Main content sections
 - `styles.beginnerNote` - Blue highlighted boxes for beginners
@@ -110,7 +110,7 @@ components/
 
 styles/
 ├── globals.css               # Global styles and CSS variables
-├── Measurements.module.css   # Lesson page styles (reusable)
+├── ContentPage.module.css    # Lesson and content page styles (reusable)
 └── [Component].module.css    # Component-specific styles
 ```
 

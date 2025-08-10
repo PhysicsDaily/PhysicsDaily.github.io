@@ -1,5 +1,4 @@
 import { Html, Head, Main, NextScript } from 'next/document';
-import Script from 'next/script';
 
 export default function Document() {
   return (
@@ -13,9 +12,7 @@ export default function Document() {
           rel="stylesheet"
         />
         
-        {/* MathJax Scripts (moved here for better performance) */}
-        <Script src="/mathjax-config.js" strategy="beforeInteractive" />
-        <Script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" strategy="beforeInteractive" />
+  {/* MathJax scripts are injected in _app.js with beforeInteractive strategy */}
       </Head>
       <body>
         <Main />
