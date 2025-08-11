@@ -1,5 +1,5 @@
 # Physics Daily
-.
+
 🔬 **Your comprehensive physics notes and study resources**
 
 Welcome to Physics Daily, a comprehensive website dedicated to providing clear, organized physics notes covering topics from classical mechanics to quantum physics. Whether you're a high school student, undergraduate, or just curious about the fascinating world of physics, you'll find detailed study materials to help you understand the fundamental principles that govern our universe.
