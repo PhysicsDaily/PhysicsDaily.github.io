@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numerical Problems: Measurement - Physics Daily</title>
+    <meta name="description" content="Practice numerical problems involving measurement, units, and dimensional analysis.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #64748b;
+            --accent-color: #06b6d4;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --border-radius: 12px;
+            --transition: all 0.2s ease;
+        }
+
+        [data-theme="dark"] {
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --card-bg: #334155;
+            --border-color: #475569;
+            --border-hover: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: all 0.3s ease;
+        }
+
+        /* Math and equation styling */
+        .math {
+            font-family: 'JetBrains Mono', monospace;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .equation {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1em;
+            font-weight: 500;
+            background: var(--bg-secondary);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .breadcrumb {
+            background: var(--bg-secondary);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary-color);
+        }
+
+        .separator {
+            margin: 0 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .current {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        /* Vertical theme toggle styling */
+        .theme-toggle {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 25px;
+            padding: 8px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .theme-toggle button {
+            background: none;
+            border: none;
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            color: var(--text-secondary);
+        }
+
+        .theme-toggle button:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            transform: scale(1.05);
+        }
+
+        .theme-toggle button.active {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: var(--shadow-md);
+        }
+
+        .theme-toggle button.active:hover {
+            background: var(--primary-dark);
+        }
+
+        .section {
+            margin: 32px 0;
+            padding: 24px;
+            border-radius: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .problem {
+            margin: 20px 0;
+            padding: 20px;
+            border-left: 4px solid var(--primary-color);
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .problem-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .problem-number {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .difficulty {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .difficulty.easy {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+        }
+
+        .difficulty.medium {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--warning-color);
+        }
+
+        .difficulty.hard {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+        }
+
+        .problem-content p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .given-data {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .given-data h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .given-data ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .given-data li {
+            margin: 0.25rem 0;
+            color: var(--text-secondary);
+        }
+
+        details {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: .5em .5em 0;
+            margin-top: 1em;
+            background: var(--bg-secondary);
+        }
+
+        summary {
+            font-weight: bold;
+            margin: -.5em -.5em 0;
+            padding: .5em;
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: color 0.2s ease;
+        }
+
+        summary:hover {
+            color: var(--primary-color);
+        }
+
+        details[open] summary {
+            color: var(--primary-color);
+        }
+
+        .solution {
+            padding: 1rem 0;
+        }
+
+        .solution h4 {
+            color: var(--primary-color);
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        .solution ol {
+            padding-left: 1.5rem;
+        }
+
+        .solution li {
+            margin: 0.75rem 0;
+            color: var(--text-secondary);
+        }
+
+        .final-answer {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-left: 4px solid var(--success-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        [data-theme="dark"] .final-answer {
+            background: linear-gradient(135deg, #14532d, #166534);
+        }
+
+        .formula-box {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .theme-toggle {
+                top: 80px;
+                right: 10px;
+                scale: 0.85;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .problem-header {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+        }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XN081SR2KP');
+    </script>
+</head>
+<body>
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../../index.html" class="nav-logo">Physics Daily</a>
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../resources.html">Resources</a></li>
+                    <li><a href="../../about.html">About</a></li>
+                    <li><a href="../../contribute.html">Contribute</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Vertical theme toggle -->
+    <div class="theme-toggle">
+        <button id="light-theme" title="Light Theme">☀️</button>
+        <button id="dark-theme" title="Dark Theme">🌙</button>
+    </div>
+
+    <div class="breadcrumb">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span class="separator">›</span>
+                <a href="../foundations.html">Classical Mechanics</a>
+                <span class="separator">›</span>
+                <a href="index.html">📏 Measurement</a>
+                <span class="separator">›</span>
+                <span class="current">🧮 Numerical Problems</span>
+            </nav>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <h1>Numerical Problems</h1>
+            <p class="subtitle">Chapter 1: Measurement</p>
+            <p class="description">
+                Practice your problem-solving skills with quantitative problems involving units, conversions, and calculations.
+            </p>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="section">
+                <h2>🧮 Numerical Problems</h2>
+                
+                <div class="problem">
+                    <div class="problem-header">
+                        <span class="problem-number">Problem 1</span>
+                        <span class="difficulty easy">Easy</span>
+                    </div>
+                    <div class="problem-content">
+                        <p>A student measures the sides of a rectangular block as <span class="equation">l = 15.12 cm</span>, <span class="equation">w = 3.45 cm</span>, and <span class="equation">h = 1.78 cm</span>. Calculate the volume of the block, expressing the answer with the correct number of significant figures.</p>
+                    </div>
+                    <details>
+                        <summary>Solution</summary>
+                        <div class="solution">
+                            <h4>Step 1: Identify the operation and rule</h4>
+                            <p>The volume <span class="math">V</span> is calculated by multiplication: <span class="equation">V = l × w × h</span>. The rule for multiplication is that the result must have the same number of significant figures as the measurement with the fewest significant figures.</p>
+                            
+                            <h4>Step 2: Count significant figures</h4>
+                            <ul>
+                                <li><span class="equation">l = 15.12 cm</span> has 4 significant figures.</li>
+                                <li><span class="equation">w = 3.45 cm</span> has 3 significant figures.</li>
+                                <li><span class="equation">h = 1.78 cm</span> has 3 significant figures.</li>
+                            </ul>
+                            <p>The result must be rounded to 3 significant figures.</p>
+                            
+                            <h4>Step 3: Calculate the volume</h4>
+                            <p><span class="equation">V = 15.12 cm × 3.45 cm × 1.78 cm = 92.78592 cm³</span></p>
+
+                            <h4>Step 4: Round to the correct number of significant figures</h4>
+                            <p>Rounding 92.78592 to 3 significant figures gives 92.8.</p>
+                            
+                            <div class="final-answer">
+                                <p><strong>Final Answer:</strong> The volume is <span class="equation">92.8 cm³</span>.</p>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="problem">
+                    <div class="problem-header">
+                        <span class="problem-number">Problem 2</span>
+                        <span class="difficulty easy">Easy</span>
+                    </div>
+                    <div class="problem-content">
+                        <p>The speed of light is approximately <span class="equation">3.00 × 10⁸ m/s</span>. Convert this speed to kilometers per hour (km/h).</p>
+                    </div>
+                    <details>
+                        <summary>Solution</summary>
+                        <div class="solution">
+                            <h4>Step 1: Set up the conversion factors</h4>
+                            <ul>
+                                <li>Meters to kilometers: <span class="equation">1 km = 1000 m</span></li>
+                                <li>Seconds to hours: <span class="equation">1 hour = 3600 s</span></li>
+                            </ul>
+
+                            <h4>Step 2: Perform the conversion</h4>
+                            <p>Speed = <span class="equation">(3.00 × 10⁸ m/s) × (1 km / 1000 m) × (3600 s / 1 hour)</span></p>
+                            <p>The units of meters and seconds cancel out, leaving km/hour.</p>
+                            <p>Speed = <span class="equation">(3.00 × 10⁸ × 3600) / 1000 km/h</span></p>
+                            <p>Speed = <span class="equation">(3.00 × 10⁸ × 3.6 × 10³) / 10³ km/h</span></p>
+                            <p>Speed = <span class="equation">3.00 × 3.6 × 10⁸ km/h = 10.8 × 10⁸ km/h</span></p>
+
+                            <h4>Step 3: Express in proper scientific notation</h4>
+                            <p>Move the decimal to get <span class="equation">1.08 × 10⁹ km/h</span>.</p>
+                            
+                            <div class="final-answer">
+                                <p><strong>Final Answer:</strong> The speed of light is <span class="equation">1.08 × 10⁹ km/h</span>.</p>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="problem">
+                    <div class="problem-header">
+                        <span class="problem-number">Problem 3</span>
+                        <span class="difficulty medium">Medium</span>
+                    </div>
+                    <div class="problem-content">
+                        <p>The period of oscillation <span class="math">T</span> of a body of mass <span class="math">m</span> suspended from a spring with spring constant <span class="math">k</span> is given by <span class="equation">T = 2π√(m/k)</span>. Check if this formula is dimensionally correct.</p>
+                        <div class="given-data">
+                            <h4>Dimensions:</h4>
+                            <ul>
+                                <li>Period <span class="math">T</span>: <span class="equation">[T]</span></li>
+                                <li>Mass <span class="math">m</span>: <span class="equation">[M]</span></li>
+                                <li>Spring constant <span class="math">k</span> (Force/length): <span class="equation">[F]/[L] = [MLT⁻²]/[L] = [MT⁻²]</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <details>
+                        <summary>Solution</summary>
+                        <div class="solution">
+                            <h4>Step 1: Analyze the Left-Hand Side (LHS)</h4>
+                            <p>The dimension of the LHS is the dimension of the period <span class="math">T</span>, which is <span class="equation">[T]</span>.</p>
+
+                            <h4>Step 2: Analyze the Right-Hand Side (RHS)</h4>
+                            <p>The term <span class="equation">2π</span> is a dimensionless constant, so we ignore it for dimensional analysis.</p>
+                            <p>The dimensions of the RHS are those of <span class="equation">√(m/k)</span>.</p>
+                            <p>Dimension of <span class="equation">m/k = [m]/[k] = [M] / [MT⁻²]</span></p>
+                            <p>Simplifying the dimensions: <span class="equation">[M] / [MT⁻²] = [M¹⁻¹ T²] = [T²]</span></p>
+                            <p>Now, take the square root: <span class="equation">√([T²]) = [T]</span>.</p>
+
+                            <h4>Step 3: Compare LHS and RHS</h4>
+                            <p>Dimension of LHS = <span class="equation">[T]</span></p>
+                            <p>Dimension of RHS = <span class="equation">[T]</span></p>
+                            
+                            <div class="final-answer">
+                                <p><strong>Conclusion:</strong> Since the dimensions of the LHS and RHS are the same, the formula is <strong>dimensionally correct</strong>.</p>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="problem">
+                    <div class="problem-header">
+                        <span class="problem-number">Problem 4</span>
+                        <span class="difficulty medium">Medium</span>
+                    </div>
+                    <div class="problem-content">
+                        <p>The resistance of a wire is measured in an experiment, and the following values are recorded: <span class="equation">4.10 Ω, 4.14 Ω, 4.08 Ω, 4.12 Ω</span>. Calculate:</p>
+                        <p><strong>a)</strong> The mean resistance.</p>
+                        <p><strong>b)</strong> The mean absolute error.</p>
+                        <p><strong>c)</strong> The percentage error.</p>
+                        <p><strong>d)</strong> The final result in the form <span class="equation">R ± ΔR</span>.</p>
+                    </div>
+                    <details>
+                        <summary>Solution</summary>
+                        <div class="solution">
+                            <h4>Step 1: Calculate the mean resistance (a)</h4>
+                            <p><span class="equation">R_mean = (4.10 + 4.14 + 4.08 + 4.12) / 4 = 16.44 / 4 = 4.11 Ω</span></p>
+
+                            <h4>Step 2: Calculate the absolute errors for each measurement</h4>
+                            <ul>
+                                <li><span class="equation">|4.11 - 4.10| = 0.01 Ω</span></li>
+                                <li><span class="equation">|4.11 - 4.14| = 0.03 Ω</span></li>
+                                <li><span class="equation">|4.11 - 4.08| = 0.03 Ω</span></li>
+                                <li><span class="equation">|4.11 - 4.12| = 0.01 Ω</span></li>
+                            </ul>
+
+                            <h4>Step 3: Calculate the mean absolute error (b)</h4>
+                            <p><span class="equation">ΔR_mean = (0.01 + 0.03 + 0.03 + 0.01) / 4 = 0.08 / 4 = 0.02 Ω</span></p>
+
+                            <h4>Step 4: Calculate the percentage error (c)</h4>
+                            <p>Relative Error = <span class="equation">ΔR_mean / R_mean = 0.02 / 4.11 ≈ 0.004866</span></p>
+                            <p>Percentage Error = <span class="equation">0.004866 × 100% ≈ 0.49%</span></p>
+
+                            <h4>Step 5: Express the final result (d)</h4>
+                            <p>The result should be written as <span class="equation">R ± ΔR</span>, where the uncertainty is rounded to one significant figure, and the main value is rounded to the same decimal place.</p>
+                            <p><span class="equation">ΔR = 0.02 Ω</span>. This is in the hundredths place.</p>
+                            <p><span class="equation">R_mean = 4.11 Ω</span>. This is also in the hundredths place.</p>
+                            
+                            <div class="final-answer">
+                                <p><strong>a) Mean Resistance:</strong> <span class="equation">4.11 Ω</span></p>
+                                <p><strong>b) Mean Absolute Error:</strong> <span class="equation">0.02 Ω</span></p>
+                                <p><strong>c) Percentage Error:</strong> <span class="equation">0.49%</span></p>
+                                <p><strong>d) Final Result:</strong> <span class="equation">R = (4.11 ± 0.02) Ω</span></p>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="problem">
+                    <div class="problem-header">
+                        <span class="problem-number">Problem 5</span>
+                        <span class="difficulty medium">Medium</span>
+                    </div>
+                    <div class="problem-content">
+                        <p>The voltage across a resistor is measured to be <span class="equation">V = (10.0 ± 0.2) V</span> and the current through it is <span class="equation">I = (2.50 ± 0.05) A</span>. Calculate the resistance <span class="math">R</span> using Ohm's Law (<span class="equation">R = V/I</span>) and find its percentage error.</p>
+                    </div>
+                    <details>
+                        <summary>Solution</summary>
+                        <div class="solution">
+                            <h4>Step 1: Calculate the mean resistance</h4>
+                            <p><span class="equation">R_mean = V_mean / I_mean = 10.0 V / 2.50 A = 4.00 Ω</span></p>
+
+                            <h4>Step 2: Calculate the relative errors of V and I</h4>
+                            <p>Relative error in Voltage: <span class="equation">ΔV/V = 0.2 / 10.0 = 0.02</span></p>
+                            <p>Relative error in Current: <span class="equation">ΔI/I = 0.05 / 2.50 = 0.02</span></p>
+
+                            <h4>Step 3: Add the relative errors to find the relative error in R</h4>
+                            <p>For division, the relative errors add: <span class="equation">ΔR/R = ΔV/V + ΔI/I</span></p>
+                            <p><span class="equation">ΔR/R = 0.02 + 0.02 = 0.04</span></p>
+
+                            <h4>Step 4: Calculate the percentage error in R</h4>
+                            <p>Percentage Error = <span class="equation">(ΔR/R) × 100% = 0.04 × 100% = 4%</span></p>
+                            
+                            <h4>Step 5 (Optional): Find the absolute error and final result</h4>
+                            <p>Absolute error <span class="equation">ΔR = R_mean × (ΔR/R) = 4.00 Ω × 0.04 = 0.16 Ω</span></p>
+                            <p>Final Result: <span class="equation">R = (4.00 ± 0.16) Ω</span>. Rounded properly: <span class="equation">R = (4.0 ± 0.2) Ω</span>.</p>
+
+                            <div class="final-answer">
+                                <p><strong>Final Answer:</strong> The resistance is <span class="equation">4.00 Ω</span> with a percentage error of <strong>4%</strong>.</p>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+                
+                <div class="problem">
+                    <div class="problem-header">
+                        <span class="problem-number">Problem 6</span>
+                        <span class="difficulty hard">Hard</span>
+                    </div>
+                    <div class="problem-content">
+                        <p>The frequency <span class="math">f</span> of a vibrating string depends on its length <span class="math">L</span>, the tension <span class="math">F</span> (a force), and its mass per unit length <span class="math">μ</span>. Use dimensional analysis to find the relationship between <span class="math">f</span>, <span class="math">L</span>, <span class="math">F</span>, and <span class="math">μ</span>.</p>
+                         <div class="given-data">
+                            <h4>Dimensions:</h4>
+                            <ul>
+                                <li>Frequency <span class="math">f</span>: <span class="equation">[T⁻¹]</span></li>
+                                <li>Length <span class="math">L</span>: <span class="equation">[L]</span></li>
+                                <li>Tension <span class="math">F</span> (Force): <span class="equation">[MLT⁻²]</span></li>
+                                <li>Mass per unit length <span class="math">μ</span>: <span class="equation">[M]/[L] = [ML⁻¹]</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <details>
+                        <summary>Solution</summary>
+                        <div class="solution">
+                            <h4>Step 1: Assume the relationship</h4>
+                            <p>Let <span class="equation">f = k × Lᵃ × Fᵇ × μᶜ</span>, where k is a dimensionless constant.</p>
+
+                            <h4>Step 2: Write the dimensional equation</h4>
+                            <p><span class="equation">[T⁻¹] = [L]ᵃ × [MLT⁻²]ᵇ × [ML⁻¹]ᶜ</span></p>
+                            <p>Combine the powers for each dimension:</p>
+                            <p><span class="equation">[M⁰L⁰T⁻¹] = [Lᵃ] × [MᵇLᵇT⁻²ᵇ] × [MᶜL⁻ᶜ]</span></p>
+                            <p><span class="equation">[M⁰L⁰T⁻¹] = [Mᵇ⁺ᶜ Lᵃ⁺ᵇ⁻ᶜ T⁻²ᵇ]</span></p>
+
+                            <h4>Step 3: Equate the powers for each dimension</h4>
+                            <ol>
+                                <li>For Mass [M]: <span class="equation">0 = b + c</span>  => <span class="equation">c = -b</span></li>
+                                <li>For Time [T]: <span class="equation">-1 = -2b</span> => <span class="equation">b = 1/2</span></li>
+                                <li>For Length [L]: <span class="equation">0 = a + b - c</span></li>
+                            </ol>
+
+                            <h4>Step 4: Solve for the exponents</h4>
+                            <p>From (2), we have <span class="equation">b = 1/2</span>.</p>
+                            <p>Using (1), <span class="equation">c = -b = -1/2</span>.</p>
+                            <p>Using (3), <span class="equation">0 = a + (1/2) - (-1/2) = a + 1</span> => <span class="equation">a = -1</span>.</p>
+
+                            <h4>Step 5: Substitute the exponents back into the assumed relationship</h4>
+                            <p><span class="equation">f = k × L⁻¹ × F¹/² × μ⁻¹/²</span></p>
+                            <p>This can be rewritten as: <span class="equation">f = (k/L) × √(F/μ)</span></p>
+
+                            <div class="final-answer">
+                                <p><strong>Final Relationship:</strong> <span class="equation">f ∝ (1/L)√(F/μ)</span>. (The actual formula has <span class="equation">k=1/2</span>).</p>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="problem">
+                    <div class="problem-header">
+                        <span class="problem-number">Problem 7</span>
+                        <span class="difficulty hard">Hard</span>
+                    </div>
+                    <div class="problem-content">
+                        <p>A physical quantity <span class="math">P</span> is related to four observables <span class="math">a, b, c,</span> and <span class="math">d</span> as follows: <span class="equation">P = a³b² / (√c d)</span>. The percentage errors of measurement in <span class="math">a, b, c,</span> and <span class="math">d</span> are 1%, 3%, 4%, and 2%, respectively. What is the percentage error in the quantity <span class="math">P</span>?</p>
+                    </div>
+                    <details>
+                        <summary>Solution</summary>
+                        <div class="solution">
+                            <h4>Step 1: Write the formula for relative error propagation</h4>
+                            <p>Given the relationship <span class="equation">P = a³b² / (c¹/² d¹)</span>, the relative error in P is the sum of the relative errors of each variable multiplied by the magnitude of its power.</p>
+                            <p class="formula-box"><span class="equation">ΔP/P = 3(Δa/a) + 2(Δb/b) + (1/2)(Δc/c) + 1(Δd/d)</span></p>
+                            <p>Note: Errors are always added, regardless of whether the variable is in the numerator or denominator.</p>
+
+                            <h4>Step 2: Convert percentage errors to relative errors (or work directly with percentages)</h4>
+                            <p>We are given the percentage errors, which is <span class="equation">(Δx/x) × 100%</span>. We can use these values directly.</p>
+                            <ul>
+                                <li>% error in a = <span class="equation">3 × 1% = 3%</span></li>
+                                <li>% error in b = <span class="equation">2 × 3% = 6%</span></li>
+                                <li>% error in c = <span class="equation">(1/2) × 4% = 2%</span></li>
+                                <li>% error in d = <span class="equation">1 × 2% = 2%</span></li>
+                            </ul>
+
+                            <h4>Step 3: Sum the resulting percentage errors</h4>
+                            <p>Total % error in P = (Contribution from a) + (Contribution from b) + (Contribution from c) + (Contribution from d)</p>
+                            <p>Total % error = <span class="equation">3% + 6% + 2% + 2% = 13%</span></p>
+
+                            <div class="final-answer">
+                                <p><strong>Final Answer:</strong> The percentage error in the quantity <span class="math">P</span> is <strong>13%</strong>.</p>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="problem">
+                    <div class="problem-header">
+                        <span class="problem-number">Problem 8</span>
+                        <span class="difficulty hard">Hard</span>
+                    </div>
+                    <div class="problem-content">
+                        <p>The radius of a sphere is measured to be <span class="equation">r = (2.15 ± 0.05) cm</span>. Calculate the surface area and volume of the sphere and express them with their error limits.</p>
+                    </div>
+                    <details>
+                        <summary>Solution</summary>
+                        <div class="solution">
+                            <h4>Part 1: Surface Area (<span class="equation">A = 4πr²</span>)</h4>
+                            <p><strong>1. Calculate the mean area:</strong></p>
+                            <p><span class="equation">A_mean = 4π(2.15 cm)² = 4π(4.6225 cm²) ≈ 58.088 cm²</span></p>
+                            <p><strong>2. Calculate the relative error in area:</strong></p>
+                            <p>Using the power rule, <span class="equation">ΔA/A = 2(Δr/r)</span>.</p>
+                            <p><span class="equation">Δr/r = 0.05 / 2.15 ≈ 0.02326</span></p>
+                            <p><span class="equation">ΔA/A = 2 × 0.02326 = 0.04652</span></p>
+                            <p><strong>3. Calculate the absolute error in area:</strong></p>
+                            <p><span class="equation">ΔA = A_mean × (ΔA/A) = 58.088 × 0.04652 ≈ 2.702 cm²</span></p>
+                            <p><strong>4. Express the final result for area:</strong></p>
+                            <p>Round error to one sig fig: <span class="equation">ΔA ≈ 3 cm²</span>. Round mean value to the same decimal place (the ones place): <span class="equation">A_mean ≈ 58 cm²</span>.</p>
+                            <p>Surface Area = <span class="equation">(58 ± 3) cm²</span></p>
+
+                            <h4>Part 2: Volume (<span class="equation">V = (4/3)πr³</span>)</h4>
+                            <p><strong>1. Calculate the mean volume:</strong></p>
+                            <p><span class="equation">V_mean = (4/3)π(2.15 cm)³ = (4/3)π(9.938375 cm³) ≈ 41.629 cm³</span></p>
+                            <p><strong>2. Calculate the relative error in volume:</strong></p>
+                            <p>Using the power rule, <span class="equation">ΔV/V = 3(Δr/r)</span>.</p>
+                            <p><span class="equation">ΔV/V = 3 × 0.02326 = 0.06978</span></p>
+                            <p><strong>3. Calculate the absolute error in volume:</strong></p>
+                            <p><span class="equation">ΔV = V_mean × (ΔV/V) = 41.629 × 0.06978 ≈ 2.905 cm³</span></p>
+                            <p><strong>4. Express the final result for volume:</strong></p>
+                            <p>Round error to one sig fig: <span class="equation">ΔV ≈ 3 cm³</span>. Round mean value to the same decimal place (the ones place): <span class="equation">V_mean ≈ 42 cm³</span>.</p>
+                            <p>Volume = <span class="equation">(42 ± 3) cm³</span></p>
+
+                            <div class="final-answer">
+                                <p><strong>Surface Area:</strong> <span class="equation">(58 ± 3) cm²</span></p>
+                                <p><strong>Volume:</strong> <span class="equation">(42 ± 3) cm³</span></p>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Complete theme toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const lightThemeBtn = document.getElementById('light-theme');
+            const darkThemeBtn = document.getElementById('dark-theme');
+            const docElement = document.documentElement;
+
+            const applyTheme = (theme) => {
+                docElement.setAttribute('data-theme', theme);
+                if (theme === 'dark') {
+                    darkThemeBtn.classList.add('active');
+                    lightThemeBtn.classList.remove('active');
+                } else {
+                    lightThemeBtn.classList.add('active');
+                    darkThemeBtn.classList.remove('active');
+                }
+                localStorage.setItem('theme', theme);
+            };
+
+            // Check for saved theme preference or default to 'light'
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            applyTheme(savedTheme);
+
+            // Event listeners for theme buttons
+            lightThemeBtn.addEventListener('click', () => {
+                applyTheme('light');
+            });
+
+            darkThemeBtn.addEventListener('click', () => {
+                applyTheme('dark');
+            });
+        });
+    </script>
+</body>
+</html>
