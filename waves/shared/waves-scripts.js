@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to get progress from localStorage
     function getChapterProgress() {
         const progress = {
-            '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0
+            '18': 0, '19': 0, '20': 0
         };
         for (let chapter in progress) {
             const savedProgress = localStorage.getItem(`chapter-${chapter}-progress`);
