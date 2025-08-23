@@ -51,4 +51,25 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.fade-in').forEach(el => {
         observer.observe(el);
     });
+
+    // --- Back-to-top Button (auto-inject if not present) ---
+    let backToTop = document.querySelector('.back-to-top');
+    if (!backToTop) {
+        backToTop = document.createElement('button');
+        backToTop.className = 'back-to-top';
+        backToTop.setAttribute('aria-label', 'Back to top');
+        backToTop.title = 'Back to top';
+        backToTop.innerHTML = '↑';
+        document.body.appendChild(backToTop);
+    }
+
+    const toggleBackToTop = () => {
+        if (window.scrollY > 300) backToTop.classList.add('visible');
+        else backToTop.classList.remove('visible');
+    };
+    toggleBackToTop();
+    window.addEventListener('scroll', toggleBackToTop, { passive: true });
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 });

@@ -3,20 +3,20 @@
 document.addEventListener('DOMContentLoaded', function() {
     const lightModeBtn = document.getElementById('light-mode');
     const darkModeBtn = document.getElementById('dark-mode');
-    const body = document.body;
+    const docElement = document.documentElement;
 
     // Check for saved theme preference or default to light mode
     const currentTheme = localStorage.getItem('theme') || 'light';
     
     if (currentTheme === 'dark') {
-        body.setAttribute('data-theme', 'dark');
+        docElement.setAttribute('data-theme', 'dark');
         if(lightModeBtn) lightModeBtn.classList.remove('active');
         if(darkModeBtn) darkModeBtn.classList.add('active');
     }
 
     if(lightModeBtn) {
         lightModeBtn.addEventListener('click', () => {
-            body.removeAttribute('data-theme');
+            docElement.setAttribute('data-theme', 'light');
             localStorage.setItem('theme', 'light');
             lightModeBtn.classList.add('active');
             if(darkModeBtn) darkModeBtn.classList.remove('active');
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if(darkModeBtn) {
         darkModeBtn.addEventListener('click', () => {
-            body.setAttribute('data-theme', 'dark');
+            docElement.setAttribute('data-theme', 'dark');
             localStorage.setItem('theme', 'dark');
             if(lightModeBtn) lightModeBtn.classList.remove('active');
             darkModeBtn.classList.add('active');
@@ -99,4 +99,22 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.fade-in').forEach(el => {
         observer.observe(el);
     });
+
+    // Back-to-top (shared)
+    let backToTop = document.querySelector('.back-to-top');
+    if (!backToTop) {
+        backToTop = document.createElement('button');
+        backToTop.className = 'back-to-top';
+        backToTop.setAttribute('aria-label', 'Back to top');
+        backToTop.title = 'Back to top';
+        backToTop.textContent = '↑';
+        document.body.appendChild(backToTop);
+    }
+    const toggleBackToTop = () => {
+        if (window.scrollY > 300) backToTop.classList.add('visible');
+        else backToTop.classList.remove('visible');
+    };
+    toggleBackToTop();
+    window.addEventListener('scroll', toggleBackToTop, { passive: true });
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 });

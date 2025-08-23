@@ -71,6 +71,15 @@ This website is actively being developed. Each physics topic section will includ
 - **Progressive difficulty** - From basics to advanced concepts
 - **Searchable content** - Quick access to specific topics
 
+### ✨ UI/UX Enhancements (2025-08)
+
+- Modernized typography scale and improved readability
+- Light/Dark theme with persistent preference (toggle at top-right)
+- Subtle card shadows, rounded corners, and gradients where appropriate
+- Better keyboard focus states and reduced-motion support
+- Back-to-top button appears after scrolling
+- Polished MCQ interface with clearer selected/hover states and print-friendly results
+
 ## 🛠️ Built With
 
 - **HTML5** - Structure and content
@@ -85,6 +94,11 @@ This website is actively being developed. Each physics topic section will includ
 3. Use the navigation menu to jump between sections
 4. Practice with the provided examples and problems
 5. Reference the formula sheets for quick lookups
+
+### Theme Toggle
+
+- Click the sun/moon button to switch themes.
+- Preference is saved to `localStorage` and applied across pages.
 
 ## 🤝 Contributing
 
