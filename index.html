@@ -5,10 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Physics Daily - Comprehensive Physics Learning Platform</title>
     <meta name="description" content="Comprehensive physics notes and study resources covering mechanics, thermodynamics, electromagnetism, optics, and modern physics. Interactive learning for advanced physics concepts.">
+    <meta name="keywords" content="physics education, online learning, physics notes, mechanics, thermodynamics, electromagnetism, optics, modern physics, interactive quizzes, physics problems">
+    <meta name="author" content="Physics Daily Team">
+    
+    <!-- Open Graph meta tags for social media -->
+    <meta property="og:title" content="Physics Daily - Comprehensive Physics Learning Platform">
+    <meta property="og:description" content="Master physics with comprehensive notes, interactive quizzes, and study resources covering all major topics from mechanics to modern physics.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://physicsdaily.github.io/">
+    <meta property="og:site_name" content="Physics Daily">
+    
+    <!-- Twitter Card meta tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Physics Daily - Comprehensive Physics Learning Platform">
+    <meta name="twitter:description" content="Master physics with comprehensive notes, interactive quizzes, and study resources covering all major topics from mechanics to modern physics.">
+    
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <meta name="google-site-verification" content="Ymi0Tv40FP7rKnVowfeCm69EwVaihVBHo5qp8xstwu0" />
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "Physics Daily",
+        "description": "Comprehensive physics learning platform covering mechanics, thermodynamics, electromagnetism, optics, and modern physics",
+        "url": "https://physicsdaily.github.io/",
+        "educationalLevel": "Higher Education",
+        "teaches": [
+            "Physics",
+            "Mechanics",
+            "Thermodynamics", 
+            "Electromagnetism",
+            "Optics",
+            "Modern Physics"
+        ],
+        "learningResourceType": [
+            "Study Notes",
+            "Interactive Quizzes",
+            "Practice Problems",
+            "Conceptual Questions"
+        ]
+    }
+    </script>
     <style>
         :root {
             --primary-color: #2563eb;
@@ -286,13 +329,15 @@
             background: var(--gradient-modern);
         }
 
-        .topic-card:hover {
+        .topic-card:hover, .topic-card:focus {
             transform: translateY(-4px);
             box-shadow: var(--shadow-lg);
             border-color: var(--border-hover);
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
         }
 
-        .topic-card:hover:before {
+        .topic-card:hover:before, .topic-card:focus:before {
             height: 6px;
         }
 
@@ -427,6 +472,37 @@
             color: var(--primary-color);
         }
 
+        /* Screen reader only text */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Skip navigation for accessibility */
+        .skip-nav {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: var(--primary-color);
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            border-radius: 4px;
+            z-index: 1000;
+            transition: top 0.3s;
+        }
+
+        .skip-nav:focus {
+            top: 6px;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .container {
@@ -506,6 +582,9 @@
      crossorigin="anonymous"></script>
 </head>
 <body>
+    <!-- Skip Navigation for Accessibility -->
+    <a href="#main-content" class="skip-nav">Skip to main content</a>
+    
     <!-- Theme Toggle -->
     <div class="theme-toggle">
         <button id="light-mode" class="active" title="Light Mode">☀️</button>
@@ -532,17 +611,18 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero-section">
+    <section class="hero-section" aria-labelledby="hero-heading">
         <div class="container">
-            <h2>Complete Physics Education</h2>
+            <h2 id="hero-heading">Complete Physics Education</h2>
             <p>Comprehensive coverage of 52 chapters with modern, interactive learning tools for advanced physics study.</p>
         </div>
     </section>
 
-    <main class="main-content">
+    <main id="main-content" class="main-content" role="main">
         <div class="container">
             <!-- Statistics Section -->
-            <section class="stats-section fade-in">
+            <section class="stats-section fade-in" aria-labelledby="stats-heading">
+                <h2 id="stats-heading" class="sr-only">Physics Daily Statistics</h2>
                 <div class="stats-grid">
                     <div class="stat-item">
                         <span class="stat-number">52</span>
@@ -564,14 +644,14 @@
             </section>
 
             <!-- Classical Mechanics -->
-            <section id="foundations" class="section fade-in">
+            <section id="foundations" class="section fade-in" aria-labelledby="mechanics-heading">
                 <div class="section-header">
-                    <h2 class="section-title">Classical Mechanics</h2>
+                    <h2 id="mechanics-heading" class="section-title">Classical Mechanics</h2>
                     <p class="section-subtitle">
                         Foundations of physics: measurement, kinematics, dynamics, energy, momentum, and rotational motion
                     </p>
                 </div>
-                <div class="topic-grid">
+                <div class="topic-grid" role="group" aria-labelledby="mechanics-heading">
                     <a href="mechanics/foundations.html" class="topic-card mechanics">
                         <div class="chapter-number">Chapters 1-7</div>
                         <h3>Foundations & Kinematics</h3>

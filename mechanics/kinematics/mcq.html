@@ -8,6 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/mcq-styles.css">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -147,6 +150,11 @@
         <div class="container">
             <div class="nav-content">
                 <a href="../../index.html" class="nav-logo">Physics Daily</a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <ul class="nav-links">
                     <li><a href="../../index.html">Home</a></li>
                     <li><a href="../../resources.html">Resources</a></li>
@@ -571,8 +579,19 @@
             if (confirm('Are you sure you want to submit the test?')) {
                 submitTest();
             }
+    <script src="../../assets/js/global.js"></script>
+    <script src="../../assets/js/quiz-manager.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize quiz with configuration
+            const quiz = new QuizManager({
+                dataUrl: '../../assets/js/mcq-data/kinematics-quiz.json',
+                maxQuestions: 50,
+                defaultTime: 60,
+                positiveMarks: 4,
+                negativeMarks: 1
+            });
         });
-    });
     </script>
 </body>
 </html>

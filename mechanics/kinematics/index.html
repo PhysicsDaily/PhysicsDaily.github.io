@@ -8,7 +8,33 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/global.css">
     <style>
+        /* Page-specific styles */
+        .section {
+            margin-bottom: 3rem;
+        }
+        .beginner-note {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--success-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+        .intermediate-note {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--warning-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+        .advanced-note {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--danger-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
         :root {
             --primary-color: #2563eb;
             --primary-dark: #1d4ed8;
@@ -528,6 +554,11 @@
         <div class="container">
             <div class="nav-content">
                 <a href="../../index.html" class="nav-logo">Physics Daily</a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <ul class="nav-links">
                     <li><a href="../../index.html">Home</a></li>
                     <li><a href="../../resources.html">Resources</a></li>
@@ -1099,38 +1130,6 @@
         </div>
     </footer>
 
-    <script>
-        // Complete theme toggle functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const lightThemeBtn = document.getElementById('light-theme');
-            const darkThemeBtn = document.getElementById('dark-theme');
-            const docElement = document.documentElement;
-
-            const applyTheme = (theme) => {
-                docElement.setAttribute('data-theme', theme);
-                if (theme === 'dark') {
-                    darkThemeBtn.classList.add('active');
-                    lightThemeBtn.classList.remove('active');
-                } else {
-                    lightThemeBtn.classList.add('active');
-                    darkThemeBtn.classList.remove('active');
-                }
-                localStorage.setItem('theme', theme);
-            };
-
-            // Check for saved theme preference or default to 'light'
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            applyTheme(savedTheme);
-
-            // Event listeners for theme buttons
-            lightThemeBtn.addEventListener('click', () => {
-                applyTheme('light');
-            });
-
-            darkThemeBtn.addEventListener('click', () => {
-                applyTheme('dark');
-            });
-        });
-    </script>
+    <script src="../../assets/js/global.js"></script>
 </body>
 </html>
