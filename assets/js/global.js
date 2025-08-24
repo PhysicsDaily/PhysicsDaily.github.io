@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // --- Theme Toggle Functionality ---
-    const lightModeBtn = document.getElementById('light-mode-btn') || document.getElementById('light-mode');
-    const darkModeBtn = document.getElementById('dark-mode-btn') || document.getElementById('dark-mode');
+    const lightModeBtn = document.getElementById('light-mode');
+    const darkModeBtn = document.getElementById('dark-mode');
     const docElement = document.documentElement;
 
     // Function to apply the theme
@@ -43,67 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
             navToggle.classList.toggle('active');
             navLinks.classList.toggle('active');
         });
-
-        // Close mobile menu when clicking on links
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navToggle.classList.remove('active');
-                navLinks.classList.remove('active');
-            });
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
-                navToggle.classList.remove('active');
-                navLinks.classList.remove('active');
-            }
-        });
     }
-
-    // --- Progress Tracking (Common functionality) ---
-    function getChapterProgress(section = 'general') {
-        const progress = {};
-        const keys = Object.keys(localStorage).filter(key => key.startsWith(`${section}-chapter-`) && key.endsWith('-progress'));
-        keys.forEach(key => {
-            const chapterNum = key.match(/-chapter-(\d+)-/)?.[1];
-            if (chapterNum) {
-                progress[chapterNum] = parseInt(localStorage.getItem(key), 10) || 0;
-            }
-        });
-        return progress;
-    }
-
-    function updateProgressDisplay() {
-        const progressBars = document.querySelectorAll('.progress-bar');
-        progressBars.forEach(bar => {
-            const chapter = bar.dataset.chapter;
-            const section = bar.dataset.section || 'general';
-            const progress = localStorage.getItem(`${section}-chapter-${chapter}-progress`) || 0;
-            bar.style.width = `${progress}%`;
-        });
-
-        // Update statistics
-        const statNumbers = document.querySelectorAll('.stat-number');
-        statNumbers.forEach(stat => {
-            const type = stat.dataset.type;
-            const section = stat.dataset.section || 'general';
-            
-            if (type === 'completed') {
-                const completed = Object.values(getChapterProgress(section)).filter(p => p === 100).length;
-                stat.textContent = completed;
-            } else if (type === 'in-progress') {
-                const inProgress = Object.values(getChapterProgress(section)).filter(p => p > 0 && p < 100).length;
-                stat.textContent = inProgress;
-            } else if (type === 'total') {
-                const total = Object.keys(getChapterProgress(section)).length;
-                stat.textContent = total || document.querySelectorAll('.chapter-card').length;
-            }
-        });
-    }
-
-    // Initialize progress display
-    updateProgressDisplay();
 
     // --- Scroll Reveal Animation ---
     const observerOptions = {
@@ -123,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 
-    // --- Back-to-top Button (auto-inject if not present) ---
+    // --- Back-to-top Button ---
     let backToTop = document.querySelector('.back-to-top');
     if (!backToTop) {
         backToTop = document.createElement('button');
@@ -135,8 +75,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const toggleBackToTop = () => {
-        if (window.scrollY > 300) backToTop.classList.add('visible');
-        else backToTop.classList.remove('visible');
+        if (window.scrollY > 300) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
     };
     toggleBackToTop();
     window.addEventListener('scroll', toggleBackToTop, { passive: true });
