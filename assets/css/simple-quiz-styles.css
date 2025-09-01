@@ -140,14 +140,14 @@
 
 /* Quiz Interface */
 .quiz-main-interface {
-    padding: 1rem;
+    padding: 0.75rem;
 }
 
 .quiz-content {
     display: grid;
-    grid-template-columns: 1fr 300px;
-    gap: 2rem;
-    max-width: 1400px;
+    grid-template-columns: 1fr 280px;
+    gap: 1.5rem;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
@@ -162,7 +162,7 @@
 
 .timer-section {
     background: var(--bg-secondary);
-    padding: 1.5rem;
+    padding: 1rem;
     text-align: center;
     border-bottom: 1px solid var(--border-color);
 }
@@ -195,7 +195,7 @@
 }
 
 .question-content {
-    padding: 2rem;
+    padding: 1.5rem;
 }
 
 .question-header {
@@ -326,7 +326,7 @@
     background: var(--card-bg);
     border-radius: var(--border-radius);
     border: 1px solid var(--border-color);
-    padding: 1.5rem;
+    padding: 1.25rem;
     box-shadow: var(--shadow-lg);
     height: fit-content;
 }
@@ -346,8 +346,8 @@
 }
 
 .palette-btn {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border: 2px solid var(--border-color);
     background: var(--bg-secondary);
     color: var(--text-secondary);
@@ -640,7 +640,7 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
     .quiz-content {
         grid-template-columns: 1fr;
         gap: 1.5rem;
@@ -648,6 +648,7 @@
     
     .question-palette-section {
         order: -1;
+        margin-bottom: 1rem;
     }
 }
 
