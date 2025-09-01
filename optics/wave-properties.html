@@ -5,41 +5,207 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Optics: Wave Properties of Light - Physics Daily</title>
     <meta name="description" content="Explore the wave nature of light, including gratings, spectra, and polarization. Comprehensive study guide for Chapters 43-45.">
-    <link rel="stylesheet" href="shared/optics-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/global.css">
 </head>
 <body>
     <nav class="nav">
         <div class="container">
-            <a href="../index.html" class="nav-logo">Physics Daily</a>
+            <div class="nav-content">
+                <a href="../index.html" class="nav-logo">Physics Daily</a>
+            </div>
         </div>
     </nav>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <button id="theme-light" class="theme-btn" aria-label="Switch to light theme">☀️</button>
+        <button id="theme-dark" class="theme-btn" aria-label="Switch to dark theme">🌙</button>
+    </div>
+
     <div class="breadcrumb">
         <div class="container">
-            <a href="../index.html">Home</a>
-            <span class="separator">›</span>
-            <a href="../index.html#optics">Optics</a>
-            <span class="separator">›</span>
-            <span class="current">Wave Properties of Light</span>
+            <nav aria-label="Breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="separator">›</span>
+                <a href="../index.html#optics">Optics</a>
+                <span class="separator">›</span>
+                <span class="current">🌊 Wave Properties of Light</span>
+            </nav>
         </div>
     </div>
+
     <header class="header">
         <div class="container">
-            <h1>Wave Properties of Light</h1>
+            <h1>Optics: Wave Properties of Light</h1>
             <p class="subtitle">Chapters 43-45: Beyond Geometric Rays</p>
+            <p class="description">
+                Explore the wave nature of light through diffraction gratings, polarization phenomena, and quantum properties of photons.
+            </p>
         </div>
     </header>
+
+    <!-- Learning Objectives -->
+    <section class="objectives-section">
+        <div class="container">
+            <h2>🎯 Learning Objectives</h2>
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <div class="objective-icon">🌈</div>
+                    <h3>Gratings & Spectra</h3>
+                    <p>Master diffraction gratings and analyze spectral line formation</p>
+                </div>
+                <div class="objective-card">
+                    <div class="objective-icon">🌀</div>
+                    <h3>Polarization</h3>
+                    <p>Understand polarization states and polarizing filter applications</p>
+                </div>
+                <div class="objective-card">
+                    <div class="objective-icon">⚡</div>
+                    <h3>Photons</h3>
+                    <p>Explore the dual nature of light and quantum photon properties</p>
+                </div>
+                <div class="objective-card">
+                    <div class="objective-icon">🔬</div>
+                    <h3>Modern Optics</h3>
+                    <p>Apply wave optics to advanced optical technologies</p>
+                </div>
+            </div>
+        </div>
+    </section>
     <main class="main-content">
         <div class="container">
+            <!-- Progress Section -->
+            <div class="progress-section">
+                <h2>📊 Your Progress</h2>
+                <div class="progress-stats">
+                    <div class="progress-stat">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Chapters Completed</span>
+                    </div>
+                    <div class="progress-stat">
+                        <span class="stat-number">9</span>
+                        <span class="stat-label">Total Topics</span>
+                    </div>
+                    <div class="progress-stat">
+                        <span class="stat-number">~16</span>
+                        <span class="stat-label">Hours (Estimated)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chapters Section -->
             <section class="chapters-section">
                 <h2>📚 Chapters Overview</h2>
                 <div class="chapter-grid">
-                    <div class="chapter-card"><h3>Gratings and Spectra</h3><a href="chapter43/index.html">Start</a></div>
-                    <div class="chapter-card"><h3>Polarization</h3><a href="chapter44/index.html">Start</a></div>
-                    <div class="chapter-card"><h3>Nature of Light</h3><a href="chapter45/index.html">Start</a></div>
+                    <div class="chapter-card">
+                        <div class="chapter-header">
+                            <span class="chapter-number">Chapter 43</span>
+                            <span class="difficulty-badge intermediate">INTERMEDIATE</span>
+                        </div>
+                        <h3>Gratings and Spectra</h3>
+                        <p class="chapter-description">Master diffraction gratings, spectral analysis, and resolving power of optical instruments.</p>
+                        <div class="chapter-stats">
+                            <span>⏱️ 5-6 hours</span>
+                            <span>📖 3 topics</span>
+                        </div>
+                        <div class="chapter-topics">
+                            <span class="topic-tag">Diffraction Gratings</span>
+                            <span class="topic-tag">Spectral Lines</span>
+                            <span class="topic-tag">Resolution</span>
+                        </div>
+                        <div class="chapter-actions">
+                            <a href="chapter43/index.html" class="btn btn-primary">Start Chapter</a>
+                            <div class="progress-indicator">
+                                <div class="progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chapter-card">
+                        <div class="chapter-header">
+                            <span class="chapter-number">Chapter 44</span>
+                            <span class="difficulty-badge intermediate">INTERMEDIATE</span>
+                        </div>
+                        <h3>Polarization</h3>
+                        <p class="chapter-description">Explore polarization states, polarizing filters, and birefringence in optical materials.</p>
+                        <div class="chapter-stats">
+                            <span>⏱️ 5-6 hours</span>
+                            <span>📖 3 topics</span>
+                        </div>
+                        <div class="chapter-topics">
+                            <span class="topic-tag">Linear Polarization</span>
+                            <span class="topic-tag">Circular Polarization</span>
+                            <span class="topic-tag">Birefringence</span>
+                        </div>
+                        <div class="chapter-actions">
+                            <a href="chapter44/index.html" class="btn btn-primary">Start Chapter</a>
+                            <div class="progress-indicator">
+                                <div class="progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chapter-card">
+                        <div class="chapter-header">
+                            <span class="chapter-number">Chapter 45</span>
+                            <span class="difficulty-badge advanced">ADVANCED</span>
+                        </div>
+                        <h3>Nature of Light</h3>
+                        <p class="chapter-description">Understand the dual wave-particle nature of light and quantum photon interactions.</p>
+                        <div class="chapter-stats">
+                            <span>⏱️ 5-6 hours</span>
+                            <span>📖 3 topics</span>
+                        </div>
+                        <div class="chapter-topics">
+                            <span class="topic-tag">Photons</span>
+                            <span class="topic-tag">Wave-Particle Duality</span>
+                            <span class="topic-tag">Quantum Effects</span>
+                        </div>
+                        <div class="chapter-actions">
+                            <a href="chapter45/index.html" class="btn btn-primary">Start Chapter</a>
+                            <div class="progress-indicator">
+                                <div class="progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Access Section -->
+            <section class="quick-access-section">
+                <h2>🚀 Quick Access</h2>
+                <div class="quick-access-grid">
+                    <a href="#" class="quick-access-card">
+                        <span class="access-icon">📊</span>
+                        <h3>Practice Problems</h3>
+                        <p>Advanced wave optics problem sets</p>
+                    </a>
+                    <a href="#" class="quick-access-card">
+                        <span class="access-icon">📋</span>
+                        <h3>Formula Sheets</h3>
+                        <p>Wave equations and optical formulas</p>
+                    </a>
+                    <a href="#" class="quick-access-card">
+                        <span class="access-icon">🧪</span>
+                        <h3>Virtual Labs</h3>
+                        <p>Interactive polarization experiments</p>
+                    </a>
+                    <a href="#" class="quick-access-card">
+                        <span class="access-icon">📝</span>
+                        <h3>Study Notes</h3>
+                        <p>Quantum optics summary notes</p>
+                    </a>
                 </div>
             </section>
         </div>
     </main>
-    <script src="shared/optics-scripts.js"></script>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <script src="../assets/js/global.js"></script>
 </body>
 </html>

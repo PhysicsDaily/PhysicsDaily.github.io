@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapter 4: Motion in 2D & 3D - Physics Daily</title>
     <meta name="description" content="Content for this chapter is under development.">
-    <link rel="stylesheet" href="../shared/mechanics-style.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
 </head>
 <body>
     <nav class="nav">
@@ -13,6 +13,12 @@
             <a href="../../index.html" class="nav-logo">Physics Daily</a>
         </div>
     </nav>
+
+    <!-- Vertical theme toggle -->
+    <div class="theme-toggle">
+        <button id="light-theme" title="Light Theme">☀️</button>
+        <button id="dark-theme" title="Dark Theme">🌙</button>
+    </div>
     <div class="breadcrumb">
         <div class="container">
             <a href="../../index.html">Home</a>
@@ -44,5 +50,39 @@
             </section>
         </div>
     </main>
+
+    <script>
+        // Complete theme toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const lightThemeBtn = document.getElementById('light-theme');
+            const darkThemeBtn = document.getElementById('dark-theme');
+            const docElement = document.documentElement;
+
+            const applyTheme = (theme) => {
+                docElement.setAttribute('data-theme', theme);
+                if (theme === 'dark') {
+                    darkThemeBtn.classList.add('active');
+                    lightThemeBtn.classList.remove('active');
+                } else {
+                    lightThemeBtn.classList.add('active');
+                    darkThemeBtn.classList.remove('active');
+                }
+                localStorage.setItem('theme', theme);
+            };
+
+            // Check for saved theme preference or default to 'light'
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            applyTheme(savedTheme);
+
+            // Event listeners for theme buttons
+            lightThemeBtn.addEventListener('click', () => {
+                applyTheme('light');
+            });
+
+            darkThemeBtn.addEventListener('click', () => {
+                applyTheme('dark');
+            });
+        });
+    </script>
 </body>
 </html>
