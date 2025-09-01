@@ -48,11 +48,22 @@
 
     <main class="main-content">
         <div class="container">
-            <div id="mcq-quiz-container" class="mcq-container">
-                <!-- Quiz content will be loaded here by JavaScript -->
-                <div class="loading-container">
-                    <div class="loading-spinner"></div>
-                    <p>Loading quiz...</p>
+            <div class="content-not-available">
+                <div class="content-message">
+                    <h1>🚧 Content Under Development</h1>
+                    <p>The MCQ quiz for Chapter 3: Force and Newton's Laws is currently being developed.</p>
+                    <p>Please check back soon for comprehensive multiple-choice questions covering:</p>
+                    <ul>
+                        <li>Newton's First Law (Law of Inertia)</li>
+                        <li>Newton's Second Law (F = ma)</li>
+                        <li>Newton's Third Law (Action-Reaction)</li>
+                        <li>Force Analysis and Free Body Diagrams</li>
+                        <li>Applications of Newton's Laws</li>
+                    </ul>
+                    <div class="back-navigation">
+                        <a href="index.html" class="btn btn-primary">← Back to Chapter 3</a>
+                        <a href="../foundations.html" class="btn btn-secondary">All Chapters</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -64,44 +75,6 @@
         </div>
     </footer>
 
-    <script src="../../assets/js/mcq-engine.js"></script>
-    <script>
-        // Initialize quiz when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize theme toggle functionality
-            const lightThemeBtn = document.getElementById('light-theme');
-            const darkThemeBtn = document.getElementById('dark-theme');
-            const docElement = document.documentElement;
-
-            const applyTheme = (theme) => {
-                docElement.setAttribute('data-theme', theme);
-                if (theme === 'dark') {
-                    darkThemeBtn.classList.add('active');
-                    lightThemeBtn.classList.remove('active');
-                } else {
-                    lightThemeBtn.classList.add('active');
-                    darkThemeBtn.classList.remove('active');
-                }
-                localStorage.setItem('theme', theme);
-            };
-
-            // Check for saved theme preference or default to 'light'
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            applyTheme(savedTheme);
-
-            // Event listeners for theme buttons
-            lightThemeBtn.addEventListener('click', () => {
-                applyTheme('light');
-            });
-
-            darkThemeBtn.addEventListener('click', () => {
-                applyTheme('dark');
-            });
-
-            // Initialize MCQ Quiz
-            const quiz = new MCQQuizEngine('mcq-quiz-container');
-            quiz.loadQuiz('../../assets/data/mcq-questions/chapter3-force-newton-laws.json');
-        });
-    </script>
+    <script src="../../assets/js/global.js"></script>
 </body>
 </html>

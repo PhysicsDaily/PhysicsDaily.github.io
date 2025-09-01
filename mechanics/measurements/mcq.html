@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/global.css">
-    <link rel="stylesheet" href="../../assets/css/mcq-styles.css">
+    <link rel="stylesheet" href="../../assets/css/simple-quiz-styles.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -57,75 +57,15 @@
         </div>
     </div>
 
-    <main>
-        <div id="instructions-container" class="instructions-container">
-            <header class="header">
-                <div class="container">
-                    <h1>Chapter 1: Assessment Quiz</h1>
-                    <p class="subtitle">Test your mastery of Measurement and Units</p>
-                </div>
-            </header>
-            <div class="container">
-                <h2>📝 Instructions</h2>
-                <ul>
-                    <li>This test contains multiple-choice questions on measurement, units, and dimensional analysis.</li>
-                    <li>Each correct answer awards <strong>+4 marks</strong>.</li>
-                    <li>Each incorrect answer results in a penalty of <strong>-1 mark</strong>.</li>
-                    <li>Unanswered questions receive <strong>0 marks</strong>.</li>
-                    <li>Use the question palette to navigate between questions.</li>
-                </ul>
-                <div class="quiz-setup">
-                     <div class="setup-item">
-                        <label for="question-count">Number of Questions:</label>
-                        <select id="question-count">
-                            <option value="10">10 (Quick Test)</option>
-                            <option value="25" selected>25 (Standard Test)</option>
-                        </select>
-                    </div>
-                    <div class="setup-item">
-                        <label for="timer-input">Set Timer (minutes):</label>
-                        <input type="number" id="timer-input" value="35" min="1">
-                    </div>
-                </div>
-                <button id="start-test-btn" class="btn" style="margin-top: 1.5rem;">Start Test</button>
-            </div>
-        </div>
-
-        <div id="quiz-interface" class="quiz-interface" style="display: none;">
-            <div class="container">
-                <div class="test-container">
-                    <div class="test-main">
-                        <div class="timer-container">
-                            <div class="timer-label">Time Remaining</div>
-                            <div id="timer-display">00:00:00</div>
-                        </div>
-                        <div id="question-header" class="question-header"></div>
-                        <div id="question-content" class="question-content"></div>
-                        <ul id="options-list" class="options-list"></ul>
-                        <div class="quiz-navigation">
-                            <button id="prev-btn" class="btn btn-secondary">Previous</button>
-                            <button id="review-btn" class="btn btn-secondary">Mark for Review</button>
-                            <button id="next-btn" class="btn">Save & Next</button>
-                        </div>
-                    </div>
-                    <aside class="test-sidebar">
-                        <div class="sidebar-header">Question Palette</div>
-                        <div id="question-palette" class="question-palette"></div>
-                        <button id="submit-test-btn" class="btn" style="width: 100%;">Submit Test</button>
-                    </aside>
+    <main class="main-content">
+        <div class="container">
+            <div id="mcq-quiz-container" class="mcq-container">
+                <!-- Quiz content will be loaded here by JavaScript -->
+                <div class="loading-container">
+                    <div class="loading-spinner"></div>
+                    <p>Loading quiz...</p>
                 </div>
             </div>
-        </div>
-        
-        <div id="results-container" class="container results-container" style="display: none;">
-             <header class="header">
-                <div class="container">
-                    <h1>Quiz Results</h1>
-                </div>
-            </header>
-            <div id="results-summary" class="results-summary"></div>
-            <div id="detailed-results"></div>
-             <button onclick="location.reload()" class="btn">Take Another Test</button>
         </div>
     </main>
 
@@ -136,17 +76,12 @@
     </footer>
 
     <script src="../../assets/js/global.js"></script>
-    <script src="../../assets/js/quiz-manager.js"></script>
+    <script src="../../assets/js/simple-quiz-engine.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Initialize quiz with configuration
-            const quiz = new QuizManager({
-                dataUrl: '../../assets/js/mcq-data/measurements-quiz.json',
-                maxQuestions: 35,
-                defaultTime: 35,
-                positiveMarks: 4,
-                negativeMarks: 1
-            });
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize MCQ Quiz
+            const quiz = new SimpleQuizEngine('mcq-quiz-container');
+            quiz.loadQuiz('../../assets/js/mcq-data/measurements-quiz.json');
         });
     </script>
 </body>
