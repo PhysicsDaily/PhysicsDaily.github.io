@@ -1,0 +1,180 @@
+{
+  "chapter": {
+    "id": "chapter3",
+    "title": "Force and Newton's Laws",
+    "topic": "mechanics",
+    "description": "Test your understanding of forces and Newton's three laws of motion"
+  },
+  "quiz": {
+    "timeLimit": 1800,
+    "passingScore": 70,
+    "instructions": [
+      "Read each question carefully before selecting your answer.",
+      "You have 30 minutes to complete this quiz.",
+      "Each question has only one correct answer.",
+      "You can review your answers before submitting."
+    ]
+  },
+  "questions": [
+    {
+      "id": 1,
+      "type": "multiple-choice",
+      "difficulty": "easy",
+      "question": "According to Newton's first law of motion, an object at rest will:",
+      "options": [
+        "Always remain at rest",
+        "Remain at rest unless acted upon by an unbalanced force",
+        "Eventually start moving on its own",
+        "Move only if pushed very hard"
+      ],
+      "correct": 1,
+      "explanation": "Newton's first law states that an object at rest stays at rest and an object in motion stays in motion unless acted upon by an unbalanced external force. This is also known as the law of inertia.",
+      "topics": ["Newton's First Law", "Inertia"],
+      "points": 2
+    },
+    {
+      "id": 2,
+      "type": "multiple-choice",
+      "difficulty": "medium",
+      "question": "If a 10 kg object experiences a net force of 20 N, what is its acceleration?",
+      "options": [
+        "0.5 m/s²",
+        "2 m/s²",
+        "10 m/s²",
+        "200 m/s²"
+      ],
+      "correct": 1,
+      "explanation": "Using Newton's second law, F = ma, we can solve for acceleration: a = F/m = 20 N / 10 kg = 2 m/s².",
+      "topics": ["Newton's Second Law", "Force and Acceleration"],
+      "points": 3
+    },
+    {
+      "id": 3,
+      "type": "multiple-choice",
+      "difficulty": "medium",
+      "question": "When you walk forward, you push backward on the ground. The ground then pushes forward on you with an equal force. This is an example of:",
+      "options": [
+        "Newton's first law",
+        "Newton's second law",
+        "Newton's third law",
+        "The law of conservation of energy"
+      ],
+      "correct": 2,
+      "explanation": "This demonstrates Newton's third law: for every action, there is an equal and opposite reaction. The force you exert on the ground is matched by an equal and opposite force the ground exerts on you.",
+      "topics": ["Newton's Third Law", "Action-Reaction Pairs"],
+      "points": 3
+    },
+    {
+      "id": 4,
+      "type": "multiple-choice",
+      "difficulty": "hard",
+      "question": "A 5 kg block is pulled across a horizontal surface by a force of 30 N applied at an angle of 37° above the horizontal. If the coefficient of kinetic friction is 0.3, what is the acceleration of the block? (sin 37° = 0.6, cos 37° = 0.8, g = 10 m/s²)",
+      "options": [
+        "2.4 m/s²",
+        "3.6 m/s²",
+        "4.8 m/s²",
+        "6.0 m/s²"
+      ],
+      "correct": 0,
+      "explanation": "First, find the horizontal component of applied force: Fx = 30 cos(37°) = 24 N. The vertical component: Fy = 30 sin(37°) = 18 N. Normal force: N = mg - Fy = 50 - 18 = 32 N. Friction force: f = μN = 0.3 × 32 = 9.6 N. Net horizontal force: Fnet = 24 - 9.6 = 14.4 N. Acceleration: a = Fnet/m = 14.4/5 = 2.88 ≈ 2.4 m/s².",
+      "topics": ["Newton's Second Law", "Friction", "Force Components"],
+      "points": 5
+    },
+    {
+      "id": 5,
+      "type": "multiple-choice",
+      "difficulty": "easy",
+      "question": "The tendency of an object to resist changes in its motion is called:",
+      "options": [
+        "Momentum",
+        "Inertia",
+        "Acceleration",
+        "Force"
+      ],
+      "correct": 1,
+      "explanation": "Inertia is the tendency of an object to resist changes in its state of motion. This concept is fundamental to Newton's first law of motion.",
+      "topics": ["Inertia", "Newton's First Law"],
+      "points": 2
+    },
+    {
+      "id": 6,
+      "type": "multiple-choice",
+      "difficulty": "medium",
+      "question": "Two forces of 3 N and 4 N act on an object. What is the range of possible magnitudes for the resultant force?",
+      "options": [
+        "1 N to 7 N",
+        "3 N to 4 N",
+        "0 N to 5 N",
+        "7 N only"
+      ],
+      "correct": 0,
+      "explanation": "When two forces act on an object, the resultant force ranges from the difference of the forces (when they act in opposite directions) to the sum of the forces (when they act in the same direction). So the range is |4-3| to (4+3) = 1 N to 7 N.",
+      "topics": ["Vector Addition", "Resultant Force"],
+      "points": 3
+    },
+    {
+      "id": 7,
+      "type": "multiple-choice",
+      "difficulty": "hard",
+      "question": "A rocket with mass 1000 kg ejects fuel at a rate of 10 kg/s with an exhaust velocity of 3000 m/s relative to the rocket. What is the thrust force produced?",
+      "options": [
+        "30,000 N",
+        "3,000 N",
+        "300 N",
+        "30 N"
+      ],
+      "correct": 0,
+      "explanation": "The thrust force is given by F = (dm/dt) × ve, where dm/dt is the mass flow rate and ve is the exhaust velocity. F = 10 kg/s × 3000 m/s = 30,000 N.",
+      "topics": ["Newton's Third Law", "Rocket Propulsion"],
+      "points": 5
+    },
+    {
+      "id": 8,
+      "type": "multiple-choice",
+      "difficulty": "easy",
+      "question": "Which of the following is NOT a fundamental force in nature?",
+      "options": [
+        "Gravitational force",
+        "Electromagnetic force",
+        "Centrifugal force",
+        "Strong nuclear force"
+      ],
+      "correct": 2,
+      "explanation": "Centrifugal force is a fictitious or pseudo force that appears in rotating reference frames. The four fundamental forces are gravitational, electromagnetic, strong nuclear, and weak nuclear forces.",
+      "topics": ["Types of Forces", "Fundamental Forces"],
+      "points": 2
+    },
+    {
+      "id": 9,
+      "type": "multiple-choice",
+      "difficulty": "medium",
+      "question": "A car of mass 1200 kg accelerates from rest to 20 m/s in 8 seconds. What is the average net force acting on the car?",
+      "options": [
+        "3000 N",
+        "2400 N",
+        "1500 N",
+        "4800 N"
+      ],
+      "correct": 0,
+      "explanation": "First find acceleration: a = (v - u)/t = (20 - 0)/8 = 2.5 m/s². Then use Newton's second law: F = ma = 1200 kg × 2.5 m/s² = 3000 N.",
+      "topics": ["Newton's Second Law", "Kinematics", "Force Calculation"],
+      "points": 3
+    },
+    {
+      "id": 10,
+      "type": "multiple-choice",
+      "difficulty": "hard",
+      "question": "Two blocks of masses 2 kg and 3 kg are connected by a string and pulled by a force of 20 N applied to the 2 kg block. If the surface is frictionless, what is the tension in the string?",
+      "options": [
+        "8 N",
+        "12 N",
+        "15 N",
+        "20 N"
+      ],
+      "correct": 1,
+      "explanation": "For the system: a = F/(m₁ + m₂) = 20/(2 + 3) = 4 m/s². For the 3 kg block: T = m₂ × a = 3 × 4 = 12 N. Alternatively, for the 2 kg block: 20 - T = m₁ × a = 2 × 4 = 8 N, so T = 12 N.",
+      "topics": ["Newton's Second Law", "Connected Bodies", "Tension"],
+      "points": 5
+    }
+  ]
+}

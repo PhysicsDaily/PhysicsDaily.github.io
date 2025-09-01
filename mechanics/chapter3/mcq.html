@@ -14,31 +14,94 @@
 <body>
     <nav class="nav">
         <div class="container">
-            <a href="../../index.html" class="nav-logo">Physics Daily</a>
+            <div class="nav-content">
+                <a href="../../index.html" class="nav-logo">Physics Daily</a>
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../resources.html">Resources</a></li>
+                    <li><a href="../../about.html">About</a></li>
+                    <li><a href="../../contribute.html">Contribute</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
+
+    <!-- Vertical theme toggle -->
+    <div class="theme-toggle">
+        <button id="light-theme" title="Light Theme">☀️</button>
+        <button id="dark-theme" title="Dark Theme">🌙</button>
+    </div>
+
     <div class="breadcrumb">
         <div class="container">
-            <a href="../../index.html">Home</a>
-            <span class="separator">›</span>
-            <a href="../foundations.html">Classical Mechanics</a>
-            <span class="separator">›</span>
-            <a href="index.html">Force and Newton's Laws</a>
-            <span class="separator">›</span>
-            <span class="current">📊 Assessment Quiz</span>
+            <nav aria-label="Breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span class="separator">›</span>
+                <a href="../foundations.html">Classical Mechanics</a>
+                <span class="separator">›</span>
+                <a href="index.html">Force and Newton's Laws</a>
+                <span class="separator">›</span>
+                <span class="current">📊 Assessment Quiz</span>
+            </nav>
         </div>
     </div>
-    <main>
-        <div id="instructions-container" class="instructions-container">
-            <header class="header">
-                <div class="container">
-                    <h1>Chapter 3: Assessment Quiz</h1>
-                    <p class="subtitle">Test your mastery of Force and Newton's Laws</p>
+
+    <main class="main-content">
+        <div class="container">
+            <div id="mcq-quiz-container" class="mcq-container">
+                <!-- Quiz content will be loaded here by JavaScript -->
+                <div class="loading-container">
+                    <div class="loading-spinner"></div>
+                    <p>Loading quiz...</p>
                 </div>
-            </header>
-            <h2>Content Coming Soon</h2>
-            <p>A multiple-choice quiz for this chapter is currently under development. Please check back later.</p>
+            </div>
         </div>
     </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
+        </div>
+    </footer>
+
+    <script src="../../assets/js/mcq-engine.js"></script>
+    <script>
+        // Initialize quiz when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize theme toggle functionality
+            const lightThemeBtn = document.getElementById('light-theme');
+            const darkThemeBtn = document.getElementById('dark-theme');
+            const docElement = document.documentElement;
+
+            const applyTheme = (theme) => {
+                docElement.setAttribute('data-theme', theme);
+                if (theme === 'dark') {
+                    darkThemeBtn.classList.add('active');
+                    lightThemeBtn.classList.remove('active');
+                } else {
+                    lightThemeBtn.classList.add('active');
+                    darkThemeBtn.classList.remove('active');
+                }
+                localStorage.setItem('theme', theme);
+            };
+
+            // Check for saved theme preference or default to 'light'
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            applyTheme(savedTheme);
+
+            // Event listeners for theme buttons
+            lightThemeBtn.addEventListener('click', () => {
+                applyTheme('light');
+            });
+
+            darkThemeBtn.addEventListener('click', () => {
+                applyTheme('dark');
+            });
+
+            // Initialize MCQ Quiz
+            const quiz = new MCQQuizEngine('mcq-quiz-container');
+            quiz.loadQuiz('../../assets/data/mcq-questions/chapter3-force-newton-laws.json');
+        });
+    </script>
 </body>
 </html>

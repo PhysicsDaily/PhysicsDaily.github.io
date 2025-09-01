@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><title>Chapter 16: Fluid Dynamics - Physics Daily</title><link rel="stylesheet" href="../shared/fluids-style.css"></head>
+<head><title>Chapter 16: Fluid Dynamics - Physics Daily</title><link rel="stylesheet" href="../../assets/css/global.css"></head>
 <body>
 <nav class="nav"><div class="container"><a href="../../index.html" class="nav-logo">Physics Daily</a></div></nav>
+
+    <!-- Vertical theme toggle -->
+    <div class="theme-toggle">
+        <button id="light-theme" title="Light Theme">☀️</button>
+        <button id="dark-theme" title="Dark Theme">🌙</button>
+    </div>
 <div class="breadcrumb"><div class="container"><a href="../../index.html">Home</a><span class="separator">›</span><a href="../mechanics.html">Fluid Mechanics & Oscillations</a><span class="separator">›</span><span class="current">Fluid Dynamics</span></div></div>
 <header class="header"><div class="container"><h1>Chapter 16: Fluid Dynamics</h1></div></header>
 <main class="main-content"><div class="container"><div class="section"><p>Content coming soon.</p></div>
@@ -11,4 +17,38 @@
 <div class="practice-card"><a href="numerical.html" class="btn">Numerical Problems</a></div>
 <div class="practice-card"><a href="mcq.html" class="btn">Assessment Quiz</a></div>
 </div></div></section></div></main>
+
+    <script>
+        // Complete theme toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const lightThemeBtn = document.getElementById('light-theme');
+            const darkThemeBtn = document.getElementById('dark-theme');
+            const docElement = document.documentElement;
+
+            const applyTheme = (theme) => {
+                docElement.setAttribute('data-theme', theme);
+                if (theme === 'dark') {
+                    darkThemeBtn.classList.add('active');
+                    lightThemeBtn.classList.remove('active');
+                } else {
+                    lightThemeBtn.classList.add('active');
+                    darkThemeBtn.classList.remove('active');
+                }
+                localStorage.setItem('theme', theme);
+            };
+
+            // Check for saved theme preference or default to 'light'
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            applyTheme(savedTheme);
+
+            // Event listeners for theme buttons
+            lightThemeBtn.addEventListener('click', () => {
+                applyTheme('light');
+            });
+
+            darkThemeBtn.addEventListener('click', () => {
+                applyTheme('dark');
+            });
+        });
+    </script>
 </body></html>
