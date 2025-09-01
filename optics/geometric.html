@@ -5,41 +5,206 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Optics: Geometric Optics - Physics Daily</title>
     <meta name="description" content="Master geometric optics, including mirrors, lenses, interference, and diffraction. Comprehensive study guide for Chapters 40-42.">
-    <link rel="stylesheet" href="shared/optics-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/global.css">
 </head>
 <body>
     <nav class="nav">
         <div class="container">
-            <a href="../index.html" class="nav-logo">Physics Daily</a>
+            <div class="nav-content">
+                <a href="../index.html" class="nav-logo">Physics Daily</a>
+            </div>
         </div>
     </nav>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <button id="theme-light" class="theme-btn" aria-label="Switch to light theme">☀️</button>
+        <button id="theme-dark" class="theme-btn" aria-label="Switch to dark theme">🌙</button>
+    </div>
     <div class="breadcrumb">
         <div class="container">
-            <a href="../index.html">Home</a>
-            <span class="separator">›</span>
-            <a href="../index.html#optics">Optics</a>
-            <span class="separator">›</span>
-            <span class="current">Geometric Optics</span>
+            <nav aria-label="Breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="separator">›</span>
+                <a href="../index.html#optics">Optics</a>
+                <span class="separator">›</span>
+                <span class="current">🔬 Geometric Optics</span>
+            </nav>
         </div>
     </div>
+
     <header class="header">
         <div class="container">
-            <h1>Geometric Optics</h1>
+            <h1>Optics: Geometric Optics</h1>
             <p class="subtitle">Chapters 40-42: The Science of Light and Vision</p>
+            <p class="description">
+                Master the fundamental principles of light behavior, including reflection, refraction, and the formation of images through mirrors and lenses.
+            </p>
         </div>
     </header>
+
+    <!-- Learning Objectives -->
+    <section class="objectives-section">
+        <div class="container">
+            <h2>🎯 Learning Objectives</h2>
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <div class="objective-icon">🪞</div>
+                    <h3>Mirrors & Reflection</h3>
+                    <p>Understand plane and curved mirrors, image formation, and the laws of reflection</p>
+                </div>
+                <div class="objective-card">
+                    <div class="objective-icon">🔍</div>
+                    <h3>Lenses & Refraction</h3>
+                    <p>Master lens equations, image formation, and optical instruments design</p>
+                </div>
+                <div class="objective-card">
+                    <div class="objective-icon">🌊</div>
+                    <h3>Wave Interference</h3>
+                    <p>Analyze interference patterns and coherent light phenomena</p>
+                </div>
+                <div class="objective-card">
+                    <div class="objective-icon">📐</div>
+                    <h3>Diffraction Effects</h3>
+                    <p>Explore single-slit and multiple-slit diffraction patterns</p>
+                </div>
+            </div>
+        </div>
+    </section>
     <main class="main-content">
         <div class="container">
+            <!-- Progress Section -->
+            <div class="progress-section">
+                <h2>📊 Your Progress</h2>
+                <div class="progress-stats">
+                    <div class="progress-stat">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Chapters Completed</span>
+                    </div>
+                    <div class="progress-stat">
+                        <span class="stat-number">9</span>
+                        <span class="stat-label">Total Topics</span>
+                    </div>
+                    <div class="progress-stat">
+                        <span class="stat-number">~18</span>
+                        <span class="stat-label">Hours (Estimated)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chapters Section -->
             <section class="chapters-section">
                 <h2>📚 Chapters Overview</h2>
                 <div class="chapter-grid">
-                    <div class="chapter-card"><h3>Mirrors and Lenses</h3><a href="chapter40/index.html">Start</a></div>
-                    <div class="chapter-card"><h3>Interference</h3><a href="chapter41/index.html">Start</a></div>
-                    <div class="chapter-card"><h3>Diffraction</h3><a href="chapter42/index.html">Start</a></div>
+                    <div class="chapter-card">
+                        <div class="chapter-header">
+                            <span class="chapter-number">Chapter 40</span>
+                            <span class="difficulty-badge beginner">BEGINNER</span>
+                        </div>
+                        <h3>Mirrors and Lenses</h3>
+                        <p class="chapter-description">Learn about plane and curved mirrors, thin and thick lenses, and image formation principles.</p>
+                        <div class="chapter-stats">
+                            <span>⏱️ 6-7 hours</span>
+                            <span>📖 3 topics</span>
+                        </div>
+                        <div class="chapter-topics">
+                            <span class="topic-tag">Plane Mirrors</span>
+                            <span class="topic-tag">Curved Mirrors</span>
+                            <span class="topic-tag">Thin Lenses</span>
+                        </div>
+                        <div class="chapter-actions">
+                            <a href="chapter40/index.html" class="btn btn-primary">Start Chapter</a>
+                            <div class="progress-indicator">
+                                <div class="progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chapter-card">
+                        <div class="chapter-header">
+                            <span class="chapter-number">Chapter 41</span>
+                            <span class="difficulty-badge intermediate">INTERMEDIATE</span>
+                        </div>
+                        <h3>Interference</h3>
+                        <p class="chapter-description">Explore interference phenomena, coherent light sources, and Young's double-slit experiment.</p>
+                        <div class="chapter-stats">
+                            <span>⏱️ 5-6 hours</span>
+                            <span>📖 3 topics</span>
+                        </div>
+                        <div class="chapter-topics">
+                            <span class="topic-tag">Coherence</span>
+                            <span class="topic-tag">Double-Slit</span>
+                            <span class="topic-tag">Thin Films</span>
+                        </div>
+                        <div class="chapter-actions">
+                            <a href="chapter41/index.html" class="btn btn-primary">Start Chapter</a>
+                            <div class="progress-indicator">
+                                <div class="progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chapter-card">
+                        <div class="chapter-header">
+                            <span class="chapter-number">Chapter 42</span>
+                            <span class="difficulty-badge intermediate">INTERMEDIATE</span>
+                        </div>
+                        <h3>Diffraction</h3>
+                        <p class="chapter-description">Understand single-slit and circular aperture diffraction, and diffraction gratings.</p>
+                        <div class="chapter-stats">
+                            <span>⏱️ 5-6 hours</span>
+                            <span>📖 3 topics</span>
+                        </div>
+                        <div class="chapter-topics">
+                            <span class="topic-tag">Single-Slit</span>
+                            <span class="topic-tag">Circular Aperture</span>
+                            <span class="topic-tag">Gratings</span>
+                        </div>
+                        <div class="chapter-actions">
+                            <a href="chapter42/index.html" class="btn btn-primary">Start Chapter</a>
+                            <div class="progress-indicator">
+                                <div class="progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Access Section -->
+            <section class="quick-access-section">
+                <h2>🚀 Quick Access</h2>
+                <div class="quick-access-grid">
+                    <a href="#" class="quick-access-card">
+                        <span class="access-icon">📊</span>
+                        <h3>Practice Problems</h3>
+                        <p>Comprehensive problem sets for all chapters</p>
+                    </a>
+                    <a href="#" class="quick-access-card">
+                        <span class="access-icon">📋</span>
+                        <h3>Formula Sheets</h3>
+                        <p>Quick reference for all key equations</p>
+                    </a>
+                    <a href="#" class="quick-access-card">
+                        <span class="access-icon">🧪</span>
+                        <h3>Virtual Labs</h3>
+                        <p>Interactive optics simulations</p>
+                    </a>
+                    <a href="#" class="quick-access-card">
+                        <span class="access-icon">📝</span>
+                        <h3>Study Notes</h3>
+                        <p>Concise summaries for quick review</p>
+                    </a>
                 </div>
             </section>
         </div>
     </main>
-    <script src="shared/optics-scripts.js"></script>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <script src="../assets/js/global.js"></script>
 </body>
 </html>
