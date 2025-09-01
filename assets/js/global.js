@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // --- Theme Toggle Functionality ---
-    const lightModeBtn = document.getElementById('light-mode-btn') || document.getElementById('light-mode');
-    const darkModeBtn = document.getElementById('dark-mode-btn') || document.getElementById('dark-mode');
+    const lightModeBtn = document.getElementById('light-mode-btn') || document.getElementById('light-mode') || document.getElementById('light-theme');
+    const darkModeBtn = document.getElementById('dark-mode-btn') || document.getElementById('dark-mode') || document.getElementById('dark-theme');
     const docElement = document.documentElement;
 
     // Function to apply the theme

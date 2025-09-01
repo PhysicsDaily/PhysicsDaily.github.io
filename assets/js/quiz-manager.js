@@ -77,9 +77,11 @@ class QuizManager {
         try {
             if (this.config.dataUrl) {
                 const response = await fetch(this.config.dataUrl);
-                this.quizData = await response.json();
+                const data = await response.json();
+                // Handle both array and object formats
+                this.quizData = data.questions || data;
             } else if (this.config.data) {
-                this.quizData = this.config.data;
+                this.quizData = this.config.data.questions || this.config.data;
             }
             
             // Set up question count options
