@@ -620,6 +620,21 @@
             box-shadow: var(--shadow-md);
         }
 
+        /* Example box styling */
+        .example-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .example-box p {
+            margin: 0.5rem 0;
+        }
+
         .question-header {
             padding: 1rem;
             cursor: pointer;
@@ -1380,6 +1395,490 @@
                 <div class="nav-buttons">
                     <button class="btn-prev" onclick="goToPrevSection()">← Previous: Introduction</button>
                     <button class="btn-next" onclick="goToNextSection()">Next: Dimensional Analysis →</button>
+                </div>
+            </div>
+
+            <!-- Section 1.3: Dimensional Analysis -->
+            <div id="section-1-3" class="content-section">
+                <h2>1.3 Dimensional Analysis</h2>
+                
+                <p>Dimensional analysis is a powerful tool for checking equations, converting units, and solving physics problems. It uses the principle that physical equations must be dimensionally consistent - both sides must have the same dimensions.</p>
+
+                <h3>Fundamental Dimensions</h3>
+                <p>All physical quantities can be expressed in terms of fundamental dimensions:</p>
+                
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Physical Quantity</th>
+                                <th>Dimension Symbol</th>
+                                <th>SI Base Unit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Length</td>
+                                <td>[L]</td>
+                                <td>meter (m)</td>
+                            </tr>
+                            <tr>
+                                <td>Mass</td>
+                                <td>[M]</td>
+                                <td>kilogram (kg)</td>
+                            </tr>
+                            <tr>
+                                <td>Time</td>
+                                <td>[T]</td>
+                                <td>second (s)</td>
+                            </tr>
+                            <tr>
+                                <td>Electric Current</td>
+                                <td>[I]</td>
+                                <td>ampere (A)</td>
+                            </tr>
+                            <tr>
+                                <td>Temperature</td>
+                                <td>[Θ]</td>
+                                <td>kelvin (K)</td>
+                            </tr>
+                            <tr>
+                                <td>Amount of Substance</td>
+                                <td>[N]</td>
+                                <td>mole (mol)</td>
+                            </tr>
+                            <tr>
+                                <td>Luminous Intensity</td>
+                                <td>[J]</td>
+                                <td>candela (cd)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Derived Dimensions</h3>
+                <p>Common derived quantities and their dimensional expressions:</p>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Physical Quantity</th>
+                                <th>Dimensional Formula</th>
+                                <th>SI Unit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Area</td>
+                                <td>[L²]</td>
+                                <td>m²</td>
+                            </tr>
+                            <tr>
+                                <td>Volume</td>
+                                <td>[L³]</td>
+                                <td>m³</td>
+                            </tr>
+                            <tr>
+                                <td>Velocity</td>
+                                <td>[LT⁻¹]</td>
+                                <td>m/s</td>
+                            </tr>
+                            <tr>
+                                <td>Acceleration</td>
+                                <td>[LT⁻²]</td>
+                                <td>m/s²</td>
+                            </tr>
+                            <tr>
+                                <td>Force</td>
+                                <td>[MLT⁻²]</td>
+                                <td>N (kg⋅m/s²)</td>
+                            </tr>
+                            <tr>
+                                <td>Energy</td>
+                                <td>[ML²T⁻²]</td>
+                                <td>J (kg⋅m²/s²)</td>
+                            </tr>
+                            <tr>
+                                <td>Power</td>
+                                <td>[ML²T⁻³]</td>
+                                <td>W (kg⋅m²/s³)</td>
+                            </tr>
+                            <tr>
+                                <td>Pressure</td>
+                                <td>[ML⁻¹T⁻²]</td>
+                                <td>Pa (kg/(m⋅s²))</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Unit Conversion Using Dimensional Analysis</h3>
+                <p>The conversion factor method uses the principle that multiplying by a ratio equal to 1 doesn't change the value:</p>
+                
+                <div class="example-box">
+                    <p><strong>Example:</strong> Convert 75 mph to m/s</p>
+                    <p>75 mph × (1609 m/1 mile) × (1 hr/3600 s) = 33.5 m/s</p>
+                </div>
+
+                <h3>Checking Equation Validity</h3>
+                <p>Dimensional analysis can verify if an equation is physically meaningful by ensuring both sides have identical dimensions.</p>
+
+                <!-- Practice Questions for Section 1.3 -->
+                <h3>Practice Problems</h3>
+                
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">1</div>
+                        <div class="question-text">Find the dimensional formula for kinetic energy (KE = ½mv²).</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p>KE = ½mv²</p>
+                        <p>Dimensions of mass: [M]</p>
+                        <p>Dimensions of velocity: [LT⁻¹]</p>
+                        <p>Dimensions of v²: [LT⁻¹]² = [L²T⁻²]</p>
+                        <p>Therefore: [KE] = [M][L²T⁻²] = <strong>[ML²T⁻²]</strong></p>
+                        <p>This matches the dimensional formula for energy.</p>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">2</div>
+                        <div class="question-text">Convert 60 km/h to m/s using dimensional analysis.</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p>60 km/h × (1000 m/1 km) × (1 h/3600 s)</p>
+                        <p>= 60 × 1000/3600 m/s</p>
+                        <p>= 60,000/3600 m/s</p>
+                        <p>= <strong>16.7 m/s</strong></p>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">3</div>
+                        <div class="question-text">Check if the equation v = at + v₀ is dimensionally consistent.</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p>Left side: [v] = [LT⁻¹]</p>
+                        <p>Right side: [at] + [v₀]</p>
+                        <p>• [a] = [LT⁻²]</p>
+                        <p>• [t] = [T]</p>
+                        <p>• [at] = [LT⁻²][T] = [LT⁻¹]</p>
+                        <p>• [v₀] = [LT⁻¹]</p>
+                        <p>Both terms on right side: [LT⁻¹] + [LT⁻¹] = [LT⁻¹]</p>
+                        <p><strong>Yes, the equation is dimensionally consistent.</strong></p>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">4</div>
+                        <div class="question-text">A student claims that distance d = vt + ½at³. Is this equation correct?</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p>Check dimensional consistency:</p>
+                        <p>Left side: [d] = [L]</p>
+                        <p>Right side: [vt] + [½at³]</p>
+                        <p>• [vt] = [LT⁻¹][T] = [L] ✓</p>
+                        <p>• [at³] = [LT⁻²][T³] = [LT] ✗</p>
+                        <p>The second term has dimensions of [LT], not [L].</p>
+                        <p><strong>No, this equation is dimensionally incorrect.</strong></p>
+                        <p>The correct equation is d = vt + ½at².</p>
+                    </div>
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn-prev" onclick="goToPrevSection()">← Previous: SI Units</button>
+                    <button class="btn-next" onclick="goToNextSection()">Next: Precision & Errors →</button>
+                </div>
+            </div>
+
+            <!-- Section 1.4: Precision and Errors -->
+            <div id="section-1-4" class="content-section">
+                <h2>1.4 Precision, Accuracy, and Error Analysis</h2>
+                
+                <p>Understanding measurement uncertainty is crucial in physics. We distinguish between precision (repeatability) and accuracy (correctness), and learn to quantify and minimize errors in experimental measurements.</p>
+
+                <h3>Precision vs. Accuracy</h3>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Concept</th>
+                                <th>Definition</th>
+                                <th>Analogy</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Precision</strong></td>
+                                <td>How close repeated measurements are to each other</td>
+                                <td>Tight grouping of arrows on target</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Accuracy</strong></td>
+                                <td>How close a measurement is to the true value</td>
+                                <td>Arrows hitting the bullseye</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Types of Errors</h3>
+                
+                <h4>1. Systematic Errors</h4>
+                <ul>
+                    <li><strong>Definition:</strong> Consistent, repeatable errors that shift all measurements in the same direction</li>
+                    <li><strong>Causes:</strong> Faulty instruments, environmental factors, procedural mistakes</li>
+                    <li><strong>Effect:</strong> Reduces accuracy but not precision</li>
+                    <li><strong>Examples:</strong> Uncalibrated scale, parallax error, thermal expansion</li>
+                </ul>
+
+                <h4>2. Random Errors</h4>
+                <ul>
+                    <li><strong>Definition:</strong> Unpredictable variations that fluctuate randomly around the true value</li>
+                    <li><strong>Causes:</strong> Human limitations, electrical noise, environmental fluctuations</li>
+                    <li><strong>Effect:</strong> Reduces precision</li>
+                    <li><strong>Examples:</strong> Reading variations, timing uncertainties, atmospheric turbulence</li>
+                </ul>
+
+                <h3>Significant Figures</h3>
+                <p>Significant figures indicate the precision of a measurement:</p>
+
+                <h4>Rules for Counting Significant Figures:</h4>
+                <ol>
+                    <li>All non-zero digits are significant: 1.234 has 4 significant figures</li>
+                    <li>Zeros between non-zero digits are significant: 1.035 has 4 significant figures</li>
+                    <li>Leading zeros are not significant: 0.0123 has 3 significant figures</li>
+                    <li>Trailing zeros after decimal point are significant: 1.230 has 4 significant figures</li>
+                    <li>Trailing zeros without decimal point may or may not be significant: 1200 (ambiguous)</li>
+                </ol>
+
+                <h4>Operations with Significant Figures:</h4>
+                <ul>
+                    <li><strong>Addition/Subtraction:</strong> Round to the least precise decimal place</li>
+                    <li><strong>Multiplication/Division:</strong> Round to the fewest significant figures</li>
+                </ul>
+
+                <h3>Error Propagation</h3>
+                <p>When combining measurements, uncertainties propagate according to specific rules:</p>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Operation</th>
+                                <th>Formula</th>
+                                <th>Error Propagation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Addition</td>
+                                <td>z = x + y</td>
+                                <td>δz = √(δx² + δy²)</td>
+                            </tr>
+                            <tr>
+                                <td>Subtraction</td>
+                                <td>z = x - y</td>
+                                <td>δz = √(δx² + δy²)</td>
+                            </tr>
+                            <tr>
+                                <td>Multiplication</td>
+                                <td>z = xy</td>
+                                <td>δz/z = √((δx/x)² + (δy/y)²)</td>
+                            </tr>
+                            <tr>
+                                <td>Division</td>
+                                <td>z = x/y</td>
+                                <td>δz/z = √((δx/x)² + (δy/y)²)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Practice Questions for Section 1.4 -->
+                <h3>Practice Problems</h3>
+                
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">1</div>
+                        <div class="question-text">Calculate: 12.34 + 5.6 + 0.789. Express with proper significant figures.</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p>12.34 (2 decimal places)</p>
+                        <p>+ 5.6 (1 decimal place) ← least precise</p>
+                        <p>+ 0.789 (3 decimal places)</p>
+                        <p>= 18.729</p>
+                        <p>Round to 1 decimal place: <strong>18.7</strong></p>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">2</div>
+                        <div class="question-text">Calculate: 2.5 × 3.14159. Express with proper significant figures.</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p>2.5 has 2 significant figures ← fewest</p>
+                        <p>3.14159 has 6 significant figures</p>
+                        <p>2.5 × 3.14159 = 7.853975</p>
+                        <p>Round to 2 significant figures: <strong>7.9</strong></p>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">3</div>
+                        <div class="question-text">A measurement gives x = 15.2 ± 0.3 cm and y = 8.7 ± 0.2 cm. Find z = x + y with uncertainty.</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p>z = x + y = 15.2 + 8.7 = 23.9 cm</p>
+                        <p>For addition: δz = √(δx² + δy²)</p>
+                        <p>δz = √(0.3² + 0.2²) = √(0.09 + 0.04) = √0.13 = 0.36 cm</p>
+                        <p>Therefore: <strong>z = 23.9 ± 0.4 cm</strong></p>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">4</div>
+                        <div class="question-text">How many significant figures are in: (a) 0.00234 (b) 1.200 (c) 3400?</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solutions:</strong></p>
+                        <p>(a) 0.00234: Leading zeros don't count → <strong>3 significant figures</strong></p>
+                        <p>(b) 1.200: Trailing zeros after decimal count → <strong>4 significant figures</strong></p>
+                        <p>(c) 3400: Ambiguous without decimal point → <strong>2-4 significant figures</strong></p>
+                        <p>To clarify (c), write as 3.4 × 10³ (2 sig figs) or 3.400 × 10³ (4 sig figs)</p>
+                    </div>
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn-prev" onclick="goToPrevSection()">← Previous: Dimensional Analysis</button>
+                    <button class="btn-next" onclick="goToNextSection()">Next: Assessment →</button>
+                </div>
+            </div>
+
+            <!-- Assessment Section -->
+            <div id="assessment" class="content-section">
+                <h2>Chapter 1 Assessment</h2>
+                
+                <p>Test your understanding of measurement principles with this comprehensive assessment. These problems integrate concepts from all sections of this chapter.</p>
+
+                <h3>Comprehensive Problems</h3>
+                
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">1</div>
+                        <div class="question-text">A student measures the length of a table five times and gets: 1.52 m, 1.49 m, 1.53 m, 1.51 m, 1.50 m. The true length is 1.65 m. Comment on the precision and accuracy of these measurements.</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p><strong>Analysis of Precision:</strong></p>
+                        <p>Range = 1.53 - 1.49 = 0.04 m</p>
+                        <p>The measurements are clustered closely together (small range), indicating <strong>high precision</strong>.</p>
+                        <p><strong>Analysis of Accuracy:</strong></p>
+                        <p>Average = (1.52 + 1.49 + 1.53 + 1.51 + 1.50)/5 = 1.51 m</p>
+                        <p>Error = |1.51 - 1.65| = 0.14 m = 14 cm</p>
+                        <p>This is a significant deviation from the true value, indicating <strong>low accuracy</strong>.</p>
+                        <p><strong>Conclusion:</strong> The measurements show high precision but low accuracy, suggesting a systematic error.</p>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">2</div>
+                        <div class="question-text">Express the following in proper scientific notation with appropriate significant figures: The speed of light is approximately 299,800,000 m/s.</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p>299,800,000 m/s = 2.998 × 10⁸ m/s</p>
+                        <p>Since we're given "approximately" and the number ends in zeros, we should consider how many figures are truly known.</p>
+                        <p>The most precise commonly used value is: <strong>2.998 × 10⁸ m/s</strong> (4 significant figures)</p>
+                        <p>For many calculations, 3.00 × 10⁸ m/s (3 significant figures) is sufficient.</p>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">3</div>
+                        <div class="question-text">A rectangular field has dimensions 127.3 ± 0.5 m by 89.6 ± 0.3 m. Calculate the area with proper uncertainty.</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p>Area = length × width = 127.3 × 89.6 = 11,406.08 m²</p>
+                        <p><strong>Uncertainty calculation for multiplication:</strong></p>
+                        <p>Relative uncertainty in length: δl/l = 0.5/127.3 = 0.00393</p>
+                        <p>Relative uncertainty in width: δw/w = 0.3/89.6 = 0.00335</p>
+                        <p>Combined relative uncertainty: √(0.00393² + 0.00335²) = 0.00517</p>
+                        <p>Absolute uncertainty: δA = A × 0.00517 = 11,406 × 0.00517 = 59 m²</p>
+                        <p><strong>Final answer: A = 11,400 ± 60 m²</strong></p>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">4</div>
+                        <div class="question-text">Convert 55 mph to km/h using dimensional analysis, and express your answer with appropriate significant figures.</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p>55 mph × (1.609 km/1 mile) = 55 × 1.609 km/h = 88.495 km/h</p>
+                        <p><strong>Significant figures analysis:</strong></p>
+                        <p>• 55 mph has 2 significant figures</p>
+                        <p>• 1.609 km/mile is a conversion factor with 4 significant figures</p>
+                        <p>Result should have 2 significant figures: <strong>88 km/h</strong></p>
+                        <p>Note: For exact conversion factors (like 12 inches = 1 foot), the number of significant figures is unlimited.</p>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">5</div>
+                        <div class="question-text">Check whether the equation P = ½ρv²A is dimensionally consistent, where P is power, ρ is density, v is velocity, and A is area.</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p><strong>Left side dimensions:</strong></p>
+                        <p>[P] = [ML²T⁻³] (power)</p>
+                        <p><strong>Right side dimensions:</strong></p>
+                        <p>[ρ] = [ML⁻³] (density)</p>
+                        <p>[v²] = [L²T⁻²] (velocity squared)</p>
+                        <p>[A] = [L²] (area)</p>
+                        <p>[½ρv²A] = [ML⁻³][L²T⁻²][L²] = [ML⁻³⁺²⁺²T⁻²] = [MLT⁻²]</p>
+                        <p><strong>Comparison:</strong></p>
+                        <p>Left: [ML²T⁻³], Right: [MLT⁻²]</p>
+                        <p><strong>No, the equation is dimensionally inconsistent.</strong></p>
+                        <p>The equation might be for force (F = ½ρv²A) rather than power.</p>
+                    </div>
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn-prev" onclick="goToPrevSection()">← Previous: Precision & Errors</button>
+                    <a href="../index.html" class="btn-home">← Back to Mechanics</a>
                 </div>
             </div>
 
