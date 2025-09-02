@@ -4,45 +4,749 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapter 4: Motion in 2D & 3D - Physics Daily</title>
-    <meta name="description" content="Content for this chapter is under development.">
-    <link rel="stylesheet" href="../shared/mechanics-style.css">
+    <meta name="description" content="Master projectile motion, circular motion, and complex dynamics in two and three dimensions.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #64748b;
+            --accent-color: #06b6d4;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --border-radius: 12px;
+            --transition: all 0.2s ease;
+        }
+
+        [data-theme="dark"] {
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --card-bg: #334155;
+            --border-color: #475569;
+            --border-hover: #64748b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: all 0.3s ease;
+        }
+
+        .math { font-family: 'JetBrains Mono', monospace; font-style: italic; font-weight: 500; }
+        .equation { font-family: 'JetBrains Mono', monospace; font-size: 1.1em; font-weight: 500; background: var(--bg-secondary); padding: 0.2em 0.4em; border-radius: 4px; border: 1px solid var(--border-color); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        .nav { background: var(--card-bg); border-bottom: 1px solid var(--border-color); padding: 1rem 0; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); text-decoration: none; }
+
+        .breadcrumb { background: var(--bg-secondary); padding: 1rem 0; border-bottom: 1px solid var(--border-color); }
+        .breadcrumb a { color: var(--text-secondary); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--primary-color); }
+        .separator { margin: 0 0.5rem; color: var(--text-secondary); }
+        .current { color: var(--text-primary); font-weight: 500; }
+
+        .header { background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); color: white; padding: 4rem 0; text-align: center; }
+        .header h1 { font-size: 3rem; margin-bottom: 1rem; font-weight: 700; }
+        .subtitle { font-size: 1.5rem; margin-bottom: 1rem; opacity: 0.9; }
+        .description { font-size: 1.1rem; opacity: 0.8; max-width: 600px; margin: 0 auto; }
+
+        .main-content { padding: 2rem 0; }
+
+        .theme-toggle { position: fixed; top: 100px; right: 20px; z-index: 1000; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 25px; padding: 8px; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; gap: 4px; }
+        .theme-toggle button { background: none; border: none; padding: 12px; border-radius: 50%; cursor: pointer; font-size: 18px; transition: all 0.3s ease; width: 44px; height: 44px; color: var(--text-secondary); }
+        .theme-toggle button:hover { background: var(--bg-secondary); }
+        .theme-toggle button.active { background: var(--primary-color); color: white; }
+
+        .section { margin: 32px 0; padding: 24px; border-radius: 12px; background: var(--card-bg); border: 1px solid var(--border-color); box-shadow: var(--shadow-md); }
+        .section h2 { color: var(--primary-color); margin-bottom: 1rem; font-size: 1.8rem; font-weight: 600; }
+        .section h3 { color: var(--text-primary); margin: 1.5rem 0 1rem 0; font-size: 1.3rem; font-weight: 600; }
+        .section h4 { color: var(--text-primary); margin: 1rem 0 0.5rem 0; font-size: 1.1rem; font-weight: 600; }
+        .section p { margin-bottom: 1rem; color: var(--text-secondary); }
+        .section ul, .section ol { margin: 1rem 0 1rem 2rem; color: var(--text-secondary); }
+        .section li { margin-bottom: 0.5rem; }
+
+        .highlight-box { background: linear-gradient(135deg, #e0f2fe, #f0f9ff); border-left: 4px solid var(--accent-color); padding: 16px; margin: 16px 0; border-radius: 8px; }
+        [data-theme="dark"] .highlight-box { background: linear-gradient(135deg, #164e63, #0c4a6e); }
+
+        .beginner-note { background: linear-gradient(135deg, #fef3c7, #fde68a); border-left: 4px solid var(--warning-color); padding: 16px; margin: 16px 0; border-radius: 8px; }
+        [data-theme="dark"] .beginner-note { background: linear-gradient(135deg, #451a03, #78350f); }
+
+        .advanced-note { background: linear-gradient(135deg, #f3e8ff, #ede9fe); border-left: 4px solid #8b5cf6; padding: 16px; margin: 16px 0; border-radius: 8px; }
+        [data-theme="dark"] .advanced-note { background: linear-gradient(135deg, #2d1b69, #3730a3); }
+
+        .danger-note { background: linear-gradient(135deg, #ffe4e6, #fee2e2); border-left: 4px solid var(--danger-color); padding: 16px; margin: 16px 0; border-radius: 8px; }
+        [data-theme="dark"] .danger-note { background: linear-gradient(135deg, #7f1d1d, #991b1b); }
+
+        .formula-box { background: var(--bg-secondary); border: 2px solid var(--border-color); border-radius: 8px; padding: 20px; margin: 16px 0; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 500; }
+
+        .example-box { background: linear-gradient(135deg, #dcfce7, #bbf7d0); border-left: 4px solid var(--success-color); padding: 16px; margin: 16px 0; border-radius: 8px; }
+        [data-theme="dark"] .example-box { background: linear-gradient(135deg, #14532d, #166534); }
+
+        .navigation-section { display: flex; justify-content: space-between; align-items: center; margin: 2rem 0; padding: 1rem; background: var(--bg-secondary); border-radius: 8px; }
+        .nav-button { background: var(--primary-color); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; text-decoration: none; font-weight: 500; transition: all 0.2s ease; }
+        .nav-button:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .nav-button:disabled { background: var(--border-color); cursor: not-allowed; transform: none; }
+
+        .question-section { margin: 2rem 0; }
+        .question { background: var(--bg-secondary); padding: 1.5rem; margin: 1rem 0; border-radius: 8px; border-left: 4px solid var(--primary-color); }
+        .question strong { color: var(--text-primary); }
+
+        details { border: 1px solid var(--border-color); border-radius: 8px; padding: .5em .5em 0; margin-top: 1em; background: var(--bg-secondary); }
+        summary { font-weight: bold; margin: -.5em -.5em 0; padding: .5em; cursor: pointer; color: var(--text-primary); }
+
+        .practice-section { padding: 2rem 0; background-color: var(--bg-secondary); }
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-title { font-size: 2.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; }
+        .section-subtitle { font-size: 1.2rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+        .practice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .practice-card { background: var(--card-bg); border-radius: var(--border-radius); padding: 2rem; text-decoration: none; color: var(--text-primary); transition: var(--transition); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); text-align: center; }
+        .practice-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--primary-color); }
+        .practice-card .icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .practice-card h3 { font-size: 1.25rem; color: var(--primary-color); margin-bottom: 0.5rem; }
+        .practice-card p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; }
+        .btn { background: var(--primary-color); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 500; transition: all 0.2s ease; display: inline-block; text-decoration: none; }
+        .btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .btn-practice { width: 100%; }
+
+        .footer { background: var(--bg-secondary); border-top: 1px solid var(--border-color); padding: 2rem 0; text-align: center; color: var(--text-secondary); }
+
+        /* Progress and Section Navigation Styles */
+        .progress-container { margin: 2rem 0; }
+        .progress-bar { background: var(--border-color); height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 1rem; }
+        .progress-fill { background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); height: 100%; width: 16.67%; transition: width 0.3s ease; }
+        
+        .section-indicators { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+        .section-indicator { background: var(--bg-secondary); border: 2px solid var(--border-color); color: var(--text-secondary); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; }
+        .section-indicator:hover { border-color: var(--primary-color); color: var(--primary-color); }
+        .section-indicator.active { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+        .section-indicator.completed { background: var(--success-color); color: white; border-color: var(--success-color); }
+
+        /* Section Display */
+        .section { display: none; }
+        .section.active-section { display: block; }
+        
+        /* Learning Objectives */
+        .learning-objectives { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 2rem 0; }
+        .objective-card { background: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--primary-color); }
+        .objective-card h4 { color: var(--primary-color); margin-bottom: 0.5rem; }
+        
+        /* Navigation Buttons */
+        .navigation-buttons { display: flex; justify-content: space-between; margin: 2rem 0; gap: 1rem; flex-wrap: wrap; }
+        .navigation-buttons .nav-button { flex: 1; min-width: 200px; text-align: center; }
+
+        @media (max-width: 768px) {
+            .theme-toggle { top: 80px; right: 10px; scale: 0.85; }
+            .header h1 { font-size: 2rem; }
+            .navigation-section { flex-direction: column; gap: 1rem; }
+            .section-indicators { justify-content: center; }
+            .section-indicator { flex: 1; text-align: center; min-width: 80px; }
+            .navigation-buttons { flex-direction: column; }
+            .navigation-buttons .nav-button { min-width: auto; }
+        }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XN081SR2KP');
+    </script>
 </head>
 <body>
     <nav class="nav">
         <div class="container">
-            <a href="../../index.html" class="nav-logo">Physics Daily</a>
+            <div class="nav-content">
+                <a href="../../index.html" class="nav-logo">Physics Daily</a>
+            </div>
         </div>
     </nav>
+
+    <div class="theme-toggle">
+        <button id="light-theme" title="Light Theme">☀️</button>
+        <button id="dark-theme" title="Dark Theme">🌙</button>
+    </div>
+
     <div class="breadcrumb">
         <div class="container">
-            <a href="../../index.html">Home</a>
-            <span class="separator">›</span>
-            <a href="../foundations.html">Classical Mechanics</a>
-            <span class="separator">›</span>
-            <span class="current">Motion in 2D & 3D</span>
+            <nav aria-label="Breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span class="separator">›</span>
+                <a href="../foundations.html">Classical Mechanics</a>
+                <span class="separator">›</span>
+                <span class="current">🌐 Motion in 2D & 3D</span>
+            </nav>
         </div>
     </div>
+
     <header class="header">
         <div class="container">
             <h1>Chapter 4: Motion in 2D & 3D</h1>
-            <p class="subtitle">This section is under development.</p>
+            <p class="subtitle">Projectiles, Circles, and Complex Motion</p>
+            <p class="description">
+                Explore the fascinating world of motion in multiple dimensions, from projectile trajectories to planetary orbits.
+            </p>
         </div>
     </header>
+
     <main class="main-content">
         <div class="container">
-            <div class="section">
-                <h2>Content Coming Soon</h2>
+            <!-- Chapter Progress Indicator -->
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="section-indicators">
+                    <button class="section-indicator active" data-section="intro">Intro</button>
+                    <button class="section-indicator" data-section="section-1">4.1</button>
+                    <button class="section-indicator" data-section="section-2">4.2</button>
+                    <button class="section-indicator" data-section="section-3">4.3</button>
+                    <button class="section-indicator" data-section="section-4">4.4</button>
+                    <button class="section-indicator" data-section="assessment">Quiz</button>
+                </div>
             </div>
-            <section class="practice-section">
-                <div class="container">
-                    <div class="practice-grid">
-                        <div class="practice-card"><a href="conceptual.html" class="btn">Conceptual Questions</a></div>
-                        <div class="practice-card"><a href="numerical.html" class="btn">Numerical Problems</a></div>
-                        <div class="practice-card"><a href="mcq.html" class="btn">Assessment Quiz</a></div>
+
+            <!-- Chapter Introduction -->
+            <div id="intro" class="section active-section">
+                <h2>🌟 Why Study Motion in Multiple Dimensions?</h2>
+                
+                <div class="highlight-box">
+                    <h3>🚀 Real-World Motion is Rarely 1D</h3>
+                    <ul>
+                        <li>How do basketball players calculate the perfect shot angle?</li>
+                        <li>Why do satellites orbit Earth instead of flying off into space?</li>
+                        <li>How do pilots navigate aircraft through complex flight paths?</li>
+                        <li>What makes a roller coaster loop-the-loop safely?</li>
+                    </ul>
+                </div>
+
+                <p>Most real-world motion occurs in two or three dimensions. This chapter builds on your understanding of forces and Newton's laws to analyze complex motions that combine multiple types of acceleration and force.</p>
+
+                <div class="example-box">
+                    <h4>🎯 Practical Applications</h4>
+                    <ul>
+                        <li><strong>Sports:</strong> Projectile motion in baseball, basketball, and soccer</li>
+                        <li><strong>Engineering:</strong> Satellite trajectories and space missions</li>
+                        <li><strong>Transportation:</strong> Aircraft navigation and vehicle dynamics</li>
+                        <li><strong>Entertainment:</strong> Roller coaster design and video game physics</li>
+                        <li><strong>Safety:</strong> Crash dynamics and protective equipment design</li>
+                    </ul>
+                </div>
+
+                <h3>🎯 What You'll Learn</h3>
+                <div class="learning-objectives">
+                    <div class="objective-card">
+                        <h4>Section 4.1: Vector Analysis</h4>
+                        <p>Master vector addition, components, and how to break complex motion into manageable parts.</p>
+                    </div>
+                    <div class="objective-card">
+                        <h4>Section 4.2: Projectile Motion</h4>
+                        <p>Understand how objects move under gravity, from simple throws to complex trajectories.</p>
+                    </div>
+                    <div class="objective-card">
+                        <h4>Section 4.3: Circular Motion</h4>
+                        <p>Learn about centripetal force, angular velocity, and motion in curved paths.</p>
+                    </div>
+                    <div class="objective-card">
+                        <h4>Section 4.4: Relative Motion</h4>
+                        <p>Analyze motion from different reference frames and understand relative velocity.</p>
                     </div>
                 </div>
-            </section>
+
+                <div class="navigation-buttons">
+                    <button class="nav-button" onclick="navigateToSection('section-1')">Start Learning: Vector Analysis →</button>
+                </div>
+            </div>
+
+            <!-- Navigation between chapters -->
+            <div class="navigation-section">
+                <a href="../Force and Newton's Laws/index.html" class="nav-button">← Previous: Force and Newton's Laws</a>
+                <span>Chapter 4 of 14</span>
+                <a href="../chapter5/index.html" class="nav-button">Next: Work and Energy →</a>
+            </div>
+
+            <!-- Section 4.1: Vector Analysis in 2D & 3D -->
+            <div id="section-1" class="section">
+                <h2>4.1 📐 Vector Analysis in 2D & 3D</h2>
+                
+                <div class="beginner-note">
+                    <strong>💡 Think of Vectors Like GPS Directions:</strong> Just as GPS tells you both how far to go AND which direction, vectors tell us both magnitude (how much) and direction (which way).
+                </div>
+
+                <h3>Vector Components</h3>
+                <p>Any vector in 2D or 3D can be broken down into perpendicular components. This is like describing a diagonal move on a chess board as a combination of horizontal and vertical moves.</p>
+
+                <div class="formula-box">
+                    <strong>2D Vector Components:</strong><br>
+                    <span class="equation">Aₓ = A cos θ</span><br>
+                    <span class="equation">Aᵧ = A sin θ</span><br>
+                    <span class="equation">|A| = √(Aₓ² + Aᵧ²)</span>
+                </div>
+
+                <h3>Vector Addition</h3>
+                <div class="highlight-box">
+                    <h4>🔍 Component Method for Vector Addition:</h4>
+                    <ol>
+                        <li>Break each vector into x, y (and z) components</li>
+                        <li>Add all x-components: Rₓ = A₁ₓ + A₂ₓ + A₃ₓ + ...</li>
+                        <li>Add all y-components: Rᵧ = A₁ᵧ + A₂ᵧ + A₃ᵧ + ...</li>
+                        <li>Find magnitude: |R| = √(Rₓ² + Rᵧ²)</li>
+                        <li>Find direction: θ = tan⁻¹(Rᵧ/Rₓ)</li>
+                    </ol>
+                </div>
+
+                <div class="example-box">
+                    <h4>📝 Example: Displacement Vectors</h4>
+                    <p><strong>Problem:</strong> A hiker walks 5 km north, then 3 km east, then 2 km at 45° northeast. Find the total displacement.</p>
+                    <p><strong>Solution:</strong></p>
+                    <p>Vector 1: (0, 5) km</p>
+                    <p>Vector 2: (3, 0) km</p>
+                    <p>Vector 3: (2cos45°, 2sin45°) = (1.41, 1.41) km</p>
+                    <p><strong>Total:</strong> (4.41, 6.41) km</p>
+                    <p><strong>Magnitude:</strong> √(4.41² + 6.41²) = 7.8 km</p>
+                    <p><strong>Direction:</strong> 55.5° north of east</p>
+                </div>
+
+                <!-- Questions for Section 4.1 -->
+                <h3>🤔 Conceptual Questions</h3>
+                
+                <div class="question">
+                    <strong>Question 1:</strong> Can two vectors of different magnitudes add up to give a zero resultant? If so, under what conditions?
+                    <details>
+                        <summary>Show Answer</summary>
+                        <p>No, two vectors of different magnitudes cannot add up to zero. For two vectors to cancel out (give zero resultant), they must have equal magnitudes and opposite directions. This is because |A + B| = 0 only when A = -B, which requires |A| = |B|.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>Question 2:</strong> A pilot wants to fly due north but there's a crosswind from the west. Should the pilot aim the plane due north, northeast, or northwest? Explain.
+                    <details>
+                        <summary>Show Answer</summary>
+                        <p>The pilot should aim northwest. The plane's velocity relative to air plus the wind velocity must equal the desired ground velocity (due north). Since wind pushes east, the plane must aim west of north to compensate, resulting in a northwest heading.</p>
+                    </details>
+                </div>
+
+                <h3>🧮 Numerical Problems</h3>
+                
+                <div class="question">
+                    <strong>Problem 1:</strong> Three forces act on an object: 10 N at 0°, 15 N at 90°, and 20 N at 180°. Find the net force.
+                    <details>
+                        <summary>Show Solution</summary>
+                        <p><strong>Components:</strong></p>
+                        <p>F₁ₓ = 10 N, F₁ᵧ = 0 N</p>
+                        <p>F₂ₓ = 0 N, F₂ᵧ = 15 N</p>
+                        <p>F₃ₓ = -20 N, F₃ᵧ = 0 N</p>
+                        <p><strong>Net components:</strong> Fₓ = -10 N, Fᵧ = 15 N</p>
+                        <p><strong>Magnitude:</strong> |F| = √(10² + 15²) = 18.0 N</p>
+                        <p><strong>Direction:</strong> 123.7° (or 56.3° above negative x-axis)</p>
+                    </details>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="nav-button" onclick="navigateToSection('intro')">← Back to Introduction</button>
+                    <button class="nav-button" onclick="navigateToSection('section-2')">Next: Projectile Motion →</button>
+                </div>
+            </div>
+
+            <!-- Section 4.2: Projectile Motion -->
+            <div id="section-2" class="section">
+                <h2>4.2 🏀 Projectile Motion</h2>
+                
+                <div class="beginner-note">
+                    <strong>💡 Key Insight:</strong> Projectile motion is just two 1D motions happening simultaneously - constant horizontal velocity and uniformly accelerated vertical motion under gravity.
+                </div>
+
+                <h3>Principles of Projectile Motion</h3>
+                <div class="highlight-box">
+                    <h4>🔑 Fundamental Assumptions:</h4>
+                    <ul>
+                        <li><strong>No air resistance:</strong> Only gravity acts on the projectile</li>
+                        <li><strong>Horizontal independence:</strong> vₓ remains constant throughout flight</li>
+                        <li><strong>Vertical acceleration:</strong> aᵧ = -g = -9.8 m/s² (downward)</li>
+                        <li><strong>Initial conditions:</strong> v₀ₓ = v₀ cos θ, v₀ᵧ = v₀ sin θ</li>
+                    </ul>
+                </div>
+
+                <div class="formula-box">
+                    <strong>Projectile Motion Equations:</strong><br>
+                    <span class="equation">x = v₀ₓt = v₀ cos θ · t</span><br>
+                    <span class="equation">y = v₀ᵧt - ½gt² = v₀ sin θ · t - ½gt²</span><br>
+                    <span class="equation">vₓ = v₀ cos θ</span><br>
+                    <span class="equation">vᵧ = v₀ sin θ - gt</span>
+                </div>
+
+                <h3>Key Parameters</h3>
+                <div class="example-box">
+                    <h4>📊 Important Projectile Characteristics:</h4>
+                    <p><strong>Time of Flight:</strong> T = (2v₀ sin θ)/g</p>
+                    <p><strong>Maximum Height:</strong> H = (v₀² sin² θ)/(2g)</p>
+                    <p><strong>Range:</strong> R = (v₀² sin 2θ)/g</p>
+                    <p><strong>Maximum Range:</strong> Occurs at θ = 45°</p>
+                </div>
+
+                <!-- Questions for Section 4.2 -->
+                <h3>🤔 Conceptual Questions</h3>
+                
+                <div class="question">
+                    <strong>Question 1:</strong> A ball is thrown horizontally from a cliff. Another identical ball is dropped from the same height at the same time. Which hits the ground first?
+                    <details>
+                        <summary>Show Answer</summary>
+                        <p>Both balls hit the ground at the same time. The horizontal velocity of the thrown ball doesn't affect its vertical motion. Both experience the same vertical acceleration (gravity) and fall the same vertical distance, so they take the same time to fall.</p>
+                    </details>
+                </div>
+
+                <div class="question">
+                    <strong>Question 2:</strong> At what angle should you launch a projectile to achieve maximum range on level ground?
+                    <details>
+                        <summary>Show Answer</summary>
+                        <p>45° gives maximum range on level ground. This is because range R = (v₀² sin 2θ)/g, and sin 2θ is maximum when 2θ = 90°, so θ = 45°. At this angle, the horizontal and vertical components of initial velocity are equal.</p>
+                    </details>
+                </div>
+
+                <h3>🧮 Numerical Problems</h3>
+                
+                <div class="question">
+                    <strong>Problem 1:</strong> A ball is kicked at 20 m/s at an angle of 30° above horizontal. Find: (a) time of flight, (b) maximum height, (c) range.
+                    <details>
+                        <summary>Show Solution</summary>
+                        <p><strong>Given:</strong> v₀ = 20 m/s, θ = 30°, g = 9.8 m/s²</p>
+                        <p><strong>(a) Time of flight:</strong> T = (2v₀ sin θ)/g = (2 × 20 × sin 30°)/9.8 = 2.04 s</p>
+                        <p><strong>(b) Maximum height:</strong> H = (v₀² sin² θ)/(2g) = (400 × 0.25)/(19.6) = 5.1 m</p>
+                        <p><strong>(c) Range:</strong> R = (v₀² sin 2θ)/g = (400 × sin 60°)/9.8 = 35.3 m</p>
+                    </details>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="nav-button" onclick="navigateToSection('section-1')">← Back to Vector Analysis</button>
+                    <button class="nav-button" onclick="navigateToSection('section-3')">Next: Circular Motion →</button>
+                </div>
+            </div>
+
+            <!-- Section 4.3: Circular Motion -->
+            <div id="section-3" class="section">
+                <h2>4.3 🌀 Circular Motion</h2>
+                
+                <div class="beginner-note">
+                    <strong>💡 Remember:</strong> Even at constant speed, circular motion involves acceleration because the direction of velocity is constantly changing!
+                </div>
+
+                <h3>Centripetal Acceleration</h3>
+                <p>Objects moving in circles experience centripetal acceleration directed toward the center of the circular path.</p>
+
+                <div class="formula-box">
+                    <strong>Centripetal Acceleration:</strong><br>
+                    <span class="equation">aᶜ = v²/r = ω²r</span><br>
+                    <span class="equation">ω = v/r = 2π/T</span><br>
+                    where ω is angular velocity and T is period
+                </div>
+
+                <h3>Centripetal Force</h3>
+                <div class="highlight-box">
+                    <h4>🔑 Newton's Second Law for Circular Motion:</h4>
+                    <p><span class="equation">Fᶜ = maᶜ = mv²/r</span></p>
+                    <p>The centripetal force is not a new type of force - it's the net inward force provided by gravity, tension, friction, normal force, etc.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>📝 Example: Car on a Banked Curve</h4>
+                    <p><strong>Problem:</strong> A car travels around a banked curve. Analyze the forces that provide centripetal acceleration.</p>
+                    <p><strong>Forces involved:</strong></p>
+                    <ul>
+                        <li>Weight (mg) - vertically downward</li>
+                        <li>Normal force (N) - perpendicular to road surface</li>
+                        <li>Friction (f) - parallel to road surface</li>
+                    </ul>
+                    <p>The horizontal components of these forces combine to provide the required centripetal force.</p>
+                </div>
+
+                <!-- Questions for Section 4.3 -->
+                <h3>🤔 Conceptual Questions</h3>
+                
+                <div class="question">
+                    <strong>Question 1:</strong> A ball attached to a string is whirled in a horizontal circle. If the string breaks, which direction will the ball fly?
+                    <details>
+                        <summary>Show Answer</summary>
+                        <p>The ball will fly off tangent to the circle at the point where the string breaks. This follows Newton's First Law - without the centripetal force from the string, the ball continues in a straight line in whatever direction it was moving at that instant.</p>
+                    </details>
+                </div>
+
+                <h3>🧮 Numerical Problems</h3>
+                
+                <div class="question">
+                    <strong>Problem 1:</strong> A 1200 kg car travels at 15 m/s around a circular track of radius 50 m. What centripetal force is required?
+                    <details>
+                        <summary>Show Solution</summary>
+                        <p><strong>Given:</strong> m = 1200 kg, v = 15 m/s, r = 50 m</p>
+                        <p><strong>Centripetal force:</strong> Fᶜ = mv²/r = (1200 × 15²)/50 = 5400 N</p>
+                        <p>This force must be provided by friction between tires and road.</p>
+                    </details>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="nav-button" onclick="navigateToSection('section-2')">← Back to Projectile Motion</button>
+                    <button class="nav-button" onclick="navigateToSection('section-4')">Next: Relative Motion →</button>
+                </div>
+            </div>
+
+            <!-- Section 4.4: Relative Motion -->
+            <div id="section-4" class="section">
+                <h2>4.4 🚂 Relative Motion</h2>
+                
+                <div class="beginner-note">
+                    <strong>💡 Key Concept:</strong> Motion is always relative to a reference frame. A passenger on a moving train has different velocities relative to the train vs. relative to the ground.
+                </div>
+
+                <h3>Reference Frames</h3>
+                <p>The description of motion depends on the chosen reference frame. Relative velocity relates the motion observed in different frames.</p>
+
+                <div class="formula-box">
+                    <strong>Relative Velocity:</strong><br>
+                    <span class="equation">v⃗ₐ/ᶜ = v⃗ₐ/ᵦ + v⃗ᵦ/ᶜ</span><br>
+                    where A/C means "A relative to C"
+                </div>
+
+                <div class="example-box">
+                    <h4>📝 Example: River Crossing</h4>
+                    <p><strong>Problem:</strong> A boat can travel at 5 m/s in still water. The river flows at 3 m/s eastward. If the boat aims directly north, what is its velocity relative to the shore?</p>
+                    <p><strong>Solution:</strong></p>
+                    <p>Boat velocity relative to water: 5 m/s north</p>
+                    <p>Water velocity relative to shore: 3 m/s east</p>
+                    <p>Resultant velocity: √(5² + 3²) = 5.83 m/s at 30.96° east of north</p>
+                </div>
+
+                <!-- Questions for Section 4.4 -->
+                <h3>🤔 Conceptual Questions</h3>
+                
+                <div class="question">
+                    <strong>Question 1:</strong> Two cars approach each other, each traveling at 30 m/s. What is their relative velocity?
+                    <details>
+                        <summary>Show Answer</summary>
+                        <p>Their relative velocity is 60 m/s. From the perspective of one car, the other car approaches at 30 m/s (its own speed) + 30 m/s (the other car's speed) = 60 m/s.</p>
+                    </details>
+                </div>
+
+                <h3>🧮 Numerical Problems</h3>
+                
+                <div class="question">
+                    <strong>Problem 1:</strong> A pilot wants to fly from city A to city B, which is 200 km due north. The plane can fly at 150 km/h in still air, but there's a 50 km/h wind from the west. In what direction should the pilot head, and how long will the trip take?
+                    <details>
+                        <summary>Show Solution</summary>
+                        <p><strong>Given:</strong> Plane speed = 150 km/h, Wind = 50 km/h from west, Distance = 200 km north</p>
+                        <p><strong>Heading:</strong> θ = sin⁻¹(50/150) = 19.47° west of north</p>
+                        <p><strong>Ground speed north:</strong> vₙ = √(150² - 50²) = 141.4 km/h</p>
+                        <p><strong>Flight time:</strong> t = 200/141.4 = 1.41 hours</p>
+                    </details>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="nav-button" onclick="navigateToSection('section-3')">← Back to Circular Motion</button>
+                    <button class="nav-button" onclick="navigateToSection('assessment')">Take Assessment Quiz →</button>
+                </div>
+            </div>
+
+            <!-- Assessment Section -->
+            <div id="assessment" class="section">
+                <h2>🎯 Chapter Assessment Quiz</h2>
+                
+                <div class="highlight-box">
+                    <h3>Test Your 2D & 3D Motion Mastery</h3>
+                    <p>Ready to demonstrate your understanding of multi-dimensional motion? This comprehensive quiz covers vectors, projectiles, circular motion, and relative motion.</p>
+                </div>
+                
+                <div class="example-box">
+                    <h4>📊 Assessment Coverage:</h4>
+                    <ul>
+                        <li><strong>Vector Analysis:</strong> Component addition and vector calculations</li>
+                        <li><strong>Projectile Motion:</strong> Trajectory analysis and real-world applications</li>
+                        <li><strong>Circular Motion:</strong> Centripetal force and acceleration problems</li>
+                        <li><strong>Relative Motion:</strong> Reference frame transformations</li>
+                        <li><strong>Mixed Problems:</strong> Combining multiple concepts</li>
+                    </ul>
+                </div>
+
+                <div style="text-align: center; margin: 3rem 0;">
+                    <button class="btn" style="font-size: 1.3rem; padding: 1.5rem 3rem; background: var(--success-color);" onclick="window.open('mcq.html', '_blank')">
+                        🚀 Launch Assessment Quiz
+                    </button>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="nav-button" onclick="navigateToSection('section-4')">← Back to Relative Motion</button>
+                    <button class="nav-button" onclick="window.location.href='../chapter5/index.html'">Next Chapter: Work and Energy →</button>
+                </div>
+            </div>
         </div>
     </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const lightThemeBtn = document.getElementById('light-theme');
+            const darkThemeBtn = document.getElementById('dark-theme');
+            const docElement = document.documentElement;
+
+            const applyTheme = (theme) => {
+                docElement.setAttribute('data-theme', theme);
+                if (theme === 'dark') {
+                    darkThemeBtn.classList.add('active');
+                    lightThemeBtn.classList.remove('active');
+                } else {
+                    lightThemeBtn.classList.add('active');
+                    darkThemeBtn.classList.remove('active');
+                }
+                localStorage.setItem('theme', theme);
+            };
+
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            applyTheme(savedTheme);
+
+            lightThemeBtn.addEventListener('click', () => applyTheme('light'));
+            darkThemeBtn.addEventListener('click', () => applyTheme('dark'));
+
+            // Initialize section navigation
+            initializeSectionNavigation();
+        });
+
+        // Section Navigation System
+        let currentSection = 'intro';
+        const sections = ['intro', 'section-1', 'section-2', 'section-3', 'section-4', 'assessment'];
+        
+        function initializeSectionNavigation() {
+            // Load saved progress
+            const savedSection = localStorage.getItem('physics-motion2d-current-section');
+            const completedSections = JSON.parse(localStorage.getItem('physics-motion2d-completed') || '[]');
+            
+            if (savedSection && sections.includes(savedSection)) {
+                currentSection = savedSection;
+            }
+            
+            // Mark completed sections
+            completedSections.forEach(sectionId => {
+                const indicator = document.querySelector(`[data-section="${sectionId}"]`);
+                if (indicator) indicator.classList.add('completed');
+            });
+            
+            // Show current section
+            showSection(currentSection);
+            updateProgress();
+            
+            // Add click handlers to section indicators
+            document.querySelectorAll('.section-indicator').forEach(indicator => {
+                indicator.addEventListener('click', (e) => {
+                    const sectionId = e.target.getAttribute('data-section');
+                    navigateToSection(sectionId);
+                });
+            });
+        }
+
+        function navigateToSection(sectionId) {
+            if (!sections.includes(sectionId)) return;
+            
+            // Mark previous section as completed if moving forward
+            const currentIndex = sections.indexOf(currentSection);
+            const targetIndex = sections.indexOf(sectionId);
+            
+            if (targetIndex > currentIndex) {
+                markSectionCompleted(currentSection);
+            }
+            
+            currentSection = sectionId;
+            showSection(sectionId);
+            updateProgress();
+            saveProgress();
+            
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active-section');
+            });
+            
+            // Show target section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active-section');
+            }
+            
+            // Update indicators
+            document.querySelectorAll('.section-indicator').forEach(indicator => {
+                indicator.classList.remove('active');
+            });
+            
+            const activeIndicator = document.querySelector(`[data-section="${sectionId}"]`);
+            if (activeIndicator) {
+                activeIndicator.classList.add('active');
+            }
+        }
+
+        function markSectionCompleted(sectionId) {
+            let completed = JSON.parse(localStorage.getItem('physics-motion2d-completed') || '[]');
+            if (!completed.includes(sectionId)) {
+                completed.push(sectionId);
+                localStorage.setItem('physics-motion2d-completed', JSON.stringify(completed));
+                
+                // Update UI
+                const indicator = document.querySelector(`[data-section="${sectionId}"]`);
+                if (indicator) indicator.classList.add('completed');
+            }
+        }
+
+        function updateProgress() {
+            const currentIndex = sections.indexOf(currentSection);
+            const progressPercent = ((currentIndex + 1) / sections.length) * 100;
+            
+            const progressFill = document.getElementById('progress-fill');
+            if (progressFill) {
+                progressFill.style.width = progressPercent + '%';
+            }
+        }
+
+        function saveProgress() {
+            localStorage.setItem('physics-motion2d-current-section', currentSection);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.altKey) {
+                const currentIndex = sections.indexOf(currentSection);
+                if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                    e.preventDefault();
+                    navigateToSection(sections[currentIndex - 1]);
+                } else if (e.key === 'ArrowRight' && currentIndex < sections.length - 1) {
+                    e.preventDefault();
+                    navigateToSection(sections[currentIndex + 1]);
+                }
+            }
+        });
+    </script>
 </body>
 </html>
