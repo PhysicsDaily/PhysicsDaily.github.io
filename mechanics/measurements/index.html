@@ -489,7 +489,270 @@
             color: var(--text-secondary);
         }
 
+        /* Progress tracking styles */
+        .progress-container {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 72px;
+            z-index: 99;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Section navigation styles */
+        .section-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        }
+
+        .section-btn {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-secondary);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .section-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        .section-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-btn.completed {
+            background: var(--success-color);
+            color: white;
+            border-color: var(--success-color);
+        }
+
+        /* Content sections */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Learning objectives styling */
+        .learning-objectives {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .learning-objectives ul {
+            margin: 0;
+            padding-left: 1rem;
+        }
+
+        .learning-objectives li {
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        /* Interactive question cards */
+        .question-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .question-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-md);
+        }
+
+        .question-header {
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--bg-secondary);
+            transition: background 0.2s ease;
+        }
+
+        .question-header:hover {
+            background: var(--border-color);
+        }
+
+        .question-number {
+            background: var(--primary-color);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .question-text {
+            flex-grow: 1;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .toggle-icon {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            transition: transform 0.2s ease;
+        }
+
+        .question-header.active .toggle-icon {
+            transform: rotate(45deg);
+        }
+
+        .answer-content {
+            padding: 0 1rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .answer-content.show {
+            padding: 1rem;
+            max-height: 500px;
+        }
+
+        /* Navigation buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .btn-prev, .btn-next, .btn-home {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-prev {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-prev:hover {
+            background: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-next, .btn-home {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-next:hover, .btn-home:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
         @media (max-width: 768px) {
+            .section-nav {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .section-btn {
+                flex: none;
+                min-width: auto;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-buttons > div {
+                display: flex;
+                gap: 1rem;
+                width: 100%;
+            }
+            
+            .btn-prev, .btn-next, .btn-home {
+                flex: 1;
+                justify-content: center;
+            }
+            
+            .progress-container {
+                position: relative;
+                top: 0;
+            }
+        }
             .theme-toggle {
                 top: 80px;
                 right: 10px;
@@ -517,6 +780,146 @@
             }
         }
     </style>
+    <script>
+        // Progressive navigation system
+        let currentSection = 'intro';
+        const sections = ['intro', 'section-1-1', 'section-1-2', 'section-1-3', 'section-1-4', 'assessment'];
+        
+        // Load progress from localStorage
+        function loadProgress() {
+            const savedProgress = localStorage.getItem('measurements-progress');
+            if (savedProgress) {
+                const progress = JSON.parse(savedProgress);
+                currentSection = progress.currentSection || 'intro';
+                markCompletedSections(progress.completedSections || []);
+            }
+        }
+        
+        // Save progress to localStorage
+        function saveProgress() {
+            const completedSections = sections.slice(0, sections.indexOf(currentSection));
+            const progress = {
+                currentSection: currentSection,
+                completedSections: completedSections
+            };
+            localStorage.setItem('measurements-progress', JSON.stringify(progress));
+        }
+        
+        // Update progress bar
+        function updateProgressBar() {
+            const currentIndex = sections.indexOf(currentSection);
+            const progress = ((currentIndex + 1) / sections.length) * 100;
+            const progressFill = document.querySelector('.progress-fill');
+            const progressText = document.querySelector('.progress-text span:last-child');
+            
+            if (progressFill) {
+                progressFill.style.width = progress + '%';
+            }
+            if (progressText) {
+                progressText.textContent = `${currentIndex + 1}/${sections.length}`;
+            }
+        }
+        
+        // Mark completed sections
+        function markCompletedSections(completedSections) {
+            completedSections.forEach(sectionId => {
+                const btn = document.querySelector(`[data-section="${sectionId}"]`);
+                if (btn) {
+                    btn.classList.add('completed');
+                }
+            });
+        }
+        
+        // Show specific section
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show target section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // Update navigation
+            document.querySelectorAll('.section-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            const activeBtn = document.querySelector(`[data-section="${sectionId}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+            
+            currentSection = sectionId;
+            updateProgressBar();
+            saveProgress();
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Navigation functions
+        function goToNextSection() {
+            const currentIndex = sections.indexOf(currentSection);
+            if (currentIndex < sections.length - 1) {
+                const nextSection = sections[currentIndex + 1];
+                showSection(nextSection);
+            }
+        }
+        
+        function goToPrevSection() {
+            const currentIndex = sections.indexOf(currentSection);
+            if (currentIndex > 0) {
+                const prevSection = sections[currentIndex - 1];
+                showSection(prevSection);
+            }
+        }
+        
+        // Question card toggle functionality
+        function toggleQuestion(element) {
+            const isActive = element.classList.contains('active');
+            
+            // Close all other questions
+            document.querySelectorAll('.question-header').forEach(header => {
+                header.classList.remove('active');
+                const content = header.nextElementSibling;
+                if (content) {
+                    content.classList.remove('show');
+                }
+            });
+            
+            // Toggle current question
+            if (!isActive) {
+                element.classList.add('active');
+                const content = element.nextElementSibling;
+                if (content) {
+                    content.classList.add('show');
+                }
+            }
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProgress();
+            showSection(currentSection);
+            
+            // Set up section navigation
+            document.querySelectorAll('.section-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const sectionId = btn.getAttribute('data-section');
+                    showSection(sectionId);
+                });
+            });
+            
+            // Set up question toggles
+            document.querySelectorAll('.question-header').forEach(header => {
+                header.addEventListener('click', () => toggleQuestion(header));
+            });
+        });
+    </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -707,6 +1110,276 @@
                             Next: SI Units →
                         </button>
                     </div>
+                </div>
+            </div>
+
+            <!-- Section 1.2: SI Units -->
+            <div id="section-1-2" class="content-section">
+                <h2>1.2 The International System of Units (SI)</h2>
+                
+                <p>The International System of Units (SI) provides a standardized framework for measurement that enables scientists worldwide to communicate effectively. This system is built on seven fundamental base units from which all other units are derived.</p>
+
+                <h3>Base Units of SI</h3>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Physical Quantity</th>
+                                <th>SI Base Unit</th>
+                                <th>Symbol</th>
+                                <th>Definition</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Length</td>
+                                <td>meter</td>
+                                <td>m</td>
+                                <td>Distance light travels in vacuum in 1/299,792,458 second</td>
+                            </tr>
+                            <tr>
+                                <td>Mass</td>
+                                <td>kilogram</td>
+                                <td>kg</td>
+                                <td>Mass of the international prototype kilogram</td>
+                            </tr>
+                            <tr>
+                                <td>Time</td>
+                                <td>second</td>
+                                <td>s</td>
+                                <td>Duration of 9,192,631,770 periods of cesium-133 radiation</td>
+                            </tr>
+                            <tr>
+                                <td>Electric Current</td>
+                                <td>ampere</td>
+                                <td>A</td>
+                                <td>Current producing force of 2×10⁻⁷ N/m between parallel wires</td>
+                            </tr>
+                            <tr>
+                                <td>Temperature</td>
+                                <td>kelvin</td>
+                                <td>K</td>
+                                <td>1/273.16 of thermodynamic temperature of water's triple point</td>
+                            </tr>
+                            <tr>
+                                <td>Amount of Substance</td>
+                                <td>mole</td>
+                                <td>mol</td>
+                                <td>Amount containing as many particles as atoms in 0.012 kg carbon-12</td>
+                            </tr>
+                            <tr>
+                                <td>Luminous Intensity</td>
+                                <td>candela</td>
+                                <td>cd</td>
+                                <td>Luminous intensity of 1/683 watt per steradian at 540×10¹² Hz</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Derived Units</h3>
+                <p>Many physical quantities are expressed using derived units, which are combinations of base units. Some common derived units have special names:</p>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Quantity</th>
+                                <th>Unit Name</th>
+                                <th>Symbol</th>
+                                <th>Base Unit Expression</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Force</td>
+                                <td>newton</td>
+                                <td>N</td>
+                                <td>kg⋅m⋅s⁻²</td>
+                            </tr>
+                            <tr>
+                                <td>Energy</td>
+                                <td>joule</td>
+                                <td>J</td>
+                                <td>kg⋅m²⋅s⁻²</td>
+                            </tr>
+                            <tr>
+                                <td>Power</td>
+                                <td>watt</td>
+                                <td>W</td>
+                                <td>kg⋅m²⋅s⁻³</td>
+                            </tr>
+                            <tr>
+                                <td>Pressure</td>
+                                <td>pascal</td>
+                                <td>Pa</td>
+                                <td>kg⋅m⁻¹⋅s⁻²</td>
+                            </tr>
+                            <tr>
+                                <td>Electric Charge</td>
+                                <td>coulomb</td>
+                                <td>C</td>
+                                <td>A⋅s</td>
+                            </tr>
+                            <tr>
+                                <td>Voltage</td>
+                                <td>volt</td>
+                                <td>V</td>
+                                <td>kg⋅m²⋅s⁻³⋅A⁻¹</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>SI Prefixes</h3>
+                <p>SI prefixes allow us to express very large or very small quantities efficiently:</p>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Prefix</th>
+                                <th>Symbol</th>
+                                <th>Power of 10</th>
+                                <th>Decimal Value</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>tera</td>
+                                <td>T</td>
+                                <td>10¹²</td>
+                                <td>1,000,000,000,000</td>
+                                <td>1 TW = 10¹² W</td>
+                            </tr>
+                            <tr>
+                                <td>giga</td>
+                                <td>G</td>
+                                <td>10⁹</td>
+                                <td>1,000,000,000</td>
+                                <td>1 GHz = 10⁹ Hz</td>
+                            </tr>
+                            <tr>
+                                <td>mega</td>
+                                <td>M</td>
+                                <td>10⁶</td>
+                                <td>1,000,000</td>
+                                <td>1 MHz = 10⁶ Hz</td>
+                            </tr>
+                            <tr>
+                                <td>kilo</td>
+                                <td>k</td>
+                                <td>10³</td>
+                                <td>1,000</td>
+                                <td>1 km = 10³ m</td>
+                            </tr>
+                            <tr>
+                                <td>centi</td>
+                                <td>c</td>
+                                <td>10⁻²</td>
+                                <td>0.01</td>
+                                <td>1 cm = 10⁻² m</td>
+                            </tr>
+                            <tr>
+                                <td>milli</td>
+                                <td>m</td>
+                                <td>10⁻³</td>
+                                <td>0.001</td>
+                                <td>1 mm = 10⁻³ m</td>
+                            </tr>
+                            <tr>
+                                <td>micro</td>
+                                <td>μ</td>
+                                <td>10⁻⁶</td>
+                                <td>0.000001</td>
+                                <td>1 μm = 10⁻⁶ m</td>
+                            </tr>
+                            <tr>
+                                <td>nano</td>
+                                <td>n</td>
+                                <td>10⁻⁹</td>
+                                <td>0.000000001</td>
+                                <td>1 nm = 10⁻⁹ m</td>
+                            </tr>
+                            <tr>
+                                <td>pico</td>
+                                <td>p</td>
+                                <td>10⁻¹²</td>
+                                <td>0.000000000001</td>
+                                <td>1 pm = 10⁻¹² m</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Practice Questions for Section 1.2 -->
+                <h3>Practice Problems</h3>
+                
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">1</div>
+                        <div class="question-text">Express 0.000035 meters using appropriate SI prefix notation.</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p>0.000035 m = 3.5 × 10⁻⁵ m</p>
+                        <p>Since 10⁻⁵ = 10⁻⁶ × 10¹ = μ × 10, we can write:</p>
+                        <p>3.5 × 10⁻⁵ m = 35 × 10⁻⁶ m = <strong>35 μm</strong></p>
+                        <p>Alternatively: 3.5 × 10⁻⁵ m = 0.035 × 10⁻³ m = <strong>0.035 mm</strong></p>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">2</div>
+                        <div class="question-text">Convert 2.5 GW to watts and express in scientific notation.</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p>G (giga) = 10⁹</p>
+                        <p>2.5 GW = 2.5 × 10⁹ W = <strong>2.5 × 10⁹ watts</strong></p>
+                        <p>This represents 2,500,000,000 watts.</p>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">3</div>
+                        <div class="question-text">A force of 250 N is applied. Express this force in terms of base SI units.</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p>Newton (N) is a derived unit for force.</p>
+                        <p>From Newton's second law: F = ma</p>
+                        <p>1 N = 1 kg⋅m⋅s⁻²</p>
+                        <p>Therefore: 250 N = <strong>250 kg⋅m⋅s⁻²</strong></p>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">4</div>
+                        <div class="question-text">Which of the following is NOT a base SI unit? (a) kilogram (b) ampere (c) newton (d) kelvin</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Answer: (c) newton</strong></p>
+                        <p><strong>Explanation:</strong></p>
+                        <p>• kilogram (kg) - base unit for mass</p>
+                        <p>• ampere (A) - base unit for electric current</p>
+                        <p>• kelvin (K) - base unit for temperature</p>
+                        <p>• newton (N) - derived unit for force (kg⋅m⋅s⁻²)</p>
+                        <p>The newton is derived from base units and is therefore not a base unit itself.</p>
+                    </div>
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn-prev" onclick="goToPrevSection()">← Previous: Introduction</button>
+                    <button class="btn-next" onclick="goToNextSection()">Next: Dimensional Analysis →</button>
                 </div>
             </div>
 
