@@ -303,7 +303,7 @@
         [data-theme="dark"] .advanced-note {
             background: linear-gradient(135deg, #2d1b69, #3730a3);
         }
-        
+
         .danger-note {
             background: linear-gradient(135deg, #ffe4e6, #fee2e2);
             border-left: 4px solid var(--danger-color);
@@ -382,32 +382,32 @@
             padding: 2rem 0;
             background-color: var(--bg-secondary);
         }
-        
+
         .section-header {
             text-align: center;
             margin-bottom: 3rem;
         }
-        
+
         .section-title {
             font-size: 2.5rem;
             font-weight: 700;
             color: var(--text-primary);
             margin-bottom: 1rem;
         }
-        
+
         .section-subtitle {
             font-size: 1.2rem;
             color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto;
         }
-        
+
         .practice-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
         }
-        
+
         .practice-card {
             background: var(--card-bg);
             border-radius: var(--border-radius);
@@ -419,30 +419,30 @@
             box-shadow: var(--shadow-sm);
             text-align: center;
         }
-        
+
         .practice-card:hover {
             transform: translateY(-4px);
             box-shadow: var(--shadow-lg);
             border-color: var(--primary-color);
         }
-        
+
         .practice-card .icon {
             font-size: 2.5rem;
             margin-bottom: 1rem;
         }
-        
+
         .practice-card h3 {
             font-size: 1.25rem;
             color: var(--primary-color);
             margin-bottom: 0.5rem;
         }
-        
+
         .practice-card p {
             color: var(--text-secondary);
             font-size: 0.95rem;
             margin-bottom: 1.5rem;
         }
-        
+
         .btn {
             background: var(--primary-color);
             color: white;
@@ -461,7 +461,7 @@
             background: var(--primary-dark);
             transform: translateY(-1px);
         }
-        
+
         .btn-practice {
             width: 100%;
         }
@@ -837,28 +837,28 @@
                 flex-direction: column;
                 gap: 0.5rem;
             }
-            
+
             .section-btn {
                 flex: none;
                 min-width: auto;
             }
-            
+
             .nav-buttons {
                 flex-direction: column;
                 gap: 1rem;
             }
-            
+
             .nav-buttons > div {
                 display: flex;
                 gap: 1rem;
                 width: 100%;
             }
-            
+
             .btn-prev, .btn-next, .btn-home {
                 flex: 1;
                 justify-content: center;
             }
-            
+
             .progress-container {
                 position: relative;
                 top: 0;
@@ -895,7 +895,7 @@
         // Progressive navigation system
         let currentSection = 'intro';
         const sections = ['intro', 'section-1-1', 'section-1-2', 'section-1-3', 'section-1-4', 'assessment'];
-        
+
         // Load progress from localStorage
         function loadProgress() {
             const savedProgress = localStorage.getItem('measurements-progress');
@@ -905,7 +905,7 @@
                 markCompletedSections(progress.completedSections || []);
             }
         }
-        
+
         // Save progress to localStorage
         function saveProgress() {
             const completedSections = sections.slice(0, sections.indexOf(currentSection));
@@ -915,14 +915,14 @@
             };
             localStorage.setItem('measurements-progress', JSON.stringify(progress));
         }
-        
+
         // Update progress bar
         function updateProgressBar() {
             const currentIndex = sections.indexOf(currentSection);
             const progress = ((currentIndex + 1) / sections.length) * 100;
             const progressFill = document.querySelector('.progress-fill');
             const progressText = document.querySelector('.progress-text span:last-child');
-            
+
             if (progressFill) {
                 progressFill.style.width = progress + '%';
             }
@@ -930,7 +930,7 @@
                 progressText.textContent = `${currentIndex + 1}/${sections.length}`;
             }
         }
-        
+
         // Mark completed sections
         function markCompletedSections(completedSections) {
             completedSections.forEach(sectionId => {
@@ -940,34 +940,34 @@
                 }
             });
         }
-        
+
         // Show specific section
         function showSection(sectionId) {
             // Hide all sections
             document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.remove('active');
             });
-            
+
             // Show target section
             const targetSection = document.getElementById(sectionId);
             if (targetSection) {
                 targetSection.classList.add('active');
             }
-            
+
             // Update navigation
             document.querySelectorAll('.section-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-            
+
             const activeBtn = document.querySelector(`[data-section="${sectionId}"]`);
             if (activeBtn) {
                 activeBtn.classList.add('active');
             }
-            
+
             currentSection = sectionId;
             updateProgressBar();
             saveProgress();
-            
+
             // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -992,7 +992,7 @@
         // Question card toggle functionality
         function toggleQuestion(element) {
             const isActive = element.classList.contains('active');
-            
+
             // Close all other questions
             document.querySelectorAll('.question-header').forEach(header => {
                 header.classList.remove('active');
@@ -1001,7 +1001,7 @@
                     content.classList.remove('show');
                 }
             });
-            
+
             // Toggle current question
             if (!isActive) {
                 element.classList.add('active');
@@ -1011,12 +1011,12 @@
                 }
             }
         }
-        
+
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             loadProgress();
             showSection(currentSection);
-            
+
             // Set up section navigation
             document.querySelectorAll('.section-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -1024,7 +1024,7 @@
                     showSection(sectionId);
                 });
             });
-            
+
             // Set up question toggles
             document.querySelectorAll('.question-header').forEach(header => {
                 header.addEventListener('click', () => toggleQuestion(header));
@@ -1117,9 +1117,9 @@
                         <p>Imagine trying to cook without measuring ingredients, or building a house without measuring lumber. Physics is similar - we need precise measurements to understand how the universe works! Every law of physics started with careful observations and measurements.</p>
                     </div>
                     <p><strong>Physics is fundamentally an experimental science.</strong> Every law, theory, and principle we know about the universe comes from careful observation and measurement. When Galileo dropped objects from the Tower of Pisa, when Newton observed falling apples, when Einstein predicted the bending of light - all these breakthroughs required precise measurement.</p>
-                    
+
                     <p>Consider this amazing fact: the GPS in your phone works because engineers understand Einstein's theory of relativity with incredible precision. Without accurate measurement of time (to nanoseconds) and the effects of gravity on time, your GPS would be off by miles!</p>
-                    
+
                     <div class="highlight-box">
                         <h4>🔬 The Power of Precise Measurement</h4>
                         <p>The 2017 detection of gravitational waves by LIGO required measuring distance changes smaller than <span class="math">1/10,000</span>th the width of a proton - that's like measuring the distance to the nearest star to within the width of a human hair!</p>
@@ -1152,10 +1152,10 @@
             <div class="content-section" id="section-1-1">
                 <div class="section">
                     <h2>1.1 Physical Quantities, Standards, and Units</h2>
-                    
+
                     <h3>What Are Physical Quantities?</h3>
                     <p>A <strong>physical quantity</strong> is any measurable property of matter or energy. Understanding these is crucial for all of physics!</p>
-                    
+
                     <div class="highlight-box">
                         <h4>📊 Two Categories of Physical Quantities:</h4>
                         <ul>
@@ -1170,7 +1170,7 @@
 
                     <h3>Operational Definitions</h3>
                     <p>Each physical quantity must have an <strong>operational definition</strong> - a precise description of how to measure it. This ensures anyone can reproduce the measurement anywhere in the world.</p>
-                    
+
                     <div class="example-box">
                         <h4>📝 Example: Defining Velocity</h4>
                         <p><strong>Operational definition:</strong> "Change in position divided by time interval"</p>
@@ -1201,7 +1201,7 @@
                                 <p><strong>Answer:</strong> Speed is a scalar (magnitude only: "50 km/h"), while velocity is a vector (magnitude + direction: "50 km/h north"). This distinction is crucial in physics!</p>
                             </div>
                         </div>
-                        
+
                         <div class="question-card">
                             <div class="question-header" onclick="toggleAnswer('q1_2')">
                                 <span class="question-number">Q2.</span>
@@ -1228,7 +1228,7 @@
             <!-- Section 1.2: SI Units -->
             <div id="section-1-2" class="content-section">
                 <h2>1.2 The International System of Units (SI)</h2>
-                
+
                 <p>The International System of Units (SI) provides a standardized framework for measurement that enables scientists worldwide to communicate effectively. This system is built on seven fundamental base units from which all other units are derived.</p>
 
                 <h3>Base Units of SI</h3>
@@ -1427,7 +1427,7 @@
 
                 <!-- Practice Questions for Section 1.2 -->
                 <h3>Practice Problems</h3>
-                
+
                 <div class="question-card">
                     <div class="question-header" onclick="toggleQuestion(this)">
                         <div class="question-number">1</div>
@@ -1498,12 +1498,12 @@
             <!-- Section 1.3: Dimensional Analysis -->
             <div id="section-1-3" class="content-section">
                 <h2>1.3 Dimensional Analysis</h2>
-                
+
                 <p>Dimensional analysis is a powerful tool for checking equations, converting units, and solving physics problems. It uses the principle that physical equations must be dimensionally consistent - both sides must have the same dimensions.</p>
 
                 <h3>Fundamental Dimensions</h3>
                 <p>All physical quantities can be expressed in terms of fundamental dimensions:</p>
-                
+
                 <div class="table-responsive">
                     <table>
                         <thead>
@@ -1612,7 +1612,7 @@
 
                 <h3>Unit Conversion Using Dimensional Analysis</h3>
                 <p>The conversion factor method uses the principle that multiplying by a ratio equal to 1 doesn't change the value:</p>
-                
+
                 <div class="example-box">
                     <p><strong>Example:</strong> Convert 75 mph to m/s</p>
                     <p>75 mph × (1609 m/1 mile) × (1 hr/3600 s) = 33.5 m/s</p>
@@ -1623,7 +1623,7 @@
 
                 <!-- Practice Questions for Section 1.3 -->
                 <h3>Practice Problems</h3>
-                
+
                 <div class="question-card">
                     <div class="question-header" onclick="toggleQuestion(this)">
                         <div class="question-number">1</div>
@@ -1703,7 +1703,7 @@
             <!-- Section 1.4: Precision and Errors -->
             <div id="section-1-4" class="content-section">
                 <h2>1.4 Precision, Accuracy, and Error Analysis</h2>
-                
+
                 <p>Understanding measurement uncertainty is crucial in physics. We distinguish between precision (repeatability) and accuracy (correctness), and learn to quantify and minimize errors in experimental measurements.</p>
 
                 <h3>Precision vs. Accuracy</h3>
@@ -1732,7 +1732,7 @@
                 </div>
 
                 <h3>Types of Errors</h3>
-                
+
                 <h4>1. Systematic Errors</h4>
                 <ul>
                     <li><strong>Definition:</strong> Consistent, repeatable errors that shift all measurements in the same direction</li>
@@ -1806,7 +1806,7 @@
 
                 <!-- Practice Questions for Section 1.4 -->
                 <h3>Practice Problems</h3>
-                
+
                 <div class="question-card">
                     <div class="question-header" onclick="toggleQuestion(this)">
                         <div class="question-number">1</div>
@@ -1877,11 +1877,11 @@
             <!-- Assessment Section -->
             <div id="assessment" class="content-section">
                 <h2>Chapter 1 Assessment</h2>
-                
+
                 <p>Test your understanding of measurement principles with this comprehensive assessment. These problems integrate concepts from all sections of this chapter.</p>
 
                 <h3>Comprehensive Problems</h3>
-                
+
                 <div class="question-card">
                     <div class="question-header" onclick="toggleQuestion(this)">
                         <div class="question-number">1</div>
@@ -2011,7 +2011,7 @@
             <div class="section">
                 <h2>1.3 Comprehensive List of Physical Quantities and Their Dimensions</h2>
                 <p><strong>Fundamental quantities</strong> are the basic building blocks of all measurements. <strong>Derived quantities</strong> are built from combinations of fundamental quantities using mathematical relationships.</p>
-                
+
                 <h3>Mechanical Quantities</h3>
                 <div class="two-column-table">
                     <div class="column-table">
@@ -2062,9 +2062,9 @@
 >>>>>>> progress
                     </div>
                     <p><strong>Physics is fundamentally an experimental science.</strong> Every law, theory, and principle we know about the universe comes from careful observation and measurement. When Galileo dropped objects from the Tower of Pisa, when Newton observed falling apples, when Einstein predicted the bending of light - all these breakthroughs required precise measurement.</p>
-                    
+
                     <p>Consider this amazing fact: the GPS in your phone works because engineers understand Einstein's theory of relativity with incredible precision. Without accurate measurement of time (to nanoseconds) and the effects of gravity on time, your GPS would be off by miles!</p>
-                    
+
                     <div class="highlight-box">
                         <h4>🔬 The Power of Precise Measurement</h4>
                         <p>The 2017 detection of gravitational waves by LIGO required measuring distance changes smaller than <span class="math">1/10,000</span>th the width of a proton - that's like measuring the distance to the nearest star to within the width of a human hair!</p>
@@ -2097,10 +2097,10 @@
             <div class="content-section" id="section1">
                 <div class="section">
                     <h2>1.1 Physical Quantities, Standards, and Units</h2>
-                    
+
                     <h3>What Are Physical Quantities?</h3>
                     <p>A <strong>physical quantity</strong> is any measurable property of matter or energy. Understanding these is crucial for all of physics!</p>
-                    
+
                     <div class="highlight-box">
                         <h4>📊 Two Categories of Physical Quantities:</h4>
                         <ul>
@@ -2115,7 +2115,7 @@
 
                     <h3>Operational Definitions</h3>
                     <p>Each physical quantity must have an <strong>operational definition</strong> - a precise description of how to measure it. This ensures anyone can reproduce the measurement anywhere in the world.</p>
-                    
+
                     <div class="example-box">
                         <h4>📝 Example: Defining Velocity</h4>
                         <p><strong>Operational definition:</strong> "Change in position divided by time interval"</p>
@@ -2146,7 +2146,7 @@
                                 <p><strong>Answer:</strong> Speed is a scalar (magnitude only: "50 km/h"), while velocity is a vector (magnitude + direction: "50 km/h north"). This distinction is crucial in physics!</p>
                             </div>
                         </div>
-                        
+
                         <div class="question-card">
                             <div class="question-header" onclick="toggleAnswer('q1_2')">
                                 <span class="question-number">Q2.</span>
@@ -2161,7 +2161,7 @@
 
                     <h3>Comprehensive List of Physical Quantities and Their Dimensions</h3>
                     <p><strong>Fundamental quantities</strong> are the basic building blocks of all measurements. <strong>Derived quantities</strong> are built from combinations of fundamental quantities using mathematical relationships.</p>
-                    
+
                     <h4>Mechanical Quantities</h4>
                     <div class="two-column-table">
                         <div class="column-table">
@@ -2242,7 +2242,7 @@
                                 <p>This matches the dimension of energy/work in the table above.</p>
                             </div>
                         </div>
-                        
+
                         <div class="question-card">
                             <div class="question-header" onclick="toggleAnswer('q1_4')">
                                 <span class="question-number">Q4.</span>
@@ -2273,7 +2273,7 @@
                 <div class="section">
                     <h2>1.2 The International System of Units (SI)</h2>
                     <p>The <strong>International System of Units (SI)</strong> is the modern form of the metric system, established by international treaty. It's the universal language of science, ensuring that a measurement in Tokyo means the same thing in New York!</p>
-                    
+
                     <div class="beginner-note">
                         <h4>🌍 Why SI Matters:</h4>
                         <p>Imagine if every country used different units for everything. The Mars Climate Orbiter crashed in 1999 because NASA used metric units while a contractor used imperial units. SI prevents such disasters!</p>
@@ -2281,7 +2281,7 @@
 
                     <h3>The Seven SI Base Units</h3>
                     <p>All measurements in physics can be expressed using just seven fundamental base units:</p>
-                    
+
                     <table>
                         <thead>
                             <tr>
@@ -2330,7 +2330,7 @@
                                 <p><strong>Answer:</strong> The speed of light is a fundamental constant of nature that's the same everywhere in the universe. A physical rod could expand with temperature, wear away, or be destroyed. Light-based definitions are invariable and accessible to any laboratory with the right equipment.</p>
                             </div>
                         </div>
-                        
+
                         <div class="question-card">
                             <div class="question-header" onclick="toggleAnswer('q2_2')">
                                 <span class="question-number">Q2.</span>
@@ -2345,7 +2345,7 @@
 
                     <h3>SI Prefixes for Large and Small Numbers</h3>
                     <p>SI uses prefixes to express very large or very small quantities efficiently:</p>
-                    
+
                     <div class="two-column-table">
                         <div class="column-table">
                             <h4>Large Number Prefixes</h4>
@@ -2405,7 +2405,7 @@
                                 <p>To micrometers: 5.2 km = 5.2 × 10³ m = 5.2 × 10³ × 10⁶ μm = <strong>5.2 × 10⁹ μm</strong></p>
                             </div>
                         </div>
-                        
+
                         <div class="question-card">
                             <div class="question-header" onclick="toggleAnswer('q2_4')">
                                 <span class="question-number">Q4.</span>
@@ -2436,17 +2436,17 @@
                 <div class="section">
                     <h2>1.3 Dimensional Analysis: The Physics Detective Tool</h2>
                     <p>Every physical quantity has <strong>dimensions</strong> expressed in terms of fundamental quantities: Mass [M], Length [L], Time [T], Electric Current [I], Temperature [Θ], Amount of Substance [N], and Luminous Intensity [J].</p>
-                    
+
                     <div class="beginner-note">
                         <h4>🕵️ Think of Dimensional Analysis as Problem-Solving:</h4>
                         <p>Like solving a puzzle, dimensional analysis helps physicists check if equations make sense, derive new relationships, and catch errors before they become costly mistakes in engineering and science!</p>
                     </div>
 
                     <h3>Four Major Powers of Dimensional Analysis</h3>
-                    
+
                     <h4>1. Checking Dimensional Consistency</h4>
                     <p>Any valid physical equation must be dimensionally consistent—every term must have the same dimensions.</p>
-                    
+
                     <div class="example-box">
                         <h4>📝 Detective Example: Is This Equation Valid?</h4>
                         <p>Let's check: <span class="equation">x = x₀ + v₀t + ½at²</span></p>
@@ -2461,11 +2461,11 @@
 
                     <h4>2. Deriving Relationships</h4>
                     <p>We can discover how quantities are related by using dimensional analysis.</p>
-                    
+
                     <div class="example-box">
                         <h4>📝 Problem-Solving Example: Period of a Pendulum</h4>
                         <p>Let's discover how the period <span class="math">T</span> of a pendulum depends on its length <span class="math">l</span>, mass <span class="math">m</span>, and gravity <span class="math">g</span>.</p>
-                        
+
                         <p><strong>Step 1:</strong> Assume <span class="equation">T = k × l^a × m^b × g^c</span></p>
                         <p><strong>Step 2:</strong> Write dimensions: <span class="equation">[T] = [L]^a × [M]^b × [LT⁻²]^c</span></p>
                         <p><strong>Step 3:</strong> Equate powers:</p>
@@ -2494,7 +2494,7 @@
 
                     <h4>3. Converting Units Between Systems</h4>
                     <p>Dimensional analysis provides a systematic way to convert between different unit systems.</p>
-                    
+
                     <div class="example-box">
                         <h4>📝 Unit Conversion Example: Newtons to Dynes</h4>
                         <p>Convert 1 Newton (SI unit) to dynes (CGS unit).</p>
@@ -2509,7 +2509,7 @@
 
                     <h4>4. Finding Dimensions of Physical Constants</h4>
                     <p>Use known physical laws to determine dimensions of constants.</p>
-                    
+
                     <div class="example-box">
                         <h4>📝 Constant Dimensions: Gravitational Constant G</h4>
                         <p>From Newton's law: <span class="equation">F = Gm₁m₂/r²</span></p>
@@ -2542,7 +2542,7 @@
                                 <p>This means G has units of m³⋅kg⁻¹⋅s⁻²</p>
                             </div>
                         </div>
-                        
+
                         <div class="question-card">
                             <div class="question-header" onclick="toggleAnswer('q3_2')">
                                 <span class="question-number">Q2.</span>
@@ -2553,7 +2553,7 @@
                                 <p><strong>Answer:</strong> The factor ½ is a dimensionless constant. Dimensional analysis can only determine the relationship between dimensions, not pure numbers. We need experimental data or deeper theory to find dimensionless factors.</p>
                             </div>
                         </div>
-                        
+
                         <div class="question-card">
                             <div class="question-header" onclick="toggleAnswer('q3_3')">
                                 <span class="question-number">Q3.</span>
@@ -2569,7 +2569,7 @@
                                 <p><strong>Result:</strong> T = K√(m/k) (K = 2π from full theory)</p>
                             </div>
                         </div>
-                        
+
                         <div class="question-card">
                             <div class="question-header" onclick="toggleAnswer('q3_4')">
                                 <span class="question-number">Q4.</span>
@@ -2600,7 +2600,7 @@
             <div class="content-section" id="section4">
                 <div class="section">
                     <h2>1.4 Precision, Significant Figures & Error Analysis</h2>
-                    
+
                     <div class="beginner-note">
                         <h4>🎯 Real-World Reality Check:</h4>
                         <p>Every measurement has uncertainty! Even the most precise instruments have limits. Understanding and quantifying this uncertainty is crucial for any scientific work - from space missions to medical devices.</p>
@@ -2608,7 +2608,7 @@
 
                     <h3>Significant Figures: The Language of Precision</h3>
                     <p><strong>Significant figures</strong> tell us the precision of a measurement - they include all certain digits plus one uncertain digit.</p>
-                    
+
                     <div class="highlight-box">
                         <h4>📏 Rules for Significant Figures:</h4>
                         <ol>
@@ -2626,7 +2626,7 @@
                         <p><strong>Rule:</strong> Round to the fewest decimal places.</p>
                         <p><strong>Example:</strong> <span class="equation">12.345 + 1.2 = 13.545</span> → <strong>13.5</strong></p>
                     </div>
-                    
+
                     <div class="operation-example">
                         <h4>Multiplication/Division Rule:</h4>
                         <p><strong>Rule:</strong> Round to the fewest significant figures.</p>
@@ -2649,20 +2649,20 @@
                     <div class="example-box">
                         <h4>📝 Worked Example: Measuring Pendulum Period</h4>
                         <p>Five measurements of a pendulum period: 2.63s, 2.56s, 2.42s, 2.71s, 2.80s</p>
-                        
+
                         <p><strong>Step 1 - Mean Value:</strong> (2.63 + 2.56 + 2.42 + 2.71 + 2.80) ÷ 5 = <strong>2.62s</strong></p>
-                        
+
                         <p><strong>Step 2 - Absolute Errors:</strong> |2.62-2.63|=0.01, |2.62-2.56|=0.06, etc.</p>
-                        
+
                         <p><strong>Step 3 - Mean Absolute Error:</strong> (0.01 + 0.06 + 0.20 + 0.09 + 0.18) ÷ 5 = <strong>0.11s</strong></p>
-                        
+
                         <p><strong>Final Result:</strong> <span class="equation">T = 2.62 ± 0.11 s</span></p>
                         <p><strong>Percentage Error:</strong> (0.11/2.62) × 100% = <strong>4.2%</strong></p>
                     </div>
 
                     <h3>Propagation of Errors</h3>
                     <p>When we calculate results from multiple measurements, their errors combine according to specific rules:</p>
-                    
+
                     <div class="advanced-note">
                         <h4>📊 Error Combination Rules:</h4>
                         <ul>
@@ -2682,7 +2682,7 @@
                         <h4>📝 Error Propagation Example: Density Calculation</h4>
                         <p>Mass: <span class="math">m = (100 ± 2) g</span>, Side length: <span class="math">L = (10 ± 0.1) cm</span></p>
                         <p>Find percentage error in density <span class="math">ρ = m/L³</span></p>
-                        
+
                         <p><strong>Solution:</strong></p>
                         <ul>
                             <li>Relative error in mass: 2/100 = 0.02</li>
@@ -2693,13 +2693,13 @@
                     </div>
 
                     <h3>Detailed Error Analysis Examples</h3>
-                    
+
                     <div class="example-box">
                         <h4>📝 Worked Example 1: Measuring the Period of a Pendulum</h4>
                         <p>Five measurements of a pendulum period: 2.63s, 2.56s, 2.42s, 2.71s, 2.80s</p>
-                        
+
                         <p><strong>Step 1 - Mean Value:</strong> (2.63 + 2.56 + 2.42 + 2.71 + 2.80) ÷ 5 = <strong>2.62s</strong></p>
-                        
+
                         <p><strong>Step 2 - Absolute Errors:</strong></p>
                         <ul>
                             <li>|2.62-2.63| = 0.01s</li>
@@ -2708,9 +2708,9 @@
                             <li>|2.62-2.71| = 0.09s</li>
                             <li>|2.62-2.80| = 0.18s</li>
                         </ul>
-                        
+
                         <p><strong>Step 3 - Mean Absolute Error:</strong> (0.01 + 0.06 + 0.20 + 0.09 + 0.18) ÷ 5 = <strong>0.11s</strong></p>
-                        
+
                         <p><strong>Final Result:</strong> <span class="equation">T = 2.62 ± 0.11 s</span></p>
                         <p><strong>Percentage Error:</strong> (0.11/2.62) × 100% = <strong>4.2%</strong></p>
                     </div>
@@ -2719,19 +2719,19 @@
                         <h4>📝 Worked Example 2: Kinetic Energy Error Propagation</h4>
                         <p>Mass: <span class="math">m = (4.0 ± 0.2) kg</span>, Velocity: <span class="math">v = (10.0 ± 0.5) m/s</span></p>
                         <p>Find uncertainty in kinetic energy <span class="math">KE = ½mv²</span></p>
-                        
+
                         <p><strong>Step 1 - Calculate mean KE:</strong> KE = ½(4.0)(10.0)² = <strong>200 J</strong></p>
-                        
+
                         <p><strong>Step 2 - Find relative errors:</strong></p>
                         <ul>
                             <li>Relative error in mass: 0.2/4.0 = 0.05</li>
                             <li>Relative error in velocity: 0.5/10.0 = 0.05</li>
                         </ul>
-                        
+
                         <p><strong>Step 3 - Combine errors:</strong> ΔKE/KE = 0.05 + 2(0.05) = 0.15 = 15%</p>
-                        
+
                         <p><strong>Step 4 - Find absolute error:</strong> ΔKE = 0.15 × 200 J = 30 J</p>
-                        
+
                         <p><strong>Final Result:</strong> <span class="equation">KE = (200 ± 30) J</span></p>
                     </div>
 
@@ -2758,7 +2758,7 @@
                                 <p><strong>Answer:</strong> 0.00506 has 3 significant figures (leading zeros don't count). 1200 is ambiguous - could be 2, 3, or 4 sig figs. Better to write as 1.20 × 10³ (3 sig figs) or 1.200 × 10³ (4 sig figs).</p>
                             </div>
                         </div>
-                        
+
                         <div class="question-card">
                             <div class="question-header" onclick="toggleAnswer('q4_2')">
                                 <span class="question-number">Q2.</span>
@@ -2771,7 +2771,7 @@
                                 <p>Relative error in A: 2 × 2% = <strong>4%</strong></p>
                             </div>
                         </div>
-                        
+
                         <div class="question-card">
                             <div class="question-header" onclick="toggleAnswer('q4_3')">
                                 <span class="question-number">Q3.</span>
@@ -2784,7 +2784,7 @@
                                 <p>Step 2: Multiplication - 13.5 × 3.14159 = 42.41... → <strong>42.4</strong> (limited by 13.5's 3 sig figs)</p>
                             </div>
                         </div>
-                        
+
                         <div class="question-card">
                             <div class="question-header" onclick="toggleAnswer('q4_4')">
                                 <span class="question-number">Q4.</span>
@@ -2798,7 +2798,7 @@
                                 <p>This is a quite precise measurement!</p>
                             </div>
                         </div>
-                        
+
                         <div class="question-card">
                             <div class="question-header" onclick="toggleAnswer('q4_5')">
                                 <span class="question-number">Q5.</span>
@@ -2831,7 +2831,7 @@
                 <div class="section">
                     <h2>🎯 Chapter Assessment</h2>
                     <p>Congratulations! You've completed the journey through measurement fundamentals. Now it's time to test your mastery and apply what you've learned.</p>
-                    
+
                     <div class="highlight-box">
                         <h4>🧠 What You've Mastered:</h4>
                         <ul>
@@ -2900,10 +2900,10 @@
                 'section4': '1.4 Precision & Error Analysis',
                 'assessment': 'Assessment'
             };
-            
+
             let currentSection = 'intro';
             let completedSections = JSON.parse(localStorage.getItem('measurements_completed') || '[]');
-            
+
             // Initialize theme
             const lightThemeBtn = document.getElementById('light-theme');
             const darkThemeBtn = document.getElementById('dark-theme');
@@ -2932,10 +2932,10 @@
                 const progressFill = document.getElementById('progressFill');
                 const progressText = document.getElementById('progressText');
                 const progressPercent = document.getElementById('progressPercent');
-                
+
                 const currentIndex = sections.indexOf(currentSection);
                 const progress = ((currentIndex + 1) / sections.length) * 100;
-                
+
                 progressFill.style.width = progress + '%';
                 progressText.textContent = sectionNames[currentSection];
                 progressPercent.textContent = Math.round(progress) + '%';
@@ -2955,7 +2955,7 @@
                 document.querySelectorAll('.section-btn').forEach(btn => {
                     const sectionId = btn.getAttribute('data-section');
                     btn.classList.remove('active', 'completed');
-                    
+
                     if (sectionId === currentSection) {
                         btn.classList.add('active');
                     } else if (completedSections.includes(sectionId)) {
@@ -2970,19 +2970,19 @@
                 if (currentSection !== 'intro') {
                     markCompleted(currentSection);
                 }
-                
+
                 // Hide all sections
                 document.querySelectorAll('.content-section').forEach(section => {
                     section.classList.remove('active');
                 });
-                
+
                 // Show target section
                 document.getElementById(sectionId).classList.add('active');
                 currentSection = sectionId;
-                
+
                 updateProgress();
                 updateSectionButtons();
-                
+
                 // Smooth scroll to top
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             };
@@ -2999,7 +2999,7 @@
             window.toggleAnswer = function(answerId) {
                 const answerElement = document.getElementById(answerId);
                 const headerElement = answerElement.previousElementSibling;
-                
+
                 if (answerElement.classList.contains('show')) {
                     answerElement.classList.remove('show');
                     headerElement.classList.remove('active');
@@ -3009,7 +3009,7 @@
                         el.classList.remove('show');
                         el.previousElementSibling.classList.remove('active');
                     });
-                    
+
                     answerElement.classList.add('show');
                     headerElement.classList.add('active');
                 }
@@ -3018,7 +3018,7 @@
             // Initialize the page
             updateProgress();
             updateSectionButtons();
-            
+
             // Auto-save progress periodically
             setInterval(() => {
                 if (currentSection !== 'intro') {
