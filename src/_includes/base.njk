@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - Physics Daily</title>
+    
+    <!-- CSS files with proper paths -->
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <link rel="stylesheet" href="/assets/css/mcq-styles.css">
+    {% if pageStyle %}
+    <link rel="stylesheet" href="{{ pageStyle }}">
+    {% endif %}
+    
+    <!-- Base uses site-wide global.css for styling to match existing UI -->
+
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    
+    <!-- Manifest for PWA -->
+    <link rel="manifest" href="/manifest.webmanifest">
+    
+    <!-- Meta tags -->
+    <meta name="description" content="{{ description or 'Comprehensive physics notes and study resources' }}">
+    <meta name="theme-color" content="#1a202c">
+</head>
+<body>
+    <!-- Navigation (matches existing site classes) -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="/index.html" class="nav-logo">Physics Daily</a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="/resources.html">Resources</a></li>
+                    <li><a href="/about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        {{ content | safe }}
+    </main>
+
+    <!-- Footer (simple footer consistent with existing UI) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="/index.html">Home</a>
+                <a href="/resources.html">Resources</a>
+                <a href="/about.html">About</a>
+            </div>
+            <p>&copy; 2024 Physics Daily. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Global JavaScript -->
+    <script src="/assets/js/global.js"></script>
+    {% if pageScript %}
+    <script src="{{ pageScript }}"></script>
+    {% endif %}
+</body>
+</html>

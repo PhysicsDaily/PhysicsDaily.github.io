@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Units and Measurement Quiz - Physics Daily</title>
+    
+    <!-- CSS files with proper paths -->
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <link rel="stylesheet" href="/assets/css/mcq-styles.css">
+    
+    
+    <!-- Base uses site-wide global.css for styling to match existing UI -->
+
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    
+    <!-- Manifest for PWA -->
+    <link rel="manifest" href="/manifest.webmanifest">
+    
+    <!-- Meta tags -->
+    <meta name="description" content="Comprehensive physics notes and study resources">
+    <meta name="theme-color" content="#1a202c">
+</head>
+<body>
+    <!-- Navigation (matches existing site classes) -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="/index.html" class="nav-logo">Physics Daily</a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="/resources.html">Resources</a></li>
+                    <li><a href="/about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+            <main class="quiz-container container">
+        <header class="quiz-header">
+            <h1>Units and Measurement Quiz</h1>
+            <p class="quiz-subtitle">Chapter 1</p>
+        </header>
+
+        <!-- Quiz Controls -->
+        <div class="quiz-controls">
+            <div class="control-group">
+                <label for="numQuestions">Number of Questions:</label>
+                <select id="numQuestions">
+                    <option value="5">5</option>
+                    <option value="10" selected>10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="all">All (5)</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="quizMode">Mode:</label>
+                <select id="quizMode">
+                    <option value="practice">Practice (Show solutions)</option>
+                    <option value="test">Test (Solutions at end)</option>
+                </select>
+            </div>
+            <button id="startQuiz" class="btn">Start Quiz</button>
+            <button id="resetQuiz" class="btn btn-secondary" style="display:none;">Reset Quiz</button>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container" style="display:none;">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div class="progress-text">Question <span id="currentQuestion">1</span> of <span id="totalQuestions">10</span></div>
+        </div>
+
+        <!-- Quiz Content -->
+        <div id="quizContent" class="quiz-content" style="display:none;">
+            <div class="question-container">
+                <h2 id="questionText"></h2>
+                <div id="optionsContainer" class="options-container"></div>
+                <div id="feedbackContainer" class="feedback-container" style="display:none;"></div>
+            </div>
+            
+            <div class="navigation-buttons">
+                <button id="prevQuestion" class="btn btn-secondary">Previous</button>
+                <button id="submitAnswer" class="btn">Submit Answer</button>
+                <button id="nextQuestion" class="btn btn-secondary">Next</button>
+                <button id="showResults" class="btn" style="display:none;">Show Results</button>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsSection" class="results-section" style="display:none;">
+            <h2>Quiz Results</h2>
+            <div class="score-display">
+                <div class="score-circle">
+                    <span id="scorePercentage">0%</span>
+                </div>
+                <div class="score-details">
+                    <p>You got <span id="correctAnswers">0</span> out of <span id="totalAnswered">0</span> questions correct.</p>
+                    <p id="scoreMessage"></p>
+                </div>
+            </div>
+            
+            <div class="results-summary">
+                <h3>Question Review</h3>
+                <div id="questionReview"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Embed quiz data -->
+    <script>
+        window.quizData = [{"id":1,"question":"Which of the following is a fundamental SI unit?","options":["Newton (N)","Joule (J)","Watt (W)","Kilogram (kg)"],"answer":"Kilogram (kg)","solution":"The SI system has seven base units. Newton, Joule, and Watt are derived units. Kilogram (mass) is a fundamental unit."},{"id":2,"question":"The principle of homogeneity states that:","options":["All physical quantities must have the same units","An equation must be dimensionally consistent","The universe is uniform and homogeneous","Derived units are homogeneous with fundamental units"],"answer":"An equation must be dimensionally consistent","solution":"The principle of homogeneity requires that all terms added or subtracted in a physical equation must have the same dimensions."},{"id":3,"question":"The dimensional formula for torque is:","options":["[MLT⁻²]","[ML²T⁻²]","[ML⁻¹T⁻²]","[M⁻¹L³T⁻²]"],"answer":"[ML²T⁻²]","solution":"Torque = Force × perpendicular distance. Dimensions are [MLT⁻²] × [L] = [ML²T⁻²]."},{"id":4,"question":"A light-year is a unit of:","options":["Time","Mass","Distance","Energy"],"answer":"Distance","solution":"A light-year is the distance that light travels in one year. It is a unit of astronomical distance."},{"id":5,"question":"Which quantity has dimensions [ML⁻¹T⁻²]?","options":["Force","Pressure","Energy","Power"],"answer":"Pressure","solution":"Pressure = Force / Area. Dimensions are [MLT⁻²] / [L²] = [ML⁻¹T⁻²]."}];
+        window.quizTopic = "measurement";
+        window.quizTitle = "Units and Measurement";
+    </script>
+
+    <!-- Load unified quiz logic -->
+    <script src="/assets/js/unified-quiz.js"></script>
+
+    </main>
+
+    <!-- Footer (simple footer consistent with existing UI) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="/index.html">Home</a>
+                <a href="/resources.html">Resources</a>
+                <a href="/about.html">About</a>
+            </div>
+            <p>&copy; 2024 Physics Daily. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Global JavaScript -->
+    <script src="/assets/js/global.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "physicsdaily.github.io",
+  "version": "2.0.0",
+  "description": "Physics Daily - Your comprehensive physics notes and study resources",
+  "main": "service-worker.js",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "start": "eleventy --serve --watch",
+    "clean": "rm -rf _site",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PhysicsDaily/PhysicsDaily.github.io.git"
+  },
+  "keywords": ["physics", "education", "study", "quiz", "learning"],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PhysicsDaily/PhysicsDaily.github.io/issues"
+  },
+  "homepage": "https://github.com/PhysicsDaily/PhysicsDaily.github.io#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
+}

@@ -1,0 +1,45 @@
+---
+layout: base.njk
+---
+<article class="chapter-content">
+    <header class="chapter-header">
+        <h1>{{ title }}</h1>
+        {% if chapter %}
+        <p class="chapter-number">Chapter {{ chapter }}</p>
+        {% endif %}
+        {% if topic %}
+        <p class="chapter-topic">{{ topic | topicName }}</p>
+        {% endif %}
+    </header>
+
+    <nav class="chapter-nav">
+        {% if hasConceptual %}
+        <a href="conceptual.html" class="nav-button">Conceptual Questions</a>
+        {% endif %}
+        {% if hasMCQ %}
+        <a href="mcq.html" class="nav-button">Multiple Choice Questions</a>
+        {% endif %}
+        {% if hasNumerical %}
+        <a href="numerical.html" class="nav-button">Numerical Problems</a>
+        {% endif %}
+    </nav>
+
+    <div class="content-wrapper">
+        {{ content | safe }}
+    </div>
+
+    {% if prevChapter or nextChapter %}
+    <nav class="chapter-pagination">
+        {% if prevChapter %}
+        <a href="{{ prevChapter.url }}" class="prev-chapter">
+            ← {{ prevChapter.title }}
+        </a>
+        {% endif %}
+        {% if nextChapter %}
+        <a href="{{ nextChapter.url }}" class="next-chapter">
+            {{ nextChapter.title }} →
+        </a>
+        {% endif %}
+    </nav>
+    {% endif %}
+</article>
