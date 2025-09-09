@@ -8,7 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../shared/mechanics-style.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/mcq-styles.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -177,7 +178,7 @@
 
     <main>
         <div id="instructions-container" class="instructions-container">
-            <header class="header" style="background: none; padding-top: 0;">
+            <header class="header" style="background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); color: white; padding-top: 0;">
                 <div class="container">
                     <h1>Chapter 1: Assessment Quiz</h1>
                     <p class="subtitle">Test your mastery of Measurement</p>
@@ -185,15 +186,27 @@
             </header>
             <h2>📝 Instructions</h2>
             <ul>
-                <li>This test contains <strong>35 multiple-choice questions</strong>.</li>
+                <li>This test can use <strong>up to 150+ multiple-choice questions</strong>. Choose 10, 25, 50, 75, or 100 to begin.</li>
                 <li>Each correct answer awards <strong>+4 marks</strong>.</li>
                 <li>Each incorrect answer results in a penalty of <strong>-1 mark</strong>.</li>
                 <li>Unanswered questions receive <strong>0 marks</strong>.</li>
                 <li>Use the question palette to navigate between questions.</li>
             </ul>
-            <div class="timer-setup">
-                <label for="timer-input">Set Timer (minutes):</label>
-                <input type="number" id="timer-input" value="60" min="1">
+            <div class="quiz-setup">
+                <div class="setup-item">
+                    <label for="question-count-select">Number of Questions:</label>
+                    <select id="question-count-select">
+                        <option value="10">10 (Quick Test)</option>
+                        <option value="25">25 (Standard Test)</option>
+                        <option value="50">50 (Thorough Test)</option>
+                        <option value="75">75 (Extended Test)</option>
+                        <option value="100" selected>100 (Full Chapter)</option>
+                    </select>
+                </div>
+                <div class="setup-item">
+                    <label for="timer-input">Set Timer (minutes):</label>
+                    <input type="number" id="timer-input" value="60" min="1">
+                </div>
             </div>
             <button id="start-test-btn" class="btn" style="margin-top: 1.5rem;">Start Test</button>
         </div>
@@ -271,7 +284,7 @@
         });
         
         // Quiz Data with Solutions
-        const quizData = [
+        let quizData = [
             { question: "1. Which of the following is a fundamental SI unit?", options: ["Newton (N)", "Joule (J)", "Watt (W)", "Kilogram (kg)"], answer: "Kilogram (kg)", solution: "The SI system has seven base units. Newton, Joule, and Watt are derived units. Kilogram (mass) is a fundamental unit." },
             { question: "2. The principle of homogeneity states that:", options: ["All physical quantities must have the same units", "An equation must be dimensionally consistent", "The universe is uniform and homogeneous", "Derived units are homogeneous with fundamental units"], answer: "An equation must be dimensionally consistent", solution: "The principle of homogeneity requires that all terms added or subtracted in a physical equation must have the same dimensions." },
             { question: "3. The dimensional formula for torque is:", options: ["[MLT⁻²]", "[ML²T⁻²]", "[ML⁻¹T⁻²]", "[M⁻¹L³T⁻²]"], answer: "[ML²T⁻²]", solution: "Torque = Force × perpendicular distance. Dimensions are [MLT⁻²] × [L] = [ML²T⁻²]." },
@@ -309,10 +322,17 @@
             { question: "35. A furlong is 220 yards, and a fortnight is 2 weeks. If a snail moves at 2.5 mm/s, its speed in furlongs per fortnight is approximately:", options: ["15", "1.5 × 10³", "1.5 × 10⁵", "1.5 × 10⁷"], answer: "1.5 × 10³", solution: "This is a unit conversion problem. 2.5 mm/s ≈ 1.5 × 10³ furlongs/fortnight. The key is careful conversion of length (mm to furlongs) and time (seconds to fortnights)." }
         ];
 
+        // Attempt to load external JSON (preferred for 150+ questions)
+        const dataUrl = '../../assets/js/mcq-data/measurements-quiz.json';
+        fetch(dataUrl).then(r => r.ok ? r.json() : Promise.reject(new Error('No external JSON')))
+          .then(json => { quizData = json; updateQuestionCountOptions(); })
+          .catch(() => { updateQuestionCountOptions(); });
+
         // Quiz State
+        let activeQuizData = [];
         let currentQuestionIndex = 0;
-        let userAnswers = new Array(quizData.length).fill(null);
-        let questionStatus = new Array(quizData.length).fill('not-visited');
+        let userAnswers = [];
+        let questionStatus = [];
         let timerInterval;
 
         // DOM Elements
@@ -320,6 +340,7 @@
         const quizInterface = document.getElementById('quiz-interface');
         const startBtn = document.getElementById('start-test-btn');
         const timerInput = document.getElementById('timer-input');
+        const questionCountSelect = document.getElementById('question-count-select');
         const timerDisplay = document.getElementById('timer-display');
         const questionHeaderEl = document.getElementById('question-header');
         const questionContentEl = document.getElementById('question-content');
@@ -354,12 +375,43 @@
             }, 1000);
         }
 
+        function updateQuestionCountOptions() {
+            // Ensure options do not exceed available questions
+            const options = Array.from(questionCountSelect.options);
+            options.forEach(opt => {
+                const val = parseInt(opt.value, 10);
+                opt.disabled = Number.isFinite(val) && val > quizData.length;
+            });
+            // If selected exceeds available, reduce to max available step
+            const selected = parseInt(questionCountSelect.value, 10);
+            if (selected > quizData.length) {
+                const allowed = [100, 75, 50, 25, 10].find(v => v <= quizData.length) || quizData.length;
+                questionCountSelect.value = String(allowed);
+            }
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
         function startTest() {
             const duration = parseInt(timerInput.value, 10);
             if (isNaN(duration) || duration <= 0) {
                 alert("Please enter a valid time in minutes.");
                 return;
             }
+            const questionCount = parseInt(questionCountSelect.value, 10);
+            const shuffled = shuffleArray([...quizData]);
+            activeQuizData = shuffled.slice(0, questionCount);
+
+            userAnswers = new Array(activeQuizData.length).fill(null);
+            questionStatus = new Array(activeQuizData.length).fill('not-visited');
+            currentQuestionIndex = 0;
+
             instructionsContainer.style.display = 'none';
             quizInterface.style.display = 'block';
             startTimer(duration);
@@ -368,7 +420,7 @@
         }
         
         function renderQuestion() {
-            const currentQuestion = quizData[currentQuestionIndex];
+            const currentQuestion = activeQuizData[currentQuestionIndex];
             
             questionHeaderEl.innerHTML = `
                 <span class="question-number">Question ${currentQuestionIndex + 1}</span>
@@ -405,7 +457,7 @@
 
             prevBtn.disabled = currentQuestionIndex === 0;
             
-            if (currentQuestionIndex === quizData.length - 1) {
+            if (currentQuestionIndex === activeQuizData.length - 1) {
                 nextBtn.textContent = 'Submit Test';
             } else {
                 nextBtn.textContent = 'Save & Next';
@@ -414,7 +466,7 @@
         
         function renderPalette() {
             paletteContainer.innerHTML = '';
-            quizData.forEach((_, index) => {
+            activeQuizData.forEach((_, index) => {
                 const btn = document.createElement('button');
                 btn.textContent = index + 1;
                 btn.classList.add('palette-btn');
@@ -431,7 +483,7 @@
         }
         
         function handleNext() {
-             if (currentQuestionIndex === quizData.length - 1) {
+             if (currentQuestionIndex === activeQuizData.length - 1) {
                 if (confirm('Are you sure you want to submit the test?')) {
                     submitTest();
                 }
@@ -474,7 +526,7 @@
             let incorrect = 0;
             let unanswered = 0;
 
-            quizData.forEach((q, index) => {
+            activeQuizData.forEach((q, index) => {
                 if (userAnswers[index] === null) {
                     unanswered++;
                 } else if (userAnswers[index] === q.answer) {
@@ -490,14 +542,14 @@
             resultsContainer.style.display = 'block';
 
             resultsSummaryEl.innerHTML = `
-                <h2>Final Score: ${score} / ${quizData.length * 4}</h2>
+                <h2>Final Score: ${score} / ${activeQuizData.length * 4}</h2>
                 <p><strong>Correct Answers:</strong> ${correct}</p>
                 <p><strong>Incorrect Answers:</strong> ${incorrect}</p>
                 <p><strong>Unanswered:</strong> ${unanswered}</p>
             `;
 
             detailedResultsEl.innerHTML = '<h3>Detailed Analysis</h3>';
-            quizData.forEach((q, index) => {
+            activeQuizData.forEach((q, index) => {
                 const userAnswer = userAnswers[index];
                 const isCorrect = userAnswer === q.answer;
                 
@@ -527,5 +579,6 @@
         });
     });
     </script>
+    <script src="../../assets/js/global.js"></script>
 </body>
 </html>

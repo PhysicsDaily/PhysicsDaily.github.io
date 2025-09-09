@@ -11,9 +11,32 @@
     <link rel="stylesheet" href="../../assets/css/global.css">
     <style>
         /* Page-specific styles */
-        .section {
-            margin-bottom: 3rem;
-        }
+        /* Progress and Section Navigation Styles */
+        .progress-container { margin: 2rem 0; }
+        .progress-bar { background: var(--border-color); height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 1rem; }
+        .progress-fill { background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); height: 100%; width: 16.67%; transition: width 0.3s ease; }
+        
+        .section-indicators { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+        .section-indicator { background: var(--bg-secondary); border: 2px solid var(--border-color); color: var(--text-secondary); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; }
+        .section-indicator:hover { border-color: var(--primary-color); color: var(--primary-color); }
+        .section-indicator.active { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+        .section-indicator.completed { background: var(--success-color); color: white; border-color: var(--success-color); }
+
+        /* Section Display */
+        .section { display: none; }
+        .section.active-section { display: block; }
+        
+        /* Learning Objectives */
+        .learning-objectives { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 2rem 0; }
+        .objective-card { background: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--primary-color); }
+        .objective-card h4 { color: var(--primary-color); margin-bottom: 0.5rem; }
+        
+        /* Navigation Buttons */
+        .navigation-buttons { display: flex; justify-content: space-between; margin: 2rem 0; gap: 1rem; flex-wrap: wrap; }
+        .navigation-buttons .nav-button { flex: 1; min-width: 200px; text-align: center; }
+        .nav-button { background: var(--primary-color); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; text-decoration: none; font-weight: 500; transition: all 0.2s ease; }
+        .nav-button:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .nav-button:disabled { background: var(--border-color); cursor: not-allowed; transform: none; }
         .beginner-note {
             background: var(--bg-secondary);
             border-left: 4px solid var(--success-color);
@@ -598,7 +621,23 @@
 
     <main class="main-content">
         <div class="container">
-            <div class="section">
+            <!-- Chapter Progress Indicator -->
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="section-indicators">
+                    <button class="section-indicator active" data-section="intro">📚 Introduction</button>
+                    <button class="section-indicator" data-section="section-1">📐 Scalars/Vectors</button>
+                    <button class="section-indicator" data-section="section-2">📍 Position</button>
+                    <button class="section-indicator" data-section="section-3">⚡ Velocity</button>
+                    <button class="section-indicator" data-section="section-4">🚀 Acceleration</button>
+                    <button class="section-indicator" data-section="assessment">📝 Quiz</button>
+                </div>
+            </div>
+
+            <!-- Chapter Introduction -->
+            <div id="intro" class="section active-section">
                 <h2>🌟 Introduction: Understanding Motion</h2>
                 
                 <div class="beginner-note">
@@ -619,10 +658,35 @@
                     <h4>🎓 Historical Context:</h4>
                     <p>Galileo Galilei (1564-1642) was the first to mathematically describe motion, laying the groundwork for Newton's laws. His studies of falling objects and projectile motion established the foundation of modern kinematics and challenged Aristotelian physics that had dominated for centuries.</p>
                 </div>
+
+                <h3>🎯 What You'll Learn</h3>
+                <div class="learning-objectives">
+                    <div class="objective-card">
+                        <h4>Section 2.1: Scalars and Vectors</h4>
+                        <p>Understand the difference between quantities with magnitude only and those with both magnitude and direction.</p>
+                    </div>
+                    <div class="objective-card">
+                        <h4>Section 2.2: Position and Displacement</h4>
+                        <p>Master the concepts of position, displacement, and distance in one-dimensional motion.</p>
+                    </div>
+                    <div class="objective-card">
+                        <h4>Section 2.3: Velocity</h4>
+                        <p>Learn about average and instantaneous velocity, and the difference between speed and velocity.</p>
+                    </div>
+                    <div class="objective-card">
+                        <h4>Section 2.4: Acceleration</h4>
+                        <p>Understand acceleration and master the kinematic equations for constant acceleration.</p>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="nav-button" onclick="navigateToSection('section-1')">Start Learning: Scalars and Vectors →</button>
+                </div>
             </div>
 
-            <div class="section">
-                <h2>2.1 Physical Quantities: Scalars and Vectors</h2>
+            <!-- Section 2.1: Scalars and Vectors -->
+            <div id="section-1" class="section">
+                <h2>2.1 📐 Physical Quantities: Scalars and Vectors</h2>
                 
                 <div class="beginner-note">
                     <h4>🔰 Simple Analogy:</h4>
@@ -677,10 +741,16 @@
                 <div class="highlight-box">
                     <p><strong>Critical Insight:</strong> Scalar and vector quantities behave differently in calculations. You can't simply add speeds to get velocity, or masses to get acceleration. Understanding this distinction prevents common physics errors and builds deeper conceptual understanding.</p>
                 </div>
+
+                <div class="navigation-buttons">
+                    <button class="nav-button" onclick="navigateToSection('intro')">← Back to Introduction</button>
+                    <button class="nav-button" onclick="navigateToSection('section-2')">Next: Position and Displacement →</button>
+                </div>
             </div>
 
-            <div class="section">
-                <h2>2.2 Position, Displacement, and Distance</h2>
+            <!-- Section 2.2: Position and Displacement -->
+            <div id="section-2" class="section">
+                <h2>2.2 📍 Position, Displacement, and Distance</h2>
                 
                 <div class="beginner-note">
                     <h4>🔰 Everyday Example:</h4>
@@ -749,10 +819,16 @@
                     <h4>🎓 Mathematical Insight:</h4>
                     <p>For any motion, |displacement| ≤ distance. Equality holds only for straight-line motion in one direction. This relationship becomes crucial in optimization problems and provides insight into the efficiency of different paths.</p>
                 </div>
+
+                <div class="navigation-buttons">
+                    <button class="nav-button" onclick="navigateToSection('section-1')">← Back to Scalars and Vectors</button>
+                    <button class="nav-button" onclick="navigateToSection('section-3')">Next: Velocity →</button>
+                </div>
             </div>
 
-            <div class="section">
-                <h2>2.3 Velocity: Rate of Change of Position</h2>
+            <!-- Section 2.3: Velocity -->
+            <div id="section-3" class="section">
+                <h2>2.3 ⚡ Velocity: Rate of Change of Position</h2>
                 
                 <div class="beginner-note">
                     <h4>🔰 Intuitive Understanding:</h4>
@@ -1063,10 +1139,88 @@
                         <li><strong>Terminal velocity:</strong> When air resistance equals gravitational force</li>
                     </ul>
                 </div>
+
+                <div class="navigation-buttons">
+                    <button class="nav-button" onclick="navigateToSection('section-3')">← Back to Velocity</button>
+                    <button class="nav-button" onclick="navigateToSection('assessment')">Take Assessment Quiz →</button>
+                </div>
             </div>
 
-            <div class="section">
-                <h2>🤔 Conceptual Questions</h2>
+            <!-- Assessment Section -->
+            <div id="assessment" class="section">
+                <h2>🎯 Chapter Assessment Quiz</h2>
+                
+                <div class="highlight-box">
+                    <h3>Test Your Mastery</h3>
+                    <p>You've completed all sections of One-Dimensional Kinematics! Now it's time to test your understanding with our comprehensive assessment quiz.</p>
+                </div>
+                
+                <div class="example-box">
+                    <h4>📊 What's Included:</h4>
+                    <ul>
+                        <li><strong>15-20 Questions:</strong> Covering all kinematics concepts</li>
+                        <li><strong>Mixed Format:</strong> Conceptual reasoning and numerical problems</li>
+                        <li><strong>Instant Feedback:</strong> Detailed explanations for each answer</li>
+                        <li><strong>Performance Analytics:</strong> See your strengths and areas for improvement</li>
+                        <li><strong>Timed Environment:</strong> Practice under exam conditions</li>
+                    </ul>
+                </div>
+
+                <div class="beginner-note">
+                    <strong>💡 Study Tip:</strong> If you score below 70%, review the relevant sections and retake the quiz. Mastery comes through practice and understanding, not memorization!
+                </div>
+                
+                <div style="text-align: center; margin: 3rem 0;">
+                    <button class="btn" style="font-size: 1.3rem; padding: 1.5rem 3rem; background: var(--success-color);" onclick="window.open('mcq.html', '_blank')">
+                        🚀 Launch Assessment Quiz
+                    </button>
+                </div>
+
+                <div class="advanced-note">
+                    <strong>🎓 Next Steps:</strong> After mastering this chapter, you'll be ready to tackle 2D motion, projectile motion, and circular motion.
+                </div>
+            </div>
+
+            <!-- Conceptual Questions Section (now part of section-4) -->
+            <div id="section-4" class="section">
+                <h2>🚀 Acceleration and Free Fall</h2>
+                
+                <div class="beginner-note">
+                    <h4>🔰 Real-World Connection:</h4>
+                    <p>Drop a ball and a feather in a vacuum chamber - they fall at exactly the same rate! This counterintuitive fact reveals that gravity accelerates all objects equally, regardless of their mass.</p>
+                </div>
+
+                <h3>Understanding Acceleration</h3>
+                <p><strong>Acceleration</strong> is the rate of change of velocity. It tells us how quickly an object speeds up, slows down, or changes direction.</p>
+
+                <div class="formula-box">
+                    <h4>Average Acceleration:</h4>
+                    <p>a = Δv/Δt = (v_f - v_i)/(t_f - t_i)</p>
+                    <p>Units: m/s²</p>
+                </div>
+
+                <h3>The Kinematic Equations</h3>
+                <p>For constant acceleration, we have four fundamental equations:</p>
+
+                <div class="formula-box">
+                    <p>1. v = v₀ + at</p>
+                    <p>2. x = x₀ + v₀t + ½at²</p>
+                    <p>3. v² = v₀² + 2a(x - x₀)</p>
+                    <p>4. x = x₀ + ½(v₀ + v)t</p>
+                </div>
+
+                <h3>Free Fall Motion</h3>
+                <p>Free fall is motion under gravity alone, with constant acceleration g = 9.8 m/s² downward (on Earth).</p>
+
+                <div class="example-box">
+                    <h4>📝 Free Fall Examples:</h4>
+                    <p><strong>Dropped Object:</strong> A stone dropped from a 45 m building</p>
+                    <p>Using y = y₀ + v₀t - ½gt²</p>
+                    <p>0 = 45 + 0 - ½(9.8)t²</p>
+                    <p>t = √(90/9.8) ≈ 3.03 seconds</p>
+                </div>
+
+                <h3>🤔 Conceptual Questions</h3>
                 
                 <div class="question">
                     <strong>1.</strong> Can an object have zero velocity but non-zero acceleration? Provide a specific example and explain the physics involved.
@@ -1131,5 +1285,119 @@
     </footer>
 
     <script src="../../assets/js/global.js"></script>
+    <script>
+        // Section Navigation System
+        let currentSection = 'intro';
+        const sections = ['intro', 'section-1', 'section-2', 'section-3', 'section-4', 'assessment'];
+        
+        function initializeSectionNavigation() {
+            // Load saved progress
+            const savedSection = localStorage.getItem('physics-kinematics-current-section');
+            const completedSections = JSON.parse(localStorage.getItem('physics-kinematics-completed') || '[]');
+            
+            if (savedSection && sections.includes(savedSection)) {
+                // Avoid landing directly on assessment when opening the chapter
+                currentSection = (savedSection === 'assessment') ? (sections.includes('section-4') ? 'section-4' : 'intro') : savedSection;
+            }
+            
+            // Mark completed sections
+            completedSections.forEach(sectionId => {
+                const indicator = document.querySelector(`[data-section="${sectionId}"]`);
+                if (indicator) indicator.classList.add('completed');
+            });
+            
+            // Show current section
+            showSection(currentSection);
+            updateProgress();
+            
+            // Add click handlers to section indicators
+            document.querySelectorAll('.section-indicator').forEach(indicator => {
+                indicator.addEventListener('click', (e) => {
+                    const sectionId = e.target.getAttribute('data-section');
+                    navigateToSection(sectionId);
+                });
+            });
+        }
+
+        function navigateToSection(sectionId) {
+            if (!sections.includes(sectionId)) return;
+            
+            // Open dedicated quiz page for assessment
+            if (sectionId === 'assessment') {
+                window.location.href = 'mcq.html';
+                return;
+            }
+            
+            // Mark previous section as completed if moving forward
+            const currentIndex = sections.indexOf(currentSection);
+            const targetIndex = sections.indexOf(sectionId);
+            
+            if (targetIndex > currentIndex) {
+                markSectionCompleted(currentSection);
+            }
+            
+            currentSection = sectionId;
+            showSection(sectionId);
+            updateProgress();
+            saveProgress();
+            
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active-section');
+            });
+            
+            // Show target section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active-section');
+            }
+            
+            // Update indicators
+            document.querySelectorAll('.section-indicator').forEach(indicator => {
+                indicator.classList.remove('active');
+            });
+            
+            const activeIndicator = document.querySelector(`[data-section="${sectionId}"]`);
+            if (activeIndicator) {
+                activeIndicator.classList.add('active');
+            }
+        }
+
+        function markSectionCompleted(sectionId) {
+            let completed = JSON.parse(localStorage.getItem('physics-kinematics-completed') || '[]');
+            if (!completed.includes(sectionId)) {
+                completed.push(sectionId);
+                localStorage.setItem('physics-kinematics-completed', JSON.stringify(completed));
+                
+                // Update UI
+                const indicator = document.querySelector(`[data-section="${sectionId}"]`);
+                if (indicator) indicator.classList.add('completed');
+            }
+        }
+
+        function updateProgress() {
+            const currentIndex = sections.indexOf(currentSection);
+            const progressPercent = ((currentIndex + 1) / sections.length) * 100;
+            
+            const progressFill = document.getElementById('progress-fill');
+            if (progressFill) {
+                progressFill.style.width = progressPercent + '%';
+            }
+        }
+
+        function saveProgress() {
+            localStorage.setItem('physics-kinematics-current-section', currentSection);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSectionNavigation();
+        });
+    </script>
 </body>
 </html>
