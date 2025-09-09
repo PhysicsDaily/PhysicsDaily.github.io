@@ -1,7 +1,7 @@
-document.addEventListener('DOMContentLoaded', function() {
+const __initGlobal = function() {
     // --- Theme Toggle Functionality ---
-    const lightModeBtn = document.getElementById('light-mode-btn') || document.getElementById('light-mode');
-    const darkModeBtn = document.getElementById('dark-mode-btn') || document.getElementById('dark-mode');
+    const lightModeBtn = document.querySelector('#light-mode-btn, #light-mode, #light-theme');
+    const darkModeBtn = document.querySelector('#dark-mode-btn, #dark-mode, #dark-theme');
     const docElement = document.documentElement;
 
     // Function to apply the theme
@@ -22,13 +22,13 @@ document.addEventListener('DOMContentLoaded', function() {
     applyTheme(savedTheme);
 
     // Event listeners for theme buttons
-    if(lightModeBtn) {
+    if (lightModeBtn) {
         lightModeBtn.addEventListener('click', () => {
             applyTheme('light');
         });
     }
 
-    if(darkModeBtn) {
+    if (darkModeBtn) {
         darkModeBtn.addEventListener('click', () => {
             applyTheme('dark');
         });
@@ -157,4 +157,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-});
+};
+
+// Initialize immediately if DOM is ready, otherwise wait for DOMContentLoaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', __initGlobal);
+} else {
+    __initGlobal();
+}
