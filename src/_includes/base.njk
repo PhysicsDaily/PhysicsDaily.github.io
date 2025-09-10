@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Skip to main content for accessibility -->
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }} - Physics Daily</title>
@@ -23,6 +25,25 @@
     <!-- Meta tags -->
     <meta name="description" content="{{ description or 'Comprehensive physics notes and study resources' }}">
     <meta name="theme-color" content="#1a202c">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XN081SR2KP');
+    </script>
+    
+    <!-- KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <!-- Interactive Learning Components -->
+    <link rel="stylesheet" href="/assets/css/interactive-components.css">
+    <link rel="stylesheet" href="/assets/css/progress-tracker.css">
 </head>
 <body>
     <!-- Navigation (matches existing site classes) -->
@@ -37,6 +58,17 @@
                 </button>
                 <ul class="nav-links">
                     <li><a href="/index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" aria-label="Topics Menu">Topics ▼</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/mechanics/">Mechanics</a></li>
+                            <li><a href="/thermodynamics/">Thermodynamics</a></li>
+                            <li><a href="/electromagnetism/">Electromagnetism</a></li>
+                            <li><a href="/waves/">Waves</a></li>
+                            <li><a href="/optics/">Optics</a></li>
+                            <li><a href="/modern/">Modern Physics</a></li>
+                        </ul>
+                    </li>
                     <li><a href="/resources.html">Resources</a></li>
                     <li><a href="/about.html">About</a></li>
                 </ul>
@@ -45,7 +77,7 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="main-content">
+    <main id="main-content" class="main-content" role="main">
         {{ content | safe }}
     </main>
 
@@ -63,8 +95,24 @@
 
     <!-- Global JavaScript -->
     <script src="/assets/js/global.js"></script>
+    <script src="/assets/js/active-learning.js"></script>
+    <script src="/assets/js/physics-simulations.js"></script>
+    <script src="/assets/js/progress-tracker.js"></script>
+    
+    <!-- Progress Streak Display -->
+    <div id="streak-display"></div>
     {% if pageScript %}
     <script src="{{ pageScript }}"></script>
     {% endif %}
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js')
+            .catch(err => console.log('Service Worker registration failed:', err));
+        });
+      }
+    </script>
 </body>
 </html>

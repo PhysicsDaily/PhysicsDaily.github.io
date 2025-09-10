@@ -1,32 +1,166 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assessment Quiz: Motion in 2D & 3D - Physics Daily</title>
-    <link rel="stylesheet" href="../shared/mechanics-style.css">
+    <title>Assessment Quiz: 2D Kinematics - Physics Daily</title>
+    <meta name="description" content="A comprehensive multiple-choice quiz on 2D Kinematics.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/global.css">
     <link rel="stylesheet" href="../../assets/css/mcq-styles.css">
+    <link rel="stylesheet" href="../../assets/css/interactive-components.css">
+    <link rel="stylesheet" href="../../assets/css/progress-tracker.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XN081SR2KP');
+    </script>
 </head>
 <body>
-    <nav class="nav"><div class="container"><a href="../../index.html" class="nav-logo">Physics Daily</a></div></nav>
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../../index.html" class="nav-logo">Physics Daily</a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" aria-label="Topics Menu">Topics â–¼</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/mechanics/">Mechanics</a></li>
+                            <li><a href="/thermodynamics/">Thermodynamics</a></li>
+                            <li><a href="/electromagnetism/">Electromagnetism</a></li>
+                            <li><a href="/waves/">Waves</a></li>
+                            <li><a href="/optics/">Optics</a></li>
+                            <li><a href="/modern/">Modern Physics</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../../resources.html">Resources</a></li>
+                    <li><a href="../../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="theme-toggle">
+        <button id="light-mode" title="Light Mode">â˜€ï¸</button>
+        <button id="dark-mode" title="Dark Mode">ðŸŒ™</button>
+    </div>
+
     <div class="breadcrumb">
         <div class="container">
-            <a href="../../index.html">Home</a><span class="separator">›</span>
-            <a href="../foundations.html">Classical Mechanics</a><span class="separator">›</span>
-            <a href="index.html">Motion in 2D & 3D</a><span class="separator">›</span>
-            <span class="current">📊 Assessment Quiz</span>
+            <nav aria-label="Breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span class="separator">â€º</span>
+                <a href="../foundations.html">Classical Mechanics</a>
+                <span class="separator">â€º</span>
+                <a href="index.html">2D Kinematics</a>
+                <span class="separator">â€º</span>
+                <span class="current">ðŸ“Š Assessment Quiz</span>
+            </nav>
         </div>
     </div>
+
     <main>
-        <div class="instructions-container">
+        <div id="instructions-container" class="instructions-container">
             <header class="header">
                 <div class="container">
                     <h1>Chapter 4: Assessment Quiz</h1>
-                    <p class="subtitle">Test your mastery of Motion in 2D & 3D</p>
+                    <p class="subtitle">Test your mastery of 2D Kinematics</p>
                 </div>
             </header>
-            <h2>Content Coming Soon</h2>
+            <h2>Instructions</h2>
+            <ul>
+                <li>This test contains <strong>multiple-choice questions</strong> on 2D Kinematics.</li>
+                <li>Each correct answer awards <strong>+4 marks</strong>.</li>
+                <li>Each incorrect answer results in a penalty of <strong>-1 mark</strong>.</li>
+                <li>Unanswered questions receive <strong>0 marks</strong>.</li>
+                <li>Use the question palette to navigate between questions.</li>
+                <li>Review your answers before submitting.</li>
+            </ul>
+            <div class="quiz-setup">
+                <div class="setup-item">
+                    <label for="question-count-select">Number of Questions:</label>
+                    <select id="question-count-select">
+                        <option value="5" selected>5 (Quick Test)</option>
+                        <option value="10">10 (Standard Test)</option>
+                        <option value="20">20 (Full Practice)</option>
+                    </select>
+                </div>
+                <div class="setup-item">
+                    <label for="timer-input">Set Timer (minutes):</label>
+                    <input type="number" id="timer-input" value="10" min="1">
+                </div>
+            </div>
+            <button id="start-test-btn" class="btn" style="margin-top: 1.5rem;">Start Test</button>
+        </div>
+
+        <div id="quiz-interface" class="quiz-interface">
+            <div class="test-container">
+                <div class="test-main">
+                    <div class="timer-container">
+                        <div class="timer-label">Time Remaining</div>
+                        <div id="timer-display">00:00:00</div>
+                    </div>
+                    <div id="question-header" class="question-header"></div>
+                    <div id="question-content" class="question-content"></div>
+                    <ul id="options-list" class="options-list"></ul>
+                    <div class="quiz-navigation">
+                        <button id="prev-btn" class="btn btn-secondary">Previous</button>
+                        <button id="mark-review-btn" class="btn btn-secondary">Mark for Review</button>
+                        <button id="next-btn" class="btn">Save & Next</button>
+                    </div>
+                </div>
+                <aside class="test-sidebar">
+                    <div class="sidebar-header">Question Palette</div>
+                    <div id="question-palette" class="question-palette"></div>
+                    <button id="submit-test-btn" class="btn" style="width: 100%;">Submit Test</button>
+                </aside>
+            </div>
+        </div>
+        
+        <div id="results-container" class="container results-container" style="display: none;">
+            <header class="header">
+                <div class="container">
+                    <h1>Quiz Results</h1>
+                </div>
+            </header>
+            <div id="results-summary" class="results-summary"></div>
+            <div id="detailed-results"></div>
+            <button onclick="location.reload()" class="btn">Take Another Test</button>
         </div>
     </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; Physics Daily. Made with â¤ï¸ for physics enthusiasts everywhere.</p>
+        </div>
+    </footer>
+
+    <script src="../../assets/js/global.js"></script>
+    <script src="../../assets/js/quiz-manager.js"></script>
+    <script src="../../assets/js/active-learning.js"></script>
+    <script src="../../assets/js/physics-simulations.js"></script>
+    <script src="../../assets/js/progress-tracker.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const quiz = new QuizManager({
+                dataUrl: '../../assets/js/mcq-data/chapter4-2d-kinematics.json',
+                maxQuestions: 20,
+                defaultTime: 10,
+                positiveMarks: 4,
+                negativeMarks: 1
+            });
+        });
+    </script>
 </body>
 </html>
+

@@ -1,18 +1,44 @@
 module.exports = function(eleventyConfig) {
+  // Manual sitemap generation (without plugin dependency)
+  eleventyConfig.addGlobalData("buildTime", () => new Date().toISOString());
+  
+  // Generate sitemap.xml during build
+  eleventyConfig.addCollection("sitemapPages", function(collectionApi) {
+    return collectionApi.getAll().filter(item => {
+      return item.outputPath && item.outputPath.endsWith('.html') && !item.data.noSitemap;
+    });
+  });
+
+  // HTML Minification for production
+  eleventyConfig.addTransform("htmlmin", function(content, outputPath) {
+    if(process.env.NODE_ENV === "production" && outputPath && outputPath.endsWith(".html")) {
+      try {
+        const htmlmin = require("html-minifier-terser");
+        return htmlmin.minify(content, {
+          useShortDoctype: true,
+          removeComments: true,
+          collapseWhitespace: true,
+          minifyCSS: true,
+          minifyJS: true
+        });
+      } catch(e) {
+        return content;
+      }
+    }
+    return content;
+  });
+
   // Copy static assets directly to output
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy("robots.txt");
-  eleventyConfig.addPassthroughCopy("sitemap.xml");
   eleventyConfig.addPassthroughCopy("manifest.webmanifest");
   eleventyConfig.addPassthroughCopy("service-worker.js");
   eleventyConfig.addPassthroughCopy(".well-known");
   eleventyConfig.addPassthroughCopy("ads.txt");
   
-  // Keep existing root HTML pages and legacy sections available unchanged
+  // Remove root page passthroughs - now handled by Eleventy templates
+  // Keep only essential static files
   eleventyConfig.addPassthroughCopy({
-    "index.html": "index.html",
-    "about.html": "about.html",
-    "resources.html": "resources.html",
     "offline.html": "offline.html",
     "404.html": "404.html"
   });
@@ -58,8 +84,8 @@ module.exports = function(eleventyConfig) {
     return collectionApi.getFilteredByGlob("src/content/**/*.md");
   });
   
-  // Do not generate our experimental homepage so the original index.html remains
-  eleventyConfig.ignores.add("src/index.njk");
+  // Enable generation of Eleventy pages from src
+  // eleventyConfig.ignores.add("src/index.njk"); // Commented out to enable Eleventy homepage
 
   return {
     dir: {

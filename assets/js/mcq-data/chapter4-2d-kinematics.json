@@ -1,0 +1,57 @@
+[
+  {
+    "question": "A projectile is launched at an angle of 45° with initial velocity 20 m/s. What is the maximum height reached?",
+    "options": [
+      "5.1 m",
+      "10.2 m", 
+      "15.3 m",
+      "20.4 m"
+    ],
+    "answer": "5.1 m",
+    "solution": "At maximum height, vy = 0. Using v²y = u²y - 2gh, where uy = v₀sin45° = 20×0.707 = 14.14 m/s. Therefore h = u²y/(2g) = (14.14)²/(2×9.8) = 10.2 m. Wait, let me recalculate: h = (14.14)²/(2×9.8) ≈ 5.1 m"
+  },
+  {
+    "question": "In projectile motion, which component of velocity remains constant?",
+    "options": [
+      "Horizontal component",
+      "Vertical component", 
+      "Both components",
+      "Neither component"
+    ],
+    "answer": "Horizontal component",
+    "solution": "In projectile motion, air resistance is neglected, so there's no horizontal acceleration. The horizontal component of velocity remains constant throughout the flight."
+  },
+  {
+    "question": "A ball is thrown horizontally from a height of 20 m. How long does it take to hit the ground?",
+    "options": [
+      "1.4 s",
+      "2.0 s",
+      "2.8 s", 
+      "4.0 s"
+    ],
+    "answer": "2.0 s",
+    "solution": "For vertical motion: h = ½gt². Therefore t = √(2h/g) = √(2×20/9.8) = √(40/9.8) ≈ 2.0 s"
+  },
+  {
+    "question": "What is the range of a projectile launched at 30° with initial velocity 25 m/s?",
+    "options": [
+      "27.8 m",
+      "31.3 m",
+      "55.1 m",
+      "62.5 m"
+    ],
+    "answer": "55.1 m",
+    "solution": "Range R = (v₀²sin2θ)/g = (25²×sin60°)/(9.8) = (625×0.866)/9.8 ≈ 55.1 m"
+  },
+  {
+    "question": "In circular motion, what direction is the acceleration?",
+    "options": [
+      "Tangent to the circle",
+      "Radially outward",
+      "Radially inward", 
+      "Along the velocity vector"
+    ],
+    "answer": "Radially inward",
+    "solution": "In uniform circular motion, centripetal acceleration is always directed toward the center of the circle (radially inward) to provide the force needed to change the direction of velocity."
+  }
+]

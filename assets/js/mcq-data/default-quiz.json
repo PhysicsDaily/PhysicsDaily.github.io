@@ -1,0 +1,57 @@
+[
+  {
+    "question": "What is the fundamental unit of length in the SI system?",
+    "options": [
+      "Centimeter",
+      "Meter", 
+      "Kilometer",
+      "Millimeter"
+    ],
+    "answer": "Meter",
+    "solution": "The meter (m) is the SI base unit for length. All other length units are derived from the meter."
+  },
+  {
+    "question": "Which of the following is a vector quantity?",
+    "options": [
+      "Speed",
+      "Distance",
+      "Velocity", 
+      "Time"
+    ],
+    "answer": "Velocity",
+    "solution": "Velocity is a vector quantity because it has both magnitude and direction. Speed, distance, and time are scalar quantities."
+  },
+  {
+    "question": "What is the acceleration due to gravity on Earth's surface?",
+    "options": [
+      "9.8 m/s²",
+      "10 m/s²",
+      "8.9 m/s²", 
+      "11 m/s²"
+    ],
+    "answer": "9.8 m/s²",
+    "solution": "The standard acceleration due to gravity on Earth's surface is approximately 9.8 m/s² or 9.81 m/s²."
+  },
+  {
+    "question": "In physics, work is defined as:",
+    "options": [
+      "Force × Time",
+      "Force × Distance", 
+      "Mass × Velocity",
+      "Force × Velocity"
+    ],
+    "answer": "Force × Distance",
+    "solution": "Work is defined as W = F·d cos θ, where F is force, d is displacement, and θ is the angle between force and displacement vectors."
+  },
+  {
+    "question": "What is the unit of energy in the SI system?",
+    "options": [
+      "Watt",
+      "Newton",
+      "Joule", 
+      "Pascal"
+    ],
+    "answer": "Joule",
+    "solution": "The joule (J) is the SI unit of energy. It equals one newton-meter (N·m) or one watt-second (W·s)."
+  }
+]

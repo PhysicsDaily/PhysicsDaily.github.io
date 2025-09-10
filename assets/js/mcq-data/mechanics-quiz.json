@@ -1,0 +1,57 @@
+[
+  {
+    "question": "What is Newton's first law of motion?",
+    "options": [
+      "F = ma",
+      "An object at rest stays at rest unless acted upon by a force",
+      "For every action there is an equal and opposite reaction", 
+      "The acceleration is proportional to the net force"
+    ],
+    "answer": "An object at rest stays at rest unless acted upon by a force",
+    "solution": "Newton's first law (law of inertia) states that an object at rest remains at rest and an object in motion remains in motion at constant velocity unless acted upon by an unbalanced net force."
+  },
+  {
+    "question": "If a 5 kg object accelerates at 2 m/s², what is the net force?",
+    "options": [
+      "2.5 N",
+      "7 N",
+      "10 N", 
+      "3 N"
+    ],
+    "answer": "10 N",
+    "solution": "Using Newton's second law: F = ma = 5 kg × 2 m/s² = 10 N"
+  },
+  {
+    "question": "What is the SI unit of momentum?",
+    "options": [
+      "kg⋅m/s",
+      "N⋅s",
+      "Both A and B", 
+      "kg⋅m/s²"
+    ],
+    "answer": "Both A and B",
+    "solution": "Momentum p = mv has units kg⋅m/s. Since impulse J = Ft = Δp, momentum can also be expressed as N⋅s."
+  },
+  {
+    "question": "In an elastic collision, what is conserved?",
+    "options": [
+      "Momentum only",
+      "Kinetic energy only",
+      "Both momentum and kinetic energy", 
+      "Neither momentum nor kinetic energy"
+    ],
+    "answer": "Both momentum and kinetic energy",
+    "solution": "In elastic collisions, both momentum and kinetic energy are conserved. In inelastic collisions, only momentum is conserved."
+  },
+  {
+    "question": "What is the relationship between force and pressure?",
+    "options": [
+      "P = F/A",
+      "P = FA",
+      "P = F + A", 
+      "P = A/F"
+    ],
+    "answer": "P = F/A",
+    "solution": "Pressure is defined as force per unit area: P = F/A, where F is the applied force and A is the area over which it's applied."
+  }
+]

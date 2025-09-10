@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/global.css">
     <style>
         :root {
             --primary-color: #2563eb;
@@ -338,34 +339,6 @@
         </div>
     </footer>
 
-    <script>
-        // Dark mode functionality
-        const lightModeBtn = document.getElementById('light-mode');
-        const darkModeBtn = document.getElementById('dark-mode');
-        const body = document.body;
-
-        // Check for saved theme preference or default to light mode
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        
-        if (currentTheme === 'dark') {
-            body.setAttribute('data-theme', 'dark');
-            lightModeBtn.classList.remove('active');
-            darkModeBtn.classList.add('active');
-        }
-
-        lightModeBtn.addEventListener('click', () => {
-            body.removeAttribute('data-theme');
-            localStorage.setItem('theme', 'light');
-            lightModeBtn.classList.add('active');
-            darkModeBtn.classList.remove('active');
-        });
-
-        darkModeBtn.addEventListener('click', () => {
-            body.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-            lightModeBtn.classList.remove('active');
-            darkModeBtn.classList.add('active');
-        });
-    </script>
+    <script src="assets/js/global.js"></script>
 </body>
 </html>
