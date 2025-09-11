@@ -12,6 +12,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/navigation.css">
+    <link rel="stylesheet" href="assets/css/interactive-components.css">
+    <link rel="stylesheet" href="assets/css/header-fixed.css">
     <style>
         :root {
             --primary-color: #2563eb;
@@ -80,10 +83,10 @@
         }
 
         /* Dark Mode Toggle */
-        .theme-toggle {
+        .theme-toggle-vertical {
             position: fixed;
             top: 2rem;
-            right: 2rem;
+            left: 2rem;
             z-index: 1000;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -93,12 +96,12 @@
             transition: var(--transition);
         }
 
-        .theme-toggle:hover {
+        .theme-toggle-vertical:hover {
             transform: scale(1.05);
             box-shadow: var(--shadow-lg);
         }
 
-        .theme-toggle button {
+        .theme-toggle-vertical button {
             background: none;
             border: none;
             padding: 0.5rem;
@@ -112,12 +115,12 @@
             font-size: 1.2rem;
         }
 
-        .theme-toggle button:hover {
+        .theme-toggle-vertical button:hover {
             background: var(--bg-tertiary);
             color: var(--text-primary);
         }
 
-        .theme-toggle button.active {
+        .theme-toggle-vertical button.active {
             background: var(--primary-color);
             color: white;
         }
@@ -267,9 +270,9 @@
                 padding: 0 1rem;
             }
 
-            .theme-toggle {
+            .theme-toggle-vertical {
                 top: 1rem;
-                right: 1rem;
+                left: 1rem;
             }
 
             .nav-content {
@@ -287,25 +290,33 @@
         }
     </style>
 </head>
-<body>
-    <div class="theme-toggle">
+<body class="has-fixed-header">
+    <!-- Fixed Header Navigation -->
+    <header class="fixed-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <span>⚛️</span>
+                    <span>Physics Daily</span>
+                </a>
+                <nav class="nav-links">
+                    <a href="/#foundations">Mechanics</a>
+                    <a href="/#waves">Waves</a>
+                    <a href="/#thermodynamics">Thermodynamics</a>
+                    <a href="/#electromagnetism">E&M</a>
+                    <a href="/#optics">Optics</a>
+                    <a href="/#modern">Modern</a>
+                    <a href="resources.html">Resources</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Vertical Theme Toggle -->
+    <div class="theme-toggle-vertical">
         <button id="light-mode" class="active" title="Light Mode">☀️</button>
         <button id="dark-mode" title="Dark Mode">🌙</button>
     </div>
-
-    <nav class="nav">
-        <div class="container">
-            <div class="nav-content">
-                <a href="index.html" class="nav-logo">Physics Daily</a>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="resources.html">Resources</a></li>
-                    <li><a href="about.html" class="active">About</a></li>
-                    <li><a href="contribute.html">Contribute</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
     <header class="header">
         <div class="container">

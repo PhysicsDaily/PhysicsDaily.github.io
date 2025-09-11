@@ -68,20 +68,39 @@ class Dashboard {
     }
 
     updateStatistics() {
-        if (!this.stats) return;
-
-        const streak = this.stats.streak || { current: 0 };
-        document.getElementById('streakCount').textContent = streak.current || 0;
-        document.getElementById('streakNumber').textContent = streak.current || 0;
-        document.getElementById('totalQuizzes').textContent = this.stats.totalQuizzes || 0;
+        // Load stats from localStorage first
+        const localStats = JSON.parse(localStorage.getItem('quizStats') || '{}');
+        const quizHistory = JSON.parse(localStorage.getItem('quizHistory') || '[]');
         
-        const avgScore = this.stats.totalQuizzes > 0 
-            ? Math.round((this.stats.correctAnswers / (this.stats.totalQuizzes * 10)) * 100)
+        // Merge with Firebase stats if available
+        const totalQuizzes = localStats.totalQuizzes || (this.stats && this.stats.totalQuizzes) || 0;
+        const correctAnswers = localStats.correctAnswers || (this.stats && this.stats.correctAnswers) || 0;
+        const totalQuestions = localStats.totalQuestions || (this.stats && this.stats.totalQuestions) || 0;
+        
+        document.getElementById('totalQuizzes').textContent = totalQuizzes;
+        
+        // Calculate average score properly
+        const avgScore = totalQuestions > 0 
+            ? Math.round((correctAnswers / totalQuestions) * 100)
             : 0;
         document.getElementById('avgScore').textContent = avgScore + '%';
         
-        const hours = Math.floor((this.stats.totalTime || 0) / 3600);
+        // Calculate streak
+        const streak = (this.stats && this.stats.streak) || { current: 0 };
+        document.getElementById('streakCount').textContent = streak.current || 0;
+        document.getElementById('streakNumber').textContent = streak.current || 0;
+        
+        // Calculate study time from quiz history
+        let totalMinutes = 0;
+        quizHistory.forEach(quiz => {
+            totalMinutes += quiz.timeSpent || 10; // Default 10 minutes per quiz
+        });
+        const hours = Math.floor(totalMinutes / 60);
         document.getElementById('studyTime').textContent = hours + 'h';
+        
+        // Store for later use
+        this.localStats = localStats;
+        this.quizHistory = quizHistory;
     }
 
     updateStreakDisplay() {
@@ -169,15 +188,38 @@ class Dashboard {
 
     getRecentActivities() {
         const activities = [];
-        if (this.stats && this.stats.quizHistory) {
-            this.stats.quizHistory.slice(0, 5).forEach(quiz => {
+        const quizHistory = this.quizHistory || JSON.parse(localStorage.getItem('quizHistory') || '[]');
+        
+        if (quizHistory.length > 0) {
+            quizHistory.slice(-5).reverse().forEach(quiz => {
+                const date = new Date(quiz.timestamp);
+                const timeString = this.formatDate(date);
                 activities.push({
-                    time: this.formatDate(quiz.timestamp),
-                    text: `Completed ${quiz.chapter || 'quiz'} - Score: ${quiz.score || 0}%`
+                    time: timeString,
+                    text: `Completed quiz - Score: ${quiz.score || 0}/${quiz.maxScore || 100} (${quiz.percentage || 0}%)`
                 });
+            });
+        } else {
+            activities.push({
+                time: 'Now',
+                text: 'Start your first quiz to see activity here!'
             });
         }
         return activities;
+    }
+    
+    formatDate(date) {
+        const now = new Date();
+        const diff = now - date;
+        const minutes = Math.floor(diff / 60000);
+        const hours = Math.floor(diff / 3600000);
+        const days = Math.floor(diff / 86400000);
+        
+        if (minutes < 1) return 'Just now';
+        if (minutes < 60) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+        if (hours < 24) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+        if (days < 7) return `${days} day${days > 1 ? 's' : ''} ago`;
+        return date.toLocaleDateString();
     }
 
     getChapterProgress() {

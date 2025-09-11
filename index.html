@@ -28,6 +28,7 @@
     
     <!-- Authentication Styles -->
     <link rel="stylesheet" href="assets/css/auth-styles.css">
+    <link rel="stylesheet" href="assets/css/header-fixed.css">
     
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
@@ -80,11 +81,11 @@
             --header-bg: #ffffff;
             
             /* Gradients for light theme */
-            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-tertiary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --gradient-quaternary: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            --gradient-modern: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            --gradient-primary: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            --gradient-secondary: linear-gradient(135deg, #06b6d4 0%, #0ea5e9 100%);
+            --gradient-tertiary: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --gradient-quaternary: linear-gradient(135deg, #64748b 0%, #94a3b8 100%);
+            --gradient-modern: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
             
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -108,11 +109,11 @@
             --header-bg: #0f172a;
             
             /* Darker gradients for dark theme */
-            --gradient-primary: linear-gradient(135deg, #4338ca 0%, #6366f1 100%);
-            --gradient-secondary: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
-            --gradient-tertiary: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
-            --gradient-quaternary: linear-gradient(135deg, #059669 0%, #10b981 100%);
-            --gradient-modern: linear-gradient(135deg, #e11d48 0%, #be185d 100%);
+            --gradient-primary: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+            --gradient-secondary: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+            --gradient-tertiary: linear-gradient(135deg, #059669 0%, #047857 100%);
+            --gradient-quaternary: linear-gradient(135deg, #475569 0%, #64748b 100%);
+            --gradient-modern: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
         }
 
         * {
@@ -589,53 +590,74 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="assets/js/particle-portraits.js" defer></script>
 </head>
-<body>
-    <!-- Skip Navigation for Accessibility -->
-    <a href="#main-content" class="skip-nav">Skip to main content</a>
+<body class="has-fixed-header">
+    <!-- Fixed Header Navigation -->
+    <header class="fixed-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <span style="font-size: 1.8rem; font-weight: 700;">Physics Daily</span>
+                </a>
+                <nav class="nav-links">
+                    <a href="about.html">About</a>
+                    <a href="resources.html">Resources</a>
+                    <button class="btn sign-in-btn" onclick="authUI.openModal()" id="header-sign-in" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                        Sign In
+                    </button>
+                    <div id="header-user-menu" style="display: none; align-items: center; gap: 1rem;">
+                        <img id="header-user-avatar" src="" alt="Profile" style="width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--primary-color);">
+                        <span id="header-user-name" style="font-weight: 500;"></span>
+                        <a href="dashboard.html">Dashboard</a>
+                        <button class="btn sign-out-btn" onclick="authUI.signOut()" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">
+                            Sign Out
+                        </button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
     
-    <!-- Theme Toggle and Auth Controls -->
-    <div class="theme-toggle">
+    <!-- Vertical Theme Toggle -->
+    <div class="theme-toggle-vertical">
         <button id="light-mode" class="active" title="Light Mode">☀️</button>
         <button id="dark-mode" title="Dark Mode">🌙</button>
     </div>
     
-    <!-- Enhanced User Section -->
-    <div class="user-section" style="position: fixed; top: 2rem; right: 8rem; z-index: 1000; display: flex; align-items: center; gap: 1rem;">
-        <div class="user-info" style="display: none;"></div>
-        <div class="auth-controls" style="display: flex; gap: 0.5rem; align-items: center;">
-            <button class="btn sign-in-btn" onclick="authUI.openModal()" style="padding: 0.5rem 1rem; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
-                <span>👤</span> Sign In
-            </button>
-            <button class="btn sign-out-btn" onclick="authUI.signOut()" style="display: none; padding: 0.5rem 1rem; font-size: 0.9rem;">Sign Out</button>
-            <a href="/dashboard.html" class="btn dashboard-btn" style="display: none; padding: 0.5rem 1rem; font-size: 0.9rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none;">
-                <span>📊</span> Dashboard
-            </a>
-        </div>
-    </div>
 
-    <header class="header">
+    <!-- Particle Hero Section with Physicist Portraits -->
+    <section class="particle-hero">
+        <div class="particle-bg"></div>
         <div class="container">
-            <h1>Physics Daily</h1>
-            <p class="subtitle">Advanced Physics Learning Platform</p>
-            <p class="description">
-                Master physics concepts from fundamentals to advanced topics with comprehensive notes, 
-                examples, and interactive content covering mechanics, thermodynamics, electromagnetism, optics, and modern physics.
-            </p>
-            <!-- Personalized Welcome Message -->
-            <div id="personalizedWelcome" style="display: none; margin-top: 1.5rem; padding: 1rem; background: rgba(37, 99, 235, 0.1); border-radius: 12px; border: 1px solid rgba(37, 99, 235, 0.2);">
-                <p style="color: var(--primary-color); font-weight: 600; margin: 0;"></p>
-            </div>
-            <div class="cta-buttons">
-                <a href="#foundations" class="btn">
-                    📚 Start Learning
-                </a>
-                <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io" class="btn btn-secondary">
-                    ⭐ Star on GitHub
-                </a>
+            <div class="particle-hero-content">
+                <div>
+                    <h1 style="font-size: 3.5rem; font-weight: 700; letter-spacing: -0.03em;">Physics Daily</h1>
+                    <p class="subtitle">Advanced Physics Learning Platform</p>
+                    <p class="description" style="margin-bottom: 2.5rem;">
+                        Master physics concepts from fundamentals to advanced topics with comprehensive notes, 
+                        examples, and interactive content covering mechanics, thermodynamics, electromagnetism, optics, and modern physics.
+                    </p>
+                    <!-- Personalized Welcome Message -->
+                    <div id="personalizedWelcome" style="display: none; margin-top: 1.5rem; padding: 1rem; background: rgba(37, 99, 235, 0.1); border-radius: 12px; border: 1px solid rgba(37, 99, 235, 0.2);">
+                        <p style="color: var(--primary-color); font-weight: 600; margin: 0;"></p>
+                    </div>
+                    <div class="cta-buttons" style="margin-top: 2rem;">
+                        <a href="#foundations" class="btn">
+                            📚 Start Learning
+                        </a>
+                        <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io" class="btn btn-secondary">
+                            ⭐ Star on GitHub
+                        </a>
+                    </div>
+                </div>
+                <div style="width: 100%; min-width: 400px;">
+                    <div id="particle-portrait" style="width: 100%; height: 400px; position: relative; border-radius: 12px;"></div>
+                    <div id="physicist-quote"></div>
+                </div>
             </div>
         </div>
-    </header>
+    </section>
 
     <!-- Hero Section -->
     <section class="hero-section" aria-labelledby="hero-heading">
@@ -924,6 +946,7 @@
     <script src="assets/js/firebase-config.js"></script>
     <script src="assets/js/auth-manager.js"></script>
     <script src="assets/js/auth-ui.js"></script>
+    <script src="assets/js/auth-navigation.js"></script>
     <script src="assets/js/progress-widget.js"></script>
     <script src="assets/js/global.js"></script>
 </body>

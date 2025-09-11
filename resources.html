@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/header-fixed.css">
     <style>
         :root {
             --primary-color: #2563eb;
@@ -90,14 +91,9 @@
             padding: 0 1.5rem;
         }
 
-        /* Dark Mode Toggle - Moved down a little bit more */
+        /* Hide old theme toggle */
         .theme-toggle {
-            position: fixed;
-            top: 4rem;
-            right: 2rem;
-            z-index: 1000;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
+            display: none !important;
             border-radius: 50px;
             padding: 0.5rem;
             box-shadow: var(--shadow-md);
@@ -503,27 +499,33 @@
   gtag('config', 'G-XN081SR2KP');
 </script>
 </head>
-<body>
-    <!-- Theme Toggle -->
-    <div class="theme-toggle">
+<body class="has-fixed-header">
+    <!-- Fixed Header Navigation -->
+    <header class="fixed-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <span>⚛️</span>
+                    <span>Physics Daily</span>
+                </a>
+                <nav class="nav-links">
+                    <a href="/#foundations">Mechanics</a>
+                    <a href="/#waves">Waves</a>
+                    <a href="/#thermodynamics">Thermodynamics</a>
+                    <a href="/#electromagnetism">E&M</a>
+                    <a href="/#optics">Optics</a>
+                    <a href="/#modern">Modern</a>
+                    <a href="resources.html">Resources</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Vertical Theme Toggle -->
+    <div class="theme-toggle-vertical">
         <button id="light-mode" class="active" title="Light Mode">☀️</button>
         <button id="dark-mode" title="Dark Mode">🌙</button>
     </div>
-
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="container">
-            <div class="nav-content">
-                <a href="index.html" class="nav-logo">Physics Daily</a>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="resources.html" class="active">Resources</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contribute.html">Contribute</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
     <!-- Header -->
     <header class="header">

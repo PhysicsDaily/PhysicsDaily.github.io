@@ -14,6 +14,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="assets/css/global.css">
     <link rel="stylesheet" href="assets/css/auth-styles.css">
+    <link rel="stylesheet" href="assets/css/header-fixed.css">
     
     <style>
         :root {
@@ -210,21 +211,33 @@
         }
     </style>
 </head>
-<body>
-    <!-- Navigation -->
-    <nav class="nav-header">
-        <div class="nav-container">
-            <a href="/" class="nav-brand">
-                🎓 Physics Daily
-            </a>
-            <div class="nav-links">
-                <div class="user-info"></div>
-                <a href="/" class="nav-link">Home</a>
-                <a href="/resources.html" class="nav-link">Resources</a>
-                <button class="sign-out-btn" onclick="authUI.signOut()">Sign Out</button>
+<body class="has-fixed-header">
+    <!-- Fixed Header Navigation -->
+    <header class="fixed-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <span style="font-size: 1.8rem; font-weight: 700;">Physics Daily</span>
+                </a>
+                <nav class="nav-links">
+                    <div id="header-user-menu" style="display: flex; align-items: center; gap: 1rem;">
+                        <img id="header-user-avatar" src="" alt="Profile" style="width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--primary-color);">
+                        <span id="header-user-name" style="font-weight: 500;"></span>
+                        <a href="dashboard.html">Dashboard</a>
+                        <a href="about.html">About</a>
+                        <a href="resources.html">Resources</a>
+                        <button class="sign-out-btn" onclick="authUI.signOut()" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">Sign Out</button>
+                    </div>
+                </nav>
             </div>
         </div>
-    </nav>
+    </header>
+    
+    <!-- Vertical Theme Toggle -->
+    <div class="theme-toggle-vertical">
+        <button id="light-mode" class="active" title="Light Mode">☀️</button>
+        <button id="dark-mode" title="Dark Mode">🌙</button>
+    </div>
 
     <!-- Main Dashboard Container -->
     <div class="dashboard-container" id="dashboardContent" style="display: none;">
@@ -348,6 +361,7 @@
     <script src="assets/js/firebase-config.js"></script>
     <script src="assets/js/auth-manager.js"></script>
     <script src="assets/js/auth-ui.js"></script>
+    <script src="assets/js/auth-navigation.js"></script>
     <script src="assets/js/dashboard.js"></script>
     <script src="assets/js/global.js"></script>
 </body>
