@@ -147,6 +147,49 @@ hr { border: 0; border-top: 1px solid var(--border-color); margin: 2rem 0; }
     color: white;
 }
 
+/* Vertical Theme Toggle Variant */
+.theme-toggle-vertical {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 1000;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    padding: 0.5rem;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.theme-toggle-vertical:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
+.theme-toggle-vertical button {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.theme-toggle-vertical button:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.theme-toggle-vertical button.active {
+    background: var(--primary-color);
+    color: white;
+}
+
 /* Topics Dropdown */
 .dropdown {
     position: relative;
@@ -746,6 +789,44 @@ img {
     border-radius: var(--border-radius);
 }
 
+/* --- About Page Styles --- */
+.about-section {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+    border: 4px solid var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+
+.about-section h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.about-section h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.about-section p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    text-align: justify;
+}
+
 /* YouTube and video embeds */
 .video-embed {
     position: relative;
@@ -804,6 +885,7 @@ figcaption { text-align: center; color: var(--text-muted); font-size: var(--font
 @media (max-width: 768px) {
     .container { padding: 0 1rem; }
     .theme-toggle { top: 1rem; right: 1rem; }
+    .theme-toggle-vertical { top: 1rem; left: 1rem; }
     
     /* Mobile Navigation */
     .nav-toggle { display: flex; }
