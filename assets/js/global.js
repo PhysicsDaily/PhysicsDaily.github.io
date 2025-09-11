@@ -1,4 +1,53 @@
 const __initGlobal = function() {
+    // --- Personalized Welcome ---
+    function showPersonalizedWelcome() {
+        if (typeof authManager !== 'undefined' && authManager.getCurrentUser()) {
+            const user = authManager.getCurrentUser();
+            const welcomeDiv = document.getElementById('personalizedWelcome');
+            if (welcomeDiv) {
+                const name = user.displayName || user.email.split('@')[0];
+                const p = welcomeDiv.querySelector('p');
+                if (p) {
+                    p.innerHTML = `Welcome back, <strong>${name}</strong>! Continue your physics journey where you left off.`;
+                }
+                welcomeDiv.style.display = 'block';
+                welcomeDiv.style.animation = 'fadeIn 0.5s ease';
+            }
+        }
+    }
+    
+    // Check auth state on load
+    if (typeof authManager !== 'undefined') {
+        authManager.on('authStateChanged', (user) => {
+            if (user) {
+                showPersonalizedWelcome();
+                updatePageForSignedInUser();
+            } else {
+                hidePersonalizedElements();
+            }
+        });
+    }
+    
+    // Update page elements for signed-in users
+    function updatePageForSignedInUser() {
+        // Add 'signed-in' class to body for conditional styling
+        document.body.classList.add('signed-in');
+        
+        // Update CTA buttons if needed
+        const startLearningBtn = document.querySelector('a[href="#foundations"]');
+        if (startLearningBtn) {
+            startLearningBtn.innerHTML = '📚 Continue Learning';
+        }
+    }
+    
+    function hidePersonalizedElements() {
+        document.body.classList.remove('signed-in');
+        const welcomeDiv = document.getElementById('personalizedWelcome');
+        if (welcomeDiv) {
+            welcomeDiv.style.display = 'none';
+        }
+    }
+
     // --- Theme Toggle Functionality ---
     const lightModeBtn = document.querySelector('#light-mode-btn, #light-mode, #light-theme');
     const darkModeBtn = document.querySelector('#dark-mode-btn, #dark-mode, #dark-theme');
@@ -104,6 +153,14 @@ const __initGlobal = function() {
 
     // Initialize progress display
     updateProgressDisplay();
+    
+    // Enhanced progress tracking with auth integration
+    if (typeof authManager !== 'undefined' && authManager.getCurrentUser()) {
+        // Update progress bars with cloud data
+        authManager.loadUserProgress().then(() => {
+            updateProgressDisplay();
+        });
+    }
 
     // --- Scroll Reveal Animation ---
     const observerOptions = {

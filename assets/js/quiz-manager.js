@@ -11,6 +11,8 @@ class QuizManager {
         this.questionStatus = [];
         this.currentQuestionIndex = 0;
         this.timerInterval = null;
+        this.startTime = null;
+        this.endTime = null;
         
         // Configuration
         this.config = {
@@ -23,7 +25,9 @@ class QuizManager {
         };
         
         this.initializeElements();
+        this.setupFallbackElements();
         this.loadQuizData();
+        this.initializeAuth();
     }
     
     initializeElements() {
@@ -49,6 +53,16 @@ class QuizManager {
             resultsSummary: document.getElementById('results-summary'),
             detailedResults: document.getElementById('detailed-results')
         };
+    }
+    
+    async initializeAuth() {
+        // Initialize auth manager if available
+        if (typeof authManager !== 'undefined' && !authManager.isInitialized) {
+            await authManager.init();
+        }
+    }
+    
+    setupFallbackElements() {
         // Fallback IDs for legacy pages
         if (!this.elements.questionCountSelect) {
             this.elements.questionCountSelect = document.getElementById('question-count-select');
@@ -125,33 +139,42 @@ class QuizManager {
     }
     
     startTest() {
-        const duration = parseInt(this.elements.timerInput.value, 10);
-        if (isNaN(duration) || duration <= 0) {
-            alert("Please enter a valid time in minutes.");
-            return;
+        // Get selected question count
+        const selectedCount = parseInt(this.elements.questionCountSelect?.value) || 20;
+        const numQuestions = Math.min(selectedCount, this.quizData.length);
+        
+        // Randomly select questions
+        const shuffled = [...this.quizData].sort(() => 0.5 - Math.random());
+        this.activeQuizData = shuffled.slice(0, numQuestions);
+        
+        // Initialize arrays
+        this.userAnswers = new Array(numQuestions).fill(null);
+        this.questionStatus = new Array(numQuestions).fill('not-visited');
+        this.currentQuestionIndex = 0;
+        this.startTime = new Date();
+        
+        // Hide instructions, show quiz
+        if (this.elements.instructionsContainer) {
+            this.elements.instructionsContainer.style.display = 'none';
+        }
+        if (this.elements.quizInterface) {
+            this.elements.quizInterface.style.display = 'block';
         }
         
-        // Gracefully handle missing question count select (fallback to max/questions available)
-        const questionCount = this.elements.questionCountSelect
-            ? parseInt(this.elements.questionCountSelect.value, 10)
-            : Math.min(this.quizData.length, this.config.maxQuestions);
-        const shuffledData = this.shuffleArray(this.quizData);
-        this.activeQuizData = shuffledData.slice(0, questionCount);
+        // Start timer
+        const timerMinutes = parseInt(this.elements.timerInput?.value) || this.config.defaultTime;
+        this.startTimer(timerMinutes * 60);
         
-        this.userAnswers = new Array(this.activeQuizData.length).fill(null);
-        this.questionStatus = new Array(this.activeQuizData.length).fill('not-visited');
-        this.currentQuestionIndex = 0;
+        // Create question palette
+        this.createQuestionPalette();
         
-        this.elements.instructionsContainer.style.display = 'none';
-        this.elements.quizInterface.style.display = 'block';
-        
-        this.startTimer(duration);
+        // Display first question
         this.renderQuestion();
         this.renderPalette();
     }
     
     startTimer(duration) {
-        let timer = duration * 60;
+        let timer = duration;
         this.timerInterval = setInterval(() => {
             const hours = Math.floor(timer / 3600);
             const minutes = Math.floor((timer % 3600) / 60);
@@ -323,9 +346,28 @@ class QuizManager {
         });
     }
     
-    displayResults(resultData) {
+    async displayResults(resultData) {
+        this.endTime = new Date();
+        const timeSpent = Math.floor((this.endTime - this.startTime) / 1000);
+        
         this.elements.quizInterface.style.display = 'none';
         this.elements.resultsContainer.style.display = 'block';
+        
+        // Save quiz result if user is authenticated
+        if (typeof authManager !== 'undefined' && authManager.isSignedIn()) {
+            const chapterMatch = window.location.pathname.match(/chapter(\d+)/);
+            const chapter = chapterMatch ? `Chapter ${chapterMatch[1]}` : 'Unknown Chapter';
+            
+            await authManager.saveQuizResult({
+                chapter: chapter,
+                topic: this.config.topic || 'Physics',
+                totalQuestions: this.activeQuizData.length,
+                correctAnswers: resultData.correct,
+                score: parseFloat(resultData.percentage),
+                timeSpent: timeSpent,
+                timestamp: new Date()
+            });
+        }
         
         // Summary
         this.elements.resultsSummary.innerHTML = `

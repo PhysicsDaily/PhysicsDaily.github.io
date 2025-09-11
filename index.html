@@ -26,6 +26,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <meta name="google-site-verification" content="Ymi0Tv40FP7rKnVowfeCm69EwVaihVBHo5qp8xstwu0" />
     
+    <!-- Authentication Styles -->
+    <link rel="stylesheet" href="assets/css/auth-styles.css">
+    
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
     {
@@ -47,7 +50,9 @@
             "Study Notes",
             "Interactive Quizzes",
             "Practice Problems",
-            "Conceptual Questions"
+            "Conceptual Questions",
+            "Video Lectures",
+            "Simulations"
         ]
     }
     </script>
@@ -579,15 +584,34 @@
 </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4062746224225625"
      crossorigin="anonymous"></script>
+     
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
     <!-- Skip Navigation for Accessibility -->
     <a href="#main-content" class="skip-nav">Skip to main content</a>
     
-    <!-- Theme Toggle -->
+    <!-- Theme Toggle and Auth Controls -->
     <div class="theme-toggle">
         <button id="light-mode" class="active" title="Light Mode">☀️</button>
         <button id="dark-mode" title="Dark Mode">🌙</button>
+    </div>
+    
+    <!-- Enhanced User Section -->
+    <div class="user-section" style="position: fixed; top: 2rem; right: 8rem; z-index: 1000; display: flex; align-items: center; gap: 1rem;">
+        <div class="user-info" style="display: none;"></div>
+        <div class="auth-controls" style="display: flex; gap: 0.5rem; align-items: center;">
+            <button class="btn sign-in-btn" onclick="authUI.openModal()" style="padding: 0.5rem 1rem; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span>👤</span> Sign In
+            </button>
+            <button class="btn sign-out-btn" onclick="authUI.signOut()" style="display: none; padding: 0.5rem 1rem; font-size: 0.9rem;">Sign Out</button>
+            <a href="/dashboard.html" class="btn dashboard-btn" style="display: none; padding: 0.5rem 1rem; font-size: 0.9rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none;">
+                <span>📊</span> Dashboard
+            </a>
+        </div>
     </div>
 
     <header class="header">
@@ -598,6 +622,10 @@
                 Master physics concepts from fundamentals to advanced topics with comprehensive notes, 
                 examples, and interactive content covering mechanics, thermodynamics, electromagnetism, optics, and modern physics.
             </p>
+            <!-- Personalized Welcome Message -->
+            <div id="personalizedWelcome" style="display: none; margin-top: 1.5rem; padding: 1rem; background: rgba(37, 99, 235, 0.1); border-radius: 12px; border: 1px solid rgba(37, 99, 235, 0.2);">
+                <p style="color: var(--primary-color); font-weight: 600; margin: 0;"></p>
+            </div>
             <div class="cta-buttons">
                 <a href="#foundations" class="btn">
                     📚 Start Learning
@@ -881,7 +909,7 @@
         </div>
     </main>
 
- <footer class="footer">
+  <footer class="footer">
     <div class="container">
         <div class="footer-links">
             <a href="about.html">About</a>
@@ -892,6 +920,11 @@
         <p>&copy; Physics Daily. Made with ❤️ for physics enthusiasts everywhere.</p>
     </div>
 </footer>
+    <!-- Firebase app scripts (compat) and auth UI -->
+    <script src="assets/js/firebase-config.js"></script>
+    <script src="assets/js/auth-manager.js"></script>
+    <script src="assets/js/auth-ui.js"></script>
+    <script src="assets/js/progress-widget.js"></script>
     <script src="assets/js/global.js"></script>
 </body>
 </html>
