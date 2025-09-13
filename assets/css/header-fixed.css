@@ -74,6 +74,31 @@
     width: 100%;
 }
 
+/* XP pill next to profile */
+.fixed-header .xp-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: .25rem .6rem;
+    border-radius: 999px;
+    font-weight: 700;
+    margin-left: .5rem;
+}
+.fixed-header .xp-pill .xp-icon {
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #e2e8f0, #cbd5e1);
+    color: #334155;
+    border-radius: 6px;
+    font-size: .7rem;
+}
+
 /* Avoid flicker before auth state resolves */
 .auth-pending .sign-in-btn,
 .auth-pending #header-user-menu,

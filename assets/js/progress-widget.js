@@ -64,6 +64,7 @@ class ProgressWidget {
                         <span class="widget-icon">📊</span>
                         <span class="widget-streak">🔥 ${this.stats.streak?.current || 0}</span>
                         <span class="widget-score">${this.calculateAverageScore()}%</span>
+                        ${this.renderLevelBadge()}
                     </div>
                     <button class="widget-toggle">
                         <svg width="12" height="12" viewBox="0 0 12 12">
@@ -105,6 +106,7 @@ class ProgressWidget {
                                 <div class="stat-label">Study Time</div>
                             </div>
                         </div>
+                        ${this.renderLevelStat()}
                     </div>
                     
                     <div class="widget-progress-section">
@@ -139,6 +141,35 @@ class ProgressWidget {
 
         // Add styles if not already present
         this.injectStyles();
+    }
+
+    renderLevelBadge() {
+        try {
+            if (!window.gamification || typeof window.gamification.getState !== 'function') return '';
+            const st = window.gamification.getState();
+            const lvl = st?.level || st?.progress?.level || 1;
+            return `<span class="level-badge">Lv ${lvl}</span>`;
+        } catch { return ''; }
+    }
+
+    renderLevelStat() {
+        try {
+            if (!window.gamification || typeof window.gamification.getState !== 'function') return '';
+            const st = window.gamification.getState();
+            const lvl = st?.level || st?.progress?.level || 1;
+            const next = st?.progress?.nextLevelXp || 250;
+            const into = st?.progress?.intoLevelXp || 0;
+            const pct = Math.max(0, Math.min(100, Math.round((into / next) * 100)));
+            return `
+                <div class="widget-stat">
+                    <div class="stat-icon">🏅</div>
+                    <div class="stat-content">
+                        <div class="stat-value">Level ${lvl}</div>
+                        <div class="stat-label">${into}/${next} XP (${pct}%)</div>
+                    </div>
+                </div>
+            `;
+        } catch { return ''; }
     }
 
     generateProgressBars() {
@@ -277,6 +308,13 @@ class ProgressWidget {
                     width: 320px;
                     transition: all 0.3s ease;
                     display: none;
+                }
+                .level-badge {
+                    display: inline-flex; align-items: center; gap: .25rem;
+                    background: var(--bg-tertiary, #f1f5f9);
+                    color: var(--text-primary, #1e293b);
+                    padding: .1rem .5rem; border-radius: 999px; font-size: .8rem; font-weight: 700;
+                    border: 1px solid var(--border-color, #e2e8f0);
                 }
 
                 .progress-widget.visible {

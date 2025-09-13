@@ -49,29 +49,56 @@ class ActiveLearning {
         // Add event listener
         const checkBtn = container.querySelector('.check-answer-btn');
         checkBtn.addEventListener('click', () => {
-            const selected = container.querySelector('input[type="radio"]:checked');
-            const feedback = container.querySelector('.concept-feedback');
-            const feedbackContent = container.querySelector('.feedback-content');
-            
-            if (!selected) {
-                alert('Please select an answer');
-                return;
-            }
-            
-            const isCorrect = parseInt(selected.value) === correct;
-            feedback.style.display = 'block';
-            feedbackContent.innerHTML = isCorrect 
-                ? '<span class="correct">✓ Correct!</span>'
-                : '<span class="incorrect">✗ Not quite right.</span>';
-            feedbackContent.className = isCorrect ? 'feedback-content correct' : 'feedback-content incorrect';
-            
-            // Save to localStorage
-            const checkId = container.id || 'check-' + Date.now();
-            localStorage.setItem(`concept-check-${checkId}`, JSON.stringify({
-                answered: true,
-                correct: isCorrect,
-                timestamp: Date.now()
-            }));
+          const selected = container.querySelector('input[type="radio"]:checked');
+          const feedback = container.querySelector('.concept-feedback');
+          const feedbackContent = container.querySelector('.feedback-content');
+          
+          if (!selected) {
+            alert('Please select an answer');
+            return;
+          }
+          
+          const isCorrect = parseInt(selected.value) === correct;
+          feedback.style.display = 'block';
+          feedbackContent.innerHTML = isCorrect 
+            ? '<span class="correct">✓ Correct!</span>'
+            : '<span class="incorrect">✗ Not quite right.</span>';
+          feedbackContent.className = isCorrect ? 'feedback-content correct' : 'feedback-content incorrect';
+          
+          // Award XP only once per check on correct answer
+          if (isCorrect && window.gamification && typeof window.gamification.grantXp === 'function') {
+              const checkId = container.id || 'check-' + Date.now();
+              const page = window.location.pathname;
+              const key = `pd:xp:awarded:${page}#${checkId}`;
+              const already = localStorage.getItem(key);
+              if (!already) {
+                  // Determine XP amount (default 25) and metadata
+                  const xpAmount = parseInt(container.dataset.xp || '25', 10) || 25;
+                  const path = window.location.pathname;
+                  // Try to infer topic/chapter from path e.g. /mechanics/chapter01/
+                  const m = path.match(/\/(mechanics|thermodynamics|electromagnetism|optics|waves|fluids|modern)\/chapter(\d+)/);
+                  const topic = m ? m[1] : null;
+                  const chapter = m ? parseInt(m[2], 10) : null;
+                  window.gamification.grantXp(xpAmount, 'section', {
+                      page,
+                      checkId,
+                      topic,
+                      chapter,
+                      question: question,
+                      chosenIndex: parseInt(selected.value),
+                      __silent: true
+                  });
+                  try { localStorage.setItem(key, '1'); } catch {}
+              }
+          }
+          
+          // Save to localStorage
+          const checkId = container.id || 'check-' + Date.now();
+          localStorage.setItem(`concept-check-${checkId}`, JSON.stringify({
+              answered: true,
+              correct: isCorrect,
+              timestamp: Date.now()
+          }));
         });
     }
     

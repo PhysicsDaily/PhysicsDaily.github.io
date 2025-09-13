@@ -11,12 +11,18 @@
             <span id="header-user-name" style="font-weight: 600;"></span>
             <span aria-hidden="true" style="display:inline-block; transform: translateY(1px); color: var(--text-secondary);">▾</span>
           </button>
+          <!-- Global XP pill (hidden until signed in) -->
+          <div id="header-xp-pill" class="xp-pill" title="Your XP" style="display:none;">
+            <span class="xp-icon">XP</span>
+            <span id="header-xp-value">0</span>
+          </div>
           <div id="profile-dropdown" class="profile-dropdown" role="menu" aria-hidden="true">
             <a href="/dashboard.html" role="menuitem">Dashboard</a>
             <a href="/settings.html" role="menuitem" id="header-settings-link">Settings</a>
           </div>
         </div>
         <a class="home-link" href="/" data-visible="not-home" style="display:none;">Home</a>
+        <a href="/leaderboard.html">Leaderboard</a>
         <a href="/resources.html">Resources</a>
         <a href="/about.html">About</a>
         <button class="btn sign-in-btn" id="header-sign-in" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Sign In</button>

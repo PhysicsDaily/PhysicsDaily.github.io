@@ -4,6 +4,20 @@ class Dashboard {
         this.user = null;
         this.stats = null;
         this.init();
+        // Live update XP/Level when gamification changes
+        try {
+            if (window.gamification && typeof gamification.onChange === 'function') {
+                gamification.onChange(() => this.updateXpLevelUI());
+            } else {
+                // Retry after a short delay in case gamification loads later
+                setTimeout(() => {
+                    if (window.gamification && typeof gamification.onChange === 'function') {
+                        gamification.onChange(() => this.updateXpLevelUI());
+                        this.updateXpLevelUI();
+                    }
+                }, 800);
+            }
+        } catch {}
     }
 
     async init() {
@@ -88,6 +102,9 @@ class Dashboard {
         // Store for later use
         this.localStats = localStats;
         this.quizHistory = quizHistory;
+
+        // Update XP/Level UI
+        this.updateXpLevelUI();
     }
 
     // streak display removed

@@ -128,6 +128,12 @@ const __initGlobal = function() {
             if (user) {
                 showPersonalizedWelcome();
                 updatePageForSignedInUser();
+                // Backfill any local XP to cloud so the leaderboard reflects it
+                try {
+                    if (window.gamification && typeof gamification.syncXpToCloud === 'function') {
+                        gamification.syncXpToCloud();
+                    }
+                } catch(e) { console.warn('[Global] XP sync on sign-in failed:', e); }
             } else {
                 hidePersonalizedElements();
             }

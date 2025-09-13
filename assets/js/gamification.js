@@ -70,7 +70,10 @@
       const speedBonus = Math.max(0, Math.round((totalQuestions * 60 - timeSpent) / 30)); // small bonus
       const scoreBonus = Math.round(percentage); // up to +100
       const xp = baseXp + Math.floor(scoreBonus/5) + Math.floor(speedBonus/2);
-      this.addXp(xp, 'quiz');
+      // Use grantXp so it also logs to Firestore if signed in
+      this.grantXp(xp, 'quiz', {
+        totalQuestions, correct, incorrect, unanswered, percentage, timeSpent
+      });
       this.addCoins(correct); // 1 coin per correct
       if (percentage >= 90) this.addBadge('ace-'+Date.now(), 'Quiz Ace: 90%+');
       if (correct === totalQuestions) this.addBadge('perfect-'+Date.now(), 'Perfect Score!');
@@ -78,6 +81,106 @@
       // Streak-based bonus via authManager if available
       if (window.authManager && authManager.isSignedIn()) {
         // No-op here; streaks are already updated in authManager.saveQuizResult()
+      }
+    }
+
+    // Public method: grant XP locally and attempt to log to Firestore for leaderboards
+    async grantXp(amount, reason = '', meta = {}) {
+      try {
+        this.addXp(amount, reason);
+        // Inform user
+        this.toast(`+${amount} XP ${reason ? `for ${reason}` : ''}`.trim());
+
+        // Log to cloud if signed in
+        if (window.authManager && authManager.isSignedIn()) {
+          await this._logXpToCloud(amount, reason, meta);
+        } else {
+          // Encourage sign-in for leaderboard visibility
+          if (!meta.__silent && (!window.authManager || !authManager.isSignedIn())) {
+            // Avoid spamming every call
+            const lastHint = parseInt(localStorage.getItem('pd:xp:signinHintAt') || '0', 10);
+            if (Date.now() - lastHint > 60_000) {
+              this.toast('Sign in to appear on the leaderboard!', '👥');
+              try { localStorage.setItem('pd:xp:signinHintAt', String(Date.now())); } catch {}
+            }
+          }
+        }
+
+        // Notify listeners (e.g., leaderboard) that XP was awarded
+        try {
+          window.dispatchEvent(new CustomEvent('xp:awarded', { detail: { amount: Math.max(0, Math.floor(amount)), reason, meta } }));
+        } catch {}
+      } catch (e) {
+        console.warn('[Gamification] grantXp failed:', e);
+      }
+    }
+
+    async _logXpToCloud(amount, reason, meta = {}) {
+      try {
+        const db = authManager.db || (firebase && firebase.firestore && firebase.firestore());
+        const user = authManager.getCurrentUser();
+        if (!db || !user) return;
+
+        // Derive profile fields from local storage first, then fallback to auth
+        let nickname = user.displayName || (user.email ? user.email.split('@')[0] : 'User');
+        let country = null;
+        try {
+          const stored = JSON.parse(localStorage.getItem('pd:user:profile') || '{}');
+          if (stored && stored.nickname) nickname = stored.nickname;
+          if (stored && stored.country) country = stored.country;
+        } catch {}
+
+        // Prepare log
+        const payload = {
+          uid: user.uid,
+          displayName: nickname,
+          country: country || null,
+          xp: Math.max(0, Math.floor(amount)) || 0,
+          reason: reason || '',
+          meta: meta || {},
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          clientTs: Date.now()
+        };
+
+        // Write to xp_logs collection
+        await db.collection('xp_logs').add(payload);
+
+        // Update user XP summary
+        await db.collection('users').doc(user.uid).set({
+          xp: {
+            total: firebase.firestore.FieldValue.increment(payload.xp),
+            lastAwardAt: firebase.firestore.FieldValue.serverTimestamp()
+          },
+          profile: {
+            // Keep a copy of display info for convenience
+            nickname: nickname || null,
+            country: country || null
+          }
+        }, { merge: true });
+      } catch (e) {
+        console.warn('[Gamification] Cloud XP log failed:', e?.message || e);
+      }
+    }
+
+    // Ensure cloud XP catches up to local XP when user signs in
+    async syncXpToCloud() {
+      try {
+        if (!(window.authManager && authManager.isSignedIn() && window.firebase && firebase.firestore)) return;
+        const db = authManager.db || (firebase && firebase.firestore && firebase.firestore());
+        const user = authManager.getCurrentUser();
+        if (!db || !user) return;
+
+        const userRef = db.collection('users').doc(user.uid);
+        const snap = await userRef.get();
+        const cloudTotal = snap.exists && snap.data()?.xp?.total ? Number(snap.data().xp.total) : 0;
+        const localTotal = Number(this.state?.xp || 0);
+        const diff = Math.max(0, Math.floor(localTotal - cloudTotal));
+        if (diff > 0) {
+          await this._logXpToCloud(diff, 'backfill', { __silent: true, source: 'local-sync', clientTs: Date.now() });
+          this.toast('Synced your local XP to the cloud.', '☁️');
+        }
+      } catch (e) {
+        console.warn('[Gamification] syncXpToCloud failed:', e?.message || e);
       }
     }
 

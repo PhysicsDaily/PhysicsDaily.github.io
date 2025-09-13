@@ -7,6 +7,8 @@ class AuthNavigationHandler {
     constructor() {
         this.initialized = false;
         this.defaultAvatar = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdOb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM2NDc0OGIiLz4KPHBhdGggZD0iTTE2IDE2QzE4LjIwOTEgMTYgMjAgMTQuMjA5MSAyMCAxMkMyMCA5Ljc5MDg2IDE4LjIwOTEgOCAxNiA4QzEzLjc5MDkgOCAxMiA5Ljc5MDg2IDEyIDEyQzEyIDE0LjIwOTEgMTMuNzkwOSAxNiAxNiAxNloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik04IDI2QzggMjIuNjg2MyAxMS4xMzQgMjAgMTUgMjBIMTdDMjAuODY2IDIwIDI0IDIyLjY4NjMgMjQgMjZWMjhIOFYyNloiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPg==';
+        this._xpStatsLoaded = false;
+        this._xpStatsTotal = 0;
         this.init();
     }
 
@@ -48,6 +50,8 @@ class AuthNavigationHandler {
     this.dashboardLink = document.getElementById('header-dashboard-link'); // may not exist now
         this.profileTrigger = document.getElementById('header-profile-trigger');
         this.profileDropdown = document.getElementById('profile-dropdown');
+        this.xpPill = document.getElementById('header-xp-pill');
+        this.xpValue = document.getElementById('header-xp-value');
 
         // Listen for profile updates (e.g., from settings page)
         document.addEventListener('userProfileUpdated', (e) => {
@@ -99,6 +103,12 @@ class AuthNavigationHandler {
                 });
             }
         }
+
+        // Listen once for XP awards to live-update the pill
+        if (!this._xpEventBound) {
+            this._xpEventBound = true;
+            window.addEventListener('xp:awarded', () => this.updateXpPill());
+        }
     }
 
     updateNavigationUI(user) {
@@ -134,6 +144,12 @@ class AuthNavigationHandler {
                 }
             }
 
+            // Show and update XP pill
+            if (this.xpPill) {
+                this.xpPill.style.display = 'inline-flex';
+                this.updateXpPill();
+            }
+
             // Show Dashboard link after account
             // Dashboard remains in profile dropdown; inline link optional
             if (this.dashboardLink) this.dashboardLink.style.display = 'inline';
@@ -163,6 +179,8 @@ class AuthNavigationHandler {
                 this.userMenu.style.display = 'none';
             }
 
+            if (this.xpPill) this.xpPill.style.display = 'none';
+
             if (this.dashboardLink) this.dashboardLink.style.display = 'none';
 
             // Hide personalized welcome
@@ -184,6 +202,28 @@ class AuthNavigationHandler {
         this.profileTrigger.setAttribute('aria-expanded', open ? 'true' : 'false');
         this.profileDropdown.classList.toggle('open', !!open);
         this.profileDropdown.setAttribute('aria-hidden', open ? 'false' : 'true');
+    }
+
+    async updateXpPill() {
+        if (!this.xpPill || !this.xpValue) return;
+        // Prefer local gamification state; reconcile with cloud once
+        let localXp = 0;
+        try {
+            if (window.gamification && typeof gamification.getState === 'function') {
+                localXp = Number(gamification.getState()?.xp || 0);
+            }
+        } catch {}
+
+        if (!this._xpStatsLoaded && window.authManager && authManager.isSignedIn() && typeof authManager.getUserStats === 'function') {
+            try {
+                const stats = await authManager.getUserStats();
+                this._xpStatsTotal = Number(stats?.xp?.total || 0);
+                this._xpStatsLoaded = true;
+            } catch {}
+        }
+
+        const total = Math.max(localXp, this._xpStatsTotal || 0);
+        this.xpValue.textContent = String(total);
     }
 }
 

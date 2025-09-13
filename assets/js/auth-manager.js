@@ -46,14 +46,18 @@ class AuthManager {
                 console.info('[Auth] If you are testing on a custom host (e.g., physicsdaily.github.io or a LAN IP), add it to the authorized domains list.');
             }
             
-            // Enable offline persistence
-            await this.db.enablePersistence().catch(err => {
-                if (err.code === 'failed-precondition') {
-                    console.warn('Multiple tabs open, persistence can only be enabled in one tab at a time.');
-                } else if (err.code === 'unimplemented') {
-                    console.warn('Browser doesn\'t support persistence');
+            // Enable offline persistence (best effort)
+            try {
+                await this.db.enablePersistence();
+            } catch (err) {
+                const msg = (err && err.message) || '';
+                const code = err && err.code;
+                if (code === 'failed-precondition' || code === 'unimplemented' || /already been started/i.test(msg)) {
+                    console.warn('[Auth] Firestore persistence not enabled:', code || msg);
+                } else {
+                    console.warn('[Auth] Unexpected persistence error (continuing):', code || msg);
                 }
-            });
+            }
 
             // Set up auth state listener
             this.auth.onAuthStateChanged(async (user) => {
@@ -74,6 +78,13 @@ class AuthManager {
             this.isInitialized = true;
             return true;
         } catch (error) {
+            const msg = String(error?.message || '');
+            if (/persistence can no longer be enabled/i.test(msg)) {
+                // Continue without persistence if this was the only problem
+                console.warn('[Auth] Continuing without persistence due to startup ordering.');
+                this.isInitialized = true;
+                return true;
+            }
             console.error('Failed to initialize Firebase:', error);
             return false;
         }
@@ -422,6 +433,7 @@ class AuthManager {
                 
                 return {
                     ...userData.stats,
+                    xp: userData.xp || { total: 0 },
                     streak: userData.streak,
                     quizHistory,
                     memberSince: userData.createdAt

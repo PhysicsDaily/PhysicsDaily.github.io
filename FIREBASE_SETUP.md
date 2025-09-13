@@ -187,3 +187,40 @@ For issues specific to:
 - Always use security rules to protect user data
 - Enable App Check for additional security (optional)
 - Monitor usage in Firebase Console to detect unusual activity
+
+### Leaderboard (XP Logs) Rules
+
+To enable the public leaderboard while keeping writes secure, add rules for the `xp_logs` collection. These allow anyone to read XP totals (for ranking) but only allow authenticated users to write XP events for themselves. The rules also validate fields to avoid abuse.
+
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Existing per-user data (users collection and its subcollections)
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      match /{subcollection}/{document} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+
+    // Public read leaderboard, authenticated write-only by the owner
+    match /xp_logs/{docId} {
+      // Anyone can read (leaderboard page)
+      allow get, list: if true;
+
+      // Only authenticated users can write XP for themselves
+      allow create: if request.auth != null
+                    && request.resource.data.uid == request.auth.uid
+                    && request.resource.data.xp is number
+                    && request.resource.data.xp >= 0
+                    && request.resource.data.timestamp is timestamp;
+
+      // Updates/deletes are not needed; disallow to maintain append-only log
+      allow update, delete: if false;
+    }
+  }
+}
+```
+
+Optionally, maintain a running total in each user doc (the code updates `users/{uid}.xp.total`). That stays protected by the `users` rules above.

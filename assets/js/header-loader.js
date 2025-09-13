@@ -4,7 +4,7 @@
   const CACHE_KEY = 'pd:header:html';
   const CACHE_TS_KEY = 'pd:header:ts';
   const CACHE_VER_KEY = 'pd:header:ver';
-  const CACHE_VER = '5'; // bump to invalidate old cached markup
+  const CACHE_VER = '7'; // bump to invalidate old cached markup
   const MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
 
   const applyHeaderHtml = (html) => {
