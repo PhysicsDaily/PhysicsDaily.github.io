@@ -7,6 +7,22 @@ class AdminDashboard {
         this.stats = null;
         this.currentTab = 'overview';
         this.isAuthorized = false;
+        
+        // Country flags mapping
+        this.countryFlags = {
+            'nepal': '🇳🇵',
+            'india': '🇮🇳',
+            'usa': '🇺🇸',
+            'uk': '🇬🇧',
+            'canada': '🇨🇦',
+            'australia': '🇦🇺',
+            'germany': '🇩🇪',
+            'france': '🇫🇷',
+            'japan': '🇯🇵',
+            'china': '🇨🇳',
+            'brazil': '🇧🇷',
+            'default': '🌍'
+        };
     }
 
     async init() {
@@ -79,6 +95,9 @@ class AdminDashboard {
         
         // Auto-refresh every 30 seconds when on Users tab
         this.startAutoRefresh();
+        
+        // Start live user tracking (just for live user count)
+        this.startLiveUserTracking();
     }
 
     showUnauthorized() {
@@ -142,6 +161,33 @@ class AdminDashboard {
         }, 30000); // 30 seconds
     }
 
+    startLiveUserTracking() {
+        // Update live users every 30 seconds
+        setInterval(() => {
+            this.updateLiveUsers();
+        }, 30000);
+        
+        // Initial update
+        this.updateLiveUsers();
+    }
+
+    updateLiveUsers() {
+        // Calculate live users (active in last 5 minutes)
+        const now = new Date();
+        const fiveMinutesAgo = new Date(now.getTime() - 5 * 60 * 1000);
+        
+        if (this.users.length > 0) {
+            const liveCount = this.users.filter(user => {
+                const lastLogin = user.lastLogin;
+                return lastLogin && lastLogin > fiveMinutesAgo;
+            }).length;
+            
+            document.getElementById('live-users').textContent = liveCount;
+        } else {
+            document.getElementById('live-users').textContent = '0';
+        }
+    }
+
     async refreshAllData() {
         console.log('[Admin] Refreshing all data...');
         try {
@@ -189,6 +235,11 @@ class AdminDashboard {
         try {
             // Load system statistics
             await this.loadStats();
+            
+            // Load users for country analytics
+            if (this.users.length === 0) {
+                this.users = await authManager.getAllUsers();
+            }
             
             // Load overview data
             this.updateOverview();
@@ -263,6 +314,10 @@ class AdminDashboard {
 
         // Update topic popularity
         this.renderTopicPopularity();
+        
+        // Calculate and update country analytics
+        this.calculateCountryDistribution();
+        this.renderCountryAnalytics();
     }
 
     renderTopUsers() {
@@ -321,6 +376,78 @@ class AdminDashboard {
         return topic.charAt(0).toUpperCase() + topic.slice(1).replace(/-/g, ' ');
     }
 
+    renderCountryAnalytics() {
+        const container = document.getElementById('country-analytics');
+        console.log('[Admin] Rendering country analytics:', this.stats?.countryDistribution);
+        
+        if (!this.stats || !this.stats.countryDistribution) {
+            console.log('[Admin] No country distribution in stats, calculating...');
+            // Calculate country distribution from users
+            this.calculateCountryDistribution();
+        }
+        
+        if (!this.stats.countryDistribution || !this.stats.countryDistribution.length) {
+            console.log('[Admin] Still no country data available');
+            container.innerHTML = '<p style="text-align: center; color: var(--text-muted);">No country data available</p>';
+            return;
+        }
+
+        const maxCount = Math.max(...this.stats.countryDistribution.map(c => c.count));
+
+        const html = this.stats.countryDistribution.map(country => {
+            const flag = this.countryFlags[country.country.toLowerCase()] || this.countryFlags.default;
+            return `
+                <div class="topic-item">
+                    <div>
+                        <span class="country-flag">${flag}</span>
+                        <strong>${this.formatCountryName(country.country)}</strong>
+                        <small style="color: var(--text-muted); margin-left: 0.5rem;">${country.count} users</small>
+                    </div>
+                    <div class="topic-bar">
+                        <div class="topic-bar-fill" style="width: ${(country.count / maxCount) * 100}%"></div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        console.log('[Admin] Country analytics HTML:', html);
+        container.innerHTML = html;
+    }
+
+    calculateCountryDistribution() {
+        console.log('[Admin] Calculating country distribution from users:', this.users.length);
+        
+        if (!this.users.length) {
+            console.log('[Admin] No users available for country analytics');
+            return;
+        }
+        
+        const countryCounts = {};
+        
+        this.users.forEach(user => {
+            const country = user.nationality || 'Unknown';
+            console.log('[Admin] User country:', user.email, '→', country);
+            countryCounts[country] = (countryCounts[country] || 0) + 1;
+        });
+
+        console.log('[Admin] Country counts:', countryCounts);
+
+        const countryDistribution = Object.entries(countryCounts)
+            .map(([country, count]) => ({ country, count }))
+            .sort((a, b) => b.count - a.count)
+            .slice(0, 8); // Top 8 countries
+
+        if (!this.stats) this.stats = {};
+        this.stats.countryDistribution = countryDistribution;
+        
+        console.log('[Admin] Final country distribution:', countryDistribution);
+    }
+
+    formatCountryName(country) {
+        if (!country || country === 'Unknown') return 'Unknown';
+        return country.charAt(0).toUpperCase() + country.slice(1).toLowerCase();
+    }
+
     renderUsersTable() {
         const tbody = document.getElementById('users-table-body');
         
@@ -348,10 +475,10 @@ class AdminDashboard {
                 </td>
                 <td>
                     <div class="user-actions">
-                        <button class="action-btn view" onclick="adminDashboard.viewUser('${user.id}')">
+                        <button class="action-btn view" onclick="window.adminDashboard.viewUser('${user.id}')">
                             View
                         </button>
-                        <button class="action-btn delete" onclick="adminDashboard.confirmDeleteUser('${user.id}', '${user.displayName || user.email}')">
+                        <button class="action-btn delete" onclick="window.adminDashboard.confirmDeleteUser('${user.id}', '${(user.displayName || user.email || 'User').replace(/'/g, "\\'")}')">
                             Delete
                         </button>
                     </div>

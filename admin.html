@@ -207,6 +207,51 @@
             transition: width 0.3s ease;
         }
 
+        .country-flag {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-color);
+        }
+
+        .chart-container {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            position: relative;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .chart-container:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
         @media (max-width: 768px) {
             .admin-container {
                 padding: 1rem;
@@ -271,6 +316,10 @@
                         <div class="stat-label">Active This Week</div>
                     </div>
                     <div class="stat-card">
+                        <div class="stat-number" id="live-users">-</div>
+                        <div class="stat-label">Live Users</div>
+                    </div>
+                    <div class="stat-card">
                         <div class="stat-number" id="total-xp">-</div>
                         <div class="stat-label">Total XP Earned</div>
                     </div>
@@ -280,9 +329,16 @@
                     </div>
                 </div>
 
-                <div class="chart-container">
-                    <div class="chart-title">🏆 Top Users by XP</div>
-                    <div id="top-users-list"></div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                    <div class="chart-container">
+                        <div class="chart-title">🏆 Top Users by XP</div>
+                        <div id="top-users-list"></div>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="chart-title">🌍 Users by Country</div>
+                        <div id="country-analytics" class="topic-list"></div>
+                    </div>
                 </div>
 
                 <div class="chart-container">

@@ -1,5 +1,5 @@
 // Basic cache-first service worker for Physics Daily
-const CACHE_NAME = 'pd-v25';
+const CACHE_NAME = 'pd-v29';
 const urlsToCache = [
   '/',
   '/index.html',

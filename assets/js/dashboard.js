@@ -4,20 +4,6 @@ class Dashboard {
         this.user = null;
         this.stats = null;
         this.init();
-        // Live update XP/Level when gamification changes
-        try {
-            if (window.gamification && typeof gamification.onChange === 'function') {
-                gamification.onChange(() => this.updateXpLevelUI());
-            } else {
-                // Retry after a short delay in case gamification loads later
-                setTimeout(() => {
-                    if (window.gamification && typeof gamification.onChange === 'function') {
-                        gamification.onChange(() => this.updateXpLevelUI());
-                        this.updateXpLevelUI();
-                    }
-                }, 800);
-            }
-        } catch {}
     }
 
     async init() {
@@ -97,14 +83,46 @@ class Dashboard {
             : 0;
         document.getElementById('avgScore').textContent = avgScore + '%';
         
-        // Streak and study time removed from header UI
-        
         // Store for later use
         this.localStats = localStats;
         this.quizHistory = quizHistory;
 
-        // Update XP/Level UI
+        // Update XP/Level UI with enhanced XP system
         this.updateXpLevelUI();
+    }
+
+    updateXpLevelUI() {
+        // Check if enhanced XP system is available
+        if (window.enhancedXP && typeof enhancedXP.getUserData === 'function') {
+            try {
+                const xpData = enhancedXP.getUserData();
+                if (xpData) {
+                    // Update XP display
+                    const xpElement = document.getElementById('xpTotal');
+                    const levelElement = document.getElementById('levelLabel');
+                    
+                    if (xpElement) {
+                        xpElement.textContent = xpData.totalXP || 0;
+                    }
+                    if (levelElement) {
+                        levelElement.textContent = `Lv ${xpData.level || 1}`;
+                    }
+                }
+            } catch (error) {
+                console.log('[Dashboard] Enhanced XP system not available yet');
+            }
+        } else {
+            // Fallback to basic display
+            const xpElement = document.getElementById('xpTotal');
+            const levelElement = document.getElementById('levelLabel');
+            
+            if (xpElement) {
+                xpElement.textContent = '0';
+            }
+            if (levelElement) {
+                levelElement.textContent = 'Lv 1';
+            }
+        }
     }
 
     // streak display removed
