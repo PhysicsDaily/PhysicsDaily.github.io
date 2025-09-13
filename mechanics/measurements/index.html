@@ -78,6 +78,77 @@
             padding: 0 20px;
         }
 
+        /* Precision & Errors enhancement styles */
+        .comparison-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+            margin: 1rem 0 1.5rem;
+        }
+        .comparison-grid h4 { margin-top: 0; }
+        .info-box, .tip-box {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--primary-color);
+            padding: 0.85rem 1rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+        .sig-rules li { margin-bottom: 0.55rem; }
+        .sig-rules em { color: var(--text-secondary); }
+        .advanced-note ol { margin-left: 1.15rem; }
+
+        /* Competitive exam section styles */
+        .highlight-row { background: var(--primary-color-light); }
+        .high-priority { background: #fee2e2; border-left: 4px solid #dc2626; }
+        .medium-priority { background: #fef3c7; border-left: 4px solid #d97706; }
+        .low-priority { background: #f0f9ff; border-left: 4px solid #0284c7; }
+        
+        .trick-box, .method-box, .pattern-box, .trap-box, .pro-technique {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .trick-box { border-left: 4px solid #22c55e; }
+        .method-box { border-left: 4px solid #3b82f6; }
+        .pattern-box { border-left: 4px solid #8b5cf6; }
+        .trap-box { border-left: 4px solid #ef4444; }
+        .pro-technique { border-left: 4px solid #f59e0b; }
+        
+        .unit-group, .family-group, .conversion-item {
+            background: var(--code-bg);
+            padding: 0.8rem;
+            border-radius: 6px;
+            margin: 0.5rem 0;
+        }
+        
+        .conversion-grid, .family-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+            margin: 1rem 0;
+        }
+        
+        .checklist-box {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .final-tip {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: white;
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        .final-tip h4 { color: white; margin-bottom: 0.8rem; }
+
         .nav {
             background: var(--card-bg);
             border-bottom: 1px solid var(--border-color);
@@ -862,11 +933,87 @@
                 padding: 6px 8px;
             }
         }
+
+        /* New enhanced styles for improved content */
+        .definition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .definition-item {
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .measurement-techniques {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .technique-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .technique-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .technique-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .real-world-examples {
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-light));
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            color: white;
+        }
+
+        .real-world-examples h4 {
+            color: white;
+            margin-top: 0;
+        }
+
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .application-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            backdrop-filter: blur(10px);
+        }
+        /* New generic content box for formal paragraph grouping */
+        .content-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
     </style>
     <script>
         // Progressive navigation system
         let currentSection = 'intro';
-        const sections = ['intro', 'section-1-1', 'section-1-2', 'section-1-3', 'section-1-4', 'assessment'];
+    const sections = ['intro', 'section-1-1', 'section-1-2', 'section-1-3', 'section-1-4', 'section-tricks', 'assessment'];
         
         // Load progress from localStorage
         function loadProgress() {
@@ -1121,6 +1268,7 @@
                     <button class="section-indicator" data-section="section-1-2">⚛️ SI Units</button>
                     <button class="section-indicator" data-section="section-1-3">🔬 Dimensions</button>
                     <button class="section-indicator" data-section="section-1-4">🎯 Precision</button>
+                    <button class="section-indicator" data-section="section-tricks">⚡ Tricks</button>
                     <button class="section-indicator" data-section="assessment">📝 Quiz</button>
                 </div>
             </div>
@@ -1128,33 +1276,39 @@
             <!-- Introduction Section -->
             <div id="intro" class="section active-section">
                 <div>
-                    <h2>🌟 Why Learn About Measurement?</h2>
+                    <h2>Introduction to Measurement</h2>
                     <div class="beginner-note">
-                        <h4>🔰 Think About This:</h4>
-                        <p>Imagine trying to cook without measuring ingredients, or building a house without measuring lumber. Physics is similar - we need precise measurements to understand how the universe works! Every law of physics started with careful observations and measurements.</p>
+                        <h4>Contextual Reflection</h4>
+                        <p>Consider the challenge of cooking without measuring ingredients or constructing a building without measuring materials. Scientific investigation likewise depends upon reliable, standardised measurement. Every accepted physical law has emerged from reproducible, quantitative observation.</p>
                     </div>
-                    <p><strong>Physics is fundamentally an experimental science.</strong> Every law, theory, and principle we know about the universe comes from careful observation and measurement. When Galileo dropped objects from the Tower of Pisa, when Newton observed falling apples, when Einstein predicted the bending of light - all these breakthroughs required precise measurement.</p>
-                    
-                    <p>Consider this amazing fact: the GPS in your phone works because engineers understand Einstein's theory of relativity with incredible precision. Without accurate measurement of time (to nanoseconds) and the effects of gravity on time, your GPS would be off by miles!</p>
-                    
+                    <div class="content-box">
+                        <p><strong>Physics is fundamentally an experimental science.</strong> Progress arises from precise observation, controlled comparison, and quantitative record. From Galileo’s kinematics studies to precision timing in modern particle accelerators, refined measurement enables theoretical development and technological application.</p>
+                        <p>Modern navigation illustrates this dependence: global positioning systems function only because relativistic time dilation, gravitational frequency shifts, and atomic clock behaviour are measured and corrected with sub‑nanosecond resolution.</p>
+                    </div>
                     <div class="highlight-box">
-                        <h4>🔬 The Power of Precise Measurement</h4>
-                        <p>The 2017 detection of gravitational waves by LIGO required measuring distance changes smaller than <span class="math">1/10,000</span>th the width of a proton - that's like measuring the distance to the nearest star to within the width of a human hair!</p>
+                        <h4>Power of High-Resolution Measurement</h4>
+                        <p>The 2017 gravitational‑wave detection (LIGO) required resolving differential length changes smaller than 10⁻¹⁸ m—orders of magnitude below atomic dimensions—demonstrating the role of instrumentation fidelity in contemporary physics.</p>
                     </div>
-
-                    <h3>What You'll Master in This Chapter</h3>
+                    <h3>Chapter Learning Objectives</h3>
                     <div class="learning-objectives">
                         <ul>
-                            <li>🎯 <strong>Physical Quantities:</strong> Understand scalars, vectors, and operational definitions</li>
-                            <li>📏 <strong>SI Units:</strong> Master the international standard for all scientific measurements</li>
-                            <li>🧮 <strong>Dimensional Analysis:</strong> Use this powerful tool to check equations and derive relationships</li>
-                            <li>🎯 <strong>Precision & Errors:</strong> Quantify uncertainty and combine errors in calculations</li>
+                            <li><strong>Physical Quantities:</strong> Distinguish scalar and vector forms; interpret operational definitions.</li>
+                            <li><strong>SI Units:</strong> Apply the base units and construct derived units coherently.</li>
+                            <li><strong>Dimensional Analysis:</strong> Validate relations and obtain structural dependence among variables.</li>
+                            <li><strong>Precision & Errors:</strong> Characterise, combine, and report measurement uncertainty rigorously.</li>
                         </ul>
                     </div>
-
                     <div class="advanced-note">
-                        <h4>🎓 For Advanced Students:</h4>
-                        <p>Modern physics pushes measurement to quantum limits. The Heisenberg uncertainty principle fundamentally limits how precisely we can simultaneously measure certain pairs of properties. This isn't just a technical limitation - it's a fundamental feature of reality itself.</p>
+                        <h4>Advanced Perspective</h4>
+                        <p>Measurement at quantum and relativistic scales introduces intrinsic limits (e.g., Heisenberg uncertainty) distinct from instrumental limitations. These fundamental bounds inform experimental design and data interpretation in modern research domains.</p>
+                        <h4>Representative Application Thresholds</h4>
+                        <ul>
+                            <li><strong>Satellite Navigation:</strong> Timing stability ~10⁻⁸ s</li>
+                            <li><strong>Magnetic Resonance Imaging:</strong> Spatial resolution ~10⁻⁴ m</li>
+                            <li><strong>Semiconductor Fabrication:</strong> Feature control ~10⁻⁹ m</li>
+                            <li><strong>Gravitational Wave Interferometry:</strong> Displacement sensitivity ~10⁻¹⁸ m</li>
+                            <li><strong>Precision Spectroscopy:</strong> Frequency determination at parts per 10⁹ or better</li>
+                        </ul>
                     </div>
                     <!-- Removed duplicate intro nav-buttons (standard one exists above) -->
                 </div>
@@ -1164,11 +1318,39 @@
             <div id="section-1-1" class="section">
                     <h2>1.1 Physical Quantities, Standards, and Units</h2>
                     
-                    <h3>What Are Physical Quantities?</h3>
-                    <p>A <strong>physical quantity</strong> is any measurable property of matter or energy. Understanding these is crucial for all of physics!</p>
+                    <h3>Definition of a Physical Quantity</h3>
+                    <p>A <strong>physical quantity</strong> is any measurable property of matter or energy that can be used to explain physical phenomena in a quantitative way.</p>
                     
                     <div class="highlight-box">
-                        <h4>📊 Two Categories of Physical Quantities:</h4>
+                        <h4>Components of a Physical Quantity</h4>
+                        <p>For a physical quantity to exist, it must have two essential parts:</p>
+                        <ol>
+                            <li><strong>Numerical part (n):</strong> The numeric value (pure number)</li>
+                            <li><strong>Unit part (u):</strong> An established standard reference part</li>
+                        </ol>
+                        
+                        <div class="formula-box">Physical Quantity = Numerical part × Unit part</div>
+                        
+                        <h4>Fundamental Relationship: n ∝ 1/u</h4>
+                        <p>The numerical part is <strong>inversely proportional</strong> to the unit part:</p>
+                        <div class="formula-box">n₁u₁ = n₂u₂ = constant</div>
+                        <p><em>This formula is fundamental for unit conversions!</em></p>
+                    </div>
+
+                    <div class="example-box">
+                        <h4>Example: Representation of Length</h4>
+                        <table style="margin: 1rem 0; width: 100%;">
+                            <tr><th>Numerical part (n)</th><th>Unit part (u)</th></tr>
+                            <tr><td>5</td><td>km</td></tr>
+                            <tr><td>5 × 10³ = 5000</td><td>m</td></tr>
+                            <tr><td>5 × 10⁵ = 500,000</td><td>cm</td></tr>
+                            <tr><td>5 × 10⁶ = 5,000,000</td><td>mm</td></tr>
+                        </table>
+                        <p><strong>Notice:</strong> As the unit gets smaller, the numerical value gets larger!</p>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <h4>Principal Categories</h4>
                         <ul>
                             <li><strong>Scalar Quantities:</strong> Have magnitude only
                                 <br><em>Examples: mass (5 kg), time (10 s), temperature (25°C), energy (100 J)</em>
@@ -1183,7 +1365,7 @@
                     <p>Each physical quantity must have an <strong>operational definition</strong> - a precise description of how to measure it. This ensures anyone can reproduce the measurement anywhere in the world.</p>
                     
                     <div class="example-box">
-                        <h4>📝 Example: Defining Velocity</h4>
+                        <h4>Example: Operational Definition of Velocity</h4>
                         <p><strong>Operational definition:</strong> "Change in position divided by time interval"</p>
                         <div class="formula-box">v = Δx/Δt</div>
                         <p>This tells us exactly how to measure velocity: measure the change in position, measure the time it took, then divide.</p>
@@ -1200,8 +1382,22 @@
                         </ol>
                     </div>
 
+                    <h3>Basic Concepts Recap</h3>
+                    <ol>
+                        <li>The magnitude of a quantity = numerical value (n) × unit (u). For any fixed physical quantity: <span class="equation">n₁u₁ = n₂u₂ = constant</span>.</li>
+                        <li>Units are either <strong>fundamental (base)</strong> or <strong>derived</strong>.</li>
+                        <li>Fundamental units cannot be derived from other units (e.g., m, kg, s, A, K, mol, cd).</li>
+                        <li>Derived units are algebraic combinations of base units (e.g., m·s⁻¹, kg·m·s⁻²).</li>
+                        <li>The SI system has seven base units + two supplementary (radian, steradian).</li>
+                        <li>A <strong>coherent system</strong>: all derived units emerge from base units with factor 1 (no extra numerical constants).</li>
+                        <li>A <strong>rationalised system</strong> uses a single unit per base quantity (e.g., SI vs older electrostatic systems).</li>
+                        <li><strong>Dimensional formulae</strong> of a quantity are independent of the unit system chosen.</li>
+                        <li>The magnitude (value) of a physical quantity is invariant; only the numerical part changes with unit choice.</li>
+                        <li><em>Conversion principle:</em> Always express into absolute (not gravitational) units before applying dimensional conversion formulas.</li>
+                    </ol>
+
                     <div class="beginner-note">
-                        <h4>🤔 Quick Check Questions:</h4>
+                        <h4>Review Questions</h4>
                         <div class="question-card">
                             <div class="question-header" onclick="toggleAnswer('q1_1')">
                                 <span class="question-number">Q1.</span>
@@ -1355,89 +1551,132 @@
                 </div>
 
                 <h3>SI Prefixes</h3>
-                <p>SI prefixes allow us to express very large or very small quantities efficiently:</p>
+                <p>SI prefixes allow concise representation of very large and very small numerical values. The most frequently used ranges in typical physics problems are highlighted.</p>
 
                 <div class="table-responsive">
                     <table>
                         <thead>
                             <tr>
+                                <th colspan="5" style="text-align:center; background:var(--bg-secondary);">Negative Powers (Sub-multiples)</th>
+                            </tr>
+                            <tr>
                                 <th>Prefix</th>
                                 <th>Symbol</th>
-                                <th>Power of 10</th>
-                                <th>Decimal Value</th>
-                                <th>Example</th>
+                                <th>Multiplier</th>
+                                <th>Power</th>
+                                <th>Typical Example</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>tera</td>
-                                <td>T</td>
-                                <td>10¹²</td>
-                                <td>1,000,000,000,000</td>
-                                <td>1 TW = 10¹² W</td>
-                            </tr>
-                            <tr>
-                                <td>giga</td>
-                                <td>G</td>
-                                <td>10⁹</td>
-                                <td>1,000,000,000</td>
-                                <td>1 GHz = 10⁹ Hz</td>
-                            </tr>
-                            <tr>
-                                <td>mega</td>
-                                <td>M</td>
-                                <td>10⁶</td>
-                                <td>1,000,000</td>
-                                <td>1 MHz = 10⁶ Hz</td>
-                            </tr>
-                            <tr>
-                                <td>kilo</td>
-                                <td>k</td>
-                                <td>10³</td>
-                                <td>1,000</td>
-                                <td>1 km = 10³ m</td>
-                            </tr>
-                            <tr>
-                                <td>centi</td>
-                                <td>c</td>
-                                <td>10⁻²</td>
-                                <td>0.01</td>
-                                <td>1 cm = 10⁻² m</td>
-                            </tr>
-                            <tr>
-                                <td>milli</td>
-                                <td>m</td>
-                                <td>10⁻³</td>
-                                <td>0.001</td>
-                                <td>1 mm = 10⁻³ m</td>
-                            </tr>
-                            <tr>
-                                <td>micro</td>
-                                <td>μ</td>
-                                <td>10⁻⁶</td>
-                                <td>0.000001</td>
-                                <td>1 μm = 10⁻⁶ m</td>
-                            </tr>
-                            <tr>
-                                <td>nano</td>
-                                <td>n</td>
-                                <td>10⁻⁹</td>
-                                <td>0.000000001</td>
-                                <td>1 nm = 10⁻⁹ m</td>
-                            </tr>
-                            <tr>
-                                <td>pico</td>
-                                <td>p</td>
-                                <td>10⁻¹²</td>
-                                <td>0.000000000001</td>
-                                <td>1 pm = 10⁻¹² m</td>
-                            </tr>
+                            <tr><td>yocto</td><td>y</td><td>0.000000000000000000000001</td><td>10⁻²⁴</td><td>Quantum events</td></tr>
+                            <tr><td>zepto</td><td>z</td><td>0.000000000000000000001</td><td>10⁻²¹</td><td>High-energy collisions</td></tr>
+                            <tr><td>atto</td><td>a</td><td>0.000000000000000001</td><td>10⁻¹⁸</td><td>Attosecond lasers</td></tr>
+                            <tr class="highlight-row"><td><strong>femto</strong></td><td><strong>f</strong></td><td>0.000000000000001</td><td><strong>10⁻¹⁵</strong></td><td><strong>Nuclear radius (1 fm)</strong></td></tr>
+                            <tr class="highlight-row"><td><strong>pico</strong></td><td><strong>p</strong></td><td>0.000000000001</td><td><strong>10⁻¹²</strong></td><td><strong>Charge (pC), atomic spacings</strong></td></tr>
+                            <tr class="highlight-row"><td><strong>nano</strong></td><td><strong>n</strong></td><td>0.000000001</td><td><strong>10⁻⁹</strong></td><td><strong>Wavelength (nm)</strong></td></tr>
+                            <tr class="highlight-row"><td><strong>micro</strong></td><td><strong>μ</strong></td><td>0.000001</td><td><strong>10⁻⁶</strong></td><td><strong>Cell size (μm)</strong></td></tr>
+                            <tr class="highlight-row"><td><strong>milli</strong></td><td><strong>m</strong></td><td>0.001</td><td><strong>10⁻³</strong></td><td><strong>Length (mm), current (mA)</strong></td></tr>
+                            <tr><td>centi</td><td>c</td><td>0.01</td><td>10⁻²</td><td>Everyday length (cm)</td></tr>
+                            <tr><td>deci</td><td>d</td><td>0.1</td><td>10⁻¹</td><td>Rarely used</td></tr>
                         </tbody>
                     </table>
                 </div>
 
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th colspan="5" style="text-align:center; background:var(--bg-secondary);">Positive Powers (Multiples)</th>
+                            </tr>
+                            <tr>
+                                <th>Prefix</th>
+                                <th>Symbol</th>
+                                <th>Multiplier</th>
+                                <th>Power</th>
+                                <th>Typical Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>deca</td><td>da</td><td>10</td><td>10¹</td><td>Very rare</td></tr>
+                            <tr><td>hecto</td><td>h</td><td>100</td><td>10²</td><td>Hectare (area)</td></tr>
+                            <tr class="highlight-row"><td><strong>kilo</strong></td><td><strong>k</strong></td><td>1,000</td><td><strong>10³</strong></td><td><strong>Mass (kg), distance (km)</strong></td></tr>
+                            <tr class="highlight-row"><td><strong>mega</strong></td><td><strong>M</strong></td><td>1,000,000</td><td><strong>10⁶</strong></td><td><strong>Frequency (MHz)</strong></td></tr>
+                            <tr class="highlight-row"><td><strong>giga</strong></td><td><strong>G</strong></td><td>1,000,000,000</td><td><strong>10⁹</strong></td><td><strong>Data (GB), energy</strong></td></tr>
+                            <tr><td>tera</td><td>T</td><td>1,000,000,000,000</td><td>10¹²</td><td>Power (TW)</td></tr>
+                            <tr><td>peta</td><td>P</td><td>1,000,000,000,000,000</td><td>10¹⁵</td><td>Astro data</td></tr>
+                            <tr><td>exa</td><td>E</td><td>10¹⁸</td><td>10¹⁸</td><td>Big data scale</td></tr>
+                            <tr><td>zetta</td><td>Z</td><td>10²¹</td><td>10²¹</td><td>Cosmic energy</td></tr>
+                            <tr><td>yotta</td><td>Y</td><td>10²⁴</td><td>10²⁴</td><td>Stellar mass est.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tip-box">
+                    <h4>Memory Aids</h4>
+                    <p><strong>Small (10⁻²⁴ → 10⁻¹):</strong> Young Zebras Are Fearfully Pale, Notably Miniature Creatures Drink<br>
+                       <strong>Large (10¹ → 10²⁴):</strong> Do Hungry Kids Meticulously Gobble Tremendous Portions Every Zestful Year</p>
+                    <p style="margin-top:0.5rem; font-size:0.85rem; color:var(--text-secondary);">Usage emphasis: nano (light, semiconductor physics), micro (microscopy), milli (laboratory scales), kilo (macroscopic distances), mega/giga (frequency, large data throughput).</p>
+                </div>
+
+                <h3>Order of Magnitude</h3>
+                <p><strong>Definition:</strong> The order of magnitude of a number <em>N</em> is the power of 10, say <em>x</em>, such that <span class="equation">0.5 ≤ N/10ˣ &lt; 5</span>. This gives a fast approximate scale of size.</p>
+                <div class="example-box">
+                    <h4>Examples</h4>
+                    <ul>
+                        <li>0.6 = 0.6 × 10⁰ → Order 0</li>
+                        <li>49 = 4.9 × 10¹ → Order 1</li>
+                        <li>51 = 0.51 × 10² → Order 2</li>
+                        <li>2040 = 2.04 × 10³ → Order 3</li>
+                        <li>9163 = 0.9163 × 10⁴ → Order 4</li>
+                    </ul>
+                </div>
+
+                <h3>Frequently Used Non-SI Units</h3>
+                <div class="comparison-grid">
+                    <div class="unit-group">
+                        <h4>🌌 Astronomical Distances</h4>
+                        <ul>
+                            <li><strong>Light year (ly):</strong> 9.46 × 10¹⁵ m (distance light travels in 1 year)</li>
+                            <li><strong>Astronomical Unit (AU):</strong> 1.496 × 10¹¹ m ≈ 1.5 × 10¹¹ m (mean Earth–Sun distance)</li>
+                            <li><strong>Parsec (pc):</strong> 3.08 × 10¹⁶ m = 3.26 ly (parallax of 1 arc‑second)</li>
+                            <li class="tip"><em>Hierarchy:</em> 1 pc &gt; 1 ly &gt; 1 AU</li>
+                        </ul>
+                    </div>
+                    <div class="unit-group">
+                        <h4>🧪 Small Length Scales</h4>
+                        <ul>
+                            <li><strong>Micron / micrometre (μm):</strong> 10⁻⁶ m</li>
+                            <li><strong>Nanometre (nm):</strong> 10⁻⁹ m</li>
+                            <li><strong>Angstrom (Å):</strong> 10⁻¹⁰ m (atomic spacing)</li>
+                            <li><strong>X‑ray unit (XU):</strong> 10⁻¹³ m (X‑ray wavelength scale)</li>
+                            <li><strong>Fermi (fm):</strong> 10⁻¹⁵ m (nuclear radius)</li>
+                        </ul>
+                    </div>
+                    <div class="unit-group">
+                        <h4>⚖️ Mass Units</h4>
+                        <ul>
+                            <li><strong>Atomic mass unit (u):</strong> 1.67 × 10⁻²⁷ kg</li>
+                            <li><strong>Slug:</strong> 14.57 kg (imperial dynamics)</li>
+                            <li><strong>Quintal:</strong> 100 kg</li>
+                            <li><strong>Metric ton:</strong> 10³ kg</li>
+                            <li><strong>Solar mass (M☉):</strong> 2.0 × 10³⁰ kg</li>
+                        </ul>
+                    </div>
+                    <div class="unit-group">
+                        <h4>⏱️ Time Units</h4>
+                        <ul>
+                            <li><strong>Mean solar day:</strong> 24 h</li>
+                            <li><strong>Sidereal month:</strong> 27.3 days</li>
+                            <li><strong>Lunar month:</strong> ≈ 29.5 days (phase cycle)</li>
+                            <li><strong>Mean solar year:</strong> 365.25 days</li>
+                            <li><strong>Shake:</strong> 10⁻⁸ s (nuclear physics)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="danger-note"><strong>Do not confuse:</strong> AU (astronomical unit) with Å (angstrom).</div>
+
                 <!-- Practice Questions for Section 1.2 -->
-                <h3>Practice Problems</h3>
+                <h3>Exercises</h3>
                 
                 <div class="question-card">
                     <div class="question-header" onclick="toggleQuestion(this)">
@@ -1451,6 +1690,21 @@
                         <p>Since 10⁻⁵ = 10⁻⁶ × 10¹ = μ × 10, we can write:</p>
                         <p>3.5 × 10⁻⁵ m = 35 × 10⁻⁶ m = <strong>35 μm</strong></p>
                         <p>Alternatively: 3.5 × 10⁻⁵ m = 0.035 × 10⁻³ m = <strong>0.035 mm</strong></p>
+                    </div>
+                </div>
+
+                <h4>Illustration MCQ</h4>
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">I1</div>
+                        <div class="question-text">SI unit of surface tension is: (a) N·s·m⁻¹ (b) J·s⁻¹ (c) N·m⁻² (d) N·m⁻¹</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Fast Recall:</strong> Surface tension = Force/Length.</p>
+                        <p>Dimension: [MT⁻²] → Unit: N/m = N·m⁻¹</p>
+                        <p><strong>Answer:</strong> (d) N·m⁻¹</p>
+                        <p class="tip-box" style="margin:0.75rem 0 0;">Memory hook: If you see a quantity involving a line or interface (film, wire loop) with force in numerator, think N·m⁻¹.</p>
                     </div>
                 </div>
 
@@ -1511,6 +1765,25 @@
                 <h2>1.3 Dimensional Analysis</h2>
                 
                 <p>Dimensional analysis is a powerful tool for checking equations, converting units, and solving physics problems. It uses the principle that physical equations must be dimensionally consistent - both sides must have the same dimensions.</p>
+
+                <div class="highlight-box">
+                    <h4>Definition of Dimensions</h4>
+                    <p><strong>Definition:</strong> The dimension of any physical quantity is defined as the powers of the fundamental quantities in the product form.</p>
+                    
+                    <div class="formula-box">
+                        [Physical Quantity] = [M]ˣ[L]ʸ[T]ᶻ...
+                    </div>
+                    
+                    <p>Where x, y, z are called the <strong>dimensions</strong> (powers) of that quantity.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Example: Force</h4>
+                    <p>Force = mass × acceleration = (mass) × (length)/(time)²</p>
+                    <div class="formula-box">[F] = [M][L][T⁻²] = [MLT⁻²]</div>
+                    <p>This is called the <strong>dimensional equation</strong> of force.</p>
+                    <p><strong>[MLT⁻²]</strong> is called the <strong>dimensional formula</strong> of force.</p>
+                </div>
 
                 <h3>Fundamental Dimensions</h3>
                 <p>All physical quantities can be expressed in terms of fundamental dimensions:</p>
@@ -1621,19 +1894,243 @@
                     </table>
                 </div>
 
+                <div class="highlight-box">
+                    <h4>Selected Additional Dimensional Forms</h4>
+                    <div class="definition-grid">
+                        <div class="definition-item">
+                            <strong>Speed/Velocity:</strong><br>
+                            [v] = [L]/[T] = [LT⁻¹] = [M⁰LT⁻¹]
+                        </div>
+                        <div class="definition-item">
+                            <strong>Acceleration:</strong><br>
+                            [a] = [v]/[T] = [LT⁻²] = [M⁰LT⁻²]
+                        </div>
+                        <div class="definition-item">
+                            <strong>Work/Energy:</strong><br>
+                            [W] = [F][s] = [MLT⁻²][L] = [ML²T⁻²]
+                        </div>
+                        <div class="definition-item">
+                            <strong>Power:</strong><br>
+                            [P] = [W]/[T] = [ML²T⁻²]/[T] = [ML²T⁻³]
+                        </div>
+                        <div class="definition-item">
+                            <strong>Pressure:</strong><br>
+                            [P] = [F]/[A] = [MLT⁻²]/[L²] = [ML⁻¹T⁻²]
+                        </div>
+                        <div class="definition-item">
+                            <strong>Potential Difference:</strong><br>
+                            [V] = [W]/[Q] = [ML²T⁻²]/[AT] = [ML²T⁻³A⁻¹]
+                        </div>
+                        <div class="definition-item">
+                            <strong>Resistance:</strong><br>
+                            [R] = [V]/[I] = [ML²T⁻³A⁻¹]/[A] = [ML²T⁻³A⁻²]
+                        </div>
+                        <div class="definition-item">
+                            <strong>Gravitational Constant:</strong><br>
+                            From F = Gm₁m₂/r²<br>
+                            [G] = [M⁻¹L³T⁻²]
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Comprehensive Dimensional Reference</h3>
+                <p>The following consolidated tables summarise high‑frequency physical quantities. Users should prioritise foundational mechanical quantities (force, energy, power, pressure) before extending to electromagnetic and thermal constants.</p>
+
+                <details open>
+                    <summary><strong>Mechanics Core Quantities</strong></summary>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr><th>Quantity</th><th>Symbol</th><th>Relation</th><th>Dimensions</th><th>Unit</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Displacement / Length</td><td>x, l</td><td>—</td><td>[L]</td><td>m</td></tr>
+                                <tr><td>Area</td><td>A</td><td>l·b</td><td>[L²]</td><td>m²</td></tr>
+                                <tr><td>Volume</td><td>V</td><td>l·b·h</td><td>[L³]</td><td>m³</td></tr>
+                                <tr><td>Density</td><td>ρ</td><td>m/V</td><td>[ML⁻³]</td><td>kg·m⁻³</td></tr>
+                                <tr><td>Velocity / Speed</td><td>v</td><td>dx/dt</td><td>[LT⁻¹]</td><td>m·s⁻¹</td></tr>
+                                <tr><td>Acceleration</td><td>a</td><td>dv/dt</td><td>[LT⁻²]</td><td>m·s⁻²</td></tr>
+                                <tr><td>Momentum</td><td>p</td><td>mv</td><td>[MLT⁻¹]</td><td>kg·m·s⁻¹</td></tr>
+                                <tr><td>Force / Weight</td><td>F, W</td><td>ma</td><td>[MLT⁻²]</td><td>N</td></tr>
+                                <tr><td>Work / Energy</td><td>W, E</td><td>F·s</td><td>[ML²T⁻²]</td><td>J</td></tr>
+                                <tr><td>Power</td><td>P</td><td>W/t</td><td>[ML²T⁻³]</td><td>W</td></tr>
+                                <tr><td>Pressure / Stress</td><td>p, σ</td><td>F/A</td><td>[ML⁻¹T⁻²]</td><td>Pa</td></tr>
+                                <tr><td>Surface tension</td><td>γ</td><td>F/l</td><td>[MT⁻²]</td><td>N·m⁻¹</td></tr>
+                                <tr><td>Gravitational constant</td><td>G</td><td>Fr²/m²</td><td>[M⁻¹L³T⁻²]</td><td>N·m²·kg⁻²</td></tr>
+                                <tr><td>Coefficient of friction</td><td>μ</td><td>F_f/N</td><td>[1]</td><td>—</td></tr>
+                                <tr><td>Spring constant</td><td>k</td><td>F/x</td><td>[MT⁻²]</td><td>N·m⁻¹</td></tr>
+                                <tr><td>Angular velocity</td><td>ω</td><td>dθ/dt</td><td>[T⁻¹]</td><td>rad·s⁻¹</td></tr>
+                                <tr><td>Moment of inertia</td><td>I</td><td>Σmr²</td><td>[ML²]</td><td>kg·m²</td></tr>
+                                <tr><td>Planck's constant</td><td>h</td><td>E/ν</td><td>[ML²T⁻¹]</td><td>J·s</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+
+                <details>
+                    <summary><strong>Heat / Thermal</strong></summary>
+                    <div class="table-responsive">
+                        <table>
+                            <thead><tr><th>Quantity</th><th>Symbol</th><th>Relation</th><th>Dimensions</th><th>Unit</th></tr></thead>
+                            <tbody>
+                                <tr><td>Temperature</td><td>T</td><td>—</td><td>[Θ]</td><td>K</td></tr>
+                                <tr><td>Specific heat</td><td>c</td><td>Q=m c ΔT</td><td>[L²T⁻²Θ⁻¹]</td><td>J·kg⁻¹·K⁻¹</td></tr>
+                                <tr><td>Latent heat</td><td>L</td><td>Q=mL</td><td>[L²T⁻²]</td><td>J·kg⁻¹</td></tr>
+                                <tr><td>Entropy</td><td>S</td><td>Q/T</td><td>[ML²T⁻²Θ⁻¹]</td><td>J·K⁻¹</td></tr>
+                                <tr><td>Thermal conductivity</td><td>k</td><td>Q= k A ΔT t / d</td><td>[MLT⁻³Θ⁻¹]</td><td>W·m⁻¹·K⁻¹</td></tr>
+                                <tr><td>Stefan constant</td><td>σ</td><td>E=σT⁴</td><td>[MT⁻³Θ⁻⁴]</td><td>W·m⁻²·K⁻⁴</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+
+                <details>
+                    <summary><strong>Light / Waves</strong></summary>
+                    <div class="table-responsive">
+                        <table>
+                            <thead><tr><th>Quantity</th><th>Symbol</th><th>Relation</th><th>Dimensions</th><th>Unit</th></tr></thead>
+                            <tbody>
+                                <tr><td>Frequency</td><td>ν</td><td>1/T</td><td>[T⁻¹]</td><td>Hz</td></tr>
+                                <tr><td>Wavelength</td><td>λ</td><td>v/ν</td><td>[L]</td><td>m</td></tr>
+                                <tr><td>Wave speed</td><td>v</td><td>λν</td><td>[LT⁻¹]</td><td>m·s⁻¹</td></tr>
+                                <tr><td>Intensity (radiative)</td><td>I</td><td>Power/Area</td><td>[MT⁻³]</td><td>W·m⁻²</td></tr>
+                                <tr><td>Planck's constant</td><td>h</td><td>E=hν</td><td>[ML²T⁻¹]</td><td>J·s</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+
+                <details>
+                    <summary><strong>Electricity & Magnetism</strong></summary>
+                    <div class="table-responsive">
+                        <table>
+                            <thead><tr><th>Quantity</th><th>Symbol</th><th>Relation</th><th>Dimensions</th><th>Unit</th></tr></thead>
+                            <tbody>
+                                <tr><td>Charge</td><td>q</td><td>I t</td><td>[IT]</td><td>C</td></tr>
+                                <tr><td>Potential (Voltage)</td><td>V</td><td>W/q</td><td>[ML²T⁻³I⁻¹]</td><td>V</td></tr>
+                                <tr><td>Capacitance</td><td>C</td><td>q/V</td><td>[M⁻¹L⁻²T⁴I²]</td><td>F</td></tr>
+                                <tr><td>Resistance</td><td>R</td><td>V/I</td><td>[ML²T⁻³I⁻²]</td><td>Ω</td></tr>
+                                <tr><td>Resistivity</td><td>ρ</td><td>RA/l</td><td>[ML³T⁻³I⁻²]</td><td>Ω·m</td></tr>
+                                <tr><td>Conductivity</td><td>σ</td><td>1/ρ</td><td>[M⁻¹L⁻³T³I²]</td><td>S·m⁻¹</td></tr>
+                                <tr><td>Permittivity</td><td>ε₀</td><td>q²/ (F r²)</td><td>[M⁻¹L⁻³T⁴I²]</td><td>F·m⁻¹</td></tr>
+                                <tr><td>Permeability</td><td>μ₀</td><td>F r /(I² l)</td><td>[MLT⁻²I⁻²]</td><td>H·m⁻¹</td></tr>
+                                <tr><td>Magnetic flux</td><td>Φ</td><td>B A</td><td>[ML²T⁻²I⁻¹]</td><td>Wb</td></tr>
+                                <tr><td>Inductance</td><td>L</td><td>Φ/I</td><td>[ML²T⁻²I⁻²]</td><td>H</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+
+                <div class="advanced-note">
+                    <h4>Dimensionless Quantities</h4>
+                    <p>Some quantities have no dimensions:</p>
+                    <ul>
+                        <li><strong>Angle:</strong> [θ] = [arc length]/[radius] = [L]/[L] = [M⁰L⁰T⁰]</li>
+                        <li><strong>Trigonometric functions:</strong> [sin θ] = [cos θ] = [tan θ] = [M⁰L⁰T⁰]</li>
+                        <li><strong>Relative density:</strong> [density of substance]/[density of water] = 1</li>
+                        <li><strong>Strain:</strong> [ΔL/L] = [ΔA/A] = [ΔV/V] = [M⁰L⁰T⁰]</li>
+                    </ul>
+                </div>
+
+                <div class="info-box" style="margin-top:1.2rem;">
+                    <h4>📌 Dimensional Clarifications Addendum</h4>
+                    <ul style="margin-left:1.1rem;">
+                        <li><strong>Density:</strong> ρ = m/V → [ρ] = [ML⁻³]</li>
+                        <li><strong>Gravitational Constant:</strong> From F = G m₁ m₂ / r² → [G] = [M⁻¹L³T⁻²]</li>
+                        <li><strong>General Unit Conversion:</strong> For quantity with dimensions M^αL^βT^γ: n₂ = n₁ (M₁/M₂)^α (L₁/L₂)^β (T₁/T₂)^γ</li>
+                        <li><strong>All Strain Types:</strong> Linear, area, and volume strain are ratios → dimensionless (unit 1)</li>
+                        <li><strong>Use Scientific Notation</strong> to make the intended significant figures explicit (e.g., 3.400 × 10³ vs 3400)</li>
+                    </ul>
+                </div>
+
                 <h3>Unit Conversion Using Dimensional Analysis</h3>
                 <p>The conversion factor method uses the principle that multiplying by a ratio equal to 1 doesn't change the value:</p>
+                
+                <div class="formula-box">
+                    n₂ = n₁ × [M₁/M₂]ˣ × [L₁/L₂]ʸ × [T₁/T₂]ᶻ
+                </div>
+                
+                <div class="example-box">
+                    <h4>Example: Converting 1 Newton to Dyne</h4>
+                    <p>Force has dimensions [MLT⁻²], so x=1, y=1, z=-2</p>
+                    <p><strong>SI system:</strong> n₁ = 1, M₁ = 1 kg, L₁ = 1 m, T₁ = 1 s</p>
+                    <p><strong>CGS system:</strong> n₂ = ?, M₂ = 1 g, L₂ = 1 cm, T₂ = 1 s</p>
+                    
+                    <p>n₂ = 1 × [1 kg/1 g]¹ × [1 m/1 cm]¹ × [1 s/1 s]⁻²</p>
+                    <p>n₂ = 1 × 10³ × 10² × 1 = 10⁵</p>
+                    <p><strong>Answer:</strong> 1 N = 10⁵ dyne</p>
+                </div>
                 
                 <div class="example-box">
                     <p><strong>Example:</strong> Convert 75 mph to m/s</p>
                     <p>75 mph × (1609 m/1 mile) × (1 hr/3600 s) = 33.5 m/s</p>
                 </div>
 
+                <h3>Checking Equation Validity - Homogeneity Principle</h3>
+                <div class="highlight-box">
+                    <h4>🎯 Homogeneity Principle</h4>
+                    <p><strong>Definition:</strong> Two or more physical quantities can be added or subtracted only if they have the same dimensions.</p>
+                    <p>This principle is used to check if physical equations are dimensionally correct.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Example: Verification of s = ut + ½at²</h4>
+                    <p><strong>1st term:</strong> [s] = [L]</p>
+                    <p><strong>2nd term:</strong> [ut] = [LT⁻¹][T] = [L]</p>
+                    <p><strong>3rd term:</strong> [½at²] = [LT⁻²][T²] = [L]</p>
+                    <p><strong>Conclusion:</strong> All terms have dimension [L], so the equation is <span style="color: var(--success-color);">✓ dimensionally correct</span></p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Counter-example: Invalid Relation s = ut + at³</h4>
+                    <p><strong>1st term:</strong> [s] = [L]</p>
+                    <p><strong>2nd term:</strong> [ut] = [LT⁻¹][T] = [L]</p>
+                    <p><strong>3rd term:</strong> [at³] = [LT⁻²][T³] = [LT]</p>
+                    <p><strong>Conclusion:</strong> The third term has dimension [LT], not [L], so this equation is <span style="color: var(--danger-color);">✗ dimensionally incorrect</span></p>
+                </div>
+
+                <div class="advanced-note">
+                    <h4>Important Limitation</h4>
+                    <p><strong>Dimensionally correct equations need not be physically correct</strong>, but <strong>dimensionally incorrect equations are never physically correct</strong>.</p>
+                </div>
+
                 <h3>Checking Equation Validity</h3>
                 <p>Dimensional analysis can verify if an equation is physically meaningful by ensuring both sides have identical dimensions.</p>
 
+                <div class="real-world-examples">
+                    <h4>Representative Applications of Dimensional Analysis</h4>
+                    <div class="applications-grid">
+                        <div class="application-card">
+                            <strong>🚀 Rocket Science</strong><br>
+                            Verify thrust equations before multi-million dollar launches
+                        </div>
+                        <div class="application-card">
+                            <strong>💊 Drug Dosage</strong><br>
+                            Ensure proper concentration units to prevent medical errors
+                        </div>
+                        <div class="application-card">
+                            <strong>🏗️ Engineering</strong><br>
+                            Check structural calculations before construction
+                        </div>
+                        <div class="application-card">
+                            <strong>🌡️ Climate Models</strong><br>
+                            Validate complex atmospheric equations
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>Guidelines for Effective Dimensional Analysis</h4>
+                    <ul>
+                        <li><strong>Always check your work:</strong> If dimensions don't match, there's an error!</li>
+                        <li><strong>Use it for estimation:</strong> Get order-of-magnitude answers quickly</li>
+                        <li><strong>Derive new relationships:</strong> Combine quantities to find unknown formulas</li>
+                        <li><strong>Convert between systems:</strong> Imperial to metric, CGS to SI, etc.</li>
+                    </ul>
+                </div>
+
                 <!-- Practice Questions for Section 1.3 -->
-                <h3>Practice Problems</h3>
+                <h3>Exercises</h3>
                 
                 <div class="question-card">
                     <div class="question-header" onclick="toggleQuestion(this)">
@@ -1652,9 +2149,95 @@
                     </div>
                 </div>
 
+                <h4>Illustration MCQs</h4>
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">I1</div>
+                        <div class="question-text">Dimensional analysis of (speed)ⁿ = [pressure/density]^(1/2) gives n = ?</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p>[pressure] = [ML⁻¹T⁻²], [density] = [ML⁻³] → pressure/density = [L²T⁻²]</p>
+                        <p>Right side: ([L²T⁻²])^(1/2) = [LT⁻¹]</p>
+                        <p>Left side: [LT⁻¹]ⁿ ⇒ n = 1</p>
+                        <p><strong>Answer:</strong> 1 (This corresponds to the speed of sound pattern √(P/ρ)).</p>
+                    </div>
+                </div>
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">I2</div>
+                        <div class="question-text">The self-inductance L has dimensions: (a) [ML²T⁻¹A⁻¹] (b) [ML²T⁻¹A⁻²] (c) [ML²T⁻²A⁻¹] (d) [ML²T⁻²A⁻²]</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p>Energy stored in inductor: E = ½ L I² → [L] = [E]/[I²] = [ML²T⁻²]/[A²] = [ML²T⁻²A⁻²]</p>
+                        <p><strong>Answer:</strong> (d)</p>
+                        <p><em>Speed tip:</em> Any time you see inductance, jump to energy relation instead of flux definition.</p>
+                    </div>
+                </div>
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">I3</div>
+                        <div class="question-text">Energy density (energy per unit volume) has the same dimensions as which of the following? (a) Pressure (b) Force (c) Surface tension (d) Power</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p>Energy density: [Energy]/[L³] = [ML²T⁻²]/[L³] = [ML⁻¹T⁻²]</p>
+                        <p>Pressure: Force/Area = [MLT⁻²]/[L²] = [ML⁻¹T⁻²]</p>
+                        <p>Others: Force [MLT⁻²]; Surface tension [MT⁻²]; Power [ML²T⁻³]</p>
+                        <p><strong>Answer:</strong> (a) Pressure</p>
+                        <p class="trap-box" style="margin:0.75rem 0 0;">Common trap: Students wrongly pick force because they recall work/force relations. Always reduce to M-L-T powers.</p>
+                    </div>
+                </div>
+
                 <div class="question-card">
                     <div class="question-header" onclick="toggleQuestion(this)">
                         <div class="question-number">2</div>
+                        <div class="question-text">In Van der Waals equation (p + a/V²)(V - b) = RT, find dimensions of constants 'a' and 'b'.</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p>According to homogeneity principle:</p>
+                        <p><strong>For constant 'a':</strong> [p] = [a/V²]</p>
+                        <p>[ML⁻¹T⁻²] = [a]/[L³]²</p>
+                        <p>[ML⁻¹T⁻²] = [a]/[L⁶]</p>
+                        <p>[a] = [ML⁻¹T⁻²][L⁶] = <strong>[ML⁵T⁻²]</strong></p>
+                        
+                        <p><strong>For constant 'b':</strong> [V] = [b]</p>
+                        <p><strong>[b] = [L³]</strong></p>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">3</div>
+                        <div class="question-text">Derive E = mc² using dimensional analysis.</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p>Let energy (E) depend on mass (m) and speed of light (c):</p>
+                        <p>E = km^x c^y (where k is proportionality constant)</p>
+                        
+                        <p><strong>Dimensionally:</strong></p>
+                        <p>[E] = [m]^x [c]^y</p>
+                        <p>[ML²T⁻²] = [M]^x [LT⁻¹]^y</p>
+                        <p>[ML²T⁻²] = [M^x L^y T^(-y)]</p>
+                        
+                        <p><strong>Equating powers:</strong></p>
+                        <p>For M: x = 1</p>
+                        <p>For L: y = 2</p>
+                        <p>For T: -y = -2, so y = 2 ✓</p>
+                        
+                        <p>Therefore: E = kmc² (where k = 1 experimentally)</p>
+                        <p><strong>Result: E = mc²</strong></p>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">4</div>
                         <div class="question-text">Convert 60 km/h to m/s using dimensional analysis.</div>
                         <div class="toggle-icon">+</div>
                     </div>
@@ -1705,6 +2288,36 @@
                     </div>
                 </div>
 
+                <div class="advanced-note">
+                    <h4>⚠️ Limitations of Dimensional Analysis</h4>
+                    <ol>
+                        <li><strong>Dimensionally correct equations need not be physically correct</strong>, but dimensionally incorrect equations are never physically correct.</li>
+                        <li><strong>Pure numbers or numerical constants</strong> in physical equations cannot be determined by dimensional analysis (like π, ½, 2, etc.).</li>
+                        <li><strong>Only equations in product form</strong> can be derived by dimensional analysis.</li>
+                        <li><strong>Equations containing trigonometric, logarithmic, or exponential functions</strong> cannot be derived by dimensional analysis.</li>
+                        <li><strong>Dimensional analysis doesn't indicate whether a quantity is vector or scalar</strong>.</li>
+                    </ol>
+                </div>
+
+                <h3>Important Points to Remember (Quick Scan)</h3>
+                <div class="info-box">
+                    <ul>
+                        <li>Frequency, angular frequency, angular velocity, velocity gradient → all [T⁻¹].</li>
+                        <li>Dimensionless: angle, solid angle, trigonometric ratios, strain (all), Poisson ratio, relative density, relative permittivity, refractive index, relative permeability, coefficient of friction.</li>
+                        <li>[L²T⁻²] group: (speed)², gravitational potential, latent heat.</li>
+                        <li>[ML²T⁻²] group: work, energy, torque, heat.</li>
+                        <li>[MLT⁻¹] group: momentum, impulse.</li>
+                        <li>Acceleration and gravitational field intensity share [LT⁻²].</li>
+                        <li>Force, weight, thrust → [MLT⁻²].</li>
+                        <li>Entropy, gas constant R, Boltzmann constant k, heat capacity share same M,L,T dimensions (differ by Θ power).</li>
+                        <li>Light year, radius of gyration, wavelength all [L].</li>
+                        <li>Surface tension and spring constant share [MT⁻²].</li>
+                        <li>Planck's constant and angular momentum share [ML²T⁻¹].</li>
+                        <li>Rydberg constant & propagation constant: [L⁻¹].</li>
+                        <li>Pressure, stress, elastic moduli, energy density → [ML⁻¹T⁻²].</li>
+                    </ul>
+                </div>
+
                 <div class="nav-buttons">
                     <button class="btn-prev" onclick="goToPrevSection()">← Previous: SI Units</button>
                     <button class="btn-next" onclick="goToNextSection()">Next: Precision & Errors →</button>
@@ -1714,8 +2327,55 @@
             <!-- Section 1.4: Precision and Errors -->
             <div id="section-1-4" class="section">
                 <h2>1.4 Precision, Accuracy, and Error Analysis</h2>
-                
-                <p>Understanding measurement uncertainty is crucial in physics. We distinguish between precision (repeatability) and accuracy (correctness), and learn to quantify and minimize errors in experimental measurements.</p>
+
+                <p>Understanding measurement uncertainty is crucial in physics. We distinguish between precision (repeatability) and accuracy (closeness to truth), identify sources of error, and apply rules for combining uncertainties.</p>
+
+                <h3>Instrument Precision Limits</h3>
+                <p>The <strong>precision (least count)</strong> of a measuring instrument determines the smallest change it can reliably detect.</p>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Instrument</th>
+                                <th>Least Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Linear Scale (ruler)</td>
+                                <td>1 mm = 0.1 cm = 0.001 m</td>
+                            </tr>
+                            <tr>
+                                <td>Vernier Caliper</td>
+                                <td>0.1 mm = 0.01 cm = 0.0001 m</td>
+                            </tr>
+                            <tr>
+                                <td>Micrometer Screw Gauge</td>
+                                <td>0.01 mm = 0.001 cm = 0.00001 m</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="info-box">
+                    <p><strong>Interpretation:</strong> The micrometer provides the most precise measurement; the ruler the least. A smaller least count means finer resolution.</p>
+                </div>
+
+                <h3>Precision vs. Accuracy</h3>
+                <div class="comparison-grid">
+                    <div>
+                        <h4>Precision</h4>
+                        <p>How closely repeated measurements agree with each other.</p>
+                        <p class="example"><strong>Example:</strong> Readings: 5.21, 5.22, 5.21, 5.22 cm → High precision.</p>
+                    </div>
+                    <div>
+                        <h4>Accuracy</h4>
+                        <p>How close a measurement is to the true value.</p>
+                        <p class="example"><strong>Example:</strong> True length = 5.80 cm but repeated readings cluster near 5.22 cm → Precise but inaccurate (systematic error).</p>
+                    </div>
+                </div>
+                <div class="tip-box">
+                    <p><strong>Key Point:</strong> Precision (repeatability) and accuracy (closeness to true value) are distinct; systematic errors impair accuracy while random fluctuations limit precision.</p>
+                </div>
 
                 <h3>Precision vs. Accuracy</h3>
                 <div class="table-responsive">
@@ -1761,16 +2421,22 @@
                 </ul>
 
                 <h3>Significant Figures</h3>
-                <p>Significant figures indicate the precision of a measurement:</p>
+                <p>Significant figures (sig figs) are the reliably known digits in a measured quantity, plus the first uncertain (estimated) digit.</p>
 
-                <h4>Rules for Counting Significant Figures:</h4>
-                <ol>
-                    <li>All non-zero digits are significant: 1.234 has 4 significant figures</li>
-                    <li>Zeros between non-zero digits are significant: 1.035 has 4 significant figures</li>
-                    <li>Leading zeros are not significant: 0.0123 has 3 significant figures</li>
-                    <li>Trailing zeros after decimal point are significant: 1.230 has 4 significant figures</li>
-                    <li>Trailing zeros without decimal point may or may not be significant: 1200 (ambiguous)</li>
+                <h4>Rules & Examples</h4>
+                <ol class="sig-rules">
+                    <li><strong>All non-zero digits are significant.</strong><br><em>Example:</em> 2345 → 4 sig figs</li>
+                    <li><strong>Leading zeros are never significant.</strong><br><em>Example:</em> 0.0234 → 3 sig figs</li>
+                    <li><strong>Zeros between non-zero digits are significant.</strong><br><em>Example:</em> 2003 → 4 sig figs</li>
+                    <li><strong>In numbers &lt; 1, zeros after decimal but before first non-zero are not significant.</strong><br><em>Example:</em> 0.00250 → 3 sig figs</li>
+                    <li><strong>Any zero between non-zero digits (even after decimal) is significant.</strong><br><em>Example:</em> 0.2035 → 4 sig figs</li>
+                    <li><strong>In numbers ≥ 1 with a decimal, trailing zeros are significant.</strong><br><em>Example:</em> 1.200 → 4 sig figs</li>
+                    <li><strong>Trailing zeros in whole numbers without a decimal may be ambiguous.</strong><br><em>Example:</em> 4500 → 2–4 sig figs (write 4.500×10³ to show 4)</li>
+                    <li><strong>Digits in the power of 10 (scientific notation) are not counted.</strong><br><em>Examples:</em> 3 × 10⁸ → 1 sig fig; 6.67 × 10⁻¹¹ → 3 sig figs</li>
                 </ol>
+                <div class="tip-box">
+                    <p><strong>Best Practice:</strong> Use scientific notation to make significant figures explicit; e.g., 2.300 × 10⁴ conveys four significant figures whereas 23000 is ambiguous.</p>
+                </div>
 
                 <h4>Operations with Significant Figures:</h4>
                 <ul>
@@ -1778,8 +2444,35 @@
                     <li><strong>Multiplication/Division:</strong> Round to the fewest significant figures</li>
                 </ul>
 
-                <h3>Error Propagation</h3>
-                <p>When combining measurements, uncertainties propagate according to specific rules:</p>
+                <h3>Fundamental Error (Uncertainty) Definitions</h3>
+                <p><strong>Error</strong> (or uncertainty) is the difference between the measured value and the accepted (true) value. We characterize how errors combine using absolute, relative (fractional), and percentage forms.</p>
+
+                <div class="info-box">
+                    <p><strong>Notation:</strong> A measurement written as (7.52 ± 0.03) cm means 7.52 cm is the best estimate and 0.03 cm is the absolute uncertainty.</p>
+                </div>
+
+                <h4>Absolute Error (Δy)</h4>
+                <ul>
+                    <li>Represents the uncertainty in the same units as the quantity.</li>
+                    <li>For sums/differences: Δy = Δa + Δb (worst-case combination).</li>
+                    <li>For a power: y = aⁿ → Δy = n aⁿ⁻¹ Δa (approx) or fractional form below.</li>
+                </ul>
+
+                <h4>Relative (Fractional) Error</h4>
+                <p>Fractional uncertainty: Δy / y</p>
+                <ul>
+                    <li>For products/quotients: Δy / y = (Δa / a) + (Δb / b) (worst-case)</li>
+                    <li>For powers: y = aⁿ → Δy / y = n (Δa / a)</li>
+                    <li>General: y = aᵐ bⁿ → Δy / y = m (Δa / a) + n (Δb / b)</li>
+                </ul>
+
+                <h4>Percentage Error</h4>
+                <p>(Δy / y) × 100%</p>
+                <p>Example: If radius r has 0.3% error, area A = 4πr² has 2 × 0.3% = 0.6% error.</p>
+
+
+                <h3>Error Propagation (Summary Table)</h3>
+                <p>When combining measurements, uncertainties propagate according to these common patterns:</p>
 
                 <div class="table-responsive">
                     <table>
@@ -1816,7 +2509,7 @@
                 </div>
 
                 <!-- Practice Questions for Section 1.4 -->
-                <h3>Practice Problems</h3>
+                <h3>Exercises</h3>
                 
                 <div class="question-card">
                     <div class="question-header" onclick="toggleQuestion(this)">
@@ -1879,8 +2572,182 @@
                     </div>
                 </div>
 
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">5</div>
+                        <div class="question-text">A student measured the radius of a sphere with a percentage error of 0.3%. Find the percentage error in its surface area.</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p>Surface area: A = 4πr²</p>
+                        <p>Percentage error propagates with powers: ΔA/A × 100% = 2 (Δr/r × 100%)</p>
+                        <p>= 2 × 0.3% = <strong>0.6%</strong></p>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">6</div>
+                        <div class="question-text">A block has dimensions (8 ± 0.4) cm by (6 ± 0.2) cm. Find the area with its absolute uncertainty.</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p>A = l × b = 8 × 6 = 48 cm²</p>
+                        <p>Fractional uncertainty (worst-case): ΔA/A = Δl/l + Δb/b = 0.4/8 + 0.2/6</p>
+                        <p>= 0.05 + 0.0333 = 0.0833</p>
+                        <p>ΔA = 0.0833 × 48 ≈ 4 cm²</p>
+                        <p><strong>A = (48 ± 4) cm²</strong> (Range: 44 cm² to 52 cm²)</p>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">7</div>
+                        <div class="question-text">Mass and velocity of a body have percentage errors of 3% and 2% respectively. Find the percentage error in kinetic energy.</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p>K.E. = ½ m v²</p>
+                        <p>Δ(K.E.)/K.E. × 100% = (Δm/m × 100%) + 2(Δv/v × 100%)</p>
+                        <p>= 3% + 2 × 2% = 7%</p>
+                        <p><strong>Percentage error in kinetic energy = 7%</strong></p>
+                    </div>
+                </div>
+
                 <div class="nav-buttons">
                     <button class="btn-prev" onclick="goToPrevSection()">← Previous: Dimensional Analysis</button>
+                    <button class="btn-next" onclick="navigateToSection('section-tricks')">Next: Tricks & Strategies →</button>
+                </div>
+            </div>
+
+            <!-- Consolidated Tricks & Strategies Section -->
+            <div id="section-tricks" class="section">
+                <h2>⚡ Tricks & Exam Strategies (Consolidated)</h2>
+                <p>This section gathers only <strong>time-saving techniques</strong>, <strong>pattern recognition</strong>, and <strong>exam‑oriented heuristics</strong>. All conceptual theory has already been integrated into the core sections above to avoid duplication.</p>
+
+                <h3>🚀 Lightning-Fast Dimensional Shortcuts</h3>
+                <div class="trick-box">
+                    <h4>Energy Relationships (Direct Forms)</h4>
+                    <ul>
+                        <li>Kinetic: E = p²/(2m) → p²/m has energy dimensions.</li>
+                        <li>Inductance: E = ½ L I² → [L] = [ML²T⁻²A⁻²].</li>
+                        <li>Capacitance: E = ½ C V² → [C] = [Q²/E] = [M⁻¹L⁻²T⁴A²].</li>
+                    </ul>
+                </div>
+                <div class="trick-box">
+                    <h4>Force-Derived Quantity Patterns</h4>
+                    <div class="formula-box" style="font-size:0.95rem; line-height:1.5;">
+                        Surface Tension = F/Length → [MT⁻²]<br>
+                        Pressure (or Energy Density) = F/Area → [ML⁻¹T⁻²]<br>
+                        Spring Constant = F/Length → [MT⁻²]
+                    </div>
+                    <p class="tip-box" style="margin-top:0.75rem;">If two unfamiliar options share the same base form F divided by some geometry, reduce power of L quickly to decide.</p>
+                </div>
+
+                <h3>🏃 Rapid Speed Recognition</h3>
+                <div class="pattern-box">
+                    <ul>
+                        <li>√(Pressure / Density) → Acoustic speed</li>
+                        <li>√(Tension / Linear density) → Wave on string</li>
+                        <li>√(GM / r) → Orbital / circular speed</li>
+                        <li>1 / √(μ₀ ε₀) → Speed of light</li>
+                    </ul>
+                </div>
+
+                <h3>🎯 Unit Conversion Efficiency</h3>
+                <div class="method-box">
+                    <h4>Method 1: Power Counting Template</h4>
+                    <p><code>n₂ = n₁ (M₁/M₂)^a (L₁/L₂)^b (T₁/T₂)^c</code> for dimensions MᵃLᵇTᶜ (extend with I, Θ if present).</p>
+                    <div class="example-box" style="margin-top:0.75rem;">
+                        <strong>Example:</strong> 1 N to dyne → [MLT⁻²]; (kg→g)=10³, (m→cm)=10² ⇒ 10⁵ dyne.
+                    </div>
+                </div>
+                <div class="method-box">
+                    <h4>Method 2: High-Value Memorised Conversions</h4>
+                    <div class="conversion-grid">
+                        <div class="conversion-item"><strong>Energy:</strong><br>1 J = 10⁷ erg<br>1 eV = 1.6×10⁻¹⁹ J<br>1 cal = 4.18 J</div>
+                        <div class="conversion-item"><strong>Force:</strong><br>1 N = 10⁵ dyne<br>1 kgf ≈ 9.8 N</div>
+                        <div class="conversion-item"><strong>Pressure:</strong><br>1 atm ≈ 10⁵ Pa<br>1 bar = 10⁵ Pa<br>1 Pa = 10 dyne/cm²</div>
+                    </div>
+                </div>
+
+                <h3>🧠 Dimension Families (Pattern Recognition)</h3>
+                <div class="pattern-box">
+                    <div class="family-grid">
+                        <div class="family-group">
+                            <h5>[MT⁻²]</h5>
+                            <ul><li>Surface tension</li><li>Spring constant</li><li>Force/length forms</li></ul>
+                        </div>
+                        <div class="family-group">
+                            <h5>[ML²T⁻²]</h5>
+                            <ul><li>Energy / Work</li><li>Torque</li><li>Angular momentum ÷ time</li></ul>
+                        </div>
+                        <div class="family-group">
+                            <h5>[T⁻¹]</h5>
+                            <ul><li>Frequency</li><li>Angular frequency</li><li>Velocity gradient</li></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>⚠️ Classic Traps</h3>
+                <div class="trap-box">
+                    <h4>Prefix Case Sensitivity</h4>
+                    <p>M (mega, 10⁶) vs m (milli, 10⁻³). One capital letter changes factor by 10⁹!</p>
+                </div>
+                <div class="trap-box">
+                    <h4>Dimension ≠ Unit</h4>
+                    <p>Always separate: Energy has dimension [ML²T⁻²], unit Joule.</p>
+                </div>
+                <div class="trap-box">
+                    <h4>Angles Are Dimensionless</h4>
+                    <p>θ, sinθ, tanθ, solid angle Ω → all [1]. Never introduce L.</p>
+                </div>
+
+                <h3>🏆 Pro Techniques</h3>
+                <div class="pro-technique">
+                    <h4>1. Eliminate by Dimensions First</h4>
+                    <p>Check each option’s M-L-T powers before algebra. Often leaves 1–2 survivors fast.</p>
+                </div>
+                <div class="pro-technique">
+                    <h4>2. Limiting Cases</h4>
+                    <p>If l → 0 in pendulum, T must → 0 (√(l/g)). Reject forms that diverge incorrectly.</p>
+                </div>
+                <div class="pro-technique">
+                    <h4>3. Symmetry & Independence</h4>
+                    <p>Pendulum period independent of mass ⇒ discard any option containing m.</p>
+                </div>
+
+                <h3>📝 Rapid Revision Checklist</h3>
+                <div class="checklist-box">
+                    <ul>
+                        <li>[Force] [MLT⁻²], [Energy] [ML²T⁻²], [Power] [ML²T⁻³]</li>
+                        <li>[Pressure] & Energy density both [ML⁻¹T⁻²]</li>
+                        <li>All strains & angles dimensionless</li>
+                        <li>n₁u₁ = n₂u₂ for conversions</li>
+                        <li>1 N = 10⁵ dyne, 1 J = 10⁷ erg</li>
+                    </ul>
+                </div>
+
+                <h3>⚡ Speed Checks Framework</h3>
+                <div class="checklist-box">
+                    <ol>
+                        <li>Dimensions consistent?</li>
+                        <li>Units plausible?</li>
+                        <li>Limits sensible?</li>
+                        <li>Order of magnitude OK?</li>
+                    </ol>
+                </div>
+
+                <div class="final-tip">
+                    <h4>🏅 3-2-1 Rule</h4>
+                    <p><strong>3</strong> seconds: identify target quantity; <strong>2</strong> methods: have a backup; <strong>1</strong> final physical sense check.</p>
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn-prev" onclick="goToPrevSection()">← Previous: Precision & Errors</button>
                     <button class="btn-next" onclick="goToNextSection()">Next: Assessment →</button>
                 </div>
             </div>
@@ -1891,11 +2758,90 @@
                 
                 <p>Test your understanding of measurement principles with this comprehensive assessment. These problems integrate concepts from all sections of this chapter.</p>
 
-                <h3>Comprehensive Problems</h3>
+                <h3>🎯 Competitive Exam Style Questions</h3>
                 
                 <div class="question-card">
                     <div class="question-header" onclick="toggleQuestion(this)">
                         <div class="question-number">1</div>
+                        <div class="question-text">SI unit of surface tension is: (a) N·s·m⁻¹ (b) J·s⁻¹ (c) N·m⁻² (d) N·m⁻¹</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Quick Solution:</strong></p>
+                        <p>Surface tension = Force/Length</p>
+                        <p>[Surface tension] = [MLT⁻²]/[L] = [MT⁻²]</p>
+                        <p>SI unit = N/m = N·m⁻¹</p>
+                        <p><strong>Answer: (d) N·m⁻¹</strong></p>
+                        <p><em>Trick: Remember the formula immediately - don't derive from stress!</em></p>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">2</div>
+                        <div class="question-text">Dimensional analysis of (speed)ⁿ = [pressure/density]^(1/2) gives n = ?</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p>[LT⁻¹]ⁿ = ([ML⁻¹T⁻²]/[ML⁻³])^(1/2)</p>
+                        <p>[LT⁻¹]ⁿ = ([L²T⁻²])^(1/2) = [LT⁻¹]</p>
+                        <p>Comparing: n = 1</p>
+                        <p><strong>Physics insight:</strong> This is the formula for sound speed in a fluid!</p>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">3</div>
+                        <div class="question-text">The self-inductance L has dimensions: (a) [ML²T⁻¹A⁻¹] (b) [ML²T⁻¹A⁻²] (c) [ML²T⁻²A⁻¹] (d) [ML²T⁻²A⁻²]</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Time-saving method:</strong></p>
+                        <p>Energy = ½LI²</p>
+                        <p>[L] = [Energy]/[I²] = [ML²T⁻²]/[A²] = [ML²T⁻²A⁻²]</p>
+                        <p><strong>Answer: (d)</strong></p>
+                        <p><em>Pro tip: Use energy formulas for quick dimensional analysis!</em></p>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">4</div>
+                        <div class="question-text">60 J/min in a system with units 100g, 100cm, 1min equals how many new units?</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Solution:</strong></p>
+                        <p>Power: [ML²T⁻³], so a=1, b=2, c=-3</p>
+                        <p>60 J/min = 1 J/s = 1 W</p>
+                        <p>n₂ = 1 × (1kg/100g)¹ × (1m/100cm)² × (1s/1min)⁻³</p>
+                        <p>= 10 × 1 × (60)³ = 2.16 × 10⁶ new units</p>
+                        <p><strong>Answer: 2.16 × 10⁶</strong></p>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">5</div>
+                        <div class="question-text">If p is momentum, then p²/m has dimensions of: (a) power (b) impulse (c) force (d) acceleration (e) energy</div>
+                        <div class="toggle-icon">+</div>
+                    </div>
+                    <div class="answer-content">
+                        <p><strong>Super quick method:</strong></p>
+                        <p>Remember: E = p²/(2m) (kinetic energy formula)</p>
+                        <p>So p²/m has dimensions of energy</p>
+                        <p><strong>Answer: (e) energy</strong></p>
+                        <p><em>Time saved: 2 seconds vs 30 seconds of calculation!</em></p>
+                    </div>
+                </div>
+
+                <h3>Comprehensive Problems</h3>
+                
+                <div class="question-card">
+                    <div class="question-header" onclick="toggleQuestion(this)">
+                        <div class="question-number">6</div>
                         <div class="question-text">A student measures the length of a table five times and gets: 1.52 m, 1.49 m, 1.53 m, 1.51 m, 1.50 m. The true length is 1.65 m. Comment on the precision and accuracy of these measurements.</div>
                         <div class="toggle-icon">+</div>
                     </div>
@@ -1914,7 +2860,7 @@
 
                 <div class="question-card">
                     <div class="question-header" onclick="toggleQuestion(this)">
-                        <div class="question-number">2</div>
+                        <div class="question-number">7</div>
                         <div class="question-text">Express the following in proper scientific notation with appropriate significant figures: The speed of light is approximately 299,800,000 m/s.</div>
                         <div class="toggle-icon">+</div>
                     </div>
@@ -1929,7 +2875,7 @@
 
                 <div class="question-card">
                     <div class="question-header" onclick="toggleQuestion(this)">
-                        <div class="question-number">3</div>
+                        <div class="question-number">8</div>
                         <div class="question-text">A rectangular field has dimensions 127.3 ± 0.5 m by 89.6 ± 0.3 m. Calculate the area with proper uncertainty.</div>
                         <div class="toggle-icon">+</div>
                     </div>
@@ -2989,15 +3935,17 @@
                     <div class="assessment-final">
                         <div class="assessment-card featured">
                             <div class="icon">🏆</div>
-                            <h4>Chapter Assessment Quiz</h4>
+                            <h4>Enhanced Chapter Assessment Quiz</h4>
                             <p>Test your complete understanding with a comprehensive MCQ assessment covering all measurement topics.</p>
                             <ul>
-                                <li>Physical quantities and standards</li>
-                                <li>SI units and conversions</li>
-                                <li>Dimensional analysis</li>
-                                <li>Precision and error analysis</li>
+                                <li><strong>45 Enhanced Questions:</strong> Traditional concepts + modern applications</li>
+                                <li><strong>Physical quantities and standards:</strong> Scalars, vectors, operational definitions</li>
+                                <li><strong>SI units and conversions:</strong> 2019 redefinition and practical applications</li>
+                                <li><strong>Dimensional analysis:</strong> Real-world problem solving and equation validation</li>
+                                <li><strong>Precision and error analysis:</strong> Uncertainty propagation and measurement techniques</li>
+                                <li><strong>Modern Applications:</strong> GPS, LIGO, atomic clocks, semiconductor technology</li>
                             </ul>
-                            <a href="mcq.html" class="btn btn-quiz">Start Assessment Quiz</a>
+                            <a href="mcq.html" class="btn btn-quiz">Start Enhanced Assessment Quiz</a>
                         </div>
                     </div>
 

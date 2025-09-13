@@ -191,24 +191,26 @@
             </header>
             <h2>📝 Instructions</h2>
             <ul>
-                <li>This test contains <strong>35 multiple-choice questions</strong>.</li>
+                <li>This test contains <strong>45 multiple-choice questions</strong>.</li>
                 <li>Each correct answer awards <strong>+4 marks</strong>.</li>
                 <li>Each incorrect answer results in a penalty of <strong>-1 mark</strong>.</li>
                 <li>Unanswered questions receive <strong>0 marks</strong>.</li>
                 <li>Use the question palette to navigate between questions.</li>
+                <li>Questions cover: <em>SI Units, Dimensional Analysis, Significant Figures, Error Analysis, and Modern Applications</em></li>
             </ul>
             <div class="quiz-setup">
                 <div class="setup-item">
                     <label for="question-count">Number of Questions:</label>
                     <select id="question-count">
-                        <option value="10">10 (Quick Test)</option>
-                        <option value="20">20 (Standard Test)</option>
-                        <option value="35" selected>35 (Full Chapter)</option>
+                        <option value="15">15 (Quick Test)</option>
+                        <option value="25">25 (Standard Test)</option>
+                        <option value="35">35 (Comprehensive)</option>
+                        <option value="45" selected>45 (Full Chapter)</option>
                     </select>
                 </div>
                 <div class="setup-item">
                     <label for="timer-input">Set Timer (minutes):</label>
-                    <input type="number" id="timer-input" value="45" min="1">
+                    <input type="number" id="timer-input" value="60" min="1">
                 </div>
             </div>
             <button id="start-test-btn" class="btn" style="margin-top: 1.5rem;">Start Test</button>
@@ -263,8 +265,8 @@
             // Initialize quiz with configuration
             const quiz = new QuizManager({
                 dataUrl: '../../assets/js/mcq-data/measurements-quiz.json',
-                maxQuestions: 35,
-                defaultTime: 45,
+                maxQuestions: 45,
+                defaultTime: 60,
                 positiveMarks: 4,
                 negativeMarks: 1
             });
