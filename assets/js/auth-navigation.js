@@ -52,6 +52,7 @@ class AuthNavigationHandler {
         this.profileDropdown = document.getElementById('profile-dropdown');
         this.xpPill = document.getElementById('header-xp-pill');
         this.xpValue = document.getElementById('header-xp-value');
+        this.adminLink = document.getElementById('header-admin-link');
 
         // Listen for profile updates (e.g., from settings page)
         document.addEventListener('userProfileUpdated', (e) => {
@@ -150,6 +151,12 @@ class AuthNavigationHandler {
                 this.updateXpPill();
             }
 
+            // Show/hide admin link based on privileges
+            if (this.adminLink) {
+                const isAdmin = window.authManager && window.authManager.isAdmin();
+                this.adminLink.style.display = isAdmin ? 'block' : 'none';
+            }
+
             // Show Dashboard link after account
             // Dashboard remains in profile dropdown; inline link optional
             if (this.dashboardLink) this.dashboardLink.style.display = 'inline';
@@ -182,6 +189,9 @@ class AuthNavigationHandler {
             if (this.xpPill) this.xpPill.style.display = 'none';
 
             if (this.dashboardLink) this.dashboardLink.style.display = 'none';
+
+            // Hide admin link
+            if (this.adminLink) this.adminLink.style.display = 'none';
 
             // Hide personalized welcome
             const welcomeElement = document.getElementById('personalizedWelcome');

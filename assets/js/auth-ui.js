@@ -271,6 +271,12 @@ class AuthUI {
         
         if (!result.success) {
             this.showError('signupEmail', result.error);
+        } else if (result.requiresOnboarding) {
+            // Close auth modal and show onboarding
+            this.closeModal();
+            if (window.onboardingUI) {
+                window.onboardingUI.showOnboarding(result.pendingData);
+            }
         } else {
             this.showSuccessNotification('Account created! Please check your email for verification.');
         }
@@ -285,6 +291,12 @@ class AuthUI {
         
         if (!result.success) {
             this.showError('signinEmail', result.error);
+        } else if (result.requiresOnboarding) {
+            // Close auth modal and show onboarding
+            this.closeModal();
+            if (window.onboardingUI) {
+                window.onboardingUI.showOnboarding(result.pendingData);
+            }
         } else {
             this.justSignedInInteractive = true;
         }

@@ -371,19 +371,27 @@ class QuizManager {
             results
         });
 
-        // Award gamification rewards
+        // Award enhanced XP rewards
         try {
-            if (window.gamification && typeof window.gamification.awardForQuiz === 'function') {
-                window.gamification.awardForQuiz({
+            if (window.enhancedXP && typeof window.enhancedXP.awardQuizXP === 'function') {
+                // Extract topic from dataUrl: '/path/to/topic-quiz.json' -> 'topic'
+                let topic = 'general';
+                if (this.config.dataUrl) {
+                    const match = this.config.dataUrl.match(/\/([^\/]+)-quiz\.json$/);
+                    if (match) {
+                        topic = match[1];
+                    }
+                }
+                
+                window.enhancedXP.awardQuizXP({
+                    topic,
                     totalQuestions: this.activeQuizData.length,
-                    correct,
-                    incorrect,
-                    unanswered,
-                    percentage: parseFloat(percentage),
-                    timeSpent: Math.floor((new Date() - this.startTime) / 1000)
+                    correctAnswers: correct,
+                    totalTime: Math.floor((new Date() - this.startTime) / 1000),
+                    percentage: parseFloat(percentage)
                 });
             }
-        } catch (e) { console.warn('Gamification award failed:', e); }
+        } catch (e) { console.warn('Enhanced XP award failed:', e); }
     }
     
     async displayResults(resultData) {

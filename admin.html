@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Physics Daily</title>
+    <meta name="description" content="Admin dashboard for managing Physics Daily platform.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/auth-styles.css">
+    <link rel="stylesheet" href="assets/css/progress-tracker.css">
+    <style>
+        /* Admin-specific styles */
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .admin-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            color: white;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .admin-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .admin-tab.active {
+            border-bottom-color: var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .admin-tab:hover {
+            background: var(--hover-bg);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .users-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .users-table th,
+        .users-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .users-table th {
+            background: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        .users-table tr:hover {
+            background: var(--hover-bg);
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn.view {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .action-btn.delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        .action-btn:hover {
+            opacity: 0.8;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+        }
+
+        .error {
+            background: #fee;
+            color: #c33;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .unauthorized {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+
+        .chart-container {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .chart-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .topic-list {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .topic-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            background: var(--hover-bg);
+            border-radius: 4px;
+        }
+
+        .topic-bar {
+            width: 100px;
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .topic-bar-fill {
+            height: 100%;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .admin-container {
+                padding: 1rem;
+            }
+
+            .admin-tabs {
+                flex-wrap: wrap;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .users-table {
+                font-size: 0.9rem;
+            }
+
+            .users-table th,
+            .users-table td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="has-fixed-header">
+    <!-- Global Header Placeholder -->
+    <div id="global-header"></div>
+
+    <div class="admin-container">
+        <div id="unauthorized-message" class="unauthorized" style="display: none;">
+            <h2>🔒 Access Denied</h2>
+            <p>You don't have admin privileges to access this page.</p>
+            <p>Please contact the system administrator if you believe this is an error.</p>
+        </div>
+
+        <div id="admin-dashboard" style="display: none;">
+            <div class="admin-header">
+                <h1>🛠️ Admin Dashboard</h1>
+                <p>Manage users, view statistics, and control the Physics Daily platform</p>
+            </div>
+
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="overview">📊 Overview</button>
+                <button class="admin-tab" data-tab="users">👥 Users</button>
+                <button class="admin-tab" data-tab="analytics">📈 Analytics</button>
+                <button class="admin-tab" data-tab="system">⚙️ System</button>
+            </div>
+
+            <!-- Overview Tab -->
+            <div id="overview-tab" class="tab-content active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-users">-</div>
+                        <div class="stat-label">Total Users</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="active-today">-</div>
+                        <div class="stat-label">Active Today</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="active-week">-</div>
+                        <div class="stat-label">Active This Week</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-xp">-</div>
+                        <div class="stat-label">Total XP Earned</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="average-xp">-</div>
+                        <div class="stat-label">Average XP per User</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title">🏆 Top Users by XP</div>
+                    <div id="top-users-list"></div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title">📚 Most Popular Topics</div>
+                    <div id="topic-popularity" class="topic-list"></div>
+                </div>
+            </div>
+
+            <!-- Users Tab -->
+            <div id="users-tab" class="tab-content">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h3>👥 User Management</h3>
+                    <button id="refresh-users-btn" class="action-btn view" style="padding: 0.5rem 1rem;">
+                        🔄 Refresh Users
+                    </button>
+                </div>
+                <div id="users-loading" class="loading">Loading users...</div>
+                <div id="users-error" class="error" style="display: none;"></div>
+                <div id="users-content" style="display: none;">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Email</th>
+                                <th>XP</th>
+                                <th>Level</th>
+                                <th>Last Login</th>
+                                <th>Joined</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Analytics Tab -->
+            <div id="analytics-tab" class="tab-content">
+                <div class="chart-container">
+                    <div class="chart-title">📈 User Registration Trend (Last 12 Months)</div>
+                    <div id="registration-chart"></div>
+                </div>
+            </div>
+
+            <!-- System Tab -->
+            <div id="system-tab" class="tab-content">
+                <div class="chart-container">
+                    <div class="chart-title">🔧 System Information</div>
+                    <div id="system-info">
+                        <p><strong>Platform:</strong> Physics Daily v2.0</p>
+                        <p><strong>Database:</strong> Firebase Firestore</p>
+                        <p><strong>Authentication:</strong> Firebase Auth</p>
+                        <p><strong>Hosting:</strong> GitHub Pages</p>
+                        <p><strong>Build:</strong> 11ty Static Site Generator</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Detail Modal -->
+    <div id="user-detail-modal" class="auth-modal" style="display: none;">
+        <div class="auth-modal-content">
+            <span class="auth-close" onclick="closeUserDetailModal()">&times;</span>
+            <h2>👤 User Details</h2>
+            <div id="user-detail-content"></div>
+        </div>
+    </div>
+
+    <!-- Global Footer Placeholder -->
+    <div id="global-footer"></div>
+
+    <!-- Scripts -->
+    <script src="assets/js/global.js"></script>
+    
+    <!-- Load admin dashboard after a delay to ensure auth manager is ready -->
+    <script>
+        // Wait for auth manager to be fully loaded before initializing admin dashboard
+        function loadAdminDashboard() {
+            if (typeof authManager !== 'undefined' && authManager.isInitialized) {
+                const script = document.createElement('script');
+                script.src = 'assets/js/admin-dashboard.js';
+                document.head.appendChild(script);
+            } else {
+                setTimeout(loadAdminDashboard, 100);
+            }
+        }
+        
+        // Start loading admin dashboard after DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadAdminDashboard);
+        } else {
+            loadAdminDashboard();
+        }
+    </script>
+</body>
+</html>

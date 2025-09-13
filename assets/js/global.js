@@ -61,6 +61,9 @@ const __initGlobal = function() {
                         if (typeof window.authManager === 'undefined') {
                             await loadScript('/assets/js/auth-manager.js');
                         }
+                        if (typeof window.onboardingUI === 'undefined') {
+                            await loadScript('/assets/js/onboarding.js');
+                        }
                         if (typeof window.authUI === 'undefined') {
                             await loadScript('/assets/js/auth-ui.js');
                         }
@@ -72,8 +75,13 @@ const __initGlobal = function() {
                         if (!scriptAlreadyOnPage('progress-tracker.js')) {
                             await loadScript('/assets/js/progress-tracker.js');
                         }
-                        if (!scriptAlreadyOnPage('gamification.js')) {
-                            await loadScript('/assets/js/gamification.js');
+                        if (!scriptAlreadyOnPage('enhanced-xp.js')) {
+                            await loadScript('/assets/js/enhanced-xp.js');
+                            // Initialize enhanced XP system
+                            if (window.EnhancedXPSystem) {
+                                window.enhancedXP = new window.EnhancedXPSystem();
+                                window.enhancedXP.init();
+                            }
                         }
                     });
 
@@ -130,8 +138,8 @@ const __initGlobal = function() {
                 updatePageForSignedInUser();
                 // Backfill any local XP to cloud so the leaderboard reflects it
                 try {
-                    if (window.gamification && typeof gamification.syncXpToCloud === 'function') {
-                        gamification.syncXpToCloud();
+                    if (window.enhancedXP && typeof enhancedXP.syncToCloud === 'function') {
+                        enhancedXP.syncToCloud();
                     }
                 } catch(e) { console.warn('[Global] XP sync on sign-in failed:', e); }
             } else {

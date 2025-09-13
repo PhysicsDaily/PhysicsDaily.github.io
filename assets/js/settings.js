@@ -308,83 +308,178 @@
   function init() {
     const nicknameEl = document.getElementById('nickname');
     const countryEl = document.getElementById('country');
-  const saveBtn = document.getElementById('saveSettings');
-  const resetBtn = document.getElementById('resetSettings');
-  const resetProgressBtn = document.getElementById('resetProgress');
-  const deleteAccountBtn = document.getElementById('deleteAccount');
-  const settingsSignOutBtn = document.getElementById('settingsSignOut');
+    const saveBtn = document.getElementById('saveSettings');
+    const resetBtn = document.getElementById('resetSettings');
+    const resetProgressBtn = document.getElementById('resetProgress');
+    const deleteAccountBtn = document.getElementById('deleteAccount');
+    const settingsSignOutBtn = document.getElementById('settingsSignOut');
     if (!nicknameEl || !countryEl) return;
 
-    populateCountries(countryEl);
-
-    const stored = loadProfileFromStorage();
-    if (stored.nickname) nicknameEl.value = stored.nickname;
-    if (stored.country) {
-      countryEl.value = stored.country;
-    }
-
-    // If signed in, prefer cloud profile displayName for nickname default
-    if (window.authManager && authManager.user && authManager.user.displayName && !nicknameEl.value) {
-      nicknameEl.value = authManager.user.displayName;
-    }
-
-    const wrapper = document.querySelector('.country-select-wrapper');
-    const flagImg = document.getElementById('countryFlagIcon');
-
-    const updateFlagPreview = () => {
-      const code = countryEl.value;
-      const list = countryEl._countries || [];
-      const entry = list.find(c => c.code === code);
-      const flag = entry?.flag || '';
-      if (flag && flagImg) {
-        // Use Twemoji CDN fallback for consistent flag rendering
-        // Convert emoji to twemoji PNG URL via code point transformation
-        const toCodePoints = (emoji = '') => Array.from(emoji).map(ch => ch.codePointAt(0).toString(16)).join('-');
-        const cps = toCodePoints(flag);
-        // If emoji unsupported, we can still display as text in alt
-        flagImg.src = `https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${cps}.svg`;
-        flagImg.alt = `${entry.name} flag`;
-        wrapper?.classList.add('has-flag');
-      } else {
-        if (flagImg) flagImg.removeAttribute('src');
-        wrapper?.classList.remove('has-flag');
+    // Function to update UI based on auth state
+    const updateUIForAuthState = (isSignedIn, userData = null) => {
+      const settingsCard = document.querySelector('.settings-card');
+      const actionsCard = document.querySelector('.actions-card');
+      
+      if (!isSignedIn) {
+        // Hide settings form and show sign-in message
+        if (settingsCard) {
+          settingsCard.innerHTML = `
+            <h1>Account Settings</h1>
+            <div style="text-align: center; padding: 3rem 2rem;">
+              <div style="font-size: 3rem; margin-bottom: 1rem;">🔒</div>
+              <h2 style="color: var(--text-primary); margin-bottom: 1rem;">Sign In Required</h2>
+              <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+                You need to sign in to access your account settings and manage your profile.
+              </p>
+              <button onclick="window.authUI?.openModal()" class="btn-primary">
+                Sign In to Continue
+              </button>
+            </div>
+          `;
+        }
+        
+        // Hide account actions for signed-out users
+        if (actionsCard) {
+          actionsCard.style.display = 'none';
+        }
+        return;
+      }
+      
+      // User is signed in - show normal UI
+      if (actionsCard) {
+        actionsCard.style.display = 'block';
+      }
+      
+      // Restore the original settings form if it was replaced
+      if (settingsCard && !settingsCard.querySelector('#nickname')) {
+        settingsCard.innerHTML = `
+          <h1>Account Settings</h1>
+          <p class="note">Update your display info used across the site.</p>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="nickname" class="form-label">👤 Nickname</label>
+              <input id="nickname" class="form-input" placeholder="Enter your nickname" />
+              <div class="note">Shown in header and dashboard.</div>
+            </div>
+            <div class="form-group">
+              <label for="country" class="form-label">🌍 Country</label>
+              <div class="country-select-wrapper">
+                <img id="countryFlagIcon" class="flag-icon" alt="Country flag" />
+                <select id="country" class="form-select"></select>
+              </div>
+              <div class="country-limit" id="countryLimit" style="display: none;">
+                You can change your country 3 times per year. <span id="changesLeft"></span>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button id="saveSettings" class="btn-primary">Save Changes</button>
+            <button id="resetSettings" class="btn-secondary">Reset</button>
+          </div>
+        `;
+        
+        // Re-initialize the form after recreating it
+        setTimeout(() => {
+          initializeForm();
+        }, 100);
       }
     };
 
-    // Initialize flag preview on load and when changed
-    updateFlagPreview();
-    updateCountryLimitDisplay();
-    countryEl.addEventListener('change', updateFlagPreview);
-
-    saveBtn?.addEventListener('click', async () => {
-      const nickname = nicknameEl.value.trim();
-      const country = countryEl.value;
+    // Function to initialize form elements and event listeners
+    const initializeForm = () => {
+      const nicknameEl = document.getElementById('nickname');
+      const countryEl = document.getElementById('country');
+      const saveBtn = document.getElementById('saveSettings');
+      const resetBtn = document.getElementById('resetSettings');
       
-      // Check country change limit
+      if (!nicknameEl || !countryEl) return;
+
+      populateCountries(countryEl);
+
       const stored = loadProfileFromStorage();
-      if (country && stored.country && country !== stored.country) {
-        const changes = getCountryChanges();
-        if (changes.count >= 3) {
-          alert('You have reached the limit of 3 country changes per year.');
-          return;
-        }
-        updateCountryChanges();
-        updateCountryLimitDisplay();
+      if (stored.nickname) nicknameEl.value = stored.nickname;
+      if (stored.country) {
+        countryEl.value = stored.country;
       }
-      
-      const profile = { nickname, country };
-      saveProfileToStorage(profile);
-      const result = await updateCloudProfile(nickname, country);
-      if (result.success) showToast('Settings saved'); else showToast('Save failed: ' + result.error);
-    });
 
-    resetBtn?.addEventListener('click', () => {
-      nicknameEl.value = '';
-      countryEl.value = '';
+      // If signed in, prefer cloud profile displayName for nickname default
+      if (window.authManager && authManager.user && authManager.user.displayName && !nicknameEl.value) {
+        nicknameEl.value = authManager.user.displayName;
+      }
+
+      const wrapper = document.querySelector('.country-select-wrapper');
+      const flagImg = document.getElementById('countryFlagIcon');
+
+      const updateFlagPreview = () => {
+        const code = countryEl.value;
+        const list = countryEl._countries || [];
+        const entry = list.find(c => c.code === code);
+        const flag = entry?.flag || '';
+        if (flag && flagImg) {
+          const toCodePoints = (emoji = '') => Array.from(emoji).map(ch => ch.codePointAt(0).toString(16)).join('-');
+          const cps = toCodePoints(flag);
+          flagImg.src = `https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${cps}.svg`;
+          flagImg.alt = `${entry.name} flag`;
+          wrapper?.classList.add('has-flag');
+        } else {
+          if (flagImg) flagImg.removeAttribute('src');
+          wrapper?.classList.remove('has-flag');
+        }
+      };
+
       updateFlagPreview();
-    });
+      updateCountryLimitDisplay();
+      countryEl.addEventListener('change', updateFlagPreview);
 
-    // Sign out from settings
+      saveBtn?.addEventListener('click', async () => {
+        const nickname = nicknameEl.value.trim();
+        const country = countryEl.value;
+        
+        const stored = loadProfileFromStorage();
+        if (country && stored.country && country !== stored.country) {
+          const changes = getCountryChanges();
+          if (changes.count >= 3) {
+            alert('You have reached the limit of 3 country changes per year.');
+            return;
+          }
+          updateCountryChanges();
+          updateCountryLimitDisplay();
+        }
+        
+        const profile = { nickname, country };
+        saveProfileToStorage(profile);
+        const result = await updateCloudProfile(nickname, country);
+        if (result.success) showToast('Settings saved'); else showToast('Save failed: ' + result.error);
+      });
+
+      resetBtn?.addEventListener('click', () => {
+        nicknameEl.value = '';
+        countryEl.value = '';
+        updateFlagPreview();
+      });
+    };
+
+    // Check initial auth state
+    if (window.authManager) {
+      const currentUser = authManager.getCurrentUser();
+      updateUIForAuthState(!!currentUser, currentUser);
+      
+      // Listen for auth state changes
+      authManager.on('authStateChanged', (user) => {
+        updateUIForAuthState(!!user, user);
+      });
+    } else {
+      // AuthManager not loaded yet, show signed-out state
+      updateUIForAuthState(false);
+    }
+
+    // Initialize form if user is already signed in
+    if (window.authManager && authManager.getCurrentUser()) {
+      populateCountries(countryEl);
+      initializeForm();
+    }
+
+    // Action button event listeners (these work regardless of auth state)
     settingsSignOutBtn?.addEventListener('click', async () => {
       try {
         if (window.authUI && typeof authUI.signOut === 'function') {
@@ -393,6 +488,10 @@
           await authManager.signOut();
         }
         showToast('Signed out');
+        // Redirect to home page after sign out
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 1000);
       } catch (e) {
         showToast('Sign out failed');
       }
@@ -400,6 +499,11 @@
 
     // Reset all progress (local + cloud)
     resetProgressBtn?.addEventListener('click', async () => {
+      if (!window.authManager || !authManager.getCurrentUser()) {
+        alert('You need to be signed in to reset progress.');
+        return;
+      }
+      
       if (!confirm('Reset all progress? This will clear your quiz history, stats, and chapter progress. This action cannot be undone.')) return;
       try {
         // Clear local progress keys conservatively
@@ -475,6 +579,23 @@
         alert('Failed to delete account. You may need to re-authenticate and try again.');
       }
     });
+
+    // Wait for authManager to be available if not loaded yet
+    if (!window.authManager) {
+      const checkAuthManager = () => {
+        if (window.authManager) {
+          const currentUser = authManager.getCurrentUser();
+          updateUIForAuthState(!!currentUser, currentUser);
+          
+          authManager.on('authStateChanged', (user) => {
+            updateUIForAuthState(!!user, user);
+          });
+        } else {
+          setTimeout(checkAuthManager, 100);
+        }
+      };
+      checkAuthManager();
+    }
   }
 
   if (document.readyState === 'loading') {

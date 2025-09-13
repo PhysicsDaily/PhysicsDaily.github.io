@@ -10,6 +10,14 @@ class AuthManager {
         this.listeners = new Map();
         this.syncInterval = null;
         this.initialAuthResolved = false;
+        
+        // Admin configuration - add your email here to be admin
+        this.adminEmails = [
+            'kandelanjit555@gmail.com',  // Your admin email
+            'admin@physicsdaily.com',
+            // Add more admin emails as needed
+            // 'another-admin@example.com'
+        ];
     }
 
     // Initialize Firebase
@@ -90,17 +98,27 @@ class AuthManager {
         }
     }
 
-    // Sign up new user
+    // Sign up new user (now requires onboarding)
     async signUp(email, password, displayName) {
+        // Return pending state to trigger onboarding
+        return { 
+            success: true, 
+            requiresOnboarding: true,
+            pendingData: { email, password, tempDisplayName: displayName }
+        };
+    }
+
+    // Complete signup with onboarding data
+    async signUpWithOnboarding(email, password, onboardingData) {
         try {
             const userCredential = await this.auth.createUserWithEmailAndPassword(email, password);
             const user = userCredential.user;
             
             // Update display name
-            await user.updateProfile({ displayName });
+            await user.updateProfile({ displayName: onboardingData.displayName });
             
-            // Create user document in Firestore
-            await this.createUserDocument(user);
+            // Create user document in Firestore with onboarding data
+            await this.createUserDocumentWithOnboarding(user, onboardingData);
             
             // Send verification email
             await user.sendEmailVerification();
@@ -121,7 +139,7 @@ class AuthManager {
         }
     }
 
-    // Sign in with Google
+    // Sign in with Google (now requires onboarding for new users)
     async signInWithGoogle() {
         try {
             const provider = new firebase.auth.GoogleAuthProvider();
@@ -130,7 +148,29 @@ class AuthManager {
             
             // Check if this is a new user
             if (userCredential.additionalUserInfo.isNewUser) {
-                await this.createUserDocument(user);
+                // New user needs onboarding
+                return { 
+                    success: true, 
+                    requiresOnboarding: true,
+                    pendingData: { 
+                        tempDisplayName: user.displayName,
+                        isGoogleSignup: true
+                    }
+                };
+            } else {
+                // Existing user, check if they have completed onboarding
+                const userDoc = await this.db.collection('users').doc(user.uid).get();
+                if (userDoc.exists && !userDoc.data().onboardingCompleted) {
+                    // Existing user without onboarding
+                    return { 
+                        success: true, 
+                        requiresOnboarding: true,
+                        pendingData: { 
+                            tempDisplayName: user.displayName,
+                            isGoogleSignup: true
+                        }
+                    };
+                }
             }
             
             return { success: true, user };
@@ -159,6 +199,75 @@ class AuthManager {
         }
     }
 
+    // Create user document in Firestore with onboarding data
+    async createUserDocumentWithOnboarding(user, onboardingData) {
+        const userRef = this.db.collection('users').doc(user.uid);
+        
+        const userData = {
+            uid: user.uid,
+            email: user.email,
+            displayName: onboardingData.displayName,
+            nationality: onboardingData.nationality,
+            ageGroup: onboardingData.ageGroup,
+            education: onboardingData.education,
+            onboardingCompleted: true,
+            onboardingCompletedAt: firebase.firestore.FieldValue.serverTimestamp(),
+            photoURL: user.photoURL || null,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            lastLogin: firebase.firestore.FieldValue.serverTimestamp(),
+            xp: {
+                total: 0,
+                lastAwardAt: null
+            },
+            streak: {
+                current: 0,
+                longest: 0,
+                lastActivityDate: null
+            },
+            stats: {
+                totalQuizzes: 0,
+                correctAnswers: 0,
+                totalTime: 0,
+                chaptersCompleted: 0,
+                topicsStudied: []
+            },
+            preferences: {
+                theme: localStorage.getItem('theme') || 'light',
+                emailNotifications: true,
+                dailyReminders: false
+            }
+        };
+        
+        await userRef.set(userData);
+        
+        // Clear any existing XP in localStorage to start fresh
+        try {
+            localStorage.removeItem('pd:gamification');
+            localStorage.removeItem('pd:xp:enhanced');
+            localStorage.removeItem('pd:xp:topicProgress');
+        } catch {}
+        
+        // Migrate local progress to cloud (but not XP)
+        await this.migrateLocalProgress();
+    }
+
+    // Update existing user document with onboarding data
+    async updateUserDocument(uid, onboardingData) {
+        const userRef = this.db.collection('users').doc(uid);
+        
+        const updateData = {
+            displayName: onboardingData.displayName,
+            nationality: onboardingData.nationality,
+            ageGroup: onboardingData.ageGroup,
+            education: onboardingData.education,
+            onboardingCompleted: true,
+            onboardingCompletedAt: firebase.firestore.FieldValue.serverTimestamp(),
+            lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+        };
+        
+        await userRef.update(updateData);
+    }
+
     // Create user document in Firestore
     async createUserDocument(user) {
         const userRef = this.db.collection('users').doc(user.uid);
@@ -172,6 +281,10 @@ class AuthManager {
                 photoURL: user.photoURL || null,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                 lastLogin: firebase.firestore.FieldValue.serverTimestamp(),
+                xp: {
+                    total: 0,
+                    lastAwardAt: null
+                },
                 streak: {
                     current: 0,
                     longest: 0,
@@ -193,7 +306,14 @@ class AuthManager {
             
             await userRef.set(userData);
             
-            // Migrate local progress to cloud
+            // Clear any existing XP in localStorage to start fresh
+            try {
+                localStorage.removeItem('pd:gamification');
+                localStorage.removeItem('pd:xp:enhanced');
+                localStorage.removeItem('pd:xp:topicProgress');
+            } catch {}
+            
+            // Migrate local progress to cloud (but not XP)
             await this.migrateLocalProgress();
         } else {
             // Update last login
@@ -538,6 +658,244 @@ class AuthManager {
     // Get current user
     getCurrentUser() {
         return this.user;
+    }
+
+    // Check if current user is admin
+    isAdmin() {
+        console.log('[AuthManager] isAdmin check:', {
+            hasUser: !!this.user,
+            userEmail: this.user?.email,
+            adminEmails: this.adminEmails,
+            emailMatch: this.user?.email ? this.adminEmails.includes(this.user.email.toLowerCase()) : false
+        });
+        
+        if (!this.user || !this.user.email) return false;
+        return this.adminEmails.includes(this.user.email.toLowerCase());
+    }
+
+    // Get admin status
+    getAdminStatus() {
+        return {
+            isAdmin: this.isAdmin(),
+            email: this.user?.email || null
+        };
+    }
+
+    // ===== ADMIN METHODS =====
+    
+    // Get all users (admin only)
+    async getAllUsers() {
+        if (!this.isAdmin()) {
+            throw new Error('Unauthorized: Admin access required');
+        }
+
+        try {
+            console.log('[Admin] Fetching all users...');
+            
+            // Try to get users with a more permissive query first
+            const snapshot = await this.db.collection('users')
+                .limit(100) // Limit to first 100 users for performance
+                .get();
+
+            console.log('[Admin] Users snapshot:', snapshot.size, 'documents');
+            
+            const users = snapshot.docs.map(doc => {
+                const data = doc.data();
+                console.log('[Admin] User data:', { id: doc.id, email: data.email });
+                return {
+                    id: doc.id,
+                    ...data,
+                    createdAt: data.createdAt?.toDate(),
+                    lastLogin: data.lastLogin?.toDate()
+                };
+            });
+            
+            console.log('[Admin] Processed users:', users.length);
+            return users;
+        } catch (error) {
+            console.error('Error fetching all users:', error);
+            
+            // If permission denied, try to get just the current user's data as a fallback
+            if (error.code === 'permission-denied') {
+                console.log('[Admin] Permission denied, trying fallback...');
+                try {
+                    const currentUserDoc = await this.db.collection('users').doc(this.user.uid).get();
+                    if (currentUserDoc.exists) {
+                        const data = currentUserDoc.data();
+                        return [{
+                            id: currentUserDoc.id,
+                            ...data,
+                            createdAt: data.createdAt?.toDate(),
+                            lastLogin: data.lastLogin?.toDate()
+                        }];
+                    }
+                } catch (fallbackError) {
+                    console.error('Fallback also failed:', fallbackError);
+                }
+            }
+            
+            throw error;
+        }
+    }
+
+    // Get system statistics (admin only)
+    async getSystemStats() {
+        if (!this.isAdmin()) {
+            throw new Error('Unauthorized: Admin access required');
+        }
+
+        try {
+            console.log('[Admin] Fetching system stats...');
+            
+            // Try to get all users for stats
+            let users = [];
+            try {
+                const usersSnapshot = await this.db.collection('users').limit(100).get();
+                users = usersSnapshot.docs.map(doc => doc.data());
+                console.log('[Admin] Got users for stats:', users.length);
+            } catch (error) {
+                console.warn('[Admin] Could not fetch all users for stats:', error);
+                // Fallback: use current user only
+                const currentUserDoc = await this.db.collection('users').doc(this.user.uid).get();
+                if (currentUserDoc.exists) {
+                    users = [currentUserDoc.data()];
+                }
+            }
+
+            const now = new Date();
+            const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+            const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+
+            const stats = {
+                totalUsers: users.length,
+                activeToday: users.filter(u => u.lastLogin?.toDate && u.lastLogin.toDate() >= todayStart).length,
+                activeThisWeek: users.filter(u => u.lastLogin?.toDate && u.lastLogin.toDate() >= weekAgo).length,
+                activeThisMonth: users.filter(u => u.lastLogin?.toDate && u.lastLogin.toDate() >= monthAgo).length,
+                totalXP: users.reduce((sum, u) => sum + (u.xp?.total || 0), 0),
+                averageXP: 0,
+                topUsers: users
+                    .filter(u => u.xp?.total > 0)
+                    .sort((a, b) => (b.xp?.total || 0) - (a.xp?.total || 0))
+                    .slice(0, 10)
+                    .map(u => ({
+                        displayName: u.displayName || u.email?.split('@')[0] || 'Anonymous',
+                        email: u.email,
+                        xp: u.xp?.total || 0,
+                        level: Math.floor((u.xp?.total || 0) / 100) + 1,
+                        lastLogin: u.lastLogin?.toDate ? u.lastLogin.toDate() : null
+                    })),
+                registrationTrend: this.calculateRegistrationTrend(users),
+                topicPopularity: this.calculateTopicPopularity(users)
+            };
+
+            if (stats.totalUsers > 0) {
+                stats.averageXP = Math.round(stats.totalXP / stats.totalUsers);
+            }
+
+            console.log('[Admin] Calculated stats:', stats);
+            return stats;
+        } catch (error) {
+            console.error('Error fetching system stats:', error);
+            
+            // Return default stats if everything fails
+            return {
+                totalUsers: 1,
+                activeToday: 1,
+                activeThisWeek: 1,
+                activeThisMonth: 1,
+                totalXP: this.user?.xp?.total || 0,
+                averageXP: this.user?.xp?.total || 0,
+                topUsers: [{
+                    displayName: this.user?.displayName || 'Admin',
+                    email: this.user?.email || '',
+                    xp: this.user?.xp?.total || 0,
+                    level: Math.floor((this.user?.xp?.total || 0) / 100) + 1,
+                    lastLogin: new Date()
+                }],
+                registrationTrend: [],
+                topicPopularity: []
+            };
+        }
+    }
+
+    // Helper method to calculate registration trend
+    calculateRegistrationTrend(users) {
+        const months = {};
+        const now = new Date();
+        
+        // Initialize last 12 months
+        for (let i = 11; i >= 0; i--) {
+            const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
+            const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+            months[key] = 0;
+        }
+
+        // Count registrations per month
+        users.forEach(user => {
+            if (user.createdAt?.toDate) {
+                const createdDate = user.createdAt.toDate();
+                const key = `${createdDate.getFullYear()}-${String(createdDate.getMonth() + 1).padStart(2, '0')}`;
+                if (months[key] !== undefined) {
+                    months[key]++;
+                }
+            }
+        });
+
+        return Object.entries(months).map(([month, count]) => ({ month, count }));
+    }
+
+    // Helper method to calculate topic popularity
+    calculateTopicPopularity(users) {
+        const topicCounts = {};
+        
+        users.forEach(user => {
+            if (user.stats?.topicsStudied) {
+                user.stats.topicsStudied.forEach(topic => {
+                    topicCounts[topic] = (topicCounts[topic] || 0) + 1;
+                });
+            }
+        });
+
+        return Object.entries(topicCounts)
+            .map(([topic, count]) => ({ topic, count }))
+            .sort((a, b) => b.count - a.count)
+            .slice(0, 10);
+    }
+
+    // Update user role (admin only)
+    async updateUserRole(userId, isAdmin) {
+        if (!this.isAdmin()) {
+            throw new Error('Unauthorized: Admin access required');
+        }
+
+        try {
+            await this.db.collection('users').doc(userId).update({
+                isAdmin: isAdmin,
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            return true;
+        } catch (error) {
+            console.error('Error updating user role:', error);
+            throw error;
+        }
+    }
+
+    // Delete user account (admin only)
+    async deleteUser(userId) {
+        if (!this.isAdmin()) {
+            throw new Error('Unauthorized: Admin access required');
+        }
+
+        try {
+            // Note: This only deletes the Firestore document
+            // Firebase Auth user deletion requires admin SDK on backend
+            await this.db.collection('users').doc(userId).delete();
+            return true;
+        } catch (error) {
+            console.error('Error deleting user:', error);
+            throw error;
+        }
     }
 }
 

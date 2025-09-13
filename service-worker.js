@@ -1,8 +1,9 @@
 // Basic cache-first service worker for Physics Daily
-const CACHE_NAME = 'pd-v18';
+const CACHE_NAME = 'pd-v25';
 const urlsToCache = [
   '/',
   '/index.html',
+  '/admin.html',
   '/assets/css/global.css',
   '/assets/css/header-fixed.css',
   '/assets/css/auth-styles.css',
@@ -12,10 +13,12 @@ const urlsToCache = [
   '/assets/js/auth-navigation.js',
   '/assets/js/firebase-config.js',
   '/assets/js/auth-manager.js',
+  '/assets/js/onboarding.js',
   '/assets/js/auth-ui.js',
   '/assets/js/settings.js',
   '/assets/js/progress-tracker.js',
-  '/assets/js/gamification.js',
+  '/assets/js/enhanced-xp.js',
+  '/assets/js/admin-dashboard.js',
   '/settings.html',
   '/assets/partials/header.html',
   '/assets/partials/footer.html',
