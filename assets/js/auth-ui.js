@@ -5,6 +5,8 @@ class AuthUI {
     constructor() {
         this.modal = null;
         this.currentTab = 'signin';
+        this.justSignedInInteractive = false;
+        this.sawInitialAuth = false; // avoid toast on initial persisted session
         this.init();
     }
 
@@ -171,9 +173,16 @@ class AuthUI {
 
         // Auth state changes
         authManager.on('authStateChanged', (user) => {
-            if (user) {
+            // First emission is usually persisted session restore — suppress toast
+            if (!this.sawInitialAuth) {
+                this.sawInitialAuth = true;
+                return;
+            }
+            // Show toast only for interactive sign-ins
+            if (user && this.justSignedInInteractive) {
                 this.closeModal();
                 this.showSuccessNotification('Successfully signed in!');
+                this.justSignedInInteractive = false;
             }
         });
     }
@@ -220,6 +229,8 @@ class AuthUI {
         
         if (!result.success) {
             this.showError('signinPassword', result.error);
+        } else {
+            this.justSignedInInteractive = true;
         }
     }
 
@@ -274,6 +285,8 @@ class AuthUI {
         
         if (!result.success) {
             this.showError('signinEmail', result.error);
+        } else {
+            this.justSignedInInteractive = true;
         }
     }
 
@@ -394,9 +407,13 @@ class AuthUI {
 const authUI = new AuthUI();
 window.authUI = authUI;  
 
-// Add CSS animations
+// Add CSS animations and minimal fail-safe visibility rules
 const style = document.createElement('style');
 style.textContent = `
+    /* Fail-safe: ensure auth modal is hidden unless explicitly opened */
+    .auth-modal { display: none !important; }
+    .auth-modal.active { display: flex !important; }
+
     @keyframes slideIn {
         from {
             opacity: 0;

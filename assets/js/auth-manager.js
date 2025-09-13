@@ -9,6 +9,7 @@ class AuthManager {
         this.isInitialized = false;
         this.listeners = new Map();
         this.syncInterval = null;
+        this.initialAuthResolved = false;
     }
 
     // Initialize Firebase
@@ -29,6 +30,21 @@ class AuthManager {
 
             this.auth = firebase.auth();
             this.db = firebase.firestore();
+
+            // Make auth state persist across tabs and reloads
+            try {
+                await this.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+            } catch (e) {
+                console.warn('[Auth] Failed to set persistence to LOCAL, using default:', e?.message || e);
+            }
+
+            // Helpful guidance for common OAuth domain issues during local testing
+            const host = window.location.hostname;
+            const likelyNeedsAllowlisting = host !== 'localhost' && host !== '127.0.0.1' && host !== '[::1]';
+            console.info('[Auth] Running on host:', host, '— ensure this host is in Firebase Auth > Settings > Authorized domains.');
+            if (likelyNeedsAllowlisting) {
+                console.info('[Auth] If you are testing on a custom host (e.g., physicsdaily.github.io or a LAN IP), add it to the authorized domains list.');
+            }
             
             // Enable offline persistence
             await this.db.enablePersistence().catch(err => {
@@ -48,6 +64,11 @@ class AuthManager {
                     this.onUserSignOut();
                 }
                 this.emit('authStateChanged', user);
+                if (!this.initialAuthResolved) {
+                    this.initialAuthResolved = true;
+                    document.body.classList.remove('auth-pending');
+                    document.body.classList.add('auth-ready');
+                }
             });
 
             this.isInitialized = true;
@@ -490,7 +511,8 @@ class AuthManager {
             'auth/user-not-found': 'No account found with this email.',
             'auth/wrong-password': 'Incorrect password.',
             'auth/popup-closed-by-user': 'Sign in was cancelled.',
-            'auth/network-request-failed': 'Network error. Please check your connection.'
+            'auth/network-request-failed': 'Network error. Please check your connection.',
+            'auth/unauthorized-domain': `This domain is not authorized for OAuth. Please add "${window.location.hostname}" to Firebase Console → Authentication → Settings → Authorized domains.`
         };
         
         return errorMessages[error.code] || error.message;

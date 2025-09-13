@@ -289,28 +289,14 @@
             }
         }
     </style>
+    <!-- Firebase (for header auth) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 </head>
-<body class="has-fixed-header">
+<body class="has-fixed-header auth-pending">
     <!-- Fixed Header Navigation -->
-    <header class="fixed-header">
-        <div class="container">
-            <div class="header-content">
-                <a href="/" class="logo">
-                    <span>⚛️</span>
-                    <span>Physics Daily</span>
-                </a>
-                <nav class="nav-links">
-                    <a href="/#foundations">Mechanics</a>
-                    <a href="/#waves">Waves</a>
-                    <a href="/#thermodynamics">Thermodynamics</a>
-                    <a href="/#electromagnetism">E&M</a>
-                    <a href="/#optics">Optics</a>
-                    <a href="/#modern">Modern</a>
-                    <a href="resources.html">Resources</a>
-                </nav>
-            </div>
-        </div>
-    </header>
+    <div id="global-header"></div>
     
     <!-- Vertical Theme Toggle -->
     <div class="theme-toggle-vertical">
@@ -350,6 +336,12 @@
         </div>
     </footer>
 
+    <!-- Auth + Header Scripts -->
+    <script src="assets/js/firebase-config.js"></script>
+    <script src="assets/js/auth-manager.js"></script>
+    <script src="assets/js/auth-ui.js"></script>
+    <script src="assets/js/header-loader.js"></script>
+    <script src="assets/js/auth-navigation.js"></script>
     <script src="assets/js/global.js"></script>
 </body>
 </html>

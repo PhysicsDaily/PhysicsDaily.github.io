@@ -1,4 +1,110 @@
 const __initGlobal = function() {
+    // --- Ensure Global Header & Auth on all pages ---
+    (function ensureGlobalHeaderAndAuth() {
+        if (window.__globalHeaderEnsured) return; // idempotent guard
+
+        const ensureCss = (hrefMatch) => !!document.querySelector(`link[rel="stylesheet"][href*="${hrefMatch}"]`);
+        const addCss = (href) => {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = href;
+            document.head.appendChild(link);
+        };
+
+        const scriptAlreadyOnPage = (namePart) => Array.from(document.querySelectorAll('script[src]')).some(s => s.src.includes(namePart));
+        const loadScript = (src) => new Promise((resolve, reject) => {
+            if (scriptAlreadyOnPage(src)) { resolve('skipped'); return; }
+            const el = document.createElement('script');
+            el.src = src;
+            el.async = false; // preserve order
+            el.onload = () => resolve();
+            el.onerror = (e) => reject(e);
+            document.head.appendChild(el);
+        });
+
+        const run = async () => {
+            try {
+                // 1) Ensure critical CSS immediately (header + auth modal)
+                if (!ensureCss('header-fixed.css')) {
+                    addCss('/assets/css/header-fixed.css');
+                }
+                // Auth modal base styles keep the modal hidden by default
+                if (!ensureCss('auth-styles.css')) {
+                    addCss('/assets/css/auth-styles.css');
+                }
+
+                // 2) Ensure placeholder to minimize layout shift
+                if (!document.getElementById('global-header')) {
+                    const ph = document.createElement('div');
+                    ph.id = 'global-header';
+                    document.body.insertBefore(ph, document.body.firstChild);
+                }
+
+                // 3) Start header injection ASAP (independent of Firebase)
+                const headerLoaderP = scriptAlreadyOnPage('header-loader.js')
+                    ? Promise.resolve('skipped')
+                    : loadScript('/assets/js/header-loader.js');
+
+                // 4) Load Firebase compat SDKs (sequential), in parallel with header loader
+                const firebaseP = (typeof window.firebase === 'undefined')
+                    ? loadScript('https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js')
+                        .then(() => loadScript('https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js'))
+                        .then(() => loadScript('https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js'))
+                    : Promise.resolve('present');
+
+                // 5) After Firebase, load site auth scripts in order
+                const siteAuthP = firebaseP
+                    .then(async () => {
+                        if (typeof window.firebaseConfig === 'undefined') {
+                            await loadScript('/assets/js/firebase-config.js');
+                        }
+                        if (typeof window.authManager === 'undefined') {
+                            await loadScript('/assets/js/auth-manager.js');
+                        }
+                        if (typeof window.authUI === 'undefined') {
+                            await loadScript('/assets/js/auth-ui.js');
+                        }
+                        // Progress + gamification CSS
+                        if (!ensureCss('progress-tracker.css')) {
+                            addCss('/assets/css/progress-tracker.css');
+                        }
+                        // Load progress and gamification utilities
+                        if (!scriptAlreadyOnPage('progress-tracker.js')) {
+                            await loadScript('/assets/js/progress-tracker.js');
+                        }
+                        if (!scriptAlreadyOnPage('gamification.js')) {
+                            await loadScript('/assets/js/gamification.js');
+                        }
+                    });
+
+                // 6) Load auth-navigation after header injected and auth scripts ready
+                await Promise.all([headerLoaderP, siteAuthP]);
+                if (!scriptAlreadyOnPage('auth-navigation.js')) {
+                    await loadScript('/assets/js/auth-navigation.js');
+                }
+
+                // 7) Ensure footer placeholder and loader
+                if (!document.getElementById('global-footer')) {
+                    const fp = document.createElement('div');
+                    fp.id = 'global-footer';
+                    document.body.appendChild(fp);
+                }
+                if (!scriptAlreadyOnPage('footer-loader.js')) {
+                    await loadScript('/assets/js/footer-loader.js');
+                }
+
+                window.__globalHeaderEnsured = true;
+            } catch (e) {
+                console.error('[Global] Failed to ensure header/auth scripts:', e);
+            }
+        };
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', run);
+        } else {
+            run();
+        }
+    })();
     // --- Personalized Welcome ---
     function showPersonalizedWelcome() {
         if (typeof authManager !== 'undefined' && authManager.getCurrentUser()) {

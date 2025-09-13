@@ -44,12 +44,10 @@ class Dashboard {
 
             this.updateWelcomeMessage();
             this.updateStatistics();
-            this.updateStreakDisplay();
             this.loadTabs();
 
             document.getElementById('loadingContainer').style.display = 'none';
             document.getElementById('dashboardContent').style.display = 'block';
-            document.getElementById('streakDisplay').style.display = 'block';
         } catch (error) {
             console.error('Failed to load dashboard:', error);
         }
@@ -85,106 +83,82 @@ class Dashboard {
             : 0;
         document.getElementById('avgScore').textContent = avgScore + '%';
         
-        // Calculate streak
-        const streak = (this.stats && this.stats.streak) || { current: 0 };
-        document.getElementById('streakCount').textContent = streak.current || 0;
-        document.getElementById('streakNumber').textContent = streak.current || 0;
-        
-        // Calculate study time from quiz history
-        let totalMinutes = 0;
-        quizHistory.forEach(quiz => {
-            totalMinutes += quiz.timeSpent || 10; // Default 10 minutes per quiz
-        });
-        const hours = Math.floor(totalMinutes / 60);
-        document.getElementById('studyTime').textContent = hours + 'h';
+        // Streak and study time removed from header UI
         
         // Store for later use
         this.localStats = localStats;
         this.quizHistory = quizHistory;
     }
 
-    updateStreakDisplay() {
-        const streakDisplay = document.getElementById('streakDisplay');
-        if (this.stats && this.stats.streak && this.stats.streak.current > 0) {
-            streakDisplay.style.display = 'block';
-        }
-    }
+    // streak display removed
 
     loadTabs() {
-        this.loadOverviewTab();
-        this.loadProgressTab();
-        this.loadAchievementsTab();
-        this.loadActivityTab();
-    }
+        this.loadStatsTab();
+    }    // Overview tab removed
 
-    loadOverviewTab() {
-        const recommendationsGrid = document.getElementById('recommendationsGrid');
-        const recommendations = this.generateRecommendations();
-        
-        recommendationsGrid.innerHTML = recommendations.map(rec => `
-            <a href="${rec.link}" class="recommendation-card">
-                <div class="recommendation-title">${rec.title}</div>
-                <div class="recommendation-desc">${rec.description}</div>
-            </a>
-        `).join('');
+    // progress tab removed
 
-        const recentActivity = document.getElementById('recentActivity');
-        const activities = this.getRecentActivities();
+    loadStatsTab() {
+        const container = document.getElementById('detailedStats');
+        if (!container) return;
+        const stats = this.computeDetailedStats();
         
-        recentActivity.innerHTML = activities.map(activity => `
-            <div class="activity-item">
-                <div class="activity-time">${activity.time}</div>
-                <div class="activity-text">${activity.text}</div>
-            </div>
-        `).join('');
-    }
-
-    loadProgressTab() {
-        const chapterProgress = document.getElementById('chapterProgress');
-        const chapters = this.getChapterProgress();
-        
-        chapterProgress.innerHTML = chapters.map(chapter => `
-            <div class="progress-item">
-                <span class="progress-label">${chapter.name}</span>
-                <div class="progress-bar-container">
-                    <div class="progress-bar-fill" style="width: ${chapter.progress}%"></div>
+        container.innerHTML = `
+            <div class="stats-grid">
+                <div class="stat-block">
+                    <h3>Total Questions</h3>
+                    <p>${stats.totalQuestions}</p>
                 </div>
-                <span class="progress-value">${chapter.progress}%</span>
+                <div class="stat-block">
+                    <h3>Correct</h3>
+                    <p>${stats.correct}</p>
+                </div>
+                <div class="stat-block">
+                    <h3>Incorrect</h3>
+                    <p>${stats.incorrect}</p>
+                </div>
+                <div class="stat-block">
+                    <h3>Unanswered</h3>
+                    <p>${stats.unanswered}</p>
+                </div>
+                <div class="stat-block">
+                    <h3>Avg Time/Question</h3>
+                    <p>${stats.avgTimePerQuestion}s</p>
+                </div>
+                <div class="stat-block">
+                    <h3>Best Score</h3>
+                    <p>${stats.bestScore}%</p>
+                </div>
+                <div class="stat-block">
+                    <h3>Last Score</h3>
+                    <p>${stats.lastScore}%</p>
+                </div>
+                <div class="stat-block">
+                    <h3>Accuracy</h3>
+                    <p>${stats.accuracy}%</p>
+                </div>
             </div>
-        `).join('');
+            ${stats.byChapter.length ? `
+            <div class="report-section">
+                <h3 style="margin-bottom: 1rem; color: var(--text-primary);">Performance by Chapter</h3>
+                <div class="progress-bars">
+                    ${stats.byChapter.map(c => `
+                        <div class="progress-item">
+                            <span class="progress-label">${c.chapter}</span>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: ${c.percentage}%"></div>
+                            </div>
+                            <span class="progress-value">${c.percentage}%</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>` : '<p style="text-align: center; color: var(--text-secondary); margin-top: 2rem;">Complete a quiz to see detailed statistics!</p>'}
+        `;
     }
 
-    loadAchievementsTab() {
-        const achievementGrid = document.getElementById('achievementGrid');
-        const achievements = this.getAchievements();
-        
-        achievementGrid.innerHTML = achievements.map(achievement => `
-            <div class="achievement-badge ${achievement.earned ? '' : 'locked'}">
-                <div class="achievement-icon">${achievement.icon}</div>
-                <div class="achievement-name">${achievement.name}</div>
-            </div>
-        `).join('');
-    }
+    // Activity tab removed
 
-    loadActivityTab() {
-        const fullActivity = document.getElementById('fullActivity');
-        const activities = this.getAllActivities();
-        
-        fullActivity.innerHTML = activities.map(activity => `
-            <div class="activity-item">
-                <div class="activity-time">${activity.time}</div>
-                <div class="activity-text">${activity.text}</div>
-            </div>
-        `).join('');
-    }
-
-    generateRecommendations() {
-        return [
-            { title: 'Continue Mechanics', description: 'Complete Chapter 3 quiz', link: '/mechanics/chapter3/mcq.html' },
-            { title: 'Review Kinematics', description: 'Practice 2D motion problems', link: '/mechanics/chapter4/mcq.html' },
-            { title: 'Start Thermodynamics', description: 'Learn about temperature', link: '/thermodynamics/chapter21/' }
-        ];
-    }
+    // Removed Recommendations: no longer used
 
     getRecentActivities() {
         const activities = [];
@@ -222,25 +196,91 @@ class Dashboard {
         return date.toLocaleDateString();
     }
 
+    getCompletedChapters() {
+        try {
+            const arr = JSON.parse(localStorage.getItem('completedChapters') || '[]');
+            return arr.map(n => parseInt(n, 10)).filter(n => !isNaN(n));
+        } catch (e) { return []; }
+    }
+
     getChapterProgress() {
+        const completed = this.getCompletedChapters();
+        // Define chapter ranges per topic
+        const ranges = {
+            'Mechanics': [1, 14],
+            'Thermodynamics': [21, 24],
+            'Electromagnetism': [25, 39],
+            'Optics': [40, 45],
+            'Modern Physics': [46, 52]
+        };
         const progress = [];
-        const topics = ['Mechanics', 'Thermodynamics', 'Electromagnetism', 'Optics', 'Modern Physics'];
-        topics.forEach(topic => {
-            const value = Math.floor(Math.random() * 100);
-            progress.push({ name: topic, progress: value });
+        Object.entries(ranges).forEach(([name, [start, end]]) => {
+            const total = end - start + 1;
+            const count = completed.filter(n => n >= start && n <= end).length;
+            const pct = total > 0 ? Math.round((count / total) * 100) : 0;
+            progress.push({ name, progress: pct });
         });
         return progress;
     }
 
-    getAchievements() {
-        return [
-            { icon: '🏆', name: 'First Quiz', earned: this.stats && this.stats.totalQuizzes > 0 },
-            { icon: '🔥', name: '7 Day Streak', earned: this.stats && this.stats.streak && this.stats.streak.current >= 7 },
-            { icon: '📚', name: '10 Quizzes', earned: this.stats && this.stats.totalQuizzes >= 10 },
-            { icon: '⭐', name: 'Perfect Score', earned: false },
-            { icon: '🎯', name: '90% Average', earned: false },
-            { icon: '🚀', name: 'Speed Learner', earned: false }
-        ];
+    // Achievements removed
+
+    computeDetailedStats() {
+        // Prefer cloud history when available
+        const cloud = this.stats?.quizHistory || [];
+        const local = JSON.parse(localStorage.getItem('quizHistory') || '[]');
+        const history = Array.isArray(cloud) && cloud.length ? cloud : local;
+        
+        if (!history.length) {
+            return {
+                totalQuestions: 0, correct: 0, incorrect: 0, unanswered: 0,
+                avgTimePerQuestion: 0, bestScore: 0, lastScore: 0, accuracy: 0, byChapter: []
+            };
+        }
+
+        let totalQuestions = 0, correct = 0, incorrect = 0, unanswered = 0, totalTime = 0;
+        let bestScore = 0, lastScore = 0;
+        const byChapterMap = new Map();
+
+        history.forEach((q, idx) => {
+            const tq = q.totalQuestions || q.total || 0;
+            const ca = q.correctAnswers || q.correct || 0;
+            const perc = typeof q.percentage === 'number' ? q.percentage : 
+                        (typeof q.score === 'number' ? q.score : 
+                        (tq ? Math.round((ca/tq)*100) : 0));
+            const ua = typeof q.unanswered === 'number' ? q.unanswered : Math.max(0, tq - ca - (q.incorrect || 0));
+            const ia = typeof q.incorrect === 'number' ? q.incorrect : Math.max(0, tq - ca - ua);
+            const ts = q.timeSpent || 0;
+
+            totalQuestions += tq;
+            correct += ca;
+            incorrect += ia;
+            unanswered += ua;
+            totalTime += ts;
+            bestScore = Math.max(bestScore, Math.round(perc));
+            if (idx === 0) lastScore = Math.round(perc); // most recent
+
+            const chapter = q.chapter || 'Unknown Chapter';
+            const rec = byChapterMap.get(chapter) || { correct:0, total:0 };
+            rec.correct += ca; 
+            rec.total += tq;
+            byChapterMap.set(chapter, rec);
+        });
+
+        const avgTimePerQuestion = totalQuestions > 0 ? Math.round(totalTime / totalQuestions) : 0;
+        const accuracy = totalQuestions > 0 ? Math.round((correct / totalQuestions) * 100) : 0;
+        
+        const byChapter = Array.from(byChapterMap.entries())
+            .map(([chapter, v]) => ({
+                chapter, 
+                percentage: v.total ? Math.round((v.correct / v.total) * 100) : 0
+            }))
+            .sort((a,b) => a.chapter.localeCompare(b.chapter));
+
+        return { 
+            totalQuestions, correct, incorrect, unanswered, 
+            avgTimePerQuestion, bestScore, lastScore, accuracy, byChapter 
+        };
     }
 
     getAllActivities() {

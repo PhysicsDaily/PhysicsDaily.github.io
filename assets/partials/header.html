@@ -1,0 +1,26 @@
+<header class="fixed-header auth-pending">
+  <div class="container">
+    <div class="header-content">
+      <a href="/" class="logo">
+        <span style="font-size: 1.8rem; font-weight: 700;">Physics Daily</span>
+      </a>
+      <nav class="nav-links">
+        <div id="header-user-menu" class="profile" style="display: none; align-items: center; gap: 0.5rem; position: relative;">
+          <button id="header-profile-trigger" class="profile-trigger" aria-haspopup="menu" aria-expanded="false" aria-controls="profile-dropdown">
+            <img id="header-user-avatar" src="" alt="Profile" style="width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--primary-color);">
+            <span id="header-user-name" style="font-weight: 600;"></span>
+            <span aria-hidden="true" style="display:inline-block; transform: translateY(1px); color: var(--text-secondary);">▾</span>
+          </button>
+          <div id="profile-dropdown" class="profile-dropdown" role="menu" aria-hidden="true">
+            <a href="/dashboard.html" role="menuitem">Dashboard</a>
+            <button id="header-sign-out" role="menuitem">Sign out</button>
+          </div>
+        </div>
+        <a class="home-link" href="/" data-visible="not-home" style="display:none;">Home</a>
+        <a href="/resources.html">Resources</a>
+        <a href="/about.html">About</a>
+        <button class="btn sign-in-btn" id="header-sign-in" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Sign In</button>
+      </nav>
+    </div>
+  </div>
+</header>

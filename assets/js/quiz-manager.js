@@ -24,6 +24,7 @@ class QuizManager {
             ...quizConfig
         };
         
+        this.dataLoaded = false;
         this.initializeElements();
         this.setupFallbackElements();
         this.loadQuizData();
@@ -104,6 +105,16 @@ class QuizManager {
             } else if (this.config.data) {
                 this.quizData = this.config.data;
             }
+            this.dataLoaded = Array.isArray(this.quizData) && this.quizData.length > 0;
+            // Enable start button only when data is ready
+            if (this.elements.startBtn) {
+                this.elements.startBtn.disabled = !this.dataLoaded;
+                if (!this.dataLoaded) {
+                    this.elements.startBtn.textContent = 'Loading questions…';
+                } else {
+                    this.elements.startBtn.textContent = 'Start Test';
+                }
+            }
             
             // Set up question count options
             if (this.elements.questionCountSelect) {
@@ -139,6 +150,11 @@ class QuizManager {
     }
     
     startTest() {
+        // Guard: ensure data is loaded
+        if (!this.dataLoaded || !Array.isArray(this.quizData) || this.quizData.length === 0) {
+            alert('Questions are still loading. Please wait a moment and try again.');
+            return;
+        }
         // Get selected question count
         const selectedCount = parseInt(this.elements.questionCountSelect?.value) || 20;
         const numQuestions = Math.min(selectedCount, this.quizData.length);
@@ -166,7 +182,7 @@ class QuizManager {
         this.startTimer(timerMinutes * 60);
         
         // Create question palette
-        this.createQuestionPalette();
+    this.createQuestionPalette();
         
         // Display first question
         this.renderQuestion();
@@ -271,6 +287,16 @@ class QuizManager {
             this.elements.paletteContainer.appendChild(btn);
         });
     }
+
+    /**
+     * Initial palette setup (legacy compatibility)
+     * Some earlier pages expect createQuestionPalette() to exist.
+     * Keep it as a thin wrapper around renderPalette() so calls are safe.
+     */
+    createQuestionPalette() {
+        if (!this.elements || !this.elements.paletteContainer) return;
+        this.renderPalette();
+    }
     
     jumpToQuestion(index) {
         this.currentQuestionIndex = index;
@@ -344,6 +370,20 @@ class QuizManager {
             maxPoints: this.activeQuizData.length * this.config.positiveMarks,
             results
         });
+
+        // Award gamification rewards
+        try {
+            if (window.gamification && typeof window.gamification.awardForQuiz === 'function') {
+                window.gamification.awardForQuiz({
+                    totalQuestions: this.activeQuizData.length,
+                    correct,
+                    incorrect,
+                    unanswered,
+                    percentage: parseFloat(percentage),
+                    timeSpent: Math.floor((new Date() - this.startTime) / 1000)
+                });
+            }
+        } catch (e) { console.warn('Gamification award failed:', e); }
     }
     
     async displayResults(resultData) {
@@ -355,8 +395,23 @@ class QuizManager {
         
         // Save quiz result if user is authenticated
         if (typeof authManager !== 'undefined' && authManager.isSignedIn()) {
-            const chapterMatch = window.location.pathname.match(/chapter(\d+)/);
-            const chapter = chapterMatch ? `Chapter ${chapterMatch[1]}` : 'Unknown Chapter';
+            // Extract chapter info from URL path
+            const path = window.location.pathname;
+            let chapter = 'Practice Quiz';
+            
+            // Try numbered chapters first: /chapter3/, /chapter25/, etc.
+            const numberedChapter = path.match(/chapter(\d+)/);
+            if (numberedChapter) {
+                chapter = `Chapter ${numberedChapter[1]}`;
+            } else {
+                // Try named chapters: /measurements/, /kinematics/, etc.
+                const namedChapter = path.match(/\/([^\/]+)\/mcq\.html$/);
+                if (namedChapter) {
+                    const name = namedChapter[1];
+                    // Capitalize first letter
+                    chapter = name.charAt(0).toUpperCase() + name.slice(1);
+                }
+            }
             
             await authManager.saveQuizResult({
                 chapter: chapter,
@@ -393,6 +448,10 @@ class QuizManager {
                         <span class="percentage">${resultData.percentage}%</span>
                     </div>
                 </div>
+                <div class="result-actions" style="margin-top:1rem; display:flex; gap:.75rem; justify-content:center;">
+                    <button id="retry-incorrect-btn" class="btn btn-secondary">Retry Incorrect</button>
+                    <button id="retake-btn" class="btn">Retake Full Quiz</button>
+                </div>
             </div>
         `;
         
@@ -419,6 +478,39 @@ class QuizManager {
         detailedHTML += '</div>';
         
         this.elements.detailedResults.innerHTML = detailedHTML;
+
+        // Hook up actions
+        const retryBtn = document.getElementById('retry-incorrect-btn');
+        if (retryBtn) retryBtn.addEventListener('click', () => this.retryIncorrect(resultData.results));
+        const retakeBtn = document.getElementById('retake-btn');
+        if (retakeBtn) retakeBtn.addEventListener('click', () => window.location.reload());
+    }
+
+    retryIncorrect(results) {
+        const incorrectQs = results
+            .map((r, idx) => ({ r, idx }))
+            .filter(x => !x.r.isCorrect && x.r.userAnswer !== 'Not Answered')
+            .map(x => this.activeQuizData[x.idx]);
+
+        if (!incorrectQs.length) {
+            alert('Great job! No incorrect questions to retry.');
+            return;
+        }
+
+        // Reset with only incorrect questions
+        this.activeQuizData = incorrectQs;
+        this.userAnswers = new Array(incorrectQs.length).fill(null);
+        this.questionStatus = new Array(incorrectQs.length).fill('not-visited');
+        this.currentQuestionIndex = 0;
+        this.startTime = new Date();
+
+        // Update UI
+        this.elements.resultsContainer.style.display = 'none';
+        this.elements.quizInterface.style.display = 'block';
+        this.createQuestionPalette();
+        this.renderQuestion();
+        this.renderPalette();
+        this.startTimer((parseInt(this.elements.timerInput?.value) || this.config.defaultTime) * 60);
     }
     
     resetQuiz() {

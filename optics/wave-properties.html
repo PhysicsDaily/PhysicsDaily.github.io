@@ -6,13 +6,15 @@
     <title>Optics: Wave Properties of Light - Physics Daily</title>
     <meta name="description" content="Explore the wave nature of light, including gratings, spectra, and polarization. Comprehensive study guide for Chapters 43-45.">
     <link rel="stylesheet" href="shared/optics-style.css">
-</head>
-<body>
-    <nav class="nav">
-        <div class="container">
-            <a href="../index.html" class="nav-logo">Physics Daily</a>
-        </div>
-    </nav>
+    <link rel="stylesheet" href="/assets/css/header-fixed.css">
+    <!-- Firebase (for header auth) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    </head>
+<body class="has-fixed-header auth-pending">
+    <!-- Fixed Header Navigation -->
+    <div id="global-header"></div>
     <div class="breadcrumb">
         <div class="container">
             <a href="../index.html">Home</a>
@@ -40,6 +42,12 @@
             </section>
         </div>
     </main>
+    <!-- Auth + Header Scripts -->
+    <script src="/assets/js/firebase-config.js"></script>
+    <script src="/assets/js/auth-manager.js"></script>
+    <script src="/assets/js/auth-ui.js"></script>
+    <script src="/assets/js/header-loader.js"></script>
+    <script src="/assets/js/auth-navigation.js"></script>
     <script src="shared/optics-scripts.js"></script>
 </body>
 </html>

@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/header-fixed.css">
     <link rel="stylesheet" href="../../assets/css/mcq-styles.css">
     <link rel="stylesheet" href="../../assets/css/interactive-components.css">
     <link rel="stylesheet" href="../../assets/css/progress-tracker.css">
@@ -19,36 +20,14 @@
       gtag('js', new Date());
       gtag('config', 'G-XN081SR2KP');
     </script>
+    <!-- Firebase (for header auth) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 </head>
-<body>
-    <nav class="nav">
-        <div class="container">
-            <div class="nav-content">
-                <a href="../../index.html" class="nav-logo">Physics Daily</a>
-                <button class="nav-toggle" aria-label="Toggle navigation">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <ul class="nav-links">
-                    <li><a href="../../index.html">Home</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" aria-label="Topics Menu">Topics ▼</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/mechanics/">Mechanics</a></li>
-                            <li><a href="/thermodynamics/">Thermodynamics</a></li>
-                            <li><a href="/electromagnetism/">Electromagnetism</a></li>
-                            <li><a href="/waves/">Waves</a></li>
-                            <li><a href="/optics/">Optics</a></li>
-                            <li><a href="/modern/">Modern Physics</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="../../resources.html">Resources</a></li>
-                    <li><a href="../../about.html">About</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<body class="has-fixed-header auth-pending">
+    <!-- Fixed Header Navigation -->
+    <div id="global-header"></div>
 
     <div class="theme-toggle">
         <button id="light-mode" title="Light Mode">☀️</button>
@@ -146,14 +125,13 @@
     </footer>
 
     <!-- Core Scripts -->
-    <script src="../../assets/js/global.js"></script>
-    
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <!-- Auth + Header Scripts -->
     <script src="../../assets/js/firebase-config.js"></script>
     <script src="../../assets/js/auth-manager.js"></script>
+    <script src="../../assets/js/auth-ui.js"></script>
+    <script src="../../assets/js/header-loader.js"></script>
+    <script src="../../assets/js/auth-navigation.js"></script>
+    <script src="../../assets/js/global.js"></script>
     
     <!-- Quiz System -->
     <script src="../../assets/js/quiz-manager.js"></script>

@@ -9,6 +9,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="shared/mechanics-style.css">
+    <link rel="stylesheet" href="/assets/css/header-fixed.css">
+    <!-- Firebase (for header auth) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN081SR2KP"></script>
 <script>
@@ -18,21 +23,10 @@
 
   gtag('config', 'G-XN081SR2KP');
 </script>
-</head>
-<body>
-    <nav class="nav">
-        <div class="container">
-            <div class="nav-content">
-                <a href="../index.html" class="nav-logo">Physics Daily</a>
-                <ul class="nav-links">
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="../resources.html">Resources</a></li>
-                    <li><a href="../about.html">About</a></li>
-                    <li><a href="../contribute.html">Contribute</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    </head>
+<body class="has-fixed-header auth-pending">
+    <!-- Fixed Header Navigation -->
+    <div id="global-header"></div>
 
     <div class="theme-toggle">
         <button id="light-mode" class="active" title="Light Mode">☀️</button>
@@ -339,6 +333,12 @@
         </div>
     </footer>
 
+    <!-- Auth + Header Scripts -->
+    <script src="/assets/js/firebase-config.js"></script>
+    <script src="/assets/js/auth-manager.js"></script>
+    <script src="/assets/js/auth-ui.js"></script>
+    <script src="/assets/js/header-loader.js"></script>
+    <script src="/assets/js/auth-navigation.js"></script>
     <script src="shared/mechanics-scripts.js"></script>
 </body>
 </html>

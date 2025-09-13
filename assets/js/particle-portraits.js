@@ -16,43 +16,25 @@ class ParticlePortrait {
         this.physicistName = physicistName;
         this.particles = [];
         this.mouse = { x: null, y: null, radius: 100 };
-        this.animationId = null;
         this._observer = null;
         this._onResize = null;
         this.prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        
-        // Performance optimizations
-        this.isVisible = true;
-        this.frameCount = 0;
-        this.targetFPS = this.prefersReducedMotion ? 24 : 30; // Reduced from 60fps
-        this.fpsInterval = 1000 / this.targetFPS;
-        this.lastFrameTime = 0;
         
         this.init();
     }
     
     init() {
         // Set canvas size
-    this.resize();
-    this._onResize = () => this.resize();
-    window.addEventListener('resize', this._onResize);
-        
-        // Add visibility detection
-        this.setupVisibilityObserver();
+        this.resize();
+        this._onResize = () => this.resize();
+        window.addEventListener('resize', this._onResize);
         
         // Load image and create particles
         this.loadImage();
     }
     
     setupVisibilityObserver() {
-        if ('IntersectionObserver' in window) {
-            this._observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    this.isVisible = entry.isIntersecting;
-                });
-            });
-            this._observer.observe(this.container);
-        }
+        // No visibility observer needed for static rendering
     }
     
     resize() {
@@ -77,14 +59,14 @@ class ParticlePortrait {
         img.onload = () => {
             console.log('Image loaded successfully:', this.imageUrl);
             this.createParticles(img);
-            this.animate();
+            this.renderStill();
         };
         
         img.onerror = (error) => {
             console.error('Image failed to load:', this.imageUrl, error);
             // Fallback to text-based particles if image fails
             this.createTextParticles();
-            this.animate();
+            this.renderStill();
         };
         
         // Use relative path without leading slash for local files
@@ -119,12 +101,15 @@ class ParticlePortrait {
     const offsetX = (cssW - width) / 2;
     const offsetY = (cssH - height) / 2;
         
-        // Dynamic sampling gap to target a particle budget for efficiency
-        const targetParticles = this.prefersReducedMotion ? 8000 : 12000;
+    // Dynamic sampling gap to target a particle budget for efficiency
+    const isMobile = window.innerWidth <= 768;
+    // Static: increase density slightly for better clarity (one-time render)
+    const targetParticles = this.prefersReducedMotion ? 9000 : (isMobile ? 12000 : 14000);
         const area = width * height;
         let gap = Math.max(2, Math.round(Math.sqrt(area / targetParticles)));
-        gap = Math.min(gap, 5); // clamp upper bound
-        const sizeScale = gap / 2; // keep coverage consistent
+    gap = Math.min(gap, 6); // clamp upper bound
+    // Keep apparent coverage similar across gaps
+    const sizeScale = Math.max(0.85, Math.min(1.35, 3 / gap));
 
         // Cache key by image and scale/gap
         const cacheKey = `${this.imageUrl}|${width}x${height}|g${gap}`;
@@ -149,8 +134,9 @@ class ParticlePortrait {
                 const a = data[index + 3];
                 if (a > 100) {
                     const brightness = (r + g + b) / 3;
-                    const base = brightness < 120 ? 3.2 : 2.4;
-                    const size = base * sizeScale;
+                    // slightly larger dots for a clearer still portrait
+                    const baseSize = brightness < 130 ? 2.4 : 1.8;
+                    const size = baseSize * sizeScale;
                     const color = `rgb(${r}, ${g}, ${b})`;
                     const px = x; // offset applied on rehydrate to allow reuse across positions
                     const py = y;
@@ -200,34 +186,24 @@ class ParticlePortrait {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
     
-    animate(currentTime = 0) {
-        // Only animate if visible and enough time has passed
-        if (!this.isVisible || currentTime - this.lastFrameTime < this.fpsInterval) {
-            this.animationId = requestAnimationFrame((time) => this.animate(time));
-            return;
-        }
+    // No animate loop needed for static rendering
 
-    this.lastFrameTime = currentTime;
-    // Clear using CSS pixel dimensions (transform already maps units)
-    this.ctx.clearRect(0, 0, this.cssWidth || this.canvas.width, this.cssHeight || this.canvas.height);
-        
-        // Only update every 2nd frame to reduce CPU usage
-        const shouldUpdate = this.frameCount % 2 === 0;
-        
-        // Update and draw particles
-        this.particles.forEach(particle => {
-            if (shouldUpdate) particle.update(this.mouse);
-            particle.draw(this.ctx);
-        });
-        
-        this.frameCount++;
-        this.animationId = requestAnimationFrame((time) => this.animate(time));
+    renderStill() {
+        if (!this.ctx) return;
+        // Clear using CSS pixel dimensions
+        this.ctx.clearRect(0, 0, this.cssWidth || this.canvas.width, this.cssHeight || this.canvas.height);
+        for (let i = 0; i < this.particles.length; i++) {
+            const p = this.particles[i];
+            p.x = p.baseX;
+            p.y = p.baseY;
+            p.vx = 0;
+            p.vy = 0;
+            p.draw(this.ctx);
+        }
     }
     
     destroy() {
-        if (this.animationId) {
-            cancelAnimationFrame(this.animationId);
-        }
+        // No animation to stop; just cleanup
         this.particles = [];
         if (this.canvas && this.canvas.parentNode) {
             this.canvas.parentNode.removeChild(this.canvas);
@@ -236,10 +212,7 @@ class ParticlePortrait {
             window.removeEventListener('resize', this._onResize);
             this._onResize = null;
         }
-        if (this._observer) {
-            this._observer.disconnect();
-            this._observer = null;
-        }
+        if (this._observer) { this._observer.disconnect(); this._observer = null; }
     }
 }
 
@@ -255,11 +228,11 @@ class Particle {
         this.color = color;
         this.size = size;
         this.density = Math.random() * 30 + 1;
-        this.vx = (Math.random() - 0.5) * 0.4; // Increased movement
-        this.vy = (Math.random() - 0.5) * 0.4;
+        this.vx = (Math.random() - 0.5) * 0.3; // slightly calmer
+        this.vy = (Math.random() - 0.5) * 0.3;
         this.angle = Math.random() * Math.PI * 2;
-        this.angleSpeed = (Math.random() - 0.5) * 0.02; // More rotation
-        this.floatRadius = Math.random() * 1.2 + 0.8; // Larger float radius
+        this.angleSpeed = (Math.random() - 0.5) * 0.015;
+        this.floatRadius = Math.random() * 1.0 + 0.6; // smaller float radius
     }
     
     update(mouse) {
@@ -270,21 +243,21 @@ class Particle {
         const floatX = Math.cos(this.angle) * this.floatRadius;
         const floatY = Math.sin(this.angle) * this.floatRadius;
         
-        // Reduced random velocity changes for more lively movement
-        this.vx += (Math.random() - 0.5) * 0.03; // Increased from 0.02
-        this.vy += (Math.random() - 0.5) * 0.03;
+        // Reduced random velocity changes for efficiency
+        this.vx += (Math.random() - 0.5) * 0.02;
+        this.vy += (Math.random() - 0.5) * 0.02;
         
         // Return to base position with spring physics
-        const returnSpeed = 0.06; // Slightly faster return
+        const returnSpeed = 0.05;
         this.vx += (this.baseX + floatX - this.x) * returnSpeed;
         this.vy += (this.baseY + floatY - this.y) * returnSpeed;
         
         // Apply friction
-        this.vx *= 0.96; // Less friction for more movement
-        this.vy *= 0.96;
+        this.vx *= 0.965;
+        this.vy *= 0.965;
         
         // Limit maximum velocity
-        const maxVel = 1.2; // Increased max velocity
+        const maxVel = 1.0;
         if (Math.abs(this.vx) > maxVel) this.vx = maxVel * Math.sign(this.vx);
         if (Math.abs(this.vy) > maxVel) this.vy = maxVel * Math.sign(this.vy);
         
@@ -294,22 +267,11 @@ class Particle {
     }
     
     draw(ctx) {
-        // Add subtle glow to particles
-        if (this.size > 3.5) {
-            ctx.shadowColor = this.color;
-            ctx.shadowBlur = 3;
-        }
-        
         ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.closePath();
         ctx.fill();
-        
-        // Reset shadow for performance
-        if (this.size > 3.5) {
-            ctx.shadowBlur = 0;
-        }
     }
 }
 
@@ -383,8 +345,9 @@ const physicists = [
 document.addEventListener('DOMContentLoaded', () => {
     const heroSection = document.querySelector('.particle-hero');
     if (heroSection) {
-        let currentPhysicist = 0;
-        let portrait = null;
+    let currentPhysicist = 0;
+    let portrait = null;
+    let currentPhysicistObj = null;
         
         // Create portrait container if it doesn't exist (centered with quote)
         let portraitContainer = document.getElementById('particle-portrait');
@@ -437,52 +400,46 @@ document.addEventListener('DOMContentLoaded', () => {
         const physicistBag = createShuffleBag(physicists);
         const lastQuoteByName = new Map();
 
-        function showNextPhysicist() {
+        function pickRandomQuote(physicist) {
+            const list = physicist.quotes || [physicist.quote];
+            if (!list || list.length === 0) return '';
+            if (list.length === 1) return list[0];
+            const last = lastQuoteByName.get(physicist.name);
+            const candidates = list.filter(q => q !== last);
+            const q = candidates[Math.floor(Math.random() * candidates.length)];
+            lastQuoteByName.set(physicist.name, q);
+            return q;
+        }
+
+        function renderQuote(physicist) {
+            const quoteElement = document.getElementById('physicist-quote');
+            if (!quoteElement) return;
+            const q = pickRandomQuote(physicist);
+            quoteElement.innerHTML = `
+                <blockquote style="margin: 0; font-size: 1.1rem; line-height: 1.6;">
+                    "${q}"
+                    <cite style="display: block; margin-top: 0.8rem; font-size: 0.95rem; color: #4F46E5; font-weight: 600;">— ${physicist.name}</cite>
+                </blockquote>
+            `;
+        }
+
+        // No timer: quote renders once per page load
+        
+        function showOnce() {
             const physicist = physicistBag.next();
             if (portrait) portrait.destroy();
+            currentPhysicistObj = physicist;
             createNewPortrait(physicist);
+            // Render quote once (no rotation)
+            renderQuote(physicist);
         }
         
         function createNewPortrait(physicist) {
             portrait = new ParticlePortrait('particle-portrait', physicist.image, physicist.name);
-            
-            // Update quote
-            const quoteElement = document.getElementById('physicist-quote');
-            if (quoteElement) {
-                const list = physicist.quotes || [physicist.quote];
-                let q = list[0];
-                if (list.length > 1) {
-                    const last = lastQuoteByName.get(physicist.name);
-                    const candidates = list.filter(s => s !== last);
-                    q = pickRandom(candidates);
-                    lastQuoteByName.set(physicist.name, q);
-                }
-                quoteElement.innerHTML = `
-                    <blockquote style="margin: 0; font-size: 1.1rem; line-height: 1.6;">
-                        "${q}"
-                        <cite style="display: block; margin-top: 0.8rem; font-size: 0.95rem; color: #4F46E5; font-weight: 600;">— ${physicist.name}</cite>
-                    </blockquote>
-                `;
-            }
         }
         
-        // Show first physicist
-        showNextPhysicist();
-        
-        // Rotate every 10–14s randomly; pause when tab hidden
-        let intervalId;
-        function scheduleNext() {
-            const ms = 10000 + Math.random() * 4000;
-            intervalId = setTimeout(() => { showNextPhysicist(); scheduleNext(); }, ms);
-        }
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                if (intervalId) clearTimeout(intervalId);
-            } else {
-                scheduleNext();
-            }
-        });
-        scheduleNext();
+        // Show a single static portrait and a random quote once
+        showOnce();
     }
 });
 

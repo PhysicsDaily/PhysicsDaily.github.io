@@ -63,6 +63,9 @@
     box-sizing: border-box;
 }
 
+/* Ensure space for global fixed header when present */
+body.has-fixed-header { padding-top: 60px; }
+
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;

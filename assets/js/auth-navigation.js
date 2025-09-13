@@ -14,11 +14,15 @@ class AuthNavigationHandler {
         if (this.initialized) return;
         
         // Wait for DOM to be ready
+        const ready = () => this.setupNavigation();
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.setupNavigation());
+            document.addEventListener('DOMContentLoaded', ready);
         } else {
-            this.setupNavigation();
+            ready();
         }
+
+        // Also wait for global header injection
+        document.addEventListener('globalHeaderReady', () => this.setupNavigation());
 
         // Listen for auth state changes
         if (window.authManager) {
@@ -41,6 +45,44 @@ class AuthNavigationHandler {
         this.userMenu = document.getElementById('header-user-menu');
         this.userAvatar = document.getElementById('header-user-avatar');
         this.userName = document.getElementById('header-user-name');
+    this.dashboardLink = document.getElementById('header-dashboard-link'); // may not exist now
+        this.profileTrigger = document.getElementById('header-profile-trigger');
+        this.profileDropdown = document.getElementById('profile-dropdown');
+
+        // Attach dropdown handlers once
+        if (this.profileTrigger && !this._dropdownBound) {
+            this._dropdownBound = true;
+            this.profileTrigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                const expanded = this.profileTrigger.getAttribute('aria-expanded') === 'true';
+                this.toggleDropdown(!expanded);
+            });
+
+            // Click-away to close
+            document.addEventListener('click', (e) => {
+                if (!this.profileDropdown || !this.profileTrigger) return;
+                const within = this.profileDropdown.contains(e.target) || this.profileTrigger.contains(e.target);
+                if (!within) this.toggleDropdown(false);
+            });
+
+            // ESC to close
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') this.toggleDropdown(false);
+            });
+
+            // Wire sign out in dropdown
+            const signOutBtn = document.getElementById('header-sign-out');
+            if (signOutBtn) {
+                signOutBtn.addEventListener('click', async () => {
+                    this.toggleDropdown(false);
+                    if (window.authUI && typeof window.authUI.signOut === 'function') {
+                        await window.authUI.signOut();
+                    } else if (window.authManager) {
+                        await window.authManager.signOut();
+                    }
+                });
+            }
+        }
     }
 
     updateNavigationUI(user) {
@@ -71,6 +113,10 @@ class AuthNavigationHandler {
                 }
             }
 
+            // Show Dashboard link after account
+            // Dashboard remains in profile dropdown; inline link optional
+            if (this.dashboardLink) this.dashboardLink.style.display = 'inline';
+
             // Update personalized welcome message if it exists
             const welcomeElement = document.getElementById('personalizedWelcome');
             if (welcomeElement) {
@@ -90,12 +136,27 @@ class AuthNavigationHandler {
                 this.userMenu.style.display = 'none';
             }
 
+            if (this.dashboardLink) this.dashboardLink.style.display = 'none';
+
             // Hide personalized welcome
             const welcomeElement = document.getElementById('personalizedWelcome');
             if (welcomeElement) {
                 welcomeElement.style.display = 'none';
             }
         }
+
+        // Mark header as ready (remove pending) after first run
+        const header = document.querySelector('.fixed-header');
+        if (header && header.classList.contains('auth-pending')) {
+            header.classList.remove('auth-pending');
+        }
+    }
+
+    toggleDropdown(open) {
+        if (!this.profileTrigger || !this.profileDropdown) return;
+        this.profileTrigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        this.profileDropdown.classList.toggle('open', !!open);
+        this.profileDropdown.setAttribute('aria-hidden', open ? 'false' : 'true');
     }
 }
 
