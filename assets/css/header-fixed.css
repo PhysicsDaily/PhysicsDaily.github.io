@@ -74,6 +74,34 @@
     width: 100%;
 }
 
+/* Screen reader only utility (in case page doesn't define it) */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* Hamburger button (hidden on desktop) */
+.mobile-nav-toggle { display: none; background: transparent; border: 0; padding: .5rem; cursor: pointer; }
+.mobile-nav-toggle .hamburger {
+    width: 24px; height: 2px; background: var(--text-primary); position: relative; display: block; transition: transform .2s ease, background .2s ease;
+}
+.mobile-nav-toggle .hamburger::before,
+.mobile-nav-toggle .hamburger::after {
+    content: ""; position: absolute; left: 0; width: 100%; height: 2px; background: var(--text-primary); transition: transform .2s ease, opacity .2s ease; 
+}
+.mobile-nav-toggle .hamburger::before { transform: translateY(-7px); }
+.mobile-nav-toggle .hamburger::after  { transform: translateY(7px); }
+.mobile-nav-toggle[aria-expanded="true"] .hamburger { background: transparent; }
+.mobile-nav-toggle[aria-expanded="true"] .hamburger::before { transform: rotate(45deg); }
+.mobile-nav-toggle[aria-expanded="true"] .hamburger::after  { transform: rotate(-45deg); }
+
 /* XP pill next to profile */
 .fixed-header .xp-pill {
     display: inline-flex;
@@ -373,8 +401,57 @@ body.auth-ready .fixed-header .nav-links {
         padding: 0.5rem 1rem;
     }
     
-    .fixed-header .nav-links { display: none; }
+    .fixed-header .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--header-bg);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1rem;
+        border-top: 1px solid var(--border-color);
+        box-shadow: var(--shadow-md);
+    }
+
+    .fixed-header .nav-links.active {
+        display: flex;
+    }
     
+    .fixed-header .nav-links a,
+    .fixed-header .nav-links .profile,
+    .fixed-header .nav-links .sign-in-btn {
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .fixed-header .nav-links a:last-child,
+    .fixed-header .nav-links .sign-in-btn {
+        border-bottom: none;
+    }
+
+    .fixed-header .xp-pill {
+        margin-left: auto;
+        margin-right: 1rem;
+    }
+
+    .profile-dropdown {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        border: none;
+        padding: 0;
+    }
+
+    .profile-dropdown a {
+        padding-left: 2rem;
+    }
+
+    .fixed-header .mobile-nav-toggle { display: block; }
+
     .theme-toggle-vertical {
         top: 70px;
         right: 10px;

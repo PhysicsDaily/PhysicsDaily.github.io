@@ -4,7 +4,7 @@
   const CACHE_KEY = 'pd:header:html';
   const CACHE_TS_KEY = 'pd:header:ts';
   const CACHE_VER_KEY = 'pd:header:ver';
-  const CACHE_VER = '7'; // bump to invalidate old cached markup
+  const CACHE_VER = '8'; // bump to invalidate old cached markup
   const MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
 
   const applyHeaderHtml = (html) => {
@@ -41,6 +41,46 @@
 
     // Announce header ready so auth-navigation can wire events
     document.dispatchEvent(new CustomEvent('globalHeaderReady'));
+
+    // Ensure mobile nav works even on pages that don't load global.js
+    (function initMobileNav(){
+      const navToggle = document.querySelector('.mobile-nav-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      if (!navToggle || !navLinks) return;
+      if (navToggle.dataset.navInitialized) return; // idempotent
+      navToggle.dataset.navInitialized = 'true';
+
+      navToggle.addEventListener('click', () => {
+        const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', String(!isExpanded));
+        navLinks.classList.toggle('active');
+      });
+
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navToggle.setAttribute('aria-expanded', 'false');
+          navLinks.classList.remove('active');
+        });
+      });
+    })();
+
+    // Ensure a global footer is present even if the page didn't load global.js
+    (function ensureFooter(){
+      try {
+        if (!document.getElementById('global-footer')) {
+          const ph = document.createElement('div');
+          ph.id = 'global-footer';
+          document.body.appendChild(ph);
+        }
+        const hasFooterLoader = Array.from(document.querySelectorAll('script[src]')).some(s => s.src.includes('footer-loader.js'));
+        if (!hasFooterLoader) {
+          const s = document.createElement('script');
+          s.src = '/assets/js/footer-loader.js';
+          s.async = true;
+          document.head.appendChild(s);
+        }
+      } catch(e) { console.warn('[HeaderLoader] ensureFooter failed', e); }
+    })();
   };
 
   const fetchAndMaybeUpdateCache = async () => {

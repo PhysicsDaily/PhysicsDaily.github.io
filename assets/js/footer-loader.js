@@ -4,7 +4,7 @@
   const CACHE_KEY = 'pd:footer:html';
   const CACHE_TS_KEY = 'pd:footer:ts';
   const CACHE_VER_KEY = 'pd:footer:ver';
-  const CACHE_VER = '1';
+  const CACHE_VER = '2';
   const MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
 
   const applyFooterHtml = (html) => {

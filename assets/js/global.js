@@ -196,30 +196,41 @@ const __initGlobal = function() {
     }
 
     // --- Mobile Navigation ---
-    const navToggle = document.querySelector('.nav-toggle');
-    const navLinks = document.querySelector('.nav-links');
+    const initMobileNav = () => {
+        const navToggle = document.querySelector('.mobile-nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
 
-    if (navToggle && navLinks) {
-        navToggle.addEventListener('click', () => {
-            navToggle.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
+        if (navToggle && navLinks) {
+            // Prevent adding multiple listeners
+            if (navToggle.dataset.navInitialized) return;
+            navToggle.dataset.navInitialized = 'true';
 
-        // Close mobile menu when clicking on links
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navToggle.classList.remove('active');
-                navLinks.classList.remove('active');
+            navToggle.addEventListener('click', () => {
+                const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+                navToggle.setAttribute('aria-expanded', !isExpanded);
+                navLinks.classList.toggle('active');
             });
-        });
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
-                navToggle.classList.remove('active');
-                navLinks.classList.remove('active');
-            }
-        });
+            // Close mobile menu when clicking on links
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navToggle.setAttribute('aria-expanded', 'false');
+                        navLinks.classList.remove('active');
+                    }
+                });
+            });
+        }
+    };
+
+    // Re-initialize mobile nav when header is ready
+    document.addEventListener('globalHeaderReady', initMobileNav);
+    
+    // Also run on initial load in case header is not dynamic
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMobileNav);
+    } else {
+        initMobileNav();
     }
 
     // --- Progress Tracking (Common functionality) ---
