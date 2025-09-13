@@ -49,6 +49,22 @@ class AuthNavigationHandler {
         this.profileTrigger = document.getElementById('header-profile-trigger');
         this.profileDropdown = document.getElementById('profile-dropdown');
 
+        // Listen for profile updates (e.g., from settings page)
+        document.addEventListener('userProfileUpdated', (e) => {
+            const { nickname } = e.detail || {};
+            if (nickname && this.userName) {
+                this.userName.textContent = nickname;
+            }
+            const welcomeElement = document.getElementById('personalizedWelcome');
+            if (welcomeElement && nickname) {
+                const welcomeText = welcomeElement.querySelector('p');
+                if (welcomeText) {
+                    welcomeText.textContent = `Welcome back, ${nickname}! Continue your physics journey.`;
+                }
+                welcomeElement.style.display = 'block';
+            }
+        });
+
         // Attach dropdown handlers once
         if (this.profileTrigger && !this._dropdownBound) {
             this._dropdownBound = true;
@@ -107,9 +123,14 @@ class AuthNavigationHandler {
                     };
                 }
                 
-                // Update user name
+                // Update user name (prefer local nickname override)
                 if (this.userName) {
-                    this.userName.textContent = user.displayName || user.email?.split('@')[0] || 'User';
+                    let nickname = null;
+                    try {
+                        const raw = localStorage.getItem('pd:user:profile');
+                        nickname = raw ? JSON.parse(raw).nickname : null;
+                    } catch {}
+                    this.userName.textContent = nickname || user.displayName || user.email?.split('@')[0] || 'User';
                 }
             }
 
@@ -120,9 +141,15 @@ class AuthNavigationHandler {
             // Update personalized welcome message if it exists
             const welcomeElement = document.getElementById('personalizedWelcome');
             if (welcomeElement) {
+                // Prefer nickname override if available
+                let nickname = null;
+                try {
+                    const raw = localStorage.getItem('pd:user:profile');
+                    nickname = raw ? JSON.parse(raw).nickname : null;
+                } catch {}
                 const welcomeText = welcomeElement.querySelector('p');
                 if (welcomeText) {
-                    welcomeText.textContent = `Welcome back, ${user.displayName || user.email?.split('@')[0]}! Continue your physics journey.`;
+                    welcomeText.textContent = `Welcome back, ${nickname || user.displayName || user.email?.split('@')[0]}! Continue your physics journey.`;
                 }
                 welcomeElement.style.display = 'block';
             }
