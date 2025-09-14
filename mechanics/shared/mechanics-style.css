@@ -57,77 +57,7 @@
     --gradient-modern: linear-gradient(135deg, #e11d48 0%, #be185d 100%);
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Ensure space for global fixed header when present */
-body.has-fixed-header { padding-top: 60px; }
-
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    line-height: 1.6;
-    color: var(--text-primary);
-    background: var(--bg-primary);
-    min-height: 100vh;
-    transition: var(--transition);
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-}
-
-/* Base typography polish */
-h1, h2, h3, h4 { letter-spacing: -0.01em; line-height: 1.25; }
-p { color: var(--text-secondary); }
-ul, ol { color: var(--text-secondary); }
-
-/* Dark Mode Toggle - positioned below contributions */
-.theme-toggle {
-    position: fixed;
-    top: 5rem;
-    right: 2rem;
-    z-index: 1000;
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 50px;
-    padding: 0.5rem;
-    box-shadow: var(--shadow-md);
-    transition: var(--transition);
-}
-
-.theme-toggle:hover {
-    transform: scale(1.05);
-    box-shadow: var(--shadow-lg);
-}
-
-.theme-toggle button {
-    background: none;
-    border: none;
-    padding: 0.5rem;
-    border-radius: 50%;
-    cursor: pointer;
-    color: var(--text-secondary);
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-}
-
-.theme-toggle button:hover {
-    background: var(--bg-tertiary);
-    color: var(--text-primary);
-}
-
-.theme-toggle button.active {
-    background: var(--primary-color);
-    color: white;
-}
+/* Removed remaining theme toggle block */
 
 /* Navigation */
 .nav {
@@ -594,10 +524,7 @@ ul, ol { color: var(--text-secondary); }
         padding: 0 1rem;
     }
 
-    .theme-toggle {
-        top: 4rem;
-        right: 1rem;
-    }
+    /* removed legacy theme toggle */
 
     .nav-content {
         flex-direction: column;

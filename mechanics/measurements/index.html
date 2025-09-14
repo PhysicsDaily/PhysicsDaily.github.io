@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Ensure global shared styles (boxes, theme toggle, layout) -->
+    <link rel="stylesheet" href="../../assets/css/global.css">
     <style>
         :root {
             --primary-color: #2563eb;
@@ -244,55 +246,6 @@
             padding: 2rem 0;
         }
 
-        /* Vertical theme toggle styling */
-        .theme-toggle {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            z-index: 1000;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 25px;
-            padding: 8px;
-            box-shadow: var(--shadow-lg);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .theme-toggle button {
-            background: none;
-            border: none;
-            padding: 12px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 18px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            color: var(--text-secondary);
-        }
-
-        .theme-toggle button:hover {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            transform: scale(1.05);
-        }
-
-        .theme-toggle button.active {
-            background: var(--primary-color);
-            color: white;
-            transform: scale(1.1);
-            box-shadow: var(--shadow-md);
-        }
-
-        .theme-toggle button.active:hover {
-            background: var(--primary-dark);
-        }
 
         .section {
             margin: 32px 0;
@@ -388,15 +341,17 @@
         }
 
         .formula-box {
-            background: var(--bg-secondary);
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
+            background: linear-gradient(135deg, #f3e8ff, #a855f7);
+            border: 2px solid #9333ea;
+            border-radius: 12px;
             padding: 20px;
             margin: 16px 0;
             text-align: center;
             font-family: 'JetBrains Mono', monospace;
             font-size: 1.2rem;
             font-weight: 500;
+            color: white;
+            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
         }
 
         .example-box {
@@ -907,11 +862,7 @@
                 top: 0;
             }
 
-            .theme-toggle {
-                top: 80px;
-                right: 10px;
-                scale: 0.85;
-            }
+            /* removed legacy theme toggle styles */
 
             .header h1 {
                 font-size: 2rem;
@@ -1001,7 +952,7 @@
             padding: 1rem;
             backdrop-filter: blur(10px);
         }
-        /* New generic content box for formal paragraph grouping */
+        /* Enhanced colorful section boxes */
         .content-box {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
@@ -1009,6 +960,109 @@
             border-radius: 8px;
             margin: 1rem 0;
         }
+
+        /* Subtle themed section boxes (aligned with kinematics & chapter3) */
+        .theory-box,
+        .definition-box,
+        .formula-section,
+        .practical-box,
+        .exercise-box,
+        .units-box,
+        .precision-box,
+        .dimensional-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 1.25rem 1.25rem 1rem;
+            margin: 1.25rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Individual accent colors */
+        .theory-box { border-left-color: var(--warning-color); background: linear-gradient(135deg,#fff7ed,#fffbeb); }
+        .definition-box { border-left-color: var(--primary-color); background: linear-gradient(135deg,#f1f5f9,#eff6ff); }
+        .formula-section { border-left-color: #7c3aed; background: linear-gradient(135deg,#f5f3ff,#ede9fe); }
+        .practical-box { border-left-color: #059669; background: linear-gradient(135deg,#f0fdf4,#dcfce7); }
+        .exercise-box { border-left-color: var(--danger-color); background: linear-gradient(135deg,#fef2f2,#fee2e2); }
+        .units-box { border-left-color: #0d9488; background: linear-gradient(135deg,#f0fdfa,#ccfbf1); }
+        .precision-box { border-left-color: #f43f5e; background: linear-gradient(135deg,#fff1f2,#ffe4e6); }
+        .dimensional-box { border-left-color: #0284c7; background: linear-gradient(135deg,#f0f9ff,#e0f2fe); }
+
+        .theory-box h3, .theory-box h4,
+        .definition-box h3, .definition-box h4,
+        .formula-section h3, .formula-section h4,
+        .practical-box h3, .practical-box h4,
+        .exercise-box h3, .exercise-box h4,
+        .units-box h3, .units-box h4,
+        .precision-box h3, .precision-box h4,
+        .dimensional-box h3, .dimensional-box h4 { margin-top: 0; margin-bottom: 0.75rem; }
+
+        /* Tone down previously enhanced existing boxes to match subtle style */
+        .highlight-box,
+        .example-box,
+        .beginner-note,
+        .advanced-note,
+        .info-box,
+        .tip-box,
+        .danger-note,
+        .learning-objectives {
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-color);
+            border-radius: 8px;
+            background: var(--bg-secondary);
+            padding: 1.25rem 1.25rem 1rem;
+            margin: 1.25rem 0;
+            box-shadow: none;
+            color: var(--text-secondary);
+        }
+
+        .beginner-note { border-left-color: var(--warning-color); }
+        .advanced-note { border-left-color: #7c3aed; }
+        .example-box { border-left-color: var(--success-color); }
+        .tip-box { border-left-color: var(--success-color); }
+        .danger-note { border-left-color: var(--danger-color); }
+        .info-box { border-left-color: var(--primary-color); }
+        .learning-objectives { border-left-color: var(--primary-color); }
+
+        .highlight-box h4, .example-box h4, .beginner-note h4, .advanced-note h4, .info-box h4, .tip-box h4, .danger-note h4, .learning-objectives h3, .learning-objectives h4 { margin-top: 0; }
+
+        /* Formula box revert to neutral style like kinematics */
+        .formula-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid #7c3aed;
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin: 1.25rem 0;
+            text-align: left;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            box-shadow: none;
+        }
+
+        /* (Removed saturated gradients above; subtle learning objectives handled with generic style) */
+
+        /* Dark mode: use neutral backgrounds, keep accent borders */
+        [data-theme="dark"] .theory-box,
+        [data-theme="dark"] .definition-box,
+        [data-theme="dark"] .formula-section,
+        [data-theme="dark"] .practical-box,
+        [data-theme="dark"] .exercise-box,
+        [data-theme="dark"] .units-box,
+        [data-theme="dark"] .precision-box,
+        [data-theme="dark"] .dimensional-box,
+        [data-theme="dark"] .highlight-box,
+        [data-theme="dark"] .example-box,
+        [data-theme="dark"] .beginner-note,
+        [data-theme="dark"] .advanced-note,
+        [data-theme="dark"] .info-box,
+        [data-theme="dark"] .tip-box,
+        [data-theme="dark"] .danger-note,
+        [data-theme="dark"] .learning-objectives,
+        [data-theme="dark"] .formula-box { background: var(--bg-secondary); box-shadow: none; }
     </style>
     <script>
         // Progressive navigation system
@@ -1213,11 +1267,6 @@
         </div>
     </nav>
 
-    <!-- Vertical theme toggle -->
-    <div class="theme-toggle">
-        <button id="light-theme" title="Light Theme">☀️</button>
-        <button id="dark-theme" title="Dark Theme">🌙</button>
-    </div>
 
     <div class="breadcrumb">
         <div class="container">
@@ -1316,12 +1365,14 @@
 
             <!-- Section 1: Physical Quantities & Standards -->
             <div id="section-1-1" class="section">
+                <div class="theory-box">
                     <h2>1.1 Physical Quantities, Standards, and Units</h2>
                     
                     <h3>Definition of a Physical Quantity</h3>
                     <p>A <strong>physical quantity</strong> is any measurable property of matter or energy that can be used to explain physical phenomena in a quantitative way.</p>
+                </div>
                     
-                    <div class="highlight-box">
+                    <div class="definition-box">
                         <h4>Components of a Physical Quantity</h4>
                         <p>For a physical quantity to exist, it must have two essential parts:</p>
                         <ol>
@@ -1347,9 +1398,9 @@
                             <tr><td>5 × 10⁶ = 5,000,000</td><td>mm</td></tr>
                         </table>
                         <p><strong>Notice:</strong> As the unit gets smaller, the numerical value gets larger!</p>
-                    </div>
+                    </dreiv>
                     
-                    <div class="highlight-box">
+                    <div class="practical-box">
                         <h4>Principal Categories</h4>
                         <ul>
                             <li><strong>Scalar Quantities:</strong> Have magnitude only
@@ -1361,8 +1412,10 @@
                         </ul>
                     </div>
 
+                <div class="theory-box">
                     <h3>Operational Definitions</h3>
                     <p>Each physical quantity must have an <strong>operational definition</strong> - a precise description of how to measure it. This ensures anyone can reproduce the measurement anywhere in the world.</p>
+                </div>
                     
                     <div class="example-box">
                         <h4>Example: Operational Definition of Velocity</h4>
@@ -1382,45 +1435,6 @@
                         </ol>
                     </div>
 
-                    <h3>Basic Concepts Recap</h3>
-                    <ol>
-                        <li>The magnitude of a quantity = numerical value (n) × unit (u). For any fixed physical quantity: <span class="equation">n₁u₁ = n₂u₂ = constant</span>.</li>
-                        <li>Units are either <strong>fundamental (base)</strong> or <strong>derived</strong>.</li>
-                        <li>Fundamental units cannot be derived from other units (e.g., m, kg, s, A, K, mol, cd).</li>
-                        <li>Derived units are algebraic combinations of base units (e.g., m·s⁻¹, kg·m·s⁻²).</li>
-                        <li>The SI system has seven base units + two supplementary (radian, steradian).</li>
-                        <li>A <strong>coherent system</strong>: all derived units emerge from base units with factor 1 (no extra numerical constants).</li>
-                        <li>A <strong>rationalised system</strong> uses a single unit per base quantity (e.g., SI vs older electrostatic systems).</li>
-                        <li><strong>Dimensional formulae</strong> of a quantity are independent of the unit system chosen.</li>
-                        <li>The magnitude (value) of a physical quantity is invariant; only the numerical part changes with unit choice.</li>
-                        <li><em>Conversion principle:</em> Always express into absolute (not gravitational) units before applying dimensional conversion formulas.</li>
-                    </ol>
-
-                    <div class="beginner-note">
-                        <h4>Review Questions</h4>
-                        <div class="question-card">
-                            <div class="question-header" onclick="toggleAnswer('q1_1')">
-                                <span class="question-number">Q1.</span>
-                                <span class="question-text">Is speed a scalar or vector quantity? What about velocity?</span>
-                                <span class="toggle-icon">+</span>
-                            </div>
-                            <div class="answer-content" id="q1_1">
-                                <p><strong>Answer:</strong> Speed is a scalar (magnitude only: "50 km/h"), while velocity is a vector (magnitude + direction: "50 km/h north"). This distinction is crucial in physics!</p>
-                            </div>
-                        </div>
-                        
-                        <div class="question-card">
-                            <div class="question-header" onclick="toggleAnswer('q1_2')">
-                                <span class="question-number">Q2.</span>
-                                <span class="question-text">Why can't we use a rubber band as a standard for length?</span>
-                                <span class="toggle-icon">+</span>
-                            </div>
-                            <div class="answer-content" id="q1_2">
-                                <p><strong>Answer:</strong> A rubber band stretches with temperature and tension, violating the "invariable" requirement. A good standard must be unchanging over time and conditions.</p>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="nav-buttons">
                         <button class="btn btn-prev" onclick="navigateToSection('intro')">
                             ← Introduction
@@ -1434,11 +1448,15 @@
 
             <!-- Section 1.2: SI Units -->
             <div id="section-1-2" class="section">
-                <h2>1.2 The International System of Units (SI)</h2>
-                
-                <p>The International System of Units (SI) provides a standardized framework for measurement that enables scientists worldwide to communicate effectively. This system is built on seven fundamental base units from which all other units are derived.</p>
+                <div class="units-box">
+                    <h2>1.2 The International System of Units (SI)</h2>
+                    
+                    <p>The International System of Units (SI) provides a standardized framework for measurement that enables scientists worldwide to communicate effectively. This system is built on seven fundamental base units from which all other units are derived.</p>
+                </div>
 
-                <h3>Base Units of SI</h3>
+                <div class="definition-box">
+                    <h3>Base Units of SI</h3>
+                </div>
                 <div class="table-responsive">
                     <table>
                         <thead>
@@ -1496,8 +1514,10 @@
                     </table>
                 </div>
 
-                <h3>Derived Units</h3>
-                <p>Many physical quantities are expressed using derived units, which are combinations of base units. Some common derived units have special names:</p>
+                <div class="formula-section">
+                    <h3>Derived Units</h3>
+                    <p>Many physical quantities are expressed using derived units, which are combinations of base units. Some common derived units have special names:</p>
+                </div>
 
                 <div class="table-responsive">
                     <table>
@@ -1550,8 +1570,10 @@
                     </table>
                 </div>
 
-                <h3>SI Prefixes</h3>
-                <p>SI prefixes allow concise representation of very large and very small numerical values. The most frequently used ranges in typical physics problems are highlighted.</p>
+                <div class="units-box">
+                    <h3>SI Prefixes</h3>
+                    <p>SI prefixes allow concise representation of very large and very small numerical values. The most frequently used ranges in typical physics problems are highlighted.</p>
+                </div>
 
                 <div class="table-responsive">
                     <table>
@@ -1676,7 +1698,9 @@
                 <div class="danger-note"><strong>Do not confuse:</strong> AU (astronomical unit) with Å (angstrom).</div>
 
                 <!-- Practice Questions for Section 1.2 -->
-                <h3>Exercises</h3>
+                <div class="exercise-box">
+                    <h3>Exercises</h3>
+                </div>
                 
                 <div class="question-card">
                     <div class="question-header" onclick="toggleQuestion(this)">
@@ -1693,67 +1717,6 @@
                     </div>
                 </div>
 
-                <h4>Illustration MCQ</h4>
-                <div class="question-card">
-                    <div class="question-header" onclick="toggleQuestion(this)">
-                        <div class="question-number">I1</div>
-                        <div class="question-text">SI unit of surface tension is: (a) N·s·m⁻¹ (b) J·s⁻¹ (c) N·m⁻² (d) N·m⁻¹</div>
-                        <div class="toggle-icon">+</div>
-                    </div>
-                    <div class="answer-content">
-                        <p><strong>Fast Recall:</strong> Surface tension = Force/Length.</p>
-                        <p>Dimension: [MT⁻²] → Unit: N/m = N·m⁻¹</p>
-                        <p><strong>Answer:</strong> (d) N·m⁻¹</p>
-                        <p class="tip-box" style="margin:0.75rem 0 0;">Memory hook: If you see a quantity involving a line or interface (film, wire loop) with force in numerator, think N·m⁻¹.</p>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question-header" onclick="toggleQuestion(this)">
-                        <div class="question-number">2</div>
-                        <div class="question-text">Convert 2.5 GW to watts and express in scientific notation.</div>
-                        <div class="toggle-icon">+</div>
-                    </div>
-                    <div class="answer-content">
-                        <p><strong>Solution:</strong></p>
-                        <p>G (giga) = 10⁹</p>
-                        <p>2.5 GW = 2.5 × 10⁹ W = <strong>2.5 × 10⁹ watts</strong></p>
-                        <p>This represents 2,500,000,000 watts.</p>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question-header" onclick="toggleQuestion(this)">
-                        <div class="question-number">3</div>
-                        <div class="question-text">A force of 250 N is applied. Express this force in terms of base SI units.</div>
-                        <div class="toggle-icon">+</div>
-                    </div>
-                    <div class="answer-content">
-                        <p><strong>Solution:</strong></p>
-                        <p>Newton (N) is a derived unit for force.</p>
-                        <p>From Newton's second law: F = ma</p>
-                        <p>1 N = 1 kg⋅m⋅s⁻²</p>
-                        <p>Therefore: 250 N = <strong>250 kg⋅m⋅s⁻²</strong></p>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question-header" onclick="toggleQuestion(this)">
-                        <div class="question-number">4</div>
-                        <div class="question-text">Which of the following is NOT a base SI unit? (a) kilogram (b) ampere (c) newton (d) kelvin</div>
-                        <div class="toggle-icon">+</div>
-                    </div>
-                    <div class="answer-content">
-                        <p><strong>Answer: (c) newton</strong></p>
-                        <p><strong>Explanation:</strong></p>
-                        <p>• kilogram (kg) - base unit for mass</p>
-                        <p>• ampere (A) - base unit for electric current</p>
-                        <p>• kelvin (K) - base unit for temperature</p>
-                        <p>• newton (N) - derived unit for force (kg⋅m⋅s⁻²)</p>
-                        <p>The newton is derived from base units and is therefore not a base unit itself.</p>
-                    </div>
-                </div>
-
                 <div class="nav-buttons">
                     <button class="btn-prev" onclick="goToPrevSection()">← Previous: Introduction</button>
                     <button class="btn-next" onclick="goToNextSection()">Next: Dimensional Analysis →</button>
@@ -1762,11 +1725,13 @@
 
             <!-- Section 1.3: Dimensional Analysis -->
             <div id="section-1-3" class="section">
-                <h2>1.3 Dimensional Analysis</h2>
-                
-                <p>Dimensional analysis is a powerful tool for checking equations, converting units, and solving physics problems. It uses the principle that physical equations must be dimensionally consistent - both sides must have the same dimensions.</p>
+                <div class="dimensional-box">
+                    <h2>1.3 Dimensional Analysis</h2>
+                    
+                    <p>Dimensional analysis is a powerful tool for checking equations, converting units, and solving physics problems. It uses the principle that physical equations must be dimensionally consistent - both sides must have the same dimensions.</p>
+                </div>
 
-                <div class="highlight-box">
+                <div class="definition-box">
                     <h4>Definition of Dimensions</h4>
                     <p><strong>Definition:</strong> The dimension of any physical quantity is defined as the powers of the fundamental quantities in the product form.</p>
                     
@@ -1785,8 +1750,10 @@
                     <p><strong>[MLT⁻²]</strong> is called the <strong>dimensional formula</strong> of force.</p>
                 </div>
 
-                <h3>Fundamental Dimensions</h3>
-                <p>All physical quantities can be expressed in terms of fundamental dimensions:</p>
+                <div class="theory-box">
+                    <h3>Fundamental Dimensions</h3>
+                    <p>All physical quantities can be expressed in terms of fundamental dimensions:</p>
+                </div>
                 
                 <div class="table-responsive">
                     <table>
@@ -2130,7 +2097,9 @@
                 </div>
 
                 <!-- Practice Questions for Section 1.3 -->
-                <h3>Exercises</h3>
+                <div class="exercise-box">
+                    <h3>Exercises</h3>
+                </div>
                 
                 <div class="question-card">
                     <div class="question-header" onclick="toggleQuestion(this)">
@@ -2146,145 +2115,6 @@
                         <p>Dimensions of v²: [LT⁻¹]² = [L²T⁻²]</p>
                         <p>Therefore: [KE] = [M][L²T⁻²] = <strong>[ML²T⁻²]</strong></p>
                         <p>This matches the dimensional formula for energy.</p>
-                    </div>
-                </div>
-
-                <h4>Illustration MCQs</h4>
-                <div class="question-card">
-                    <div class="question-header" onclick="toggleQuestion(this)">
-                        <div class="question-number">I1</div>
-                        <div class="question-text">Dimensional analysis of (speed)ⁿ = [pressure/density]^(1/2) gives n = ?</div>
-                        <div class="toggle-icon">+</div>
-                    </div>
-                    <div class="answer-content">
-                        <p>[pressure] = [ML⁻¹T⁻²], [density] = [ML⁻³] → pressure/density = [L²T⁻²]</p>
-                        <p>Right side: ([L²T⁻²])^(1/2) = [LT⁻¹]</p>
-                        <p>Left side: [LT⁻¹]ⁿ ⇒ n = 1</p>
-                        <p><strong>Answer:</strong> 1 (This corresponds to the speed of sound pattern √(P/ρ)).</p>
-                    </div>
-                </div>
-                <div class="question-card">
-                    <div class="question-header" onclick="toggleQuestion(this)">
-                        <div class="question-number">I2</div>
-                        <div class="question-text">The self-inductance L has dimensions: (a) [ML²T⁻¹A⁻¹] (b) [ML²T⁻¹A⁻²] (c) [ML²T⁻²A⁻¹] (d) [ML²T⁻²A⁻²]</div>
-                        <div class="toggle-icon">+</div>
-                    </div>
-                    <div class="answer-content">
-                        <p>Energy stored in inductor: E = ½ L I² → [L] = [E]/[I²] = [ML²T⁻²]/[A²] = [ML²T⁻²A⁻²]</p>
-                        <p><strong>Answer:</strong> (d)</p>
-                        <p><em>Speed tip:</em> Any time you see inductance, jump to energy relation instead of flux definition.</p>
-                    </div>
-                </div>
-                <div class="question-card">
-                    <div class="question-header" onclick="toggleQuestion(this)">
-                        <div class="question-number">I3</div>
-                        <div class="question-text">Energy density (energy per unit volume) has the same dimensions as which of the following? (a) Pressure (b) Force (c) Surface tension (d) Power</div>
-                        <div class="toggle-icon">+</div>
-                    </div>
-                    <div class="answer-content">
-                        <p>Energy density: [Energy]/[L³] = [ML²T⁻²]/[L³] = [ML⁻¹T⁻²]</p>
-                        <p>Pressure: Force/Area = [MLT⁻²]/[L²] = [ML⁻¹T⁻²]</p>
-                        <p>Others: Force [MLT⁻²]; Surface tension [MT⁻²]; Power [ML²T⁻³]</p>
-                        <p><strong>Answer:</strong> (a) Pressure</p>
-                        <p class="trap-box" style="margin:0.75rem 0 0;">Common trap: Students wrongly pick force because they recall work/force relations. Always reduce to M-L-T powers.</p>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question-header" onclick="toggleQuestion(this)">
-                        <div class="question-number">2</div>
-                        <div class="question-text">In Van der Waals equation (p + a/V²)(V - b) = RT, find dimensions of constants 'a' and 'b'.</div>
-                        <div class="toggle-icon">+</div>
-                    </div>
-                    <div class="answer-content">
-                        <p><strong>Solution:</strong></p>
-                        <p>According to homogeneity principle:</p>
-                        <p><strong>For constant 'a':</strong> [p] = [a/V²]</p>
-                        <p>[ML⁻¹T⁻²] = [a]/[L³]²</p>
-                        <p>[ML⁻¹T⁻²] = [a]/[L⁶]</p>
-                        <p>[a] = [ML⁻¹T⁻²][L⁶] = <strong>[ML⁵T⁻²]</strong></p>
-                        
-                        <p><strong>For constant 'b':</strong> [V] = [b]</p>
-                        <p><strong>[b] = [L³]</strong></p>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question-header" onclick="toggleQuestion(this)">
-                        <div class="question-number">3</div>
-                        <div class="question-text">Derive E = mc² using dimensional analysis.</div>
-                        <div class="toggle-icon">+</div>
-                    </div>
-                    <div class="answer-content">
-                        <p><strong>Solution:</strong></p>
-                        <p>Let energy (E) depend on mass (m) and speed of light (c):</p>
-                        <p>E = km^x c^y (where k is proportionality constant)</p>
-                        
-                        <p><strong>Dimensionally:</strong></p>
-                        <p>[E] = [m]^x [c]^y</p>
-                        <p>[ML²T⁻²] = [M]^x [LT⁻¹]^y</p>
-                        <p>[ML²T⁻²] = [M^x L^y T^(-y)]</p>
-                        
-                        <p><strong>Equating powers:</strong></p>
-                        <p>For M: x = 1</p>
-                        <p>For L: y = 2</p>
-                        <p>For T: -y = -2, so y = 2 ✓</p>
-                        
-                        <p>Therefore: E = kmc² (where k = 1 experimentally)</p>
-                        <p><strong>Result: E = mc²</strong></p>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question-header" onclick="toggleQuestion(this)">
-                        <div class="question-number">4</div>
-                        <div class="question-text">Convert 60 km/h to m/s using dimensional analysis.</div>
-                        <div class="toggle-icon">+</div>
-                    </div>
-                    <div class="answer-content">
-                        <p><strong>Solution:</strong></p>
-                        <p>60 km/h × (1000 m/1 km) × (1 h/3600 s)</p>
-                        <p>= 60 × 1000/3600 m/s</p>
-                        <p>= 60,000/3600 m/s</p>
-                        <p>= <strong>16.7 m/s</strong></p>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question-header" onclick="toggleQuestion(this)">
-                        <div class="question-number">3</div>
-                        <div class="question-text">Check if the equation v = at + v₀ is dimensionally consistent.</div>
-                        <div class="toggle-icon">+</div>
-                    </div>
-                    <div class="answer-content">
-                        <p><strong>Solution:</strong></p>
-                        <p>Left side: [v] = [LT⁻¹]</p>
-                        <p>Right side: [at] + [v₀]</p>
-                        <p>• [a] = [LT⁻²]</p>
-                        <p>• [t] = [T]</p>
-                        <p>• [at] = [LT⁻²][T] = [LT⁻¹]</p>
-                        <p>• [v₀] = [LT⁻¹]</p>
-                        <p>Both terms on right side: [LT⁻¹] + [LT⁻¹] = [LT⁻¹]</p>
-                        <p><strong>Yes, the equation is dimensionally consistent.</strong></p>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question-header" onclick="toggleQuestion(this)">
-                        <div class="question-number">4</div>
-                        <div class="question-text">A student claims that distance d = vt + ½at³. Is this equation correct?</div>
-                        <div class="toggle-icon">+</div>
-                    </div>
-                    <div class="answer-content">
-                        <p><strong>Solution:</strong></p>
-                        <p>Check dimensional consistency:</p>
-                        <p>Left side: [d] = [L]</p>
-                        <p>Right side: [vt] + [½at³]</p>
-                        <p>• [vt] = [LT⁻¹][T] = [L] ✓</p>
-                        <p>• [at³] = [LT⁻²][T³] = [LT] ✗</p>
-                        <p>The second term has dimensions of [LT], not [L].</p>
-                        <p><strong>No, this equation is dimensionally incorrect.</strong></p>
-                        <p>The correct equation is d = vt + ½at².</p>
                     </div>
                 </div>
 
@@ -2326,12 +2156,16 @@
 
             <!-- Section 1.4: Precision and Errors -->
             <div id="section-1-4" class="section">
-                <h2>1.4 Precision, Accuracy, and Error Analysis</h2>
+                <div class="precision-box">
+                    <h2>1.4 Precision, Accuracy, and Error Analysis</h2>
 
-                <p>Understanding measurement uncertainty is crucial in physics. We distinguish between precision (repeatability) and accuracy (closeness to truth), identify sources of error, and apply rules for combining uncertainties.</p>
+                    <p>Understanding measurement uncertainty is crucial in physics. We distinguish between precision (repeatability) and accuracy (closeness to truth), identify sources of error, and apply rules for combining uncertainties.</p>
+                </div>
 
-                <h3>Instrument Precision Limits</h3>
-                <p>The <strong>precision (least count)</strong> of a measuring instrument determines the smallest change it can reliably detect.</p>
+                <div class="practical-box">
+                    <h3>Instrument Precision Limits</h3>
+                    <p>The <strong>precision (least count)</strong> of a measuring instrument determines the smallest change it can reliably detect.</p>
+                </div>
                 <div class="table-responsive">
                     <table>
                         <thead>
@@ -2402,36 +2236,45 @@
                     </table>
                 </div>
 
-                <h3>Types of Errors</h3>
+                <div class="theory-box">
+                    <h3>Types of Errors</h3>
+                </div>
                 
-                <h4>1. Systematic Errors</h4>
-                <ul>
-                    <li><strong>Definition:</strong> Consistent, repeatable errors that shift all measurements in the same direction</li>
-                    <li><strong>Causes:</strong> Faulty instruments, environmental factors, procedural mistakes</li>
-                    <li><strong>Effect:</strong> Reduces accuracy but not precision</li>
-                    <li><strong>Examples:</strong> Uncalibrated scale, parallax error, thermal expansion</li>
-                </ul>
+                <div class="exercise-box">
+                    <h4>1. Systematic Errors</h4>
+                    <ul>
+                        <li><strong>Definition:</strong> Consistent, repeatable errors that shift all measurements in the same direction</li>
+                        <li><strong>Causes:</strong> Faulty instruments, environmental factors, procedural mistakes</li>
+                        <li><strong>Effect:</strong> Reduces accuracy but not precision</li>
+                        <li><strong>Examples:</strong> Uncalibrated scale, parallax error, thermal expansion</li>
+                    </ul>
+                </div>
 
-                <h4>2. Random Errors</h4>
-                <ul>
-                    <li><strong>Definition:</strong> Unpredictable variations that fluctuate randomly around the true value</li>
-                    <li><strong>Causes:</strong> Human limitations, electrical noise, environmental fluctuations</li>
-                    <li><strong>Effect:</strong> Reduces precision</li>
-                    <li><strong>Examples:</strong> Reading variations, timing uncertainties, atmospheric turbulence</li>
-                </ul>
+                <div class="exercise-box">
+                    <h4>2. Random Errors</h4>
+                    <ul>
+                        <li><strong>Definition:</strong> Unpredictable variations that fluctuate randomly around the true value</li>
+                        <li><strong>Causes:</strong> Human limitations, electrical noise, environmental fluctuations</li>
+                        <li><strong>Effect:</strong> Reduces precision</li>
+                        <li><strong>Examples:</strong> Reading variations, timing uncertainties, atmospheric turbulence</li>
+                    </ul>
+                </div>
 
-                <h3>Significant Figures</h3>
-                <p>Significant figures (sig figs) are the reliably known digits in a measured quantity, plus the first uncertain (estimated) digit.</p>
+                <div class="precision-box">
+                    <h3>Significant Figures</h3>
+                    <p>Significant figures (sig figs) are the reliably known digits in a measured quantity, plus the first uncertain (estimated) digit.</p>
+                </div>
 
-                <h4>Rules & Examples</h4>
-                <ol class="sig-rules">
-                    <li><strong>All non-zero digits are significant.</strong><br><em>Example:</em> 2345 → 4 sig figs</li>
-                    <li><strong>Leading zeros are never significant.</strong><br><em>Example:</em> 0.0234 → 3 sig figs</li>
-                    <li><strong>Zeros between non-zero digits are significant.</strong><br><em>Example:</em> 2003 → 4 sig figs</li>
-                    <li><strong>In numbers &lt; 1, zeros after decimal but before first non-zero are not significant.</strong><br><em>Example:</em> 0.00250 → 3 sig figs</li>
-                    <li><strong>Any zero between non-zero digits (even after decimal) is significant.</strong><br><em>Example:</em> 0.2035 → 4 sig figs</li>
-                    <li><strong>In numbers ≥ 1 with a decimal, trailing zeros are significant.</strong><br><em>Example:</em> 1.200 → 4 sig figs</li>
-                    <li><strong>Trailing zeros in whole numbers without a decimal may be ambiguous.</strong><br><em>Example:</em> 4500 → 2–4 sig figs (write 4.500×10³ to show 4)</li>
+                <div class="practical-box">
+                    <h4>Rules & Examples</h4>
+                    <ol class="sig-rules">
+                        <li><strong>All non-zero digits are significant.</strong><br><em>Example:</em> 2345 → 4 sig figs</li>
+                        <li><strong>Leading zeros are never significant.</strong><br><em>Example:</em> 0.0234 → 3 sig figs</li>
+                        <li><strong>Zeros between non-zero digits are significant.</strong><br><em>Example:</em> 2003 → 4 sig figs</li>
+                        <li><strong>In numbers &lt; 1, zeros after decimal but before first non-zero are not significant.</strong><br><em>Example:</em> 0.00250 → 3 sig figs</li>
+                        <li><strong>Any zero between non-zero digits (even after decimal) is significant.</strong><br><em>Example:</em> 0.2035 → 4 sig figs</li>
+                        <li><strong>In numbers ≥ 1 with a decimal, trailing zeros are significant.</strong><br><em>Example:</em> 1.200 → 4 sig figs</li>
+                        <li><strong>Trailing zeros in whole numbers without a decimal may be ambiguous.</strong><br><em>Example:</em> 4500 → 2–4 sig figs (write 4.500×10³ to show 4)</li>
                     <li><strong>Digits in the power of 10 (scientific notation) are not counted.</strong><br><em>Examples:</em> 3 × 10⁸ → 1 sig fig; 6.67 × 10⁻¹¹ → 3 sig figs</li>
                 </ol>
                 <div class="tip-box">
@@ -2509,7 +2352,9 @@
                 </div>
 
                 <!-- Practice Questions for Section 1.4 -->
-                <h3>Exercises</h3>
+                <div class="exercise-box">
+                    <h3>Exercises</h3>
+                </div>
                 
                 <div class="question-card">
                     <div class="question-header" onclick="toggleQuestion(this)">
@@ -3835,75 +3680,10 @@
                         </ul>
                     </div>
 
-                    <div class="beginner-note">
-                        <h4>🤔 Master Your Understanding:</h4>
-                        <div class="question-card">
-                            <div class="question-header" onclick="toggleAnswer('q4_1')">
-                                <span class="question-number">Q1.</span>
-                                <span class="question-text">How many significant figures are in 0.00506 and 1200?</span>
-                                <span class="toggle-icon">+</span>
-                            </div>
-                            <div class="answer-content" id="q4_1">
-                                <p><strong>Answer:</strong> 0.00506 has 3 significant figures (leading zeros don't count). 1200 is ambiguous - could be 2, 3, or 4 sig figs. Better to write as 1.20 × 10³ (3 sig figs) or 1.200 × 10³ (4 sig figs).</p>
-                            </div>
-                        </div>
-                        
-                        <div class="question-card">
-                            <div class="question-header" onclick="toggleAnswer('q4_2')">
-                                <span class="question-number">Q2.</span>
-                                <span class="question-text">If length L = (5.0 ± 0.1) m, what is the percentage error in area A = L²?</span>
-                                <span class="toggle-icon">+</span>
-                            </div>
-                            <div class="answer-content" id="q4_2">
-                                <p><strong>Solution:</strong> For A = L², the relative error is doubled.</p>
-                                <p>Relative error in L: 0.1/5.0 = 0.02 = 2%</p>
-                                <p>Relative error in A: 2 × 2% = <strong>4%</strong></p>
-                            </div>
-                        </div>
-                        
-                        <div class="question-card">
-                            <div class="question-header" onclick="toggleAnswer('q4_3')">
-                                <span class="question-number">Q3.</span>
-                                <span class="question-text">Calculate: (12.345 + 1.2) × 3.14159. Apply significant figure rules correctly.</span>
-                                <span class="toggle-icon">+</span>
-                            </div>
-                            <div class="answer-content" id="q4_3">
-                                <p><strong>Solution:</strong></p>
-                                <p>Step 1: Addition - 12.345 + 1.2 = 13.545 → 13.5 (limited by 1.2's decimal places)</p>
-                                <p>Step 2: Multiplication - 13.5 × 3.14159 = 42.41... → <strong>42.4</strong> (limited by 13.5's 3 sig figs)</p>
-                            </div>
-                        </div>
-                        
-                        <div class="question-card">
-                            <div class="question-header" onclick="toggleAnswer('q4_4')">
-                                <span class="question-number">Q4.</span>
-                                <span class="question-text">A measurement gives 25.6 ± 0.3. What is the percentage error?</span>
-                                <span class="toggle-icon">+</span>
-                            </div>
-                            <div class="answer-content" id="q4_4">
-                                <p><strong>Solution:</strong></p>
-                                <p>Percentage error = (absolute error / measured value) × 100%</p>
-                                <p>= (0.3 / 25.6) × 100% = <strong>1.2%</strong></p>
-                                <p>This is a quite precise measurement!</p>
-                            </div>
-                        </div>
-                        
-                        <div class="question-card">
-                            <div class="question-header" onclick="toggleAnswer('q4_5')">
-                                <span class="question-number">Q5.</span>
-                                <span class="question-text">If resistance R = V/I where V = (12.0 ± 0.2) V and I = (2.5 ± 0.1) A, find R with its uncertainty.</span>
-                                <span class="toggle-icon">+</span>
-                            </div>
-                            <div class="answer-content" id="q4_5">
-                                <p><strong>Solution:</strong></p>
-                                <p>Mean resistance: R = 12.0/2.5 = 4.8 Ω</p>
-                                <p>Relative errors: ΔV/V = 0.2/12.0 = 0.0167, ΔI/I = 0.1/2.5 = 0.04</p>
-                                <p>Combined relative error: ΔR/R = 0.0167 + 0.04 = 0.0567</p>
-                                <p>Absolute error: ΔR = 0.0567 × 4.8 = 0.27 ≈ 0.3 Ω</p>
-                                <p><strong>Result:</strong> R = (4.8 ± 0.3) Ω</p>
-                            </div>
-                        </div>
-                    </div>
+
+
+
+
 
                     <div class="nav-buttons">
                         <button class="btn btn-prev" onclick="navigateToSection('section3')">
@@ -3921,16 +3701,6 @@
                     <h2>🎯 Chapter Assessment</h2>
                     <p>Congratulations! You've completed the journey through measurement fundamentals. Now it's time to test your mastery and apply what you've learned.</p>
                     
-                    <div class="highlight-box">
-                        <h4>🧠 What You've Mastered:</h4>
-                        <ul>
-                            <li>✅ <strong>Physical Quantities:</strong> Distinguished scalars from vectors and understood operational definitions</li>
-                            <li>✅ <strong>SI Units:</strong> Learned the seven base units and how all other units derive from them</li>
-                            <li>✅ <strong>Dimensional Analysis:</strong> Used this powerful tool to check equations and derive relationships</li>
-                            <li>✅ <strong>Precision & Errors:</strong> Quantified uncertainty and learned error propagation rules</li>
-                        </ul>
-                    </div>
-
                     <h3>Final Assessment</h3>
                     <div class="assessment-final">
                         <div class="assessment-card featured">

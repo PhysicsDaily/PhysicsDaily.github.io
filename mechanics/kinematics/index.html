@@ -120,41 +120,7 @@
             border-radius: 4px;
             border: 1px solid var(--border-color);
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .nav {
-            background: var(--card-bg);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
+        /* removed stray brace from legacy block */
 
         .nav-links a {
             color: var(--text-secondary);
@@ -222,55 +188,7 @@
             padding: 2rem 0;
         }
 
-        /* Vertical theme toggle styling */
-        .theme-toggle {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            z-index: 1000;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 25px;
-            padding: 8px;
-            box-shadow: var(--shadow-lg);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .theme-toggle button {
-            background: none;
-            border: none;
-            padding: 12px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 18px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            color: var(--text-secondary);
-        }
-
-        .theme-toggle button:hover {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            transform: scale(1.05);
-        }
-
-        .theme-toggle button.active {
-            background: var(--primary-color);
-            color: white;
-            transform: scale(1.1);
-            box-shadow: var(--shadow-md);
-        }
-
-        .theme-toggle button.active:hover {
-            background: var(--primary-dark);
-        }
+        /* (Removed legacy vertical theme toggle styles) */
 
         .section {
             margin: 32px 0;
@@ -541,12 +459,7 @@
         }
 
         @media (max-width: 768px) {
-            .theme-toggle {
-                top: 80px;
-                right: 10px;
-                scale: 0.85;
-            }
-
+            /* legacy theme toggle styles removed */
             .header h1 {
                 font-size: 2rem;
             }
@@ -585,10 +498,7 @@
         </div>
     </nav>
 
-    <div class="theme-toggle">
-        <button id="light-theme" title="Light Theme">☀️</button>
-        <button id="dark-theme" title="Dark Theme">🌙</button>
-    </div>
+    
 
     <div class="breadcrumb">
         <div class="container">

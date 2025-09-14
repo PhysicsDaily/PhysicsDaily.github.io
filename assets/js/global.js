@@ -168,39 +168,34 @@ const __initGlobal = function() {
         }
     }
 
-    // --- Theme Toggle Functionality ---
-    const lightModeBtn = document.querySelector('#light-mode-btn, #light-mode, #light-theme');
-    const darkModeBtn = document.querySelector('#dark-mode-btn, #dark-mode, #dark-theme');
+    // --- Theme Handling (Centralized; selection moved to settings page) ---
     const docElement = document.documentElement;
+    const lightModeBtn = document.querySelector('#light-mode-btn, #light-mode, #light-theme'); // legacy support
+    const darkModeBtn  = document.querySelector('#dark-mode-btn, #dark-mode, #dark-theme');    // legacy support
+    const themeSelect  = document.getElementById('theme-select'); // new settings control
 
-    // Function to apply the theme
     const applyTheme = (theme) => {
+        if (!theme) return;
         docElement.setAttribute('data-theme', theme);
-        if (theme === 'dark') {
-            if(darkModeBtn) darkModeBtn.classList.add('active');
-            if(lightModeBtn) lightModeBtn.classList.remove('active');
-        } else {
-            if(lightModeBtn) lightModeBtn.classList.add('active');
-            if(darkModeBtn) darkModeBtn.classList.remove('active');
-        }
+        // Legacy button state (if still present anywhere)
+        if (lightModeBtn) lightModeBtn.classList.toggle('active', theme === 'light');
+        if (darkModeBtn)  darkModeBtn.classList.toggle('active', theme === 'dark');
+        // Sync settings select
+        if (themeSelect && themeSelect.value !== theme) themeSelect.value = theme;
         localStorage.setItem('theme', theme);
     };
 
-    // Check for saved theme preference or default to 'light'
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    applyTheme(savedTheme);
+    // Initialize theme
+    applyTheme(localStorage.getItem('theme') || 'light');
 
-    // Event listeners for theme buttons
-    if (lightModeBtn) {
-        lightModeBtn.addEventListener('click', () => {
-            applyTheme('light');
-        });
-    }
+    // Wire legacy buttons only if present (some pages may still have them until cleaned)
+    if (lightModeBtn) lightModeBtn.addEventListener('click', () => applyTheme('light'));
+    if (darkModeBtn)  darkModeBtn.addEventListener('click', () => applyTheme('dark'));
 
-    if (darkModeBtn) {
-        darkModeBtn.addEventListener('click', () => {
-            applyTheme('dark');
-        });
+    // Wire settings select (authoritative control now)
+    if (themeSelect && !themeSelect.dataset.bound) {
+        themeSelect.dataset.bound = 'true';
+        themeSelect.addEventListener('change', (e) => applyTheme(e.target.value));
     }
 
     // --- Mobile Navigation ---

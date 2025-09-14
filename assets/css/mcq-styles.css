@@ -631,7 +631,7 @@
 
 /* Print-friendly results */
 @media print {
-    .test-sidebar, .quiz-navigation, .theme-toggle, #instructions-container { display: none !important; }
+    .test-sidebar, .quiz-navigation, #instructions-container { display: none !important; }
     .results-container { page-break-before: always; }
     .result-question { break-inside: avoid; }
 }

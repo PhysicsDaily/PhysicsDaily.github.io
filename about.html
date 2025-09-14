@@ -82,48 +82,7 @@
             padding: 0 1.5rem;
         }
 
-        /* Dark Mode Toggle */
-        .theme-toggle-vertical {
-            position: fixed;
-            top: 2rem;
-            left: 2rem;
-            z-index: 1000;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 50px;
-            padding: 0.5rem;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-        }
-
-        .theme-toggle-vertical:hover {
-            transform: scale(1.05);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .theme-toggle-vertical button {
-            background: none;
-            border: none;
-            padding: 0.5rem;
-            border-radius: 50%;
-            cursor: pointer;
-            color: var(--text-secondary);
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .theme-toggle-vertical button:hover {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-        }
-
-        .theme-toggle-vertical button.active {
-            background: var(--primary-color);
-            color: white;
-        }
+        /* (Removed legacy theme toggle styles) */
         
         /* Navigation */
         .nav {
@@ -270,10 +229,7 @@
                 padding: 0 1rem;
             }
 
-            .theme-toggle-vertical {
-                top: 1rem;
-                left: 1rem;
-            }
+            /* removed legacy theme toggle styles */
 
             .nav-content {
                 flex-direction: column;
@@ -299,10 +255,7 @@
     <div id="global-header"></div>
     
     <!-- Vertical Theme Toggle -->
-    <div class="theme-toggle-vertical">
-        <button id="light-mode" class="active" title="Light Mode">☀️</button>
-        <button id="dark-mode" title="Dark Mode">🌙</button>
-    </div>
+    
 
     <header class="header">
         <div class="container">
