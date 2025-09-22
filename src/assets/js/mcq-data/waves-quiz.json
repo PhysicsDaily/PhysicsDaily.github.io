@@ -1,0 +1,57 @@
+[
+  {
+    "question": "What is the relationship between wave speed, frequency, and wavelength?",
+    "options": [
+      "v = fλ",
+      "v = f/λ",
+      "v = λ/f", 
+      "v = f + λ"
+    ],
+    "answer": "v = fλ",
+    "solution": "The wave equation relates wave speed (v) to frequency (f) and wavelength (λ): v = fλ. This applies to all types of waves."
+  },
+  {
+    "question": "What type of wave requires a medium to travel?",
+    "options": [
+      "Light waves",
+      "Sound waves",
+      "Radio waves", 
+      "X-rays"
+    ],
+    "answer": "Sound waves",
+    "solution": "Sound waves are mechanical waves that require a medium (solid, liquid, or gas) to propagate. Light, radio, and X-rays are electromagnetic waves that can travel through vacuum."
+  },
+  {
+    "question": "What happens when two waves of equal amplitude interfere constructively?",
+    "options": [
+      "Amplitude doubles",
+      "Amplitude becomes zero",
+      "Amplitude remains same", 
+      "Frequency doubles"
+    ],
+    "answer": "Amplitude doubles",
+    "solution": "In constructive interference, waves add together. When two waves of equal amplitude A interfere constructively, the resulting amplitude is 2A."
+  },
+  {
+    "question": "What is the Doppler effect?",
+    "options": [
+      "Change in wave speed",
+      "Change in wave amplitude",
+      "Change in observed frequency due to relative motion", 
+      "Change in wavelength only"
+    ],
+    "answer": "Change in observed frequency due to relative motion",
+    "solution": "The Doppler effect is the change in observed frequency (and wavelength) when there is relative motion between the wave source and observer."
+  },
+  {
+    "question": "In a standing wave, points of zero amplitude are called:",
+    "options": [
+      "Antinodes",
+      "Nodes",
+      "Crests", 
+      "Troughs"
+    ],
+    "answer": "Nodes",
+    "solution": "In standing waves, nodes are points of destructive interference where amplitude is always zero. Antinodes are points of maximum amplitude."
+  }
+]

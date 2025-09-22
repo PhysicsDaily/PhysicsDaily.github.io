@@ -1,0 +1,57 @@
+[
+  {
+    "question": "What is the law of reflection?",
+    "options": [
+      "Angle of incidence equals angle of reflection",
+      "Light always reflects at 45°",
+      "Reflected ray is parallel to incident ray", 
+      "All light is absorbed upon reflection"
+    ],
+    "answer": "Angle of incidence equals angle of reflection",
+    "solution": "The law of reflection states that the angle of incidence equals the angle of reflection, both measured from the normal to the surface."
+  },
+  {
+    "question": "What is Snell's law?",
+    "options": [
+      "n₁sinθ₁ = n₂sinθ₂",
+      "n₁cosθ₁ = n₂cosθ₂",
+      "n₁tanθ₁ = n₂tanθ₂", 
+      "n₁θ₁ = n₂θ₂"
+    ],
+    "answer": "n₁sinθ₁ = n₂sinθ₂",
+    "solution": "Snell's law describes refraction: n₁sinθ₁ = n₂sinθ₂, where n is refractive index and θ is angle from normal."
+  },
+  {
+    "question": "What type of lens is used to correct nearsightedness?",
+    "options": [
+      "Converging lens",
+      "Diverging lens",
+      "Cylindrical lens", 
+      "Bifocal lens"
+    ],
+    "answer": "Diverging lens",
+    "solution": "Nearsightedness (myopia) is corrected with diverging (concave) lenses that spread out light rays before they enter the eye."
+  },
+  {
+    "question": "What happens to light in total internal reflection?",
+    "options": [
+      "All light is absorbed",
+      "All light is reflected back",
+      "Light is partially transmitted", 
+      "Light changes color"
+    ],
+    "answer": "All light is reflected back",
+    "solution": "Total internal reflection occurs when light traveling from a denser to less dense medium hits the boundary at an angle greater than the critical angle. All light is reflected back."
+  },
+  {
+    "question": "What determines the color of light in terms of wave properties?",
+    "options": [
+      "Amplitude",
+      "Frequency",
+      "Speed", 
+      "Phase"
+    ],
+    "answer": "Frequency",
+    "solution": "The color of light is determined by its frequency (or equivalently, wavelength). Different frequencies correspond to different colors in the visible spectrum."
+  }
+]

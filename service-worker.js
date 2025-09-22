@@ -3,7 +3,6 @@ const CACHE_NAME = 'pd-v29';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/admin.html',
   '/assets/css/global.css',
   '/assets/css/header-fixed.css',
   '/assets/css/auth-styles.css',
@@ -18,7 +17,6 @@ const urlsToCache = [
   '/assets/js/settings.js',
   '/assets/js/progress-tracker.js',
   '/assets/js/enhanced-xp.js',
-  '/assets/js/admin-dashboard.js',
   '/settings.html',
   '/assets/partials/header.html',
   '/assets/partials/footer.html',

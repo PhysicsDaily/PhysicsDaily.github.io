@@ -1323,7 +1323,7 @@ ${pages.map(page => `  <url>
     if (allowAll) {
       robotsTxt += 'User-agent: *\\nAllow: /\\n\\n';
     } else {
-      robotsTxt += 'User-agent: *\\nDisallow: /admin/\\nDisallow: /assets/js/mcq-data/\\n\\n';
+      robotsTxt += 'User-agent: *\\nDisallow: /assets/js/mcq-data/\\n\\n';
     }
     
     // Add crawl delay for courtesy
@@ -1720,3 +1720,4 @@ logger.info('Physics Daily MCP Server started successfully', {
   availableTools: Object.keys(server.tools).length,
   pid: process.pid
 });
+

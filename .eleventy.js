@@ -29,7 +29,7 @@ module.exports = function(eleventyConfig) {
   });
 
   // Copy static assets directly to output
-  eleventyConfig.addPassthroughCopy("assets");
+  eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy("robots.txt");
   eleventyConfig.addPassthroughCopy("manifest.webmanifest");
   eleventyConfig.addPassthroughCopy("service-worker.js");
@@ -99,3 +99,4 @@ module.exports = function(eleventyConfig) {
     dataTemplateEngine: "njk"
   };
 };
+

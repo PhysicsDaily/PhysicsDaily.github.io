@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <!-- Skip to main content for accessibility -->
-    <a class="skip-link" href="#main-content">Skip to main content</a>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }} - Physics Daily</title>
@@ -13,7 +13,6 @@
     {% if pageStyle %}
     <link rel="stylesheet" href="{{ pageStyle }}">
     {% endif %}
-    
     <!-- Base uses site-wide global.css for styling to match existing UI -->
 
     <!-- Favicon -->
@@ -44,8 +43,12 @@
     <!-- Interactive Learning Components -->
     <link rel="stylesheet" href="/assets/css/interactive-components.css">
     <link rel="stylesheet" href="/assets/css/progress-tracker.css">
+    {% if topic %}
+    <link rel="stylesheet" href="/assets/css/topics/{{ topic }}-style.css">
+    {% endif %}
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <!-- Navigation (matches existing site classes) -->
     <nav class="nav">
         <div class="container">
@@ -60,7 +63,7 @@
                     <li><a href="/index.html">Home</a></li>
                     <li><a href="/leaderboard.html">Leaderboard</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" aria-label="Topics Menu">Topics ▼</a>
+                        <a href="#" class="dropdown-toggle" aria-label="Topics Menu">Topics</a>
                         <ul class="dropdown-menu">
                             <li><a href="/mechanics/">Mechanics</a></li>
                             <li><a href="/thermodynamics/">Thermodynamics</a></li>
@@ -101,12 +104,19 @@
     <script src="/assets/js/progress-tracker.js"></script>
     <script src="/assets/js/progress-widget.js"></script>
     
+    {% if topic %}
+    <script src="/assets/js/topics/{{ topic }}-scripts.js" defer></script>
+    {% endif %}
     <!-- Progress Streak Display -->
     <div id="streak-display"></div>
-    {% if pageScript %}
-    <script src="{{ pageScript }}"></script>
+    {% if pageScripts %}
+    {% for script in pageScripts %}
+    <script src="{{ script }}" defer></script>
+    {% endfor %}
     {% endif %}
-    
+    {% if pageScript %}
+    <script src="{{ pageScript }}" defer></script>
+    {% endif %}
     <!-- Service Worker Registration -->
     <script>
       if ('serviceWorker' in navigator) {
@@ -118,3 +128,18 @@
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

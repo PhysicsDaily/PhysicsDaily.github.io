@@ -4,14 +4,14 @@
 - Site (Eleventy): `src/` -> builds to `_site/`.
   - Templates: `src/_includes/*.njk`; Data: `src/_data/`; Pages: `src/pages/*.njk`.
   - Content: `src/content/<topic>/chapter*/index.md` (Markdown with front matter).
-- Static passthrough: `assets/`, `robots.txt`, `manifest.webmanifest`, `service-worker.js`, `.well-known/`.
+- Static passthrough: `src/assets/`, `robots.txt`, `manifest.webmanifest`, `service-worker.js`, `.well-known/`.
 - Legacy HTML and topic folders at repo root are preserved for compatibility.
 - MCP server (Node): `mcp-server/` (own `package.json`, tests, linting).
 
 ## Architecture Overview
 - Static generator: Eleventy composes Markdown + Nunjucks using `.eleventy.js` collections (`chapters`, `sitemapPages`), filters (`slug`, `topicName`), and passthrough copies. `NODE_ENV=production` enables HTML minification.
 - Data flow: `src/content/**` (front matter) + templates in `src/_includes` and `src/pages` -> `_site/` static HTML; global data from `src/_data/*` (e.g., `quizzes.json`).
-- Client runtime: Mostly static HTML/CSS; PWA bits via `service-worker.js` and `manifest.webmanifest`; static assets in `assets/`.
+- Client runtime: Mostly static HTML/CSS; PWA bits via `service-worker.js` and `manifest.webmanifest`; static assets live in `src/assets/` and are passthrough-copied to the build.
 - Separation: `mcp-server/` is a standalone Node tool for content validation/automation; it is not bundled into the site.
 
 ## Build, Test, and Dev Commands
@@ -47,5 +47,7 @@
 
 ## Agent-Specific Instructions
 - Place new site content in `src/content/...` and new pages in `src/pages/...`; avoid editing legacy root HTML unless migrating.
+- Keep shared assets under `src/assets/` (topics go in `css/topics` and `js/topics`); leave legacy placeholders only until the Eleventy pages fully replace them.
 - Preserve passthrough directories and Eleventy dir config in `.eleventy.js`.
 - Keep changes focused; avoid mass reformatting outside touched files.
+

@@ -7,9 +7,9 @@ layout: base.njk
         <div class="container">
             <div class="breadcrumb">
                 <a href="/">Home</a>
-                <span class="separator">›</span>
+                <span class="separator">&gt;</span>
                 <a href="/{{ topic }}">{{ topic | topicName }}</a>
-                <span class="separator">›</span>
+                <span class="separator">&gt;</span>
                 <span class="current">Chapter {{ chapter }}: {{ title }}</span>
             </div>
             <h1>{{ title }}</h1>
@@ -24,7 +24,7 @@ layout: base.njk
                 
                 {% if hasMCQ %}
                 <a href="mcq.html" class="nav-card">
-                    <span class="nav-icon">📊</span>
+                    <span class="nav-icon" aria-hidden="true">Q</span>
                     <span class="nav-title">Multiple Choice Quiz</span>
                     <span class="nav-description">Practice with MCQs</span>
                 </a>
@@ -34,7 +34,7 @@ layout: base.njk
                 
                 {% if hasSimulation %}
                 <a href="simulation.html" class="nav-card">
-                    <span class="nav-icon">🔬</span>
+                    <span class="nav-icon" aria-hidden="true">Sim</span>
                     <span class="nav-title">Interactive Simulation</span>
                     <span class="nav-description">Visualize concepts</span>
                 </a>
@@ -49,7 +49,7 @@ layout: base.njk
             
             {% if learningObjectives %}
             <section class="learning-objectives">
-                <h2>🎯 Learning Objectives</h2>
+                <h2>Learning Objectives</h2>
                 <ul>
                     {% for objective in learningObjectives %}
                     <li>{{ objective }}</li>
@@ -60,7 +60,7 @@ layout: base.njk
             
             {% if keyConcepts %}
             <section class="key-concepts">
-                <h2>🔑 Key Concepts</h2>
+                <h2>Key Concepts</h2>
                 <div class="concepts-grid">
                     {% for concept in keyConcepts %}
                     <div class="concept-card">
@@ -77,3 +77,11 @@ layout: base.njk
         </div>
     </main>
 </div>
+
+
+
+
+
+
+
+

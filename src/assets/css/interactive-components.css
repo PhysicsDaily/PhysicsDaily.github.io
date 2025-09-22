@@ -1,0 +1,435 @@
+/* Interactive Learning Components Styles */
+
+/* Physics Simulation Container */
+.simulation-container {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.simulation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.simulation-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.simulation-title::before {
+    content: '🔬';
+    font-size: 1.5rem;
+}
+
+.simulation-canvas {
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-secondary);
+    margin-bottom: 1rem;
+}
+
+.simulation-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.simulation-controls button {
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.simulation-controls button:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.simulation-controls .start-btn {
+    background: var(--success-color);
+    color: white;
+    border-color: var(--success-color);
+}
+
+.simulation-controls .stop-btn {
+    background: var(--danger-color);
+    color: white;
+    border-color: var(--danger-color);
+}
+
+/* Video Embed Container */
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    margin: 2rem 0;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-wrapper {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
+.video-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.video-header::before {
+    content: '📹';
+    font-size: 1.3rem;
+}
+
+.video-description {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Interactive Diagram */
+.diagram-container {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.diagram-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.diagram-caption {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Concept Card */
+.concept-card {
+    background: linear-gradient(135deg, var(--card-bg), var(--bg-secondary));
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.concept-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--primary-color), var(--accent-color));
+}
+
+.concept-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.concept-title::before {
+    content: '💡';
+    font-size: 1.5rem;
+}
+
+.concept-content {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.concept-formula {
+    background: var(--bg-tertiary);
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+/* Interactive Example Box */
+.example-box {
+    background: var(--bg-secondary);
+    border: 2px dashed var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
+.example-header {
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.example-problem {
+    background: var(--card-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.example-solution {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), transparent);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    padding: 1rem;
+    border-radius: 8px;
+    color: var(--text-secondary);
+}
+
+.example-solution strong {
+    color: var(--success-color);
+}
+
+/* Practice Problem */
+.practice-problem {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
+.problem-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.problem-number {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.problem-difficulty {
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.problem-difficulty.easy {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+}
+
+.problem-difficulty.medium {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--warning-color);
+}
+
+.problem-difficulty.hard {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+}
+
+.problem-statement {
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.show-solution-btn {
+    padding: 0.5rem 1.5rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.show-solution-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.problem-solution {
+    display: none;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-color);
+}
+
+.problem-solution.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+/* Tab Container for Different Content Types */
+.content-tabs {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    margin: 2rem 0;
+    overflow: hidden;
+}
+
+.tab-buttons {
+    display: flex;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tab-button {
+    flex: 1;
+    padding: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.tab-button:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.tab-button.active {
+    color: var(--primary-color);
+    background: var(--card-bg);
+}
+
+.tab-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--primary-color);
+}
+
+.tab-content {
+    padding: 2rem;
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .simulation-container,
+    .video-wrapper,
+    .diagram-container,
+    .concept-card,
+    .practice-problem {
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .simulation-controls {
+        flex-direction: column;
+    }
+    
+    .simulation-controls button {
+        width: 100%;
+    }
+    
+    .tab-buttons {
+        flex-direction: column;
+    }
+    
+    .tab-button {
+        text-align: left;
+        border-bottom: 1px solid var(--border-color);
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

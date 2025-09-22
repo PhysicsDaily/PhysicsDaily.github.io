@@ -256,26 +256,7 @@
     </footer>
 
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Theme toggle
-        const lightModeBtn = document.getElementById('light-mode');
-        const darkModeBtn = document.getElementById('dark-mode');
-        const docElement = document.documentElement;
-
-        const applyTheme = (theme) => {
-            docElement.setAttribute('data-theme', theme);
-            lightModeBtn.classList.toggle('active', theme === 'light');
-            darkModeBtn.classList.toggle('active', theme === 'dark');
-            localStorage.setItem('theme', theme);
-        };
-
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        applyTheme(savedTheme);
-
-        lightModeBtn.addEventListener('click', () => applyTheme('light'));
-        darkModeBtn.addEventListener('click', () => applyTheme('dark'));
-        
-        // Full Quiz Data Source
+    document.addEventListener('DOMContentLoaded', () => {\r\n        // Full Quiz Data Source
         const fullQuizData = [
             { question: "1. A body is said to be in motion if it changes its position with respect to:", options: ["its own axis", "the observer", "time only", "its mass"], answer: "the observer", solution: "Motion is relative. An object's position must change relative to a reference point or observer." },
             { question: "2. Which of the following is a vector quantity?", options: ["Speed", "Distance", "Time", "Displacement"], answer: "Displacement", solution: "Displacement includes both magnitude (distance) and direction, making it a vector." },
@@ -593,3 +574,5 @@
     </script>
 </body>
 </html>
+
+
