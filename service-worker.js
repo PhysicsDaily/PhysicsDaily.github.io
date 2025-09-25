@@ -3,7 +3,7 @@ const CACHE_NAME = 'pd-v30';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/mechanics/foundations.html',
+  '/mechanics/foundation.html',
   '/assets/css/global.css',
   '/assets/css/header-fixed.css',
   '/assets/css/auth-styles.css',
