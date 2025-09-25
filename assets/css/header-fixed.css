@@ -34,7 +34,8 @@
     align-items: center;
     justify-content: space-between;
     min-height: var(--fixed-header-height);
-    padding-block: 0.35rem;
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
 }
 
 .fixed-header .logo {

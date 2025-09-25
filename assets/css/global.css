@@ -867,9 +867,7 @@ figcaption { text-align: center; color: var(--text-muted); font-size: var(--font
 ::selection { background: rgba(37, 99, 235, 0.2); }
 
 /* Motion preferences */
-@media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; animation: none !important; }
-}
+/* (Removed duplicate @media (prefers-reduced-motion: reduce) block to avoid override issues) */
 
 /* Responsive Design */
 @media (max-width: 768px) {
