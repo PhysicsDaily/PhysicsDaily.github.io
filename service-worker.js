@@ -1,13 +1,15 @@
 // Basic cache-first service worker for Physics Daily
-const CACHE_NAME = 'pd-v29';
+const CACHE_NAME = 'pd-v30';
 const urlsToCache = [
   '/',
   '/index.html',
+  '/mechanics/foundations.html',
   '/assets/css/global.css',
   '/assets/css/header-fixed.css',
   '/assets/css/auth-styles.css',
   '/assets/css/progress-tracker.css',
   '/assets/js/global.js',
+  '/assets/js/topic-toolkit.js',
   '/assets/js/header-loader.js',
   '/assets/js/auth-navigation.js',
   '/assets/js/firebase-config.js',
@@ -24,6 +26,7 @@ const urlsToCache = [
 ];
 
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => cache.addAll(urlsToCache))
@@ -52,6 +55,6 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then(keys => Promise.all(
       keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))
-    ))
+    )).then(() => self.clients.claim())
   );
 });

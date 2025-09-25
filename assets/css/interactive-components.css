@@ -67,6 +67,11 @@
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
 }
 
+.simulation-controls button:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.35);
+    outline-offset: 2px;
+}
+
 .simulation-controls .start-btn {
     background: var(--success-color);
     color: white;
@@ -319,6 +324,11 @@
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
 }
 
+.show-solution-btn:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.35);
+    outline-offset: 3px;
+}
+
 .problem-solution {
     display: none;
     margin-top: 1.5rem;
@@ -370,6 +380,11 @@
     background: var(--card-bg);
 }
 
+.tab-button:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
 .tab-button.active::after {
     content: '';
     position: absolute;
@@ -419,6 +434,26 @@
     .tab-button {
         text-align: left;
         border-bottom: 1px solid var(--border-color);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .simulation-controls button,
+    .show-solution-btn,
+    .tab-button,
+    .bookmark-btn,
+    .bookmarks-toggle,
+    .bookmark-item,
+    .concept-card,
+    .result-item,
+    .content-tabs,
+    .tab-panel,
+    .example-box,
+    .practice-problem {
+        transition: none !important;
+        animation: none !important;
+        transform: none !important;
+        box-shadow: none !important;
     }
 }
 

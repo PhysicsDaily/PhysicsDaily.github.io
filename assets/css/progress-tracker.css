@@ -57,6 +57,11 @@
     box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
 
+.mark-complete-btn:focus-visible {
+    outline: 3px solid rgba(16, 185, 129, 0.35);
+    outline-offset: 2px;
+}
+
 .mark-complete-btn.completed {
     background: var(--bg-secondary);
     color: var(--text-muted);
@@ -92,6 +97,11 @@
     border-color: var(--warning-color);
 }
 
+.bookmark-btn:focus-visible {
+    outline: 3px solid rgba(245, 158, 11, 0.35);
+    outline-offset: 2px;
+}
+
 /* Bookmarks Menu */
 .bookmarks-menu {
     position: fixed;
@@ -120,6 +130,11 @@
 .bookmarks-toggle:hover {
     transform: scale(1.1);
     box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+
+.bookmarks-toggle:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.35);
+    outline-offset: 3px;
 }
 
 .bookmark-icon {
@@ -213,6 +228,10 @@
     color: var(--danger-color);
 }
 
+.remove-bookmark:focus-visible {
+    color: var(--danger-dark);
+}
+
 .no-bookmarks {
     text-align: center;
     color: var(--text-muted);
@@ -235,6 +254,11 @@
 
 .achievement-notification.show {
     right: 20px;
+}
+
+.achievement-notification:focus-visible {
+    outline: 3px solid rgba(16, 185, 129, 0.35);
+    outline-offset: 3px;
 }
 
 .achievement-content {
@@ -350,6 +374,21 @@
     .achievement-notification {
         right: 10px;
         left: 10px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .streak-container,
+    .bookmarks-toggle,
+    .bookmark-btn,
+    .mark-complete-btn,
+    .achievement-notification,
+    .bookmark-item,
+    .progress-bar-fill {
+        transition: none !important;
+        animation: none !important;
+        transform: none !important;
+        box-shadow: none !important;
     }
 }
 

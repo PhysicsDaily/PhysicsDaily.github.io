@@ -6,48 +6,93 @@
   const CACHE_VER_KEY = 'pd:header:ver';
   const CACHE_VER = '9'; // bump to invalidate old cached markup
   const MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
+  const FALLBACK_HEADER = `
+<header class="fixed-header" data-header-fallback>
+  <div class="container">
+    <div class="header-content">
+      <a class="logo" href="/">Physics Daily</a>
+      <button class="mobile-nav-toggle" aria-controls="nav-links" aria-expanded="false" aria-label="Open menu" type="button">
+        <span class="hamburger" aria-hidden="true"></span>
+        <span class="visually-hidden">Menu</span>
+      </button>
+      <nav class="nav-links" id="nav-links">
+        <a class="home-link" href="/" hidden>Home</a>
+        <a href="/leaderboard.html">Leaderboard</a>
+        <a href="/resources.html">Resources</a>
+        <a href="/about.html">About</a>
+        <button class="btn sign-in-btn" id="header-sign-in" type="button">Sign In</button>
+      </nav>
+    </div>
+  </div>
+</header>
+`.trim();
 
-  const applyHeaderHtml = (html) => {
-    const placeholder = document.getElementById('global-header');
-    if (placeholder) {
-      placeholder.outerHTML = html; // replace placeholder with header markup
-    } else {
-      // No placeholder found: insert at the top of the body
+  const replaceHeaderMarkup = (html) => {
+    try {
+      const placeholder = document.getElementById('global-header');
+      if (placeholder) {
+        placeholder.outerHTML = html;
+        return document.querySelector('.fixed-header');
+      }
+
+      const fallbackNode = document.querySelector('[data-header-fallback]');
+      if (fallbackNode) {
+        fallbackNode.outerHTML = html;
+        return document.querySelector('.fixed-header');
+      }
+
+      const existingHeader = document.querySelector('.fixed-header');
+      if (existingHeader) {
+        existingHeader.outerHTML = html;
+        return document.querySelector('.fixed-header');
+      }
+
       document.body.insertAdjacentHTML('afterbegin', html);
+      return document.querySelector('.fixed-header');
+    } catch (error) {
+      console.error('[HeaderLoader] Failed to insert header markup:', error);
+      return null;
+    }
+  };
+
+  const applyHeaderHtml = (html, { isFallback = false } = {}) => {
+    const headerRoot = replaceHeaderMarkup(html);
+    if (!headerRoot) return;
+
+    const normalizedPath = location.pathname.replace(/index\.html$/, '');
+    const isHome = normalizedPath === '/' || normalizedPath === '';
+    const homeLink = headerRoot.querySelector('.home-link');
+    if (homeLink) {
+      homeLink.hidden = isHome;
     }
 
-    // Show Home link on non-home pages only
-    const isHome = location.pathname.endsWith('/') || location.pathname.endsWith('/index.html') || location.pathname === '/index.html';
-    const homeLink = document.querySelector('.fixed-header .home-link');
-    if (homeLink) homeLink.style.display = isHome ? 'none' : 'inline';
+    if (document.body) {
+      document.body.classList.add('has-fixed-header');
+    }
 
-    // Ensure body has spacing for fixed header
-    document.body.classList.add('has-fixed-header');
-
-    // Hide any legacy inline nav to avoid duplicates
     const legacyNav = document.querySelector('nav.nav');
     if (legacyNav) {
       legacyNav.style.display = 'none';
     }
 
-    // Re-bind sign-in button to open modal if present
-    const signInBtn = document.getElementById('header-sign-in');
-    if (signInBtn && window.authUI) {
+    const signInBtn = headerRoot.querySelector('#header-sign-in');
+    if (signInBtn && !signInBtn.dataset.authBound) {
+      signInBtn.dataset.authBound = 'true';
       signInBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.authUI.openModal();
+        if (window.authUI && typeof window.authUI.openModal === 'function') {
+          e.preventDefault();
+          window.authUI.openModal();
+        }
       });
     }
 
-    // Announce header ready so auth-navigation can wire events
-    document.dispatchEvent(new CustomEvent('globalHeaderReady'));
+    document.dispatchEvent(new CustomEvent('globalHeaderReady', { detail: { fallback: isFallback } }));
 
-    // Ensure mobile nav works even on pages that don't load global.js
-    (function initMobileNav(){
-      const navToggle = document.querySelector('.mobile-nav-toggle');
-      const navLinks = document.querySelector('.nav-links');
+    (function initMobileNav(root){
+      const navToggle = root.querySelector('.mobile-nav-toggle');
+      const navLinks = root.querySelector('.nav-links');
       if (!navToggle || !navLinks) return;
-      if (navToggle.dataset.navInitialized) return; // idempotent
+      if (navToggle.dataset.navInitialized) return;
       navToggle.dataset.navInitialized = 'true';
 
       navToggle.addEventListener('click', () => {
@@ -62,9 +107,8 @@
           navLinks.classList.remove('active');
         });
       });
-    })();
+    })(headerRoot);
 
-    // Ensure a global footer is present even if the page didn't load global.js
     (function ensureFooter(){
       try {
         if (!document.getElementById('global-footer')) {
@@ -81,14 +125,27 @@
         }
       } catch(e) { console.warn('[HeaderLoader] ensureFooter failed', e); }
     })();
+
+    if (!isFallback) {
+      window.__headerLoaderLoaded = true;
+    }
+  };
+
+  const ensureFallbackHeader = () => {
+    if (document.querySelector('[data-header-fallback]') || document.querySelector('.fixed-header')) return;
+    applyHeaderHtml(FALLBACK_HEADER, { isFallback: true });
   };
 
   const fetchAndMaybeUpdateCache = async () => {
+    const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    const timeoutId = controller ? setTimeout(() => controller.abort(), 5000) : null;
     try {
-      const resp = await fetch('/assets/partials/header.html', { cache: 'no-store' });
-      if (!resp.ok) throw new Error('Failed to load header');
+      const resp = await fetch('/assets/partials/header.html', {
+        cache: 'no-store',
+        signal: controller ? controller.signal : undefined
+      });
+      if (!resp.ok) throw new Error(`Failed to load header: ${resp.status}`);
       const html = await resp.text();
-      // Update cache for next navigation, but avoid DOM replacement now to prevent double-binding
       try {
         localStorage.setItem(CACHE_KEY, html);
         localStorage.setItem(CACHE_TS_KEY, String(Date.now()));
@@ -96,14 +153,19 @@
       } catch {}
       return html;
     } catch (e) {
-      console.error('[HeaderLoader] Network fetch failed:', e);
+      if (e && e.name === 'AbortError') {
+        console.warn('[HeaderLoader] Network fetch aborted (timeout)');
+      } else {
+        console.error('[HeaderLoader] Network fetch failed:', e);
+      }
       return null;
+    } finally {
+      if (timeoutId) clearTimeout(timeoutId);
     }
   };
 
   const injectHeader = async () => {
     try {
-      // Try local cache first for instant paint
       const cachedHtml = localStorage.getItem(CACHE_KEY);
       const cachedVer = localStorage.getItem(CACHE_VER_KEY);
       const cachedTs = parseInt(localStorage.getItem(CACHE_TS_KEY) || '0', 10);
@@ -111,22 +173,25 @@
 
       if (cachedHtml && cachedVer === CACHE_VER && fresh) {
         applyHeaderHtml(cachedHtml);
-        window.__headerLoaderLoaded = true;
-        // Refresh cache in background (don't await)
         fetchAndMaybeUpdateCache();
+        return;
+      }
+
+      ensureFallbackHeader();
+
+      const html = await fetchAndMaybeUpdateCache();
+      if (html) {
+        applyHeaderHtml(html);
+      } else if (cachedHtml) {
+        applyHeaderHtml(cachedHtml);
       } else {
-        // Fetch from network and inject
-        const html = await fetchAndMaybeUpdateCache();
-        if (html) {
-          applyHeaderHtml(html);
-        } else if (cachedHtml) {
-          // Fallback to any cached html even if stale/version-mismatch
-          applyHeaderHtml(cachedHtml);
-        }
         window.__headerLoaderLoaded = true;
       }
     } catch (e) {
       console.error('[HeaderLoader] Failed:', e);
+      if (!window.__headerLoaderLoaded) {
+        window.__headerLoaderLoaded = true;
+      }
     }
   };
 

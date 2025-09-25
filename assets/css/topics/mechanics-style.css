@@ -101,6 +101,12 @@
     color: var(--primary-color);
 }
 
+.nav-links a:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+
 /* Breadcrumb */
 .breadcrumb {
     background: var(--bg-secondary);
@@ -132,6 +138,11 @@
 .breadcrumb .current {
     color: var(--text-primary);
     font-weight: 500;
+}
+
+.btn:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.35);
+    outline-offset: 3px;
 }
 
 /* Header */
@@ -611,7 +622,23 @@
 .back-to-top:hover { transform: translateY(-2px); border-color: var(--border-hover); }
 .back-to-top.visible { display: inline-flex; }
 
-/* Dark mode transition */
-* {
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+.back-to-top:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.35);
+    outline-offset: 3px;
 }
+
+@media (prefers-reduced-motion: reduce) {
+    .fade-in,
+    .chapter-card,
+    .objectives-card,
+    .quick-access-card,
+    .btn,
+    .back-to-top {
+        transition: none !important;
+        animation: none !important;
+        transform: none !important;
+        box-shadow: none !important;
+    }
+}
+
+/* Dark mode transition handled globally */

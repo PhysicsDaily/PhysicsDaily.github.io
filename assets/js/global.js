@@ -1,4 +1,7 @@
 const __initGlobal = function() {
+    const onIdle = typeof window.requestIdleCallback === 'function'
+        ? (cb) => window.requestIdleCallback(cb, { timeout: 200 })
+        : (cb) => setTimeout(cb, 0);
     // --- Ensure Global Header & Auth on all pages ---
     (function ensureGlobalHeaderAndAuth() {
         if (window.__globalHeaderEnsured) return; // idempotent guard
@@ -99,6 +102,10 @@ const __initGlobal = function() {
                 }
                 if (!scriptAlreadyOnPage('footer-loader.js')) {
                     await loadScript('/assets/js/footer-loader.js');
+                }
+
+                if (typeof window.TopicToolkit === 'undefined' && !scriptAlreadyOnPage('topic-toolkit.js')) {
+                    await loadScript('/assets/js/topic-toolkit.js');
                 }
 
                 window.__globalHeaderEnsured = true;
@@ -249,12 +256,11 @@ const __initGlobal = function() {
             bar.style.width = `${progress}%`;
         });
 
-        // Update statistics
         const statNumbers = document.querySelectorAll('.stat-number');
         statNumbers.forEach(stat => {
             const type = stat.dataset.type;
             const section = stat.dataset.section || 'general';
-            
+
             if (type === 'completed') {
                 const completed = Object.values(getChapterProgress(section)).filter(p => p === 100).length;
                 stat.textContent = completed;
@@ -268,68 +274,100 @@ const __initGlobal = function() {
         });
     }
 
-    // Initialize progress display
-    updateProgressDisplay();
-    
-    // Enhanced progress tracking with auth integration
-    if (typeof authManager !== 'undefined' && authManager.getCurrentUser()) {
-        // Update progress bars with cloud data
-        authManager.loadUserProgress().then(() => {
-            updateProgressDisplay();
-        });
-    }
+    const initProgressSystems = () => {
+        updateProgressDisplay();
+
+        if (typeof authManager !== 'undefined' && authManager.getCurrentUser()) {
+            authManager.loadUserProgress().then(() => {
+                updateProgressDisplay();
+            }).catch((err) => {
+                console.warn('[Global] Unable to hydrate cloud progress:', err);
+            });
+        }
+    };
 
     // --- Scroll Reveal Animation ---
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+    let scrollObserver;
+    const initScrollReveal = () => {
+        if (scrollObserver || !('IntersectionObserver' in window)) return;
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            scrollObserver.observe(el);
         });
-    }, observerOptions);
-
-    document.querySelectorAll('.fade-in').forEach(el => {
-        observer.observe(el);
-    });
+    };
 
     // --- Back-to-top Button (auto-inject if not present) ---
-    let backToTop = document.querySelector('.back-to-top');
-    if (!backToTop) {
-        backToTop = document.createElement('button');
-        backToTop.className = 'back-to-top';
-        backToTop.setAttribute('aria-label', 'Back to top');
-        backToTop.title = 'Back to top';
-        backToTop.innerHTML = '↑';
-        document.body.appendChild(backToTop);
-    }
+    let backToTopButton;
+    let backToTopScrollHandler;
+    const initBackToTop = () => {
+        if (!backToTopButton) {
+            backToTopButton = document.querySelector('.back-to-top');
+            if (!backToTopButton) {
+                backToTopButton = document.createElement('button');
+                backToTopButton.className = 'back-to-top';
+                backToTopButton.setAttribute('aria-label', 'Back to top');
+                backToTopButton.title = 'Back to top';
+                backToTopButton.innerHTML = '↑';
+                document.body.appendChild(backToTopButton);
+            }
+        }
 
-    const toggleBackToTop = () => {
-        if (window.scrollY > 300) backToTop.classList.add('visible');
-        else backToTop.classList.remove('visible');
+        const toggleBackToTop = () => {
+            if (window.scrollY > 300) backToTopButton.classList.add('visible');
+            else backToTopButton.classList.remove('visible');
+        };
+
+        if (!backToTopScrollHandler) {
+            backToTopScrollHandler = () => toggleBackToTop();
+            window.addEventListener('scroll', backToTopScrollHandler, { passive: true });
+        }
+
+        toggleBackToTop();
+
+        if (!backToTopButton.dataset.bound) {
+            backToTopButton.dataset.bound = 'true';
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
     };
-    toggleBackToTop();
-    window.addEventListener('scroll', toggleBackToTop, { passive: true });
-    backToTop.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
 
     // --- Smooth Scrolling for Anchor Links ---
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+    const initSmoothAnchors = () => {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            if (anchor.dataset.smoothScrollBound) return;
+            anchor.dataset.smoothScrollBound = 'true';
+            anchor.addEventListener('click', function (e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
+    };
+
+    onIdle(() => {
+        initProgressSystems();
+        initScrollReveal();
+        initBackToTop();
+        initSmoothAnchors();
     });
 };
 

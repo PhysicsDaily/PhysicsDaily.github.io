@@ -4,10 +4,6 @@
   "description": "Physics Daily - Your comprehensive physics notes and study resources",
   "main": "service-worker.js",
   "scripts": {
-    "build": "eleventy",
-    "serve": "eleventy --serve",
-    "start": "eleventy --serve --watch",
-    "clean": "rimraf _site",
     "format": "prettier --write .",
     "lint": "eslint . --ext .js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -30,9 +26,7 @@
   },
   "homepage": "https://github.com/PhysicsDaily/PhysicsDaily.github.io#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.1",
     "eslint": "^9.35.0",
-    "prettier": "^3.6.2",
-    "rimraf": "^6.0.1"
+    "prettier": "^3.6.2"
   }
 }
