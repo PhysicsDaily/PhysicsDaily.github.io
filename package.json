@@ -27,7 +27,12 @@
   },
   "homepage": "https://github.com/PhysicsDaily/PhysicsDaily.github.io#readme",
   "devDependencies": {
-    "eslint": "^9.35.0",
+    "@eslint/css": "^0.11.1",
+    "@eslint/js": "^9.36.0",
+    "@eslint/json": "^0.13.2",
+    "@eslint/markdown": "^7.3.0",
+    "eslint": "^9.36.0",
+    "globals": "^16.4.0",
     "prettier": "^3.6.2",
     "rimraf": "^5.0.5"
   }
