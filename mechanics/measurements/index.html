@@ -550,6 +550,14 @@
             color: var(--text-secondary);
         }
 
+        .progress-text span {
+            background: var(--bg-tertiary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
         /* Section navigation styles */
         .section-nav {
             display: flex;
@@ -819,9 +827,17 @@
         .content-section.active { display: none !important; }
 
         /* Progress and Section Navigation Styles (standardized) */
-        .progress-container { margin: 2rem 0; }
+        .progress-container {
+            margin: 0 0 2rem;
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 80px;
+            z-index: 95;
+        }
         .progress-bar { background: var(--border-color); height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 1rem; }
-        .progress-fill { background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); height: 100%; width: 16.67%; transition: width 0.3s ease; }
+        .progress-fill { background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); height: 100%; width: 0%; transition: width 0.3s ease; }
         .section-indicators { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
         .section-indicator { background: var(--bg-secondary); border: 2px solid var(--border-color); color: var(--text-secondary); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; }
         .section-indicator:hover { border-color: var(--primary-color); color: var(--primary-color); }
@@ -1094,13 +1110,20 @@
             const currentIndex = sections.indexOf(currentSection);
             const progress = ((currentIndex + 1) / sections.length) * 100;
             const progressFill = document.getElementById('progress-fill') || document.querySelector('.progress-fill');
-            const progressText = document.querySelector('.progress-text span:last-child');
+            const progressLabel = document.getElementById('progressText');
+            const progressValue = document.getElementById('progressPercent');
+            const activeIndicator = document.querySelector(`[data-section="${currentSection}"]`);
             
             if (progressFill) {
                 progressFill.style.width = progress + '%';
             }
-            if (progressText) {
-                progressText.textContent = `${currentIndex + 1}/${sections.length}`;
+            if (progressValue) {
+                progressValue.textContent = Math.round(progress) + '%';
+            }
+            if (progressLabel && activeIndicator) {
+                const fallback = activeIndicator.textContent.trim();
+                const cleanedLabel = fallback.replace(/^[^A-Za-z0-9]+\s*/, '').trim();
+                progressLabel.textContent = cleanedLabel || fallback;
             }
         }
         
@@ -1285,23 +1308,10 @@
             <h1>Chapter 1: Measurement</h1>
             <p class="subtitle">Foundation of Scientific Physics</p>
             <p class="description">
-                Master the fundamental concepts of measurement, units, and dimensional analysis that form the bedrock of all physics - from basic concepts to advanced applications.
+                Master the fundamental concepts of measurement, units, and dimensional analysis that form the bedrock of all physics.
             </p>
         </div>
     </header>
-
-    <!-- Progress indicator -->
-    <div class="progress-container">
-        <div class="container">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <div class="progress-text">
-                <span id="progressText">Introduction</span>
-                <span id="progressPercent">0%</span>
-            </div>
-        </div>
-    </div>
 
     <main class="main-content">
         <div class="container">
@@ -1311,6 +1321,11 @@
                 <div class="progress-bar">
                     <div class="progress-fill" id="progress-fill"></div>
                 </div>
+                <div class="progress-text">
+                    <span id="progressText">Introduction</span>
+                    <span id="progressPercent">0%</span>
+                </div>
+
                 <div class="section-indicators">
                     <button class="section-indicator active" data-section="intro">📚 Introduction</button>
                     <button class="section-indicator" data-section="section-1-1">📊 Quantities</button>
@@ -2794,3 +2809,4 @@
 <script src="../../assets/js/header-loader.js"></script>
 </body>
 </html>
+

@@ -1,0 +1,253 @@
+---
+layout: layouts/mechanics.njk
+title: "Chapter 1: Measurement Intensive Review"
+description: "Rapid reference kit for measurement, significant figures, and dimensional analysis."
+permalink: mechanics/measurements/ir.html
+
+breadcrumbs:
+  - label: "Home"
+    url: "/index.html"
+  - label: "Classical Mechanics"
+    url: "/index.html#foundations"
+  - label: "Scientific Measurement"
+    url: "/mechanics/measurements/index.html"
+  - label: "Intensive Review"
+    current: true
+
+hero:
+  title: "Measurement Intensive Review"
+  subtitle: "Review precision tools, error analysis, and conversion fluency in one sitting."
+  description: "Use this focused reference to tighten Chapter 1 mastery. Skim the checkpoints, reinforce best practices, and finish with lab-ready drills."
+  tags:
+    - "Rapid recall"
+    - "Error analysis"
+    - "Lab readiness"
+  stats:
+    - number: "30 min"
+      label: "Warm-up plan"
+    - number: "6"
+      label: "Checkpoints"
+    - number: "3"
+      label: "Drill sets"
+
+quickAccess:
+  title: "Jump back into the chapter"
+  cards:
+    - icon: "&#128211;"
+      title: "Concept walkthrough"
+      description: "Revisit the full guided notes and worked examples."
+      url: "index.html"
+    - icon: "&#128270;"
+      title: "Targeted practice"
+      description: "Use the MCQ bank to stress-test precision and accuracy."
+      url: "mcq.html"
+    - icon: "&#9874;"
+      title: "Lab checklist"
+      description: "Review the pre-lab routine before recording data."
+      url: "#lab-checklist"
+
+reviewModules:
+  - title: "Measurement framework"
+    summary: "Confirm the ideas that govern every data capture."
+    points:
+      - "Differentiate precision vs. accuracy with a quick sketch or data table example."
+      - "Trace the SI base units and identify the derived quantities used in current problems."
+      - "Rehearse the conversion ladder process you prefer (factor-label or ratio method)."
+  - title: "Significant figures control"
+    summary: "Re-ensure every calculation respects reporting rules."
+    points:
+      - "List the four sig-fig detection rules and one example that tends to trick you."
+      - "Practice a chained multiplication/division and an addition/subtraction case."
+      - "Note where guard digits protect against rounding drift."
+  - title: "Dimensional analysis fluency"
+    summary: "Test whether every equation you use makes sense dimensionally."
+    points:
+      - "Check two textbook formulas: do both sides share the same dimensions?"
+      - "Set up a two-step conversion (mixed units) and confirm units cancel cleanly."
+      - "Explain what would break if you picked an inconsistent unit system."
+
+practiceSets:
+  - title: "Warm-up precision drills"
+    duration: "10 minutes"
+    summary: "Start with bite-sized tasks to activate definitions."
+    tasks:
+      - "Categorize five measurements as precise, accurate, both, or neither."
+      - "Rewrite three values in scientific notation with the correct sig figs."
+      - "Identify the limiting measurement in a composite calculation."
+  - title: "Conversion gauntlet"
+    duration: "12 minutes"
+    summary: "Work a progressive string of unit conversions."
+    tasks:
+      - "Convert a velocity across metric prefixes, then to imperial units."
+      - "Scale an area and volume problem to highlight squared vs. cubed reasoning."
+      - "Finish with a dimensional equation proof to validate the final result."
+  - title: "Lab report ready"
+    duration: "8 minutes"
+    summary: "Simulate the checks you perform before handing in data."
+    tasks:
+      - "Draft uncertainty notation for a measurement device you use often."
+      - "Verify that all recorded values include units and context."
+      - "Write one reflection sentence on how measurement choices affect conclusions."
+
+labChecklist:
+  title: "Lab readiness checklist"
+  description: "Use this quick scan before labs or timed assessments."
+  items:
+    - "Instrument zeroed and calibration verified."
+    - "Units consistent across all recorded values."
+    - "Significant figures noted for each instrument reading."
+    - "Conversion factors written before calculation begins."
+    - "Uncertainty or tolerance annotated beside final results."
+
+reflectionPrompts:
+  title: "Reflection cues"
+  items:
+    - "What part of the measurement workflow still feels mechanical instead of intuitive?"
+    - "Which calculation step produced the biggest rounding drift today?"
+    - "How will you communicate uncertainty without overcomplicating the report?"
+
+callout:
+  heading: "Keep momentum"
+  text: "Log your checkpoint completions and move on to Motion in One Dimension while this precision work stays fresh."
+  ctaLabel: "Back to course map"
+  ctaUrl: "../foundation.html"
+---
+
+<div class="breadcrumb">
+    <div class="container">
+        <nav aria-label="Breadcrumb">
+            {% for crumb in breadcrumbs %}
+                {% if crumb.current %}
+                    <span class="current">{{ crumb.label }}</span>
+                {% else %}
+                    <a href="{{ crumb.url }}">{{ crumb.label }}</a>
+                    <span class="separator">></span>
+                {% endif %}
+            {% endfor %}
+        </nav>
+    </div>
+</div>
+
+<header class="header">
+    <div class="container">
+        <h1>{{ hero.title }}</h1>
+        <p class="subtitle">{{ hero.subtitle }}</p>
+        <p class="description">{{ hero.description }}</p>
+
+        <div class="chapter-topics">
+            {% for tag in hero.tags %}
+                <span class="topic-tag">{{ tag }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="progress-stats">
+            {% for stat in hero.stats %}
+                <div class="stat-item">
+                    <span class="stat-number">{{ stat.number }}</span>
+                    <span class="stat-label">{{ stat.label }}</span>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</header>
+
+{% if quickAccess %}
+<section class="quick-access-section" id="quick-access">
+    <div class="container">
+        <h2>{{ quickAccess.title }}</h2>
+        <div class="quick-access-grid">
+            {% for card in quickAccess.cards %}
+                <a class="quick-access-card" href="{{ card.url }}">
+                    <span class="access-icon" aria-hidden="true">{{ card.icon | safe }}</span>
+                    <h3>{{ card.title }}</h3>
+                    <p>{{ card.description }}</p>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<main class="main-content">
+    <div class="container">
+        <section class="ir-section" id="concept-refresh">
+            <h2>Concept checkpoints</h2>
+            <div class="ir-grid">
+                {% for module in reviewModules %}
+                    <article class="ir-card">
+                        <h3>{{ module.title }}</h3>
+                        <p class="ir-lede">{{ module.summary }}</p>
+                        <ul class="ir-list">
+                            {% for point in module.points %}
+                                <li>{{ point }}</li>
+                            {% endfor %}
+                        </ul>
+                    </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="ir-section" id="practice-sprints">
+            <h2>Practice sprints</h2>
+            <div class="ir-grid">
+                {% for set in practiceSets %}
+                    <article class="ir-card">
+                        <div class="ir-card-header">
+                            <h3>{{ set.title }}</h3>
+                            <span class="badge">{{ set.duration }}</span>
+                        </div>
+                        <p class="ir-lede">{{ set.summary }}</p>
+                        <ul class="ir-list">
+                            {% for task in set.tasks %}
+                                <li>{{ task }}</li>
+                            {% endfor %}
+                        </ul>
+                    </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="ir-section" id="lab-checklist">
+            <h2>{{ labChecklist.title }}</h2>
+            <p class="section-intro">{{ labChecklist.description }}</p>
+            <div class="ir-checklist">
+                <ul>
+                    {% for item in labChecklist.items %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+
+        <section class="ir-section" id="reflection">
+            <h2>{{ reflectionPrompts.title }}</h2>
+            <div class="ir-card">
+                <ul class="ir-list">
+                    {% for prompt in reflectionPrompts.items %}
+                        <li>{{ prompt }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+
+        <section class="ir-section" id="next-step">
+            <div class="ir-callout">
+                <h3>{{ callout.heading }}</h3>
+                <p>{{ callout.text }}</p>
+                <a class="btn btn-secondary" href="{{ callout.ctaUrl }}">{{ callout.ctaLabel }}</a>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-links">
+            <a href="/index.html">Home</a>
+            <a href="/about.html">About</a>
+            <a href="/contribute.html">Contribute</a>
+            <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io">GitHub</a>
+        </div>
+        <p>&copy; Physics Daily. Made with curiosity for physics enthusiasts everywhere.</p>
+    </div>
+</footer>

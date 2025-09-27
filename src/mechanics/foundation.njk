@@ -1,0 +1,289 @@
+---
+layout: layouts/mechanics.njk
+title: "Classical Mechanics: Foundations & Kinematics"
+description: "Master classical mechanics fundamentals including measurement, motion, Newton's laws, and momentum. Comprehensive study guide for Chapters 1-7."
+permalink: mechanics/foundation.html
+
+breadcrumbs:
+  - label: "Home"
+    url: "../index.html"
+  - label: "Classical Mechanics"
+    url: "../index.html#foundations"
+  - label: "Foundations & Kinematics"
+    current: true
+
+hero:
+  title: "Classical Mechanics: Foundations & Kinematics"
+  subtitle: "Chapters 1-7 | Build your mechanics toolkit"
+  description: "Explore the fundamental principles of classical mechanics through a systematic study of measurement theory, kinematics, dynamics, and particle systems. This structured pathway delivers the mathematical and conceptual framework required for advanced physics."
+  tags:
+    - "Structured curriculum"
+    - "Scientific method practice"
+    - "Problem-solving focus"
+  stats:
+    - number: "7"
+      label: "Chapters"
+    - number: "21"
+      label: "Core concepts"
+    - number: "35 h"
+      label: "Guided study time"
+
+objectives:
+  title: "Learning objectives"
+  items:
+    - icon: "&#128207;"
+      title: "Measurement mastery"
+      description: "Develop proficiency with SI units, significant figures, and dimensional analysis for reliable physical measurements."
+    - icon: "&#128200;"
+      title: "Kinematic analysis"
+      description: "Model motion in one, two, and three dimensions using graphical representations and calculus-ready equations."
+    - icon: "&#9881;"
+      title: "Newtonian reasoning"
+      description: "Apply Newton's laws to diagnose forces, predict accelerations, and design solution strategies."
+    - icon: "&#9878;"
+      title: "Conservation perspective"
+      description: "Use conservation of momentum to understand both isolated and real-world particle interactions."
+
+progress:
+  title: "Progress planner"
+  description: "Track your study hours and checkpoint completions as you advance through the chapter sequence."
+  stats:
+    - id: "completed-chapters"
+      number: "0 / 7"
+      label: "Chapters completed"
+    - id: "total-topics"
+      number: "21"
+      label: "Concept milestones"
+    - id: "study-time"
+      number: "35 h"
+      label: "Recommended hours"
+
+chapters:
+  - id: "chapter-1"
+    number: "Chapter 1"
+    title: "Scientific Measurement"
+    description: "Establish foundational skills in precision measurement, unit systems, and quantitative analysis essential for experimental physics."
+    difficulty: "Foundational"
+    difficultyClass: "beginner"
+    studyTime: "4-5 hours"
+    topicsCount: "3 focus areas"
+    topics:
+      - "SI units and standards"
+      - "Significant figures"
+      - "Dimensional analysis"
+    url: "measurements/index.html"
+    buttonText: "Open chapter"
+    progress: 0
+  - id: "chapter-2"
+    number: "Chapter 2"
+    title: "Motion in One Dimension"
+    description: "Develop mathematical models for position, velocity, and acceleration while becoming fluent with kinematic equations."
+    difficulty: "Foundational"
+    difficultyClass: "beginner"
+    studyTime: "5-6 hours"
+    topicsCount: "3 focus areas"
+    topics:
+      - "Position and displacement"
+      - "Velocity and acceleration"
+      - "Kinematic equation set"
+    url: "kinematics/index.html"
+    buttonText: "Open chapter"
+    progress: 0
+  - id: "chapter-3"
+    number: "Chapter 3"
+    title: "Force and Newton's Laws"
+    description: "Examine the relationship between forces and motion through Newton's three fundamental laws and structured problem solving."
+    difficulty: "Intermediate"
+    difficultyClass: "intermediate"
+    studyTime: "6-7 hours"
+    topicsCount: "3 focus areas"
+    topics:
+      - "Newton's three laws"
+      - "Free-body diagramming"
+      - "Force analysis workflow"
+    url: "chapter3/index.html"
+    buttonText: "Open chapter"
+    progress: 0
+  - id: "chapter-4"
+    number: "Chapter 4"
+    title: "Motion in 2D and 3D"
+    description: "Analyze projectile, circular, and relative motion to extend one-dimensional reasoning into vector-rich scenarios."
+    difficulty: "Intermediate"
+    difficultyClass: "intermediate"
+    studyTime: "5-6 hours"
+    topicsCount: "3 focus areas"
+    topics:
+      - "Projectile motion"
+      - "Uniform circular motion"
+      - "Relative motion frames"
+    url: "chapter4/index.html"
+    buttonText: "Open chapter"
+    progress: 0
+  - id: "chapter-5"
+    number: "Chapter 5"
+    title: "Applied Newtonian Mechanics"
+    description: "Apply Newton's laws to practical systems involving friction, inclined planes, pulleys, and coupled particles."
+    difficulty: "Intermediate"
+    difficultyClass: "intermediate"
+    studyTime: "6-7 hours"
+    topicsCount: "3 focus areas"
+    topics:
+      - "Friction models"
+      - "Inclined plane dynamics"
+      - "Connected system analysis"
+    url: "chapter5/index.html"
+    buttonText: "Open chapter"
+    progress: 0
+  - id: "chapter-6"
+    number: "Chapter 6"
+    title: "Momentum and Impulse"
+    description: "Investigate linear momentum conservation and the impulse-momentum theorem in both idealized and real collisions."
+    difficulty: "Intermediate"
+    difficultyClass: "intermediate"
+    studyTime: "5-6 hours"
+    topicsCount: "3 focus areas"
+    topics:
+      - "Linear momentum"
+      - "Impulse formulations"
+      - "Collision case studies"
+    url: "chapter6/index.html"
+    buttonText: "Open chapter"
+    progress: 0
+  - id: "chapter-7"
+    number: "Chapter 7"
+    title: "Systems of Particles"
+    description: "Study multi-particle systems, center of mass motion, and advanced applications of conservation principles."
+    difficulty: "Advanced"
+    difficultyClass: "advanced"
+    studyTime: "4-5 hours"
+    topicsCount: "3 focus areas"
+    topics:
+      - "Center of mass analysis"
+      - "Multi-particle systems"
+      - "Variable mass models"
+    url: "chapter7/index.html"
+    buttonText: "Open chapter"
+    progress: 0
+---
+
+<div class="breadcrumb">
+    <div class="container">
+        <nav aria-label="Breadcrumb">
+            {% for crumb in breadcrumbs %}
+                {% if crumb.current %}
+                    <span class="current">{{ crumb.label }}</span>
+                {% else %}
+                    <a href="{{ crumb.url }}">{{ crumb.label }}</a>
+                    <span class="separator">></span>
+                {% endif %}
+            {% endfor %}
+        </nav>
+    </div>
+</div>
+
+<header class="header">
+    <div class="container">
+        <h1>{{ hero.title }}</h1>
+        <p class="subtitle">{{ hero.subtitle }}</p>
+        <p class="description">{{ hero.description }}</p>
+        
+        <div class="chapter-topics">
+            {% for tag in hero.tags %}
+                <span class="topic-tag">{{ tag }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="progress-stats">
+            {% for stat in hero.stats %}
+                <div class="stat-item">
+                    <span class="stat-number">{{ stat.number }}</span>
+                    <span class="stat-label">{{ stat.label }}</span>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</header>
+
+<section class="objectives-section" id="objectives">
+    <div class="container">
+        <div class="objectives-card">
+            <h2>{{ objectives.title }}</h2>
+            <div class="objectives-grid">
+                {% for objective in objectives.items %}
+                    <div class="objective-item">
+                        <span class="objective-icon" aria-hidden="true">{{ objective.icon | safe }}</span>
+                        <h3>{{ objective.title }}</h3>
+                        <p>{{ objective.description }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<main class="main-content">
+    <div class="container">
+        <section class="progress-section" id="progress">
+            <h2>{{ progress.title }}</h2>
+            {% if progress.description %}
+                <p class="section-intro">{{ progress.description }}</p>
+            {% endif %}
+            
+            <div class="progress-stats">
+                {% for stat in progress.stats %}
+                    <div class="stat-item">
+                        <span class="stat-number" {% if stat.id %}id="{{ stat.id }}"{% endif %}>{{ stat.number }}</span>
+                        <span class="stat-label">{{ stat.label }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="chapters-section" id="chapters">
+            <h2>Course curriculum</h2>
+            <div class="chapter-grid">
+                {% for chapter in chapters %}
+                    <div class="chapter-card" id="{{ chapter.id }}" data-chapter="{{ loop.index }}">
+                        <div class="chapter-header">
+                            <div class="chapter-number">{{ chapter.number }}</div>
+                            <div class="difficulty-badge {{ chapter.difficultyClass }}">{{ chapter.difficulty }}</div>
+                        </div>
+                        
+                        <h3>{{ chapter.title }}</h3>
+                        <p class="chapter-description">{{ chapter.description }}</p>
+                        
+                        <div class="chapter-stats">
+                            <span class="study-time">{{ chapter.studyTime }}</span>
+                            <span class="topics-count">{{ chapter.topicsCount }}</span>
+                        </div>
+                        
+                        <div class="chapter-topics">
+                            {% for topic in chapter.topics %}
+                                <span class="topic-tag">{{ topic }}</span>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="chapter-actions">
+                            <a href="{{ chapter.url }}" class="btn btn-primary">{{ chapter.buttonText }}</a>
+                            <div class="progress-indicator">
+                                <div class="progress-bar" data-progress="{{ chapter.progress }}"></div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="../about.html">About</a>
+            <a href="../contribute.html">Contribute</a>
+            <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io">GitHub</a>
+        </div>
+        <p>&copy; Physics Daily. Made with curiosity for physics enthusiasts everywhere.</p>
+    </div>
+</footer>
