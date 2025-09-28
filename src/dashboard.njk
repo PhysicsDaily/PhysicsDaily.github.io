@@ -1,0 +1,359 @@
+---
+layout: layouts/base.njk
+title: "Dashboard"
+description: "Track your physics learning progress, view statistics, and manage your account."
+permalink: dashboard.html
+skipMainWrapper: true
+headExtra: |
+  <style>
+  :root {
+      --primary-color: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #3b82f6;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --text-muted: #94a3b8;
+      --border-color: #e2e8f0;
+      --card-bg: #ffffff;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+
+  [data-theme="dark"] {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-tertiary: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+      --card-bg: #1e293b;
+  }
+
+  body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      min-height: 100vh;
+  }
+
+  .nav-header {
+      background: var(--bg-primary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+  }
+
+  .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  .nav-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+  }
+
+  .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+  }
+
+  .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+  }
+
+  .nav-link:hover {
+      color: var(--primary-color);
+  }
+
+  .sign-out-btn {
+      padding: 0.5rem 1rem;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.2s;
+  }
+
+  .sign-out-btn:hover {
+      background: var(--primary-dark);
+  }
+
+  .loading-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 60vh;
+  }
+
+  .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid var(--border-color);
+      border-top-color: var(--primary-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+      to { transform: rotate(360deg); }
+  }
+
+  .tab-nav {
+      display: flex;
+      gap: 0.5rem;
+      background: var(--bg-tertiary);
+      padding: 0.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      justify-content: flex-end;
+  }
+
+  .tab-btn {
+      flex: 1;
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.2s;
+  }
+
+  .tab-btn.active {
+      background: var(--card-bg);
+      color: var(--text-primary);
+      box-shadow: var(--shadow-sm);
+  }
+
+  .tab-content {
+      display: none;
+  }
+
+  .tab-content.active {
+      display: block;
+  }
+
+  .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+  }
+
+  .stat-block {
+      background: var(--bg-tertiary);
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid var(--border-color);
+  }
+
+  .stat-block h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+  }
+
+  .stat-block p {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+  }
+
+  .progress-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+  }
+
+  .progress-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+  }
+
+  .progress-label {
+      min-width: 120px;
+      font-weight: 500;
+      color: var(--text-primary);
+  }
+
+  .progress-bar-container {
+      flex: 1;
+      height: 8px;
+      background: var(--bg-tertiary);
+      border-radius: 4px;
+      overflow: hidden;
+  }
+
+  .progress-bar-fill {
+      height: 100%;
+      background: var(--primary-color);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+  }
+
+  .progress-value {
+      min-width: 60px;
+      text-align: right;
+      font-weight: 600;
+      color: var(--text-primary);
+  }
+
+  .dashboard-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem 4rem;
+  }
+
+  .dashboard-header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+  }
+
+  .dashboard-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+  }
+
+  .stat-card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+  }
+
+  .stat-value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-primary);
+  }
+
+  .stat-label {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+  }
+
+  .progress-chart {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+  }
+
+  .chart-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+      .nav-container {
+          padding: 0 1.25rem;
+      }
+
+      .dashboard-container {
+          padding: 0 1.25rem 3rem;
+      }
+
+      .tab-nav {
+          justify-content: center;
+      }
+
+      .tab-btn {
+          flex: unset;
+      }
+
+      .progress-item {
+          flex-direction: column;
+          align-items: flex-start;
+      }
+
+      .progress-value {
+          text-align: left;
+      }
+  }
+  </style>
+pageScripts:
+  - src: "/assets/js/enhanced-xp.js"
+    defer: true
+  - src: "/assets/js/dashboard.js"
+    defer: true
+---
+<div class="dashboard-container" id="dashboardContent" style="display: none;">
+    <div class="dashboard-header">
+        <h1 class="dashboard-welcome" id="welcomeMessage">Welcome back!</h1>
+        <p>Track your physics learning journey</p>
+
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <span class="stat-value" id="totalQuizzes">0</span>
+                <span class="stat-label">Quizzes Completed</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="avgScore">0%</span>
+                <span class="stat-label">Average Score</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="xpTotal">0</span>
+                <span class="stat-label">Total XP</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="levelLabel">Lv 1</span>
+                <span class="stat-label">Current Level</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-nav">
+        <button class="tab-btn active" data-tab="stats">Stats</button>
+    </div>
+
+    <div class="tab-content active" id="stats">
+        <div class="progress-chart">
+            <h2 class="chart-title">Detailed Insights</h2>
+            <div id="detailedStats"></div>
+        </div>
+    </div>
+</div>
+
+<div class="loading-container" id="loadingContainer">
+    <div class="loading-spinner"></div>
+</div>
+---

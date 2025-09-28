@@ -16,16 +16,31 @@
     <link rel="stylesheet" href="/assets/css/auth-styles.css">
 
     {% if pageStyles %}
-        <link rel="stylesheet" href="{{ pageStyles }}">
+        {% if pageStyles is string %}
+            <link rel="stylesheet" href="{{ pageStyles }}">
+        {% else %}
+            {% for styleHref in pageStyles %}
+                <link rel="stylesheet" href="{{ styleHref }}">
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+
+    {% if headExtra %}
+        {{ headExtra | safe }}
     {% endif %}
 </head>
-<body class="has-fixed-header auth-pending">
+{% set resolvedBodyClass = bodyClass or "has-fixed-header auth-pending" %}
+<body class="{{ resolvedBodyClass }}">
 
     <div id="global-header"></div>
 
-    <main id="main-content" class="main-content" role="main">
+    {% if skipMainWrapper %}
         {{ content | safe }}
-    </main>
+    {% else %}
+        <main id="main-content" class="main-content" role="main">
+            {{ content | safe }}
+        </main>
+    {% endif %}
 
     <div id="global-footer"></div>
 
@@ -33,7 +48,34 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
+    <script src="/assets/js/firebase-config.js"></script>
+    <script src="/assets/js/auth-manager.js"></script>
+    <script src="/assets/js/auth-ui.js"></script>
+    <script src="/assets/js/header-loader.js"></script>
+    <script src="/assets/js/auth-navigation.js"></script>
     <script src="/assets/js/global.js"></script>
+
+    {% if pageScripts %}
+        {% set scripts = pageScripts if pageScripts is iterable and (pageScripts is not string) else [pageScripts] %}
+        {% for script in scripts %}
+            {% if script.src %}
+                <script
+                    src="{{ script.src }}"
+                    {% if script.type %}type="{{ script.type }}"{% endif %}
+                    {% if script.async %}async{% endif %}
+                    {% if script.defer %}defer{% endif %}
+                ></script>
+            {% elif script.content %}
+                <script{% if script.type %} type="{{ script.type }}"{% endif %}>{{ script.content | safe }}</script>
+            {% else %}
+                <script>{{ script | safe }}</script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    {% if bodyExtra %}
+        {{ bodyExtra | safe }}
+    {% endif %}
 
 </body>
 </html>

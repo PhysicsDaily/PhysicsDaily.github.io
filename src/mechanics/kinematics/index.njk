@@ -1,3 +1,9 @@
+---
+layout: null
+title: "Chapter 2: One-Dimensional Kinematics"
+description: "Master the fundamentals of motion in one dimension, from basic concepts to advanced applications in kinematics."
+permalink: mechanics/kinematics/index.html
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1166,26 +1172,21 @@
         const sections = ['intro', 'section-1', 'section-2', 'section-3', 'section-4', 'assessment'];
         
         function initializeSectionNavigation() {
-            // Load saved progress
             const savedSection = localStorage.getItem('physics-kinematics-current-section');
             const completedSections = JSON.parse(localStorage.getItem('physics-kinematics-completed') || '[]');
             
             if (savedSection && sections.includes(savedSection)) {
-                // Avoid landing directly on assessment when opening the chapter
                 currentSection = (savedSection === 'assessment') ? (sections.includes('section-4') ? 'section-4' : 'intro') : savedSection;
             }
             
-            // Mark completed sections
             completedSections.forEach(sectionId => {
                 const indicator = document.querySelector(`[data-section="${sectionId}"]`);
                 if (indicator) indicator.classList.add('completed');
             });
             
-            // Show current section
             showSection(currentSection);
             updateProgress();
             
-            // Add click handlers to section indicators
             document.querySelectorAll('.section-indicator').forEach(indicator => {
                 indicator.addEventListener('click', (e) => {
                     const sectionId = e.target.getAttribute('data-section');
@@ -1197,13 +1198,11 @@
         function navigateToSection(sectionId) {
             if (!sections.includes(sectionId)) return;
             
-            // Open dedicated quiz page for assessment
             if (sectionId === 'assessment') {
                 window.location.href = 'mcq.html';
                 return;
             }
             
-            // Mark previous section as completed if moving forward
             const currentIndex = sections.indexOf(currentSection);
             const targetIndex = sections.indexOf(sectionId);
             
@@ -1215,24 +1214,19 @@
             showSection(sectionId);
             updateProgress();
             saveProgress();
-            
-            // Smooth scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function showSection(sectionId) {
-            // Hide all sections
             document.querySelectorAll('.section').forEach(section => {
                 section.classList.remove('active-section');
             });
             
-            // Show target section
             const targetSection = document.getElementById(sectionId);
             if (targetSection) {
                 targetSection.classList.add('active-section');
             }
             
-            // Update indicators
             document.querySelectorAll('.section-indicator').forEach(indicator => {
                 indicator.classList.remove('active');
             });
@@ -1249,7 +1243,6 @@
                 completed.push(sectionId);
                 localStorage.setItem('physics-kinematics-completed', JSON.stringify(completed));
                 
-                // Update UI
                 const indicator = document.querySelector(`[data-section="${sectionId}"]`);
                 if (indicator) indicator.classList.add('completed');
             }
@@ -1269,11 +1262,9 @@
             localStorage.setItem('physics-kinematics-current-section', currentSection);
         }
 
-        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             initializeSectionNavigation();
         });
     </script>
 </body>
 </html>
-
