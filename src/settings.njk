@@ -176,6 +176,11 @@ headExtra: |
 
   .country-limit::before { content: '⚠️'; }
 
+  [data-theme="dark"] .country-limit {
+      color: #fbbf24;
+      background: rgba(245, 158, 11, 0.15);
+  }
+
   .note {
       color: var(--text-secondary);
       font-size: 0.875rem;
@@ -333,8 +338,8 @@ pageScripts:
     <p class="note">Update your display info used across the site.</p>
     <div class="form-grid">
       <div class="form-group">
-        <label for="nickname" class="form-label">👤 Nickname</label>
-        <input id="nickname" class="form-input" placeholder="Enter your nickname">
+        <label for="displayName" class="form-label">👤 Name</label>
+        <input id="displayName" class="form-input" placeholder="Enter your name">
         <div class="note">Shown in header and dashboard.</div>
       </div>
       <div class="form-group">
@@ -344,7 +349,7 @@ pageScripts:
           <select id="country" class="form-select"></select>
         </div>
         <div class="country-limit" id="countryLimit" style="display: none;">
-          You can change your country 3 times per year. <span id="changesLeft"></span>
+          <span id="changesLeft"></span>
         </div>
       </div>
       <div class="form-group">
@@ -358,7 +363,6 @@ pageScripts:
     </div>
     <div class="form-actions">
       <button id="saveSettings" class="btn-primary">Save Changes</button>
-      <button id="resetSettings" class="btn-secondary">Reset</button>
     </div>
   </div>
 

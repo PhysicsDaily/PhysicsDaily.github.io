@@ -1,7 +1,7 @@
-// Settings page logic: nickname and country
+// Settings page logic: displayName and country
 (function(){
-  const STORAGE_KEY = 'pd:user:profile'; // stores { nickname, country }
-  const COUNTRY_CHANGES_KEY = 'pd:country:changes'; // stores { year, count, lastChange }
+  const STORAGE_KEY = 'pd:user:profile'; // stores { displayName, country }
+  const COUNTRY_CHANGES_KEY = 'pd:country:changes'; // stores { year, count, changes: [] }
 
   function loadProfileFromStorage() {
     try {
@@ -20,47 +20,39 @@
       const data = raw ? JSON.parse(raw) : {};
       const currentYear = new Date().getFullYear();
       
-      // Reset if new year
+      // Reset if new year (starting January 1st)
       if (data.year !== currentYear) {
-        return { year: currentYear, count: 0, lastChange: null };
+        return { year: currentYear, count: 0, changes: [] };
       }
       return data;
     } catch {
-      return { year: new Date().getFullYear(), count: 0, lastChange: null };
+      return { year: new Date().getFullYear(), count: 0, changes: [] };
     }
   }
 
-  function updateCountryChanges() {
+  function recordCountryChange(fromCountry, toCountry) {
     const changes = getCountryChanges();
     changes.count += 1;
-    changes.lastChange = Date.now();
+    changes.changes.push({
+      from: fromCountry,
+      to: toCountry,
+      timestamp: Date.now(),
+      date: new Date().toISOString()
+    });
     try {
       localStorage.setItem(COUNTRY_CHANGES_KEY, JSON.stringify(changes));
     } catch {}
     return changes;
   }
 
-  function updateCountryLimitDisplay() {
+  function canChangeCountry() {
     const changes = getCountryChanges();
-    const limitEl = document.getElementById('countryLimit');
-    const changesLeftEl = document.getElementById('changesLeft');
-    
-    if (limitEl && changesLeftEl) {
-      const remaining = Math.max(0, 3 - changes.count);
-      changesLeftEl.textContent = `${remaining} changes remaining this year.`;
-      
-      if (changes.count >= 3) {
-        limitEl.style.display = 'flex';
-        limitEl.style.borderColor = '#ef4444';
-        limitEl.style.background = 'rgba(239, 68, 68, 0.1)';
-        limitEl.style.color = '#b91c1c';
-        changesLeftEl.textContent = 'No more changes allowed this year.';
-      } else if (changes.count > 0) {
-        limitEl.style.display = 'flex';
-      } else {
-        limitEl.style.display = 'none';
-      }
-    }
+    return changes.count < 3;
+  }
+
+  function getRemainingChanges() {
+    const changes = getCountryChanges();
+    return Math.max(0, 3 - changes.count);
   }
 
   function populateCountries(select) {
@@ -272,24 +264,24 @@
     select._countries = countries;
   }
 
-  async function updateCloudProfile(nickname, country) {
+  async function updateCloudProfile(displayName, country) {
     if (!window.authManager || !authManager.user) return { success: true };
     try {
-      // Update auth displayName if nickname provided
-      if (nickname && authManager.user.displayName !== nickname) {
-        await authManager.user.updateProfile({ displayName: nickname });
+      // Update auth displayName
+      if (displayName && authManager.user.displayName !== displayName) {
+        await authManager.user.updateProfile({ displayName: displayName });
       }
 
       // Update Firestore user doc with preferences
       const db = authManager.db;
       await db.collection('users').doc(authManager.user.uid).set({
-        displayName: nickname || authManager.user.displayName || null,
-        profile: { nickname: nickname || null, country: country || null },
+        displayName: displayName || authManager.user.displayName || null,
+        profile: { displayName: displayName || null, country: country || null },
         preferences: { country: country || null }
       }, { merge: true });
 
       // Emit a custom event so header can refresh name
-      document.dispatchEvent(new CustomEvent('userProfileUpdated', { detail: { nickname, country } }));
+      document.dispatchEvent(new CustomEvent('userProfileUpdated', { detail: { displayName, country } }));
       return { success: true };
     } catch (e) {
       console.error('[Settings] Failed to update cloud profile', e);
@@ -306,14 +298,17 @@
   }
 
   function init() {
-    const nicknameEl = document.getElementById('nickname');
+    // Initialize theme immediately on page load
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    
+    const displayNameEl = document.getElementById('displayName');
     const countryEl = document.getElementById('country');
     const saveBtn = document.getElementById('saveSettings');
-    const resetBtn = document.getElementById('resetSettings');
     const resetProgressBtn = document.getElementById('resetProgress');
     const deleteAccountBtn = document.getElementById('deleteAccount');
     const settingsSignOutBtn = document.getElementById('settingsSignOut');
-    if (!nicknameEl || !countryEl) return;
+    if (!displayNameEl || !countryEl) return;
 
     // Function to update UI based on auth state
     const updateUIForAuthState = (isSignedIn, userData = null) => {
@@ -351,14 +346,14 @@
       }
       
       // Restore the original settings form if it was replaced
-      if (settingsCard && !settingsCard.querySelector('#nickname')) {
+      if (settingsCard && !settingsCard.querySelector('#displayName')) {
         settingsCard.innerHTML = `
           <h1>Account Settings</h1>
           <p class="note">Update your display info used across the site.</p>
           <div class="form-grid">
             <div class="form-group">
-              <label for="nickname" class="form-label">👤 Nickname</label>
-              <input id="nickname" class="form-input" placeholder="Enter your nickname" />
+              <label for="displayName" class="form-label">👤 Name</label>
+              <input id="displayName" class="form-input" placeholder="Enter your name" />
               <div class="note">Shown in header and dashboard.</div>
             </div>
             <div class="form-group">
@@ -368,13 +363,20 @@
                 <select id="country" class="form-select"></select>
               </div>
               <div class="country-limit" id="countryLimit" style="display: none;">
-                You can change your country 3 times per year. <span id="changesLeft"></span>
+                <span id="changesLeft"></span>
               </div>
+            </div>
+            <div class="form-group">
+              <label for="theme-select" class="form-label">🎨 Site Theme</label>
+              <select id="theme-select" class="form-select">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+              </select>
+              <div class="note">This is now the only place to change appearance. Your choice is saved.</div>
             </div>
           </div>
           <div class="form-actions">
             <button id="saveSettings" class="btn-primary">Save Changes</button>
-            <button id="resetSettings" class="btn-secondary">Reset</button>
           </div>
         `;
         
@@ -387,24 +389,33 @@
 
     // Function to initialize form elements and event listeners
     const initializeForm = () => {
-      const nicknameEl = document.getElementById('nickname');
+      const displayNameEl = document.getElementById('displayName');
       const countryEl = document.getElementById('country');
+      const themeSelectEl = document.getElementById('theme-select');
       const saveBtn = document.getElementById('saveSettings');
-      const resetBtn = document.getElementById('resetSettings');
       
-      if (!nicknameEl || !countryEl) return;
+      if (!displayNameEl || !countryEl) return;
 
       populateCountries(countryEl);
 
       const stored = loadProfileFromStorage();
-      if (stored.nickname) nicknameEl.value = stored.nickname;
+      
+      // Load displayName: prefer Firebase Auth displayName, then stored value
+      if (window.authManager && authManager.user && authManager.user.displayName) {
+        displayNameEl.value = authManager.user.displayName;
+      } else if (stored.displayName) {
+        displayNameEl.value = stored.displayName;
+      }
+      
+      // Load country from storage
       if (stored.country) {
         countryEl.value = stored.country;
       }
 
-      // If signed in, prefer cloud profile displayName for nickname default
-      if (window.authManager && authManager.user && authManager.user.displayName && !nicknameEl.value) {
-        nicknameEl.value = authManager.user.displayName;
+      // Initialize theme select with current theme
+      if (themeSelectEl) {
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        themeSelectEl.value = currentTheme;
       }
 
       const wrapper = document.querySelector('.country-select-wrapper');
@@ -428,34 +439,69 @@
       };
 
       updateFlagPreview();
-      updateCountryLimitDisplay();
+      updateCountryLimitUI();
       countryEl.addEventListener('change', updateFlagPreview);
 
-      saveBtn?.addEventListener('click', async () => {
-        const nickname = nicknameEl.value.trim();
-        const country = countryEl.value;
+      function updateCountryLimitUI() {
+        const limitEl = document.getElementById('countryLimit');
+        const changesLeftEl = document.getElementById('changesLeft');
         
+        if (!limitEl || !changesLeftEl) return;
+        
+        const changes = getCountryChanges();
+        const remaining = getRemainingChanges();
+        
+        if (changes.count === 0) {
+          limitEl.style.display = 'none';
+        } else {
+          limitEl.style.display = 'flex';
+          
+          if (remaining === 0) {
+            const nextYear = new Date().getFullYear() + 1;
+            limitEl.style.borderColor = '#ef4444';
+            limitEl.style.background = 'rgba(239, 68, 68, 0.1)';
+            limitEl.style.color = '#b91c1c';
+            changesLeftEl.textContent = `No more changes allowed until January 1, ${nextYear}.`;
+          } else {
+            limitEl.style.borderColor = 'var(--warning-color)';
+            limitEl.style.background = 'rgba(245, 158, 11, 0.1)';
+            limitEl.style.color = '#92400e';
+            changesLeftEl.textContent = `${remaining} change${remaining !== 1 ? 's' : ''} remaining this year.`;
+          }
+        }
+      }
+
+      saveBtn?.addEventListener('click', async () => {
+        const displayName = displayNameEl.value.trim();
+        const country = countryEl.value;
+        const theme = themeSelectEl ? themeSelectEl.value : null;
+        
+        // Check if country is being changed
         const stored = loadProfileFromStorage();
         if (country && stored.country && country !== stored.country) {
-          const changes = getCountryChanges();
-          if (changes.count >= 3) {
-            alert('You have reached the limit of 3 country changes per year.');
+          if (!canChangeCountry()) {
+            const nextYear = new Date().getFullYear() + 1;
+            alert(`You have reached the limit of 3 country changes per year. You can change it again starting January 1, ${nextYear}.`);
             return;
           }
-          updateCountryChanges();
-          updateCountryLimitDisplay();
+          // Record the change
+          recordCountryChange(stored.country, country);
+          updateCountryLimitUI();
         }
         
-        const profile = { nickname, country };
+        // Apply theme if changed
+        if (theme) {
+          const currentTheme = localStorage.getItem('theme') || 'light';
+          if (theme !== currentTheme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+          }
+        }
+        
+        const profile = { displayName, country };
         saveProfileToStorage(profile);
-        const result = await updateCloudProfile(nickname, country);
+        const result = await updateCloudProfile(displayName, country);
         if (result.success) showToast('Settings saved'); else showToast('Save failed: ' + result.error);
-      });
-
-      resetBtn?.addEventListener('click', () => {
-        nicknameEl.value = '';
-        countryEl.value = '';
-        updateFlagPreview();
       });
     };
 
@@ -515,9 +561,9 @@
           }
         }
         keysToRemove.forEach(k => localStorage.removeItem(k));
-        // Keep profile nickname; re-save after purge
+        // Keep profile displayName and country; re-save after purge
         const profile = loadProfileFromStorage();
-        if (profile && (profile.nickname || profile.country)) saveProfileToStorage(profile);
+        if (profile && (profile.displayName || profile.country)) saveProfileToStorage(profile);
 
         // Cloud cleanup if signed in
         if (window.authManager && authManager.user) {

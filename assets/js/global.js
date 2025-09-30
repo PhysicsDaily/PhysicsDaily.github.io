@@ -176,9 +176,10 @@ const __initGlobal = function() {
     }
 
     // --- Theme Handling (Centralized; selection moved to settings page) ---
-    const docElement = document.documentElement;    const themeSelect  = document.getElementById('theme-select'); // new settings control
+    const docElement = document.documentElement;
+    const themeSelect = document.getElementById('theme-select'); // new settings control
 
-        const applyTheme = (theme) => {
+    const applyTheme = (theme) => {
         const resolved = theme || 'light';
         docElement.setAttribute('data-theme', resolved);
         if (themeSelect && themeSelect.value !== resolved) {
@@ -187,7 +188,7 @@ const __initGlobal = function() {
         localStorage.setItem('theme', resolved);
     };
 
-    // Initialize theme
+    // Initialize theme on page load
     applyTheme(localStorage.getItem('theme'));
 
     // Wire settings select (authoritative control now)
@@ -195,6 +196,13 @@ const __initGlobal = function() {
         themeSelect.dataset.bound = 'true';
         themeSelect.addEventListener('change', (e) => applyTheme(e.target.value));
     }
+
+    // Listen for theme changes from other tabs/pages
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'theme' && e.newValue) {
+            applyTheme(e.newValue);
+        }
+    });
 
     // --- Mobile Navigation ---
     const initMobileNav = () => {
