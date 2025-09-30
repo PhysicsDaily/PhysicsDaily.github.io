@@ -1,10 +1,6 @@
 module.exports = function(eleventyConfig) {
   // Tell Eleventy to copy the 'assets' folder to the output folder (_site)
   eleventyConfig.addPassthroughCopy("assets");
-  eleventyConfig.addPassthroughCopy("dashboard.html");
-  eleventyConfig.addPassthroughCopy("leaderboard.html");
-  eleventyConfig.addPassthroughCopy("settings.html");
-  eleventyConfig.addPassthroughCopy("mcq-template.html");
   eleventyConfig.addPassthroughCopy("service-worker.js");
   eleventyConfig.addPassthroughCopy("robots.txt");
   eleventyConfig.addPassthroughCopy("manifest.webmanifest");
