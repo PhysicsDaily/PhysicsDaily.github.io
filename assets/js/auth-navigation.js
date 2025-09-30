@@ -147,7 +147,10 @@ class AuthNavigationHandler {
             // Show and update XP pill
             if (this.xpPill) {
                 this.xpPill.style.display = 'inline-flex';
+                console.log('[AuthNav] XP pill shown');
                 this.updateXpPill();
+            } else {
+                console.warn('[AuthNav] XP pill element not found');
             }
 
             // Show Dashboard link after account

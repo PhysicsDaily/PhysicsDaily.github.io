@@ -2,18 +2,168 @@
   <style>
     /* Fallback minimal styles to ensure hamburger works everywhere */
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-    .mobile-nav-toggle{display:none;background:transparent;border:0;padding:.5rem;cursor:pointer}
-    .mobile-nav-toggle .hamburger{width:24px;height:2px;background:var(--text-primary,#1e293b);position:relative;display:block}
-    .mobile-nav-toggle .hamburger:before,.mobile-nav-toggle .hamburger:after{content:"";position:absolute;left:0;width:100%;height:2px;background:inherit}
+    .mobile-nav-toggle{display:none;background:transparent;border:0;padding:.5rem;cursor:pointer;transition:transform 0.3s ease}
+    .mobile-nav-toggle:hover{transform:scale(1.1)}
+    .mobile-nav-toggle .hamburger{width:24px;height:2px;background:var(--text-primary,#1e293b);position:relative;display:block;transition:all 0.3s ease}
+    .mobile-nav-toggle .hamburger:before,.mobile-nav-toggle .hamburger:after{content:"";position:absolute;left:0;width:100%;height:2px;background:inherit;transition:all 0.3s ease}
     .mobile-nav-toggle .hamburger:before{transform:translateY(-7px)}
     .mobile-nav-toggle .hamburger:after{transform:translateY(7px)}
     .mobile-nav-toggle[aria-expanded="true"] .hamburger{background:transparent}
-    .mobile-nav-toggle[aria-expanded="true"] .hamburger:before{transform:rotate(45deg)}
-    .mobile-nav-toggle[aria-expanded="true"] .hamburger:after{transform:rotate(-45deg)}
+    .mobile-nav-toggle[aria-expanded="true"] .hamburger:before{transform:rotate(45deg) translateY(0)}
+    .mobile-nav-toggle[aria-expanded="true"] .hamburger:after{transform:rotate(-45deg) translateY(0)}
+    
+    /* Profile dropdown improvements */
+    .profile-trigger {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      border: 2px solid var(--border-color);
+      border-radius: 999px;
+      padding: 0.35rem 0.75rem 0.35rem 0.35rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      color: var(--text-primary);
+    }
+    .profile-trigger:hover {
+      border-color: var(--primary-color);
+      background: rgba(37, 99, 235, 0.05);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .profile-trigger[aria-expanded="true"] {
+      border-color: var(--primary-color);
+      background: rgba(37, 99, 235, 0.08);
+    }
+    .profile-trigger #header-user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--primary-color);
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .profile-trigger:hover #header-user-avatar {
+      transform: scale(1.05);
+    }
+    .profile-trigger #header-user-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      max-width: 120px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .profile-trigger .dropdown-arrow {
+      display: inline-block;
+      transition: transform 0.3s ease;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+    .profile-trigger[aria-expanded="true"] .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+    
+    .profile-dropdown {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      min-width: 180px;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+    }
+    .profile-dropdown[aria-hidden="false"] {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .profile-dropdown::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      right: 20px;
+      width: 12px;
+      height: 12px;
+      background: var(--card-bg);
+      border-left: 1px solid var(--border-color);
+      border-top: 1px solid var(--border-color);
+      transform: rotate(45deg);
+    }
+    .profile-dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1.25rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+    }
+    .profile-dropdown a:first-child {
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+    }
+    .profile-dropdown a:last-child {
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+    }
+    .profile-dropdown a:hover {
+      background: var(--bg-secondary);
+      border-left-color: var(--primary-color);
+      padding-left: 1.35rem;
+    }
+    .profile-dropdown a::before {
+      content: attr(data-icon);
+      font-size: 1.1rem;
+    }
+    
+    /* XP Pill improvements */
+    .xp-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(6, 182, 212, 0.1));
+      border: 2px solid var(--primary-color);
+      border-radius: 999px;
+      padding: 0.4rem 0.85rem;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+    }
+    .xp-pill:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+    .xp-pill .xp-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark, #1d4ed8));
+      color: white;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
     @media (max-width:768px){
       .fixed-header .mobile-nav-toggle{display:block}
-      .fixed-header .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--header-bg,#fff);border-top:1px solid var(--border-color,#e2e8f0)}
-      .fixed-header .nav-links.active{display:flex;flex-direction:column;align-items:stretch}
+      .fixed-header .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--header-bg,#fff);border-top:1px solid var(--border-color,#e2e8f0);box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+      .fixed-header .nav-links.active{display:flex;flex-direction:column;align-items:stretch;padding:0.5rem 0}
+      .fixed-header .nav-links a, .fixed-header .nav-links button {margin:0.25rem 1rem}
+      .profile-dropdown {right: 1rem}
     }
   </style>
   <div class="container">
@@ -26,20 +176,21 @@
         <span class="sr-only">Menu</span>
       </button>
       <nav id="nav-links" class="nav-links">
-        <div id="header-user-menu" class="profile" style="display: none; align-items: center; gap: 0.5rem; position: relative;">
+        <div id="header-user-menu" class="profile" style="display: none; align-items: center; gap: 0.75rem; position: relative;">
           <button id="header-profile-trigger" class="profile-trigger" aria-haspopup="menu" aria-expanded="false" aria-controls="profile-dropdown">
-            <img id="header-user-avatar" src="" alt="Profile" style="width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--primary-color);">
-            <span id="header-user-name" style="font-weight: 600;"></span>
-            <span aria-hidden="true" style="display:inline-block; transform: translateY(1px); color: var(--text-secondary);">v</span>
+            <img id="header-user-avatar" src="" alt="Profile">
+            <span id="header-user-name"></span>
+            <span class="dropdown-arrow" aria-hidden="true">▼</span>
           </button>
           <!-- Global XP pill (hidden until signed in) -->
-          <div id="header-xp-pill" class="xp-pill" title="Your XP" style="display:none;">
+          <div id="header-xp-pill" class="xp-pill" title="Your total XP" style="display:none;">
             <span class="xp-icon">XP</span>
             <span id="header-xp-value">0</span>
           </div>
           <div id="profile-dropdown" class="profile-dropdown" role="menu" aria-hidden="true">
-            <a href="/dashboard.html" role="menuitem">Dashboard</a>
-            <a href="/settings.html" role="menuitem" id="header-settings-link">Settings</a></div>
+            <a href="/dashboard.html" role="menuitem" data-icon="📊">Dashboard</a>
+            <a href="/settings.html" role="menuitem" id="header-settings-link" data-icon="⚙️">Settings</a>
+          </div>
         </div>
         <a class="home-link" href="/" data-visible="not-home" style="display:none;">Home</a>
         <a href="/leaderboard.html">Leaderboard</a>
@@ -50,4 +201,3 @@
     </div>
   </div>
 </header>
-

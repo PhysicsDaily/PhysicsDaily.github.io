@@ -334,10 +334,17 @@
     const resetProgressBtn = document.getElementById('resetProgress');
     const deleteAccountBtn = document.getElementById('deleteAccount');
     const settingsSignOutBtn = document.getElementById('settingsSignOut');
-    if (!displayNameEl || !countryEl) return;
+    
+    console.log('[Settings] Initializing...');
+    
+    if (!displayNameEl || !countryEl) {
+      console.error('[Settings] Required elements not found');
+      return;
+    }
 
     // Function to update UI based on auth state
     const updateUIForAuthState = (isSignedIn, userData = null) => {
+      console.log('[Settings] Updating UI for auth state:', isSignedIn, userData);
       const settingsCard = document.querySelector('.settings-card');
       const actionsCard = document.querySelector('.actions-card');
       
@@ -366,13 +373,16 @@
         return;
       }
       
-      // User is signed in - show normal UI
+      // User is signed in - ensure form is visible
+      console.log('[Settings] User signed in, showing form');
       if (actionsCard) {
         actionsCard.style.display = 'block';
       }
       
-      // Restore the original settings form if it was replaced
-      if (settingsCard && !settingsCard.querySelector('#displayName')) {
+      // Check if form was replaced - restore it
+      const hasForm = document.getElementById('displayName');
+      if (!hasForm && settingsCard) {
+        console.log('[Settings] Restoring settings form...');
         settingsCard.innerHTML = `
           <h1>Account Settings</h1>
           <p class="note">Update your display info used across the site.</p>
@@ -410,6 +420,10 @@
         setTimeout(() => {
           initializeForm();
         }, 100);
+      } else if (hasForm) {
+        // Form already exists, just initialize it
+        console.log('[Settings] Form exists, initializing...');
+        initializeForm();
       }
     };
 
@@ -420,9 +434,32 @@
       const themeSelectEl = document.getElementById('theme-select');
       const saveBtn = document.getElementById('saveSettings');
       
-      if (!displayNameEl || !countryEl) return;
+      if (!displayNameEl || !countryEl) {
+        console.warn('[Settings] Required form elements not found');
+        return;
+      }
 
       populateCountries(countryEl);
+
+      const wrapper = document.querySelector('.country-select-wrapper');
+      const flagImg = document.getElementById('countryFlagIcon');
+
+      function updateFlagPreview() {
+        const code = countryEl.value;
+        const list = countryEl._countries || [];
+        const entry = list.find(c => c.code === code);
+        const flag = entry?.flag || '';
+        if (flag && flagImg) {
+          const toCodePoints = (emoji = '') => Array.from(emoji).map(ch => ch.codePointAt(0).toString(16)).join('-');
+          const cps = toCodePoints(flag);
+          flagImg.src = `https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${cps}.svg`;
+          flagImg.alt = `${entry.name} flag`;
+          wrapper?.classList.add('has-flag');
+        } else {
+          if (flagImg) flagImg.removeAttribute('src');
+          wrapper?.classList.remove('has-flag');
+        }
+      }
 
       const stored = loadProfileFromStorage();
       
@@ -447,26 +484,6 @@
         const currentTheme = localStorage.getItem('theme') || 'light';
         themeSelectEl.value = currentTheme;
       }
-
-      const wrapper = document.querySelector('.country-select-wrapper');
-      const flagImg = document.getElementById('countryFlagIcon');
-
-      const updateFlagPreview = () => {
-        const code = countryEl.value;
-        const list = countryEl._countries || [];
-        const entry = list.find(c => c.code === code);
-        const flag = entry?.flag || '';
-        if (flag && flagImg) {
-          const toCodePoints = (emoji = '') => Array.from(emoji).map(ch => ch.codePointAt(0).toString(16)).join('-');
-          const cps = toCodePoints(flag);
-          flagImg.src = `https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${cps}.svg`;
-          flagImg.alt = `${entry.name} flag`;
-          wrapper?.classList.add('has-flag');
-        } else {
-          if (flagImg) flagImg.removeAttribute('src');
-          wrapper?.classList.remove('has-flag');
-        }
-      };
 
       updateFlagPreview();
       updateCountryLimitUI();
@@ -501,67 +518,90 @@
         }
       }
 
-      saveBtn?.addEventListener('click', async () => {
-        const displayName = displayNameEl.value.trim();
-        const country = countryEl.value;
-        const theme = themeSelectEl ? themeSelectEl.value : null;
+      if (saveBtn) {
+        // Remove any existing listeners
+        const newSaveBtn = saveBtn.cloneNode(true);
+        saveBtn.parentNode.replaceChild(newSaveBtn, saveBtn);
         
-        // Check if country is being changed
-        const stored = loadProfileFromStorage();
-        if (country && stored.country && country !== stored.country) {
-          if (!canChangeCountry()) {
-            const nextYear = new Date().getFullYear() + 1;
-            alert(`You have reached the limit of 3 country changes per year. You can change it again starting January 1, ${nextYear}.`);
-            return;
+        newSaveBtn.addEventListener('click', async () => {
+          console.log('[Settings] Save button clicked');
+          const displayName = displayNameEl.value.trim();
+          const country = countryEl.value;
+          const themeSelect = document.getElementById('theme-select');
+          const theme = themeSelect ? themeSelect.value : null;
+          
+          console.log('[Settings] Saving:', { displayName, country, theme });
+          
+          // Check if country is being changed
+          const stored = loadProfileFromStorage();
+          if (country && stored.country && country !== stored.country) {
+            if (!canChangeCountry()) {
+              const nextYear = new Date().getFullYear() + 1;
+              alert(`You have reached the limit of 3 country changes per year. You can change it again starting January 1, ${nextYear}.`);
+              return;
+            }
+            // Record the change
+            recordCountryChange(stored.country, country);
+            updateCountryLimitUI();
           }
-          // Record the change
-          recordCountryChange(stored.country, country);
-          updateCountryLimitUI();
-        }
-        
-        // Apply theme if changed
-        if (theme) {
-          const currentTheme = localStorage.getItem('theme') || 'light';
-          if (theme !== currentTheme) {
-            document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
+          
+          // Apply theme if changed
+          if (theme) {
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            console.log('[Settings] Applying theme:', theme, 'current:', currentTheme);
+            if (theme !== currentTheme) {
+              document.documentElement.setAttribute('data-theme', theme);
+              localStorage.setItem('theme', theme);
+              console.log('[Settings] Theme updated to:', theme);
+            }
           }
-        }
-        
-        const profile = { displayName, country };
-        saveProfileToStorage(profile);
-        const result = await updateCloudProfile(displayName, country);
-        if (result.success) {
-          showToast('Settings saved');
-          // Trigger leaderboard refresh to update displayed country
-          document.dispatchEvent(new CustomEvent('profileUpdated', { 
-            detail: { displayName, country } 
-          }));
-        } else {
-          showToast('Save failed: ' + result.error);
-        }
-      });
+          
+          const profile = { displayName, country };
+          saveProfileToStorage(profile);
+          const result = await updateCloudProfile(displayName, country);
+          if (result.success) {
+            showToast('Settings saved ✓');
+            // Trigger leaderboard refresh to update displayed country
+            document.dispatchEvent(new CustomEvent('profileUpdated', { 
+              detail: { displayName, country } 
+            }));
+          } else {
+            showToast('Save failed: ' + (result.error || 'Unknown error'));
+          }
+        });
+      } else {
+        console.warn('[Settings] Save button not found');
+      }
     };
 
-    // Check initial auth state
-    if (window.authManager) {
-      const currentUser = authManager.getCurrentUser();
-      updateUIForAuthState(!!currentUser, currentUser);
-      
-      // Listen for auth state changes
-      authManager.on('authStateChanged', (user) => {
-        updateUIForAuthState(!!user, user);
-      });
-    } else {
-      // AuthManager not loaded yet, show signed-out state
-      updateUIForAuthState(false);
-    }
-
-    // Initialize form if user is already signed in
-    if (window.authManager && authManager.getCurrentUser()) {
-      populateCountries(countryEl);
-      initializeForm();
-    }
+    // Check initial auth state with better timing
+    const checkAuthState = () => {
+      if (window.authManager) {
+        console.log('[Settings] AuthManager available, checking state...');
+        const currentUser = authManager.getCurrentUser();
+        console.log('[Settings] Current user:', currentUser);
+        updateUIForAuthState(!!currentUser, currentUser);
+        
+        // Listen for auth state changes
+        authManager.on('authStateChanged', (user) => {
+          console.log('[Settings] Auth state changed:', user);
+          updateUIForAuthState(!!user, user);
+        });
+        
+        // Initialize form if user is signed in
+        if (currentUser && countryEl) {
+          populateCountries(countryEl);
+          initializeForm();
+        }
+      } else {
+        console.log('[Settings] AuthManager not available yet, waiting...');
+        // AuthManager not loaded yet, try again soon
+        setTimeout(checkAuthState, 100);
+      }
+    };
+    
+    // Start checking auth state
+    checkAuthState();
 
     // Action button event listeners (these work regardless of auth state)
     settingsSignOutBtn?.addEventListener('click', async () => {
