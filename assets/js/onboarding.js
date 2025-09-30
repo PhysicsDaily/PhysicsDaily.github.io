@@ -51,30 +51,6 @@ class OnboardingUI {
                             <span class="form-error" id="onboardingNationalityError"></span>
                         </div>
                         
-                        <div class="form-group">
-                            <label class="form-label">Age Group (Optional)</label>
-                            <select class="form-input form-select" id="onboardingAgeGroup">
-                                <option value="">Select age group</option>
-                                <option value="under-18">Under 18</option>
-                                <option value="18-25">18-25</option>
-                                <option value="26-35">26-35</option>
-                                <option value="36-50">36-50</option>
-                                <option value="over-50">Over 50</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Education Level (Optional)</label>
-                            <select class="form-input form-select" id="onboardingEducation">
-                                <option value="">Select education level</option>
-                                <option value="high-school">High School</option>
-                                <option value="undergraduate">Undergraduate</option>
-                                <option value="graduate">Graduate</option>
-                                <option value="phd">PhD</option>
-                                <option value="professional">Professional</option>
-                            </select>
-                        </div>
-                        
                         <div class="onboarding-actions">
                             <button type="submit" class="onboarding-button">Complete Setup</button>
                         </div>
@@ -204,8 +180,6 @@ class OnboardingUI {
         
         const name = document.getElementById('onboardingName').value.trim();
         const nationality = this.nationalityInput ? this.nationalityInput.getValue() : '';
-        const ageGroup = document.getElementById('onboardingAgeGroup').value;
-        const education = document.getElementById('onboardingEducation').value;
         
         // Validation
         if (name.length < 2) {
@@ -224,9 +198,7 @@ class OnboardingUI {
             // Update the pending user data with onboarding info
             const onboardingData = {
                 displayName: name,
-                nationality: nationality,
-                ageGroup: ageGroup || null,
-                education: education || null,
+                country: nationality,
                 onboardingCompleted: true,
                 onboardingCompletedAt: new Date().toISOString()
             };

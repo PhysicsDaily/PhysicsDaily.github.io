@@ -201,9 +201,9 @@ class AuthManager {
             uid: user.uid,
             email: user.email,
             displayName: onboardingData.displayName,
-            nationality: onboardingData.nationality,
-            ageGroup: onboardingData.ageGroup,
-            education: onboardingData.education,
+            profile: {
+                country: onboardingData.country
+            },
             onboardingCompleted: true,
             onboardingCompletedAt: firebase.firestore.FieldValue.serverTimestamp(),
             photoURL: user.photoURL || null,
@@ -228,7 +228,8 @@ class AuthManager {
             preferences: {
                 theme: localStorage.getItem('theme') || 'light',
                 emailNotifications: true,
-                dailyReminders: false
+                dailyReminders: false,
+                country: onboardingData.country
             }
         };
         
@@ -251,9 +252,8 @@ class AuthManager {
         
         const updateData = {
             displayName: onboardingData.displayName,
-            nationality: onboardingData.nationality,
-            ageGroup: onboardingData.ageGroup,
-            education: onboardingData.education,
+            'profile.country': onboardingData.country,
+            'preferences.country': onboardingData.country,
             onboardingCompleted: true,
             onboardingCompletedAt: firebase.firestore.FieldValue.serverTimestamp(),
             lastLogin: firebase.firestore.FieldValue.serverTimestamp()

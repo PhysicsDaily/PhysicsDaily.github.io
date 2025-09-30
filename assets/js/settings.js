@@ -614,6 +614,17 @@
         };
         await deleteCollection(userRef.collection('quizzes'));
         await userRef.collection('progress').doc('data').delete().catch(()=>{});
+        
+        // Mark all xp_logs from this user as deleted so they don't appear in leaderboard
+        const xpLogsSnap = await db.collection('xp_logs').where('uid', '==', uid).limit(500).get();
+        if (!xpLogsSnap.empty) {
+          const batch = db.batch();
+          xpLogsSnap.forEach(doc => {
+            batch.update(doc.ref, { userDeleted: true, deletedAt: firebase.firestore.FieldValue.serverTimestamp() });
+          });
+          await batch.commit();
+        }
+        
         await userRef.delete().catch(()=>{});
 
         // Delete Firebase Auth user
