@@ -82,10 +82,13 @@ This website is actively being developed. Each physics topic section will includ
 
 ## 🛠️ Built With
 
+- **Eleventy (11ty)** - Static site generator
+- **Nunjucks** - Templating engine
 - **HTML5** - Structure and content
 - **CSS3** - Modern styling and responsive design
-- **JavaScript** - Interactive features (coming soon)
-- **GitHub Pages** - Free hosting and deployment
+- **JavaScript** - Interactive features and gamification
+- **Firebase** - Authentication and real-time database
+- **GitHub Pages** - Hosting via GitHub Actions
 
 ## 📖 How to Use
 
@@ -99,6 +102,37 @@ This website is actively being developed. Each physics topic section will includ
 
 - Click the sun/moon button to switch themes.
 - Preference is saved to `localStorage` and applied across pages.
+
+## 🚀 Deployment
+
+This site is automatically deployed to GitHub Pages using GitHub Actions. Every push to the `main` branch triggers a new deployment.
+
+### Quick Start for Developers
+
+```bash
+# Clone the repository
+git clone https://github.com/PhysicsDaily/PhysicsDaily.github.io.git
+cd PhysicsDaily.github.io
+
+# Install dependencies
+npm install
+
+# Start development server
+npm start
+# Visit http://localhost:8080
+
+# Build for production
+npm run build
+```
+
+### Deployment Workflow
+
+1. Push changes to `main` branch
+2. GitHub Actions automatically builds with Eleventy
+3. Site deploys to https://physicsdaily.github.io
+4. Changes are live in 1-2 minutes
+
+📖 **For detailed deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md)**
 
 ## 🤝 Contributing
 
