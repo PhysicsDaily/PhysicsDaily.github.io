@@ -63,6 +63,15 @@
 
       // Optimistic UI update when XP is awarded (no extra reads)
       window.addEventListener('xp:awarded', (e) => this.onXpAwarded(e?.detail?.amount || 0));
+      
+      // Refresh leaderboard when profile is updated (e.g., country change)
+      document.addEventListener('profileUpdated', () => {
+        console.log('[Leaderboard] Profile updated, refreshing...');
+        // Clear cache to force fresh data with updated profile
+        delete this.cache;
+        this.cache = {};
+        this.loadAndRender(this.currentRange, false);
+      });
     }
 
     async ensureFirebaseReady() {
@@ -227,7 +236,39 @@
 
         console.log(`[Leaderboard] ${range}: Aggregated ${byUser.size} users from ${snap.size || 0} logs`);
 
-        // Build ranking array (avoid per-user Firestore lookups to save reads)
+        // Fetch current user profiles to get updated displayName and country
+        // This ensures country changes are reflected immediately
+        const userIds = Array.from(byUser.keys());
+        if (userIds.length > 0) {
+          try {
+            // Fetch users in batches of 10 to avoid query limitations
+            const batchSize = 10;
+            for (let i = 0; i < userIds.length; i += batchSize) {
+              const batch = userIds.slice(i, i + batchSize);
+              const userDocs = await Promise.all(
+                batch.map(uid => this.db.collection('users').doc(uid).get().catch(() => null))
+              );
+              
+              userDocs.forEach((userDoc, idx) => {
+                if (userDoc && userDoc.exists) {
+                  const userData = userDoc.data();
+                  const uid = batch[idx];
+                  const userEntry = byUser.get(uid);
+                  if (userEntry) {
+                    // Update with current profile data
+                    userEntry.displayName = userData.profile?.displayName || userData.displayName || userEntry.displayName;
+                    userEntry.country = userData.profile?.country || userData.preferences?.country || userEntry.country;
+                  }
+                }
+              });
+            }
+            console.log(`[Leaderboard] ${range}: Updated profiles for ${userIds.length} users`);
+          } catch (e) {
+            console.warn('[Leaderboard] Failed to fetch user profiles, using cached data:', e);
+          }
+        }
+
+        // Build ranking array
         const results = Array.from(byUser.values());
 
         // If no activity in this period, fallback to all-time from users.xp.total
@@ -323,13 +364,23 @@
     }
 
     isoToFlag(iso) {
-      if (!iso || typeof iso !== 'string' || iso.length !== 2) return '🌐';
+      if (!iso || typeof iso !== 'string' || iso.length !== 2) return null;
+      
+      // Convert ISO code to Unicode flag emoji
       try {
         const codePoints = iso.toUpperCase().split('').map(char => 127397 + char.charCodeAt(0));
-        return String.fromCodePoint(...codePoints);
+        const emoji = String.fromCodePoint(...codePoints);
+        
+        // Convert emoji to Twemoji CDN URL
+        const hex = Array.from(emoji).map(c => c.codePointAt(0).toString(16)).join('-');
+        return {
+          emoji: emoji,
+          url: `https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${hex}.svg`,
+          alt: `${iso.toUpperCase()} flag`
+        };
       } catch (e) {
         console.warn('[Leaderboard] Flag conversion failed for:', iso, e);
-        return '🌐';
+        return null;
       }
     }
 
@@ -365,23 +416,30 @@
         if (empty) empty.style.display = 'block';
       } else {
         if (empty) empty.style.display = 'none';
-        tbody.innerHTML = data.map(r => `
-          <tr data-uid="${r.uid}">
-            <td class="rank">
-              <div class="rank-medal ${r.rank === 1 ? 'rank-1' : r.rank === 2 ? 'rank-2' : r.rank === 3 ? 'rank-3' : 'rank-other'}">
-                ${r.rank}
-              </div>
-            </td>
-            <td class="name">
-              <div class="name-cell">
-                <span class="flag">${this.isoToFlag(r.country || '')}</span>
-                <span class="text">${this.escapeHtml(r.displayName || 'Anonymous')}</span>
-              </div>
-            </td>
-            <td class="country">${r.country || 'N/A'}</td>
-            <td class="xp">${Number(r.xp) || 0}</td>
-          </tr>
-        `).join('');
+        tbody.innerHTML = data.map(r => {
+          const flagData = this.isoToFlag(r.country || '');
+          const flagHtml = flagData 
+            ? `<img src="${flagData.url}" alt="${flagData.alt}" class="flag" onerror="this.style.display='none'">` 
+            : `<span class="flag-emoji">🌐</span>`;
+          
+          return `
+            <tr data-uid="${r.uid}">
+              <td class="rank">
+                <div class="rank-medal ${r.rank === 1 ? 'rank-1' : r.rank === 2 ? 'rank-2' : r.rank === 3 ? 'rank-3' : 'rank-other'}">
+                  ${r.rank}
+                </div>
+              </td>
+              <td class="name">
+                <div class="name-cell">
+                  ${flagHtml}
+                  <span class="text">${this.escapeHtml(r.displayName || 'Anonymous')}</span>
+                </div>
+              </td>
+              <td class="country">${r.country || 'N/A'}</td>
+              <td class="xp">${Number(r.xp) || 0}</td>
+            </tr>
+          `;
+        }).join('');
       }
 
       this.highlightSelf();

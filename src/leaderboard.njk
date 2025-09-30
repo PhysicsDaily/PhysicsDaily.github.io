@@ -304,11 +304,23 @@ headExtra: |
 
   .name .name-cell { display: flex; align-items: center; gap: .9rem; }
   .name .flag { 
-    font-size: 1.5rem; 
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    object-fit: cover;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,.15));
+    transition: transform 0.3s ease;
+    border: 1px solid var(--border-color);
+  }
+  .name .flag:hover {
+    transform: scale(1.15);
+  }
+  .name .flag-emoji {
+    font-size: 1.5rem;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,.15));
     transition: transform 0.3s ease;
   }
-  .name .flag:hover {
+  .name .flag-emoji:hover {
     transform: scale(1.2);
   }
   .name .text { font-weight: 600; font-size: 1.05rem; }
@@ -337,12 +349,67 @@ headExtra: |
   }
 
   .lb-footer-note { 
-    padding: 1rem 1.5rem; 
-    color: var(--text-secondary); 
-    font-size: .9rem;
-    background: var(--bg-secondary);
-    border-top: 1px solid var(--border-color);
+    padding: 1.75rem 1.5rem; 
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+    border-top: 2px solid var(--border-color);
+  }
+  .lb-rules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1rem;
+  }
+  .lb-rule-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.25rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .lb-rule-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color, #06b6d4));
+  }
+  .lb-rule-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color);
+  }
+  .lb-rule-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+  .lb-rule-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+  .lb-rule-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
     line-height: 1.6;
+  }
+  .lb-rules-header {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .lb-rules-header::before {
+    content: '📋';
+    font-size: 1.3rem;
   }
 
   #leaderboardLoading { 
@@ -461,9 +528,24 @@ pageScripts:
         </table>
       </div>
       <div class="lb-footer-note">
-        <strong>How it works:</strong> XP is earned by answering section Quick Checks correctly and by quiz performance. 
-        <br><strong>Reset schedule:</strong> Daily resets at midnight. Weekly resets every Monday (or at the start of a new month if it comes first). Monthly resets on the 1st.
-        <br>Tie-breakers are resolved by most recent activity.
+        <div class="lb-rules-header">How the Leaderboard Works</div>
+        <div class="lb-rules-grid">
+          <div class="lb-rule-card">
+            <span class="lb-rule-icon">⚡</span>
+            <div class="lb-rule-title">Earning XP</div>
+            <div class="lb-rule-text">Earn XP by answering section Quick Checks correctly and completing quizzes. The more accurate and faster you are, the more XP you gain!</div>
+          </div>
+          <div class="lb-rule-card">
+            <span class="lb-rule-icon">🔄</span>
+            <div class="lb-rule-title">Reset Schedule</div>
+            <div class="lb-rule-text"><strong>Daily:</strong> Midnight<br><strong>Weekly:</strong> Every Monday (or month start)<br><strong>Monthly:</strong> 1st of each month</div>
+          </div>
+          <div class="lb-rule-card">
+            <span class="lb-rule-icon">🏆</span>
+            <div class="lb-rule-title">Tie-Breakers</div>
+            <div class="lb-rule-text">When users have the same XP, rankings are determined by the most recent activity. Stay active to maintain your position!</div>
+          </div>
+        </div>
       </div>
     </section>
   </div>

@@ -16,10 +16,6 @@ hero:
   title: "Classical Mechanics: Foundations & Kinematics"
   subtitle: "Chapters 1-7 | Build your mechanics toolkit"
   description: "Explore the fundamental principles of classical mechanics through a systematic study of measurement theory, kinematics, dynamics, and particle systems. This structured pathway delivers the mathematical and conceptual framework required for advanced physics."
-  tags:
-    - "Structured curriculum"
-    - "Scientific method practice"
-    - "Problem-solving focus"
   stats:
     - number: "7"
       label: "Chapters"
@@ -60,7 +56,7 @@ progress:
 
 chapters:
   - id: "chapter-1"
-    number: "Chapter 1"
+    number: "1"
     title: "Scientific Measurement"
     description: "Establish foundational skills in precision measurement, unit systems, and quantitative analysis essential for experimental physics."
     difficulty: "Foundational"
@@ -75,7 +71,7 @@ chapters:
     buttonText: "Open chapter"
     progress: 0
   - id: "chapter-2"
-    number: "Chapter 2"
+    number: "2"
     title: "Motion in One Dimension"
     description: "Develop mathematical models for position, velocity, and acceleration while becoming fluent with kinematic equations."
     difficulty: "Foundational"
@@ -90,7 +86,7 @@ chapters:
     buttonText: "Open chapter"
     progress: 0
   - id: "chapter-3"
-    number: "Chapter 3"
+    number: "3"
     title: "Force and Newton's Laws"
     description: "Examine the relationship between forces and motion through Newton's three fundamental laws and structured problem solving."
     difficulty: "Intermediate"
@@ -105,7 +101,7 @@ chapters:
     buttonText: "Open chapter"
     progress: 0
   - id: "chapter-4"
-    number: "Chapter 4"
+    number: "4"
     title: "Motion in 2D and 3D"
     description: "Analyze projectile, circular, and relative motion to extend one-dimensional reasoning into vector-rich scenarios."
     difficulty: "Intermediate"
@@ -120,7 +116,7 @@ chapters:
     buttonText: "Open chapter"
     progress: 0
   - id: "chapter-5"
-    number: "Chapter 5"
+    number: "5"
     title: "Applied Newtonian Mechanics"
     description: "Apply Newton's laws to practical systems involving friction, inclined planes, pulleys, and coupled particles."
     difficulty: "Intermediate"
@@ -135,7 +131,7 @@ chapters:
     buttonText: "Open chapter"
     progress: 0
   - id: "chapter-6"
-    number: "Chapter 6"
+    number: "6"
     title: "Momentum and Impulse"
     description: "Investigate linear momentum conservation and the impulse-momentum theorem in both idealized and real collisions."
     difficulty: "Intermediate"
@@ -150,7 +146,7 @@ chapters:
     buttonText: "Open chapter"
     progress: 0
   - id: "chapter-7"
-    number: "Chapter 7"
+    number: "7"
     title: "Systems of Particles"
     description: "Study multi-particle systems, center of mass motion, and advanced applications of conservation principles."
     difficulty: "Advanced"
@@ -166,123 +162,116 @@ chapters:
     progress: 0
 ---
 
-<div class="breadcrumb">
-    <div class="container">
-        <nav aria-label="Breadcrumb">
-            {% for crumb in breadcrumbs %}
-                {% if crumb.current %}
-                    <span class="current">{{ crumb.label }}</span>
-                {% else %}
-                    <a href="{{ crumb.url }}">{{ crumb.label }}</a>
-                    <span class="separator">></span>
-                {% endif %}
-            {% endfor %}
-        </nav>
-    </div>
+
+<div class="breadcrumb bg-faint">
+  <div class="container">
+    <nav aria-label="Breadcrumb">
+      {% for crumb in breadcrumbs %}
+        {% if crumb.current %}
+          <span class="current">{{ crumb.label }}</span>
+        {% else %}
+          <a href="{{ crumb.url }}">{{ crumb.label }}</a>
+          <span class="separator">&rsaquo;</span>
+        {% endif %}
+      {% endfor %}
+    </nav>
+  </div>
 </div>
 
-<header class="header">
-    <div class="container">
-        <h1>{{ hero.title }}</h1>
-        <p class="subtitle">{{ hero.subtitle }}</p>
-        <p class="description">{{ hero.description }}</p>
-        
-        <div class="chapter-topics">
-            {% for tag in hero.tags %}
-                <span class="topic-tag">{{ tag }}</span>
-            {% endfor %}
-        </div>
 
-        <div class="progress-stats">
-            {% for stat in hero.stats %}
-                <div class="stat-item">
-                    <span class="stat-number">{{ stat.number }}</span>
-                    <span class="stat-label">{{ stat.label }}</span>
-                </div>
-            {% endfor %}
+<header class="header hero-section bg-gradient">
+  <div class="container">
+    <h1 class="hero-title">{{ hero.title }}</h1>
+    <p class="subtitle">{{ hero.subtitle }}</p>
+    <p class="description">{{ hero.description }}</p>
+    <div class="progress-stats hero-stats">
+      {% for stat in hero.stats %}
+        <div class="stat-item">
+          <span class="stat-number">{{ stat.number }}</span>
+          <span class="stat-label">{{ stat.label }}</span>
         </div>
+      {% endfor %}
     </div>
+  </div>
 </header>
 
-<section class="objectives-section" id="objectives">
-    <div class="container">
-        <div class="objectives-card">
-            <h2>{{ objectives.title }}</h2>
-            <div class="objectives-grid">
-                {% for objective in objectives.items %}
-                    <div class="objective-item">
-                        <span class="objective-icon" aria-hidden="true">{{ objective.icon | safe }}</span>
-                        <h3>{{ objective.title }}</h3>
-                        <p>{{ objective.description }}</p>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
+
+<section class="objectives-section bg-faint" id="objectives">
+  <div class="container">
+    <div class="objectives-card">
+      <h2 class="section-title"><span class="icon">🎯</span> {{ objectives.title }}</h2>
+      <div class="objectives-grid">
+        {% for objective in objectives.items %}
+          <div class="objective-item card">
+            <span class="objective-icon colored" aria-hidden="true">{{ objective.icon | safe }}</span>
+            <h3>{{ objective.title }}</h3>
+            <p>{{ objective.description }}</p>
+          </div>
+        {% endfor %}
+      </div>
     </div>
+  </div>
 </section>
 
-<main class="main-content">
-    <div class="container">
-        <section class="progress-section" id="progress">
-            <h2>{{ progress.title }}</h2>
-            {% if progress.description %}
-                <p class="section-intro">{{ progress.description }}</p>
-            {% endif %}
-            
-            <div class="progress-stats">
-                {% for stat in progress.stats %}
-                    <div class="stat-item">
-                        <span class="stat-number" {% if stat.id %}id="{{ stat.id }}"{% endif %}>{{ stat.number }}</span>
-                        <span class="stat-label">{{ stat.label }}</span>
-                    </div>
-                {% endfor %}
-            </div>
-        </section>
 
-        <section class="chapters-section" id="chapters">
-            <h2>Course curriculum</h2>
-            <div class="chapter-grid">
-                {% for chapter in chapters %}
-                    <div class="chapter-card" id="{{ chapter.id }}" data-chapter="{{ loop.index }}">
-                        <div class="chapter-header">
-                            <div class="chapter-number">{{ chapter.number }}</div>
-                            <div class="difficulty-badge {{ chapter.difficultyClass }}">{{ chapter.difficulty }}</div>
-                        </div>
-                        
-                        <h3>{{ chapter.title }}</h3>
-                        <p class="chapter-description">{{ chapter.description }}</p>
-                        
-                        <div class="chapter-stats">
-                            <span class="study-time">{{ chapter.studyTime }}</span>
-                            <span class="topics-count">{{ chapter.topicsCount }}</span>
-                        </div>
-                        
-                        <div class="chapter-topics">
-                            {% for topic in chapter.topics %}
-                                <span class="topic-tag">{{ topic }}</span>
-                            {% endfor %}
-                        </div>
-                        
-                        <div class="chapter-actions">
-                            <a href="{{ chapter.url }}" class="btn btn-primary">{{ chapter.buttonText }}</a>
-                            <div class="progress-indicator">
-                                <div class="progress-bar" data-progress="{{ chapter.progress }}"></div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
+<main class="main-content">
+  <div class="container">
+    <section class="progress-section card bg-white shadow" id="progress">
+      <h2 class="section-title"><span class="icon">📈</span> {{ progress.title }}</h2>
+      {% if progress.description %}
+        <p class="section-intro">{{ progress.description }}</p>
+      {% endif %}
+      <div class="progress-stats">
+        {% for stat in progress.stats %}
+          <div class="stat-item">
+            <span class="stat-number" {% if stat.id %}id="{{ stat.id }}"{% endif %}>{{ stat.number }}</span>
+            <span class="stat-label">{{ stat.label }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="chapters-section" id="chapters">
+      <h2 class="section-title"><span class="icon">📚</span> Course curriculum</h2>
+      <div class="chapter-grid">
+        {% for chapter in chapters %}
+          <div class="chapter-card card shadow hoverable" id="{{ chapter.id }}" data-chapter="{{ loop.index }}">
+            <div class="chapter-header">
+              <div class="chapter-number circle-badge">{{ chapter.number }}</div>
+              <div class="difficulty-badge {{ chapter.difficultyClass }}">{{ chapter.difficulty }}</div>
             </div>
-        </section>
-    </div>
+            <h3 class="chapter-title">{{ chapter.title }}</h3>
+            <p class="chapter-description">{{ chapter.description }}</p>
+            <div class="chapter-stats">
+              <span class="study-time"><span class="icon">⏱️</span> {{ chapter.studyTime }}</span>
+              <span class="topics-count"><span class="icon">📋</span> {{ chapter.topicsCount }}</span>
+            </div>
+            <div class="chapter-topics">
+              {% for topic in chapter.topics %}
+                <span class="topic-tag pill small">{{ topic }}</span>
+              {% endfor %}
+            </div>
+            <div class="chapter-actions">
+              <a href="{{ chapter.url }}" class="btn btn-primary">{{ chapter.buttonText }}</a>
+              <div class="progress-indicator">
+                <div class="progress-bar" data-progress="{{ chapter.progress }}"></div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+  </div>
 </main>
 
-<footer class="footer">
-    <div class="container">
-        <div class="footer-links">
-            <a href="../index.html">Home</a>
-            <a href="../about.html">About</a>
-            <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io">GitHub</a>
-        </div>
-        <p>&copy; Physics Daily. Made with curiosity for physics enthusiasts everywhere.</p>
+
+<footer class="footer bg-faint">
+  <div class="container">
+    <div class="footer-links">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+      <a href="https://github.com/PhysicsDaily/PhysicsDaily.github.io">GitHub</a>
     </div>
+    <p>&copy; Physics Daily. Made with curiosity for physics enthusiasts everywhere.</p>
+  </div>
 </footer>

@@ -531,7 +531,15 @@
         const profile = { displayName, country };
         saveProfileToStorage(profile);
         const result = await updateCloudProfile(displayName, country);
-        if (result.success) showToast('Settings saved'); else showToast('Save failed: ' + result.error);
+        if (result.success) {
+          showToast('Settings saved');
+          // Trigger leaderboard refresh to update displayed country
+          document.dispatchEvent(new CustomEvent('profileUpdated', { 
+            detail: { displayName, country } 
+          }));
+        } else {
+          showToast('Save failed: ' + result.error);
+        }
       });
     };
 
