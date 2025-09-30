@@ -8,8 +8,11 @@
       this.user = null;
       this.db = null;
       this.selfXp = { daily: 0, weekly: 0, monthly: 0 };
-      this.cacheTTLms = 180000; // 3 minutes to keep reads low
+      this.cacheTTLms = 180000; // 3 minutes
       this.debouncedReloadId = null;
+      this.autoRefreshInterval = null;
+      this.lastFetchTime = {};
+      this.isRefreshing = false;
       this.init();
     }
 
@@ -21,6 +24,10 @@
       dailyBtn?.addEventListener('click', () => this.switchRange('daily'));
       weeklyBtn?.addEventListener('click', () => this.switchRange('weekly'));
       monthlyBtn?.addEventListener('click', () => this.switchRange('monthly'));
+
+      // Wire manual refresh button
+      const refreshBtn = document.getElementById('lb-refresh');
+      refreshBtn?.addEventListener('click', () => this.manualRefresh());
 
       // Ensure Firebase/Auth ready
       await this.ensureFirebaseReady();
@@ -37,8 +44,22 @@
       // Initial load
       await this.loadAndRenderAll();
 
-      // Periodic refresh (throttled to 5 minutes)
-      setInterval(() => this.loadAndRender(this.currentRange, true), 300_000);
+      // Smart auto-refresh: faster when active, slower when idle
+      this.startAutoRefresh();
+
+      // Pause refresh when tab is hidden to save resources
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          this.stopAutoRefresh();
+        } else {
+          this.startAutoRefresh();
+          // Refresh immediately when coming back if data is stale
+          const lastFetch = this.lastFetchTime[this.currentRange] || 0;
+          if (Date.now() - lastFetch > this.cacheTTLms) {
+            this.loadAndRender(this.currentRange, false);
+          }
+        }
+      });
 
       // Optimistic UI update when XP is awarded (no extra reads)
       window.addEventListener('xp:awarded', (e) => this.onXpAwarded(e?.detail?.amount || 0));
@@ -68,33 +89,49 @@
     }
 
     getRangeStart(range) {
-      const now = Date.now();
+      const now = new Date();
       switch (range) {
         case 'daily':
-          return new Date(now - 24 * 60 * 60 * 1000);
+          // Start of today (midnight)
+          return new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);
         case 'weekly':
-          return new Date(now - 7 * 24 * 60 * 60 * 1000);
+          // Week resets on Mondays AND at start of each month
+          // This ensures weeks are always within a single month
+          const monthStart = new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0, 0);
+          const day = now.getDay();
+          const diff = day === 0 ? -6 : 1 - day; // Days back to Monday
+          const mondayStart = new Date(now);
+          mondayStart.setDate(now.getDate() + diff);
+          mondayStart.setHours(0, 0, 0, 0);
+          
+          // Use the more recent date: either Monday or start of month
+          return mondayStart > monthStart ? mondayStart : monthStart;
         case 'monthly':
-          {
-            const d = new Date();
-            return new Date(d.getFullYear(), d.getMonth(), 1, 0, 0, 0, 0); // start of current month
-          }
+          // Start of current month
+          return new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0, 0);
         default:
-          return new Date(now - 24 * 60 * 60 * 1000);
+          return new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);
       }
     }
 
     getRangeStartMs(range) {
-      const now = Date.now();
-      switch (range) {
-        case 'daily':
-          return now - 24 * 60 * 60 * 1000;
-        case 'weekly':
-          return now - 7 * 24 * 60 * 60 * 1000;
-        case 'monthly':
-          return this.getRangeStart('monthly').getTime();
-        default:
-          return now - 24 * 60 * 60 * 1000;
+      return this.getRangeStart(range).getTime();
+    }
+
+    startAutoRefresh() {
+      this.stopAutoRefresh();
+      // Refresh every 2 minutes when viewing leaderboard
+      this.autoRefreshInterval = setInterval(() => {
+        if (!this.isRefreshing && !document.hidden) {
+          this.loadAndRender(this.currentRange, true);
+        }
+      }, 120000); // 2 minutes
+    }
+
+    stopAutoRefresh() {
+      if (this.autoRefreshInterval) {
+        clearInterval(this.autoRefreshInterval);
+        this.autoRefreshInterval = null;
       }
     }
 
@@ -111,11 +148,12 @@
         if (!this.db) return;
 
         this.isLoading = true;
+        this.isRefreshing = true;
         if (!silent) this.setLoading(true);
 
         // Try cache first to avoid reads
         const cached = this.readCache(range);
-        if (cached) {
+        if (cached && !silent) {
           this.rankings[range] = cached.data;
           this.render(range);
           this.isLoading = false;
@@ -159,16 +197,23 @@
             console.error('[Leaderboard] query failed', e1, e2);
             this.setError('Could not load leaderboard (permissions or indexing). See console.');
             this.isLoading = false;
+            this.isRefreshing = false;
             this.setLoading(false);
             return;
           }
         }
+        
+        this.lastFetchTime[range] = Date.now();
         const byUser = new Map();
 
         snap.forEach(doc => {
           const d = doc.data() || {};
           const uid = d.uid || 'unknown';
+          if (uid === 'unknown') return; // Skip invalid entries
+          
           const xp = Number(d.xp) || 0;
+          if (xp <= 0) return; // Skip zero XP logs
+          
           if (!byUser.has(uid)) {
             byUser.set(uid, {
               uid,
@@ -179,6 +224,8 @@
           }
           byUser.get(uid).xp += xp;
         });
+
+        console.log(`[Leaderboard] ${range}: Aggregated ${byUser.size} users from ${snap.size || 0} logs`);
 
         // Build ranking array (avoid per-user Firestore lookups to save reads)
         const results = Array.from(byUser.values());
@@ -223,11 +270,13 @@
           this.render(range);
         }
         this.isLoading = false;
+        this.isRefreshing = false;
         if (!silent) this.setLoading(false);
         this.clearError();
       } catch (e) {
         console.error('[Leaderboard] load failed', e);
         this.isLoading = false;
+        this.isRefreshing = false;
         this.setLoading(false);
         this.setError('Failed to load leaderboard. Check your Firestore rules for xp_logs.');
       }
@@ -239,6 +288,23 @@
       document.querySelectorAll('.lb-tab').forEach(b => b.classList.remove('active'));
       document.getElementById(`tab-${range}`)?.classList.add('active');
       this.render(range);
+    }
+
+    async manualRefresh() {
+      const btn = document.getElementById('lb-refresh');
+      if (!btn || this.isRefreshing) return;
+      
+      btn.classList.add('refreshing');
+      btn.disabled = true;
+      
+      // Clear cache to force fresh data
+      delete this.cache[this.currentRange];
+      await this.loadAndRender(this.currentRange, false);
+      
+      setTimeout(() => {
+        btn.classList.remove('refreshing');
+        btn.disabled = false;
+      }, 1000);
     }
 
     setLoading(isLoading) {
@@ -257,10 +323,14 @@
     }
 
     isoToFlag(iso) {
-      if (!iso) return '';
+      if (!iso || typeof iso !== 'string' || iso.length !== 2) return '🌐';
       try {
-        return iso.replace(/./g, c => String.fromCodePoint(127397 + c.toUpperCase().charCodeAt()));
-      } catch { return iso; }
+        const codePoints = iso.toUpperCase().split('').map(char => 127397 + char.charCodeAt(0));
+        return String.fromCodePoint(...codePoints);
+      } catch (e) {
+        console.warn('[Leaderboard] Flag conversion failed for:', iso, e);
+        return '🌐';
+      }
     }
 
     highlightSelf() {
@@ -278,7 +348,15 @@
       const empty = document.getElementById('leaderboardEmpty');
       const subtitle = document.getElementById('leaderboardSubtitle');
       if (subtitle) {
-        subtitle.textContent = range === 'daily' ? 'Last 24 hours' : range === 'weekly' ? 'Last 7 days' : 'This month to date';
+        if (range === 'daily') {
+          subtitle.textContent = 'Today';
+        } else if (range === 'weekly') {
+          const start = this.getRangeStart('weekly');
+          const isMonthStart = start.getDate() === 1;
+          subtitle.textContent = isMonthStart ? 'This week (resets at month start)' : 'This week';
+        } else {
+          subtitle.textContent = 'This month';
+        }
       }
       if (!tbody) return;
 
@@ -300,8 +378,8 @@
                 <span class="text">${this.escapeHtml(r.displayName || 'Anonymous')}</span>
               </div>
             </td>
-            <td class="country">${r.country || ''}</td>
-            <td class="xp">${r.xp}</td>
+            <td class="country">${r.country || 'N/A'}</td>
+            <td class="xp">${Number(r.xp) || 0}</td>
           </tr>
         `).join('');
       }
@@ -361,18 +439,44 @@
       const pos = count > 1 ? ((count - rank) / (count - 1)) * 100 : 0;
       if (pointer) pointer.style.left = `${Math.max(0, Math.min(100, pos))}%`;
 
-      // Monthly reset info
+      // Reset timer info with proper calculations
       if (resetEl) {
-        if (range === 'monthly') {
-          const now = new Date();
-          const next = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-          const days = Math.max(0, Math.ceil((next - now) / (1000*60*60*24)));
-          resetEl.textContent = `Monthly leaderboard resets in ${days} day${days===1?'':'s'}`;
+        const now = new Date();
+        let resetTime;
+        let resetLabel = '';
+        
+        if (range === 'daily') {
+          // Next midnight
+          resetTime = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
+          resetLabel = 'Daily reset';
         } else if (range === 'weekly') {
-          // Optional friendly info for weekly
-          resetEl.textContent = 'Weekly: last 7 days';
+          // Next Monday OR next month (whichever comes first)
+          const d = now.getDay();
+          const daysToAdd = d === 0 ? 1 : 8 - d;
+          const nextMonday = new Date(now);
+          nextMonday.setDate(now.getDate() + daysToAdd);
+          nextMonday.setHours(0,0,0,0);
+          
+          const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1, 0, 0, 0);
+          
+          // Use whichever comes first
+          resetTime = nextMonday < nextMonth ? nextMonday : nextMonth;
+          resetLabel = nextMonday < nextMonth ? 'Weekly reset (Monday)' : 'Weekly reset (new month)';
         } else {
-          resetEl.textContent = 'Daily: last 24 hours';
+          // Next month
+          resetTime = new Date(now.getFullYear(), now.getMonth() + 1, 1, 0, 0, 0);
+          resetLabel = 'Monthly reset';
+        }
+        
+        const diff = resetTime - now;
+        const days = Math.floor(diff / 86400000);
+        const h = Math.floor((diff % 86400000) / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        
+        if (days > 0) {
+          resetEl.textContent = `${resetLabel} in ${days}d ${h}h`;
+        } else {
+          resetEl.textContent = `${resetLabel} in ${h}h ${m}m`;
         }
       }
     }
