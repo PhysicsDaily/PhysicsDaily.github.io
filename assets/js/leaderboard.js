@@ -210,7 +210,6 @@
           const d = doc.data() || {};
           const uid = d.uid || 'unknown';
           if (uid === 'unknown') return; // Skip invalid entries
-          if (d.userDeleted) return; // Skip logs from deleted users
           
           const xp = Number(d.xp) || 0;
           if (xp <= 0) return; // Skip zero XP logs

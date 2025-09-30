@@ -264,6 +264,32 @@
     select._countries = countries;
   }
 
+  async function loadCountryFromFirebase(countryEl) {
+    try {
+      const db = authManager.db;
+      const user = authManager.getCurrentUser();
+      if (!db || !user) return;
+      
+      const userDoc = await db.collection('users').doc(user.uid).get();
+      if (userDoc.exists) {
+        const userData = userDoc.data();
+        const country = userData?.profile?.country || userData?.preferences?.country || null;
+        if (country && countryEl) {
+          countryEl.value = country;
+          // Also save to localStorage
+          const stored = loadProfileFromStorage();
+          stored.country = country;
+          saveProfileToStorage(stored);
+          // Update flag preview
+          const event = new Event('change');
+          countryEl.dispatchEvent(event);
+        }
+      }
+    } catch (e) {
+      console.warn('[Settings] Failed to load country from Firebase:', e);
+    }
+  }
+
   async function updateCloudProfile(displayName, country) {
     if (!window.authManager || !authManager.user) return { success: true };
     try {
@@ -407,9 +433,13 @@
         displayNameEl.value = stored.displayName;
       }
       
-      // Load country from storage
+      // Load country: try localStorage first, then Firebase user document
       if (stored.country) {
         countryEl.value = stored.country;
+        updateFlagPreview();
+      } else if (window.authManager && authManager.isSignedIn()) {
+        // Try to load from Firebase
+        loadCountryFromFirebase(countryEl);
       }
 
       // Initialize theme select with current theme
@@ -603,7 +633,7 @@
         const db = authManager.db;
         const userRef = db.collection('users').doc(uid);
 
-        // Delete subcollections (quizzes)
+        // Delete subcollections and all user data recursively
         const deleteCollection = async (ref) => {
           const snap = await ref.limit(200).get();
           if (snap.empty) return;
@@ -612,19 +642,17 @@
           await batch.commit();
           await deleteCollection(ref); // continue until empty
         };
+        
+        // Delete all quizzes
         await deleteCollection(userRef.collection('quizzes'));
-        await userRef.collection('progress').doc('data').delete().catch(()=>{});
         
-        // Mark all xp_logs from this user as deleted so they don't appear in leaderboard
-        const xpLogsSnap = await db.collection('xp_logs').where('uid', '==', uid).limit(500).get();
-        if (!xpLogsSnap.empty) {
-          const batch = db.batch();
-          xpLogsSnap.forEach(doc => {
-            batch.update(doc.ref, { userDeleted: true, deletedAt: firebase.firestore.FieldValue.serverTimestamp() });
-          });
-          await batch.commit();
-        }
+        // Delete progress data
+        await deleteCollection(userRef.collection('progress'));
         
+        // Delete ALL xp_logs from this user (not just mark them)
+        await deleteCollection(db.collection('xp_logs').where('uid', '==', uid));
+        
+        // Delete user document
         await userRef.delete().catch(()=>{});
 
         // Delete Firebase Auth user

@@ -356,18 +356,29 @@
 
         // Get user profile info
         let nickname = user.displayName || (user.email ? user.email.split('@')[0] : 'User');
-        let nationality = null;
+        let country = null;
         
         try {
           const stored = JSON.parse(localStorage.getItem('pd:user:profile') || '{}');
-          if (stored?.nickname) nickname = stored.nickname;
-          if (stored?.nationality) nationality = stored.nationality;
+          if (stored?.displayName) nickname = stored.displayName;
+          if (stored?.country) country = stored.country;
         } catch {}
+        
+        // Also try to get country from Firebase user profile
+        if (!country && authManager.db) {
+          try {
+            const userDoc = await authManager.db.collection('users').doc(user.uid).get();
+            if (userDoc.exists) {
+              const userData = userDoc.data();
+              country = userData?.profile?.country || userData?.preferences?.country || null;
+            }
+          } catch {}
+        }
 
         const payload = {
           uid: user.uid,
           displayName: nickname,
-          nationality: nationality || null,
+          country: country || null,
           xp: amount,
           reason: reason || '',
           meta: meta || {},
@@ -384,10 +395,7 @@
             total: firebase.firestore.FieldValue.increment(amount),
             lastAwardAt: firebase.firestore.FieldValue.serverTimestamp()
           },
-          profile: {
-            nickname: nickname || null,
-            nationality: nationality || null
-          }
+          displayName: nickname
         }, { merge: true });
 
       } catch (e) {
