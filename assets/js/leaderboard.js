@@ -13,6 +13,8 @@
       this.autoRefreshInterval = null;
       this.lastFetchTime = {};
       this.isRefreshing = false;
+      this.cache = {};
+      this.refreshStatusTimer = null;
       this.init();
     }
 
@@ -67,9 +69,7 @@
       // Refresh leaderboard when profile is updated (e.g., country change)
       document.addEventListener('profileUpdated', () => {
         console.log('[Leaderboard] Profile updated, refreshing...');
-        // Clear cache to force fresh data with updated profile
-        delete this.cache;
-        this.cache = {};
+        this.clearAllCache();
         this.loadAndRender(this.currentRange, false);
       });
     }
@@ -154,19 +154,34 @@
     async loadAndRender(range, silent = false) {
       try {
         if (!this.db) await this.ensureFirebaseReady();
-        if (!this.db) return;
+        if (!this.db) {
+          if (!silent && range === this.currentRange) {
+            this.updateRefreshStatus(range, { state: 'error' });
+          }
+          return;
+        }
 
         this.isLoading = true;
         this.isRefreshing = true;
-        if (!silent) this.setLoading(true);
+        if (!silent) {
+          this.setLoading(true);
+          if (range === this.currentRange) {
+            this.updateRefreshStatus(range, { state: 'loading' });
+          }
+        }
 
         // Try cache first to avoid reads
         const cached = this.readCache(range);
         if (cached && !silent) {
           this.rankings[range] = cached.data;
+          this.lastFetchTime[range] = cached.ts;
           this.render(range);
+          if (range === this.currentRange) {
+            this.updateRefreshStatus(range);
+            this.scheduleRefreshStatusUpdate();
+          }
           this.isLoading = false;
-          if (!silent) this.setLoading(false);
+          this.setLoading(false);
         }
 
         // Prefer clientTs for instant visibility of new logs, fallback to server timestamp
@@ -314,12 +329,19 @@
         this.isRefreshing = false;
         if (!silent) this.setLoading(false);
         this.clearError();
+        if (range === this.currentRange) {
+          this.updateRefreshStatus(range);
+          this.scheduleRefreshStatusUpdate();
+        }
       } catch (e) {
         console.error('[Leaderboard] load failed', e);
         this.isLoading = false;
         this.isRefreshing = false;
         this.setLoading(false);
         this.setError('Failed to load leaderboard. Check your Firestore rules for xp_logs.');
+        if (range === this.currentRange) {
+          this.updateRefreshStatus(range, { state: 'error' });
+        }
       }
     }
 
@@ -329,6 +351,8 @@
       document.querySelectorAll('.lb-tab').forEach(b => b.classList.remove('active'));
       document.getElementById(`tab-${range}`)?.classList.add('active');
       this.render(range);
+      this.updateRefreshStatus(range);
+      this.scheduleRefreshStatusUpdate();
     }
 
     async manualRefresh() {
@@ -337,9 +361,10 @@
       
       btn.classList.add('refreshing');
       btn.disabled = true;
+      this.updateRefreshStatus(this.currentRange, { state: 'loading' });
       
       // Clear cache to force fresh data
-      delete this.cache[this.currentRange];
+      this.clearCacheForRange(this.currentRange);
       await this.loadAndRender(this.currentRange, false);
       
       setTimeout(() => {
@@ -541,20 +566,98 @@
 
     // --- Simple cache helpers ---
     readCache(range) {
+      const memo = this.cache[range];
+      if (memo && Date.now() - memo.ts <= this.cacheTTLms) {
+        return memo;
+      }
+      if (memo && Date.now() - memo.ts > this.cacheTTLms) {
+        delete this.cache[range];
+      }
       try {
         const raw = localStorage.getItem(`pd:lb:cache:${range}`);
         if (!raw) return null;
         const obj = JSON.parse(raw);
         if (!obj || !obj.ts || !obj.data) return null;
-        if (Date.now() - obj.ts > this.cacheTTLms) return null;
+        if (Date.now() - obj.ts > this.cacheTTLms) {
+          this.clearCacheForRange(range);
+          return null;
+        }
+        this.cache[range] = obj;
         return obj;
-      } catch { return null; }
+      } catch {
+        return null;
+      }
     }
 
     writeCache(range, data) {
+      const payload = { ts: Date.now(), data };
+      this.cache[range] = payload;
       try {
-        localStorage.setItem(`pd:lb:cache:${range}` , JSON.stringify({ ts: Date.now(), data }));
+        localStorage.setItem(`pd:lb:cache:${range}` , JSON.stringify(payload));
       } catch {}
+      this.lastFetchTime[range] = payload.ts;
+      return payload;
+    }
+
+    clearCacheForRange(range) {
+      delete this.cache[range];
+      try {
+        localStorage.removeItem(`pd:lb:cache:${range}`);
+      } catch {}
+    }
+
+    clearAllCache() {
+      ['daily', 'weekly', 'monthly'].forEach(range => this.clearCacheForRange(range));
+    }
+
+    formatRelativeTime(ts) {
+      const diffMs = Date.now() - ts;
+      if (diffMs <= 0) return 'just now';
+      const diffSec = Math.round(diffMs / 1000);
+      if (diffSec < 45) return 'just now';
+      if (diffSec < 90) return '1 min ago';
+      const diffMin = Math.round(diffSec / 60);
+      if (diffMin < 60) return `${diffMin} min${diffMin === 1 ? '' : 's'} ago`;
+      const diffHr = Math.round(diffMin / 60);
+      if (diffHr < 24) return `${diffHr} hr${diffHr === 1 ? '' : 's'} ago`;
+      const diffDay = Math.round(diffHr / 24);
+      return `${diffDay} day${diffDay === 1 ? '' : 's'} ago`;
+    }
+
+    updateRefreshStatus(range, { state = 'idle' } = {}) {
+      const el = document.getElementById('lbRefreshStatus');
+      if (!el) return;
+      el.dataset.state = state;
+
+      if (state === 'loading') {
+        el.textContent = 'Refreshing...';
+        return;
+      }
+
+      if (state === 'error') {
+        el.textContent = 'Refresh failed';
+        return;
+      }
+
+      const ts = this.lastFetchTime[range];
+      if (!ts) {
+        el.textContent = 'Tap refresh to load';
+        return;
+      }
+
+      el.textContent = `Updated ${this.formatRelativeTime(ts)}`;
+    }
+
+    scheduleRefreshStatusUpdate() {
+      if (this.refreshStatusTimer) {
+        clearInterval(this.refreshStatusTimer);
+        this.refreshStatusTimer = null;
+      }
+      const ts = this.lastFetchTime[this.currentRange];
+      if (!ts) return;
+      this.refreshStatusTimer = setInterval(() => {
+        this.updateRefreshStatus(this.currentRange);
+      }, 60000);
     }
   }
 

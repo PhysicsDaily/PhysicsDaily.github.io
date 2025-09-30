@@ -190,6 +190,24 @@ headExtra: |
     content: '⏱️';
     font-size: 1.1rem;
   }
+  .lb-last-refresh {
+    font-size: .85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--text-secondary);
+    min-height: 1.25rem;
+  }
+  .lb-last-refresh::before {
+    content: '⟳';
+    display: inline-block;
+  }
+  .lb-last-refresh[data-state="loading"]::before {
+    animation: spin 1s linear infinite;
+  }
+  .lb-last-refresh[data-state="error"] {
+    color: var(--danger-color, #ef4444);
+  }
   .lb-rankbar { width:100%; padding: .5rem 1.5rem 1.25rem; background: var(--bg-secondary); }
   .lb-rankbar .zones { 
     position:relative; 
@@ -504,6 +522,7 @@ pageScripts:
       </div>
       <div class="lb-meta">
         <div class="lb-reset" id="lbResetInfo">Resets soon</div>
+        <div class="lb-last-refresh" id="lbRefreshStatus" aria-live="polite" data-state="idle">Tap refresh to load</div>
         <div class="rank-value" id="lbRankValue">Rank: —</div>
       </div>
       <div class="lb-rankbar">
