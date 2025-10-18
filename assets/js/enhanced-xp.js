@@ -8,7 +8,16 @@
       this.topicProgress = this.loadTopicProgress();
       this.listeners = [];
       this.persistScheduled = null;
-      
+
+      // Cloud sync optimization
+      this.cloudSyncScheduled = null;
+      this.pendingCloudXP = [];
+      this.lastCloudSync = 0;
+      this.CLOUD_SYNC_DELAY = 2000; // Reduced to 2 seconds for better responsiveness
+      this.userProfileCache = null; // Cache user profile to avoid repeated reads
+      this.lastSyncCheck = 0;
+      this.SYNC_CHECK_INTERVAL = 60000; // Check sync every 1 minute (was 5 minutes)
+
       // Topic definitions with question counts
       this.topics = {
         'mechanics-foundations': { name: 'Mechanics Foundations', totalQuestions: 100 },
@@ -32,14 +41,56 @@
     init() {
       // Check for daily login XP
       this.checkDailyLogin();
-      
+
       // Listen for auth state changes to sync XP
       if (window.authManager) {
         authManager.on('authStateChanged', (user) => {
           if (user) {
+            this.loadUserProfileCache(); // Load profile once
             this.syncXpToCloud();
+          } else {
+            this.userProfileCache = null; // Clear cache on sign out
           }
         });
+      }
+
+      // Flush pending XP writes before page unload
+      window.addEventListener('beforeunload', () => {
+        this.flushPendingCloudWrites();
+      });
+    }
+
+    // Cache user profile to avoid repeated Firestore reads
+    async loadUserProfileCache() {
+      try {
+        const user = authManager?.getCurrentUser();
+        if (!user) return;
+
+        // First check localStorage
+        try {
+          const stored = JSON.parse(localStorage.getItem('pd:user:profile') || '{}');
+          if (stored?.displayName || stored?.country) {
+            this.userProfileCache = {
+              nickname: stored.displayName || user.displayName || user.email?.split('@')[0] || 'User',
+              country: stored.country || null
+            };
+            return; // Use cached data, skip Firestore read
+          }
+        } catch {}
+
+        // Only read from Firestore if localStorage doesn't have profile
+        if (authManager.db) {
+          const userDoc = await authManager.db.collection('users').doc(user.uid).get();
+          if (userDoc.exists) {
+            const userData = userDoc.data();
+            this.userProfileCache = {
+              nickname: userData?.profile?.displayName || user.displayName || user.email?.split('@')[0] || 'User',
+              country: userData?.profile?.country || userData?.preferences?.country || null
+            };
+          }
+        }
+      } catch (e) {
+        console.warn('[EnhancedXP] Failed to cache user profile:', e);
       }
     }
 
@@ -62,7 +113,16 @@
     loadTopicProgress() {
       try {
         const raw = localStorage.getItem('pd:xp:topicProgress');
-        if (raw) return JSON.parse(raw);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          // Convert correctAnswers arrays back to Sets
+          Object.keys(parsed).forEach(topicId => {
+            if (parsed[topicId].correctAnswers) {
+              parsed[topicId].correctAnswers = new Set(parsed[topicId].correctAnswers);
+            }
+          });
+          return parsed;
+        }
       } catch {}
       return {};
     }
@@ -70,7 +130,16 @@
     saveState() {
       try {
         localStorage.setItem('pd:xp:enhanced', JSON.stringify(this.state));
-        localStorage.setItem('pd:xp:topicProgress', JSON.stringify(this.topicProgress));
+
+        // Convert Sets to arrays for JSON serialization
+        const serializableProgress = {};
+        Object.keys(this.topicProgress).forEach(topicId => {
+          serializableProgress[topicId] = {
+            ...this.topicProgress[topicId],
+            correctAnswers: Array.from(this.topicProgress[topicId].correctAnswers || [])
+          };
+        });
+        localStorage.setItem('pd:xp:topicProgress', JSON.stringify(serializableProgress));
       } catch {}
     }
 
@@ -284,7 +353,7 @@
     addXP(amount, reason = '', meta = {}) {
       const xpToAdd = Math.max(0, Math.floor(amount));
       this.state.xp += xpToAdd;
-      
+
       // Level calculation (enhanced)
       const newLevel = this.calculateLevel(this.state.xp);
       if (newLevel > this.state.level) {
@@ -292,20 +361,103 @@
         this.state.level = newLevel;
         this.addBadge(`level-${newLevel}`, `Level ${newLevel} Achieved! 🎉`);
         this.toast(`Level Up! You are now level ${newLevel}!`, '⬆️');
-        
+
         // Level milestone rewards
         if (newLevel % 10 === 0) {
           this.addBadge(`milestone-${newLevel}`, `Level ${newLevel} Milestone! 💎`);
         }
       }
-      
+
       this.state.lastAwardAt = Date.now();
       this.schedulePersist();
       this.emit();
-      
-      // Log to cloud if signed in
+
+      // Queue XP for batched cloud sync instead of immediate write
       if (window.authManager && authManager.isSignedIn()) {
-        this.logXPToCloud(xpToAdd, reason, meta);
+        this.queueCloudXP(xpToAdd, reason, meta);
+      }
+    }
+
+    // Queue XP for batched cloud write (Firebase optimization)
+    queueCloudXP(amount, reason, meta) {
+      this.pendingCloudXP.push({ amount, reason, meta, timestamp: Date.now() });
+
+      // Schedule batched write
+      if (!this.cloudSyncScheduled) {
+        this.cloudSyncScheduled = setTimeout(() => {
+          this.flushPendingCloudWrites();
+        }, this.CLOUD_SYNC_DELAY);
+      }
+    }
+
+    // Flush all pending XP writes to cloud in one batch
+    async flushPendingCloudWrites() {
+      if (this.pendingCloudXP.length === 0) return;
+
+      clearTimeout(this.cloudSyncScheduled);
+      this.cloudSyncScheduled = null;
+
+      const batch = [...this.pendingCloudXP];
+      this.pendingCloudXP = [];
+
+      try {
+        const db = authManager.db;
+        const user = authManager.getCurrentUser();
+        if (!db || !user) return;
+
+        // Get cached profile or use defaults
+        const profile = this.userProfileCache || {
+          nickname: user.displayName || user.email?.split('@')[0] || 'User',
+          country: null
+        };
+
+        // Calculate total XP from batch
+        const totalXP = batch.reduce((sum, item) => sum + item.amount, 0);
+
+        // Single write to update user's total XP
+        await db.collection('users').doc(user.uid).set({
+          xp: {
+            total: firebase.firestore.FieldValue.increment(totalXP),
+            lastAwardAt: firebase.firestore.FieldValue.serverTimestamp()
+          },
+          displayName: profile.nickname
+        }, { merge: true });
+
+        // Only log significant XP awards (reduce xp_logs writes)
+        const significantAwards = batch.filter(item =>
+          item.amount >= 10 ||
+          item.reason === 'quiz' ||
+          item.reason === 'daily-login' ||
+          (item.meta && item.meta.milestone)
+        );
+
+        // Batch write significant XP logs
+        if (significantAwards.length > 0) {
+          const batchWrite = db.batch();
+
+          significantAwards.forEach(item => {
+            const logRef = db.collection('xp_logs').doc();
+            batchWrite.set(logRef, {
+              uid: user.uid,
+              displayName: profile.nickname,
+              country: profile.country,
+              xp: item.amount,
+              reason: item.reason || '',
+              meta: item.meta || {},
+              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+              clientTs: item.timestamp
+            });
+          });
+
+          await batchWrite.commit();
+        }
+
+        this.lastCloudSync = Date.now();
+
+      } catch (e) {
+        console.warn('[EnhancedXP] Failed to flush XP to cloud:', e);
+        // Re-queue failed writes
+        this.pendingCloudXP.unshift(...batch);
       }
     }
 
@@ -347,84 +499,65 @@
       return this.state.badges.some(badge => badge.id === badgeId);
     }
 
-    // Log XP to cloud for leaderboards
-    async logXPToCloud(amount, reason, meta = {}) {
-      try {
-        const db = authManager.db;
-        const user = authManager.getCurrentUser();
-        if (!db || !user) return;
-
-        // Get user profile info
-        let nickname = user.displayName || (user.email ? user.email.split('@')[0] : 'User');
-        let country = null;
-        
-        try {
-          const stored = JSON.parse(localStorage.getItem('pd:user:profile') || '{}');
-          if (stored?.displayName) nickname = stored.displayName;
-          if (stored?.country) country = stored.country;
-        } catch {}
-        
-        // Also try to get country from Firebase user profile
-        if (!country && authManager.db) {
-          try {
-            const userDoc = await authManager.db.collection('users').doc(user.uid).get();
-            if (userDoc.exists) {
-              const userData = userDoc.data();
-              country = userData?.profile?.country || userData?.preferences?.country || null;
-            }
-          } catch {}
-        }
-
-        const payload = {
-          uid: user.uid,
-          displayName: nickname,
-          country: country || null,
-          xp: amount,
-          reason: reason || '',
-          meta: meta || {},
-          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-          clientTs: Date.now()
-        };
-
-        // Log to xp_logs collection
-        await db.collection('xp_logs').add(payload);
-
-        // Update user total XP
-        await db.collection('users').doc(user.uid).set({
-          xp: {
-            total: firebase.firestore.FieldValue.increment(amount),
-            lastAwardAt: firebase.firestore.FieldValue.serverTimestamp()
-          },
-          displayName: nickname
-        }, { merge: true });
-
-      } catch (e) {
-        console.warn('[EnhancedXP] Failed to log XP to cloud:', e);
-      }
-    }
-
-    // Sync local XP to cloud when user signs in
+    // Optimized sync: only sync once per session or when explicitly needed
     async syncXpToCloud() {
       try {
+        // Rate limit: only sync if enough time has passed
+        const now = Date.now();
+        if (now - this.lastSyncCheck < this.SYNC_CHECK_INTERVAL) {
+          return; // Skip sync, too soon since last check
+        }
+        this.lastSyncCheck = now;
+
         if (!(window.authManager && authManager.isSignedIn())) return;
-        
+
         const db = authManager.db;
         const user = authManager.getCurrentUser();
         if (!db || !user) return;
 
-        const userRef = db.collection('users').doc(user.uid);
-        const doc = await userRef.get();
-        const cloudXP = doc.exists ? (doc.data()?.xp?.total || 0) : 0;
+        // Check if we need to sync (use cached value if available)
+        const cachedCloudXP = parseInt(localStorage.getItem('pd:lastCloudXP') || '0', 10);
         const localXP = this.state.xp;
-        
-        if (localXP > cloudXP) {
-          const diff = localXP - cloudXP;
-          await this.logXPToCloud(diff, 'sync', { 
-            source: 'local-backfill',
-            cloudXP,
-            localXP
-          });
-          this.toast('Synced your progress to the cloud!', '☁️');
+
+        // Only read from Firestore if local is significantly different
+        if (Math.abs(localXP - cachedCloudXP) > 20) {
+          const userRef = db.collection('users').doc(user.uid);
+          const doc = await userRef.get();
+          const cloudXP = doc.exists ? (doc.data()?.xp?.total || 0) : 0;
+
+          if (localXP > cloudXP) {
+            // Local has more XP, push to cloud
+            const diff = localXP - cloudXP;
+
+            // Use batched write system
+            this.queueCloudXP(diff, 'sync', {
+              source: 'local-backfill',
+              cloudXP,
+              localXP
+            });
+
+            // Immediately flush for sync operations
+            await this.flushPendingCloudWrites();
+
+            // Cache the cloud value
+            localStorage.setItem('pd:lastCloudXP', localXP.toString());
+
+            this.toast('Synced your progress to the cloud!', '☁️');
+          } else if (cloudXP > localXP) {
+            // Cloud has more XP, pull from cloud
+            this.state.xp = cloudXP;
+            this.state.level = this.calculateLevel(cloudXP);
+            this.schedulePersist();
+            this.emit();
+
+            // Update cache
+            localStorage.setItem('pd:lastCloudXP', cloudXP.toString());
+
+            this.toast('Loaded your progress from the cloud!', '☁️');
+          } else {
+            // XP matches, just update cache
+            localStorage.setItem('pd:lastCloudXP', cloudXP.toString());
+          }
         }
       } catch (e) {
         console.warn('[EnhancedXP] Sync failed:', e);
@@ -444,7 +577,13 @@
     getState() {
       const levelInfo = this.getLevelInfo(this.state.xp);
       return {
-        ...this.state,
+        totalXP: this.state.xp,
+        xp: this.state.xp, // Alias for compatibility
+        level: this.state.level,
+        loginStreak: this.state.loginStreak,
+        totalDaysActive: this.state.totalDaysActive,
+        badges: this.state.badges,
+        lastAwardAt: this.state.lastAwardAt,
         levelInfo,
         topicProgress: this.topicProgress
       };

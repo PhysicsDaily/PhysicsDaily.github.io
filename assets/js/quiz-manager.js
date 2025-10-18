@@ -382,14 +382,15 @@ class QuizManager {
                         topic = match[1];
                     }
                 }
-                
-                window.enhancedXP.awardQuizXP({
-                    topic,
+
+                const quizResults = {
                     totalQuestions: this.activeQuizData.length,
-                    correctAnswers: correct,
-                    totalTime: Math.floor((new Date() - this.startTime) / 1000),
+                    correct: correct, // Changed from correctAnswers to match enhancedXP API
+                    timeSpent: Math.floor((new Date() - this.startTime) / 1000), // Changed from totalTime
                     percentage: parseFloat(percentage)
-                });
+                };
+
+                window.enhancedXP.awardQuizXP(topic, quizResults);
             }
         } catch (e) { console.warn('Enhanced XP award failed:', e); }
     }

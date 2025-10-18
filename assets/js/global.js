@@ -143,10 +143,10 @@ const __initGlobal = function() {
             if (user) {
                 showPersonalizedWelcome();
                 updatePageForSignedInUser();
-                // Backfill any local XP to cloud so the leaderboard reflects it
+                // Backfill any local XP to cloud using syncXpToCloud so the leaderboard reflects it
                 try {
-                    if (window.enhancedXP && typeof enhancedXP.syncToCloud === 'function') {
-                        enhancedXP.syncToCloud();
+                    if (window.enhancedXP && typeof enhancedXP.syncXpToCloud === 'function') {
+                        enhancedXP.syncXpToCloud();
                     }
                 } catch(e) { console.warn('[Global] XP sync on sign-in failed:', e); }
             } else {

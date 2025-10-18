@@ -93,20 +93,43 @@ class Dashboard {
 
     updateXpLevelUI() {
         // Check if enhanced XP system is available
-        if (window.enhancedXP && typeof enhancedXP.getUserData === 'function') {
+        if (window.enhancedXP && (typeof enhancedXP.getState === 'function' || typeof enhancedXP.getUserData === 'function')) {
             try {
-                const xpData = enhancedXP.getUserData();
-                if (xpData) {
+                // Prefer getState, fallback to getUserData for legacy support
+                const xpState = typeof enhancedXP.getState === 'function'
+                    ? enhancedXP.getState()
+                    : enhancedXP.getUserData();
+
+                if (xpState) {
                     // Update XP display
                     const xpElement = document.getElementById('xpTotal');
                     const levelElement = document.getElementById('levelLabel');
-                    
+
                     if (xpElement) {
-                        xpElement.textContent = xpData.totalXP || 0;
+                        xpElement.textContent = xpState.totalXP || xpState.xp || 0;
                     }
                     if (levelElement) {
-                        levelElement.textContent = `Lv ${xpData.level || 1}`;
+                        levelElement.textContent = `Lv ${xpState.level || xpState.lvl || 1}`;
                     }
+                }
+
+                // Subscribe to XP changes if not already subscribed
+                if (!this.xpSubscribed && window.gamification && typeof window.gamification.onChange === 'function') {
+                    window.gamification.onChange(() => {
+                        const state = typeof enhancedXP.getState === 'function'
+                            ? enhancedXP.getState()
+                            : enhancedXP.getUserData();
+                        const xpElement = document.getElementById('xpTotal');
+                        const levelElement = document.getElementById('levelLabel');
+
+                        if (xpElement && state) {
+                            xpElement.textContent = state.totalXP || state.xp || 0;
+                        }
+                        if (levelElement && state) {
+                            levelElement.textContent = `Lv ${state.level || state.lvl || 1}`;
+                        }
+                    });
+                    this.xpSubscribed = true;
                 }
             } catch (error) {
                 console.log('[Dashboard] Enhanced XP system not available yet');
@@ -115,7 +138,7 @@ class Dashboard {
             // Fallback to basic display
             const xpElement = document.getElementById('xpTotal');
             const levelElement = document.getElementById('levelLabel');
-            
+
             if (xpElement) {
                 xpElement.textContent = '0';
             }
