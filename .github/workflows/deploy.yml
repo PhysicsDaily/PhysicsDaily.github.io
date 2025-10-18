@@ -32,7 +32,7 @@ jobs:
         run: npm ci
 
       - name: Build with Eleventy
-        run: npx @11ty/eleventy
+        run: npx @11ty/eleventy --config=config/eleventy.js
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

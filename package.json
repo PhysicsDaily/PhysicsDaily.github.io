@@ -5,11 +5,11 @@
   "main": "service-worker.js",
   "scripts": {
     "format": "prettier --write .",
-    "lint": "eslint . --ext .js",
+    "lint": "eslint --config config/eslint.config.mjs . --ext .js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf _site dist",
-    "start": "eleventy --serve",
-    "build": "eleventy"
+    "start": "eleventy --config=config/eleventy.js --serve",
+    "build": "eleventy --config=config/eleventy.js"
   },
   "repository": {
     "type": "git",

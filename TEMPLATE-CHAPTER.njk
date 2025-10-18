@@ -1,0 +1,391 @@
+---
+layout: null
+title: "Chapter X: Your Topic Here"
+description: "Brief description of what this chapter covers"
+permalink: mechanics/your-topic/index.html
+
+# INSTRUCTIONS:
+# 1. Copy this file to: CONTENT/mechanics/your-topic/index.njk
+# 2. Change the title, description, and permalink above
+# 3. Edit the content sections below
+# 4. Test with: npm start
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - Physics Daily</title>
+    <meta name="description" content="{{ description }}">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/header-fixed.css">
+    <link rel="stylesheet" href="../../assets/css/auth-styles.css">
+
+    <!-- Inline Styles (copied from measurements chapter - don't modify unless needed) -->
+    <style>
+        /* Color Variables */
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #64748b;
+            --accent-color: #06b6d4;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --border-radius: 12px;
+            --transition: all 0.2s ease;
+        }
+
+        /* Dark Theme */
+        [data-theme="dark"] {
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --card-bg: #334155;
+            --border-color: #475569;
+            --border-hover: #64748b;
+        }
+
+        /* Base Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: all 0.3s ease;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+        .description {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        /* Section Styles */
+        .section {
+            display: none;
+            margin: 32px 0;
+        }
+        .section.active-section {
+            display: block;
+        }
+
+        /* Content Boxes */
+        .example-box {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-left: 4px solid var(--success-color);
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+        }
+
+        .formula-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid #7c3aed;
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin: 1.25rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
+            border-left: 4px solid var(--accent-color);
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+        }
+
+        .danger-note {
+            background: linear-gradient(135deg, #ffe4e6, #fee2e2);
+            border-left: 4px solid var(--danger-color);
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+        }
+
+        /* Navigation */
+        .section-indicators {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        .section-indicator {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .section-indicator.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+    </style>
+
+    <!-- Navigation Script -->
+    <script>
+        let currentSection = 'intro';
+        const sections = ['intro', 'section-1', 'section-2', 'assessment'];
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active-section');
+            });
+
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active-section');
+            }
+
+            document.querySelectorAll('.section-indicator').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const activeBtn = document.querySelector(`[data-section="${sectionId}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+
+            currentSection = sectionId;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function navigateToSection(sectionId) {
+            showSection(sectionId);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('intro');
+
+            document.querySelectorAll('.section-indicator').forEach(indicator => {
+                indicator.addEventListener('click', () => {
+                    const sectionId = indicator.getAttribute('data-section');
+                    navigateToSection(sectionId);
+                });
+            });
+        });
+    </script>
+</head>
+<body class="has-fixed-header auth-pending">
+    <!-- Global Header (auto-loaded) -->
+    <div id="global-header"></div>
+
+    <!-- Page Header -->
+    <header class="header">
+        <div class="container">
+            <h1>Chapter X: Your Topic Here</h1>
+            <p class="subtitle">One-line description</p>
+            <p class="description">
+                Detailed description of what students will learn in this chapter.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Section Navigation -->
+            <div class="section-indicators">
+                <button class="section-indicator active" data-section="intro">📚 Introduction</button>
+                <button class="section-indicator" data-section="section-1">📊 Section 1</button>
+                <button class="section-indicator" data-section="section-2">⚡ Section 2</button>
+                <button class="section-indicator" data-section="assessment">📝 Quiz</button>
+            </div>
+
+            <!-- Introduction Section -->
+            <div id="intro" class="section active-section">
+                <h2>Introduction</h2>
+
+                <p>Write your introduction here. Explain what this chapter is about and why it's important.</p>
+
+                <div class="highlight-box">
+                    <h4>Key Concept</h4>
+                    <p>Use this box to highlight important concepts.</p>
+                </div>
+
+                <h3>What You'll Learn</h3>
+                <ul>
+                    <li>Concept 1</li>
+                    <li>Concept 2</li>
+                    <li>Concept 3</li>
+                </ul>
+
+                <div class="nav-buttons">
+                    <span></span>
+                    <button class="btn" onclick="navigateToSection('section-1')">
+                        Next: Section 1 →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Section 1 -->
+            <div id="section-1" class="section">
+                <h2>1. First Main Topic</h2>
+
+                <p>Write your content here. Explain the concept clearly.</p>
+
+                <div class="formula-box">
+                    F = ma
+                </div>
+
+                <div class="example-box">
+                    <h4>Example 1: Solving a Problem</h4>
+                    <p><strong>Problem:</strong> Describe the problem here.</p>
+                    <p><strong>Solution:</strong></p>
+                    <p>Step 1: ...</p>
+                    <p>Step 2: ...</p>
+                    <p><strong>Answer:</strong> Final answer here</p>
+                </div>
+
+                <div class="danger-note">
+                    <strong>Common Mistake:</strong> Warn students about common errors.
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn" onclick="navigateToSection('intro')">
+                        ← Introduction
+                    </button>
+                    <button class="btn" onclick="navigateToSection('section-2')">
+                        Next: Section 2 →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Section 2 -->
+            <div id="section-2" class="section">
+                <h2>2. Second Main Topic</h2>
+
+                <p>Continue your content here...</p>
+
+                <div class="nav-buttons">
+                    <button class="btn" onclick="navigateToSection('section-1')">
+                        ← Section 1
+                    </button>
+                    <button class="btn" onclick="navigateToSection('assessment')">
+                        Next: Assessment →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Assessment Section -->
+            <div id="assessment" class="section">
+                <h2>Chapter Assessment</h2>
+
+                <p>Test your understanding with these practice questions.</p>
+
+                <!-- Add practice questions here -->
+
+                <div class="nav-buttons">
+                    <button class="btn" onclick="navigateToSection('section-2')">
+                        ← Previous Section
+                    </button>
+                    <a href="../foundation.html" class="btn">← Back to Overview</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" style="background: var(--bg-secondary); padding: 2rem 0; text-align: center; color: var(--text-secondary);">
+        <div class="container">
+            <p>&copy; 2024 Physics Daily. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts (required for authentication and navigation) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="../../assets/js/firebase-config.js"></script>
+    <script src="../../assets/js/auth-manager.js"></script>
+    <script src="../../assets/js/auth-ui.js"></script>
+    <script src="../../assets/js/header-loader.js"></script>
+    <script src="../../assets/js/auth-navigation.js"></script>
+    <script src="../../assets/js/global.js"></script>
+</body>
+</html>

@@ -7,10 +7,10 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("ads.txt");
   eleventyConfig.addPassthroughCopy("sitemap.xml");
 
-  // Tell Eleventy to use the 'src' folder as the input directory
+  // Tell Eleventy to use the 'CONTENT' folder as the input directory
   return {
     dir: {
-      input: "src",
+      input: "CONTENT",
       includes: "_includes",
       data: "_data",
       output: "_site" // This is the default, but it's good to be explicit

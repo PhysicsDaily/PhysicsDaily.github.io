@@ -107,6 +107,20 @@ This website is actively being developed. Each physics topic section will includ
 
 This site is automatically deployed to GitHub Pages using GitHub Actions. Every push to the `main` branch triggers a new deployment.
 
+### Quick Start for Content Writers (Class 12 Students!)
+
+**🎓 If you're a student adding physics content (no coding!):**
+1. Read **`START-HERE.md`** first!
+2. Only work in the **`CONTENT/`** folder
+3. Copy **`TEMPLATE-CHAPTER.njk`** for new chapters
+4. Ignore everything in `config/`, `assets/`, `node_modules/`
+
+**📖 Documentation for you:**
+- `START-HERE.md` - Quick 5-minute guide
+- `CONTENT-GUIDE.md` - Detailed writing guide
+- `README-STUDENT.md` - Command reference
+- `TEMPLATE-CHAPTER.njk` - Copy this to create chapters
+
 ### Quick Start for Developers
 
 ```bash
@@ -117,12 +131,25 @@ cd PhysicsDaily.github.io
 # Install dependencies
 npm install
 
-# Start development server
+# Start development server (uses config/eleventy.js)
 npm start
 # Visit http://localhost:8080
 
 # Build for production
 npm run build
+```
+
+**📁 Project Structure (Restructured for Students):**
+```
+PhysicsDaily.github.io/
+├── CONTENT/              ← Content writers work here only!
+│   ├── mechanics/
+│   ├── thermodynamics/
+│   └── ...
+├── config/              ← Technical configs (don't touch)
+├── assets/              ← Styles & scripts (don't touch)
+├── node_modules/        ← Dependencies (don't touch)
+└── README.md            ← This file
 ```
 
 ### Deployment Workflow
