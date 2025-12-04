@@ -2,7 +2,7 @@
 
 ## Learning Objectives
 
-After studying this chapter, you will be able to:
+After studying this chapter, you will be able to: 1
 
 - Describe the nature of physics and its relation to other sciences
 - Use SI units and convert between unit systems
