@@ -65,18 +65,33 @@ A comprehensive physics study resource following **University Physics by Sears &
 
 ## Features
 
-!!! tip "Interactive Learning"
-    - 📐 **Mathematical rigor** with full LaTeX equation support
-    - 🎯 **Practice problems** and worked examples
-    - 🧪 **Interactive simulations** for key concepts
-    - ✅ **MCQs** for self-assessment
+<div class="grid cards" markdown>
 
-!!! example "Sample Equation"
-    The famous mass-energy equivalence:
-    
-    $$E = mc^2$$
-    
-    Where $E$ is energy, $m$ is mass, and $c$ is the speed of light.
+-   :material-math-integral-box:{ .lg .middle } **Mathematical Rigor**
+
+    ---
+
+    Full LaTeX equation support with step-by-step derivations
+
+-   :material-target:{ .lg .middle } **Practice Problems**
+
+    ---
+
+    Worked examples and challenging problems to test your understanding
+
+-   :material-flask:{ .lg .middle } **Interactive Simulations**
+
+    ---
+
+    Visualize key concepts with hands-on interactive tools
+
+-   :material-check-circle:{ .lg .middle } **Self-Assessment**
+
+    ---
+
+    MCQs and quizzes to track your learning progress
+
+</div>
 
 ---
 
