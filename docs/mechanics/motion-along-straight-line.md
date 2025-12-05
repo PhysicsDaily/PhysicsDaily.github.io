@@ -53,7 +53,7 @@ $$a = \frac{dv}{dt} = \frac{d^2x}{dt^2}$$
 
 When acceleration is constant, we have four key equations:
 
-<div class="important-equation">
+<div class="important-equation" markdown="1">
 
 $$v = v_0 + at$$
 

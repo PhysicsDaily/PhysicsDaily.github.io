@@ -27,21 +27,4 @@ Mechanics is the foundation of physics, dealing with motion, forces, energy, and
 
 ---
 
-## Key Equations Preview
-
-!!! info "Fundamental Equations"
-    **Kinematics:**
-    $$v = v_0 + at \qquad x = x_0 + v_0 t + \frac{1}{2}at^2$$
-
-    **Newton's Second Law:**
-    $$\vec{F} = m\vec{a}$$
-
-    **Work-Energy Theorem:**
-    $$W_{net} = \Delta K = \frac{1}{2}mv^2 - \frac{1}{2}mv_0^2$$
-
-    **Conservation of Energy:**
-    $$K_1 + U_1 + W_{other} = K_2 + U_2$$
-
----
-
 Start with [Chapter 1: Units, Physical Quantities, and Vectors](units-physical-quantities.md) →
