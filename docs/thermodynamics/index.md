@@ -1,6 +1,6 @@
 # Part 3: Thermodynamics
 
-**Chapters 17-20** of University Physics
+
 
 Thermodynamics deals with heat, temperature, energy transfer, and the behavior of systems at the macroscopic level.
 

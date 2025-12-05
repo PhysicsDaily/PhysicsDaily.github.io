@@ -1,6 +1,6 @@
 # Part 6: Modern Physics
 
-**Chapters 37-44** of University Physics
+
 
 Modern physics covers the revolutionary discoveries of the 20th century: relativity, quantum mechanics, and particle physics.
 

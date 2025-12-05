@@ -5,7 +5,7 @@ hide:
 
 # Welcome to Physics Daily 🌌
 
-A comprehensive physics study resource following **University Physics by Sears & Zemansky**.
+A comprehensive physics study resource covering all major topics.
 
 ## What You'll Find Here
 
@@ -103,7 +103,7 @@ A comprehensive physics study resource following **University Physics by Sears &
 
     ---
 
-    Follow the chapters in order, matching University Physics structure
+    Follow the chapters in order.
 
 -   :material-book-open-page-variant:{ .lg .middle } **Study Theory**
 

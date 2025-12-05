@@ -1,6 +1,6 @@
 # Part 2: Waves and Acoustics
 
-**Chapters 15-16** of University Physics
+
 
 This section covers the physics of waves, including mechanical waves, sound, and wave phenomena.
 

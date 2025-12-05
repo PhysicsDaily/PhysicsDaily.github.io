@@ -1,6 +1,6 @@
 # Part 5: Optics
 
-**Chapters 33-36** of University Physics
+
 
 Optics explores the nature and behavior of light, including reflection, refraction, and wave phenomena.
 

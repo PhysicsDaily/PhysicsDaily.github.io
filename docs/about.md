@@ -2,7 +2,7 @@
 
 Welcome to Physics Daily!
 
-This website is a comprehensive resource for studying physics, following the structure of "University Physics" by Sears & Zemansky.
+This website is a comprehensive resource for studying physics, covering mechanics, thermodynamics, electromagnetism, optics, and modern physics.
 
 ## Our Mission
 

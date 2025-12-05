@@ -1,6 +1,6 @@
 # Part 4: Electromagnetism
 
-**Chapters 21-32** of University Physics
+
 
 Electromagnetism covers electric and magnetic fields, circuits, and electromagnetic waves—the foundation of modern technology.
 
