@@ -97,11 +97,39 @@ A comprehensive physics study resource following **University Physics by Sears &
 
 ## How to Use This Site
 
-1. **Follow the chapters** in order, matching University Physics structure
-2. **Study the theory** with step-by-step derivations
-3. **Work through examples** before attempting problems
-4. **Test yourself** with MCQs and practice questions
-5. **Explore simulations** to build physical intuition
+<div class="grid cards" markdown>
+
+-   :material-format-list-numbered:{ .lg .middle } **Follow Chapters**
+
+    ---
+
+    Follow the chapters in order, matching University Physics structure
+
+-   :material-book-open-page-variant:{ .lg .middle } **Study Theory**
+
+    ---
+
+    Study the theory with step-by-step derivations
+
+-   :material-calculator:{ .lg .middle } **Work Examples**
+
+    ---
+
+    Work through examples before attempting problems
+
+-   :material-clipboard-check:{ .lg .middle } **Test Yourself**
+
+    ---
+
+    Test yourself with MCQs and practice questions
+
+-   :material-flask:{ .lg .middle } **Explore Simulations**
+
+    ---
+
+    Explore simulations to build physical intuition
+
+</div>
 
 ---
 
