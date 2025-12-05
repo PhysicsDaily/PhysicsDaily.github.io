@@ -1,2 +1,2 @@
-# First Law of Thermodynamics
+# The First Law of Thermodynamics
 *Content coming soon!*

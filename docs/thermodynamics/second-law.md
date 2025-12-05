@@ -1,2 +1,2 @@
-# Second Law of Thermodynamics
+# The Second Law of Thermodynamics
 *Content coming soon!*

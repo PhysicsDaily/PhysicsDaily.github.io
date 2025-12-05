@@ -11,12 +11,13 @@ Modern physics covers the revolutionary discoveries of the 20th century: relativ
 | Chapter | Topic |
 |---------|-------|
 | 37 | [Relativity](relativity.md) |
-| 38 | [Photons and Matter Waves](photons-matter-waves.md) |
-| 39 | [Quantum Mechanics](quantum-mechanics.md) |
-| 40 | [Atomic Structure](atomic-structure.md) |
-| 41 | [Molecules and Condensed Matter](molecules-condensed-matter.md) |
-| 42 | [Nuclear Physics](nuclear-physics.md) |
-| 43-44 | [Particle Physics and Cosmology](particle-physics-cosmology.md) |
+| 38 | [Photons: Light Waves Behaving as Particles](photons-light-waves.md) |
+| 39 | [Particles Behaving as Waves](particles-waves.md) |
+| 40 | [Quantum Mechanics I: Wave Functions](quantum-mechanics-wave-functions.md) |
+| 41 | [Quantum Mechanics II: Atomic Structure](quantum-mechanics-atomic-structure.md) |
+| 42 | [Molecules and Condensed Matter](molecules-condensed-matter.md) |
+| 43 | [Nuclear Physics](nuclear-physics.md) |
+| 44 | [Particle Physics and Cosmology](particle-physics-cosmology.md) |
 
 ---
 

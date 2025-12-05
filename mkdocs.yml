@@ -92,8 +92,6 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/PhysicsDaily
 
-copyright: Copyright &copy; 2024 Physics Daily
-
 nav:
   - Home: index.md
   - Resources: resources.md

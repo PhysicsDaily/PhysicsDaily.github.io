@@ -12,8 +12,8 @@ Thermodynamics deals with heat, temperature, energy transfer, and the behavior o
 |---------|-------|
 | 17 | [Temperature and Heat](temperature-heat.md) |
 | 18 | [Thermal Properties of Matter](thermal-properties.md) |
-| 19 | [First Law of Thermodynamics](first-law.md) |
-| 20 | [Second Law of Thermodynamics](second-law.md) |
+| 19 | [The First Law of Thermodynamics](first-law.md) |
+| 20 | [The Second Law of Thermodynamics](second-law.md) |
 
 ---
 

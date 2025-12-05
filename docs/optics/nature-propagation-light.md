@@ -1,2 +1,2 @@
-# Nature and Propagation of Light
+# The Nature and Propagation of Light
 *Content coming soon!*

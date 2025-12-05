@@ -10,7 +10,7 @@ Optics explores the nature and behavior of light, including reflection, refracti
 
 | Chapter | Topic |
 |---------|-------|
-| 33 | [Nature and Propagation of Light](nature-propagation-light.md) |
+| 33 | [The Nature and Propagation of Light](nature-propagation-light.md) |
 | 34 | [Geometric Optics](geometric-optics.md) |
 | 35 | [Interference](interference.md) |
 | 36 | [Diffraction](diffraction.md) |

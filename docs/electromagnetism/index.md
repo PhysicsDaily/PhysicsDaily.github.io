@@ -14,7 +14,7 @@ Electromagnetism covers electric and magnetic fields, circuits, and electromagne
 | 22 | [Gauss's Law](gauss-law.md) |
 | 23 | [Electric Potential](electric-potential.md) |
 | 24 | [Capacitance and Dielectrics](capacitance-dielectrics.md) |
-| 25 | [Current, Resistance & EMF](current-resistance-emf.md) |
+| 25 | [Current, Resistance, and Electromotive Force](current-resistance-emf.md) |
 | 26 | [Direct-Current Circuits](dc-circuits.md) |
 | 27 | [Magnetic Field and Magnetic Forces](magnetic-field-forces.md) |
 | 28 | [Sources of Magnetic Field](sources-magnetic-field.md) |
