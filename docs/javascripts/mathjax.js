@@ -12,9 +12,19 @@ window.MathJax = {
   }
 };
 
-document$.subscribe(() => {
-  MathJax.startup.output.clearCache()
-  MathJax.typesetClear()
-  MathJax.texReset()
-  MathJax.typesetPromise()
-})
+const renderMath = () => {
+  const mathjax = window.MathJax
+  if (!mathjax?.typesetPromise) return
+
+  const { startup, typesetClear, texReset } = mathjax
+  startup?.output?.clearCache?.()
+  typesetClear?.()
+  texReset?.()
+  return mathjax.typesetPromise()
+}
+
+if (typeof document$ !== "undefined") {
+  document$.subscribe(renderMath)
+}
+
+window.addEventListener("load", renderMath)

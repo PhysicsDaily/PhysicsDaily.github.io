@@ -1,21 +1,38 @@
 /* Physics Daily - Custom Styles */
 
+:root {
+  --pd-card-radius: 8px;
+  --pd-card-margin: 1rem 0;
+  --pd-surface-bg: var(--md-code-bg-color);
+  --pd-surface-border: 1px solid var(--md-default-fg-color--lightest);
+}
+
 /* Better equation spacing */
 .md-typeset .arithmatex {
   overflow-x: auto;
   padding: 0.5rem 0;
 }
 
-/* Simulation container */
-.simulation-container {
-  background: var(--md-code-bg-color);
-  border-radius: 8px;
-  padding: 1rem;
-  margin: 1rem 0;
-  border: 1px solid var(--md-default-fg-color--lightest);
+/* Shared surfaces */
+.simulation-container,
+.mcq-container,
+.example-problem {
+  border-radius: var(--pd-card-radius);
+  margin: var(--pd-card-margin);
 }
 
-.simulation-container canvas {
+.simulation-container,
+.mcq-container {
+  background: var(--pd-surface-bg);
+}
+
+.simulation-container {
+  padding: 1rem;
+  border: var(--pd-surface-border);
+}
+
+.simulation-container canvas,
+.physics-diagram img {
   display: block;
   margin: 0 auto;
   max-width: 100%;
@@ -23,10 +40,7 @@
 
 /* MCQ styling */
 .mcq-container {
-  background: var(--md-code-bg-color);
-  border-radius: 8px;
   padding: 1.5rem;
-  margin: 1rem 0;
 }
 
 .mcq-container .question {
@@ -41,7 +55,7 @@
   border-radius: 4px;
   cursor: pointer;
   transition: background 0.2s ease;
-  border: 1px solid var(--md-default-fg-color--lightest);
+  border: var(--pd-surface-border);
 }
 
 .mcq-container .options label:hover {
@@ -59,7 +73,6 @@
 }
 
 .physics-diagram img {
-  max-width: 100%;
   border-radius: 4px;
 }
 
@@ -74,7 +87,7 @@
   background: linear-gradient(135deg, var(--md-primary-fg-color--dark) 0%, var(--md-primary-fg-color) 100%);
   color: var(--md-primary-bg-color);
   padding: 1.5rem;
-  border-radius: 8px;
+  border-radius: var(--pd-card-radius);
   margin: 1.5rem 0;
   text-align: center;
 }
@@ -87,15 +100,13 @@
 .derivation {
   border-left: 3px solid var(--md-accent-fg-color);
   padding-left: 1.5rem;
-  margin: 1rem 0;
+  margin: var(--pd-card-margin);
 }
 
 /* Example problems */
 .example-problem {
   background: var(--md-admonition-bg-color);
-  border-radius: 8px;
   padding: 1rem 1.5rem;
-  margin: 1rem 0;
   border-left: 4px solid var(--md-accent-fg-color);
 }
 
