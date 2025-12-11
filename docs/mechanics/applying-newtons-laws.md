@@ -1,6 +1,6 @@
 # Chapter 5: Applying Newton's Laws
 
-*Content coming soon!*/m
+*Content coming soon!*
 
 ## Key Topics
 
