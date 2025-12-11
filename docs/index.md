@@ -1,11 +1,21 @@
 ---
 hide:
   - navigation
+  - toc
 ---
 
-# Welcome to Physics Daily 🌌
-
-A comprehensive physics study resource covering all major topics.
+<section class="hero-section">
+  <div class="hero-content">
+    <h1 class="hero-title">Welcome to Physics Daily</h1>
+    <p class="hero-subtitle">A comprehensive physics study resource covering all major topics. Master the fundamentals and explore advanced concepts with clear explanations and interactive content.</p>
+    <a href="mechanics/" class="hero-button">Start Learning</a>
+  </div>
+  <div class="hero-image">
+    <img id="scientist-image" src="" alt="">
+    <p id="scientist-quote" class="hero-quote"></p>
+    <span id="scientist-name" class="hero-quote-author"></span>
+  </div>
+</section>
 
 ## What You'll Find Here
 
@@ -35,11 +45,4 @@ A comprehensive physics study resource covering all major topics.
 
     Relativity, quantum mechanics, and particle physics
 
-</div>
-
----
-
-<div style="text-align: center; margin-top: 2rem;">
-    <em>"The important thing is not to stop questioning. Curiosity has its own reason for existing."</em>
-    <br>— Albert Einstein
 </div>
