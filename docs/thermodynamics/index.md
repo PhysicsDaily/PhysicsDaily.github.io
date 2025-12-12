@@ -13,7 +13,7 @@ Thermodynamics deals with heat, temperature, energy transfer, and the behavior o
 
 ## Topics Covered
 
-<div class="grid cards" markdown>
+<div class="grid cards clickable-cards" markdown>
 
 -   **Chapter 17**
 

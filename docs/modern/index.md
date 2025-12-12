@@ -13,7 +13,7 @@ Modern physics covers the revolutionary discoveries of the 20th century: relativ
 
 ## Topics Covered
 
-<div class="grid cards" markdown>
+<div class="grid cards clickable-cards" markdown>
 
 -   **Chapter 37**
 

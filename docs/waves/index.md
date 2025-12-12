@@ -13,7 +13,7 @@ This section covers the physics of waves, including mechanical waves, sound, and
 
 ## Topics Covered
 
-<div class="grid cards" markdown>
+<div class="grid cards clickable-cards" markdown>
 
 -   **Chapter 15**
 

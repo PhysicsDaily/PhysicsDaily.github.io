@@ -13,7 +13,7 @@ Electromagnetism covers electric and magnetic fields, circuits, and electromagne
 
 ## Topics Covered
 
-<div class="grid cards" markdown>
+<div class="grid cards clickable-cards" markdown>
 
 -   **Chapter 21**
 

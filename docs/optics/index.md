@@ -13,7 +13,7 @@ Optics explores the nature and behavior of light, including reflection, refracti
 
 ## Topics Covered
 
-<div class="grid cards" markdown>
+<div class="grid cards clickable-cards" markdown>
 
 -   **Chapter 33**
 

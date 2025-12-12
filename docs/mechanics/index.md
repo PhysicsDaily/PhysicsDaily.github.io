@@ -13,7 +13,7 @@ Mechanics is the foundation of physics, dealing with motion, forces, energy, and
 
 ## Topics Covered
 
-<div class="grid cards" markdown>
+<div class="grid cards clickable-cards" markdown>
 
 -   **Chapter 1**
 
