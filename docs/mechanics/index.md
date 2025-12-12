@@ -130,5 +130,3 @@ Mechanics is the foundation of physics, dealing with motion, forces, energy, and
 </div>
 
 ---
-
-Start with [Chapter 1: Units, Physical Quantities, and Vectors](units-physical-quantities.md).
