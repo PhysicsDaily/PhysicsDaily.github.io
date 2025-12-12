@@ -13,34 +13,74 @@ Modern physics covers the revolutionary discoveries of the 20th century: relativ
 
 ## Topics Covered
 
-| Chapter | Topic |
-|---------|-------|
-| 37 | [Relativity](relativity.md) |
-| 38 | [Photons: Light Waves Behaving as Particles](photons-light-waves.md) |
-| 39 | [Particles Behaving as Waves](particles-waves.md) |
-| 40 | [Quantum Mechanics I: Wave Functions](quantum-mechanics-wave-functions.md) |
-| 41 | [Quantum Mechanics II: Atomic Structure](quantum-mechanics-atomic-structure.md) |
-| 42 | [Molecules and Condensed Matter](molecules-condensed-matter.md) |
-| 43 | [Nuclear Physics](nuclear-physics.md) |
-| 44 | [Particle Physics and Cosmology](particle-physics-cosmology.md) |
+<div class="grid cards" markdown>
+
+-   **Chapter 37**
+
+    ---
+
+    [**Relativity**](relativity.md)
+
+    Special relativity, spacetime, and relativistic effects.
+
+-   **Chapter 38**
+
+    ---
+
+    [**Photons: Light Waves Behaving as Particles**](photons-light-waves.md)
+
+    Photons, the photoelectric effect, and particle-like light.
+
+-   **Chapter 39**
+
+    ---
+
+    [**Particles Behaving as Waves**](particles-waves.md)
+
+    de Broglie wavelength and matter-wave behavior.
+
+-   **Chapter 40**
+
+    ---
+
+    [**Quantum Mechanics I: Wave Functions**](quantum-mechanics-wave-functions.md)
+
+    Wave functions, probability, and the Schrödinger equation.
+
+-   **Chapter 41**
+
+    ---
+
+    [**Quantum Mechanics II: Atomic Structure**](quantum-mechanics-atomic-structure.md)
+
+    Atomic models, spectra, and quantum numbers.
+
+-   **Chapter 42**
+
+    ---
+
+    [**Molecules and Condensed Matter**](molecules-condensed-matter.md)
+
+    Solids, bands, and condensed-matter basics.
+
+-   **Chapter 43**
+
+    ---
+
+    [**Nuclear Physics**](nuclear-physics.md)
+
+    Radioactivity, nuclear structure, and reactions.
+
+-   **Chapter 44**
+
+    ---
+
+    [**Particle Physics and Cosmology**](particle-physics-cosmology.md)
+
+    Fundamental particles and an introduction to cosmology.
+
+</div>
 
 ---
 
-## Key Concepts Preview
-
-!!! info "Revolutionary Equations"
-    **Mass-Energy Equivalence:**
-    $$E = mc^2$$
-    
-    **Time Dilation:**
-    $$\Delta t = \gamma \Delta t_0 = \frac{\Delta t_0}{\sqrt{1 - v^2/c^2}}$$
-    
-    **de Broglie Wavelength:**
-    $$\lambda = \frac{h}{p}$$
-    
-    **Schrödinger Equation:**
-    $$i\hbar\frac{\partial \Psi}{\partial t} = \hat{H}\Psi$$
-
----
-
-*Content coming soon!*
+Start with [Chapter 37: Relativity](relativity.md).

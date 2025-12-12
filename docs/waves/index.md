@@ -13,25 +13,26 @@ This section covers the physics of waves, including mechanical waves, sound, and
 
 ## Topics Covered
 
-| Chapter | Topic |
-|---------|-------|
-| 15 | [Mechanical Waves](mechanical-waves.md) |
-| 16 | [Sound and Hearing](sound-hearing.md) |
+<div class="grid cards" markdown>
+
+-   **Chapter 15**
+
+    ---
+
+    [**Mechanical Waves**](mechanical-waves.md)
+
+    Wave motion, superposition, and energy transfer.
+
+-   **Chapter 16**
+
+    ---
+
+    [**Sound and Hearing**](sound-hearing.md)
+
+    Sound waves, intensity, resonance, and the Doppler effect.
+
+</div>
 
 ---
 
-## Key Concepts Preview
-
-!!! info "Wave Fundamentals"
-    **Wave Equation:**
-    $$y(x,t) = A \sin(kx - \omega t + \phi)$$
-    
-    **Wave Speed:**
-    $$v = f\lambda = \frac{\omega}{k}$$
-    
-    **Sound Intensity Level:**
-    $$\beta = 10 \log_{10}\left(\frac{I}{I_0}\right) \text{ dB}$$
-
----
-
-*Content coming soon!*
+Start with [Chapter 15: Mechanical Waves](mechanical-waves.md).

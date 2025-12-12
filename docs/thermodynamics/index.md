@@ -13,30 +13,42 @@ Thermodynamics deals with heat, temperature, energy transfer, and the behavior o
 
 ## Topics Covered
 
-| Chapter | Topic |
-|---------|-------|
-| 17 | [Temperature and Heat](temperature-heat.md) |
-| 18 | [Thermal Properties of Matter](thermal-properties.md) |
-| 19 | [The First Law of Thermodynamics](first-law.md) |
-| 20 | [The Second Law of Thermodynamics](second-law.md) |
+<div class="grid cards" markdown>
+
+-   **Chapter 17**
+
+    ---
+
+    [**Temperature and Heat**](temperature-heat.md)
+
+    Temperature scales, heat transfer, and calorimetry.
+
+-   **Chapter 18**
+
+    ---
+
+    [**Thermal Properties of Matter**](thermal-properties.md)
+
+    Thermal expansion, phase changes, and specific heat.
+
+-   **Chapter 19**
+
+    ---
+
+    [**The First Law of Thermodynamics**](first-law.md)
+
+    Internal energy, work, and energy conservation.
+
+-   **Chapter 20**
+
+    ---
+
+    [**The Second Law of Thermodynamics**](second-law.md)
+
+    Entropy, heat engines, and the limits of efficiency.
+
+</div>
 
 ---
 
-## Key Concepts Preview
-
-!!! info "Fundamental Laws"
-    **Heat Transfer:**
-    $$Q = mc\Delta T$$
-    
-    **First Law of Thermodynamics:**
-    $$\Delta U = Q - W$$
-    
-    **Ideal Gas Law:**
-    $$PV = nRT$$
-    
-    **Entropy:**
-    $$\Delta S = \int \frac{dQ}{T}$$
-
----
-
-*Content coming soon!*
+Start with [Chapter 17: Temperature and Heat](temperature-heat.md).
