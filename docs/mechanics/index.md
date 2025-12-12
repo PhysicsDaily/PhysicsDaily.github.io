@@ -10,7 +10,7 @@ Mechanics is the foundation of physics, dealing with motion, forces, energy, and
 
 <div class="grid cards" markdown>
 
--   :material-ruler:{ .lg .middle } **Chapter 1**
+-   **Chapter 1**
 
     ---
 
@@ -18,7 +18,7 @@ Mechanics is the foundation of physics, dealing with motion, forces, energy, and
 
     Foundations of measurement and vectors.
 
--   :material-arrow-right-thick:{ .lg .middle } **Chapter 2**
+-   **Chapter 2**
 
     ---
 
@@ -26,7 +26,7 @@ Mechanics is the foundation of physics, dealing with motion, forces, energy, and
 
     Kinematics in one dimension.
 
--   :material-axis-arrow:{ .lg .middle } **Chapter 3**
+-   **Chapter 3**
 
     ---
 
@@ -34,7 +34,7 @@ Mechanics is the foundation of physics, dealing with motion, forces, energy, and
 
     Projectile and circular motion.
 
--   :material-weight:{ .lg .middle } **Chapter 4**
+-   **Chapter 4**
 
     ---
 
@@ -42,7 +42,7 @@ Mechanics is the foundation of physics, dealing with motion, forces, energy, and
 
     Force, mass, and the three laws of motion.
 
--   :material-cogs:{ .lg .middle } **Chapter 5**
+-   **Chapter 5**
 
     ---
 
@@ -50,7 +50,7 @@ Mechanics is the foundation of physics, dealing with motion, forces, energy, and
 
     Friction, drag, and circular dynamics.
 
--   :material-lightning-bolt:{ .lg .middle } **Chapter 6**
+-   **Chapter 6**
 
     ---
 
@@ -58,7 +58,7 @@ Mechanics is the foundation of physics, dealing with motion, forces, energy, and
 
     Work-energy theorem and power.
 
--   :material-battery-charging:{ .lg .middle } **Chapter 7**
+-   **Chapter 7**
 
     ---
 
@@ -66,7 +66,7 @@ Mechanics is the foundation of physics, dealing with motion, forces, energy, and
 
     Conservative forces and energy conservation.
 
--   :material-circle-multiple:{ .lg .middle } **Chapter 8**
+-   **Chapter 8**
 
     ---
 
@@ -74,7 +74,7 @@ Mechanics is the foundation of physics, dealing with motion, forces, energy, and
 
     Impulse, momentum, and collisions.
 
--   :material-rotate-right:{ .lg .middle } **Chapter 9**
+-   **Chapter 9**
 
     ---
 
@@ -82,7 +82,7 @@ Mechanics is the foundation of physics, dealing with motion, forces, energy, and
 
     Angular kinematics and energy.
 
--   :material-disc:{ .lg .middle } **Chapter 10**
+-   **Chapter 10**
 
     ---
 
@@ -90,7 +90,7 @@ Mechanics is the foundation of physics, dealing with motion, forces, energy, and
 
     Torque and angular momentum.
 
--   :material-scale-balance:{ .lg .middle } **Chapter 11**
+-   **Chapter 11**
 
     ---
 
@@ -98,7 +98,7 @@ Mechanics is the foundation of physics, dealing with motion, forces, energy, and
 
     Static equilibrium and stress/strain.
 
--   :material-water:{ .lg .middle } **Chapter 12**
+-   **Chapter 12**
 
     ---
 
@@ -106,7 +106,7 @@ Mechanics is the foundation of physics, dealing with motion, forces, energy, and
 
     Density, pressure, and buoyancy.
 
--   :material-earth:{ .lg .middle } **Chapter 13**
+-   **Chapter 13**
 
     ---
 
@@ -114,7 +114,7 @@ Mechanics is the foundation of physics, dealing with motion, forces, energy, and
 
     Newton's law of gravitation and orbits.
 
--   :material-sine-wave:{ .lg .middle } **Chapter 14**
+-   **Chapter 14**
 
     ---
 
@@ -126,4 +126,4 @@ Mechanics is the foundation of physics, dealing with motion, forces, energy, and
 
 ---
 
-Start with [Chapter 1: Units, Physical Quantities, and Vectors](units-physical-quantities.md) →
+Start with [Chapter 1: Units, Physical Quantities, and Vectors](units-physical-quantities.md).

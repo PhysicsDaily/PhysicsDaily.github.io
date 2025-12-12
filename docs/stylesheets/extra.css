@@ -7,37 +7,98 @@
   --pd-hero-text: #2d2a26;
 }
 
-/* Beige Navigation Bar */
-.md-header {
+/* Navigation Bar */
+[data-md-color-scheme="default"] .md-header {
   background-color: #e8dcc8;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
-.md-header__title,
-.md-header-nav__button,
-.md-header__button {
+[data-md-color-scheme="default"] .md-header__title,
+[data-md-color-scheme="default"] .md-header-nav__button,
+[data-md-color-scheme="default"] .md-header__button {
   color: #2d2a26;
 }
 
-.md-tabs {
+[data-md-color-scheme="slate"] .md-header__title,
+[data-md-color-scheme="slate"] .md-header-nav__button,
+[data-md-color-scheme="slate"] .md-header__button {
+  color: #f5f2ec;
+}
+
+.md-header__title {
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+[data-md-color-scheme="default"] .md-tabs {
   background-color: #d9ccb8;
 }
 
 .md-tabs__link {
-  color: #4a4540;
+  color: #2f2a26;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
 }
 
 .md-tabs__link--active,
 .md-tabs__link:hover {
-  color: #2d2a26;
+  color: #1e1b19;
+  font-weight: 700;
 }
 
-.md-search__input {
+[data-md-color-scheme="slate"] .md-tabs__link {
+  color: rgba(245, 242, 236, 0.9);
+}
+
+[data-md-color-scheme="slate"] .md-tabs__link--active,
+[data-md-color-scheme="slate"] .md-tabs__link:hover {
+  color: #ffffff;
+}
+
+[data-md-color-scheme="default"] .md-search__input {
   background-color: rgba(255, 255, 255, 0.7);
+  color: #2d2a26;
+  font-weight: 500;
 }
 
-.md-search__input::placeholder {
-  color: #6b6560;
+[data-md-color-scheme="default"] .md-search__input::placeholder {
+  color: #4a4540;
+}
+
+[data-md-color-scheme="slate"] .md-search__input {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #f5f2ec;
+  font-weight: 500;
+}
+
+[data-md-color-scheme="slate"] .md-search__input::placeholder {
+  color: rgba(245, 242, 236, 0.7);
+}
+
+/* Repo/source text in header */
+[data-md-color-scheme="default"] .md-source,
+[data-md-color-scheme="default"] .md-source__repository,
+[data-md-color-scheme="default"] .md-source__facts,
+[data-md-color-scheme="default"] .md-source__fact,
+[data-md-color-scheme="default"] .md-header__source,
+[data-md-color-scheme="default"] .md-header__source a {
+  color: #2d2a26;
+  font-weight: 500;
+}
+
+[data-md-color-scheme="default"] .md-source__repository {
+  font-weight: 600;
+}
+
+[data-md-color-scheme="slate"] .md-source,
+[data-md-color-scheme="slate"] .md-source__repository,
+[data-md-color-scheme="slate"] .md-source__facts,
+[data-md-color-scheme="slate"] .md-source__fact,
+[data-md-color-scheme="slate"] .md-header__source,
+[data-md-color-scheme="slate"] .md-header__source a {
+  color: #f5f2ec;
+  font-weight: 500;
 }
 
 /* Hero Section */
