@@ -508,3 +508,20 @@
 .clickable-cards>ul>li:hover .section-icon {
   transform: scale(1.1);
 }
+
+/* Hide left chapter navigation sidebar */
+@media screen and (min-width: 76.25em) {
+  .md-sidebar--primary {
+    display: none;
+  }
+
+  /* Remove extra spacing applied when the sidebar exists */
+  [dir=ltr] .md-sidebar--primary:not([hidden])~.md-content>.md-content__inner {
+    margin-left: 0;
+  }
+
+  /* Drawer toggle is useless without navigation */
+  label.md-header__button[for="__drawer"] {
+    display: none;
+  }
+}
