@@ -1,3 +1,8 @@
+---
+hide:
+  - navigation
+---
+
 # Part 1: Mechanics
 
 

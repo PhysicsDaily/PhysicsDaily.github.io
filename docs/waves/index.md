@@ -1,3 +1,8 @@
+---
+hide:
+  - navigation
+---
+
 # Part 2: Waves and Acoustics
 
 

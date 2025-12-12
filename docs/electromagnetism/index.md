@@ -1,3 +1,8 @@
+---
+hide:
+  - navigation
+---
+
 # Part 4: Electromagnetism
 
 

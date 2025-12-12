@@ -1,3 +1,8 @@
+---
+hide:
+  - navigation
+---
+
 # Part 6: Modern Physics
 
 
