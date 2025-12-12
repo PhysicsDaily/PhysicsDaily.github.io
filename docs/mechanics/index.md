@@ -15,13 +15,21 @@ Mechanics is the foundation of physics, dealing with motion, forces, energy, and
 
 <div class="grid cards clickable-cards" markdown>
 
+-   **Chapter 0**
+
+    ---
+
+    [**Units and Physical Quantities**](units-physical-quantities.md)
+
+    Foundations of measurement and dimensional analysis.
+
 -   **Chapter 1**
 
     ---
 
-    [**Units, Physical Quantities, and Vectors**](units-physical-quantities.md)
+    [**Vectors**](vectors.md)
 
-    Foundations of measurement and vectors.
+    Vector operations, components, and applications.
 
 -   **Chapter 2**
 
