@@ -94,63 +94,62 @@ extra:
       link: https://github.com/PhysicsDaily
 
 nav:
-  - Home:
-      - Overview: index.md
-      - Mechanics:
-          - Overview: mechanics/index.md
-          - "Chapter 1: Units, Physical Quantities, and Vectors": mechanics/units-physical-quantities.md
-          - "Chapter 2: Motion Along a Straight Line": mechanics/motion-along-straight-line.md
-          - "Chapter 3: Motion in Two or Three Dimensions": mechanics/motion-2d-3d.md
-          - "Chapter 4: Newton's Laws of Motion": mechanics/newtons-laws.md
-          - "Chapter 5: Applying Newton's Laws": mechanics/applying-newtons-laws.md
-          - "Chapter 6: Work and Kinetic Energy": mechanics/work-kinetic-energy.md
-          - "Chapter 7: Potential Energy and Energy Conservation": mechanics/potential-energy-conservation.md
-          - "Chapter 8: Momentum, Impulse, and Collisions": mechanics/momentum-impulse-collisions.md
-          - "Chapter 9: Rotation of Rigid Bodies": mechanics/rotation-rigid-bodies.md
-          - "Chapter 10: Dynamics of Rotational Motion": mechanics/dynamics-rotational-motion.md
-          - "Chapter 11: Equilibrium and Elasticity": mechanics/equilibrium-elasticity.md
-          - "Chapter 12: Fluid Mechanics": mechanics/fluid-mechanics.md
-          - "Chapter 13: Gravitation": mechanics/gravitation.md
-          - "Chapter 14: Periodic Motion": mechanics/periodic-motion.md
-      - Waves and Acoustics:
-          - Overview: waves/index.md
-          - "Chapter 15: Mechanical Waves": waves/mechanical-waves.md
-          - "Chapter 16: Sound and Hearing": waves/sound-hearing.md
-      - Thermodynamics:
-          - Overview: thermodynamics/index.md
-          - "Chapter 17: Temperature and Heat": thermodynamics/temperature-heat.md
-          - "Chapter 18: Thermal Properties of Matter": thermodynamics/thermal-properties.md
-          - "Chapter 19: The First Law of Thermodynamics": thermodynamics/first-law.md
-          - "Chapter 20: The Second Law of Thermodynamics": thermodynamics/second-law.md
-      - Electromagnetism:
-          - Overview: electromagnetism/index.md
-          - "Chapter 21: Electric Charge and Electric Field": electromagnetism/electric-charge-field.md
-          - "Chapter 22: Gauss's Law": electromagnetism/gauss-law.md
-          - "Chapter 23: Electric Potential": electromagnetism/electric-potential.md
-          - "Chapter 24: Capacitance and Dielectrics": electromagnetism/capacitance-dielectrics.md
-          - "Chapter 25: Current, Resistance, and Electromotive Force": electromagnetism/current-resistance-emf.md
-          - "Chapter 26: Direct-Current Circuits": electromagnetism/dc-circuits.md
-          - "Chapter 27: Magnetic Field and Magnetic Forces": electromagnetism/magnetic-field-forces.md
-          - "Chapter 28: Sources of Magnetic Field": electromagnetism/sources-magnetic-field.md
-          - "Chapter 29: Electromagnetic Induction": electromagnetism/electromagnetic-induction.md
-          - "Chapter 30: Inductance": electromagnetism/inductance.md
-          - "Chapter 31: Alternating Current": electromagnetism/alternating-current.md
-          - "Chapter 32: Electromagnetic Waves": electromagnetism/electromagnetic-waves.md
-      - Optics:
-          - Overview: optics/index.md
-          - "Chapter 33: The Nature and Propagation of Light": optics/nature-propagation-light.md
-          - "Chapter 34: Geometric Optics": optics/geometric-optics.md
-          - "Chapter 35: Interference": optics/interference.md
-          - "Chapter 36: Diffraction": optics/diffraction.md
-      - Modern Physics:
-          - Overview: modern/index.md
-          - "Chapter 37: Relativity": modern/relativity.md
-          - "Chapter 38: Photons: Light Waves Behaving as Particles": modern/photons-light-waves.md
-          - "Chapter 39: Particles Behaving as Waves": modern/particles-waves.md
-          - "Chapter 40: Quantum Mechanics I: Wave Functions": modern/quantum-mechanics-wave-functions.md
-          - "Chapter 41: Quantum Mechanics II: Atomic Structure": modern/quantum-mechanics-atomic-structure.md
-          - "Chapter 42: Molecules and Condensed Matter": modern/molecules-condensed-matter.md
-          - "Chapter 43: Nuclear Physics": modern/nuclear-physics.md
-          - "Chapter 44: Particle Physics and Cosmology": modern/particle-physics-cosmology.md
+  - Home: index.md
+  - Mechanics:
+      - Overview: mechanics/index.md
+      - "Chapter 1: Units, Physical Quantities, and Vectors": mechanics/units-physical-quantities.md
+      - "Chapter 2: Motion Along a Straight Line": mechanics/motion-along-straight-line.md
+      - "Chapter 3: Motion in Two or Three Dimensions": mechanics/motion-2d-3d.md
+      - "Chapter 4: Newton's Laws of Motion": mechanics/newtons-laws.md
+      - "Chapter 5: Applying Newton's Laws": mechanics/applying-newtons-laws.md
+      - "Chapter 6: Work and Kinetic Energy": mechanics/work-kinetic-energy.md
+      - "Chapter 7: Potential Energy and Energy Conservation": mechanics/potential-energy-conservation.md
+      - "Chapter 8: Momentum, Impulse, and Collisions": mechanics/momentum-impulse-collisions.md
+      - "Chapter 9: Rotation of Rigid Bodies": mechanics/rotation-rigid-bodies.md
+      - "Chapter 10: Dynamics of Rotational Motion": mechanics/dynamics-rotational-motion.md
+      - "Chapter 11: Equilibrium and Elasticity": mechanics/equilibrium-elasticity.md
+      - "Chapter 12: Fluid Mechanics": mechanics/fluid-mechanics.md
+      - "Chapter 13: Gravitation": mechanics/gravitation.md
+      - "Chapter 14: Periodic Motion": mechanics/periodic-motion.md
+  - Waves and Acoustics:
+      - Overview: waves/index.md
+      - "Chapter 15: Mechanical Waves": waves/mechanical-waves.md
+      - "Chapter 16: Sound and Hearing": waves/sound-hearing.md
+  - Thermodynamics:
+      - Overview: thermodynamics/index.md
+      - "Chapter 17: Temperature and Heat": thermodynamics/temperature-heat.md
+      - "Chapter 18: Thermal Properties of Matter": thermodynamics/thermal-properties.md
+      - "Chapter 19: The First Law of Thermodynamics": thermodynamics/first-law.md
+      - "Chapter 20: The Second Law of Thermodynamics": thermodynamics/second-law.md
+  - Electromagnetism:
+      - Overview: electromagnetism/index.md
+      - "Chapter 21: Electric Charge and Electric Field": electromagnetism/electric-charge-field.md
+      - "Chapter 22: Gauss's Law": electromagnetism/gauss-law.md
+      - "Chapter 23: Electric Potential": electromagnetism/electric-potential.md
+      - "Chapter 24: Capacitance and Dielectrics": electromagnetism/capacitance-dielectrics.md
+      - "Chapter 25: Current, Resistance, and Electromotive Force": electromagnetism/current-resistance-emf.md
+      - "Chapter 26: Direct-Current Circuits": electromagnetism/dc-circuits.md
+      - "Chapter 27: Magnetic Field and Magnetic Forces": electromagnetism/magnetic-field-forces.md
+      - "Chapter 28: Sources of Magnetic Field": electromagnetism/sources-magnetic-field.md
+      - "Chapter 29: Electromagnetic Induction": electromagnetism/electromagnetic-induction.md
+      - "Chapter 30: Inductance": electromagnetism/inductance.md
+      - "Chapter 31: Alternating Current": electromagnetism/alternating-current.md
+      - "Chapter 32: Electromagnetic Waves": electromagnetism/electromagnetic-waves.md
+  - Optics:
+      - Overview: optics/index.md
+      - "Chapter 33: The Nature and Propagation of Light": optics/nature-propagation-light.md
+      - "Chapter 34: Geometric Optics": optics/geometric-optics.md
+      - "Chapter 35: Interference": optics/interference.md
+      - "Chapter 36: Diffraction": optics/diffraction.md
+  - Modern Physics:
+      - Overview: modern/index.md
+      - "Chapter 37: Relativity": modern/relativity.md
+      - "Chapter 38: Photons: Light Waves Behaving as Particles": modern/photons-light-waves.md
+      - "Chapter 39: Particles Behaving as Waves": modern/particles-waves.md
+      - "Chapter 40: Quantum Mechanics I: Wave Functions": modern/quantum-mechanics-wave-functions.md
+      - "Chapter 41: Quantum Mechanics II: Atomic Structure": modern/quantum-mechanics-atomic-structure.md
+      - "Chapter 42: Molecules and Condensed Matter": modern/molecules-condensed-matter.md
+      - "Chapter 43: Nuclear Physics": modern/nuclear-physics.md
+      - "Chapter 44: Particle Physics and Cosmology": modern/particle-physics-cosmology.md
   - Resources: resources.md
   - About: about.md
