@@ -17,7 +17,7 @@ hide:
   </div>
 </section>
 
-## What You'll Find Here
+## Contents
 
 <div class="grid cards clickable-cards" markdown>
 
