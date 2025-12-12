@@ -277,75 +277,6 @@
   padding: 0.5rem 0;
 }
 
-/* Shared surfaces */
-.simulation-container,
-.mcq-container,
-.example-problem {
-  border-radius: var(--pd-card-radius);
-  margin: var(--pd-card-margin);
-}
-
-.simulation-container,
-.mcq-container {
-  background: var(--pd-surface-bg);
-}
-
-.simulation-container {
-  padding: 1rem;
-  border: var(--pd-surface-border);
-}
-
-.simulation-container canvas,
-.physics-diagram img {
-  display: block;
-  margin: 0 auto;
-  max-width: 100%;
-}
-
-/* MCQ styling */
-.mcq-container {
-  padding: 1.5rem;
-}
-
-.mcq-container .question {
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-.mcq-container .options label {
-  display: block;
-  padding: 0.75rem 1rem;
-  margin: 0.5rem 0;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-  border: var(--pd-surface-border);
-}
-
-.mcq-container .options label:hover {
-  background: var(--md-accent-fg-color--transparent);
-}
-
-.mcq-container .options input[type="radio"] {
-  margin-right: 0.75rem;
-}
-
-/* Physics diagrams */
-.physics-diagram {
-  text-align: center;
-  margin: 1.5rem 0;
-}
-
-.physics-diagram img {
-  border-radius: 4px;
-}
-
-.physics-diagram figcaption {
-  font-size: 0.85rem;
-  color: var(--md-default-fg-color--light);
-  margin-top: 0.5rem;
-}
-
 /* Important equations box */
 .important-equation {
   background: linear-gradient(135deg, var(--md-primary-fg-color--dark) 0%, var(--md-primary-fg-color) 100%);
@@ -358,26 +289,6 @@
 
 .important-equation .MathJax {
   font-size: 1.2em !important;
-}
-
-/* Derivation steps */
-.derivation {
-  border-left: 3px solid var(--md-accent-fg-color);
-  padding-left: 1.5rem;
-  margin: var(--pd-card-margin);
-}
-
-/* Example problems */
-.example-problem {
-  background: var(--md-admonition-bg-color);
-  padding: 1rem 1.5rem;
-  border-left: 4px solid var(--md-accent-fg-color);
-}
-
-.example-problem .problem-title {
-  font-weight: 700;
-  color: var(--md-accent-fg-color);
-  margin-bottom: 0.5rem;
 }
 
 /* Vector notation */
@@ -485,28 +396,6 @@
   color: var(--md-default-fg-color--light);
   line-height: 1.5;
   margin: 0;
-}
-
-/* Custom section icons (images) */
-.section-icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  margin-right: 0.75rem;
-  display: inline-block;
-  vertical-align: middle;
-  transition: transform 0.3s ease;
-  object-fit: contain;
-}
-
-/* Dark mode fix - remove white background */
-/* Dark mode fix - remove white background */
-[data-md-color-scheme="slate"] .section-icon {
-  filter: invert(1) hue-rotate(180deg);
-  mix-blend-mode: screen;
-}
-
-.clickable-cards>ul>li:hover .section-icon {
-  transform: scale(1.1);
 }
 
 /* Hide left chapter navigation sidebar */
