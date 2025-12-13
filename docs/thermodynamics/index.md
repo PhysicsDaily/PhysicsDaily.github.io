@@ -3,11 +3,14 @@ hide:
   - navigation
 ---
 
-# Part 3: Thermodynamics
-
-
-
-Thermodynamics deals with heat, temperature, energy transfer, and the behavior of systems at the macroscopic level.
+<div class="topic-hero">
+  <div class="topic-hero-text">
+    <p class="topic-hero-kicker">Part 3</p>
+    <h1>Thermodynamics</h1>
+    <p class="topic-hero-subtitle">Thermodynamics deals with heat, temperature, energy transfer, and the behavior of systems at the macroscopic level.</p>
+    <a class="topic-hero-button" href="temperature-heat.md">Intro to Thermodynamics</a>
+  </div>
+</div>
 
 ---
 

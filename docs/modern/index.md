@@ -3,11 +3,14 @@ hide:
   - navigation
 ---
 
-# Part 6: Modern Physics
-
-
-
-Modern physics covers the revolutionary discoveries of the 20th century: relativity, quantum mechanics, and particle physics.
+<div class="topic-hero">
+  <div class="topic-hero-text">
+    <p class="topic-hero-kicker">Part 6</p>
+    <h1>Modern Physics</h1>
+    <p class="topic-hero-subtitle">Modern physics covers the revolutionary discoveries of the 20th century: relativity, quantum mechanics, and particle physics.</p>
+    <a class="topic-hero-button" href="relativity.md">Intro to Modern Physics</a>
+  </div>
+</div>
 
 ---
 

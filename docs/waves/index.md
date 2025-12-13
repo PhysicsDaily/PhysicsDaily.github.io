@@ -3,11 +3,14 @@ hide:
   - navigation
 ---
 
-# Part 2: Waves and Acoustics
-
-
-
-This section covers the physics of waves, including mechanical waves, sound, and wave phenomena.
+<div class="topic-hero">
+  <div class="topic-hero-text">
+    <p class="topic-hero-kicker">Part 2</p>
+    <h1>Waves and Acoustics</h1>
+    <p class="topic-hero-subtitle">This section covers the physics of waves, including mechanical waves, sound, and wave phenomena.</p>
+    <a class="topic-hero-button" href="mechanical-waves.md">Intro to Waves & Acoustics</a>
+  </div>
+</div>
 
 ---
 

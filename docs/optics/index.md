@@ -3,11 +3,14 @@ hide:
   - navigation
 ---
 
-# Part 5: Optics
-
-
-
-Optics explores the nature and behavior of light, including reflection, refraction, and wave phenomena.
+<div class="topic-hero">
+  <div class="topic-hero-text">
+    <p class="topic-hero-kicker">Part 5</p>
+    <h1>Optics</h1>
+    <p class="topic-hero-subtitle">Optics explores the nature and behavior of light, including reflection, refraction, and wave phenomena.</p>
+    <a class="topic-hero-button" href="nature-propagation-light.md">Intro to Optics</a>
+  </div>
+</div>
 
 ---
 

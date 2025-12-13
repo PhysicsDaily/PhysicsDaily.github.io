@@ -3,11 +3,14 @@ hide:
   - navigation
 ---
 
-# Part 4: Electromagnetism
-
-
-
-Electromagnetism covers electric and magnetic fields, circuits, and electromagnetic waves—the foundation of modern technology.
+<div class="topic-hero">
+  <div class="topic-hero-text">
+    <p class="topic-hero-kicker">Part 4</p>
+    <h1>Electromagnetism</h1>
+    <p class="topic-hero-subtitle">Electromagnetism covers electric and magnetic fields, circuits, and electromagnetic waves - the foundation of modern technology.</p>
+    <a class="topic-hero-button" href="electric-charge-field.md">Intro to Electromagnetism</a>
+  </div>
+</div>
 
 ---
 
