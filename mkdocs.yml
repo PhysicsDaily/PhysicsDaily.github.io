@@ -93,6 +93,7 @@ nav:
       - Home: index.md
       - "Let's Understand Physics": understand-physics.md
       - Mechanics:
+          - Intro to Mechanics: mechanics/intro-to-mechanics.md
           - Overview: mechanics/index.md
           - "Chapter 1: Units, Physical Quantities, and Vectors": mechanics/units-physical-quantities.md
           - "Chapter 2: Motion Along a Straight Line": mechanics/motion-along-straight-line.md

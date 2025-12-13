@@ -8,7 +8,7 @@ hide:
     <p class="topic-hero-kicker">Part 1</p>
     <h1>Mechanics</h1>
     <p class="topic-hero-subtitle">Mechanics is the foundation of physics, dealing with motion, forces, energy, and the interactions between objects.</p>
-    <a class="topic-hero-button" href="units-physical-quantities.md">Intro to Mechanics</a>
+    <a class="topic-hero-button" href="intro-to-mechanics.md">Intro to Mechanics</a>
   </div>
 </div>
 
