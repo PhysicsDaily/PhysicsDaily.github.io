@@ -91,6 +91,7 @@ extra:
 nav:
   - Home:
       - Home: index.md
+      - "Let's Understand Physics": understand-physics.md
       - Mechanics:
           - Overview: mechanics/index.md
           - "Chapter 1: Units, Physical Quantities, and Vectors": mechanics/units-physical-quantities.md

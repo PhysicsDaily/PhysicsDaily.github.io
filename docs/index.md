@@ -8,7 +8,7 @@ hide:
   <div class="hero-content">
     <h1 class="hero-title">Welcome to Physics Daily</h1>
     <p class="hero-subtitle">A comprehensive physics study resource covering all major topics. Master the fundamentals and explore advanced concepts with clear explanations and interactive content.</p>
-    <a href="mechanics/" class="hero-button">Start Learning</a>
+    <a href="understand-physics/" class="hero-button">Let's Understand Physics</a>
   </div>
   <div class="hero-image">
     <img id="scientist-image" src="" alt="">
