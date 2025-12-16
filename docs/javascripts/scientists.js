@@ -61,29 +61,42 @@ function displayRandomScientist() {
     // Safety check
     if (!imageEl || !quoteEl || !nameEl) return;
 
-    // 1. Start Fade Out
+    const shouldAnimate = imageEl.dataset.pdScientistInitialized === 'true';
+    imageEl.dataset.pdScientistInitialized = 'true';
+
+    const scientist = scientists[Math.floor(Math.random() * scientists.length)];
+    const quote = scientist.quotes[Math.floor(Math.random() * scientist.quotes.length)];
+
+    // First paint: avoid hiding the hero content.
+    if (!shouldAnimate) {
+        imageEl.src = scientist.image;
+        imageEl.alt = scientist.name;
+        quoteEl.textContent = `"${quote}"`;
+        nameEl.textContent = `\u2014 ${scientist.name}`;
+        imageEl.style.opacity = '1';
+        quoteEl.style.opacity = '1';
+        nameEl.style.opacity = '1';
+        return;
+    }
+
+    const fadeMs = 250;
+
+    // Fade out current content
     imageEl.style.opacity = '0';
     quoteEl.style.opacity = '0';
     nameEl.style.opacity = '0';
 
-    // 2. Wait for fade out to finish (500ms), then swap data
     setTimeout(() => {
-        const scientist = scientists[Math.floor(Math.random() * scientists.length)];
-        const quote = scientist.quotes[Math.floor(Math.random() * scientist.quotes.length)];
-
-        // Update Content
         imageEl.src = scientist.image;
         imageEl.alt = scientist.name;
-
-        // Note: Using backticks ` ` for template literals
         quoteEl.textContent = `"${quote}"`;
-        nameEl.textContent = `— ${scientist.name}`;
+        nameEl.textContent = `\u2014 ${scientist.name}`;
 
-        // 3. Start Fade In
+        // Fade in new content
         imageEl.style.opacity = '1';
         quoteEl.style.opacity = '1';
         nameEl.style.opacity = '1';
-    }, 500);
+    }, fadeMs);
 }
 
 // Run when DOM is ready

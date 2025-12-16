@@ -11,9 +11,9 @@ hide:
     <a href="understand-physics/" class="hero-button">Let's Understand Physics</a>
   </div>
   <div class="hero-image">
-    <img id="scientist-image" src="" alt="">
-    <p id="scientist-quote" class="hero-quote"></p>
-    <span id="scientist-name" class="hero-quote-author"></span>
+    <img id="scientist-image" src="assets/images/einstein.png" alt="Albert Einstein" width="180" height="180" loading="eager" decoding="async">
+    <p id="scientist-quote" class="hero-quote">"The important thing is not to stop questioning. Curiosity has its own reason for existing."</p>
+    <span id="scientist-name" class="hero-quote-author">&mdash; Albert Einstein</span>
   </div>
 </section>
 
