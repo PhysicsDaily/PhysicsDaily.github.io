@@ -95,7 +95,8 @@ nav:
       - Mechanics:
           - Intro to Mechanics: mechanics/intro-to-mechanics.md
           - Overview: mechanics/index.md
-          - "Chapter 1: Units, Physical Quantities, and Vectors": mechanics/units-physical-quantities.md
+          - "Chapter 0: Units and Physical Quantities": mechanics/units-physical-quantities.md
+          - "Chapter 1: Vectors": mechanics/vectors.md
           - "Chapter 2: Motion Along a Straight Line": mechanics/motion-along-straight-line.md
           - "Chapter 3: Motion in Two or Three Dimensions": mechanics/motion-2d-3d.md
           - "Chapter 4: Newton's Laws of Motion": mechanics/newtons-laws.md
