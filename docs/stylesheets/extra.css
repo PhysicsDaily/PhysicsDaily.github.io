@@ -5,6 +5,10 @@
   --pd-surface-border: 1px solid var(--md-default-fg-color--lightest);
   --pd-hero-bg: linear-gradient(135deg, #f5f0e6 0%, #faf7f0 50%, #fffef9 100%);
   --pd-hero-text: #2d2a26;
+  --pd-accent: #8b6914;
+  --pd-accent-dark: #6b5210;
+  --pd-accent-cool: #4a90d9;
+  --pd-accent-cool-dark: #3b7fc4;
 }
 
 /* Navigation Bar */
@@ -106,6 +110,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 2rem;
   background: var(--pd-hero-bg);
   border-radius: 16px;
   padding: 3rem;
@@ -139,6 +144,7 @@
   color: var(--pd-hero-text) !important;
   margin: 0 0 1rem 0 !important;
   line-height: 1.2 !important;
+  letter-spacing: 0.005em;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -153,7 +159,7 @@
 .hero-button {
   display: inline-block;
   padding: 1rem 2.5rem;
-  background: #8b6914;
+  background: var(--pd-accent);
   color: #ffffff !important;
   font-weight: 700;
   font-size: 1.1rem;
@@ -166,7 +172,7 @@
 .hero-button:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(139, 105, 20, 0.4);
-  background: #6b5210;
+  background: var(--pd-accent-dark);
 }
 
 .hero-image {
@@ -256,12 +262,12 @@
 }
 
 [data-md-color-scheme="slate"] .hero-button {
-  background: #4a90d9;
+  background: var(--pd-accent-cool);
   box-shadow: 0 4px 15px rgba(74, 144, 217, 0.3);
 }
 
 [data-md-color-scheme="slate"] .hero-button:hover {
-  background: #3b7fc4;
+  background: var(--pd-accent-cool-dark);
   box-shadow: 0 8px 25px rgba(74, 144, 217, 0.4);
 }
 
@@ -317,7 +323,7 @@
   align-items: center;
   gap: 0.35rem;
   padding: 0.6rem 1.1rem;
-  background: #8b6914;
+  background: var(--pd-accent);
   color: #ffffff !important;
   border-radius: 999px;
   font-weight: 700;
@@ -328,13 +334,13 @@
 }
 
 .topic-hero-button::after {
-  content: "→";
+  content: "->";
   font-size: 0.9rem;
 }
 
 .topic-hero-button:hover {
   transform: translateY(-1px);
-  background: #6b5210;
+  background: var(--pd-accent-dark);
   box-shadow: 0 6px 15px rgba(107, 82, 16, 0.35);
 }
 
@@ -358,12 +364,12 @@
 }
 
 [data-md-color-scheme="slate"] .topic-hero-button {
-  background: #4a90d9;
+  background: var(--pd-accent-cool);
   box-shadow: 0 3px 12px rgba(74, 144, 217, 0.35);
 }
 
 [data-md-color-scheme="slate"] .topic-hero-button:hover {
-  background: #3b7fc4;
+  background: var(--pd-accent-cool-dark);
   box-shadow: 0 6px 18px rgba(59, 127, 196, 0.4);
 }
 
@@ -437,6 +443,12 @@
   z-index: 2;
 }
 
+.clickable-cards>ul>li:focus-within {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-color: var(--md-accent-fg-color);
+}
+
 /* Dark mode hover */
 [data-md-color-scheme="slate"] .clickable-cards>ul>li:hover {
   background-color: var(--md-code-bg-color);
@@ -481,6 +493,15 @@
   cursor: pointer;
 }
 
+.hero-button:focus-visible,
+.topic-hero-button:focus-visible,
+.md-tabs__link:focus-visible,
+.md-header__button:focus-visible,
+.clickable-cards>ul>li a:focus-visible {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: 3px;
+}
+
 /* Title hover color */
 .clickable-cards>ul>li:hover a {
   color: var(--md-accent-fg-color);
@@ -508,5 +529,24 @@
   /* Drawer toggle is useless without navigation */
   label.md-header__button[for="__drawer"] {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-button,
+  .hero-image img,
+  .hero-quote,
+  .hero-quote-author,
+  .topic-hero-button,
+  .clickable-cards>ul>li,
+  .clickable-cards>ul>li .lg {
+    transition: none;
+  }
+
+  .hero-button:hover,
+  .topic-hero-button:hover,
+  .clickable-cards>ul>li:hover,
+  .clickable-cards>ul>li:focus-within {
+    transform: none;
   }
 }
