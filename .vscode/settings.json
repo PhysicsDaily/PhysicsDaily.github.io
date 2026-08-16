@@ -1,0 +1,25 @@
+{
+  // Tuck the root config files under a collapsed arrow so the explorer shows
+  // the folders you actually edit. Nothing is moved or deleted -- click the
+  // arrow next to package.json or README.md to reveal them.
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "package.json": "package-lock.json, npm-shrinkwrap.json, pnpm-lock.yaml, yarn.lock, astro.config.mjs, tsconfig.json, .gitignore, .gitattributes",
+    "README.md": "AGENTS.md, CLAUDE.md, LICENSE, LICENSE.md"
+  },
+
+  // Generated output -- rebuilt by `npm run dev` / `npm run build`, never edited
+  // by hand, and already excluded from git. Anchored to the project root so
+  // this cannot affect your `*.astro` component files.
+  "files.exclude": {
+    ".astro": true,
+    "dist": true,
+    "node_modules": true
+  },
+
+  // Keep the lockfile out of search results so Ctrl+Shift+F stays useful.
+  "search.exclude": {
+    "package-lock.json": true
+  }
+}
