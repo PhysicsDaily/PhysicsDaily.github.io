@@ -1,5 +1,6 @@
 ---
-import TrajectoryFigure from '../home/TrajectoryFigure.astro';
+import { Image } from 'astro:assets';
+import { getDailyFeature } from '../../data/quotes';
 import '../../styles/home.css';
 
 // Starlight renders this component in place of its default hero whenever a page
@@ -8,6 +9,10 @@ const { data } = Astro.locals.starlightRoute.entry;
 const { title = data.title, tagline, actions = [] } = data.hero ?? {};
 const eyebrow = 'eyebrow' in data ? (data.eyebrow as string | undefined) : undefined;
 const facts = 'facts' in data ? ((data.facts as string[] | undefined) ?? []) : [];
+
+// Fixed at build time, so the daily rebuild is what advances it. Deliberately
+// not randomised on the client: that would swap the portrait after first paint.
+const { scientist, quote } = getDailyFeature();
 
 // Starlight's page-title anchor target, used by the skip link and search.
 const PAGE_TITLE_ID = '_top';
@@ -58,11 +63,27 @@ const PAGE_TITLE_ID = '_top';
 			}
 		</div>
 
-		<figure class="pd-figure">
-			<TrajectoryFigure />
+		<figure class="pd-figure pd-figure--quote">
+			<Image
+				class="pd-portrait"
+				src={scientist.portrait}
+				alt={`Portrait of ${scientist.name}.`}
+				widths={[440, 660, 880]}
+				sizes="(min-width: 56rem) 30rem, 92vw"
+				style={`object-position: ${scientist.focus}`}
+				loading="eager"
+			/>
 			<figcaption>
-				<b>Fig. 1</b> — Projectile motion at equal time steps. Horizontal spacing stays constant;
-				vertical spacing collapses near the apex. <span class="pd-math">s = ut + ½at²</span>
+				<blockquote class="pd-quote">“{quote.text}”</blockquote>
+				<p class="pd-quote__by">
+					<span class="pd-quote__name">{scientist.name}</span>
+					<span class="pd-quote__lived">{scientist.lived} · {scientist.field}</span>
+					<span class="pd-quote__src">
+						{quote.reported ? 'As ' : ''}{quote.source}, {quote.year}
+						{quote.translated ? ' (translated)' : ''}
+					</span>
+				</p>
+				<p class="pd-quote__credit">{scientist.credit}</p>
 			</figcaption>
 		</figure>
 	</section>

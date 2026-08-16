@@ -4,6 +4,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # The homepage features one scientist per day, chosen at build time because the
+  # site is static. Without a rebuild the feature would freeze on whatever day
+  # the last push happened, so rebuild daily just after midnight UTC.
+  schedule:
+    - cron: '17 0 * * *'
 
 permissions:
   contents: read

@@ -118,6 +118,25 @@
 	height: auto;
 }
 
+/*
+ * Portraits arrive as 3:4-ish paintings and photographs of very different
+ * origins. Framing them all at 4:3 keeps the hero one height whoever is
+ * featured; each portrait supplies its own object-position so the crop holds
+ * the head clear of the top edge.
+ */
+.pd-portrait {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+}
+
+/* Warm plates and oils read as a stain against the dark theme; damp them down. */
+:root[data-theme='dark'] .pd-portrait {
+	filter: saturate(0.8) brightness(0.94);
+}
+
 .pd-figure figcaption {
 	padding: 0.85rem 1rem;
 	font-size: 0.8125rem;
@@ -129,6 +148,58 @@
 .pd-figure figcaption b {
 	font-weight: 600;
 	color: var(--sl-color-gray-2);
+}
+
+/* --- Hero quote ---------------------------------------------------------- */
+
+.pd-figure--quote figcaption {
+	padding: 1.15rem 1.25rem 1.25rem;
+}
+
+.pd-quote {
+	margin: 0;
+	font-family: var(--pd-font-display);
+	font-size: clamp(1.05rem, 1rem + 0.35vw, 1.2rem);
+	font-style: italic;
+	line-height: 1.5;
+	color: var(--sl-color-white);
+	text-wrap: pretty;
+}
+
+.pd-quote__by {
+	display: flex;
+	flex-direction: column;
+	gap: 0.1rem;
+	margin: 0.85rem 0 0;
+	color: var(--sl-color-gray-2);
+}
+
+.pd-quote__name {
+	font-size: 1rem;
+	font-weight: 600;
+	color: var(--sl-color-white);
+}
+
+.pd-quote__lived {
+	font-size: 0.72rem;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--sl-color-accent);
+}
+
+.pd-quote__src {
+	margin-block-start: 0.2rem;
+	font-size: 0.8125rem;
+	line-height: 1.5;
+	color: var(--sl-color-gray-3);
+	text-wrap: pretty;
+}
+
+.pd-quote__credit {
+	margin: 0.3rem 0 0;
+	font-size: 0.75rem;
+	color: var(--sl-color-gray-4);
 }
 
 /* --- Curriculum ---------------------------------------------------------- */
