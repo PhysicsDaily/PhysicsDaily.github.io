@@ -1,0 +1,309 @@
+/* PhysicsDaily theme — ink on paper.
+   Source Serif 4 for display type, Inter for UI and body copy.
+   One accent colour only; separation comes from rules and space, not tint. */
+
+:root {
+	--sl-font: 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	--pd-font-display: 'Source Serif 4 Variable', 'Iowan Old Style', 'Palatino Linotype', Palatino,
+		Georgia, 'Times New Roman', serif;
+
+	/* Dark theme (default) */
+	--sl-color-white: #f4f4f2;
+	--sl-color-gray-1: #e3e4e2;
+	--sl-color-gray-2: #b7bbc1;
+	--sl-color-gray-3: #8a8f98;
+	--sl-color-gray-4: #565b64;
+	--sl-color-gray-5: #2b2f36;
+	--sl-color-gray-6: #191c21;
+	--sl-color-black: #101317;
+
+	--sl-color-accent-low: #172440;
+	--sl-color-accent: #92b4ff;
+	--sl-color-accent-high: #dde7ff;
+
+	--sl-color-bg-nav: var(--pd-surface);
+	--sl-color-hairline-light: var(--pd-rule);
+	--sl-color-hairline: var(--pd-rule);
+
+	--pd-rule: #262a31;
+	--pd-rule-strong: #3c424b;
+	--pd-surface: #171a1f;
+	--pd-surface-hover: #1d2127;
+	--pd-btn-fg: #0e1116;
+	--pd-radius: 0.25rem;
+	--pd-measure: 38rem;
+}
+
+:root[data-theme='light'] {
+	--sl-color-white: #14171b;
+	--sl-color-gray-1: #22262c;
+	--sl-color-gray-2: #454a53;
+	--sl-color-gray-3: #6a7078;
+	--sl-color-gray-4: #b1ada2;
+	--sl-color-gray-5: #ddd8cd;
+	--sl-color-gray-6: #efebe2;
+	--sl-color-gray-7: #f7f4ed;
+	--sl-color-black: #fdfcf9;
+
+	--sl-color-accent-low: #e6ecf9;
+	--sl-color-accent: #1c46b4;
+	--sl-color-accent-high: #10306e;
+
+	--pd-rule: #e4dfd3;
+	--pd-rule-strong: #c9c2b3;
+	--pd-surface: #f7f4ec;
+	--pd-surface-hover: #f2eee4;
+	--pd-btn-fg: #fdfcf9;
+}
+
+/* Comfortable measure for reading; Starlight widens this on splash pages. */
+:root {
+	--sl-text-body: 1.0625rem;
+	--sl-line-height: 1.7;
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+	font-variant-ligatures: no-common-ligatures;
+}
+
+::selection {
+	color: var(--sl-color-black);
+	background: var(--sl-color-accent);
+}
+
+:focus-visible {
+	outline: 2px solid var(--sl-color-accent);
+	outline-offset: 3px;
+}
+
+/* --- Site chrome ---------------------------------------------------------- */
+
+.header {
+	background: color-mix(in srgb, var(--sl-color-bg) 82%, transparent);
+	border-bottom: 1px solid var(--pd-rule);
+	backdrop-filter: blur(10px);
+}
+
+.site-title {
+	font-family: var(--pd-font-display);
+	font-size: 1.3rem;
+	font-weight: 600;
+	letter-spacing: -0.015em;
+	color: var(--sl-color-white);
+}
+
+.site-title img {
+	height: 1.5rem;
+}
+
+.sidebar-content a {
+	font-size: var(--sl-text-sm);
+}
+
+.sidebar-content summary > span,
+.sidebar-content .group-label > span,
+.pd-branch-label {
+	font-size: var(--sl-text-xs);
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--sl-color-gray-3);
+}
+
+/* The branch heading replaces the group `<summary>`, so it carries the padding the
+   summary used to provide, keeps the summary's immunity to text selection, and its
+   chapters keep the nested indent rule. */
+.pd-branch-label {
+	margin: 0 0 0.35rem;
+	padding-inline: var(--sl-sidebar-item-padding-inline, 0.5rem);
+	line-height: 1.4;
+	cursor: default;
+	user-select: none;
+}
+
+.pd-branch-nav > ul {
+	margin-inline-start: 0.5rem;
+	border-inline-start: 1px solid var(--sl-color-hairline-light);
+	padding-inline-start: 0.5rem;
+}
+
+@media (min-width: 50rem) {
+	/* The branch heading shares its row with the collapse button: it is the one row
+	   that never carries an active-page highlight, so nothing collides there. Hence
+	   the button's height as a floor, and its width kept clear at the inline end. */
+	.pd-branch-label {
+		display: flex;
+		align-items: center;
+		min-height: 2.25rem;
+		margin-block-end: 0.25rem;
+		padding-inline-end: 2.9rem;
+	}
+
+	/* A standalone page has no branch heading to lend the button a row, so reserve
+	   one above its links instead. */
+	.sidebar-content:not(:has(.pd-branch-label)) {
+		padding-top: 3.5rem;
+	}
+}
+
+/* --- Editorial typography for prose pages -------------------------------- */
+
+.sl-markdown-content,
+.sl-markdown-content p,
+.sl-markdown-content li {
+	text-wrap: pretty;
+}
+
+h1[data-page-title],
+.sl-markdown-content :is(h1, h2):not(:where(.not-content *)) {
+	font-family: var(--pd-font-display);
+	font-weight: 600;
+	letter-spacing: -0.02em;
+	line-height: 1.15;
+	text-wrap: balance;
+}
+
+.sl-markdown-content h2:not(:where(.not-content *)) {
+	padding-block-end: 0.35rem;
+	border-bottom: 1px solid var(--pd-rule);
+}
+
+.sl-markdown-content :is(h3, h4):not(:where(.not-content *)) {
+	font-weight: 600;
+	letter-spacing: -0.01em;
+}
+
+.sl-markdown-content a:not(:where(.not-content *)) {
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.2em;
+	text-decoration-color: color-mix(in srgb, var(--sl-color-accent) 45%, transparent);
+}
+
+.sl-markdown-content blockquote:not(:where(.not-content *)) {
+	padding-inline-start: 1.25rem;
+	font-family: var(--pd-font-display);
+	font-size: 1.125rem;
+	font-style: italic;
+	color: var(--sl-color-gray-2);
+	border-inline-start: 2px solid var(--sl-color-accent);
+}
+
+/* --- Equations ------------------------------------------------------------ */
+
+.katex-display {
+	overflow-x: auto;
+	overflow-y: hidden;
+	padding-block: 0.75rem;
+}
+
+.katex {
+	font-size: 1.05em;
+}
+
+/* --- Shared homepage primitives ------------------------------------------ */
+
+.pd-eyebrow {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin: 0;
+	font-size: 0.72rem;
+	font-weight: 600;
+	line-height: 1;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--sl-color-gray-3);
+}
+
+.pd-eyebrow::after {
+	flex: 1;
+	height: 1px;
+	background: var(--pd-rule);
+	content: '';
+}
+
+.pd-title {
+	margin: 0;
+	font-family: var(--pd-font-display);
+	font-size: clamp(1.75rem, 1.2rem + 1.9vw, 2.4rem);
+	font-weight: 600;
+	line-height: 1.15;
+	letter-spacing: -0.022em;
+	color: var(--sl-color-white);
+	text-wrap: balance;
+}
+
+.pd-lede {
+	max-width: var(--pd-measure);
+	margin: 0;
+	font-size: 1.0625rem;
+	line-height: 1.65;
+	color: var(--sl-color-gray-2);
+	text-wrap: pretty;
+}
+
+.pd-math {
+	font-family: var(--pd-font-display);
+	font-style: italic;
+	white-space: nowrap;
+}
+
+.pd-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.7rem 1.15rem;
+	font-size: 0.95rem;
+	font-weight: 600;
+	line-height: 1;
+	text-decoration: none;
+	border: 1px solid transparent;
+	border-radius: var(--pd-radius);
+	transition:
+		background-color 150ms ease,
+		border-color 150ms ease,
+		color 150ms ease;
+}
+
+.pd-btn svg {
+	flex: none;
+	transition: transform 150ms ease;
+}
+
+.pd-btn:hover svg {
+	transform: translateX(0.15rem);
+}
+
+.pd-btn--primary {
+	color: var(--pd-btn-fg);
+	background: var(--sl-color-accent);
+}
+
+.pd-btn--primary:hover {
+	color: var(--pd-btn-fg);
+	background: color-mix(in srgb, var(--sl-color-accent) 85%, var(--sl-color-white));
+}
+
+.pd-btn--ghost {
+	color: var(--sl-color-white);
+	border-color: var(--pd-rule-strong);
+}
+
+.pd-btn--ghost:hover {
+	color: var(--sl-color-white);
+	background: var(--pd-surface-hover);
+	border-color: var(--sl-color-gray-4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		scroll-behavior: auto !important;
+		transition-duration: 0.01ms !important;
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+	}
+}

@@ -1,0 +1,69 @@
+---
+import TrajectoryFigure from '../home/TrajectoryFigure.astro';
+import '../../styles/home.css';
+
+// Starlight renders this component in place of its default hero whenever a page
+// sets `hero` in its frontmatter. Only the homepage does.
+const { data } = Astro.locals.starlightRoute.entry;
+const { title = data.title, tagline, actions = [] } = data.hero ?? {};
+const eyebrow = 'eyebrow' in data ? (data.eyebrow as string | undefined) : undefined;
+const facts = 'facts' in data ? ((data.facts as string[] | undefined) ?? []) : [];
+
+// Starlight's page-title anchor target, used by the skip link and search.
+const PAGE_TITLE_ID = '_top';
+---
+
+<div class="pd-home">
+	<section class="pd-hero">
+		<div class="pd-hero__copy">
+			{eyebrow && <p class="pd-eyebrow">{eyebrow}</p>}
+			<h1 id={PAGE_TITLE_ID} data-page-title class="pd-hero__title" set:html={title} />
+			{tagline && <p class="pd-hero__tagline" set:html={tagline} />}
+			{
+				actions.length > 0 && (
+					<div class="pd-hero__actions">
+						{actions.map(({ link, text, variant }) => (
+							<a
+								href={link}
+								class:list={[
+									'pd-btn',
+									variant === 'primary' ? 'pd-btn--primary' : 'pd-btn--ghost',
+								]}
+							>
+								{text}
+								{variant === 'primary' && (
+									<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" fill="none">
+										<path
+											d="M2.5 8h11m-4-4 4 4-4 4"
+											stroke="currentColor"
+											stroke-width="1.6"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										/>
+									</svg>
+								)}
+							</a>
+						))}
+					</div>
+				)
+			}
+			{
+				facts.length > 0 && (
+					<ul class="pd-hero__facts">
+						{facts.map((fact) => (
+							<li>{fact}</li>
+						))}
+					</ul>
+				)
+			}
+		</div>
+
+		<figure class="pd-figure">
+			<TrajectoryFigure />
+			<figcaption>
+				<b>Fig. 1</b> — Projectile motion at equal time steps. Horizontal spacing stays constant;
+				vertical spacing collapses near the apex. <span class="pd-math">s = ut + ½at²</span>
+			</figcaption>
+		</figure>
+	</section>
+</div>

@@ -1,0 +1,152 @@
+---
+/**
+ * Textbook-style figure: projectile motion sampled at equal time intervals.
+ * The dots are the exact positions of a quadratic path at t = 0, 1/8 … 1, so they
+ * bunch near the apex the way a real stroboscopic photograph does.
+ */
+const dots = [
+	[60, 248],
+	[99, 190.25],
+	[138, 149],
+	[177, 124.25],
+	[216, 116],
+	[255, 124.25],
+	[294, 149],
+	[333, 190.25],
+	[372, 248],
+];
+---
+
+<svg viewBox="0 0 420 300" role="img" aria-labelledby="fig-title fig-desc">
+	<title id="fig-title">Projectile motion</title>
+	<desc id="fig-desc">
+		A parabolic trajectory rising from the origin to an apex and falling back to the ground line.
+		Dots mark the projectile's position at equal time intervals, an initial velocity arrow leaves
+		the origin at an angle theta, the apex height is labelled h, and the horizontal range is
+		labelled R.
+	</desc>
+
+	<!-- Axes -->
+	<g class="axis" stroke-width="1.25" stroke-linecap="square">
+		<line x1="52" y1="248" x2="398" y2="248"></line>
+		<line x1="52" y1="248" x2="52" y2="34"></line>
+	</g>
+	<g class="axis-head">
+		<polygon points="52,26 47.5,37 56.5,37"></polygon>
+		<polygon points="406,248 395,243.5 395,252.5"></polygon>
+	</g>
+
+	<!-- Apex height and range guides -->
+	<g class="guide" stroke-width="1" stroke-dasharray="3 4">
+		<line x1="216" y1="116" x2="216" y2="248"></line>
+		<line x1="60" y1="252" x2="60" y2="278"></line>
+		<line x1="372" y1="252" x2="372" y2="278"></line>
+	</g>
+	<g class="guide" stroke-width="1.25">
+		<line x1="60" y1="272" x2="372" y2="272"></line>
+	</g>
+	<g class="guide-head">
+		<polygon points="54,272 64,268.5 64,275.5"></polygon>
+		<polygon points="378,272 368,268.5 368,275.5"></polygon>
+	</g>
+
+	<!-- Trajectory -->
+	<path class="path" d="M60,248 Q216,-16 372,248" pathLength="1" fill="none" stroke-width="1.75"
+	></path>
+
+	<!-- Equal-time positions -->
+	<g class="dots">
+		{
+			dots.map(([x, y], index) => (
+				<circle class="dot" cx={x} cy={y} r="4" style={`--i:${index}`} />
+			))
+		}
+	</g>
+
+	<!-- Launch velocity and angle -->
+	<line class="vector" x1="60" y1="248" x2="104" y2="175" stroke-width="1.75"></line>
+	<polygon class="vector-head" points="108.3,166.2 106.8,177 99.6,172.8"></polygon>
+	<path class="guide" d="M90,248 A30,30 0 0 0 75.3,222.2" fill="none" stroke-width="1"></path>
+
+	<!-- Labels -->
+	<g class="label">
+		<text x="103" y="156" text-anchor="end">v<tspan class="sub" dy="4">0</tspan></text>
+		<text x="78" y="241" class="sm">θ</text>
+		<text x="224" y="188">h</text>
+		<text x="216" y="292" text-anchor="middle">R</text>
+		<text x="36" y="42">y</text>
+		<text x="396" y="268">x</text>
+	</g>
+</svg>
+
+<style>
+	svg {
+		font-family: var(--pd-font-display);
+		font-size: 16px;
+		font-style: italic;
+	}
+
+	.axis,
+	.guide {
+		stroke: var(--pd-rule-strong);
+	}
+
+	.axis-head,
+	.guide-head {
+		fill: var(--pd-rule-strong);
+	}
+
+	.path {
+		stroke: var(--sl-color-accent);
+		stroke-dasharray: 1;
+		animation: draw 1100ms ease-out both;
+	}
+
+	.dot {
+		fill: var(--sl-color-accent);
+		animation: pop 320ms ease-out both;
+		animation-delay: calc(420ms + var(--i) * 70ms);
+		transform-box: fill-box;
+		transform-origin: center;
+	}
+
+	.vector {
+		stroke: var(--sl-color-white);
+	}
+
+	.vector-head {
+		fill: var(--sl-color-white);
+	}
+
+	.label {
+		fill: var(--sl-color-gray-3);
+	}
+
+	.label .sm {
+		font-size: 14px;
+	}
+
+	.label .sub {
+		font-size: 11px;
+	}
+
+	@keyframes draw {
+		from {
+			stroke-dashoffset: 1;
+		}
+		to {
+			stroke-dashoffset: 0;
+		}
+	}
+
+	@keyframes pop {
+		from {
+			opacity: 0;
+			transform: scale(0.4);
+		}
+		to {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+</style>

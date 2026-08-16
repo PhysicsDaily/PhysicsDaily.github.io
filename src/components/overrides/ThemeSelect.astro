@@ -1,0 +1,87 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+
+const lightLabel = Astro.locals.t('themeSelect.light');
+const darkLabel = Astro.locals.t('themeSelect.dark');
+const accessibleLabel = Astro.locals.t('themeSelect.accessibleLabel');
+---
+
+<starlight-theme-select data-light-label={lightLabel} data-dark-label={darkLabel}>
+	<button type="button" class="pd-theme-toggle" aria-label={accessibleLabel}>
+		<Icon name="sun" class="label-icon" />
+		<span data-theme-label>{lightLabel}</span>
+	</button>
+</starlight-theme-select>
+
+{/* Inlined to avoid FOUC. Uses global scope from `ThemeProvider.astro` */}
+<script is:inline>
+	StarlightThemeProvider.updatePickers();
+</script>
+
+<script>
+	type Theme = 'dark' | 'light';
+
+	declare const StarlightThemeProvider: {
+		updatePickers(theme?: string): void;
+	};
+
+	const storageKey = 'starlight-theme';
+
+	const getPreferredColorScheme = (): Theme =>
+		matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+
+	const parseTheme = (theme: unknown): Theme =>
+		theme === 'dark' || theme === 'light' ? theme : getPreferredColorScheme();
+
+	const loadTheme = (): Theme =>
+		parseTheme(typeof localStorage !== 'undefined' && localStorage.getItem(storageKey));
+
+	function storeTheme(theme: Theme): void {
+		if (typeof localStorage !== 'undefined') {
+			localStorage.setItem(storageKey, theme);
+		}
+	}
+
+	function onThemeChange(theme: Theme): void {
+		StarlightThemeProvider.updatePickers(theme);
+		document.documentElement.dataset.theme = theme;
+		storeTheme(theme);
+	}
+
+	class StarlightThemeSelect extends HTMLElement {
+		constructor() {
+			super();
+			onThemeChange(loadTheme());
+			this.querySelector('button')?.addEventListener('click', () => {
+				onThemeChange(loadTheme() === 'light' ? 'dark' : 'light');
+			});
+		}
+	}
+
+	customElements.define('starlight-theme-select', StarlightThemeSelect);
+</script>
+
+<style>
+	.pd-theme-toggle {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		margin: 0;
+		padding: 0.4rem 0.15rem;
+		border: 0;
+		background: transparent;
+		color: var(--sl-color-gray-2);
+		font: inherit;
+		font-size: var(--sl-text-sm);
+		line-height: 1;
+		cursor: pointer;
+	}
+
+	.pd-theme-toggle:hover {
+		color: var(--sl-color-white);
+	}
+
+	.pd-theme-toggle :global(svg) {
+		font-size: 0.875rem;
+	}
+</style>

@@ -1,0 +1,45 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+---
+
+{/* This is intentionally inlined to avoid FOUC. */}
+<script is:inline>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const preferred = window.matchMedia('(prefers-color-scheme: light)').matches
+			? 'light'
+			: 'dark';
+		const theme = storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : preferred;
+		document.documentElement.dataset.theme = theme;
+		return {
+			updatePickers(next = theme) {
+				const resolved = next === 'light' || next === 'dark' ? next : theme;
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector('#theme-icons');
+					const newIcon = tmpl && tmpl.content.querySelector('.' + resolved);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+					const label = picker.querySelector('[data-theme-label]');
+					if (label) {
+						label.textContent = picker.getAttribute('data-' + resolved + '-label') || resolved;
+					}
+					const button = picker.querySelector('button');
+					if (button) {
+						button.setAttribute('aria-pressed', resolved === 'dark' ? 'true' : 'false');
+					}
+				});
+			},
+		};
+	})();
+</script>
+
+<template id="theme-icons">
+	<Icon name="sun" class="light" />
+	<Icon name="moon" class="dark" />
+</template>

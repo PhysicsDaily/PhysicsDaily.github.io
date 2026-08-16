@@ -1,0 +1,108 @@
+---
+import { base, getChapters } from '../../data/chapters';
+import '../../styles/home.css';
+
+const mechanicsChapters = await getChapters('mechanics');
+
+const branches = [
+	{
+		name: 'Mechanics',
+		description:
+			'Kinematics, Newton’s laws, work and energy, momentum, rotation, and gravitation.',
+		slug: 'mechanics/',
+		count: mechanicsChapters.length,
+	},
+	{
+		name: 'Waves & Oscillations',
+		description:
+			'Simple harmonic motion, damping and resonance, sound, standing waves, and interference.',
+		slug: null,
+		count: 0,
+	},
+	{
+		name: 'Thermodynamics',
+		description:
+			'Temperature, heat transfer, kinetic theory, the laws of thermodynamics, and entropy.',
+		slug: null,
+		count: 0,
+	},
+	{
+		name: 'Optics',
+		description: 'Reflection and refraction, mirrors and lenses, diffraction, and polarization.',
+		slug: null,
+		count: 0,
+	},
+	{
+		name: 'Electrodynamics',
+		description:
+			'Electric and magnetic fields, circuits, induction, and Maxwell’s equations.',
+		slug: null,
+		count: 0,
+	},
+	{
+		name: 'Modern Physics',
+		description: 'Special relativity, quanta, atomic structure, nuclei, and particles.',
+		slug: null,
+		count: 0,
+	},
+];
+---
+
+<section class="pd-section not-content" id="curriculum">
+	<header class="pd-section__head">
+		<p class="pd-eyebrow">Curriculum</p>
+		<h2 class="pd-title">Six branches, in the order they build on each other</h2>
+		<p class="pd-lede">
+			Mechanics is being written first — everything after it assumes you have read it. Chapters
+			within a branch are meant to be read in sequence.
+		</p>
+	</header>
+
+	<ol class="pd-track">
+		{
+			branches.map((branch, index) => {
+				const number = String(index + 1).padStart(2, '0');
+				const body = (
+					<>
+						<span class="pd-branch__num">{number}</span>
+						<div class="pd-branch__body">
+							<h3 class="pd-branch__name">{branch.name}</h3>
+							<p class="pd-branch__desc">{branch.description}</p>
+						</div>
+						<span class="pd-branch__meta">
+							{branch.slug ? (
+								<>
+									<span class="pd-branch__dot" />
+									{branch.count} {branch.count === 1 ? 'chapter' : 'chapters'}
+									<svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+										<path
+											d="M2.5 8h11m-4-4 4 4-4 4"
+											stroke="currentColor"
+											stroke-width="1.6"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										/>
+									</svg>
+								</>
+							) : (
+								'Planned'
+							)}
+						</span>
+					</>
+				);
+
+				return (
+					<li>
+						{branch.slug ? (
+							<a class="pd-branch" href={`${base}${branch.slug}`}>
+								{body}
+							</a>
+						) : (
+							<div class="pd-branch pd-branch--planned">{body}</div>
+						)}
+					</li>
+				);
+			})
+		}
+	</ol>
+</section>

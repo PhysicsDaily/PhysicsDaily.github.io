@@ -1,0 +1,44 @@
+---
+interface Props {
+	id: string;
+	title: string;
+	start?: number;
+}
+
+const { id, title, start } = Astro.props;
+const startTime = start && start > 0 ? Math.floor(start) : undefined;
+const source = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}${
+	startTime ? `?start=${startTime}` : ''
+}`;
+---
+
+<div class="video-frame not-content">
+	<iframe
+		src={source}
+		title={title}
+		loading="lazy"
+		referrerpolicy="strict-origin-when-cross-origin"
+		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+		allowfullscreen
+	></iframe>
+</div>
+
+<style>
+	.video-frame {
+		overflow: hidden;
+		width: 100%;
+		margin-block: 1.5rem;
+		background: #000;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.85rem;
+		box-shadow: 0 14px 35px rgb(0 0 0 / 12%);
+		aspect-ratio: 16 / 9;
+	}
+
+	iframe {
+		display: block;
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}
+</style>

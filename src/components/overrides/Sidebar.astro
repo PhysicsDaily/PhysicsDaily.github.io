@@ -1,0 +1,42 @@
+---
+import MobileMenuFooter from '@astrojs/starlight/components/MobileMenuFooter.astro';
+import SidebarPersister from '@astrojs/starlight/components/SidebarPersister.astro';
+import SidebarSublist from '@astrojs/starlight/components/SidebarSublist.astro';
+
+const { sidebar } = Astro.locals.starlightRoute;
+
+/**
+ * The route middleware narrows the sidebar to the branch being read, so a single
+ * top-level entry is the whole of what the reader can navigate here:
+ *
+ * - A lone group is that branch. Its label becomes a heading and its chapters a
+ *   plain list — with nothing else in the sidebar there is nothing to collapse it
+ *   away for, and a `<summary>` that only ever hides the current branch is a
+ *   control worth removing rather than styling. Nested sub-groups keep their own.
+ * - A lone link is a standalone page, and it points at the page already open, so
+ *   it is rendered as the same heading. As a link it would only ever be the
+ *   current page, drawing an active-page highlight across an entire sidebar for
+ *   the privilege of reloading the page.
+ */
+const [only] = sidebar;
+const lone = sidebar.length === 1 ? only : undefined;
+const heading = lone?.type === 'group' || lone?.isCurrent ? lone.label : undefined;
+const chapters = lone?.type === 'group' ? lone.entries : [];
+---
+
+<SidebarPersister>
+	{
+		heading ? (
+			<div class="pd-branch-nav">
+				<h2 class="pd-branch-label">{heading}</h2>
+				{chapters.length > 0 && <SidebarSublist sublist={chapters} nested />}
+			</div>
+		) : (
+			<SidebarSublist sublist={sidebar} />
+		)
+	}
+</SidebarPersister>
+
+<div class="md:sl-hidden">
+	<MobileMenuFooter />
+</div>
