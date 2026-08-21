@@ -1,5 +1,6 @@
 ---
 title: 'Chapter 1: Vectors'
+order: 1
 ---
 
 Many physical quantities need more than a number. To describe a displacement, velocity, force,
@@ -30,5 +31,3 @@ $$
 
 Components let us analyze each direction independently, which is essential for kinematics and
 Newton's laws.
-
-Next, study [Chapter 2: Kinematics](../chapter-2-kinematics/).

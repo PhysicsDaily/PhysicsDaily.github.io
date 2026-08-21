@@ -16,6 +16,11 @@ export const onRequest = defineRouteMiddleware(async (context, next) => {
 	await next();
 
 	const route = context.locals.starlightRoute;
+	// Splash pages stand outside the reading flow; the homepage also reads the full
+	// sidebar to count its curriculum's chapters, so it must not be narrowed even if
+	// a Home link is ever added to it.
+	if (route.entry.data.template === 'splash') return;
+
 	const branch = route.sidebar.find(holdsCurrentPage);
 	if (!branch) return;
 

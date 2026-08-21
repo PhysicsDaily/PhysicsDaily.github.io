@@ -245,14 +245,6 @@
 	color: var(--sl-color-white);
 }
 
-.pd-branch__desc {
-	max-width: 44rem;
-	margin: 0.3rem 0 0;
-	font-size: 0.9375rem;
-	line-height: 1.6;
-	color: var(--sl-color-gray-3);
-}
-
 .pd-branch__meta {
 	display: flex;
 	grid-column: 2;

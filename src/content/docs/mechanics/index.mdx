@@ -5,11 +5,8 @@ prev: false
 next: false
 ---
 
-import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+import ChapterCards from '../../../components/ChapterCards.astro';
 
 ## Chapters
 
-<CardGrid>
-	<LinkCard title="Chapter 1: Vectors" href="./chapter-1-vectors/" />
-	<LinkCard title="Chapter 2: Kinematics" href="./chapter-2-kinematics/" />
-</CardGrid>
+<ChapterCards branch="mechanics" />

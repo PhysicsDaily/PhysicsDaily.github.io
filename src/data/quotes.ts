@@ -52,7 +52,8 @@ export interface Scientist {
 	focus: string;
 	/** Attribution for the portrait, shown in small print. */
 	credit: string;
-	quotes: Quote[];
+	/** A scientist with nothing to quote cannot be featured, so at least one. */
+	quotes: readonly [Quote, ...Quote[]];
 }
 
 export const scientists: Scientist[] = [
@@ -144,6 +145,7 @@ export const scientists: Scientist[] = [
 				text: 'I am among those who think that science has great beauty.',
 				source: 'quoted in Ève Curie, Madame Curie',
 				year: '1937',
+				reported: true,
 			},
 			{
 				text: 'All my life through, the new sights of Nature made me rejoice like a child.',
@@ -220,8 +222,18 @@ export const features: Feature[] = Array.from(
  * rebuild in .github/workflows/deploy.yml is what actually advances it.
  */
 export function getDailyFeature(now: Date = new Date()): Feature {
+	if (!Number.isFinite(now.getTime())) {
+		throw new TypeError('Expected a valid date.');
+	}
+	if (features.length === 0) {
+		throw new Error('No scientist quotes are configured, so there is nothing to feature.');
+	}
+
 	const utcDay = Math.floor(
 		Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) / 86_400_000,
 	);
-	return features[utcDay % features.length]!;
+	// JavaScript's remainder keeps the dividend's sign, so dates before the Unix
+	// epoch would index the array negatively and silently return undefined.
+	const index = ((utcDay % features.length) + features.length) % features.length;
+	return features[index]!;
 }

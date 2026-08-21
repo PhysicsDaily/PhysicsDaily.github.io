@@ -25,35 +25,52 @@ npm run build
 
 ## Content structure
 
-Chapter pages live in `src/content/docs/`. The current Mechanics content is organized as:
+Chapter pages live in `src/content/docs/`. A short chapter is a single file; a chapter long enough to be read in sittings becomes a directory whose files are its sections. Such a chapter has no page of its own — it begins at its first section, and its own URL redirects there through the `redirects` map in `astro.config.mjs`.
 
-```text
-src/content/docs/
-├── index.mdx
-├── introduction-to-physics.md
-└── mechanics/
-    ├── index.mdx
-    ├── chapter-1-vectors.md
-    └── chapter-2-kinematics.md
-```
+Name a chapter's file or directory `chapter-<number>-<slug>`, directly inside its branch. The homepage chapter counts and the overview cards find chapters by that name, so a page inside a branch that is named otherwise is listed in the sidebar but counted as a chapter nowhere; the build prints a warning naming the page when that happens.
 
-Add sections to a chapter with Markdown headings:
+So content divides at two levels: files divide a chapter into sections, and Markdown headings divide a section.
 
 ```md
 ---
-title: 'Chapter 2: Kinematics'
+title: Position and displacement
 ---
 
-## Position and displacement
+## Position
 
 Write your notes here.
 
-## Velocity
+## Displacement
 
-Continue the chapter here.
+Continue the section here.
 ```
 
 Starlight automatically adds level-two and level-three headings to the page table of contents.
+
+### Reading order and the Next link
+
+The sidebar is generated from the files in `src/content/docs/` by `src/data/generateSidebar.mjs` — adding a page means creating the file, and the sidebar picks it up on the next build. Reading order comes from an `order` field in each page's frontmatter (pages without one sort alphabetically after ordered ones; a directory's index page always comes first):
+
+```md
+---
+title: Position and displacement
+order: 1
+---
+```
+
+A subdirectory becomes a collapsible group. Its label, collapse state, and position among its siblings are declared in an optional `_meta.json` beside its pages:
+
+```json
+{ "title": "Chapter 2: Kinematics", "collapsed": true, "order": 2 }
+```
+
+Those three fields are the only ones `_meta.json` may set, and the build fails with the file's path if one is missing a value of the right type — a mistyped field would otherwise look exactly like having written no `_meta.json` at all.
+
+Starlight builds each page's Previous/Next footer links from that order, so giving a new section an `order` places it in the chain readers click through. A page opts out of the footer with `prev: false` and `next: false` in its frontmatter, as `mechanics/index.mdx` does. The homepage chapter counts and the chapter cards on each branch's overview page read the same generated sidebar, so a chapter listed there is a chapter everywhere.
+
+The sidebar is built when the Astro config is evaluated — once at dev server startup, and on each build — so creating a page while a dev server is running requires restarting it to appear.
+
+The relative paths in the examples below (`../../../`) are written from a chapter file such as `mechanics/chapter-1-vectors.md`. A section file sits one directory deeper, so it needs one more `../`.
 
 ## Equations
 

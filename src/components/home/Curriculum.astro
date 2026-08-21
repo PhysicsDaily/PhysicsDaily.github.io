@@ -2,46 +2,38 @@
 import { base, getChapters } from '../../data/chapters';
 import '../../styles/home.css';
 
-const mechanicsChapters = await getChapters('mechanics');
+const mechanicsChapters = getChapters(Astro.locals.starlightRoute.sidebar, 'mechanics');
 
+// Branch order follows Halliday, Resnick & Krane: mechanics, oscillations
+// and waves, thermodynamics, electrodynamics, optics, then modern physics.
 const branches = [
 	{
 		name: 'Mechanics',
-		description:
-			'Kinematics, Newton’s laws, work and energy, momentum, rotation, and gravitation.',
 		slug: 'mechanics/',
 		count: mechanicsChapters.length,
 	},
 	{
-		name: 'Waves & Oscillations',
-		description:
-			'Simple harmonic motion, damping and resonance, sound, standing waves, and interference.',
+		name: 'Oscillations & Waves',
 		slug: null,
 		count: 0,
 	},
 	{
 		name: 'Thermodynamics',
-		description:
-			'Temperature, heat transfer, kinetic theory, the laws of thermodynamics, and entropy.',
-		slug: null,
-		count: 0,
-	},
-	{
-		name: 'Optics',
-		description: 'Reflection and refraction, mirrors and lenses, diffraction, and polarization.',
 		slug: null,
 		count: 0,
 	},
 	{
 		name: 'Electrodynamics',
-		description:
-			'Electric and magnetic fields, circuits, induction, and Maxwell’s equations.',
+		slug: null,
+		count: 0,
+	},
+	{
+		name: 'Optics',
 		slug: null,
 		count: 0,
 	},
 	{
 		name: 'Modern Physics',
-		description: 'Special relativity, quanta, atomic structure, nuclei, and particles.',
 		slug: null,
 		count: 0,
 	},
@@ -67,7 +59,6 @@ const branches = [
 						<span class="pd-branch__num">{number}</span>
 						<div class="pd-branch__body">
 							<h3 class="pd-branch__name">{branch.name}</h3>
-							<p class="pd-branch__desc">{branch.description}</p>
 						</div>
 						<span class="pd-branch__meta">
 							{branch.slug ? (

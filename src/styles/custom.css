@@ -129,6 +129,25 @@ body {
 	padding-inline-start: 0.5rem;
 }
 
+/* A chapter divided into sections is a nested group, sitting in the list among the
+   chapters that are single pages. Its summary reads as one of them — sentence case
+   at link size and colour, on the same vertical rhythm — rather than borrowing the
+   uppercase tracking that marks the branch heading above it. Two selectors because
+   Starlight wraps the label twice: `.group-label` inside the summary, `.large`
+   inside that. */
+.pd-branch-nav ul summary {
+	padding-block: 0.3em;
+}
+
+.pd-branch-nav ul summary > span,
+.pd-branch-nav ul .group-label > span {
+	font-size: var(--sl-text-sm);
+	font-weight: 400;
+	letter-spacing: normal;
+	text-transform: none;
+	color: var(--sl-color-gray-2);
+}
+
 @media (min-width: 50rem) {
 	/* The branch heading shares its row with the collapse button: it is the one row
 	   that never carries an active-page highlight, so nothing collides there. Hence
@@ -145,6 +164,24 @@ body {
 	   one above its links instead. */
 	.sidebar-content:not(:has(.pd-branch-label)) {
 		padding-top: 3.5rem;
+	}
+}
+
+/* --- Compact "On this page" rail ------------------------------------------ */
+
+/* Starlight sizes the TOC column as the sidebar width plus half the space left
+   over around the centred content column — far more than a heading list needs.
+   Pin it to the sidebar width, hand the reclaimed space to the main pane, and
+   keep the prose centred in the widened pane. */
+@media (min-width: 72rem) {
+	.right-sidebar-container {
+		width: var(--sl-sidebar-width);
+	}
+
+	[data-has-sidebar][data-has-toc] .main-pane {
+		--sl-content-margin-inline: auto;
+
+		width: calc(100% - var(--sl-sidebar-width));
 	}
 }
 
@@ -200,6 +237,47 @@ h1[data-page-title],
 
 .katex {
 	font-size: 1.05em;
+}
+
+/* --- Previous / next links ------------------------------------------------ */
+
+/* Starlight sizes these as cards with 2xl titles. At the foot of a section they
+   are a footnote to the reading rather than a feature of it, so they are set at
+   the size of the small print they are. */
+.pagination-links {
+	gap: 0.5rem;
+	grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+}
+
+.pagination-links a {
+	gap: 0.45rem;
+	padding: 0.5rem 0.7rem;
+	font-size: 0.68rem;
+	font-weight: 600;
+	line-height: 1.4;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--sl-color-gray-3);
+	border-color: var(--pd-rule);
+	border-radius: var(--pd-radius);
+	box-shadow: none;
+}
+
+.pagination-links a:hover {
+	background: var(--pd-surface-hover);
+	border-color: var(--pd-rule-strong);
+}
+
+.pagination-links .link-title {
+	font-size: 0.9rem;
+	font-weight: 500;
+	line-height: 1.35;
+	letter-spacing: normal;
+	text-transform: none;
+}
+
+.pagination-links svg {
+	font-size: 1rem;
 }
 
 /* --- Shared homepage primitives ------------------------------------------ */

@@ -1,0 +1,25 @@
+---
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { type Chapter, getChapters } from '../data/chapters';
+
+interface Props {
+	/** Branch whose chapters to list, such as `mechanics`. */
+	branch: string;
+}
+
+/**
+ * One card per chapter of a branch, in reading order, derived from the sidebar
+ * — the same source the homepage curriculum and Prev/Next links use. A chapter
+ * split into sections links to its first section, exactly as the sidebar does.
+ */
+const { branch } = Astro.props;
+const chapters: Chapter[] = getChapters(Astro.locals.starlightRoute.sidebar, branch);
+
+/** Cards name a chapter as its sidebar entry and page heading do, numbering included. */
+const cardTitle = (chapter: Chapter) =>
+	chapter.label ? `${chapter.label}: ${chapter.title}` : chapter.title;
+---
+
+<CardGrid>
+	{chapters.map((chapter) => <LinkCard title={cardTitle(chapter)} href={chapter.href} />)}
+</CardGrid>

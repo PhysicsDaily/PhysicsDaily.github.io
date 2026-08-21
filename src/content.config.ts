@@ -11,6 +11,10 @@ export const collections = {
 				eyebrow: z.string().optional(),
 				/** Short honest claims listed under the hero call to action. */
 				facts: z.array(z.string()).default([]),
+				/** Position in the sidebar reading order; unordered pages sort last. */
+				order: z.number().int().optional(),
+				/** Sidebar label when it should differ from the page title. */
+				label: z.string().optional(),
 			}),
 		}),
 	}),

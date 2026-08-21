@@ -4,6 +4,7 @@ import { unified } from '@astrojs/markdown-remark';
 import starlight from '@astrojs/starlight';
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
+import { generateSidebar } from './src/data/generateSidebar.mjs';
 
 const [repositoryOwner = '', repositoryName = ''] = (process.env.GITHUB_REPOSITORY ?? '').split('/');
 const isGitHubPagesBuild = Boolean(repositoryOwner && repositoryName);
@@ -12,11 +13,22 @@ const isGitHubPagesBuild = Boolean(repositoryOwner && repositoryName);
 const host = `${repositoryOwner.toLowerCase()}.github.io`;
 const isUserOrOrganizationSite = repositoryName.toLowerCase() === host;
 
+const base =
+	process.env.BASE_PATH ??
+	(isGitHubPagesBuild && !isUserOrOrganizationSite ? `/${repositoryName}` : '/');
+// Astro prefixes a redirect's own route with the base but writes its destination out
+// as given, so the destination has to carry the base itself. `/` leaves no prefix.
+const basePrefix = base.replace(/\/$/, '');
+
 export default defineConfig({
 	site: process.env.SITE_URL ?? (isGitHubPagesBuild ? `https://${host}` : undefined),
-	base:
-		process.env.BASE_PATH ??
-		(isGitHubPagesBuild && !isUserOrOrganizationSite ? `/${repositoryName}` : '/'),
+	base,
+	// A chapter split into sections has no page of its own, so the chapter's own URL
+	// — published while the chapter was still a single page, and the natural thing to
+	// link or type — sends the reader to the section the chapter begins at.
+	redirects: {
+		'/mechanics/chapter-2-kinematics': `${basePrefix}/mechanics/chapter-2-kinematics/position-and-displacement/`,
+	},
 	integrations: [
 		starlight({
 			title: 'PhysicsDaily',
@@ -42,22 +54,15 @@ export default defineConfig({
 				'katex/dist/katex.min.css',
 				'./src/styles/custom.css',
 			],
+			// The sidebar is generated from the files in src/content/docs/ — see
+			// generateSidebar.mjs. Adding a page means creating the file; its `order`
+			// frontmatter places it in the reading order.
 			sidebar: [
 				{ label: 'Introduction to Physics', slug: 'introduction-to-physics' },
 				{
 					label: 'Mechanics',
 					collapsed: true,
-					items: [
-						{ label: 'Overview', slug: 'mechanics' },
-						{
-							label: 'Chapter 1: Vectors',
-							slug: 'mechanics/chapter-1-vectors',
-						},
-						{
-							label: 'Chapter 2: Kinematics',
-							slug: 'mechanics/chapter-2-kinematics',
-						},
-					],
+					items: generateSidebar('mechanics'),
 				},
 			],
 		}),
