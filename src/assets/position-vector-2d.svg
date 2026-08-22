@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="100%" height="100%" role="img" aria-labelledby="pos-vec-title pos-vec-desc">
+	<title id="pos-vec-title">2D Position Vector</title>
+	<desc id="pos-vec-desc">A two-dimensional Cartesian coordinate system showing origin O, x and y axes, point P at coordinates (x, y), and the position vector r directed from the origin to point P with angle theta.</desc>
+
+	<style>
+		:root {
+			--axis-color: #3c424b;
+			--guide-color: #565b64;
+			--label-primary: #f4f4f2;
+			--label-secondary: #b7bbc1;
+			--label-muted: #8a8f98;
+			--accent: #92b4ff;
+		}
+		@media (prefers-color-scheme: light) {
+			:root {
+				--axis-color: #c9c2b3;
+				--guide-color: #b1ada2;
+				--label-primary: #14171b;
+				--label-secondary: #454a53;
+				--label-muted: #6a7078;
+				--accent: #1c46b4;
+			}
+		}
+		text {
+			font-family: 'Source Serif 4', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+			user-select: none;
+		}
+		.axis { stroke: var(--axis-color); stroke-width: 1.5; stroke-linecap: square; }
+		.axis-head { fill: var(--axis-color); }
+		.axis-label { fill: var(--label-secondary); font-size: 17px; font-style: italic; font-weight: 600; }
+		.origin-label { fill: var(--label-muted); font-size: 16px; font-style: italic; }
+		.guide { stroke: var(--guide-color); stroke-width: 1.2; stroke-dasharray: 4 4; }
+		.tick { stroke: var(--axis-color); stroke-width: 1.25; }
+		.coord-label { fill: var(--label-muted); font-size: 15px; font-style: italic; }
+		.angle-arc { stroke: var(--label-muted); stroke-width: 1.25; fill: none; }
+		.angle-label { fill: var(--label-secondary); font-size: 15px; font-style: italic; }
+		.vector-line { stroke: var(--accent); stroke-width: 2.25; stroke-linecap: round; }
+		.vector-head { fill: var(--accent); }
+		.vector-dot { fill: var(--accent); stroke: var(--label-primary); stroke-width: 1.5; }
+		.vector-label { color: var(--accent); fill: var(--accent); }
+		.vec-text { font-size: 19px; font-style: italic; font-weight: 600; }
+		.point-label { fill: var(--label-primary); font-size: 16px; font-weight: 600; font-style: italic; }
+	</style>
+
+	<!-- Coordinate Axes -->
+	<g class="axis">
+		<line x1="45" y1="195" x2="350" y2="195"></line>
+		<line x1="70" y1="220" x2="70" y2="30"></line>
+	</g>
+
+	<!-- Axis Arrowheads -->
+	<g class="axis-head">
+		<!-- Y-axis arrow -->
+		<polygon points="70,22 65.5,34 74.5,34"></polygon>
+		<!-- X-axis arrow -->
+		<polygon points="358,195 346,190.5 346,199.5"></polygon>
+	</g>
+
+	<!-- Axis Labels -->
+	<g class="axis-label">
+		<text x="70" y="14" text-anchor="middle">y</text>
+		<text x="368" y="199" text-anchor="start">x</text>
+	</g>
+
+	<!-- Origin Label -->
+	<text x="54" y="212" class="origin-label">O</text>
+
+	<!-- Dashed Projection / Guide Lines -->
+	<g class="guide">
+		<!-- Vertical projection to x-axis -->
+		<line x1="260" y1="75" x2="260" y2="195"></line>
+		<!-- Horizontal projection to y-axis -->
+		<line x1="260" y1="75" x2="70" y2="75"></line>
+	</g>
+
+	<!-- Axis Ticks and Coordinates -->
+	<g class="tick">
+		<line x1="260" y1="192" x2="260" y2="198"></line>
+		<line x1="67" y1="75" x2="73" y2="75"></line>
+	</g>
+	<g class="coord-label">
+		<text x="260" y="215" text-anchor="middle">x</text>
+		<text x="56" y="80" text-anchor="end">y</text>
+	</g>
+
+	<!-- Angle theta arc & label -->
+	<path class="angle-arc" d="M 115,195 A 45,45 0 0 0 108,171"></path>
+	<text x="124" y="186" class="angle-label">θ</text>
+
+	<!-- Position Vector r (arrow line and head) -->
+	<line class="vector-line" x1="70" y1="195" x2="248" y2="82.5"></line>
+	<polygon class="vector-head" points="260,75 245.2,77.8 251.1,87.1"></polygon>
+
+	<!-- Vector r Label with over-arrow -->
+	<g class="vector-label">
+		<text x="150" y="125" class="vec-text">r</text>
+		<path
+			d="M 148,107 L 160,107 M 156.5,104 L 160.5,107 L 156.5,110"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="1.25"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+		></path>
+	</g>
+
+	<!-- Particle Point P(x, y) -->
+	<circle class="vector-dot" cx="260" cy="75" r="4.5"></circle>
+	<text x="272" y="71" class="point-label">P(x, y)</text>
+</svg>
+

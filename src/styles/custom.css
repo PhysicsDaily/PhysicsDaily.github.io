@@ -415,3 +415,31 @@ h1[data-page-title],
 		animation-iteration-count: 1 !important;
 	}
 }
+/* Centered card for content diagrams, so white figures don't blend into the page. */
+.diagram-card {
+	width: fit-content;
+	max-width: 100%;
+	margin: 1.75rem auto;
+	padding: 1.25rem 1.5rem 1rem;
+	text-align: center;
+	background: var(--pd-surface);
+	border: 1px solid var(--pd-rule);
+	border-radius: 8px;
+}
+
+.diagram-card img {
+	max-width: 100%;
+	height: auto;
+	margin: 0 auto;
+}
+
+.diagram-card figcaption {
+	margin-top: 0.75rem;
+	font-size: 0.85rem;
+	line-height: 1.5;
+	color: var(--sl-color-gray-3);
+}
+
+.diagram-card figcaption p {
+	margin: 0;
+}
