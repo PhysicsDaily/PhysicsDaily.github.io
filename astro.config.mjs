@@ -52,6 +52,24 @@ export default defineConfig({
 				ThemeSelect: './src/components/overrides/ThemeSelect.astro',
 			},
 			routeMiddleware: './src/starlightRouteData.ts',
+			// Google Analytics 4 — loads on every page. The tag is async, so it never
+			// blocks rendering. Stats stay private in the GA4 dashboard.
+			head: [
+				{
+					tag: 'script',
+					attrs: {
+						src: 'https://www.googletagmanager.com/gtag/js?id=G-P08V4L3DF9',
+						async: true,
+					},
+				},
+				{
+					tag: 'script',
+					content: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-P08V4L3DF9');`,
+				},
+			],
 			customCss: [
 				'@fontsource-variable/source-serif-4/wght.css',
 				'@fontsource-variable/inter/wght.css',
