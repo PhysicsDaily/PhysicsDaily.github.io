@@ -69,6 +69,17 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-P08V4L3DF9');`,
 				},
+				// Cloudflare Web Analytics — free, ~4KB, deferred module so it never
+				// blocks rendering. More resistant to adblockers than gtag.js, so the
+				// Cloudflare dashboard is the accurate count; GA4 is the deep detail.
+				{
+					tag: 'script',
+					attrs: {
+						type: 'module',
+						src: 'https://static.cloudflareinsights.com/beacon.min.js',
+						'data-cf-beacon': '{"token": "d9af8c2cb2c2421392420889bf7212d4"}',
+					},
+				},
 			],
 			customCss: [
 				'@fontsource-variable/source-serif-4/wght.css',
