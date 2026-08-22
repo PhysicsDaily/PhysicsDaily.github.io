@@ -4,6 +4,14 @@ import { Icon } from '@astrojs/starlight/components';
 
 {/* This is intentionally inlined to avoid FOUC. */}
 <script is:inline>
+	(() => {
+		try {
+			if (localStorage.getItem('physicsdaily-sidebar-collapsed') === 'true') {
+				document.documentElement.setAttribute('data-sidebar-collapsed', '');
+			}
+		} catch {}
+	})();
+
 	window.StarlightThemeProvider = (() => {
 		const storedTheme =
 			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');

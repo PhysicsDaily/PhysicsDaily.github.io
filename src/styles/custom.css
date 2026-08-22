@@ -87,6 +87,9 @@ body {
 }
 
 .site-title {
+	/* Tighter than Starlight's --sl-nav-gap (1rem) so the mark and the wordmark
+	   read as one lockup rather than two neighbouring elements. */
+	gap: 0.55rem;
 	font-family: var(--pd-font-display);
 	font-size: 1.3rem;
 	font-weight: 600;
@@ -94,8 +97,11 @@ body {
 	color: var(--sl-color-white);
 }
 
+/* The mark is roughly 2:1, cropped tight to its ink, so height alone sets its
+   size. 1.75rem clears the nav box: --sl-nav-height 3.5rem less 2x --sl-nav-pad-y
+   0.75rem leaves 2rem. */
 .site-title img {
-	height: 1.5rem;
+	height: 1.75rem;
 }
 
 .sidebar-content a {

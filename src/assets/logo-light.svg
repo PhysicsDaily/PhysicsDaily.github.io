@@ -1,5 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="PhysicsDaily">
-  <ellipse cx="16" cy="16" rx="13" ry="6.2" transform="rotate(-30 16 16)" fill="none" stroke="#1c46b4" stroke-width="2.6"/>
-  <circle cx="16" cy="16" r="3.7" fill="#14171b"/>
-  <circle cx="27.3" cy="9.5" r="2.4" fill="#1c46b4"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="3 18 58 28">
+  <!--
+    Shared geometry with logo-dark.svg and public/favicon.svg: centre (32,32),
+    planet r=13, ring rx=26 ry=8 tilted -16deg, moons seated on the ring's true
+    tips at (7, 39.2) and (57, 24.8). Mirror any shape change into all three.
+
+    The viewBox is cropped tight to the ink rather than padded out to a square:
+    Starlight sizes the logo by height, so empty space above and below would
+    shrink the mark in the header.
+
+    No latitude bands. A stroked arc trimmed by the planet's silhouette leaves two
+    blunt cut ends, which read as a scuff on a disc this small rather than as
+    banding, and at favicon sizes it is invisible noise either way.
+  -->
+  <defs>
+    <!-- The ring's near half is the half below its own major axis, so the clip is
+         rotated with the ring instead of cutting straight across it. -->
+    <clipPath id="pdl-ring-front">
+      <rect x="-32" y="32" width="128" height="64" transform="rotate(-16 32 32)"/>
+    </clipPath>
+  </defs>
+  <!-- Ring, drawn whole; the opaque planet hides the far half. Drawing the full
+       ellipse rather than clipping it to the far half keeps the two arcs from
+       leaving an antialiasing seam where they would meet at the tips. -->
+  <ellipse cx="32" cy="32" rx="26" ry="8" transform="rotate(-16 32 32)" fill="none" stroke="#1c46b4" stroke-width="2.8"/>
+  <!-- Planet -->
+  <circle cx="32" cy="32" r="13" fill="#efebe2" stroke="#14171b" stroke-width="2.8"/>
+  <!-- Ring, near half, passing in front of the planet -->
+  <g clip-path="url(#pdl-ring-front)">
+    <ellipse cx="32" cy="32" rx="26" ry="8" transform="rotate(-16 32 32)" fill="none" stroke="#1c46b4" stroke-width="2.8"/>
+  </g>
+  <!-- Moons, threaded onto the ring at its tips -->
+  <circle cx="7" cy="39.2" r="2.4" fill="#14171b"/>
+  <circle cx="57" cy="24.8" r="1.8" fill="#14171b"/>
 </svg>

@@ -34,9 +34,14 @@ export default defineConfig({
 			title: 'PhysicsDaily',
 			description:
 				'Clear, structured physics notes with diagrams, videos, equations, and interactive simulations.',
+			// The logo is the mark alone — the wordmark beside it is the real site title,
+			// rendered as HTML so it picks up Source Serif 4. An SVG loaded through <img>
+			// cannot reach the page's @font-face rules, so a wordmark baked into the file
+			// would fall back to a different font on every OS.
 			logo: {
 				light: './src/assets/logo-light.svg',
 				dark: './src/assets/logo-dark.svg',
+				replacesTitle: false,
 				alt: '',
 			},
 			components: {

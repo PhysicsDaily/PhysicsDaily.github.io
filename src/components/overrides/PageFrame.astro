@@ -37,12 +37,20 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 
 	class PhysicsDailySidebarToggle extends HTMLElement {
 		button = this.querySelector('button')!;
-		sidebar = document.getElementById('starlight__sidebar');
 		desktopMedia = matchMedia('(min-width: 50rem)');
+
+		get sidebar() {
+			return document.getElementById('starlight__sidebar');
+		}
+
+		connectedCallback() {
+			queueMicrotask(() => this.syncSidebarAccessibility());
+		}
 
 		constructor() {
 			super();
-			this.setCollapsed(localStorage.getItem(storageKey) === 'true', false);
+			const isCollapsed = document.documentElement.hasAttribute('data-sidebar-collapsed');
+			this.setCollapsed(isCollapsed, false);
 			this.desktopMedia.addEventListener('change', () => this.syncSidebarAccessibility());
 			this.button.addEventListener('click', () => {
 				this.setCollapsed(!document.documentElement.hasAttribute('data-sidebar-collapsed'));
@@ -55,7 +63,11 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 			this.button.setAttribute('aria-label', collapsed ? 'Expand sidebar' : 'Collapse sidebar');
 			this.button.title = collapsed ? 'Expand sidebar' : 'Collapse sidebar';
 			this.syncSidebarAccessibility();
-			if (persist) localStorage.setItem(storageKey, String(collapsed));
+			if (persist) {
+				try {
+					localStorage.setItem(storageKey, String(collapsed));
+				} catch {}
+			}
 		}
 
 		syncSidebarAccessibility() {

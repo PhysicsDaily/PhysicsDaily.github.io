@@ -16,6 +16,13 @@ export const onRequest = defineRouteMiddleware(async (context, next) => {
 	await next();
 
 	const route = context.locals.starlightRoute;
+
+	// Set page title to just the page's title without the "| SiteTitle" suffix
+	const titleTag = route.head.find((tag) => tag.tag === 'title');
+	if (titleTag && route.entry?.data?.title) {
+		titleTag.content = route.entry.data.title;
+	}
+
 	// Splash pages stand outside the reading flow; the homepage also reads the full
 	// sidebar to count its curriculum's chapters, so it must not be narrowed even if
 	// a Home link is ever added to it.
