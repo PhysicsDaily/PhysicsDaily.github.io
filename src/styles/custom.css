@@ -245,6 +245,36 @@ h1[data-page-title],
 	font-size: 1.05em;
 }
 
+/* Fix KaTeX accent positioning (e.g. \vec{r}, \hat{r}, \bar{r}) where class names
+   in KaTeX CSS (.katex-accent, .katex-overlay) mismatch KaTeX output (.accent, .overlay) */
+.katex .accent > .vlist-t,
+.katex .katex-accent > .vlist-t {
+	text-align: center;
+}
+
+.katex .accent .accent-body,
+.katex .katex-accent .accent-body {
+	position: relative;
+}
+
+.katex .accent .accent-body:not(.accent-full),
+.katex .katex-accent .accent-body:not(.accent-full) {
+	width: 0;
+}
+
+.katex .overlay,
+.katex .katex-overlay {
+	display: block;
+	position: relative;
+	height: inherit;
+}
+
+.katex .accent svg {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
 /* --- Previous / next links ------------------------------------------------ */
 
 /* Starlight sizes these as cards with 2xl titles. At the foot of a section they

@@ -1,5 +1,5 @@
 ---
 title: Acceleration
 description: How quickly velocity itself changes.
-order: 4
+order: 5
 ---

@@ -27,7 +27,7 @@ export default defineConfig({
 	// — published while the chapter was still a single page, and the natural thing to
 	// link or type — sends the reader to the section the chapter begins at.
 	redirects: {
-		'/mechanics/chapter-2-kinematics': `${basePrefix}/mechanics/chapter-2-kinematics/position-and-displacement/`,
+		'/mechanics/chapter-2-kinematics': `${basePrefix}/mechanics/chapter-2-kinematics/introduction-to-kinematics/`,
 	},
 	integrations: [
 		starlight({
