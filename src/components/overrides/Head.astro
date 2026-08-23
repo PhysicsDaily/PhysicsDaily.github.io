@@ -1,0 +1,16 @@
+---
+// Extends Starlight's head with preloads for the two latin variable fonts.
+// The @fontsource CSS uses `font-display: swap`, so without a preload the page
+// first paints in fallback fonts and reflows when these arrive — the CLS hits
+// flagged in the field data (hero copy, content panel, pagination links).
+// Importing with ?url makes Vite emit the same hashed asset the bundled CSS
+// references, so the preload always points at the real file.
+import sourceSerifWoff2 from '@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-normal.woff2?url';
+import interWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+
+const { head } = Astro.locals.starlightRoute;
+---
+
+{head.map(({ tag: Tag, attrs, content }) => <Tag {...attrs} set:html={content} />)}
+<link rel="preload" href={sourceSerifWoff2} as="font" type="font/woff2" crossorigin />
+<link rel="preload" href={interWoff2} as="font" type="font/woff2" crossorigin />

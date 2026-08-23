@@ -21,7 +21,7 @@ const base =
 const basePrefix = base.replace(/\/$/, '');
 
 export default defineConfig({
-	site: process.env.SITE_URL ?? (isGitHubPagesBuild ? `https://${host}` : undefined),
+	site: process.env.SITE_URL ?? (isGitHubPagesBuild ? `https://${host}` : 'https://physicsdaily.github.io'),
 	base,
 	// A chapter split into sections has no page of its own, so the chapter's own URL
 	// — published while the chapter was still a single page, and the natural thing to
@@ -45,6 +45,7 @@ export default defineConfig({
 				alt: '',
 			},
 			components: {
+				Head: './src/components/overrides/Head.astro',
 				Hero: './src/components/overrides/Hero.astro',
 				PageFrame: './src/components/overrides/PageFrame.astro',
 				Sidebar: './src/components/overrides/Sidebar.astro',
