@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="100%" height="100%" role="img" aria-labelledby="pos-vec-1d-title pos-vec-1d-desc">
+	<title id="pos-vec-1d-title">1D Position Vector</title>
+	<desc id="pos-vec-1d-desc">A one-dimensional coordinate axis showing origin O, positive and negative x directions, particle point P at coordinate x, and the position vector r directed from origin O to point P.</desc>
+
+	<style>
+		:root {
+			--axis-color: #3c424b;
+			--guide-color: #565b64;
+			--label-primary: #f4f4f2;
+			--label-secondary: #b7bbc1;
+			--label-muted: #8a8f98;
+			--accent: #92b4ff;
+		}
+		@media (prefers-color-scheme: light) {
+			:root {
+				--axis-color: #c9c2b3;
+				--guide-color: #b1ada2;
+				--label-primary: #14171b;
+				--label-secondary: #454a53;
+				--label-muted: #6a7078;
+				--accent: #1c46b4;
+			}
+		}
+		text {
+			font-family: 'Source Serif 4', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+			user-select: none;
+		}
+		.axis { stroke: var(--axis-color); stroke-width: 1.5; stroke-linecap: square; }
+		.axis-head { fill: var(--axis-color); }
+		.axis-label { fill: var(--label-secondary); font-size: 17px; font-style: italic; font-weight: 600; }
+		.origin-label { fill: var(--label-muted); font-size: 16px; font-style: italic; }
+		.guide { stroke: var(--guide-color); stroke-width: 1.2; stroke-dasharray: 4 4; }
+		.tick { stroke: var(--axis-color); stroke-width: 1.25; }
+		.coord-label { fill: var(--label-muted); font-size: 15px; font-style: italic; }
+		.vector-line { stroke: var(--accent); stroke-width: 2.25; stroke-linecap: round; }
+		.vector-head { fill: var(--accent); }
+		.vector-dot { fill: var(--accent); stroke: var(--label-primary); stroke-width: 1.5; }
+		.vector-label { color: var(--accent); fill: var(--accent); }
+		.vec-text { font-size: 19px; font-style: italic; font-weight: 600; }
+		.point-label { fill: var(--label-primary); font-size: 16px; font-weight: 600; font-style: italic; }
+	</style>
+
+	<!-- Coordinate Axis (X-axis) -->
+	<g class="axis">
+		<line x1="45" y1="160" x2="350" y2="160"></line>
+	</g>
+
+	<!-- Axis Arrowheads (Both Directions) -->
+	<g class="axis-head">
+		<!-- Left (-x) Arrow -->
+		<polygon points="37,160 49,155.5 49,164.5"></polygon>
+		<!-- Right (+x) Arrow -->
+		<polygon points="358,160 346,155.5 346,164.5"></polygon>
+	</g>
+
+	<!-- Axis Labels -->
+	<g class="axis-label">
+		<text x="22" y="165" text-anchor="middle">-x</text>
+		<text x="372" y="165" text-anchor="middle">+x</text>
+	</g>
+
+	<!-- Dashed Projection / Guide Lines -->
+	<g class="guide">
+		<!-- Vertical guide at origin O -->
+		<line x1="110" y1="90" x2="110" y2="160"></line>
+		<!-- Vertical guide at point P -->
+		<line x1="280" y1="90" x2="280" y2="160"></line>
+	</g>
+
+	<!-- Axis Ticks -->
+	<g class="tick">
+		<!-- Origin tick -->
+		<line x1="110" y1="154" x2="110" y2="166"></line>
+		<!-- Reference negative tick -->
+		<line x1="65" y1="156" x2="65" y2="164"></line>
+		<!-- Reference intermediate tick -->
+		<line x1="195" y1="156" x2="195" y2="164"></line>
+		<!-- Point P coordinate tick -->
+		<line x1="280" y1="154" x2="280" y2="166"></line>
+	</g>
+
+	<!-- Ticks and Coordinate Labels -->
+	<g class="origin-label">
+		<text x="110" y="186" text-anchor="middle">O (0)</text>
+	</g>
+	<g class="coord-label">
+		<text x="280" y="186" text-anchor="middle">x</text>
+	</g>
+
+	<!-- Position Vector r (elevated parallel vector) -->
+	<line class="vector-line" x1="110" y1="90" x2="268" y2="90"></line>
+	<polygon class="vector-head" points="280,90 268,85.5 268,94.5"></polygon>
+
+	<!-- Vector r Label with over-arrow -->
+	<g class="vector-label">
+		<text x="195" y="75" text-anchor="middle" class="vec-text">r</text>
+		<path
+			d="M 190,57 L 202,57 M 198.5,54 L 202.5,57 L 198.5,60"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="1.25"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+		></path>
+	</g>
+
+	<!-- Particle Point P(x) -->
+	<circle class="vector-dot" cx="280" cy="160" r="4.5"></circle>
+	<text x="280" y="138" class="point-label" text-anchor="middle">P(x)</text>
+</svg>
+

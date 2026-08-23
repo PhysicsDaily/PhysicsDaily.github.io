@@ -443,3 +443,19 @@ h1[data-page-title],
 .diagram-card figcaption p {
 	margin: 0;
 }
+
+/* Grid container for side-by-side diagrams */
+.diagram-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 1.25rem;
+	margin: 1.75rem auto;
+}
+
+.diagram-grid .diagram-card {
+	margin: 0;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
