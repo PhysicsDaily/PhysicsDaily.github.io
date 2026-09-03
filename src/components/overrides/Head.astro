@@ -1,16 +1,43 @@
 ---
-// Extends Starlight's head with preloads for the two latin variable fonts.
+// Extends Starlight's head with preloads for the two latin variable fonts
+// and the homepage hero image.
 // Combined with `font-display: optional` in fonts.css, preloading guarantees
 // zero layout shift (CLS): fonts ready on first paint render immediately; on slow
 // networks, fallbacks render without ever swapping mid-session.
 // Importing with ?url makes Vite emit the same hashed asset the bundled CSS
 // references, so the preload always points at the real file.
+import { getImage } from 'astro:assets';
+import { getDailyFeature } from '../../data/quotes';
 import sourceSerifWoff2 from '@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-normal.woff2?url';
 import interWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
 
-const { head } = Astro.locals.starlightRoute;
+const { head, entry } = Astro.locals.starlightRoute;
+const isHome = Boolean(entry?.data?.hero);
+
+let heroPreload: Awaited<ReturnType<typeof getImage>> | undefined;
+if (isHome) {
+	const { scientist } = getDailyFeature();
+	heroPreload = await getImage({
+		src: scientist.portrait,
+		widths: [380, 500, 760],
+		sizes: '(min-width: 56rem) 25rem, min(25rem, 90vw)',
+		quality: 78,
+	});
+}
 ---
 
 {head.map(({ tag: Tag, attrs, content }) => <Tag {...attrs} set:html={content} />)}
 <link rel="preload" href={sourceSerifWoff2} as="font" type="font/woff2" crossorigin />
 <link rel="preload" href={interWoff2} as="font" type="font/woff2" crossorigin />
+{
+	heroPreload && (
+		<link
+			rel="preload"
+			as="image"
+			href={heroPreload.src}
+			imagesrcset={heroPreload.srcSet.attribute}
+			imagesizes="(min-width: 56rem) 25rem, min(25rem, 90vw)"
+			fetchpriority="high"
+		/>
+	)
+}
