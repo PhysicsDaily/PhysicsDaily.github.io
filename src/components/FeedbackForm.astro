@@ -1,0 +1,121 @@
+---
+import ArrowIcon from './ArrowIcon.astro';
+import { feedbackConfig } from '../data/feedbackConfig';
+---
+
+<div class="pd-feedback-container">
+	<pd-feedback-form
+		data-success={feedbackConfig.successMessage}
+		data-btn-text={feedbackConfig.buttonText}
+	>
+		<iframe
+			name="pd-feedback-iframe"
+			id="pd-feedback-iframe"
+			tabindex="-1"
+			aria-hidden="true"
+			class="pd-feedback__iframe"
+		></iframe>
+
+		<form
+			action={feedbackConfig.formActionUrl}
+			method="POST"
+			target="pd-feedback-iframe"
+			class="pd-feedback__form"
+		>
+			<div class="pd-feedback__field">
+				<label for="pd-feedback-message" class="pd-feedback__label">
+					Your feedback <span class="pd-feedback__req" aria-hidden="true">*</span>
+				</label>
+				<textarea
+					id="pd-feedback-message"
+					name={feedbackConfig.messageEntryId}
+					rows="6"
+					required
+					placeholder={feedbackConfig.placeholderMessage}
+					class="pd-feedback__textarea"
+				></textarea>
+			</div>
+
+			<div class="pd-feedback__field">
+				<label for="pd-feedback-email" class="pd-feedback__label">
+					Email <span class="pd-feedback__req" aria-hidden="true">*</span>
+				</label>
+				<input
+					type="email"
+					id="pd-feedback-email"
+					name={feedbackConfig.emailEntryId}
+					required
+					placeholder={feedbackConfig.placeholderEmail}
+					class="pd-feedback__input"
+					autocomplete="email"
+				/>
+			</div>
+
+			<div class="pd-feedback__footer">
+				<button type="submit" class="pd-btn pd-btn--primary pd-feedback__submit">
+					<span class="pd-feedback__submit-text">{feedbackConfig.buttonText}</span>
+					<ArrowIcon />
+				</button>
+			</div>
+
+			<div class="pd-feedback__status" aria-live="polite" hidden></div>
+
+			{
+				feedbackConfig.directFormUrl && (
+					<p class="pd-feedback__direct">
+						Prefer the standard form?{' '}
+						<a
+							href={feedbackConfig.directFormUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Open directly in Google Forms ↗
+						</a>
+					</p>
+				)
+			}
+		</form>
+	</pd-feedback-form>
+</div>
+
+<script>
+	class PDFeedbackForm extends HTMLElement {
+		connectedCallback() {
+			const form = this.querySelector('form');
+			const iframe = this.querySelector('iframe');
+			const submitBtn = this.querySelector('.pd-feedback__submit') as HTMLButtonElement | null;
+			const submitText = this.querySelector('.pd-feedback__submit-text');
+			const status = this.querySelector('.pd-feedback__status') as HTMLElement | null;
+			const successMsg = this.dataset.success || 'Thank you! Your feedback has been sent.';
+			const defaultBtnText = this.dataset.btnText || 'Send feedback';
+
+			if (!form || !iframe || !submitBtn || !status) return;
+
+			let isSubmitting = false;
+
+			form.addEventListener('submit', () => {
+				isSubmitting = true;
+				submitBtn.disabled = true;
+				if (submitText) submitText.textContent = 'Sending...';
+				status.hidden = true;
+			});
+
+			iframe.addEventListener('load', () => {
+				if (!isSubmitting) return;
+				isSubmitting = false;
+
+				form.reset();
+				submitBtn.disabled = false;
+				if (submitText) submitText.textContent = defaultBtnText;
+
+				status.innerHTML = `<strong>✓ ${successMsg}</strong>`;
+				status.className = 'pd-feedback__status pd-feedback__status--success';
+				status.hidden = false;
+			});
+		}
+	}
+
+	if (!customElements.get('pd-feedback-form')) {
+		customElements.define('pd-feedback-form', PDFeedbackForm);
+	}
+</script>

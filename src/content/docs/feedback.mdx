@@ -1,0 +1,21 @@
+---
+title: Feedback
+description: Send feedback, report errata, or suggest new chapters and simulations for PhysicsDaily.
+template: splash
+tableOfContents: false
+prev: false
+next: false
+---
+
+import FeedbackForm from '../../components/FeedbackForm.astro';
+import { feedbackConfig } from '../../data/feedbackConfig';
+
+<div class="pd-feedback-page not-content">
+	<div class="pd-feedback-page__header">
+		<p class="pd-eyebrow">{feedbackConfig.eyebrow}</p>
+		<h1 class="pd-title">{feedbackConfig.title}</h1>
+		<p class="pd-lede">{feedbackConfig.lede}</p>
+	</div>
+
+	<FeedbackForm />
+</div>

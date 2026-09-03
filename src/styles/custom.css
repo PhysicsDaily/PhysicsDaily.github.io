@@ -371,3 +371,148 @@ h1[data-page-title],
 	flex-direction: column;
 	justify-content: space-between;
 }
+
+/* --- Feedback Page & Form ------------------------------------------------ */
+
+.pd-feedback-page {
+	max-width: 38rem;
+	margin-inline: auto;
+	padding-block: clamp(2rem, 1.5rem + 3vw, 4rem);
+}
+
+.pd-feedback-page__header {
+	display: flex;
+	flex-direction: column;
+	gap: 0.85rem;
+	margin-block-end: 2rem;
+}
+
+.pd-feedback-container {
+	background: var(--pd-surface);
+	border: 1px solid var(--pd-rule);
+	border-radius: var(--pd-radius);
+	padding: clamp(1.25rem, 1rem + 1vw, 2rem);
+}
+
+.pd-feedback__iframe {
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 0;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+.pd-feedback__form {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+
+.pd-feedback__field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.4rem;
+}
+
+.pd-feedback__label {
+	font-size: var(--sl-text-sm);
+	font-weight: 500;
+	color: var(--sl-color-white);
+}
+
+.pd-feedback__req {
+	color: var(--sl-color-accent);
+}
+
+.pd-feedback__opt {
+	font-size: var(--sl-text-xs);
+	font-weight: 400;
+	color: var(--sl-color-gray-3);
+}
+
+.pd-feedback__input,
+.pd-feedback__textarea {
+	width: 100%;
+	padding: 0.65rem 0.85rem;
+	font-family: var(--sl-font);
+	font-size: 0.95rem;
+	line-height: 1.5;
+	color: var(--sl-color-white);
+	background: var(--pd-surface-hover);
+	border: 1px solid var(--pd-rule-strong);
+	border-radius: var(--pd-radius);
+	transition: border-color 150ms ease, box-shadow 150ms ease;
+	box-sizing: border-box;
+}
+
+.pd-feedback__textarea {
+	resize: vertical;
+	min-height: 7rem;
+}
+
+.pd-feedback__input::placeholder,
+.pd-feedback__textarea::placeholder {
+	color: var(--sl-color-gray-4);
+}
+
+.pd-feedback__input:focus,
+.pd-feedback__textarea:focus {
+	outline: none;
+	border-color: var(--sl-color-accent);
+	box-shadow: 0 0 0 1px var(--sl-color-accent);
+}
+
+.pd-feedback__footer {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	margin-top: 0.25rem;
+}
+
+.pd-feedback__submit {
+	cursor: pointer;
+}
+
+.pd-feedback__submit:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
+}
+
+.pd-feedback__status {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	padding: 0.75rem 1rem;
+	border-radius: var(--pd-radius);
+	font-size: 0.9rem;
+	line-height: 1.4;
+}
+
+.pd-feedback__status--success {
+	color: var(--sl-color-white);
+	background: color-mix(in srgb, var(--sl-color-accent) 15%, var(--pd-surface));
+	border: 1px solid var(--sl-color-accent);
+}
+
+.pd-feedback__status-hint {
+	font-size: 0.8rem;
+	color: var(--sl-color-gray-3);
+	margin-top: 0.2rem;
+}
+
+.pd-feedback__direct {
+	margin-top: 0.5rem;
+	font-size: 0.85rem;
+	color: var(--sl-color-gray-3);
+}
+
+.pd-feedback__direct a {
+	color: var(--sl-color-accent);
+	text-decoration: underline;
+}
+
+/* Hide the default Starlight title panel on the custom feedback page */
+.main-pane:has(.pd-feedback-page) > main > .content-panel:first-child {
+	display: none;
+}
