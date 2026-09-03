@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import ArrowIcon from '../ArrowIcon.astro';
 import { getDailyFeature } from '../../data/quotes';
 import '../../styles/home.css';
 
@@ -36,17 +37,7 @@ const PAGE_TITLE_ID = '_top';
 								]}
 							>
 								{text}
-								{variant === 'primary' && (
-									<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" fill="none">
-										<path
-											d="M2.5 8h11m-4-4 4 4-4 4"
-											stroke="currentColor"
-											stroke-width="1.6"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										/>
-									</svg>
-								)}
+								{variant === 'primary' && <ArrowIcon />}
 							</a>
 						))}
 					</div>

@@ -27,11 +27,13 @@ const accessibleLabel = Astro.locals.t('themeSelect.accessibleLabel');
 
 	const storageKey = 'starlight-theme';
 
-	const getPreferredColorScheme = (): Theme =>
-		matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-
+	// ThemeProvider's inline script has already resolved the theme — stored choice,
+	// else the OS preference — and stamped it on <html> before this module runs, so
+	// that attribute is the single source of truth for the un-stored fallback here.
 	const parseTheme = (theme: unknown): Theme =>
-		theme === 'dark' || theme === 'light' ? theme : getPreferredColorScheme();
+		theme === 'dark' || theme === 'light'
+			? theme
+			: ((document.documentElement.dataset.theme as Theme | undefined) ?? 'dark');
 
 	const loadTheme = (): Theme =>
 		parseTheme(typeof localStorage !== 'undefined' && localStorage.getItem(storageKey));

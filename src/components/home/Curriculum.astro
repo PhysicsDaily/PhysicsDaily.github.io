@@ -1,43 +1,25 @@
 ---
+import ArrowIcon from '../ArrowIcon.astro';
 import { base, getChapters } from '../../data/chapters';
-import '../../styles/home.css';
-
-const mechanicsChapters = getChapters(Astro.locals.starlightRoute.sidebar, 'mechanics');
 
 // Branch order follows Halliday, Resnick & Krane: mechanics, oscillations
 // and waves, thermodynamics, electrodynamics, optics, then modern physics.
+// To activate a planned branch: set its slug to the content directory's name
+// (e.g. 'thermodynamics'). The chapter count is computed automatically from
+// the sidebar — no extra code needed.
 const branches = [
-	{
-		name: 'Mechanics',
-		slug: 'mechanics/',
-		count: mechanicsChapters.length,
-	},
-	{
-		name: 'Oscillations & Waves',
-		slug: null,
-		count: 0,
-	},
-	{
-		name: 'Thermodynamics',
-		slug: null,
-		count: 0,
-	},
-	{
-		name: 'Electrodynamics',
-		slug: null,
-		count: 0,
-	},
-	{
-		name: 'Optics',
-		slug: null,
-		count: 0,
-	},
-	{
-		name: 'Modern Physics',
-		slug: null,
-		count: 0,
-	},
-];
+	{ name: 'Mechanics', slug: 'mechanics' },
+	{ name: 'Oscillations & Waves', slug: null },
+	{ name: 'Thermodynamics', slug: null },
+	{ name: 'Electrodynamics', slug: null },
+	{ name: 'Optics', slug: null },
+	{ name: 'Modern Physics', slug: null },
+] as const;
+
+const sidebar = Astro.locals.starlightRoute.sidebar;
+
+/** Chapters of an active branch, in the reading order the sidebar declares. */
+const chapterCount = (slug: string): number => getChapters(sidebar, slug).length;
 ---
 
 <section class="pd-section not-content" id="curriculum">
@@ -54,6 +36,7 @@ const branches = [
 		{
 			branches.map((branch, index) => {
 				const number = String(index + 1).padStart(2, '0');
+				const count = branch.slug ? chapterCount(branch.slug) : 0;
 				const body = (
 					<>
 						<span class="pd-branch__num">{number}</span>
@@ -64,16 +47,8 @@ const branches = [
 							{branch.slug ? (
 								<>
 									<span class="pd-branch__dot" />
-									{branch.count} {branch.count === 1 ? 'chapter' : 'chapters'}
-									<svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-										<path
-											d="M2.5 8h11m-4-4 4 4-4 4"
-											stroke="currentColor"
-											stroke-width="1.6"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										/>
-									</svg>
+									{count} {count === 1 ? 'chapter' : 'chapters'}
+									<ArrowIcon size={15} />
 								</>
 							) : (
 								'Planned'
@@ -85,7 +60,7 @@ const branches = [
 				return (
 					<li>
 						{branch.slug ? (
-							<a class="pd-branch" href={`${base}${branch.slug}`}>
+							<a class="pd-branch" href={`${base}${branch.slug}/`}>
 								{body}
 							</a>
 						) : (
