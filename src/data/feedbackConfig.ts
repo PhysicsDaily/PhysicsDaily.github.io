@@ -35,17 +35,17 @@ export const feedbackConfig: FeedbackConfig = {
 	directFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSfgV2H3V_MM0weD2kZ4VktXVrn0bH0owMTSab-RgqT-_CyK0Q/viewform',
 
 	// /feedback page copy
-	eyebrow: 'Feedback',
-	title: 'Help us improve PhysicsDaily',
-	lede: 'Spotted a typo, noticed an error in a derivation, or want to suggest a new chapter or interactive simulation? Let us know — we read every message.',
-	placeholderMessage: 'What thoughts, suggestions, or corrections do you have?',
+	eyebrow: 'Feedback & Appreciation',
+	title: 'Feedback, suggestions, or appreciation',
+	lede: 'Found a typo, have a question about a derivation, or simply want to say thanks? Whether it’s constructive feedback, an idea for a simulation, or a kind word of appreciation, we read and cherish every message.',
+	placeholderMessage: 'Your feedback, suggestions, corrections, or a note of appreciation...',
 	placeholderEmail: 'Your email address',
-	buttonText: 'Send feedback',
-	successMessage: 'Thank you! Your feedback has been sent.',
+	buttonText: 'Send message',
+	successMessage: 'Thank you! Your message has been sent.',
 
 	// Homepage callout section
-	homeSectionEyebrow: 'Feedback',
-	homeSectionTitle: 'Help us improve PhysicsDaily',
-	homeSectionLede: 'Notice a mistake or have ideas for new topics and interactive simulations?',
-	homeButtonText: 'Give feedback',
+	homeSectionEyebrow: 'Feedback & Appreciation',
+	homeSectionTitle: 'Share feedback or a kind note',
+	homeSectionLede: 'Notice an error, have an idea for a simulation, or want to say thanks? We’d love to hear from you.',
+	homeButtonText: 'Send feedback or appreciation',
 };
