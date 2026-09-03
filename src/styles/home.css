@@ -215,15 +215,15 @@
 
 /*
  * Portraits arrive as 3:4-ish paintings and photographs of very different
- * origins. Framing them all at 4:3 keeps the hero one height whoever is
- * featured; each portrait supplies its own object-position so the crop holds
+ * origins. Framing them all at 3:4 keeps the hero balanced and reveals the
+ * full subject; each portrait supplies its own object-position so the crop holds
  * the head clear of the top edge.
  */
 .pd-portrait {
 	display: block;
 	width: 100%;
 	height: auto;
-	aspect-ratio: 4 / 3;
+	aspect-ratio: 3 / 4;
 	object-fit: cover;
 }
 
@@ -246,6 +246,19 @@
 }
 
 /* --- Hero quote ---------------------------------------------------------- */
+
+.pd-figure--quote {
+	max-width: 25rem;
+	width: 100%;
+	margin-inline: auto;
+}
+
+@media (min-width: 56rem) {
+	.pd-figure--quote {
+		margin-inline: 0;
+		justify-self: end;
+	}
+}
 
 .pd-figure--quote figcaption {
 	padding: 1.15rem 1.25rem 1.25rem;

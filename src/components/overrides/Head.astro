@@ -1,8 +1,8 @@
 ---
 // Extends Starlight's head with preloads for the two latin variable fonts.
-// The @fontsource CSS uses `font-display: swap`, so without a preload the page
-// first paints in fallback fonts and reflows when these arrive — the CLS hits
-// flagged in the field data (hero copy, content panel, pagination links).
+// Combined with `font-display: optional` in fonts.css, preloading guarantees
+// zero layout shift (CLS): fonts ready on first paint render immediately; on slow
+// networks, fallbacks render without ever swapping mid-session.
 // Importing with ?url makes Vite emit the same hashed asset the bundled CSS
 // references, so the preload always points at the real file.
 import sourceSerifWoff2 from '@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-normal.woff2?url';

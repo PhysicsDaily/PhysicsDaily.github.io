@@ -239,7 +239,7 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 			   the header grid derives its title column from that variable, so changing
 			   it document-wide would reflow the title and search box on every toggle.
 			   The remaining rail keeps the prose clear of the toggle button. */
-			:global([data-sidebar-collapsed]) .main-frame {
+			:global([data-has-sidebar][data-sidebar-collapsed]) .main-frame {
 				padding-inline-start: 3.5rem;
 			}
 		}

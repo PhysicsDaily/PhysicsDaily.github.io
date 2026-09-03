@@ -3,8 +3,8 @@
    One accent colour only; separation comes from rules and space, not tint. */
 
 :root {
-	--sl-font: 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-	--pd-font-display: 'Source Serif 4 Variable', 'Iowan Old Style', 'Palatino Linotype', Palatino,
+	--sl-font: 'Inter Variable', 'Inter Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	--pd-font-display: 'Source Serif 4 Variable', 'Source Serif 4 Fallback', 'Iowan Old Style', 'Palatino Linotype', Palatino,
 		Georgia, 'Times New Roman', serif;
 
 	/* Dark theme (default) */
@@ -339,6 +339,7 @@ h1[data-page-title],
 }
 
 .diagram-card img {
+	display: block;
 	max-width: 100%;
 	height: auto;
 	margin: 0 auto;
