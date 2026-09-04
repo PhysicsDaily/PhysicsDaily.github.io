@@ -501,17 +501,6 @@ h1[data-page-title],
 	margin-top: 0.2rem;
 }
 
-.pd-feedback__direct {
-	margin-top: 0.5rem;
-	font-size: 0.85rem;
-	color: var(--sl-color-gray-3);
-}
-
-.pd-feedback__direct a {
-	color: var(--sl-color-accent);
-	text-decoration: underline;
-}
-
 /* Hide the default Starlight title panel on the custom feedback page */
 .main-pane:has(.pd-feedback-page) > main > .content-panel:first-child {
 	display: none;

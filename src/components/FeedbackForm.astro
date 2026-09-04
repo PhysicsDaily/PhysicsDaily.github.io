@@ -59,21 +59,6 @@ import { feedbackConfig } from '../data/feedbackConfig';
 			</div>
 
 			<div class="pd-feedback__status" aria-live="polite" hidden></div>
-
-			{
-				feedbackConfig.directFormUrl && (
-					<p class="pd-feedback__direct">
-						Prefer the standard form?{' '}
-						<a
-							href={feedbackConfig.directFormUrl}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							Open directly in Google Forms ↗
-						</a>
-					</p>
-				)
-			}
 		</form>
 	</pd-feedback-form>
 </div>
