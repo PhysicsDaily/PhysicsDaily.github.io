@@ -8,7 +8,8 @@
     "dev:status": "astro dev status",
     "dev:logs": "astro dev logs",
     "dev:stop": "astro dev stop",
-    "build": "astro build",
+    "generate:favicons": "node scripts/generate-favicons.js",
+    "build": "node scripts/generate-favicons.js && astro build",
     "check": "astro check",
     "preview": "astro preview",
     "astro": "astro"

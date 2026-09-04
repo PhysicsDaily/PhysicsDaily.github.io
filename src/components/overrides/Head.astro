@@ -24,9 +24,26 @@ if (isHome) {
 		quality: 78,
 	});
 }
+
+const basePrefix = import.meta.env.BASE_URL.replace(/\/$/, '');
+const siteUrl = Astro.site?.origin ?? 'https://physicsdaily.github.io';
+const siteNameSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: 'PhysicsDaily',
+	alternateName: 'Physics Daily',
+	url: siteUrl + '/',
+};
 ---
 
 {head.map(({ tag: Tag, attrs, content }) => <Tag {...attrs} set:html={content} />)}
+<link rel="icon" type="image/png" sizes="48x48" href={`${basePrefix}/favicon-48x48.png`} />
+<link rel="icon" type="image/png" sizes="32x32" href={`${basePrefix}/favicon-32x32.png`} />
+<link rel="icon" type="image/png" sizes="16x16" href={`${basePrefix}/favicon-16x16.png`} />
+<link rel="shortcut icon" href={`${basePrefix}/favicon.ico`} />
+<link rel="apple-touch-icon" sizes="180x180" href={`${basePrefix}/apple-touch-icon.png`} />
+<link rel="manifest" href={`${basePrefix}/site.webmanifest`} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(siteNameSchema)} />
 <link rel="preload" href={sourceSerifWoff2} as="font" type="font/woff2" crossorigin />
 <link rel="preload" href={interWoff2} as="font" type="font/woff2" crossorigin />
 {
@@ -41,3 +58,4 @@ if (isHome) {
 		/>
 	)
 }
+
